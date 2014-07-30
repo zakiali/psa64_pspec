@@ -43,6 +43,7 @@ David R. DeBoer\altaffilmark{2},
 Daniel C. Jacobs\altaffilmark{8},
 David F. Moore\altaffilmark{3},
 Jonathan C. Pober\altaffilmark{4},
+Jeff Zheng
 % XXX if includes paper data, needs full author list
 }
 
@@ -64,6 +65,9 @@ The Donald C. Backer Precision Array for Probing the Epoch of Reionization
 redshifted 21 cm emission from the Epoch of Reionization.
 
 
+
+
+
 \section{Observations}
 Here, we describe the features of the data set used in this analysis. 
 We used the maximally redundant configuration of the PAPER array (see Figure
@@ -83,14 +87,44 @@ Each baseline instantaneously measured the 100-200 MHz band which was divided
 into 1024 frequency channels of resolution 97.66 kHz and integrated for 10.7
 seconds.  
 
+\subsection{Compressing the Data}
+The raw described above constitue XX TB of data which can be cumbersome and time
+consuming to do meaningful science. Therefore, the raw data was reprocessed
+through a compression algorithm that comprised of chopping bits of data out that
+correspondend to parts of the sky that was not relavant to our science
+objectives. By applying fourier filters in the delay (Fourier dual of frequency)
+and fringe rate (Fourier dual of time) spaces, we are able disregard 
+
 \begin{figure*}\centering
 \includegraphics[width=1.85\columnwidth]{plots/antenna_positions.png}
 \caption{Antenna positions for the PAPER 64 observation run.}
 \label{fig:antenna_positions}
 \end{figure*}
 
+\section{Summary of Improvements from PSA32}
+In comparison to the previous PAPER pipeline (see Parsonsi, 2014), this analysis
+took a slightly different approach which included some important steps to
+improve our bottom line. In short, the improvements included using a new, 
+refined redundant calibration method (Zheng 2014), increasing the width of the
+wideband delay filter that removes smothe spectrum foregrounds, weighting the
+lst binned data sets, and optimal fringe rate filtering. 
 
-\section{Calibrations}
+Figure \ref{fig:step_through_pspec} shows the power spectra when each of the
+steps mentioned above are turned off and for the one where all of them are
+turned on.
+
+
+%A more rigorous calibrations. Forward Ref.
+%omnical
+%lstbinning with chi-sq weighting
+%horizon cut at 200ns = 100 + 100 (instead of 100 + 15)
+%optimal fringe-rate filtereing
+%want the 4(5?) figures in this section. Incrementally step back through improvement points.
+
+
+\section{Analysis}
+Describe the overall flow of the data through of the pipeline.
+\subsection{Calibrations}
 \subsection{General}
 The calibration pipeline included a rough calibration based on logarithmic and
 linear redundant calibration, as well as self calibration. A rough pass of log
@@ -101,6 +135,63 @@ flux scale to PictorA (Jacobs, 2013).
 \subsection{Gain Calibration}
 Gain calibration was derived on the basis of redundancy and self calibration.
 
+\subsection{Omnical}
+%waterfalls of chi squared and solutions.
+%day to day repeatability.
+%The output of the omnical - 
+%
+
+\subsection{lstbinning}
+
+\subsection{WB delay filtering}
+Galactic synchrotron and extragalactic point sources, generally foregrounds,
+greatly contaminate the EOR signal. They are roughly 9 orders of magnitude
+(Pober 2013a) above the expected level and EOR and can hide low order RFI events
+and cross-talk.  Therefore, its removal is completeley necessary and required in
+order to obtain the desired EOR signal. In addition to dominating the EOR
+signal, foregrounds can corrupt higher-order $k$ modes in the power spectrum
+measurement from the sidelobes arising from RFI flagging and the finite
+bandwidth used in the line of sight Fourier transform (corresponding to
+$k_{\parallel}$).
+
+PAPER uses the delay filtering technique described in Parsons 2012b to remove
+smooth spectrum foregrounds that mask EOR. Followeing the technique
+described there, we first take the delay transform of every baseline for every
+integration, as per 
+
+\begin{equation}\label{eqn:delay_transform}
+    \tilde{V} = \int{W(\nu)S(\nu)V(\nu)e^{-2\pi{i}\tau\nu}d\nu},
+\end{equation}
+
+where $V(\nu)$ is the visibility measured, $W(\nu)$ is a blackman-harris
+windowing function and $S(\nu)$ is the weighting function that encodes the flags
+for he data. Following the method in (Parsons Backer 2009), we use a CLEAN
+algorithm to deconvolve out the effects of RFI flags and band edge effects. FRI
+flags and the band edges have the effect of scattering foreground emission to
+higher order delay modes which would otherwise be uncontaminated. The
+implementation of CLEAN is such that it treats the RFI flags as a sampling
+function in frequency and iteratively fits to the highest point in delay space,
+and therefore trying to fill in the flagged data in frequency. We restrict these
+CLEAN components to fall within 100 ns of the horizon limit for a given
+baseline. 
+
+For the 30m baseline used, the cutoff corresponds 
+
+
+
+\subsection{optimal Fringe-rate filter}
+%plots:
+% filters used. 
+% apply filters to foreground data. Compute fr of pica and show that we are not 
+%   killing the sky.
+% 
+
+
+\section{Results}
+
+\section{Science}
+
+\section{Conclusions}
 
 
 %\clearpage
