@@ -135,13 +135,19 @@ flux scale to PictorA (Jacobs, 2013).
 \subsection{Gain Calibration}
 Gain calibration was derived on the basis of redundancy and self calibration.
 
+\subsection{A First Pass}
+Phase calibration was c
+
 \subsection{Omnical}
+The new element to our calibration pipeline was the use of the omnical package
+developed at MIT by Jeff Zheng (Zheng 2014). 
 %waterfalls of chi squared and solutions.
 %day to day repeatability.
 %The output of the omnical - 
 %
 
 \subsection{lstbinning}
+After calibration, we then average and bin data in lst bins of 
 
 \subsection{WB delay filtering}
 Galactic synchrotron and extragalactic point sources, generally foregrounds,
@@ -180,6 +186,79 @@ For the 30m baseline used, the cutoff corresponds
 
 
 \subsection{optimal Fringe-rate filter}
+Before forming power spectra we need to time average visibilities that measure
+the same $k$ mode on the sky. This is the best way to combine data because we
+get a $\sqrt{N}$, where N is the number of samples, gain in sensitivity. This is
+in oppostion to weighting after forming power spectra, where noise beats down as
+the $\sqrt{N}$. Rather than a straight averaging in time, we can do better by
+using a weighted averge. Specifically, we want to upweight samples that have
+higher signal-to-noise. 
+
+This is acheived by applying a carefully crafted filter in fringe rate domain,
+the fourier dual to time. Different patches on the sky correspond to different
+fringe rates, for a given baseline and frequency. Maximum fringe rates are found
+along the equatorial plane where zero fringe rates are found around the poles
+(sources at the poles do not move through the fringes of a baselines). Sources
+on the other side of the pole, corresponds to negative fringe rates, because
+they move through the fringe pattern in the opposite direction. By weighing the
+fringe rates sampled by a baseline by the beam response of the baseline, gives
+us the optimal fringe rate filer to use for time averaging. See Parsons/Liu 2014
+for a detailed discussion.
+
+We implement the optimal fringe rate filter by first calculating the fringe rate
+of everypoint on the sky and weighting it the beam of a given baseline, summing
+along constant fringe rate contours, This is then squared to get the effective
+sensitivity of each fring rate bin (squaringe the power beam). That is we are
+upweighting fringe rate bins that have greater signal-to-noise.  We then fit a
+gaussian to the optimal filter to have a smooth function, along with tanh
+function for to have a smooth cut off at the maximum fringe rate for the given
+baseline and frequency.  Note that this only calculated for a given frequency
+and scaled to other frequencies, due to the fact that fringe rate scales
+linearly with frequency via
+
+\begin{equation}
+    f_{max} = \frac{|\mathbf{b}_{eq}|}{c}\omega_{\oplus}\nu
+\end{equation}
+
+
+To minimize edge effects in time we fourier transform the optimal fringe rate
+filter to get the time domain convolution kernel and apply it to each visibility for a
+given channel and baseline. 
+
+The exact implementation of the optimal fringe rate filter, uses a convolution
+kernel of 400 integrations (should we be??). This has the effect of denoising the data as if it
+averaged over 4.75 hours with a weigthing function that is the beam weighted
+fringe rate. For each of the baseline types used (~30 m baselines of different
+orientations).
+
+Since the PAPER beam is ~45 degrees, and the array is located at a declination
+of $-30^{\circ}$ the fringe rates associated with the low signal to noise (down
+in the beam) correspond to very high and very low/negative fringe rates. Figure
+\ref{fig:fringe_rate_cut} shows a cut of the optimal fringe rate at MHz for a 30
+m east west baseline. Therfore, the implemented fringe rate filter removes some
+sky signal, signal associated with fringe rates outside of the ranges shown in
+Figure \ref{fig:fringe_rate_cut}. Figure \ref{fig:fr_preserved_signal} shows
+that the applied filter removes sky associated with negative fringe rates and
+very high fringe rates. 
+
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth]{plots/fr_filter_slice.png}
+\caption{slice of a fringe rate filter at a frequency of 159MHz}
+\ref{fig:fringe_rate_cut}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=2\columnwidth]{plots/fr_preserved_signal.png}
+\caption{slice of a fringe rate filter at a frequency of 159MHz}
+\ref{fig:fr_preserved_signal}
+\end{figure}
+
+
+
+
+
 %plots:
 % filters used. 
 % apply filters to foreground data. Compute fr of pica and show that we are not 
