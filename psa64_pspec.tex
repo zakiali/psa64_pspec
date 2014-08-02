@@ -1,7 +1,7 @@
 %\documentclass[preprint]{aastex}  % USE THIS TO MAKE BIB, THEN FORMAT USING EMULATEAPJ
 \documentclass[twocolumn,numberedappendix]{emulateapj}
 \shorttitle{PSA64}
-\shortauthors{Parsons, et al.}
+\shortauthors{Ali, et al.}
 
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -87,14 +87,6 @@ Each baseline instantaneously measured the 100-200 MHz band which was divided
 into 1024 frequency channels of resolution 97.66 kHz and integrated for 10.7
 seconds.  
 
-\subsection{Compressing the Data}
-The raw described above constitue XX TB of data which can be cumbersome and time
-consuming to do meaningful science. Therefore, the raw data was reprocessed
-through a compression algorithm that comprised of chopping bits of data out that
-correspondend to parts of the sky that was not relavant to our science
-objectives. By applying fourier filters in the delay (Fourier dual of frequency)
-and fringe rate (Fourier dual of time) spaces, we are able disregard 
-
 \begin{figure*}\centering
 \includegraphics[width=1.85\columnwidth]{plots/antenna_positions.png}
 \caption{Antenna positions for the PAPER 64 observation run.}
@@ -109,7 +101,7 @@ refined redundant calibration method (Zheng 2014), increasing the width of the
 wideband delay filter that removes smothe spectrum foregrounds, weighting the
 lst binned data sets, and optimal fringe rate filtering. 
 
-Figure \ref{fig:step_through_pspec} shows the power spectra when each of the
+Figure \ref{fig:step_through_pspec} (TBD) shows the power spectra when each of the
 steps mentioned above are turned off and for the one where all of them are
 turned on.
 
@@ -124,23 +116,107 @@ turned on.
 
 \section{Analysis}
 Describe the overall flow of the data through of the pipeline.
+Here we describe the analysis pipeline of the data set obtained in 2012/2013
+observing season. 
+Data was first run through a preprocessing compression pipeline which reduces
+the volume of the data by a factor of forty. Afterwards we calibrate the
+relative phases of our array on the basis of redundancy using a logcal approach
+in delay space, and then get the absoultue phase calibration by fitting. We then
+set the flux scale of our observations by using Pictor A. The logcal done above
+was a rough estimate of the phase calibration and hence we used Omnical to get
+the calibrations to higher accuracy. This was a major difference in the pipeline
+from previous iterations on PAPER data. We then remove foregrounds using the
+delay filtering technique and form power spectra. The detalis of the above are
+discussed below and figure \ref{fig:analysis_pipeline} shows a block diagram of
+the analysis pipeline.
+
+\subsection{Preprocessing Compression}
+As low frequency interferometer grow bigger, data volume becomes an issue. For
+this data set a 10 minute file consisting of 1024 channel complex visibilites
+integrated for 10.7 seconds each, requires 4G of storage space. For the
+observing season this requires about 40TB of storage space. This is doable, for
+now, but when it comes to analyzing sorting through this much data can be
+cumbersome. Therfore we have implementd a compression techinque which reduces
+the amount of storage by a factor of forty. 
+Details of this critical step are presetned in the appendix A of
+\citep{parsons2014a}.  The punch line is that after RFI flagging, and removing
+unsmooth and transient emission from the data, we end up with a factor of 20
+reduction in data volume, ending up with a total data set that requres 2TB of
+storage. After compression, it ends up that the orignal 1024 channels get
+downsampled to 203 channels (still encompassing the 100 MHz) and the 60 time
+samples per 10 minute file end up as 14 timesamples with an effective
+integration time of 42.8 seconds. 
+
+(Show plot of rraw data and compressed data? )
 \subsection{Calibrations}
-\subsection{General}
-The calibration pipeline included a rough calibration based on logarithmic and
-linear redundant calibration, as well as self calibration. A rough pass of log
-cal was first applied to the data on the basis of redundancy to match up
-baselines of the same separation. This included a gain calibration that set the
-flux scale to PictorA (Jacobs, 2013).
+\subsubsection{Overview}
+Precise calibration turned out to be critical in improving our bottom line of
+our final result. We began the calibration procedure by first using a
+logarithmic calibration scheme based in redundant measurements
+(\citep{liu_et_al2010}, \citep{zheng_et_al2014}) as well as using standard
+interferometric self calibration. We set the flux scale of the observations to
+Pictor A (\citep{jacobs_et_al_pictor} which has the spectrum 
+\begin{equation}
+    S_{\nu} = 382(\frac{\nu}{150 MHz})^{-.76} Jy.
+\end{equation}
+We then apply the solutions and run through another round of calibration. We use
+the methods described in \citep{liu_et_al2010} and \citep{zheng_et_al2014} to
+use a linearized redundant calibration. Specifically, we used a pre production
+version of the Omnical package described in \citep{zhend_et_al2014}.
+
+\subsection{The logcal}
+Before we begin the fine calibration, we perform the same calibration that was
+done in \citep{parsons2014}. That is, we use redundncy to do a relative
+phase\footnote{In actuality, we solve for delays to get around phase wrapping
+issues. These delays are applied to visibilities as $e^{2\pi{i}\tau\nu}$}
+calibration between antennas, which removes the electrical delays from cables
+in the signal path. Due to redundancy, we cal calibrate out all of the
+per-antennas delays in the signal path relative to two parameters which we call
+$\tau_{ns}$ and $\tau_{es}$. These delays are the relative electrical delays
+that correspond to baseline delays in the north-ssouth and east-west component
+for 2 reference baselines (49-10 and 49-41,respectively). The antenna based
+delay solutions vary as much as a couple nanoseconds day to day when solutions
+are averaged over hour long timescales withing a day. However, the variations in
+solutions is worse when only averaging over ten minute time scales. . Therefore
+need for better calibration is requred.  We use self calibration to derive the
+two unknow parameters, $\tau_{ns}$ and $\tau_{ew}$, by using Centaurus A, Fornax
+A, and Pictor A.
+
+Note that there is no possibility of signal loss (see \citep{parsons2014}).
 
 \subsection{Gain Calibration}
 Gain calibration was derived on the basis of redundancy and self calibration.
+The phase calibrations described above, simultaneously also calibrated for the
+gain variation between antennas. Again we can only calibrate to a fiducial
+antenna (49) whose gain is defined as unity. We then perform a self calibration
+to set the flux scale to Pictor A whose spectrum is derived in
+\citep{jacops_2013}. We use the same methods describes in \citep{Parsons 2014}.
 
-\subsection{A First Pass}
-Phase calibration was c
+Figure \ref{fig:bmfom_pic} shows that dataset beamformed to Pictor A, with log
+janskies on the y axis and lst on the xaxis for a frequncy of .1 + (120/203)*.1/203. 
+As can be seen, the day to day variation in the formed beam has a fractional
+spread of about 10$\%$.  This shows the stability of the instrument and the well
+behaved calibration solutions derived above. 
 
 \subsection{Omnical}
+(How did we know that our calibrations was not good enough? Because of the power
+spectrum? PSA32? We did beamform data to pictorA and say that vs LST, the
+beamform matched well day to day with a fractional spread of about 10%) 
+The 10$\%$ spread in the formed beam to Pictor A in figure \ref{fig:bmform_pic}
+shows the stability of the solutions over time. However, we wanted to do better. 
 The new element to our calibration pipeline was the use of the omnical package
-developed at MIT by Jeff Zheng (Zheng 2014). 
+developed at MIT by Jeff Zheng (\citep{zheng_et_al2014}). This calibration
+pipeline takes redundant calibration one step deeper by performing lin cal,
+which solves for the unbiased phase and gain solutions.  
+
+Omnical performs a logcal first to find biased phase and gain solutions so the
+solutions are close. lincal, in order to converge, requres a guess of the
+solutions that are close to the actual value. Logcal delivers this result.
+Because of the calibration performed above, which was an implementation of
+logcal, the data requried for lincal was already in hand. Lincal was ran on the
+data and the solutions were applied to the data.
+
+Figure \ref{fig:gain_solutions} shows the gain solutions output by omnical. 
 %waterfalls of chi squared and solutions.
 %day to day repeatability.
 %The output of the omnical - 
@@ -152,18 +228,22 @@ After calibration, we then average and bin data in lst bins of
 \subsection{WB delay filtering}
 Galactic synchrotron and extragalactic point sources, generally foregrounds,
 greatly contaminate the EOR signal. They are roughly 9 orders of magnitude
-(Pober 2013a) above the expected level and EOR and can hide low order RFI events
+(Pober 2013a) above the expected level of EOR and can hide low order RFI events
 and cross-talk.  Therefore, its removal is completeley necessary and required in
 order to obtain the desired EOR signal. In addition to dominating the EOR
 signal, foregrounds can corrupt higher-order $k$ modes in the power spectrum
 measurement from the sidelobes arising from RFI flagging and the finite
 bandwidth used in the line of sight Fourier transform (corresponding to
-$k_{\parallel}$).
+$k_{\parallel}$). 
 
-PAPER uses the delay filtering technique described in Parsons 2012b to remove
-smooth spectrum foregrounds that mask EOR. Followeing the technique
-described there, we first take the delay transform of every baseline for every
-integration, as per 
+PAPER uses the delay filtering technique described in \citep{parsons_2012b} to
+remove smooth spectrum foregrounds that mask EOR. This method relies on the fact
+that for a given baseline, there is a maximum delay a source can be measured at.
+This maximum delay is given when the source is on the horizon. Since the 
+delay is given by projection of the baseline in the direction of the source, the
+maximum delay is just the time it takes light to travel the baseline length. 
+Following the technique described in \citep{parsons_2012b}, the delay transform
+of a visibility takes the form 
 
 \begin{equation}\label{eqn:delay_transform}
     \tilde{V} = \int{W(\nu)S(\nu)V(\nu)e^{-2\pi{i}\tau\nu}d\nu},
@@ -171,7 +251,20 @@ integration, as per
 
 where $V(\nu)$ is the visibility measured, $W(\nu)$ is a blackman-harris
 windowing function and $S(\nu)$ is the weighting function that encodes the flags
-for he data. Following the method in (Parsons Backer 2009), we use a CLEAN
+for the data. Hence, the the fourier transoform of the source spectrum convolves
+the foruier transform of the visibility. Therfore, this method localizes smooth
+spectrum sources which have a narrow footprint in delay domain. Luckily, most
+extragalactic sources and synchrotron radiation have power law spectra.
+
+Using the entire bandwidth increases the degree of foreground separation and is
+impereative to get the best estimate of foreground isolation. We apply the delay
+transform defined above to every baseline over the entire 100 Mhz. Figure
+\ref{fig:delaytransform} shows the localization of foregrounds for a 30 meter
+baseline within the horizon of 100 ns. After the filter is applied we see 3
+orders of magintude in reduction of foreground isolation.  This is a factor of 6
+in powerspectra! 
+
+Following the method in (Parsons Backer 2009), we use a CLEAN
 algorithm to deconvolve out the effects of RFI flags and band edge effects. FRI
 flags and the band edges have the effect of scattering foreground emission to
 higher order delay modes which would otherwise be uncontaminated. The
@@ -179,9 +272,9 @@ implementation of CLEAN is such that it treats the RFI flags as a sampling
 function in frequency and iteratively fits to the highest point in delay space,
 and therefore trying to fill in the flagged data in frequency. We restrict these
 CLEAN components to fall within 100 ns of the horizon limit for a given
-baseline. 
+baseline.  This CLEAN model is then subtracted off from the the orignal
+visibility, leaving us with a filterd visibility.
 
-For the 30m baseline used, the cutoff corresponds 
 
 
 
@@ -274,6 +367,7 @@ very high fringe rates.
 
 
 %\clearpage
+\nocite{*}
 \bibliographystyle{apj}
 \bibliography{biblio}
 

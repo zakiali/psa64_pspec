@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  30 JUL 2014 18:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  1 AUG 2014 16:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**psa64_pspec.tex
+**psa64_pspec
 (./psa64_pspec.tex
 LaTeX2e <2014/05/01>
 Babel <3.9k> and hyphenation patterns for 78 languages loaded.
@@ -372,100 +372,252 @@ Underfull \hbox (badness 10000) in paragraph at lines 100--100
 LaTeX Warning: Reference `fig:step_through_pspec' on page 1 undefined on input 
 line 112.
 
+
+LaTeX Warning: Reference `fig:analysis_pipeline' on page 1 undefined on input l
+ine 138.
+
 [1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+Package natbib Warning: Citation `zheng_et_al2014' on page 2 undefined on input
+ line 164.
+
+
+Package natbib Warning: Citation `jacobs_et_al_pictor' on page 2 undefined on i
+nput line 166.
+
+
+Package natbib Warning: Citation `zheng_et_al2014' on page 2 undefined on input
+ line 171.
+
+
+Package natbib Warning: Citation `zhend_et_al2014' on page 2 undefined on input
+ line 173.
+
+
+Package natbib Warning: Citation `parsons2014' on page 2 undefined on input lin
+e 177.
+
+
+Package natbib Warning: Citation `parsons2014' on page 2 undefined on input lin
+e 193.
+
+
+Package natbib Warning: Citation `jacops_2013' on page 2 undefined on input lin
+e 201.
+
+
+Package natbib Warning: Citation `Parsons 2014' on page 2 undefined on input li
+ne 201.
+
+
+LaTeX Warning: Reference `fig:bmfom_pic' on page 2 undefined on input line 203.
+
+
+
+LaTeX Warning: Reference `fig:bmform_pic' on page 2 undefined on input line 213
+.
+
+
+Package natbib Warning: Citation `zheng_et_al2014' on page 2 undefined on input
+ line 216.
+
 [2 <./plots/antenna_positions.png>]
 
-LaTeX Warning: Reference `fig:fringe_rate_cut' on page 3 undefined on input lin
-e 237.
+LaTeX Warning: Reference `fig:gain_solutions' on page 3 undefined on input line
+ 227.
 
 
 LaTeX Warning: Reference `fig:fringe_rate_cut' on page 3 undefined on input lin
-e 240.
+e 321.
+
+
+LaTeX Warning: Reference `fig:fringe_rate_cut' on page 3 undefined on input lin
+e 324.
 
 
 LaTeX Warning: Reference `fig:fr_preserved_signal' on page 3 undefined on input
- line 240.
+ line 324.
 
-<plots/fr_filter_slice.png, id=27, 578.16pt x 433.62pt>
+<plots/fr_filter_slice.png, id=28, 578.16pt x 433.62pt>
 File: plots/fr_filter_slice.png Graphic file (type png)
 
 <use plots/fr_filter_slice.png>
-Package pdftex.def Info: plots/fr_filter_slice.png used on input line 246.
+Package pdftex.def Info: plots/fr_filter_slice.png used on input line 330.
 (pdftex.def)             Requested size: 245.26653pt x 183.94531pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 247--247
+Underfull \hbox (badness 10000) in paragraph at lines 331--331
 $[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 247--247
+Underfull \hbox (badness 10000) in paragraph at lines 331--331
 
  []
 
 
 LaTeX Warning: Reference `fig:fringe_rate_cut' on page 3 undefined on input lin
-e 248.
+e 332.
 
-<plots/fr_preserved_signal.png, id=28, 1011.78pt x 433.62pt>
+<plots/fr_preserved_signal.png, id=29, 1011.78pt x 433.62pt>
 File: plots/fr_preserved_signal.png Graphic file (type png)
 
 <use plots/fr_preserved_signal.png>
-Package pdftex.def Info: plots/fr_preserved_signal.png used on input line 253.
+Package pdftex.def Info: plots/fr_preserved_signal.png used on input line 337.
 (pdftex.def)             Requested size: 490.53305pt x 210.23267pt.
 
-Overfull \hbox (245.26653pt too wide) in paragraph at lines 253--254
+Overfull \hbox (245.26653pt too wide) in paragraph at lines 337--338
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 254--254
+Underfull \hbox (badness 10000) in paragraph at lines 338--338
 $[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 254--254
+Underfull \hbox (badness 10000) in paragraph at lines 338--338
 
  []
 
 
 LaTeX Warning: Reference `fig:fr_preserved_signal' on page 3 undefined on input
- line 255.
+ line 339.
 
-No file psa64_pspec.bbl.
-[3 <./plots/fr_filter_slice.png>] [4 <./plots/fr_preserved_signal.png>]
-(./psa64_pspec.aux)
+[3]
+
+LaTeX Warning: A float is stuck (cannot be placed) on input line 357.
+
+
+LaTeX Warning: A float is stuck (cannot be placed) on input line 357.
+
+
+Class revtex4 Warning: Deferred float stuck during \clearpage processing.
+
+(./psa64_pspec.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 9--11
+ []\OT1/cmr/m/n/8 2005, Virtex-II Pro and Virtex-II Pro X Plat-form
+ []
+
+
+Underfull \hbox (badness 7869) in paragraph at lines 9--11
+ \OT1/cmr/m/n/8 FP-GAs: Func-tional De-scrip-tion (DS083-2 v4.5), Xil-inx,
+ []
+
+[4 <./plots/fr_filter_slice.png> <./plots/fr_preserved_signal.png>]
+Underfull \hbox (badness 2119) in paragraph at lines 120--122
+ []\OT1/cmr/m/n/8 Brigham, E. O. 1988, The fast Fourier trans-form and its
+ []
+
+
+Underfull \hbox (badness 1867) in paragraph at lines 141--144
+ []\OT1/cmr/m/n/8 Clark, B. G. 1999, in As-tro-nom-i-cal So-ci-ety of the Pa-ci
+fic
+ []
+
+
+Underfull \hbox (badness 2547) in paragraph at lines 141--144
+ \OT1/cmr/m/n/8 Con-fer-ence Se-ries, Vol. 180, Syn-the-sis Imag-ing in Ra-dio
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 189--191
+ []\OT1/cmr/m/n/8 D'Addario, L. 2001, Cor-re-la-tors: Gen-eral De-sign
+ []
+
+
+Underfull \hbox (badness 5893) in paragraph at lines 189--191
+ \OT1/cmr/m/n/8 Con-sid-er-a-tions, ATA Memo 24, Allen Tele-scope Ar-ray,
+ []
+
+
+Underfull \hbox (badness 1142) in paragraph at lines 322--324
+ []\OT1/cmr/m/n/8 Jackson, T. L., & Far-rell, W. M. 2006, Par-al-lel Pro-cess-i
+ng
+ []
+
+
+Underfull \hbox (badness 1448) in paragraph at lines 433--435
+ []\OT1/cmr/m/n/8 McQuinn, M., Zahn, O., Zal-dar-riaga, M., Hern-quist, L., &
+ []
+
+
+Underfull \hbox (badness 1009) in paragraph at lines 492--496
+ \OT1/cmr/m/n/8 Optical In-stru-men-ta-tion En-gi-neers (SPIE) Con-fer-ence, Vo
+l.
+ []
+
+
+Underfull \hbox (badness 2635) in paragraph at lines 492--496
+ \OT1/cmr/m/n/8 5489, So-ci-ety of Photo-Optical In-stru-men-ta-tion En-gi-neer
+s
+ []
+
+[5]
+Underfull \hbox (badness 1028) in paragraph at lines 664--668
+ []\OT1/cmr/m/n/8 Sault, R. J., Teuben, P. J., & Wright, M. C. H. 1995, in
+ []
+
+
+Underfull \hbox (badness 1715) in paragraph at lines 696--698
+ []\OT1/cmr/m/n/8 Slurzberg, M., & Os-ter-held, W. 1961, Es-sen-tials of Radio-
+
+ []
+
+
+Underfull \hbox (badness 2547) in paragraph at lines 756--759
+ \OT1/cmr/m/n/8 Con-fer-ence Se-ries, Vol. 180, Syn-the-sis Imag-ing in Ra-dio
+ []
+
+
+Underfull \hbox (badness 5908) in paragraph at lines 792--794
+ []\OT1/cmr/m/n/8 Weinreb, S., & D'Addario, L. 2001, Cost Equa-tion for
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 792--794
+ \OT1/cmr/m/n/8 the SKA, SKA Memo 1, Square Kilo-me-tre Ar-ray,
+ []
+
+)
+
+Package natbib Warning: There were undefined citations.
+
+[6] (./psa64_pspec.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4550 strings out of 493117
- 58697 string characters out of 6135433
- 140226 words of memory out of 5000000
- 7929 multiletter control sequences out of 15000+600000
+ 5126 strings out of 493117
+ 71919 string characters out of 6135433
+ 204576 words of memory out of 5000000
+ 8503 multiletter control sequences out of 15000+600000
  13802 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,6n,28p,267b,308s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,7n,28p,1126b,525s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><
 /usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><
 /usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
 usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></u
-sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr
-/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
-ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/loca
-l/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/t
-exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texl
-ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive
-/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/20
-14/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/201
-4/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2014/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb>
-Output written on psa64_pspec.pdf (4 pages, 391792 bytes).
+sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
+/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/l
+ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/loc
+al/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local
+/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/te
+xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texli
+ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/
+2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/201
+4/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2014/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2014/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2014/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+Output written on psa64_pspec.pdf (6 pages, 438965 bytes).
 PDF statistics:
- 88 PDF objects out of 1000 (max. 8388607)
- 59 compressed objects within 1 object stream
+ 106 PDF objects out of 1000 (max. 8388607)
+ 72 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

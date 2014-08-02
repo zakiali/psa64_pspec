@@ -1,0 +1,849 @@
+\begin{thebibliography}{184}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{xil(2004)}]{xilinx_ug024}
+ 2004, {RocketIO Tranceiver User Guide (UG024 v2.5)}, Xilinx,
+  http://www.xilinx.com
+
+\bibitem[{xil(2005)}]{xilinx_ds083}
+ 2005, {Virtex-II Pro and Virtex-II Pro X Platform FPGAs: Functional
+  Description (DS083-2 v4.5)}, Xilinx, http://www.xilinx.com
+
+\bibitem[{hal(2006)}]{hall2006}
+ 2006, {SKA Demonstrators, Pathfinders and Design Studies EWG Comments on 2006
+  Updates}, SKA Memo~86, Square Kilometre Array,
+  http://www.skatelescope.org/PDF/memos
+
+\bibitem[{{Baars} {et~al.}(1977){Baars}, {Genzel}, {Pauliny-Toth}, \&
+  {Witzel}}]{baars_et_al1977}
+{Baars}, J.~W.~M., {Genzel}, R., {Pauliny-Toth}, I.~I.~K., \& {Witzel}, A.
+  1977, \aap, 61, 99
+
+\bibitem[{Babcock(1953)}]{babcock1953}
+Babcock, W.~C. 1953, Bell System Technical Journal, 31, 63
+
+\bibitem[{{Barkana} \& {Loeb}(2005{\natexlab{a}})}]{barkana_loeb2005a}
+{Barkana}, R., \& {Loeb}, A. 2005{\natexlab{a}}, \apjl, 624, L65
+
+\bibitem[{{Barkana} \& {Loeb}(2005{\natexlab{b}})}]{barkana_loeb2005b}
+---. 2005{\natexlab{b}}, \apj, 626, 1
+
+\bibitem[{{Becker} {et~al.}(2001){Becker}, {Fan}, {White}, {Strauss},
+  {Narayanan}, {Lupton}, {Gunn}, {Annis}, {Bahcall}, {Brinkmann}, {Connolly},
+  {Csabai}, {Czarapata}, {Doi}, {Heckman}, {Hennessy}, {Ivezi{\'c}}, {Knapp},
+  {Lamb}, {McKay}, {Munn}, {Nash}, {Nichol}, {Pier}, {Richards}, {Schneider},
+  {Stoughton}, {Szalay}, {Thakar}, \& {York}}]{becker_et_al2001}
+{Becker}, R.~H., {et~al.} 2001, \aj, 122, 2850
+
+\bibitem[{{Bernardi} {et~al.}(2010){Bernardi}, {de Bruyn}, {Harker},
+  {Brentjens}, {Ciardi}, {Jeli{\'c}}, {Koopmans}, {Labropoulos}, {Offringa},
+  {Pandey}, {Schaye}, {Thomas}, {Yatawatta}, \& {Zaroubi}}]{bernardi_et_al2010}
+{Bernardi}, G., {et~al.} 2010, \aap, 522, A67+
+
+\bibitem[{{Bhatnagar} {et~al.}(2008){Bhatnagar}, {Cornwell}, {Golap}, \&
+  {Uson}}]{bhatnagar_et_al2008}
+{Bhatnagar}, S., {Cornwell}, T.~J., {Golap}, K., \& {Uson}, J.~M. 2008, \aap,
+  487, 419
+
+\bibitem[{Blackman \& Tukey(1958)}]{blackman_tukey1958}
+Blackman, R.~B., \& Tukey, J.~W. 1958, The measurement of power spectra (Dover
+  Publications Inc.)
+
+\bibitem[{Bloom \& Golomb(1977)}]{bloom_golomb1977}
+Bloom, G., \& Golomb, S. 1977, in Proceedings of the IEEE, Vol.~65, 562--570
+
+\bibitem[{{Bouwens} {et~al.}(2010){Bouwens}, {Illingworth}, {Oesch},
+  {Stiavelli}, {van Dokkum}, {Trenti}, {Magee}, {Labb{\'e}}, {Franx},
+  {Carollo}, \& {Gonzalez}}]{bouwens_et_al2010}
+{Bouwens}, R.~J., {et~al.} 2010, \apjl, 709, L133
+
+\bibitem[{{Bowman} {et~al.}(2006){Bowman}, {Morales}, \&
+  {Hewitt}}]{bowman_et_al2006}
+{Bowman}, J.~D., {Morales}, M.~F., \& {Hewitt}, J.~N. 2006, \apj, 638, 20
+
+\bibitem[{{Bowman} {et~al.}(2007{\natexlab{a}}){Bowman}, {Morales}, \&
+  {Hewitt}}]{bowman_et_al2007b}
+---. 2007{\natexlab{a}}, \apj, 661, 1
+
+\bibitem[{{Bowman} {et~al.}(2009){Bowman}, {Morales}, \&
+  {Hewitt}}]{bowman_et_al2009}
+---. 2009, \apj, 695, 183
+
+\bibitem[{{Bowman} {et~al.}(2008){Bowman}, {Rogers}, \&
+  {Hewitt}}]{bowman_et_al2008a}
+{Bowman}, J.~D., {Rogers}, A.~E.~E., \& {Hewitt}, J.~N. 2008, \apj, 676, 1
+
+\bibitem[{{Bowman} {et~al.}(2007{\natexlab{b}}){Bowman}, {Barnes}, {Briggs},
+  {Corey}, {Lynch}, {Bhat}, {Cappallo}, {Doeleman}, {Fanous}, {Herne},
+  {Hewitt}, {Johnston}, {Kasper}, {Kocz}, {Kratzenberg}, {Lonsdale}, {Morales},
+  {Oberoi}, {Salah}, {Stansby}, {Stevens}, {Torr}, {Wayth}, {Webster}, \&
+  {Wyithe}}]{bowman_et_al2007a}
+{Bowman}, J.~D., {et~al.} 2007{\natexlab{b}}, \aj, 133, 1505
+
+\bibitem[{{Bowman} {et~al.}(2013){Bowman}, {Cairns}, {Kaplan}, {Murphy},
+  {Oberoi}, {Staveley-Smith}, {Arcus}, {Barnes}, {Bernardi}, {Briggs}, {Brown},
+  {Bunton}, {Burgasser}, {Cappallo}, {Chatterjee}, {Corey}, {Coster},
+  {Deshpande}, {deSouza}, {Emrich}, {Erickson}, {Goeke}, {Gaensler},
+  {Greenhill}, {Harvey-Smith}, {Hazelton}, {Herne}, {Hewitt},
+  {Johnston-Hollitt}, {Kasper}, {Kincaid}, {Koenig}, {Kratzenberg}, {Lonsdale},
+  {Lynch}, {Matthews}, {McWhirter}, {Mitchell}, {Morales}, {Morgan}, {Ord},
+  {Pathikulangara}, {Prabu}, {Remillard}, {Robishaw}, {Rogers}, {Roshi},
+  {Salah}, {Sault}, {Shankar}, {Srivani}, {Stevens}, {Subrahmanyan}, {Tingay},
+  {Wayth}, {Waterson}, {Webster}, {Whitney}, {Williams}, {Williams}, \&
+  {Wyithe}}]{bowman_et_al2012}
+---. 2013, \pasa, 30, 31
+
+\bibitem[{{Bradley}(2006)}]{bradley2006}
+{Bradley}, R. 2006, {A Low Cost Screened Enclosure for Effective Control of
+  Undesired Radio Frequency Emissions}, NRAO EDIR 317,
+  http://www.gb.nrao.edu/electronics/edir
+
+\bibitem[{{Bradley} {et~al.}(2005){Bradley}, {Backer}, {Parsons}, {Parashare},
+  \& {Gugliucci}}]{bradley_et_al2005}
+{Bradley}, R., {Backer}, D., {Parsons}, A., {Parashare}, C., \& {Gugliucci},
+  N.~E. 2005, in Bulletin of the American Astronomical Society, Vol.~37,
+  1216--+
+
+\bibitem[{{Bradley} {et~al.}(2008){Bradley}, {Parashare}, {Gugliucci},
+  {Mastrantonio}, {Backer}, {Parsons}, {Foster}, {Manley}, {Herne}, {Lynch},
+  {Wright}, {Werthimer}, {Carilli}, {Datta}, \& {Aguirre}}]{bradley_et_al2008}
+{Bradley}, R., {et~al.} 2008
+
+\bibitem[{{Brentjens} \& {de Bruyn}(2005)}]{brentjens_debruyn2005}
+{Brentjens}, M.~A., \& {de Bruyn}, A.~G. 2005, \aap, 441, 1217
+
+\bibitem[{{Briggs}(2004)}]{briggs2004}
+{Briggs}, F.~H. 2004, in IAU Symposium, Vol. 217, Recycling Intergalactic and
+  Interstellar Matter, ed. P.-A. {Duc}, J.~{Braine}, \& E.~{Brinks}, 26--+
+
+\bibitem[{{Brigham}(1988)}]{brigham1988}
+{Brigham}, E.~O. 1988, {The fast Fourier transform and its applications.}
+  (Englewood Cliffs, N.J.: Prentice-Hall, 1988)
+
+\bibitem[{{Burgess} \& {Hunstead}(2006)}]{burgess_hunstead2006}
+{Burgess}, A.~M., \& {Hunstead}, R.~W. 2006, \aj, 131, 100
+
+\bibitem[{{Chang} {et~al.}(2005){Chang}, {Wawrzynek}, \&
+  {Brodersen}}]{chang_et_al2005}
+{Chang}, C., {Wawrzynek}, J., \& {Brodersen}, R.~W. 2005, IEEE Design and Test
+  of Computers, 22, 114
+
+\bibitem[{{Chapiro}(1984)}]{chapiro1984}
+{Chapiro}, D.~M. 1984, PhD thesis, Stanford Univ., CA.
+
+\bibitem[{{Chen}(2004)}]{chen2004}
+{Chen}, X. 2004, ArXiv Astrophysics e-prints
+
+\bibitem[{{Chen} \& {Miralda-Escud{\'e}}(2004)}]{chen_et_al2004}
+{Chen}, X., \& {Miralda-Escud{\'e}}, J. 2004, \apj, 602, 1
+
+\bibitem[{{Clark}(1999)}]{clark1999}
+{Clark}, B.~G. 1999, in Astronomical Society of the Pacific Conference Series,
+  Vol. 180, Synthesis Imaging in Radio Astronomy II, ed. {G.~B.~Taylor,
+  C.~L.~Carilli, \& R.~A.~Perley}, 1--+
+
+\bibitem[{{{Comm. for a Decadal Survey of A\&A; NRC}}(2010)}]{astro2010}
+{{Comm. for a Decadal Survey of A\&A; NRC}}. 2010, New Worlds, New Horizons in
+  Astronomy and Astrophysics (Natl. Academies Press)
+
+\bibitem[{{Conway} {et~al.}(1990){Conway}, {Cornwell}, \&
+  {Wilkinson}}]{conway_et_al1990}
+{Conway}, J.~E., {Cornwell}, T.~J., \& {Wilkinson}, P.~N. 1990, \mnras, 246,
+  490
+
+\bibitem[{{Cornwell} \& {Fomalont}(1989)}]{cornwell_fomalont1989}
+{Cornwell}, T., \& {Fomalont}, E.~B. 1989, in Astronomical Society of the
+  Pacific Conference Series, Vol.~6, Synthesis Imaging in Radio Astronomy, ed.
+  R.~A. {Perley}, F.~R. {Schwab}, \& A.~H. {Bridle}, 185--+
+
+\bibitem[{{Cornwell} \& {Evans}(1985)}]{cornwell_evans1985}
+{Cornwell}, T.~J., \& {Evans}, K.~F. 1985, \aap, 143, 77
+
+\bibitem[{{Cornwell} {et~al.}(2003){Cornwell}, {Golap}, \&
+  {Bhatnagar}}]{cornwell_et_al2003}
+{Cornwell}, T.~J., {Golap}, K., \& {Bhatnagar}, S. 2003, {W-Projection: A New
+  Algorithm for Non-Coplanar Baselines}, EVLA Memo~67
+
+\bibitem[{{Cornwell} {et~al.}(2005{\natexlab{a}}){Cornwell}, {Golap}, \&
+  {Bhatnagar}}]{cornwell_et_al_2005_347}
+{Cornwell}, T.~J., {Golap}, K., \& {Bhatnagar}, S. 2005{\natexlab{a}}, in
+  Astronomical Society of the Pacific Conference Series, Vol. 347, Astronomical
+  Data Analysis Software and Systems XIV, ed. P.~{Shopbell}, M.~{Britton}, \&
+  R.~{Ebert}, 86--+
+
+\bibitem[{{Cornwell} {et~al.}(2005{\natexlab{b}}){Cornwell}, {Golap}, \&
+  {Bhatnagar}}]{cornwell_et_al_2005_345}
+{Cornwell}, T.~J., {Golap}, K., \& {Bhatnagar}, S. 2005{\natexlab{b}}, in
+  Astronomical Society of the Pacific Conference Series, Vol. 345, Astronomical
+  Society of the Pacific Conference Series, ed. N.~{Kassim}, M.~{Perez},
+  W.~{Junor}, \& P.~{Henning}, 350--+
+
+\bibitem[{Costas(1984)}]{costas1984}
+Costas, J. 1984, in Proceedings of the IEEE, Vol.~72, 996--1009
+
+\bibitem[{{Crochiere} \& {Rabiner}(1983)}]{crochiere_rabiner1983}
+{Crochiere}, R., \& {Rabiner}, L.~R. 1983, {Multirate Digital Signal
+  Processing} (Englewood Cliffs, N.J., Prentice-Hall, Inc., 1983.~336 p.)
+
+\bibitem[{{D'Addario}(2001)}]{daddario2001}
+{D'Addario}, L. 2001, {Correlators: General Design Considerations}, ATA
+  Memo~24, Allen Telescope Array, http://ral.berkeley.edu/ata/memos/
+
+\bibitem[{{de Oliveira-Costa} {et~al.}(2008{\natexlab{a}}){de Oliveira-Costa},
+  {Tegmark}, {Gaensler}, {Jonas}, {Landecker}, \& {Reich}}]{deoliveira2008}
+{de Oliveira-Costa}, A., {Tegmark}, M., {Gaensler}, B.~M., {Jonas}, J.,
+  {Landecker}, T.~L., \& {Reich}, P. 2008{\natexlab{a}}, \mnras, 388, 247
+
+\bibitem[{{de Oliveira-Costa} {et~al.}(2008{\natexlab{b}}){de Oliveira-Costa},
+  {Tegmark}, {Gaensler}, {Jonas}, {Landecker}, \&
+  {Reich}}]{deolivieracosta_et_al2008}
+---. 2008{\natexlab{b}}, \mnras, 388, 247
+
+\bibitem[{{de Villiers}(2007)}]{devilliers2007}
+{de Villiers}, M. 2007, \aap, 469, 793
+
+\bibitem[{{Demorest} {et~al.}(2004){Demorest}, {Ramachandran}, {Backer},
+  {Ferdman}, {Stairs}, \& {Nice}}]{demorest_et_al2004}
+{Demorest}, P., {Ramachandran}, R., {Backer}, D., {Ferdman}, R., {Stairs}, I.,
+  \& {Nice}, D. 2004, in Bulletin of the American Astronomical Society, 1598--+
+
+\bibitem[{{Di Matteo} {et~al.}(2004){Di Matteo}, {Ciardi}, \&
+  {Miniati}}]{dimatteo_et_al2004}
+{Di Matteo}, T., {Ciardi}, B., \& {Miniati}, F. 2004, \mnras, 355, 1053
+
+\bibitem[{{Di Matteo} {et~al.}(2002){Di Matteo}, {Perna}, {Abel}, \&
+  {Rees}}]{dimatteo_et_al2002}
+{Di Matteo}, T., {Perna}, R., {Abel}, T., \& {Rees}, M.~J. 2002, \apj, 564, 576
+
+\bibitem[{{Dick}(2000)}]{dick2000}
+{Dick}, C. 2000, {High-Performance 1024-Point Complex FFT/IFFT V2.0},
+  http://www.xilinx.com
+
+\bibitem[{{Dillon} {et~al.}(2013{\natexlab{a}}){Dillon}, {Liu}, \&
+  {Tegmark}}]{dillon_et_al2013a}
+{Dillon}, J.~S., {Liu}, A., \& {Tegmark}, M. 2013{\natexlab{a}}, \prd, 87,
+  043005
+
+\bibitem[{{Dillon} {et~al.}(2013{\natexlab{b}}){Dillon}, {Liu}, {Tegmark},
+  {Bernardi}, {Gleadow}, {Edgar}, {Clark}, {Allen}, {Arcus}, {Benkevitch},
+  {Bowman}, {Briggs}, {Bunton}, {Burns}, {Cappallo}, {Coles}, {Corey},
+  {Desouza}, {Doeleman}, {Derome}, {Deshpande}, {Emrich}, {Goeke},
+  {Gopalakrishna}, {Herne}, {Hewitt}, {Kamini}, {Kaplan}, {Kasper}, {Kincaid},
+  {Kocz}, {Kowald}, {Kratzenberg}, {Kumar}, {Lonsdale}, {Lynch}, {McWhirter},
+  {Madhavi}, {Matejek}, {Morales}, {Morgan}, {Oberoi}, {Pathikulangara},
+  {Prabu}, {Rogers}, {Roshi}, {Salah}, {Schinkel}, {Udaya Shankar}, {Srivani},
+  {Stevens}, {Tingay}, {Vaccarella}, {Waterson}, {Webster}, {Whitney},
+  {Williams}, \& {Williams}}]{dillon_et_al2013b}
+{Dillon}, J.~S., {et~al.} 2013{\natexlab{b}}, ArXiv e-prints
+
+\bibitem[{{Dunkley} {et~al.}(2008){Dunkley}, {Komatsu}, {Nolta}, {Spergel},
+  {Larson}, {Hinshaw}, {Page}, {Bennett}, {Gold}, {Jarosik}, {Weiland},
+  {Halpern}, {Hill}, {Kogut}, {Limon}, {Meyer}, {Tucker}, {Wollack}, \&
+  {Wright}}]{dunkley_et_al2008}
+{Dunkley}, J., {et~al.} 2008, ArXiv e-prints, 803
+
+\bibitem[{{Fan} {et~al.}(2006){Fan}, {Carilli}, \& {Keating}}]{fan_et_al2006}
+{Fan}, X., {Carilli}, C.~L., \& {Keating}, B. 2006, \araa, 44, 415
+
+\bibitem[{{Field}(1958)}]{field1958}
+{Field}, G.~B. 1958, Proc. IRE, 46, 240
+
+\bibitem[{{Furlanetto} {et~al.}(2006){Furlanetto}, {Oh}, \&
+  {Briggs}}]{furlanetto_et_al2006}
+{Furlanetto}, S.~R., {Oh}, S.~P., \& {Briggs}, F.~H. 2006, \physrep, 433, 181
+
+\bibitem[{{Golap} {et~al.}(2005){Golap}, {Cornwell}, {Perley}, \&
+  {Bhatnagar}}]{golap_et_al2005}
+{Golap}, K., {Cornwell}, T.~J., {Perley}, R.~A., \& {Bhatnagar}, S. 2005, in
+  Astronomical Society of the Pacific Conference Series, Vol. 345, Astronomical
+  Society of the Pacific Conference Series, ed. N.~{Kassim}, M.~{Perez},
+  W.~{Junor}, \& P.~{Henning}, 366--+
+
+\bibitem[{{Golap} {et~al.}(1998){Golap}, {Shankar}, {Sachdev}, {Dodson}, \&
+  {Sastry}}]{golap_et_al1998}
+{Golap}, K., {Shankar}, N.~U., {Sachdev}, S., {Dodson}, R., \& {Sastry}, C.~V.
+  1998, Journal of Astrophysics and Astronomy, 19, 35
+
+\bibitem[{Golomb \& Taylor(1984)}]{golomb_taylor1984}
+Golomb, S., \& Taylor, H. 1984, Proceedings of the IEEE, 72, 1143
+
+\bibitem[{Golomb \& Gong(2004)}]{golomb_gong2004}
+Golomb, S.~W., \& Gong, G. 2004, Signal Design for Good Correlation: For
+  Wireless Communication, Cryptography, and Radar (New York, NY, USA: Cambridge
+  University Press)
+
+\bibitem[{{G{\'o}rski} {et~al.}(2005){G{\'o}rski}, {Hivon}, {Banday},
+  {Wandelt}, {Hansen}, {Reinecke}, \& {Bartelmann}}]{gorski_et_al2005}
+{G{\'o}rski}, K.~M., {Hivon}, E., {Banday}, A.~J., {Wandelt}, B.~D., {Hansen},
+  F.~K., {Reinecke}, M., \& {Bartelmann}, M. 2005, \apj, 622, 759
+
+\bibitem[{{Hall}(1988)}]{arrl1988}
+{Hall}, G., ed. 1988, {The ARRL Antenna Book, 15th Edition} (American Radio
+  Relay League, Newington, Connecticut, 1988.), 16
+
+\bibitem[{{Harris}(1978)}]{harris1978}
+{Harris}, F.~J. 1978, IEEE Proceedings, 66, 51
+
+\bibitem[{{Haslam} {et~al.}(1982){Haslam}, {Salter}, {Stoffel}, \&
+  {Wilson}}]{haslam_et_al1982}
+{Haslam}, C.~G.~T., {Salter}, C.~J., {Stoffel}, H., \& {Wilson}, W.~E. 1982,
+  \aaps, 47, 1
+
+\bibitem[{{Hazelton} {et~al.}(2013){Hazelton}, {Morales}, \&
+  {Sullivan}}]{hazelton_et_al2013}
+{Hazelton}, B.~J., {Morales}, M.~F., \& {Sullivan}, I.~S. 2013, ArXiv e-prints
+
+\bibitem[{{Heiles} {et~al.}(2004){Heiles}, {Goldston}, {Mock}, {Parsons},
+  {Stanimirovic}, \& {Werthimer}}]{heiles_et_al2004}
+{Heiles}, C., {Goldston}, J., {Mock}, J., {Parsons}, A., {Stanimirovic}, S., \&
+  {Werthimer}, D. 2004, in Bulletin of the American Astronomical Society,
+  1476--+
+
+\bibitem[{{Helmboldt} {et~al.}(2008){Helmboldt}, {Kassim}, {Cohen}, {Lane}, \&
+  {Lazio}}]{helmboldt_et_al2008}
+{Helmboldt}, J.~F., {Kassim}, N.~E., {Cohen}, A.~S., {Lane}, W.~M., \& {Lazio},
+  T.~J. 2008, \apjs, 174, 313
+
+\bibitem[{{Hirata}(2006)}]{hirata2006}
+{Hirata}, C.~M. 2006, \mnras, 367, 259
+
+\bibitem[{{H{\"o}gbom}(1974)}]{hogbom1974}
+{H{\"o}gbom}, J.~A. 1974, \aaps, 15, 417
+
+\bibitem[{{Hui} \& {Haiman}(2003)}]{hui_haiman2003}
+{Hui}, L., \& {Haiman}, Z. 2003, \apj, 596, 9
+
+\bibitem[{{Iliev} {et~al.}(2008){Iliev}, {Mellema}, {Pen}, {Bond}, \&
+  {Shapiro}}]{iliev_et_al2008}
+{Iliev}, I.~T., {Mellema}, G., {Pen}, U.-L., {Bond}, J.~R., \& {Shapiro}, P.~R.
+  2008, \mnras, 384, 863
+
+\bibitem[{{Jackson} \& {Farrell}(2006)}]{jackson_farrell2006}
+{Jackson}, T.~L., \& {Farrell}, W.~M. 2006, Parallel Processing Symposium,
+  International, 44, 2942
+
+\bibitem[{{Jacobs} {et~al.}(2011){Jacobs}, {Aguirre}, {Parsons}, {Pober},
+  {Bradley}, {Carilli}, {Gugliucci}, {Manley}, {van der Merwe}, {Moore}, \&
+  {Parashare}}]{jacobs_et_al2011}
+{Jacobs}, D.~C., {et~al.} 2011, \apjl, 734, L34
+
+\bibitem[{{Jacobs} {et~al.}(2013){Jacobs}, {Aguirre}, {Parsons}, {Pober},
+  {Bradley}, {Carilli}, {Gugliucci}, {Manley}, {van der Merwe}, {Moore}, \&
+  {Parashare}}]{jacobs_et_al2013}
+---. 2013, ArXiv e-prints
+
+\bibitem[{{Jeli{\'c}} {et~al.}(2010){Jeli{\'c}}, {Zaroubi}, {Labropoulos},
+  {Bernardi}, {de Bruyn}, \& {Koopmans}}]{jelic_et_al2010}
+{Jeli{\'c}}, V., {Zaroubi}, S., {Labropoulos}, P., {Bernardi}, G., {de Bruyn},
+  A.~G., \& {Koopmans}, L.~V.~E. 2010, \mnras, 409, 1647
+
+\bibitem[{{Jeli{\'c}} {et~al.}(2008){Jeli{\'c}}, {Zaroubi}, {Labropoulos},
+  {Thomas}, {Bernardi}, {Brentjens}, {de Bruyn}, {Ciardi}, {Harker},
+  {Koopmans}, {Pandey}, {Schaye}, \& {Yatawatta}}]{jelic_et_al2008}
+{Jeli{\'c}}, V., {et~al.} 2008, \mnras, 389, 1319
+
+\bibitem[{{Jenet} \& {Anderson}(1998)}]{jenet_anderson1998}
+{Jenet}, F.~A., \& {Anderson}, S.~B. 1998, \pasp, 110, 1467
+
+\bibitem[{{Jennison}(1958)}]{jennison1958}
+{Jennison}, R.~C. 1958, \mnras, 118, 276
+
+\bibitem[{{Johnson}(1993)}]{johnson1993}
+{Johnson}, R.~C. 1993, {Antenna Engineering Handbook, 3rd Edition} (New York,
+  McGraw-Hill, 1993.), 18--23
+
+\bibitem[{{Keto}(1997)}]{keto1997}
+{Keto}, E. 1997, \apj, 475, 843
+
+\bibitem[{{Komesaroff}(1960)}]{komesaroff1960}
+{Komesaroff}, M.~M. 1960, Australian Journal of Physics, 13, 153
+
+\bibitem[{{Kuehr} {et~al.}(1981){Kuehr}, {Witzel}, {Pauliny-Toth}, \&
+  {Nauber}}]{kuhr_et_al1981}
+{Kuehr}, H., {Witzel}, A., {Pauliny-Toth}, I.~I.~K., \& {Nauber}, U. 1981,
+  \aaps, 45, 367
+
+\bibitem[{{Large} {et~al.}(1981){Large}, {Mills}, {Little}, {Crawford}, \&
+  {Sutton}}]{large_et_al1981}
+{Large}, M.~I., {Mills}, B.~Y., {Little}, A.~G., {Crawford}, D.~F., \&
+  {Sutton}, J.~M. 1981, \mnras, 194, 693
+
+\bibitem[{{Lidz} {et~al.}(2008){Lidz}, {Zahn}, {McQuinn}, {Zaldarriaga}, \&
+  {Hernquist}}]{lidz_et_al2008}
+{Lidz}, A., {Zahn}, O., {McQuinn}, M., {Zaldarriaga}, M., \& {Hernquist}, L.
+  2008, \apj, 680, 962
+
+\bibitem[{{Liu} \& {Tegmark}(2011)}]{liu_tegmark2011}
+{Liu}, A., \& {Tegmark}, M. 2011, \prd, 83, 103006
+
+\bibitem[{{Liu} {et~al.}(2010){Liu}, {Tegmark}, {Morrison}, {Lutomirski}, \&
+  {Zaldarriaga}}]{liu_et_al2010}
+{Liu}, A., {Tegmark}, M., {Morrison}, S., {Lutomirski}, A., \& {Zaldarriaga},
+  M. 2010, \mnras, 408, 1029
+
+\bibitem[{{Liu} {et~al.}(2008){Liu}, {Tegmark}, \&
+  {Zaldarriaga}}]{liu_et_al2008}
+{Liu}, A., {Tegmark}, M., \& {Zaldarriaga}, M. 2008, ArXiv e-prints
+
+\bibitem[{{Loeb} \& {Barkana}(2001)}]{loeb_barkana2001}
+{Loeb}, A., \& {Barkana}, R. 2001, \araa, 39, 19
+
+\bibitem[{{Loeb} \& {Zaldarriaga}(2004)}]{loeb_zaldarriaga2004}
+{Loeb}, A., \& {Zaldarriaga}, M. 2004, Physical Review Letters, 92, 211301
+
+\bibitem[{{Lonsdale} {et~al.}(2009){Lonsdale}, {Cappallo}, {Morales}, {Briggs},
+  {Benkevitch}, {Bowman}, {Bunton}, {Burns}, {Corey}, {Desouza}, {Doeleman},
+  {Derome}, {Deshpande}, {Gopala}, {Greenhill}, {Herne}, {Hewitt}, {Kamini},
+  {Kasper}, {Kincaid}, {Kocz}, {Kowald}, {Kratzenberg}, {Kumar}, {Lynch},
+  {Madhavi}, {Matejek}, {Mitchell}, {Morgan}, {Oberoi}, {Ord},
+  {Pathikulangara}, {Prabu}, {Rogers}, {Roshi}, {Salah}, {Sault}, {Shankar},
+  {Srivani}, {Stevens}, {Tingay}, {Vaccarella}, {Waterson}, {Wayth}, {Webster},
+  {Whitney}, {Williams}, \& {Williams}}]{lonsdale_et_al2009}
+{Lonsdale}, C.~J., {et~al.} 2009, IEEE Proceedings, 97, 1497
+
+\bibitem[{{Madau} {et~al.}(1997){Madau}, {Meiksin}, \&
+  {Rees}}]{madau_et_al1997}
+{Madau}, P., {Meiksin}, A., \& {Rees}, M.~J. 1997, \apj, 475, 429
+
+\bibitem[{{Madau} {et~al.}(2004){Madau}, {Rees}, {Volonteri}, {Haardt}, \&
+  {Oh}}]{madau_et_al2004}
+{Madau}, P., {Rees}, M.~J., {Volonteri}, M., {Haardt}, F., \& {Oh}, S.~P. 2004,
+  \apj, 604, 484
+
+\bibitem[{{Mao} {et~al.}(2008){Mao}, {Tegmark}, {McQuinn}, {Zaldarriaga}, \&
+  {Zahn}}]{mao_et_al2008}
+{Mao}, Y., {Tegmark}, M., {McQuinn}, M., {Zaldarriaga}, M., \& {Zahn}, O. 2008,
+  \prd, 78, 023529
+
+\bibitem[{{Masui} {et~al.}(2013){Masui}, {Switzer}, {Banavar}, {Bandura},
+  {Blake}, {Calin}, {Chang}, {Chen}, {Li}, {Liao}, {Natarajan}, {Pen},
+  {Peterson}, {Shaw}, \& {Voytek}}]{masui_et_al2013}
+{Masui}, K.~W., {et~al.} 2013, \apjl, 763, L20
+
+\bibitem[{{McQuinn} {et~al.}(2007){McQuinn}, {Lidz}, {Zahn}, {Dutta},
+  {Hernquist}, \& {Zaldarriaga}}]{mcquinn_et_al2007}
+{McQuinn}, M., {Lidz}, A., {Zahn}, O., {Dutta}, S., {Hernquist}, L., \&
+  {Zaldarriaga}, M. 2007, \mnras, 377, 1043
+
+\bibitem[{{McQuinn} \& {O'Leary}(2012)}]{mcquinn_oleary2012}
+{McQuinn}, M., \& {O'Leary}, R.~M. 2012, \apj, 760, 3
+
+\bibitem[{{McQuinn} {et~al.}(2006){McQuinn}, {Zahn}, {Zaldarriaga},
+  {Hernquist}, \& {Furlanetto}}]{mcquinn_et_al2006}
+{McQuinn}, M., {Zahn}, O., {Zaldarriaga}, M., {Hernquist}, L., \& {Furlanetto},
+  S.~R. 2006, \apj, 653, 815
+
+\bibitem[{{Mesinger} {et~al.}(2013){Mesinger}, {Ferrara}, \&
+  {Spiegel}}]{mesinger_et_al2013}
+{Mesinger}, A., {Ferrara}, A., \& {Spiegel}, D.~S. 2013, \mnras, 431, 621
+
+\bibitem[{{Mesinger} {et~al.}(2011){Mesinger}, {Furlanetto}, \&
+  {Cen}}]{mesinger_et_al2011}
+{Mesinger}, A., {Furlanetto}, S., \& {Cen}, R. 2011, \mnras, 411, 955
+
+\bibitem[{Meyer \& Papakonstantinou(2009)}]{meyer_papakon2009}
+Meyer, C., \& Papakonstantinou, P.~A. 2009, Discrete Appl. Math., 157, 738
+
+\bibitem[{{Millman} \& {Halkias}(1967)}]{millman_halkias1967}
+{Millman}, J., \& {Halkias}, C. 1967, {Electronic Devices and Circuits} (New
+  York, McGraw-Hill, 1967.)
+
+\bibitem[{{Mirabel} {et~al.}(2011){Mirabel}, {Dijkstra}, {Laurent}, {Loeb}, \&
+  {Pritchard}}]{mirabel_et_al2011}
+{Mirabel}, I.~F., {Dijkstra}, M., {Laurent}, P., {Loeb}, A., \& {Pritchard},
+  J.~R. 2011, \aap, 528, A149
+
+\bibitem[{{Mishra} {et~al.}(2005){Mishra}, {\`Eabri\ae}, {Chang}, {Willkomm},
+  {van Schewick}, {Wolisz}, \& {Brodersen}}]{mishra_et_al2005}
+{Mishra}, S., {\`Eabri\ae}, D., {Chang}, C., {Willkomm}, D., {van Schewick},
+  B., {Wolisz}, A., \& {Brodersen}, R. 2005, IEEE DySPAN
+
+\bibitem[{{Moore} {et~al.}(2013){Moore}, {Aguirre}, {Parsons}, {Jacobs}, \&
+  {Pober}}]{moore_et_al2013}
+{Moore}, D.~F., {Aguirre}, J.~E., {Parsons}, A.~R., {Jacobs}, D.~C., \&
+  {Pober}, J.~C. 2013, \apj, 769, 154
+
+\bibitem[{{Morales}(2005)}]{morales2005}
+{Morales}, M.~F. 2005, \apj, 619, 678
+
+\bibitem[{{Morales} {et~al.}(2006{\natexlab{a}}){Morales}, {Bowman},
+  {Cappallo}, {Hewitt}, \& {Lonsdale}}]{morales_et_al2006b}
+{Morales}, M.~F., {Bowman}, J.~D., {Cappallo}, R., {Hewitt}, J.~N., \&
+  {Lonsdale}, C.~J. 2006{\natexlab{a}}, New Astronomy Review, 50, 173
+
+\bibitem[{{Morales} {et~al.}(2006{\natexlab{b}}){Morales}, {Bowman}, \&
+  {Hewitt}}]{morales_et_al2006a}
+{Morales}, M.~F., {Bowman}, J.~D., \& {Hewitt}, J.~N. 2006{\natexlab{b}}, \apj,
+  648, 767
+
+\bibitem[{{Morales} \& {Hewitt}(2004)}]{morales_hewitt2004}
+{Morales}, M.~F., \& {Hewitt}, J. 2004, \apj, 615, 7
+
+\bibitem[{{Morales} \& {Matejek}(2009{\natexlab{a}})}]{morales_matejek2009}
+{Morales}, M.~F., \& {Matejek}, M. 2009{\natexlab{a}}, \mnras, 400, 1814
+
+\bibitem[{{Morales} \& {Matejek}(2009{\natexlab{b}})}]{Morales2009}
+---. 2009{\natexlab{b}}, \mnras, 400, 1814
+
+\bibitem[{{Morales} \& {Wyithe}(2010)}]{morales_wyithe2010}
+{Morales}, M.~F., \& {Wyithe}, J.~S.~B. 2010, \araa, 48, 127
+
+\bibitem[{{Noordam}(2004)}]{noordam2004}
+{Noordam}, J.~E. 2004, in Presented at the Society of Photo-Optical
+  Instrumentation Engineers (SPIE) Conference, Vol. 5489, Society of
+  Photo-Optical Instrumentation Engineers (SPIE) Conference Series, ed. J.~M.
+  {Oschmann}, Jr., 817--825
+
+\bibitem[{{Ord} {et~al.}(2010){Ord}, {Mitchell}, {Wayth}, {Greenhill},
+  {Bernardi}, {Gleadow}, {Edgar}, {Clark}, {Allen}, {Arcus}, {Benkevitch},
+  {Bowman}, {Briggs}, {Bunton}, {Burns}, {Cappallo}, {Coles}, {Corey},
+  {Desouza}, {Doeleman}, {Derome}, {Deshpande}, {Emrich}, {Goeke},
+  {Gopalakrishna}, {Herne}, {Hewitt}, {Kamini}, {Kaplan}, {Kasper}, {Kincaid},
+  {Kocz}, {Kowald}, {Kratzenberg}, {Kumar}, {Lonsdale}, {Lynch}, {McWhirter},
+  {Madhavi}, {Matejek}, {Morales}, {Morgan}, {Oberoi}, {Pathikulangara},
+  {Prabu}, {Rogers}, {Roshi}, {Salah}, {Schinkel}, {Udaya Shankar}, {Srivani},
+  {Stevens}, {Tingay}, {Vaccarella}, {Waterson}, {Webster}, {Whitney},
+  {Williams}, \& {Williams}}]{ord_et_al2010}
+{Ord}, S.~M., {et~al.} 2010, \pasp, 122, 1353
+
+\bibitem[{{Paciga} {et~al.}(2011){Paciga}, {Chang}, {Gupta}, {Nityanada},
+  {Odegova}, {Pen}, {Peterson}, {Roy}, \& {Sigurdson}}]{paciga_et_al2011}
+{Paciga}, G., {et~al.} 2011, \mnras, 413, 1174
+
+\bibitem[{{Paciga} {et~al.}(2013){Paciga}, {Albert}, {Bandura}, {Chang},
+  {Gupta}, {Hirata}, {Odegova}, {Pen}, {Peterson}, {Roy}, {Shaw}, {Sigurdson},
+  \& {Voytek}}]{paciga_et_al2013}
+---. 2013, \mnras
+
+\bibitem[{{Page} {et~al.}(2007){Page}, {Hinshaw}, {Komatsu}, {Nolta},
+  {Spergel}, {Bennett}, {Barnes}, {Bean}, {Dor{\'e}}, {Dunkley}, {Halpern},
+  {Hill}, {Jarosik}, {Kogut}, {Limon}, {Meyer}, {Odegard}, {Peiris}, {Tucker},
+  {Verde}, {Weiland}, {Wollack}, \& {Wright}}]{page_et_al2007}
+{Page}, L., {et~al.} 2007, \apjs, 170, 335
+
+\bibitem[{{Parashare} \& {Bradley}(2009)}]{parashare_bradley2009}
+{Parashare}, C.~R., \& {Bradley}, R.~F. 2009, in 2009 USNC/URSI Annual Meeting
+
+\bibitem[{{Park} {et~al.}(2003){Park}, {Ng}, {Park}, {Liu}, \&
+  {Umetsu}}]{park_et_al2003}
+{Park}, C., {Ng}, K., {Park}, C., {Liu}, G., \& {Umetsu}, K. 2003, \apj, 589,
+  67
+
+\bibitem[{Parsons(2009)}]{parsons2009}
+Parsons, A. 2009, Signal Processing Letters, IEEE, 16, 477
+
+\bibitem[{{Parsons} {et~al.}(2012{\natexlab{a}}){Parsons}, {Pober}, {McQuinn},
+  {Jacobs}, \& {Aguirre}}]{parsons_et_al2012a}
+{Parsons}, A., {Pober}, J., {McQuinn}, M., {Jacobs}, D., \& {Aguirre}, J.
+  2012{\natexlab{a}}, \apj, 753, 81
+
+\bibitem[{{Parsons} {et~al.}(2006){Parsons}, {Backer}, {Chang}, {Chapman},
+  {Chen}, {Crescini}, {de Jesus}, {Dick}, {Droz}, {MacMahon}, {Meder}, {Mock},
+  {Nagpal}, {Nikolic}, {Parsa}, {Richards}, {Siemion}, {Wawrzynek},
+  {Werthimer}, \& {Wright}}]{parsons_et_al2006}
+{Parsons}, A., {et~al.} 2006, in Asilomar Conference on Signals and Systems,
+  Pacific Grove, CA, 2031--2035
+
+\bibitem[{{Parsons} {et~al.}(2008){Parsons}, {Backer}, {Siemion}, {Chen},
+  {Werthimer}, {Droz}, {Filiba}, {Manley}, {McMahon}, {Parsa}, {MacMahon}, \&
+  {Wright}}]{parsons_et_al2008}
+{Parsons}, A., {et~al.} 2008, \pasp, 120, 1207
+
+\bibitem[{{Parsons} \& {Backer}(2009)}]{parsons_backer2009}
+{Parsons}, A.~R., \& {Backer}, D.~C. 2009, \aj, 138, 219
+
+\bibitem[{{Parsons} {et~al.}(2012{\natexlab{b}}){Parsons}, {Pober}, {Aguirre},
+  {Carilli}, {Jacobs}, \& {Moore}}]{parsons_et_al2012b}
+{Parsons}, A.~R., {Pober}, J.~C., {Aguirre}, J.~E., {Carilli}, C.~L., {Jacobs},
+  D.~C., \& {Moore}, D.~F. 2012{\natexlab{b}}, \apj, 756, 165
+
+\bibitem[{{Parsons} {et~al.}(2009){Parsons}, {Backer}, {Bradley}, {Aguirre},
+  {Benoit}, {Carilli}, {Foster}, {Gugliucci}, {Herne}, {Jacobs}, {Manley},
+  {Parashare}, {Werthimer}, \& {Wright}}]{parsons_et_al2009}
+{Parsons}, A.~R., {et~al.} 2009, Submitted to \aj. ArXiv:0904.2334
+
+\bibitem[{{Parsons} {et~al.}(2010){Parsons}, {Backer}, {Foster}, {Wright},
+  {Bradley}, {Gugliucci}, {Parashare}, {Benoit}, {Aguirre}, {Jacobs},
+  {Carilli}, {Herne}, {Lynch}, {Manley}, \& {Werthimer}}]{parsons_et_al2010}
+---. 2010, \aj, 139, 1468
+
+\bibitem[{{Parsons} {et~al.}(2014){Parsons}, {Liu}, {Aguirre}, {Ali},
+  {Bradley}, {Carilli}, {DeBoer}, {Dexter}, {Gugliucci}, {Jacobs}, {Klima},
+  {MacMahon}, {Manley}, {Moore}, {Pober}, {Stefan}, \&
+  {Walbrugh}}]{parsons2014a}
+---. 2014, \apj, 788, 106
+
+\bibitem[{{Pearson} \& {Readhead}(1984)}]{pearson_readhead1984}
+{Pearson}, T.~J., \& {Readhead}, A.~C.~S. 1984, \araa, 22, 97
+
+\bibitem[{{Pen} {et~al.}(2009){Pen}, {Chang}, {Hirata}, {Peterson}, {Roy},
+  {Gupta}, {Odegova}, \& {Sigurdson}}]{pen_et_al2009}
+{Pen}, U., {Chang}, T., {Hirata}, C.~M., {Peterson}, J.~B., {Roy}, J., {Gupta},
+  Y., {Odegova}, J., \& {Sigurdson}, K. 2009, \mnras, 399, 181
+
+\bibitem[{{Perley} {et~al.}(1997){Perley}, {Roser}, \&
+  {Meisenheimer}}]{perley_et_al1997}
+{Perley}, R.~A., {Roser}, H.-J., \& {Meisenheimer}, K. 1997, \aap, 328, 12
+
+\bibitem[{{Petrovic} \& {Oh}(2010)}]{petrovic_oh2010}
+{Petrovic}, N., \& {Oh}, S.~P. 2010, ArXiv e-prints
+
+\bibitem[{{Plana} {et~al.}(2007){Plana}, {Furber}, {Temple}, {Khan}, {Shi},
+  {Wu}, \& {Yang}}]{luis_et_al2007}
+{Plana}, L.~A., {Furber}, S.~B., {Temple}, S., {Khan}, M., {Shi}, Y., {Wu}, J.,
+  \& {Yang}, S. 2007, IEEE Des. Test, 24, 454
+
+\bibitem[{{Planck Collaboration} {et~al.}(2013){Planck Collaboration}, {Ade},
+  {Aghanim}, {Armitage-Caplan}, {Arnaud}, {Ashdown}, {Atrio-Barandela},
+  {Aumont}, {Baccigalupi}, {Banday}, \& et~al.}]{planck_et_al2013}
+{Planck Collaboration} {et~al.} 2013, ArXiv e-prints
+
+\bibitem[{{Pober} {et~al.}(2011){Pober}, {Parsons}, {Jacobs}, {Aguirre},
+  {Bradley}, {Carilli}, {Gugliucci}, {Moore}, \& {Parashare}}]{pober_et_al2011}
+{Pober}, J.~C., {et~al.} 2011, ArXiv e-prints
+
+\bibitem[{{Pober} {et~al.}(2012){Pober}, {Parsons}, {Jacobs}, {Aguirre},
+  {Bradley}, {Carilli}, {Gugliucci}, {Moore}, \& {Parashare}}]{pober_et_al2012}
+---. 2012, \aj, 143, 53
+
+\bibitem[{{Pober} {et~al.}(2013){Pober}, {Parsons}, {Aguirre}, {Ali},
+  {Bradley}, {Carilli}, {DeBoer}, {Dexter}, {Gugliucci}, {Jacobs}, {Klima},
+  {MacMahon}, {Manley}, {Moore}, {Stefan}, \& {Walbrugh}}]{pober_et_al2013}
+---. 2013, \apjl, 768, L36
+
+\bibitem[{{Pritchard} \& {Loeb}(2010)}]{pritchard_loeb2010}
+{Pritchard}, J.~R., \& {Loeb}, A. 2010, \prd, 82, 023006
+
+\bibitem[{{Pritchard} \& {Loeb}(2012)}]{pritchard_loeb2012}
+---. 2012, Reports on Progress in Physics, 75, 086901
+
+\bibitem[{{Rabiner} \& {Gold}(1975)}]{rabiner_gold1975}
+{Rabiner}, L.~R., \& {Gold}, B. 1975, {Theory and application of digital signal
+  processing} (Englewood Cliffs, N.J., Prentice-Hall, Inc., 1975.~777 p.)
+
+\bibitem[{{Ricotti} \& {Ostriker}(2004)}]{ricotti_ostriker2004}
+{Ricotti}, M., \& {Ostriker}, J.~P. 2004, \mnras, 352, 547
+
+\bibitem[{{Roberts} {et~al.}(1987){Roberts}, {Lehar}, \&
+  {Dreher}}]{roberts_et_al1987}
+{Roberts}, D.~H., {Lehar}, J., \& {Dreher}, J.~W. 1987, \aj, 93, 968
+
+\bibitem[{Robinson(1985)}]{robinson1985}
+Robinson, J. 1985, IEEE Transactions on Information Theory, 31, 781
+
+\bibitem[{{Rogers} \& {Bowman}(2008)}]{rogers_bowman2008}
+{Rogers}, A.~E.~E., \& {Bowman}, J.~D. 2008, \aj, 136, 641
+
+\bibitem[{{Rottgering} {et~al.}(2006){Rottgering}, {Braun}, {Barthel}, {van
+  Haarlem}, {Miley}, {Morganti}, {Snellen}, {Falcke}, {de Bruyn}, {Stappers},
+  {Boland}, {Butcher}, {de Geus}, {Koopmans}, {Fender}, {Kuijpers},
+  {Schilizzi}, {Vogt}, {Wijers}, {Wise}, {Brouw}, {Hamaker}, {Noordam},
+  {Oosterloo}, {Bahren}, {Brentjens}, {Wijnholds}, {Bregman}, {van Cappellen},
+  {Gunst}, {Kant}, {Reitsma}, {van der Schaaf}, \& {de
+  Vos}}]{rottgering_et_al2006}
+{Rottgering}, H.~J.~A., {et~al.} 2006, ArXiv Astrophysics e-prints
+
+\bibitem[{{Rybicki} \& {Lightman}(1979)}]{rybicki_lightman1979}
+{Rybicki}, G.~B., \& {Lightman}, A.~P. 1979, {Radiative processes in
+  astrophysics} (New York, Wiley-Interscience, 1979.~393 p.)
+
+\bibitem[{{Santos} {et~al.}(2008){Santos}, {Amblard}, {Pritchard}, {Trac},
+  {Cen}, \& {Cooray}}]{santos_et_al2008}
+{Santos}, M.~G., {Amblard}, A., {Pritchard}, J., {Trac}, H., {Cen}, R., \&
+  {Cooray}, A. 2008, \apj, 689, 1
+
+\bibitem[{{Santos} {et~al.}(2005){Santos}, {Cooray}, \&
+  {Knox}}]{santos_et_al2005}
+{Santos}, M.~G., {Cooray}, A., \& {Knox}, L. 2005, \apj, 625, 575
+
+\bibitem[{{Sault}(1990)}]{sault1990}
+{Sault}, R.~J. 1990, \apjl, 354, L61
+
+\bibitem[{{Sault} {et~al.}(1995){Sault}, {Teuben}, \&
+  {Wright}}]{sault_et_al1995}
+{Sault}, R.~J., {Teuben}, P.~J., \& {Wright}, M.~C.~H. 1995, in Astronomical
+  Society of the Pacific Conference Series, Vol.~77, Astronomical Data Analysis
+  Software and Systems IV, ed. R.~A. {Shaw}, H.~E. {Payne}, \& J.~J.~E.
+  {Hayes}, 433--+
+
+\bibitem[{{Schenker} {et~al.}(2013){Schenker}, {Robertson}, {Ellis}, {Ono},
+  {McLure}, {Dunlop}, {Koekemoer}, {Bowler}, {Ouchi}, {Curtis-Lake}, {Rogers},
+  {Schneider}, {Charlot}, {Stark}, {Furlanetto}, \&
+  {Cirasuolo}}]{schenker_et_al2012}
+{Schenker}, M.~A., {et~al.} 2013, \apj, 768, 196
+
+\bibitem[{{Shaw} {et~al.}(2013{\natexlab{a}}){Shaw}, {Sigurdson}, {Pen},
+  {Stebbins}, \& {Sitwell}}]{shaw_et_al2013}
+{Shaw}, J.~R., {Sigurdson}, K., {Pen}, U.-L., {Stebbins}, A., \& {Sitwell}, M.
+  2013{\natexlab{a}}, ArXiv e-prints
+
+\bibitem[{{Shaw} {et~al.}(2013{\natexlab{b}}){Shaw}, {Sigurdson}, {Pen},
+  {Stebbins}, \& {Sitwell}}]{Shaw2013}
+---. 2013{\natexlab{b}}, ArXiv e-prints
+
+\bibitem[{{Shull} {et~al.}(1995){Shull}, {Stocke}, \&
+  {Penton}}]{shull_et_al1995}
+{Shull}, J.~M., {Stocke}, J.~T., \& {Penton}, S. 1995, ArXiv Astrophysics
+  e-prints
+
+\bibitem[{Sidon(1932)}]{sidon1932}
+Sidon, S. 1932, Mathematische Annalen, 106, 536
+
+\bibitem[{{Slee}(1995)}]{slee1995}
+{Slee}, O.~B. 1995, Australian Journal of Physics, 48, 143
+
+\bibitem[{{Slurzberg} \& {Osterheld}(1961)}]{slurzberg_osterheld1961}
+{Slurzberg}, M., \& {Osterheld}, W. 1961, {Essentials of Radio-Electronics, 2nd
+  Edition} (New York, McGraw-Hill, 1961.), 595
+
+\bibitem[{{So} {et~al.}(2006){So}, {Tkachenko}, \& {Brodersen}}]{so_et_al2006}
+{So}, H., {Tkachenko}, A., \& {Brodersen}, R. 2006, CODES+ISSS
+
+\bibitem[{{So}(2007)}]{so2007}
+{So}, K.~H. 2007, PhD thesis, Berkeley Wireless Research Center, UC Berkeley,
+  CA.
+
+\bibitem[{{So} \& {Brodersen}(2006)}]{so_broderson2006}
+{So}, K.~H., \& {Brodersen}, R.~W. 2006, in 16th International Conference on
+  Field Programmable Logic and Applications (Madrid, Spain), 349--354
+
+\bibitem[{{Stefan} {et~al.}(2013){Stefan}, {Carilli}, {Green}, {Ali},
+  {Aguirre}, {Bradley}, {DeBoer}, {Dexter}, {Gugliucci}, {Harris}, {Jacobs},
+  {Klima}, {MacMahon}, {Manley}, {Moore}, {Parsons}, {Pober}, \&
+  {Walbrugh}}]{stefan_et_al2013}
+{Stefan}, I.~I., {et~al.} 2013, \mnras
+
+\bibitem[{{Sullivan} {et~al.}(2012){Sullivan}, {Morales}, {Hazelton}, {Arcus},
+  {Barnes}, {Bernardi}, {Briggs}, {Bowman}, {Bunton}, {Cappallo}, {Corey},
+  {Deshpande}, {deSouza}, {Emrich}, {Gaensler}, {Goeke}, {Greenhill}, {Herne},
+  {Hewitt}, {Johnston-Hollitt}, {Kaplan}, {Kasper}, {Kincaid}, {Koenig},
+  {Kratzenberg}, {Lonsdale}, {Lynch}, {McWhirter}, {Mitchell}, {Morgan},
+  {Oberoi}, {Ord}, {Pathikulangara}, {Prabu}, {Remillard}, {Rogers}, {Roshi},
+  {Salah}, {Sault}, {Udaya Shankar}, {Srivani}, {Stevens}, {Subrahmanyan},
+  {Tingay}, {Wayth}, {Waterson}, {Webster}, {Whitney}, {Williams}, {Williams},
+  \& {Wyithe}}]{sullivan_et_al2012}
+{Sullivan}, I.~S., {et~al.} 2012, \apj, 759, 17
+
+\bibitem[{{Switzer} {et~al.}(2013){Switzer}, {Masui}, {Bandura}, {Calin},
+  {Chang}, {Chen}, {Li}, {Liao}, {Natarajan}, {Pen}, {Peterson}, {Shaw}, \&
+  {Voytek}}]{switzer_et_al2013}
+{Switzer}, E.~R., {et~al.} 2013, ArXiv e-prints
+
+\bibitem[{{Tanaka} {et~al.}(2012){Tanaka}, {Perna}, \&
+  {Haiman}}]{tanaka_et_al2012}
+{Tanaka}, T., {Perna}, R., \& {Haiman}, Z. 2012, \mnras, 425, 2974
+
+\bibitem[{{Tegmark}(1997{\natexlab{a}})}]{Tegmark97}
+{Tegmark}, M. 1997{\natexlab{a}}, \apjl, 480, L87
+
+\bibitem[{{Tegmark}(1997{\natexlab{b}})}]{tegmark1997}
+---. 1997{\natexlab{b}}, \prd, 55, 5895
+
+\bibitem[{{Tegmark} {et~al.}(2000){Tegmark}, {Eisenstein}, {Hu}, \& {de
+  Oliveira-Costa}}]{tegmark_et_al2000}
+{Tegmark}, M., {Eisenstein}, D.~J., {Hu}, W., \& {de Oliveira-Costa}, A. 2000,
+  \apj, 530, 133
+
+\bibitem[{{Tegmark} {et~al.}(1998){Tegmark}, {Hamilton}, {Strauss}, {Vogeley},
+  \& {Szalay}}]{tegmark_et_al1998}
+{Tegmark}, M., {Hamilton}, A.~J.~S., {Strauss}, M.~A., {Vogeley}, M.~S., \&
+  {Szalay}, A.~S. 1998, \apj, 499, 555
+
+\bibitem[{{Tegmark} \& {Zaldarriaga}(2009)}]{tegmark_zaldarriaga2009}
+{Tegmark}, M., \& {Zaldarriaga}, M. 2009, \prd, 79, 083530
+
+\bibitem[{{Thompson}(1999)}]{thompson1999}
+{Thompson}, A.~R. 1999, in Astronomical Society of the Pacific Conference
+  Series, Vol. 180, Synthesis Imaging in Radio Astronomy II, ed. {G.~B.~Taylor,
+  C.~L.~Carilli, \& R.~A.~Perley}, 11--+
+
+\bibitem[{{Thompson} {et~al.}(2001){Thompson}, {Moran}, \&
+  {Swenson}}]{thompson_et_al2001}
+{Thompson}, A.~R., {Moran}, J.~M., \& {Swenson}, Jr., G.~W. 2001,
+  {Interferometry and Synthesis in Radio Astronomy, 2nd Edition} (New York,
+  Wiley-Interscience, 2001.~692 p.)
+
+\bibitem[{{Tingay} {et~al.}(2013){Tingay}, {Goeke}, {Bowman}, {Emrich}, {Ord},
+  {Mitchell}, {Morales}, {Booler}, {Crosse}, {Wayth}, {Lonsdale}, {Tremblay},
+  {Pallot}, {Colegate}, {Wicenec}, {Kudryavtseva}, {Arcus}, {Barnes},
+  {Bernardi}, {Briggs}, {Burns}, {Bunton}, {Cappallo}, {Corey}, {Deshpande},
+  {Desouza}, {Gaensler}, {Greenhill}, {Hall}, {Hazelton}, {Herne}, {Hewitt},
+  {Johnston-Hollitt}, {Kaplan}, {Kasper}, {Kincaid}, {Koenig}, {Kratzenberg},
+  {Lynch}, {Mckinley}, {Mcwhirter}, {Morgan}, {Oberoi}, {Pathikulangara},
+  {Prabu}, {Remillard}, {Rogers}, {Roshi}, {Salah}, {Sault}, {Udaya-Shankar},
+  {Schlagenhaufer}, {Srivani}, {Stevens}, {Subrahmanyan}, {Waterson},
+  {Webster}, {Whitney}, {Williams}, {Williams}, \& {Wyithe}}]{tingay_et_al2013}
+{Tingay}, S.~J., {et~al.} 2013, \pasa, 30, 7
+
+\bibitem[{{Trac} \& {Cen}(2007)}]{trac07}
+{Trac}, H., \& {Cen}, R. 2007, \apj, 671, 1
+
+\bibitem[{{Vaidyanathan}(1990)}]{vaidyanathan1990}
+{Vaidyanathan}, P.~P. 1990, Proc. IEEE, 78, 56
+
+\bibitem[{{Wang} {et~al.}(2006){Wang}, {Tegmark}, {Santos}, \&
+  {Knox}}]{wang_et_al2006}
+{Wang}, X., {Tegmark}, M., {Santos}, M.~G., \& {Knox}, L. 2006, \apj, 650, 529
+
+\bibitem[{{Weinreb}(1961)}]{weinreb1961}
+{Weinreb}, S. 1961, Proc. IEEE, 49, 1099
+
+\bibitem[{{Weinreb} \& {D'Addario}(2001)}]{weinreb_daddario2001}
+{Weinreb}, S., \& {D'Addario}, L. 2001, {Cost Equation for the SKA}, SKA
+  Memo~1, Square Kilometre Array, http://www.skatelescope.org/PDF/memos
+
+\bibitem[{{White} {et~al.}(1999){White}, {Carlstrom}, {Dragovan}, \&
+  {Holzapfel}}]{white_et_al1999}
+{White}, M., {Carlstrom}, J.~E., {Dragovan}, M., \& {Holzapfel}, W.~L. 1999,
+  \apj, 514, 12
+
+\bibitem[{{Wieringa}(1992)}]{wieringa1992}
+{Wieringa}, M.~H. 1992, Experimental Astronomy, 2, 203
+
+\bibitem[{{Wouthuysen}(1952)}]{wouthuysen1952}
+{Wouthuysen}, S.~A. 1952, \aj, 57, 31
+
+\bibitem[{{Wright}(2005)}]{wright2005}
+{Wright}, M. 2005, {Real Time Imaging}, SKA Memo~60, Square Kilometre Array,
+  http://www.skatelescope.org/PDF/memos
+
+\bibitem[{{Wrobel} \& {Walker}(1999)}]{wrobel_walker1999}
+{Wrobel}, J.~M., \& {Walker}, R.~C. 1999, in Astronomical Society of the
+  Pacific Conference Series, Vol. 180, Synthesis Imaging in Radio Astronomy II,
+  ed. G.~B. {Taylor}, C.~L. {Carilli}, \& R.~A. {Perley}, 171--+
+
+\bibitem[{{Yatawatta} {et~al.}(2008){Yatawatta}, {Zaroubi}, {de Bruyn},
+  {Koopmans}, \& {Noordam}}]{yatawatta_et_al2008}
+{Yatawatta}, S., {Zaroubi}, S., {de Bruyn}, G., {Koopmans}, L., \& {Noordam},
+  J. 2008, ArXiv:0810.5751
+
+\bibitem[{{Yatawatta} {et~al.}(2013){Yatawatta}, {de Bruyn}, {Brentjens},
+  {Labropoulos}, {Pandey}, {Kazemi}, {Zaroubi}, {Koopmans}, {Offringa},
+  {Jeli{\'c}}, {Martinez Rubi}, {Veligatla}, {Wijnholds}, {Brouw}, {Bernardi},
+  {Ciardi}, {Daiboo}, {Harker}, {Mellema}, {Schaye}, {Thomas}, {Vedantham},
+  {Chapman}, {Abdalla}, {Alexov}, {Anderson}, {Avruch}, {Batejat}, {Bell},
+  {Bell}, {Bentum}, {Best}, {Bonafede}, {Bregman}, {Breitling}, {van de Brink},
+  {Broderick}, {Br{\"u}ggen}, {Conway}, {de Gasperin}, {de Geus}, {Duscha},
+  {Falcke}, {Fallows}, {Ferrari}, {Frieswijk}, {Garrett}, {Griessmeier},
+  {Gunst}, {Hassall}, {Hessels}, {Hoeft}, {Iacobelli}, {Juette},
+  {Karastergiou}, {Kondratiev}, {Kramer}, {Kuniyoshi}, {Kuper}, {van Leeuwen},
+  {Maat}, {Mann}, {McKean}, {Mevius}, {Mol}, {Munk}, {Nijboer}, {Noordam},
+  {Norden}, {Orru}, {Paas}, {Pandey-Pommier}, {Pizzo}, {Polatidis}, {Reich},
+  {R{\"o}ttgering}, {Sluman}, {Smirnov}, {Stappers}, {Steinmetz}, {Tagger},
+  {Tang}, {Tasse}, {ter Veen}, {Vermeulen}, {van Weeren}, {Wise}, {Wucknitz},
+  \& {Zarka}}]{yatawatta_et_al2013}
+{Yatawatta}, S., {et~al.} 2013, \aap, 550, A136
+
+\bibitem[{{Yen}(1974)}]{yen1974}
+{Yen}, J.~L. 1974, \aaps, 15, 483
+
+\bibitem[{{Zahn} {et~al.}(2007){Zahn}, {Lidz}, {McQuinn}, {Dutta}, {Hernquist},
+  {Zaldarriaga}, \& {Furlanetto}}]{zahn_et_al2007}
+{Zahn}, O., {Lidz}, A., {McQuinn}, M., {Dutta}, S., {Hernquist}, L.,
+  {Zaldarriaga}, M., \& {Furlanetto}, S.~R. 2007, \apj, 654, 12
+
+\bibitem[{{Zaldarriaga} {et~al.}(2004){Zaldarriaga}, {Furlanetto}, \&
+  {Hernquist}}]{zaldarriaga_et_al2004}
+{Zaldarriaga}, M., {Furlanetto}, S.~R., \& {Hernquist}, L. 2004, \apj, 608, 622
+
+\end{thebibliography}
