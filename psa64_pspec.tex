@@ -62,48 +62,75 @@ Jeff Zheng
 \section{Introduction}
 The Donald C. Backer Precision Array for Probing the Epoch of Reionization
 (PAPER) is a dedicated experiment to measure the power spectrum of highly
-redshifted 21 cm emission from the Epoch of Reionization.
+redshifted 21 cm emission during the Epoch of Reionization. PAPER is but one
+experiment that aims to detect this faint signal. Other telescopes that have the
+same goal are the Giant Meter-wave Radio Telescope (GMRT), the LOw Frequency
+ARray (LOFAR), and the Murchison Widefield Array (MWA). PAPER currently consists
+of 128 dual-polarization antennae in a 100-200MHz band out in the Karoo desert
+in South Africa. 
+
+The current best upper limit on 21 cm signal level is at $(41 mK)^{2}$ which was
+measured by PAPER. This limit was acheived by using the delay-spectrum technique
+to remove foregrounds and by using a maximum redundancy array to essentially
+measure the same $k$-modes repeatedly, boosting sensitivity. In this analysis we
+employ the same techniques mentioned as well is introduce an optimal fringe-fringe
+rate filter to  boost sensitivity and make use of precise calibration via
+the Omnical redundant calibrator package. 
+
+The paper is outlined as follows. In section \ref{sec:observations} we describe
+the observations used in this analysis. In \ref{sec:improvements} we discuss the
+improvements in this pipeline with respect to the previous analysis of PSA-32
+\cite{parsons_et_al2014}. We then move on to the data analysis pipeline in
+section \ref{sec:analysis}. Seciton \ref{sec:results} describes the results of
+ our efforts and provides new contraints on EoR. We conclude in
+\ref{sec:conclusion}.
 
 
-
-
-
-\section{Observations}
+\section{Observations}\ref{sec:observations}
 Here, we describe the features of the data set used in this analysis. 
-We used the maximally redundant configuration of the PAPER array (see Figure
+Currently, PAPER boasts a modest 128 dual-polarization antenna array, which was
+followed by a 64 antenna array. This paper focuses on the latter.
+We used a maximally redundant configuration of the PAPER array (see Figure
 \ref{fig:antenna_positions} for this analysis, relying on all of the redundant
 baselines for the calibration procedure, but only using a subset of the
-baselines for the power spectrum analysis. For the power spectrum analysis we
+baselines for the power spectrum analysis. The columns are separated by 30
+meters and the rows by 5 meters. For the power spectrum analysis we
 are using the baselines that correspond to the width between two columns (e.g.
 49-41) as well as those that correspond to over and up and down one antenna
-(e.g. 10-41 and 10-58, respectively). These 154 baselines are used in the power
-spectrum analysis because they are instantaneously redundant and therefore they
-measure the same Fourier modes on the sky. The sensitivity of the array is mostly
-captured by these baselines. 
+(e.g. 10-41 and 10-58, respectively). These 154 baselines are 
+instantaneously redundant and therefore they measure the same Fourier modes on
+the sky. Within a single group of the three types of baselines above, the
+measurements add coherently, where between groups they add in quadrature. Having
+repeated measurements of the same baseline type greatly increases sensitivity. 
 
-The observation of the 64 antenna data set spanned a 135 day period that
+The observation of this 64 antenna data set spanned a 135 day period that
 commenced on 2012 November 8 (JD62456240) and ended  2013 March 23 (JD62456375). 
 Each baseline instantaneously measured the 100-200 MHz band which was divided
 into 1024 frequency channels of resolution 97.66 kHz and integrated for 10.7
-seconds.  
+seconds. In this analysis we analyze observations that spanned, in local
+siderial time (LST), a range of 1:00 to 10:00 hours. This range corresponds to
+the "EoR cold patch", in which galaxtic synchrotron power is minimal (away from
+the center of the galaxy).
+%XXX lst range will change.
 
-\begin{figure*}\centering
+\begin{figure*}[!t]\centering
 \includegraphics[width=1.85\columnwidth]{plots/antenna_positions.png}
 \caption{Antenna positions for the PAPER 64 observation run.}
 \label{fig:antenna_positions}
 \end{figure*}
 
 \section{Summary of Improvements from PSA32}
-In comparison to the previous PAPER pipeline (see Parsonsi, 2014), this analysis
-took a slightly different approach which included some important steps to
-improve our bottom line. In short, the improvements included using a new, 
-refined redundant calibration method (Zheng 2014), increasing the width of the
-wideband delay filter that removes smothe spectrum foregrounds, weighting the
-lst binned data sets, and optimal fringe rate filtering. 
+In comparison to the previous PAPER pipeline (see \cite{parsons_et_al2014}),
+this analysis took a slightly different approach which included some important
+steps to improve our bottom line. In short, the improvements included using a
+new, refined redundant calibration method (Zheng 2014), increasing the width of
+the wideband delay filter that removes smothe spectrum foregrounds, weighting
+the lst binned data sets, and optimal fringe rate filtering. In section
+\ref{sec:analysis}, we dicuss each of the improvements in more detail.
 
-Figure \ref{fig:step_through_pspec} (TBD) shows the power spectra when each of the
-steps mentioned above are turned off and for the one where all of them are
-turned on.
+Figure \ref{fig:step_through_pspec} (TBD) shows the power spectra when each of
+the steps mentioned above are turned off and for the one where all of them are
+turned on. We can see the gradual improvement of the power spectra (hopefully).
 
 
 %A more rigorous calibrations. Forward Ref.
@@ -223,7 +250,18 @@ Figure \ref{fig:gain_solutions} shows the gain solutions output by omnical.
 %
 
 \subsection{lstbinning}
-After calibration, we then average and bin data in lst bins of 
+The Omnical calibration pipeline removes all of the variation between unique
+baseline types and averages them together, effectively creating a model for what
+a baseline measures. This is not simulated and is derived from the data. These
+averaged models are what we use to continue through the analysis pipeline. 
+
+The motivation for using these datasets is that they are pre calibrated and have
+baseline to baseline variation removed from them, including cross talk and other
+systematics. This is essentially the averaged of what a unique baseline type
+should measure. This includes RFI events that effect the entire array and sky
+signal. 
+
+We lstbin these data into lst bins of 42.8 seconds over the entire observation.
 
 \subsection{WB delay filtering}
 Galactic synchrotron and extragalactic point sources, generally foregrounds,
