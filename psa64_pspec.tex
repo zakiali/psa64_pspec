@@ -38,12 +38,12 @@
 Zaki S. Ali\altaffilmark{1},
 Aaron R. Parsons\altaffilmark{1,2},
 Adrian Liu\altaffilmark{1},
+Jeff Zheng
 James E. Aguirre\altaffilmark{3},
 David R. DeBoer\altaffilmark{2},
 Daniel C. Jacobs\altaffilmark{8},
 David F. Moore\altaffilmark{3},
 Jonathan C. Pober\altaffilmark{4},
-Jeff Zheng
 % XXX if includes paper data, needs full author list
 }
 
@@ -114,7 +114,7 @@ the center of the galaxy).
 %XXX lst range will change.
 
 \begin{figure*}[!t]\centering
-\includegraphics[width=1.85\columnwidth]{plots/antenna_positions.png}
+\includegraphics[width=1.85\columnwidth,height=\columnwidth]{plots/antenna_positions.png}
 \caption{Antenna positions for the PAPER 64 observation run.}
 \label{fig:antenna_positions}
 \end{figure*}
@@ -375,16 +375,26 @@ very high fringe rates.
 \begin{figure}
 \centering
 \includegraphics[width=\columnwidth]{plots/fr_filter_slice.png}
-\caption{slice of a fringe rate filter at a frequency of 159MHz}
+\caption{slice of a fringe rate filter at a frequency of 159MHz. Top is the
+filter in fringe rate domain. The bottom consists of the corresponding time
+domain filter gotten by fourier transforming and windowing with a
+blackman-harris window to damp the tails.}
 \ref{fig:fringe_rate_cut}
 \end{figure}
 
-\begin{figure}
-\centering
+\begin{figure*}[t!]\centering
 \includegraphics[width=2\columnwidth]{plots/fr_preserved_signal.png}
-\caption{slice of a fringe rate filter at a frequency of 159MHz}
+\caption{slice of a fringe rate filter at a frequency of 159MHz. Shown here is
+the fringe-rate transform of foreground contained data for a 30 m east-west
+baseline. Blue and green are the real and imaginary part, respectively and red
+is the absolute valeu. Note the maximum and minimum fringerates correspond to
+the theoretical minimum and maximum for a baseline of this length at 159 MHz.
+The center panel shows the real (red)  and imaginary (green) parts of the fringe
+rate filter to be applied. Finally, the last panel on the right shows that the
+fringe rate filtered visibilities. The fringe rate filter is just a weighting
+applied in fringe rate space and retains foregrounds.}
 \ref{fig:fr_preserved_signal}
-\end{figure}
+\end{figure*}
 
 
 
@@ -405,9 +415,9 @@ very high fringe rates.
 
 
 %\clearpage
-\nocite{*}
-\bibliographystyle{apj}
-\bibliography{biblio}
+%\nocite{*}
+%\bibliographystyle{apj}
+%\bibliography{biblio}
 
 \end{document}
 
