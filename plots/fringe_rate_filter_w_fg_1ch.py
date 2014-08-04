@@ -65,6 +65,8 @@ f1, f2 = frates[0] - .5*step, frates[-1]+.5*step
 #:p.title('Stokes I in Fringe rate domain (mHz)')
 #p.show()
 
+fq = n.average(freqs)
+print fq
 
 #Now filter with aggressive fringe rate filter. 
 b1 = 1; b2 = 4 #sep24 is the 0,1 spacing.
@@ -83,32 +85,35 @@ firs = firs.conj()
 print firs.shape
 print frspace.shape
 
-fq = n.average(freqs)
-print fq
 
+#if true over writes frbins and frspace 
+#if True:
+if False 
 #Aarons methof with the sigma fixed
-#t = n.arange(-200,200,1) * 42.8
-#w = a.dsp.gen_window(t.size, 'none')
-#sig = .000288*(fq/.1788)#was found in fr
-#cen = .001059 * (fq/.1788)#was found in fr
-#firg = n.exp(-(t**2)/(2*(1./(2*n.pi*sig)**2))).astype(n.complex) * w #note that this is in time.
-#firg /= firg.sum()
-#firg *= n.exp(2j*n.pi*cen*t) # need to flip the sign for backward baselines
-#firg = firg.conj()
+    t = n.arange(-200,201,1) * 42.8
+    frbins = n.fft.fftshift(n.fft.fftfreq(401,42.8))
+    w = a.dsp.gen_window(t.size, 'none')
+    sig = .000288*(fq/.1788)#was found in fr
+    cen = .001059 * (fq/.1788)#was found in fr
+    firg = n.exp(-(t**2)/(2*(1./(sig)**2))).astype(n.complex) * w #note that this is in time.
+    firg /= firg.sum()
+    firg *= n.exp(2j*n.pi*cen*t) # need to flip the sign for backward baselines
+    firg = firg.conj()
+    frspace = n.fft.fftshift(n.fft.ifft(n.fft.fftshift(firg)))
 
 
-#firs = firg
+firs = firg
 
 vis_frf = n.zeros_like(vis)
 wgts_frf = n.zeros_like(vis)
 filtered = n.zeros_like(vis)
 for ch in xrange(len(chans)):
-    #vis_frf[:,ch] = n.convolve(wgts[:,ch]*vis[:,ch], n.conj(firs[ch,:]), mode='same')
-    #wgts_frf[:,ch] = n.convolve(wgts[:,ch], n.abs(n.conj(firs[ch,:])), mode='same')
-    #filtered[:,ch] = n.where(wgts_frf[:,ch]>0, vis_frf[:,ch]/wgts_frf[:,ch], 1)
-    vis_frf[:,ch] = n.convolve(wgts[:,ch]*vis[:,ch], firs[:,ch], mode='same')
-    wgts_frf[:,ch] = n.convolve(wgts[:,ch], n.abs(firs[:,ch]), mode='same')
-    filtered[:,ch] = n.where(wgts[:,ch]>0, vis_frf[:,ch]/wgts_frf[:,ch], 1)
+    vis_frf[:,ch] = n.convolve(wgts[:,ch]*vis[:,ch], firs, mode='same')
+    wgts_frf[:,ch] = n.convolve(wgts[:,ch], n.abs(firs), mode='same')
+    filtered[:,ch] = n.where(wgts_frf[:,ch]>0, vis_frf[:,ch]/wgts_frf[:,ch], 1)
+    #vis_frf[:,ch] = n.convolve(wgts[:,ch]*vis[:,ch], firs[:,ch], mode='same')
+    #wgts_frf[:,ch] = n.convolve(wgts[:,ch], n.abs(firs[:,ch]), mode='same')
+    #filtered[:,ch] = n.where(wgts[:,ch]>0, vis_frf[:,ch]/wgts_frf[:,ch], 1)
 ww = n.where(wgts_frf>.1, 1, 0)
 filtered = ww*filtered
 
@@ -297,7 +302,7 @@ p.title('filtered in fr')
 #p.ylabel('amplitude')
 #p.title('filtered in time')
 
-p.savefig('fr_preserved_signal.png', format='png')
+p.savefig('aaron_fr_preserved_signal.png', format='png')
 
 #p.show()
 

@@ -191,8 +191,8 @@ def ubl2bl(ubl):
 import pylab as p
 
 #get fringe rate filter.
-#if True:
-if False:
+if True:
+#if False:
     print 'Zaki method of FR filtering'
     import frf_conv
     b1,b2 = ubl2bl(opts.sep)
@@ -201,8 +201,8 @@ if False:
     t, firs, frbins, frkers = frf_conv.get_fringe_rate_kernels(beam_w_fr, 42.8, 401)
     firs = firs.take(chans, axis=0)
     firs = n.conj(firs)
-#if False:
-if True:
+if False:
+#if True:
     print 'Aaron method of FR filtering'
     t = n.arange(-200,200,1) * 42.8
     w = a.dsp.gen_window(t.size, 'blackman-harris')
@@ -279,7 +279,6 @@ for filename in args:
     else:
         Nrms = n.random.normal(size=Trms.shape) * n.exp(2j*n.pi*n.random.uniform(size=Trms.shape))
 
-    Nrms = n.random.normal(size=Trms.shape) * n.exp(2j*n.pi*n.random.uniform(size=Trms.shape))
     # XXX do more with getting noise right
     T[filename] = n.fft.fftshift(n.fft.ifft(window * Trms), axes=1)
     N[filename] = n.fft.fftshift(n.fft.ifft(window * Nrms), axes=1)
