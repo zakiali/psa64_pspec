@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  3 AUG 2014 22:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  7 AUG 2014 15:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -333,10 +333,10 @@ e
 ))
 
 Class revtex4 Warning: Assuming \noaffiliation for  Zaki S. Ali\textsuperscript
- {1}, Aaron R. Parsons\textsuperscript {1,2}, Adrian Liu\textsuperscript {1}, J
-eff Zheng James E. Aguirre\textsuperscript {3}, David R. DeBoer\textsuperscript
- {2}, Daniel C. Jacobs\textsuperscript {8}, David F. Moore\textsuperscript {3},
- Jonathan C. Pober\textsuperscript {4}, .
+ {1}, Aaron R. Parsons\textsuperscript {1,2}, Jeff Zheng, Jonathan C. Pober\tex
+tsuperscript {4}, James E. Aguirre\textsuperscript {3}, David R. DeBoer\textsup
+erscript {2}, Daniel C. Jacobs\textsuperscript {8}, Adrian Liu\textsuperscript 
+{1}, David F. Moore\textsuperscript {3} .
 
 LaTeX Font Info:    Try loading font information for U+lasy on input line 62.
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/ulasy.fd
@@ -353,57 +353,61 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 62.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
+LaTeX Warning: Reference `parsons_et_al2014' on page 1 undefined on input line 
+74.
+
+
 LaTeX Warning: Reference `sec:observations' on page 1 undefined on input line 8
-0.
-
-
-LaTeX Warning: Reference `sec:improvements' on page 1 undefined on input line 8
 1.
 
 
+LaTeX Warning: Reference `sec:improvements' on page 1 undefined on input line 8
+2.
+
+
 Package natbib Warning: Citation `parsons_et_al2014' on page 1 undefined on inp
-ut line 83.
+ut line 84.
 
 
-LaTeX Warning: Reference `sec:analysis' on page 1 undefined on input line 84.
+LaTeX Warning: Reference `sec:analysis' on page 1 undefined on input line 85.
 
 
-LaTeX Warning: Reference `sec:results' on page 1 undefined on input line 84.
+LaTeX Warning: Reference `sec:results' on page 1 undefined on input line 85.
 
 
-LaTeX Warning: Reference `sec:conclusion' on page 1 undefined on input line 86.
+LaTeX Warning: Reference `sec:conclusion' on page 1 undefined on input line 87.
 
 
 
-LaTeX Warning: Reference `sec:observations' on page 1 undefined on input line 8
-9.
+LaTeX Warning: Reference `sec:observations' on page 1 undefined on input line 9
+0.
 
 <plots/antenna_positions.png, id=1, 578.16pt x 433.62pt>
 File: plots/antenna_positions.png Graphic file (type png)
 
 <use plots/antenna_positions.png>
-Package pdftex.def Info: plots/antenna_positions.png used on input line 117.
+Package pdftex.def Info: plots/antenna_positions.png used on input line 118.
 (pdftex.def)             Requested size: 453.74191pt x 245.26703pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--118
+Underfull \hbox (badness 10000) in paragraph at lines 119--119
 $[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--118
+Underfull \hbox (badness 10000) in paragraph at lines 119--119
 
  []
 
 
 Package natbib Warning: Citation `parsons_et_al2014' on page 1 undefined on inp
-ut line 123.
+ut line 124.
 
 
-LaTeX Warning: Reference `sec:analysis' on page 1 undefined on input line 129.
+LaTeX Warning: Reference `sec:analysis' on page 1 undefined on input line 130.
 
 
 LaTeX Warning: Reference `fig:step_through_pspec' on page 1 undefined on input 
-line 131.
+line 132.
 
 
 LaTeX Warning: Reference `fig:analysis_pipeline' on page 1 undefined on input l
@@ -411,148 +415,159 @@ ine 157.
 
 [1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
+Package natbib Warning: Citation `parsons_backer2009' on page 2 undefined on in
+put line 171.
+
+
 Package natbib Warning: Citation `parsons2014a' on page 2 undefined on input li
-ne 169.
+ne 195.
 
 
 Package natbib Warning: Citation `liu_et_al2010' on page 2 undefined on input l
-ine 183.
+ine 214.
 
 
 Package natbib Warning: Citation `zheng_et_al2014' on page 2 undefined on input
- line 183.
+ line 214.
 
 
-Package natbib Warning: Citation `jacobs_et_al_pictor' on page 2 undefined on i
-nput line 185.
-
-
-Package natbib Warning: Citation `liu_et_al2010' on page 2 undefined on input l
-ine 190.
-
-
-Package natbib Warning: Citation `zheng_et_al2014' on page 2 undefined on input
- line 190.
-
-
-Package natbib Warning: Citation `zhend_et_al2014' on page 2 undefined on input
- line 192.
-
-
-Package natbib Warning: Citation `parsons2014' on page 2 undefined on input lin
-e 196.
-
-
-Package natbib Warning: Citation `parsons2014' on page 2 undefined on input lin
-e 212.
-
-
-Package natbib Warning: Citation `jacops_2013' on page 2 undefined on input lin
-e 220.
-
-
-Package natbib Warning: Citation `Parsons 2014' on page 2 undefined on input li
-ne 220.
-
-
-LaTeX Warning: Reference `fig:bmfom_pic' on page 2 undefined on input line 222.
-
+LaTeX Warning: Reference `fig:antenna_pos' on page 2 undefined on input line 22
+8.
 
 [2 <./plots/antenna_positions.png>]
 
-LaTeX Warning: Reference `fig:bmform_pic' on page 3 undefined on input line 232
-.
+Package natbib Warning: Citation `jacobs_et_al_pictor' on page 3 undefined on i
+nput line 244.
+
+
+Package natbib Warning: Citation `parsons2014' on page 3 undefined on input lin
+e 255.
+
+
+Package natbib Warning: Citation `parsons2014' on page 3 undefined on input lin
+e 271.
+
+
+Package natbib Warning: Citation `jacops_2013' on page 3 undefined on input lin
+e 279.
+
+
+Package natbib Warning: Citation `Parsons 2014' on page 3 undefined on input li
+ne 279.
+
+
+LaTeX Warning: Reference `fig:bmfom_pic' on page 3 undefined on input line 281.
+
 
 
 Package natbib Warning: Citation `zheng_et_al2014' on page 3 undefined on input
- line 235.
+ line 305.
+
+
+LaTeX Warning: Reference `fig:chi_2' on page 3 undefined on input line 322.
 
 
 LaTeX Warning: Reference `fig:gain_solutions' on page 3 undefined on input line
- 246.
-
-
-Package natbib Warning: Citation `parsons_2012b' on page 3 undefined on input l
-ine 277.
-
-
-Package natbib Warning: Citation `parsons_2012b' on page 3 undefined on input l
-ine 283.
-
-
-LaTeX Warning: Reference `fig:delaytransform' on page 3 undefined on input line
- 300.
+ 326.
 
 [3]
 
-LaTeX Warning: Reference `fig:fringe_rate_cut' on page 4 undefined on input lin
-e 368.
+Package natbib Warning: Citation `parsons_2012b' on page 4 undefined on input l
+ine 365.
 
 
-LaTeX Warning: Reference `fig:fringe_rate_cut' on page 4 undefined on input lin
-e 371.
+Package natbib Warning: Citation `parsons_2012b' on page 4 undefined on input l
+ine 375.
 
 
-LaTeX Warning: Reference `fig:fr_preserved_signal' on page 4 undefined on input
- line 371.
+Underfull \hbox (badness 1448) in paragraph at lines 382--394
+\OT1/cmr/m/n/10 where $\OML/cmm/m/it/10 V\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^W\
+OT1/cmr/m/n/10 )$ is the vis-i-bil-ity mea-sured, $\OML/cmm/m/it/10 W\OT1/cmr/m
+/n/10 (\OML/cmm/m/it/10 ^^W\OT1/cmr/m/n/10 )$ is a
+ []
 
-<plots/fr_filter_slice.png, id=33, 578.16pt x 433.62pt>
+
+Package natbib Warning: Citation `parsons_backer2009' on page 4 undefined on in
+put line 399.
+
+
+LaTeX Warning: Reference `fig:wideband_delay_removal' on page 4 undefined on in
+put line 410.
+
+
+LaTeX Warning: Reference `fig:delaytransform' on page 4 undefined on input line
+ 418.
+
+[4]
+
+LaTeX Warning: Reference `fig:fringe_rate_cut' on page 5 undefined on input lin
+e 488.
+
+
+LaTeX Warning: Reference `fig:fringe_rate_cut' on page 5 undefined on input lin
+e 491.
+
+
+LaTeX Warning: Reference `fig:fr_preserved_signal' on page 5 undefined on input
+ line 491.
+
+<plots/fr_filter_slice.png, id=36, 578.16pt x 433.62pt>
 File: plots/fr_filter_slice.png Graphic file (type png)
 
 <use plots/fr_filter_slice.png>
-Package pdftex.def Info: plots/fr_filter_slice.png used on input line 377.
+Package pdftex.def Info: plots/fr_filter_slice.png used on input line 497.
 (pdftex.def)             Requested size: 245.26653pt x 183.94531pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 381--381
+Underfull \hbox (badness 10000) in paragraph at lines 501--501
 $[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 381--381
+Underfull \hbox (badness 10000) in paragraph at lines 501--501
 
  []
 
 
-LaTeX Warning: Reference `fig:fringe_rate_cut' on page 4 undefined on input lin
-e 382.
+LaTeX Warning: Reference `fig:fringe_rate_cut' on page 5 undefined on input lin
+e 502.
 
-<plots/fr_preserved_signal.png, id=34, 1011.78pt x 433.62pt>
+<plots/fr_preserved_signal.png, id=37, 1011.78pt x 433.62pt>
 File: plots/fr_preserved_signal.png Graphic file (type png)
 
 <use plots/fr_preserved_signal.png>
-Package pdftex.def Info: plots/fr_preserved_signal.png used on input line 386.
+Package pdftex.def Info: plots/fr_preserved_signal.png used on input line 506.
 (pdftex.def)             Requested size: 490.53305pt x 210.23267pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 395--395
+Underfull \hbox (badness 10000) in paragraph at lines 515--515
 $[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 395--395
+Underfull \hbox (badness 10000) in paragraph at lines 515--515
 
  []
 
 
-LaTeX Warning: Reference `fig:fr_preserved_signal' on page 4 undefined on input
- line 396.
+LaTeX Warning: Reference `fig:fr_preserved_signal' on page 5 undefined on input
+ line 516.
 
-<plots/noise_t.png, id=35, 578.16pt x 433.62pt>
+<plots/noise_t.png, id=38, 578.16pt x 433.62pt>
 File: plots/noise_t.png Graphic file (type png)
  <use plots/noise_t.png>
-Package pdftex.def Info: plots/noise_t.png used on input line 400.
+Package pdftex.def Info: plots/noise_t.png used on input line 520.
 (pdftex.def)             Requested size: 245.2604pt x 196.2123pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--404
+Underfull \hbox (badness 10000) in paragraph at lines 524--524
 $[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--404
+Underfull \hbox (badness 10000) in paragraph at lines 524--524
 
  []
 
 
-LaTeX Warning: Reference `fig:noise_t' on page 4 undefined on input line 405.
+LaTeX Warning: Reference `fig:noise_t' on page 5 undefined on input line 525.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -560,20 +575,20 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 Package natbib Warning: There were undefined citations.
 
-[4 <./plots/fr_filter_slice.png>] [5 <./plots/fr_preserved_signal.png> <./plots
+[5 <./plots/fr_filter_slice.png>] [6 <./plots/fr_preserved_signal.png> <./plots
 /noise_t.png>] (./psa64_pspec.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4577 strings out of 493117
- 59154 string characters out of 6135433
- 143222 words of memory out of 5000000
- 7956 multiletter control sequences out of 15000+600000
- 13802 words of font info for 56 fonts, out of 8000000 for 9000
+ 4587 strings out of 493117
+ 59302 string characters out of 6135433
+ 143236 words of memory out of 5000000
+ 7965 multiletter control sequences out of 15000+600000
+ 14114 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,7n,28p,785b,307s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,10n,28p,785b,307s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><
 /usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><
@@ -593,10 +608,10 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2014/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2014/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on psa64_pspec.pdf (5 pages, 484144 bytes).
+Output written on psa64_pspec.pdf (6 pages, 500317 bytes).
 PDF statistics:
- 105 PDF objects out of 1000 (max. 8388607)
- 70 compressed objects within 1 object stream
+ 108 PDF objects out of 1000 (max. 8388607)
+ 72 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
