@@ -5,9 +5,10 @@ import capo as C
 import sys, optparse
 
 args = sys.argv[1:]
+args = ['data/raw/omnical_lstbin_v2Bf_I.npz','data/raw/omnical_lstbin_v2_I.npz']
 
 sep = 'sep6'
-lst_rng = (2,5)
+lst_rng = (3,5)
 
 
 jy2T = {}
@@ -50,15 +51,21 @@ for filename in args:
     df_wgt[ftype] = df_wgt.get(ftype,0) +   n.sum(w_df, axis=0)
     dt_dat[ftype] = dt_dat.get(ftype,0) + n.sum(n.abs(d_dt)**2, axis=0)
     dt_wgt[ftype] = dt_wgt.get(ftype,0) + n.sum(w_dt, axis=0)
+    #raw_dat[ftype] = raw_dat.get(ftype,0) + n.abs(n.sum(dat, axis=0))**2
+    #raw_wgt[ftype] = raw_dat.get(ftype,0) + n.sum(bwgt, axis=0)
+    #df_dat[ftype] = df_dat.get(ftype,0) +   n.abs(n.sum(d_df, axis=0))**2
+    #df_wgt[ftype] = df_wgt.get(ftype,0) +   n.sum(w_df, axis=0)
+    #dt_dat[ftype] = dt_dat.get(ftype,0) + n.abs(n.sum(d_dt, axis=0))**2
+    #dt_wgt[ftype] = dt_wgt.get(ftype,0) + n.sum(w_dt, axis=0)
 
     print 't'
 
 
 for i,ftype in enumerate(jy2T.keys()):
-#    raw = n.sqrt(n.where(raw_wgt[ftype] > 0, raw_dat[ftype] / raw_wgt[ftype], 0)) * jy2T[ftype]
+    raw = n.sqrt(n.where(raw_wgt[ftype] > 0, raw_dat[ftype] / raw_wgt[ftype], 0)) * jy2T[ftype]
     df = n.sqrt(n.where(df_wgt[ftype] > 0, df_dat[ftype] / df_wgt[ftype], 0)) * jy2T_df[ftype]
     dt = n.sqrt(n.where(dt_wgt[ftype] > 0, dt_dat[ftype] / dt_wgt[ftype], 0)) * jy2T[ftype]
-#    p.semilogy(freqs, raw, 'k')
+    p.semilogy(freqs, raw, 'k')
     p.semilogy(freqs_df, df, 'm')
     p.semilogy(freqs, dt, 'c')
 p.grid()
@@ -66,5 +73,5 @@ p.xlim(.115,.187)
 p.ylim(1,3e3)
 p.xlabel('Frequency [GHz]')
 p.ylabel('Brightness Temperature [mK]')
-p.savefig('noise_t.png', format='png')
+p.savefig('noise_t_35.png', format='png')
 p.show()

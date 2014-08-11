@@ -22,6 +22,8 @@ o.add_option('--gain', type='float', default=.3,
     help='gain parameter in approximation. .3 for 32, .1 for 64')
 o.add_option('--usebls', action='store_true',
     help='use the baselines give in the command line. Default is use all of the given separations.')
+o.add_option('--lstrng', dest='lstrng', default=None,
+    help='Range of LSTS to use.')
 o.add_option('--output', type='string', default='',
     help='output directory for pspec_boot files (default "")')
 opts,args = o.parse_args(sys.argv[1:])
@@ -192,7 +194,16 @@ import pylab as p
 
 #get fringe rate filter.
 if True:
-#if False:
+    print 'Zaki method of FR filtering-OLD'
+    import frf_conv
+    b1,b2 = ubl2bl(opts.sep)
+    print 'using basline %d_%d'%(b1,b2)
+    t, firs, frbins, frkers = frf_conv.get_oldfilter(aa, (1,4), 42.8, 401, freqs)
+    firs = firs.take(chans, axis=0)
+    firs = n.conj(firs)
+    scalar = scalar/1.9
+#if True:
+if False:
     print 'Zaki method of FR filtering'
     import frf_conv
     b1,b2 = ubl2bl(opts.sep)
@@ -201,6 +212,8 @@ if True:
     t, firs, frbins, frkers = frf_conv.get_fringe_rate_kernels(beam_w_fr, 42.8, 401)
     firs = firs.take(chans, axis=0)
     firs = n.conj(firs)
+    #Scaling for aggressive fringe rate filtering
+    scalar = scalar
 if False:
 #if True:
     print 'Aaron method of FR filtering'
@@ -215,6 +228,7 @@ if False:
     firg = firg.conj()
     #fir = n.array([1.])
     firs = firg
+    scalar = scalar
 
 #capo.arp.waterfall(firs);p.colorbar(shrink=.5)
 #p.show()
@@ -234,6 +248,9 @@ if False:
 #kwargs = {'cen_fqs':cen_fqs,'B':B, 'ntaps':NTAPS, 'window':WINDOW, 'bm_fqs':afreqs.clip(.120,.190)}
 #window = a.dsp.gen_window(freqs.size, window=WINDOW)
 
+
+lst_low, lst_high = map(float, opts.lstrng.split('_'))
+
 #T is a dictionary of the visibilities and N is the dictionary for noise estimates.
 T, N, W = {}, {}, {}
 times = []
@@ -248,25 +265,28 @@ for filename in args:
     d = npz[SEP].take(chans, axis=1)
     try: w = npz['wgt_'+SEP].take(chans, axis=1) / 1e-6
     except(KeyError): w = n.ones_like(d)
+    lsts = npz['lsts'] * 12/n.pi
     d = n.concatenate([d[-200:],d[:1460]], axis=0)
     w = n.concatenate([w[-200:],w[:1460]], axis=0)
+    lsts = n.concatenate([lsts[-200:], lsts[:1460]], axis=0)
     for ch in xrange(d.shape[1]):
-        #d[:,ch] = n.convolve(w[:,ch]*d[:,ch], firs[ch,:], mode='same')
-        #w[:,ch] = n.convolve(w[:,ch], n.abs(firs[ch,:]), mode='same')
-        #d[:,ch] /= n.where(w[:,ch] > 0, w[:,ch], 1)
-        d[:,ch] = n.convolve(w[:,ch]*d[:,ch], firs, mode='same')
-        w[:,ch] = n.convolve(w[:,ch], n.abs(firs), mode='same')
+        d[:,ch] = n.convolve(w[:,ch]*d[:,ch], firs[ch,:], mode='same')
+        w[:,ch] = n.convolve(w[:,ch], n.abs(firs[ch,:]), mode='same')
         d[:,ch] /= n.where(w[:,ch] > 0, w[:,ch], 1)
-    frates = n.fft.fftshift(n.fft.fftfreq(d.shape[0], 42.8))
-    capo.arp.waterfall(n.fft.fftshift(n.fft.ifft(d,axis=0),axes=0), extent=(0,1,frates[-1],frates[0]));p.colorbar(shrink=.5)
-    p.show()
+        #d[:,ch] = n.convolve(w[:,ch]*d[:,ch], firs, mode='same')
+        #w[:,ch] = n.convolve(w[:,ch], n.abs(firs), mode='same')
+        #d[:,ch] /= n.where(w[:,ch] > 0, w[:,ch], 1)
+    #frates = n.fft.fftshift(n.fft.fftfreq(d.shape[0], 42.8))
+    #capo.arp.waterfall(n.fft.fftshift(n.fft.ifft(d,axis=0),axes=0), extent=(0,1,frates[-1],frates[0]));p.colorbar(shrink=.5)
+    #p.show()
+    lstmask = n.logical_and(lsts>=lst_low, lsts<=lst_high)
     w = n.where(w > .1, 1, 0)
     d *= w
-    d = d[300:800] # XXX
-    w = w[300:800] # XXX
+    d = d[lstmask,:] # XXX
+    w = w[lstmask,:] # XXX
 
     Trms = d * capo.pspec.jy2T(afreqs)
-    if True:
+    if False:
         TSYS = 560e3#mK
         B = 100e6 / 203 #in hz.
         NDAY = 135

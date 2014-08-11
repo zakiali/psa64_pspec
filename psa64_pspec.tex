@@ -71,9 +71,9 @@ in South Africa.
 
 The current best upper limit on 21 cm signal level is at $(41 mK)^{2}$ at
 $k=.27 h \text{Mpc}^{-1}$ which was measured by PAPER in a 32 antenna redundant
-configuration (\ref{parsons_et_al2014}. This limit was acheived by using the
-delay-spectrum technique to remove foregrounds and by using a maximum
-redundancy array to essentially measure the same fourier mode repeatedly, boosting
+configuration (\ref{parsons_et_al2014}). This limit was acheived by using the
+delay-spectrum technique to remove foregrounds and using the  maximum
+redundancy array to repeatedly measure the same fourier mode, boosting
 sensitivity. In this analysis we employ the same techniques mentioned, as well
 is introduce an optimal fringe-fringe rate filter to  boost sensitivity and
 make use of improved calibration via the Omnical redundant calibrator package. 
@@ -182,8 +182,8 @@ data volume comes in.  Similarily, in delay-rate space, there is a maximum
 delay rate a model point source can have, which is given by, 
 
 \begin{equation}
-    -\omega_{oplus}\frac{|b_{y}|}{c} \leq \frac{d\tau_{g}}{dt} 
-                                     \leq \omega_{oplus}\frac{|b_{y}|}{c}.
+    -\omega_{\oplus}\frac{|b_{y}|}{c} \leq \frac{d\tau_{g}}{dt} 
+                                     \leq \omega_{\oplus}\frac{|b_{y}|}{c}.
 \end{equation}
 
 This equation is valid at an Hour Angle of $h = 0^{\circ}$ and and a declination
@@ -197,40 +197,41 @@ data volume. For greater detail, see \cite{parsons2014a}.
 Note that the only parameter the compression described above depends on is a baseline
 orientation and length. For this dataset, we used a baseline oriented along the
 east-west direction at a latitude of $-30^{\circ}$ with a length of
-300 meter.s
+300 meters.
 Applying the compression to a 10 minute file consisting of 1024 channels over a
 100 MHz bandwidth and 60 time samples consisting of 
 10 second integrations, outputs a file consisting of 203 channels over the same
 bandwidth and 14 time samples consisting of 42.8 second integrations. This is a
 factor of 20 reduction in data volume. Originally, this dataset required 40 TB
 of storage in its raw form. After compression, this data set required 2TB of
-storage. This reduction in data volume greatly facilitated analysis (how?).
+storage. This reduction in data volume greatly facilitated analysis (how?) and
+allowed us to use shredder (describe shredder).
 
-(Show plot of rraw data and compressed data? )
+(Show plot of raw data and compressed data? )
 
 
 \subsection{Calibrations}
 \subsubsection{Overview}
-Redundant calibration (\cite{liu_et_al2010}, \cite{zheng_et_al2014}) uses
-redundancy within the array to solve for relative phases and gains of the
-antennas. To explain redundant calibration, suppose that the baseline between
-antennas $i,j$ measure a visibility $v_{ij}$, then we have 
+As the name suggests, redundant calibration (\cite{liu_et_al2010},
+\cite{zheng_et_al2014}) uses redundancy within the array to solve for relative
+phases and gains of the antennas. To explain redundant calibration, suppose that
+the baseline between antennas $i,j$ measure a visibility $v_{ij}$, then we have 
 
 \begin{equation}\label{eqn:redcal}
     v_{ij} = g_{i}g_{j}^{*}y_{i-j} + n_{ij},   
 \end{equation}
 where $g_{i}$,$g_{j}$ are the complex gains due to antenna $i$ and antenna $j$,
-respectively, $y_{i-j}$ is the true visibiility measured by perfect antennas
+respectively, $y_{i-j}$ is the true visibility measured by perfect antennas
 $i$,$j$ for the given baseline type, and $n_{ij}$ is the residual noise from
 the baseline.  If the number of baselines of a given type is much greater than
-the number of baselines types this problem is overconstrained and $g_{i}i$,
+the number of baselines types this problem is over constrained and $g_{i}i$,
 $g_{j}$, and $y_{i-j}$ can be solved for. PAPER is in this limit due to the
 maximally redundant configuration as shown in figure \ref{fig:antenna_pos}. 
 
 Redundant calibration comes in two flavors: log calibration and linear
 calibration. Log calibration, or logcal for short, takes the logarithm of
 equation \ref{eqn:redcal} to give a linearized system. Hence, solutions can be
-solved for by using standar linear algebra techniques. However, this method is
+solved for by using standard linear algebra techniques. However, this method is
 biased. On the other hand linear calibration, or lincal for short, is an
 unbiased method of solving for the complex gain solutions. In this method
 equation \ref{eqn:redcal} is Taylor expanded about an initial guess for the
@@ -252,21 +253,32 @@ redundant calibration to get even more accurate calibration parameters.
 
 \subsection{logcal-for lack of a better title}
 We first perform the same calibration that was
-done in \citep{parsons2014}. That is, we use redundncy to do a relative
+done in \citep{parsons2014}. That is, we use redundancy to do a relative
 phase\footnote{In actuality, we solve for delays to get around phase wrapping
 issues. These delays are applied to visibilities as $e^{2\pi{i}\tau\nu}$}
 calibration between antennas, which removes the electrical delays from cables in
 the signal path. Due to redundancy, we can calibrate out all of the per-antennas
-delays in the signal path relative to two parameters which we call $\tau_{ns}$
-and $\tau_{es}$. These delays are the relative electrical delays that correspond
-to baseline delays in the north-south and east-west component for 2 reference
-baselines (49-10 and 49-41,respectively). The antenna based delay solutions vary
-as much as a couple nanoseconds day to day when solutions are averaged over hour
-long timescales withing a day. However, the variations in solutions is worse
-when only averaging over ten minute time scales. Therefore need for better
-calibration is requred.  We use self calibration to derive the two unknow
-parameters, $\tau_{ns}$ and $\tau_{ew}$, by using the Crab Nebula, Fornax A, and
-Pictor A.
+delays in the signal path relative to two delay parameters which we call
+$\tau_{ns}$ and $\tau_{es}$. These delays are the relative electrical delays
+that correspond to baseline delays in the north-south and east-west component
+for 2 reference baselines (49-10 and 49-41,respectively). These solutions were
+then applied to the data set which was calibrated again with Omnical. 
+
+The application of this calibration to the data set before Omnical was needed
+because in order to calibrate accurately, Omnical needs to have a rough estimate
+for the calibration solutions for every antenna. In \cite{zheng_et_al2014}, a
+model of the sky was used in order get the rough estimate of the solutions.
+Here, we use actual sky data to get the rough calibration. Because the solutions
+are derived from the instrument, we can incorporate into the solutions antenna
+based variations. 
+ 
+The antenna based
+delay solutions vary as much as a couple nanoseconds day to day when solutions
+are averaged over hour long timescales withing a day. However, the variations in
+solutions is worse when only averaging over ten minute time scales. Therefore
+need for better calibration is requred.  We use self calibration to derive the
+two unknow parameters, $\tau_{ns}$ and $\tau_{ew}$, by using the Crab Nebula,
+Fornax A, and Pictor A.
 
 Note that there is no possibility of signal loss (see \citep{parsons2014}).
 
@@ -458,29 +470,25 @@ for a detailed discussion.
 
 We implement the optimal fringe rate filter by first calculating the fringe rate
 of everypoint on the sky and weighting it the beam of a given baseline, summing
-along constant fringe rate contours, This is then squared to get the effective
-sensitivity of each fring rate bin (squaringe the power beam). That is we are
-upweighting fringe rate bins that have greater signal-to-noise.  We then fit a
-gaussian to the optimal filter to have a smooth function, along with tanh
-function for to have a smooth cut off at the maximum fringe rate for the given
-baseline and frequency.  Note that this only calculated for a given frequency
-and scaled to other frequencies, due to the fact that fringe rate scales
-linearly with frequency via
+along constant fringe rate contours. Note that because the data already has one
+factor of the power beam in it, we only need to weight the fringe rates by the
+power beam and not square it. That is we are upweighting fringe rate bins that
+have greater signal-to-noise.  We then fit a gaussian to the optimal filter to
+have a smooth function, along with tanh function for to have a smooth cut off
+at the maximum fringe rate for the given baseline and frequency.  Note that
+this only calculated for a given frequency and scaled to other frequencies, due
+to the fact that fringe rate scales linearly with frequency via
 
 \begin{equation}
     f_{max} = \frac{|\mathbf{b}_{eq}|}{c}\omega_{\oplus}\nu
 \end{equation}
 
 
-To minimize edge effects in time we fourier transform the optimal fringe rate
-filter to get the time domain convolution kernel and apply it to each visibility for a
-given channel and baseline. 
-
-The exact implementation of the optimal fringe rate filter, uses a convolution
-kernel of 400 integrations (should we be??). This has the effect of denoising the data as if it
-averaged over 4.75 hours with a weigthing function that is the beam weighted
-fringe rate. For each of the baseline types used (~30 m baselines of different
-orientations).
+We then fourier transform the omptimal fringe rate filter and multipy by a
+blackman-harris window function. This convolution kernel is then applied to 
+visibilities for every baseline at every frequncy. We implement the fringe rate
+filter over the span of 17163 seconds even though the full with half max of the
+filter spans ~15 minutes for a 30 meter baseline. This 
 
 Since the PAPER beam is ~45 degrees, and the array is located at a declination
 of $-30^{\circ}$ the fringe rates associated with the low signal to noise (down
@@ -517,13 +525,24 @@ applied in fringe rate space and retains foregrounds.}
 \end{figure*}
 
 \begin{figure}[h!]\centering
-\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/noise_t.png}
+\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/noise_t_35.png}
 \caption{Estimates of noise temperature. Magenta is frequncy differenced
 estimate where the cyan is the time differenced estimate. All curves are
 averaged over all 30m east-west baselines (56) and averaged incoherently in 43s
-bins of LST from LST 2 to 5 hours with a channel bandwidth of 490 kHz.}
+bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
 \ref{fig:noise_t}
 \end{figure}
+
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/noise_vs_fq_plot.png}
+\caption{Estimates of noise temperature. Magenta is frequncy differenced
+estimate where the cyan is the time differenced estimate. Averaged in LST from 3
+to 5 hours. on uv files calibrated with omnical. fg,delay filtered, baseline
+averaged, normal fringe rate filter, optimal fringe rate filtering.}
+\ref{fig:noise_omni_uv}
+\end{figure}
+
 
 
 %plots:

@@ -73,8 +73,8 @@ b1 = 1; b2 = 4 #sep24 is the 0,1 spacing.
 beam_w_fr = frf_conv.get_beam_w_fr(aa, (b1,b2)) #returns the beam weighted fringe rates in fr domain.
 
 #using a filter that is 3.5785bar hours long = 301 samples.
-tbins, firs, frbins, frspace = frf_conv.get_fringe_rate_kernels(beam_w_fr, 42.8, 401)
-fr_bins = n.fft.fftshift(n.fft.fftfreq(401, 42.8))
+tbins, firs, frbins, frspace = frf_conv.get_fringe_rate_kernels(beam_w_fr, 42.8, 51)
+fr_bins = n.fft.fftshift(n.fft.fftfreq(51, 42.8))
 
 bwfr10 = beam_w_fr.take(chans, axis=0)[0](fr_bins)
 
@@ -88,7 +88,7 @@ print frspace.shape
 
 #if true over writes frbins and frspace 
 #if True:
-if False 
+if False:
 #Aarons methof with the sigma fixed
     t = n.arange(-200,201,1) * 42.8
     frbins = n.fft.fftshift(n.fft.fftfreq(401,42.8))
@@ -100,20 +100,18 @@ if False
     firg *= n.exp(2j*n.pi*cen*t) # need to flip the sign for backward baselines
     firg = firg.conj()
     frspace = n.fft.fftshift(n.fft.ifft(n.fft.fftshift(firg)))
-
-
-firs = firg
+    firs = firg
 
 vis_frf = n.zeros_like(vis)
 wgts_frf = n.zeros_like(vis)
 filtered = n.zeros_like(vis)
 for ch in xrange(len(chans)):
-    vis_frf[:,ch] = n.convolve(wgts[:,ch]*vis[:,ch], firs, mode='same')
-    wgts_frf[:,ch] = n.convolve(wgts[:,ch], n.abs(firs), mode='same')
-    filtered[:,ch] = n.where(wgts_frf[:,ch]>0, vis_frf[:,ch]/wgts_frf[:,ch], 1)
-    #vis_frf[:,ch] = n.convolve(wgts[:,ch]*vis[:,ch], firs[:,ch], mode='same')
-    #wgts_frf[:,ch] = n.convolve(wgts[:,ch], n.abs(firs[:,ch]), mode='same')
-    #filtered[:,ch] = n.where(wgts[:,ch]>0, vis_frf[:,ch]/wgts_frf[:,ch], 1)
+    #vis_frf[:,ch] = n.convolve(wgts[:,ch]*vis[:,ch], firs, mode='same')
+    #wgts_frf[:,ch] = n.convolve(wgts[:,ch], n.abs(firs), mode='same')
+    #filtered[:,ch] = n.where(wgts_frf[:,ch]>0, vis_frf[:,ch]/wgts_frf[:,ch], 1)
+    vis_frf[:,ch] = n.convolve(wgts[:,ch]*vis[:,ch], firs[:,ch], mode='same')
+    wgts_frf[:,ch] = n.convolve(wgts[:,ch], n.abs(firs[:,ch]), mode='same')
+    filtered[:,ch] = n.where(wgts[:,ch]>0, vis_frf[:,ch]/wgts_frf[:,ch], 1)
 ww = n.where(wgts_frf>.1, 1, 0)
 filtered = ww*filtered
 
@@ -171,7 +169,7 @@ p.plot(lsts, filtered.real, label='real')
 p.plot(lsts, filtered.imag, label='imag')
 p.plot(lsts, n.abs(filtered), label='abs')
 p.title('filtered in time')
-p.savefig('fr_preserved_signal.png', format='png')
+#p.savefig('fr_preserved_signal.png', format='png')
 
 
 p.figure(5)
@@ -185,7 +183,7 @@ p.ylabel('amplitude')
 p.plot(tbins, firs.real, label='real')
 p.plot(tbins, firs.imag, label='imag')
 p.suptitle('Fringe Rate filter at 159 MHz')
-p.savefig('fr_filter_slice.png', format='png')
+#p.savefig('fr_filter_slice.png', format='png')
 
 #FFT Method
 #fft_filter = n.fft.fft(wgts[:,ch]*vis[:,ch]) * firs
@@ -264,7 +262,7 @@ p.subplot(132)
 p.plot(frbins, frspace.real, label='real')
 p.plot(frbins, frspace.imag, label='imag')
 p.plot(frbins, n.abs(frspace), label='abs')
-p.xlim(-.6,1.5)
+p.xlim(-.8,1.5)
 p.xlabel('LST  (hrs)')
 p.ylabel('amplitude')
 p.title('fr filter')
@@ -302,9 +300,9 @@ p.title('filtered in fr')
 #p.ylabel('amplitude')
 #p.title('filtered in time')
 
-p.savefig('aaron_fr_preserved_signal.png', format='png')
+#p.savefig('fr_preserved_signal.png', format='png')
 
-#p.show()
+p.show()
 
 
 

@@ -254,6 +254,7 @@ for sep in RS_VS_KPL:
         nos = n.std(n.concatenate([d[:8], d[-8:]])) * n.ones_like(d)
     '''
     if d_fold.size == 0: d_fold,nos_fold = None, None
+    p.clf()
     dual_plot(kpl, d, 2*nos, d_fold, 2*nos_fold, color=colors[0], bins=BINS) # 2-sigma error bars
     #dual_plot(kpl, d, nos, color=colors[0], bins=BINS) # 2-sigma error bars
     colors = colors[1:] + colors[0]
@@ -293,4 +294,24 @@ p.ylabel(r'$k^3/2\pi^2\ P(k)\ [{\rm mK}^2]$')
 p.ylim(1e0,1e9)
 p.xlim(0, 0.6)
 p.grid()
-p.show()
+
+f = n.load(args[0])
+def posterior(kpl, pk, err):
+    ind = n.logical_and(kpl>.2, kpl<.5)
+    print kpl,pk.real,err
+    kpl = kpl[ind]
+    pk= kpl**3 * pk[ind]/(2*n.pi**2)
+    err = kpl**3 * err[ind]/(2*n.pi**2)
+    s = n.logspace(3,4,100)
+    data = []
+    for ss in s:
+        data.append(n.exp(-.5*n.sum((pk.real - ss)**2 / err**2)))
+        print data[-1]
+    data = n.array(data)
+    print data
+    print s
+    data/=n.sum(data)
+    p.figure(5)        
+    p.plot(s, data)
+    p.show()
+posterior(f['kpl'], f['pk'], f['err'])

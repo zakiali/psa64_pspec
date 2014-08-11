@@ -20,11 +20,23 @@ sep = 'sep24' #the 0,1 spacing
 vis = data[sep]
 wgts = data['wgt_'+sep] / 1e-6
 lsts = data['lsts']
+
+
 vis = vis.take(chans, axis=1)
 wgts = wgts.take(chans, axis=1)
 vis = n.concatenate([vis[-200:], vis[:1460]], axis=0) #want in time order for fr filter
 wgts = n.concatenate([wgts[-200:], wgts[:1460]], axis=0) #want in time order for frf
 lsts = n.concatenate([lsts[-200:], lsts[:1460]], axis=0) #want in time order for frf
+
+lst_rng = (22,5)
+lst_mask = n.logical_and(lsts>=3, lsts<=5)
+
+vis = vis[lst_mask]
+wgts = wgts[lst_mask]
+lsts = lsts[lst_mask]
+print vis.shape
+
+
 
 #for plotting the correct lsts.
 step = lsts[1] - lsts[0]
@@ -63,8 +75,8 @@ beam_w_fr = frf_conv.get_beam_w_fr(aa, (b1,b2)) #returns the beam weighted fring
 
 test = beam_w_fr[110]
 #using a filter that is 3.5785bar hours long = 301 samples.
-t, firs, frbins, frspace = frf_conv.get_fringe_rate_kernels(beam_w_fr, 42.8, 301)
-fr_bins = n.fft.fftshift(n.fft.fftfreq(301, 42.8))
+t, firs, frbins, frspace = frf_conv.get_fringe_rate_kernels(beam_w_fr, 42.8, 51)
+fr_bins = n.fft.fftshift(n.fft.fftfreq(51, 42.8))
 
 #show filters in both spaces.
 print firs.shape
