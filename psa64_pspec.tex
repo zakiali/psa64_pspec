@@ -1,5 +1,5 @@
-%\documentclass[preprint]{aastex}  % USE THIS TO MAKE BIB, THEN FORMAT USING EMULATEAPJ
-\documentclass[twocolumn,numberedappendix]{emulateapj}
+\documentclass[preprint]{aastex}  % USE THIS TO MAKE BIB, THEN FORMAT USING EMULATEAPJ
+%\documentclass[twocolumn,numberedappendix]{emulateapj}
 \shorttitle{PSA64}
 \shortauthors{Ali, et al.}
 
@@ -89,10 +89,11 @@ section \ref{sec:analysis}. Seciton \ref{sec:results} describes the results of
 
 \section{Observations}\ref{sec:observations}
 Here, we describe the features of the data set used in this analysis. 
-The analysis desribed in this paper focuses on the 64 antenna array deployed in
-the Fall of 2012.  We used a maximally redundant configuration of the PAPER
-array (see Figure \ref{fig:antenna_positions}) for this analysis, relying on all
-of the redundant baselines for the calibration procedure, but only using a
+The observations discussed in this paper were taken when PAPER consisted of 64
+dual polarization antennas deployed in the Fall of 2012.  The antennas were
+arranged in a maximally redundant configuration as seen in Figure
+\ref{fig:antenna_positions}). We rely on all
+of the baselines for the calibration procedure to , but only using a
 subset of the baselines for the power spectrum analysis. The columns are
 separated by 30 meters and the rows by 5 meters. For the power spectrum analysis
 we are using the baselines that correspond to the width between two columns
@@ -288,7 +289,7 @@ The phase calibrations described above, simultaneously also calibrated for the
 relative gain variation between antennas. Again we can only calibrate to a fiducial
 antenna (49) whose gain is defined as unity. We then perform a self calibration
 to set the flux scale to Pictor A whose spectrum is derived in
-\citep{jacops_2013}. We use the same methods describes in \citep{Parsons 2014}.
+\citep{jacobs_et_al2013}. We use the same methods describes in \citep{parsons2014a}.
 
 Figure \ref{fig:bmfom_pic} shows that dataset beamformed to Pictor A, with log
 janskies on the y axis and lst on the xaxis for a frequncy of .1 + (120/203)*.1/203. 
@@ -349,22 +350,16 @@ dataset. Infact, this is what is done.
 %The output of the omnical - 
 %
 
-\subsection{lstbinning}
-Need to flesh this out more XXX
-The Omnical calibration pipeline removes all of the variation between unique
-baseline types and averages them together, effectively creating a model for what
-a baseline measures. This is not simulated and is derived from the data. These
-averaged models are what we use to continue through the analysis pipeline. 
 
-The motivation for using these datasets is that they are pre calibrated and have
-baseline to baseline variation removed from them, including cross talk and other
-systematics. This is essentially the averaged of what a unique baseline type
-should measure. This includes RFI events that effect the entire array and sky
-signal. 
 
-We lstbin these data into lst bins of 42.8 seconds over the entire observation.
 
 \subsection{WB delay filtering}
+After calibration, we form our estimate of stokes I by combining the two linear
+polarizations as $V_{I} = .5 (V_{xx} + V_{yy})$, where $V{xx}$ and $V{yy}$ are
+the visibilities for the $xx$ and $yy$ linear polarizations for the same
+antenna. We then perform 
+
+
 Galactic synchrotron and extragalactic point sources, generally foregrounds,
 greatly contaminate the EOR signal. They are 5 orders of magnitude (in K)
 (Pober 2013a) above the expected level of EOR and can hide low order RFI events
@@ -374,7 +369,7 @@ corrupt higher-order $k$ modes in the power spectrum measurement from the
 sidelobes arising from RFI flagging and the finite bandwidth used in the line
 of sight Fourier transform (corresponding to $k_{\parallel}$). 
 
-PAPER uses the delay filtering technique described in \citep{parsons_2012b} to
+PAPER uses the delay filtering technique described in \citep{parsons_et_al2012b} to
 remove smooth spectrum foregrounds that mask EoR. Taking the fourier transform
 along the freuqncy axis for a visibility, which defines the delay transform,
 maps sky emission in to delay space. Flat spectrum sources in this space are
@@ -384,7 +379,7 @@ can come in at. This maximum delay is given light travel time between the two
 antennas in a baseline. Physically, this corresponds to emission from the
 horizon. Therfore, all sky emission is localized to this "horizon limit."
 
-Following the technique described in \citep{parsons_2012b}, the delay transform
+Following the technique described in \citep{parsons_et_al2012b}, the delay transform
 of a visibility takes the form 
 
 \begin{align}\label{eqn:delay_transform}
@@ -439,11 +434,62 @@ traditional method of removing cross talk which consisted of subtracting hour
 long averages from each visibility. This was due to the fact that some days in
 the observation had gaps in time owning to some technical difficulties during
 observations. However, with foregrounds removed we were able to remove 10 minute
-averages from every visibility whitin a file (files have a cadence of ten
+averages from every visibility within a file (files have a cadence of ten
 minutes). Normally, hour long averages are needed for foreground contained data
 to wash out the fringes from the said foregrounds to detect the static phase
 bias that is crosstalk. For foreground removed data, we do not have this
-complication and are able to remove the offset by subtracting shorter sums.
+complication since bright foregrounds are not dominating the average and are
+able to remove the offset by subtracting shorter sums.
+
+\subsection{Binning}
+
+Once smooth sources have been removed and a final pass of RFI excision and
+crosstalk removal have been performed, the data is averaged in local sidereal
+time (LST) with bins of width 43 seconds to match the integration time of the
+data. The data set consisted of 135 unevenly sampled days with the effective
+number of total days being 123.57. This uneven sampling in the data set was due
+to technical difficulties in the recording of disks. Future publications of this
+data set will have an evenly sampled data set.
+
+Sporadic RFI events can skew individual LST bins away from the median value of
+the sky at a given LST. Therefore, we compute the median in a given LST bin for
+each frequency and flag off data that is 3 sigma outside of that median before
+averaging. This filter mitigates the adverse effects of RFI from dominating a
+LST bin. 
+
+\subsubsection{A noise study}
+During the LST averaging, we compute the median and the variance for every LST
+and frequency bin. The variance in particular is of importance becuase it allows
+us to estimate the system temperature, $T_{sys}$, as a function of LST and
+frequency. The variance is computed, per frequency, for all the visibilities
+that are included in a given LST bin, which gives us an estimate ${I_{rms}}$,
+the specific intensity in Jy, which is then converted to a $T_{rms}$ in the
+usual way, 
+\begin{equation}
+    T_{rms} = \frac{I_{rms}\lambda^{2}}{2k\Omega}.
+\end{equation}
+
+where $\lambda$ is the observing wavelength, $\Omega$ is the size of the beam in
+steradian, and $k$ is the boltzmann constant. We convert $T_{rms}$ to a system
+temperature by scaling up the rms with the effective integration time and
+bandwidth used. That is, 
+\begin{equation}
+    T_{sys} = T_{rms} \times \sqrt{\Delta{B}t_{int}}.
+\end{equation}
+
+Figure \ref{fig:tsys_lst_fq} shows the system temperature as a function of
+LST and frequncy. In our "cold" patch, we find that $T_{sys}$ is around $500K$.
+
+
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth]{plots/tsys_lst_freq.png}
+\caption{Tsys as a function of lst and frequency. The cold spot resides in the
+lst range of 1-7hours.}
+\ref{fig:tsys_lst_fq}
+\end{figure}
+
+
 
 
 
@@ -561,8 +607,8 @@ averaged, normal fringe rate filter, optimal fringe rate filtering.}
 
 %\clearpage
 %\nocite{*}
-%\bibliographystyle{apj}
-%\bibliography{biblio}
+\bibliographystyle{apj}
+\bibliography{biblio}
 
 \end{document}
 
