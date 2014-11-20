@@ -1,5 +1,5 @@
-\documentclass[preprint]{aastex}  % USE THIS TO MAKE BIB, THEN FORMAT USING EMULATEAPJ
-%\documentclass[twocolumn,numberedappendix]{emulateapj}
+%\documentclass[preprint]{aastex}  % USE THIS TO MAKE BIB, THEN FORMAT USING EMULATEAPJ
+\documentclass[twocolumn,numberedappendix]{emulateapj}
 \shorttitle{PSA64}
 \shortauthors{Ali, et al.}
 
@@ -71,7 +71,7 @@ in South Africa.
 
 The current best upper limit on 21 cm signal level is at $(41 mK)^{2}$ at
 $k=.27 h \text{Mpc}^{-1}$ which was measured by PAPER in a 32 antenna redundant
-configuration (\ref{parsons_et_al2014}). This limit was acheived by using the
+configuration (\ref{parsons_et_al2014a}). This limit was acheived by using the
 delay-spectrum technique to remove foregrounds and using the  maximum
 redundancy array to repeatedly measure the same fourier mode, boosting
 sensitivity. In this analysis we employ the same techniques mentioned, as well
@@ -81,7 +81,7 @@ make use of improved calibration via the Omnical redundant calibrator package.
 The paper is outlined as follows. In section \ref{sec:observations} we describe
 the observations used in this analysis. In \ref{sec:improvements} we discuss the
 improvements in this pipeline with respect to the previous analysis of PSA-32
-\cite{parsons_et_al2014}. We then move on to the data analysis pipeline in
+\cite{parsons_et_al2014a}. We then move on to the data analysis pipeline in
 section \ref{sec:analysis}. Seciton \ref{sec:results} describes the results of
  our efforts and provides new contraints on EoR. We conclude in
 \ref{sec:conclusion}.
@@ -122,7 +122,7 @@ the center of the galaxy).
 \end{figure*}
 
 \section{Summary of Improvements from PSA32}
-In comparison to the previous PAPER pipeline (see \cite{parsons_et_al2014}),
+In comparison to the previous PAPER pipeline (see \cite{parsons_et_al2014a}),
 this analysis took a slightly different approach which included some critical
 steps to improve our upper limit. In short, the improvements included using a
 new, refined redundant calibration method (Zheng 2014), increasing the width of
@@ -193,7 +193,7 @@ By filtering out delay-rates that are outside of this range, we are removing
 sources that have a high rate of change with respect to the rotation of the
 earth. That is fast transient sources will be removed. We can then decimate in
 time with respect to the Nyquist rate, giving us another dimension to decrease
-data volume. For greater detail, see \cite{parsons2014a}.
+data volume. For greater detail, see \cite{parsons_et_al2014a}.
 
 Note that the only parameter the compression described above depends on is a baseline
 orientation and length. For this dataset, we used a baseline oriented along the
@@ -243,7 +243,7 @@ In this analysis we used a logcal algorithm based in delay space to get a rough
 calibration of the dataset. This was followed by an absolute calibration to set
 the overall phase and flux scale using a self calibration. We used model phase
 centers of Pictor, Fornax A, and Crab Nebula. The absolute amplitude is set
-by the flux of Pictor A found in \cite{jacobs_et_al_pictor}, whose spectrum is
+by the flux of Pictor A found in \cite{jacobs_et_al2013}, whose spectrum is
 defined by 
 \begin{equation}
     S_{\nu} = 382(\frac{\nu}{150 MHz})^{-.76} Jy.
@@ -254,7 +254,7 @@ redundant calibration to get even more accurate calibration parameters.
 
 \subsection{logcal-for lack of a better title}
 We first perform the same calibration that was
-done in \citep{parsons2014}. That is, we use redundancy to do a relative
+done in \citep{parsons_et_al2014a}. That is, we use redundancy to do a relative
 phase\footnote{In actuality, we solve for delays to get around phase wrapping
 issues. These delays are applied to visibilities as $e^{2\pi{i}\tau\nu}$}
 calibration between antennas, which removes the electrical delays from cables in
@@ -281,7 +281,7 @@ need for better calibration is requred.  We use self calibration to derive the
 two unknow parameters, $\tau_{ns}$ and $\tau_{ew}$, by using the Crab Nebula,
 Fornax A, and Pictor A.
 
-Note that there is no possibility of signal loss (see \citep{parsons2014}).
+Note that there is no possibility of signal loss (see \citep{parsons_et_al2014a}).
 
 \subsection{Gain Calibration}
 Gain calibration was derived on the basis of redundancy and self calibration.
@@ -289,7 +289,7 @@ The phase calibrations described above, simultaneously also calibrated for the
 relative gain variation between antennas. Again we can only calibrate to a fiducial
 antenna (49) whose gain is defined as unity. We then perform a self calibration
 to set the flux scale to Pictor A whose spectrum is derived in
-\citep{jacobs_et_al2013}. We use the same methods describes in \citep{parsons2014a}.
+\citep{jacobs_et_al2013}. We use the same methods describes in \citep{parsons_et_al2014a}.
 
 Figure \ref{fig:bmfom_pic} shows that dataset beamformed to Pictor A, with log
 janskies on the y axis and lst on the xaxis for a frequncy of .1 + (120/203)*.1/203. 
@@ -553,7 +553,7 @@ very high fringe rates.
 filter in fringe rate domain. The bottom consists of the corresponding time
 domain filter gotten by fourier transforming and windowing with a
 blackman-harris window to damp the tails.}
-\ref{fig:fringe_rate_cut}
+\label{fig:fringe_rate_cut}
 \end{figure}
 
 \begin{figure*}[t!]\centering
@@ -567,7 +567,7 @@ The center panel shows the real (red)  and imaginary (green) parts of the fringe
 rate filter to be applied. Finally, the last panel on the right shows that the
 fringe rate filtered visibilities. The fringe rate filter is just a weighting
 applied in fringe rate space and retains foregrounds.}
-\ref{fig:fr_preserved_signal}
+\label{fig:fr_preserved_signal}
 \end{figure*}
 
 \begin{figure}[h!]\centering
@@ -576,7 +576,7 @@ applied in fringe rate space and retains foregrounds.}
 estimate where the cyan is the time differenced estimate. All curves are
 averaged over all 30m east-west baselines (56) and averaged incoherently in 43s
 bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
-\ref{fig:noise_t}
+\label{fig:noise_t}
 \end{figure}
 
 
@@ -586,9 +586,44 @@ bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
 estimate where the cyan is the time differenced estimate. Averaged in LST from 3
 to 5 hours. on uv files calibrated with omnical. fg,delay filtered, baseline
 averaged, normal fringe rate filter, optimal fringe rate filtering.}
-\ref{fig:noise_omni_uv}
+\label{fig:noise_omni_uv}
 \end{figure}
 
+
+\subsection{Optimal Quadratic Estimator}
+
+\begin{figure}[h!]\centering
+\includegraphics[width=2\columnwidth, height=.8\columnwidth]{plots/x_example.png}
+\caption{Input fringe rate filtered frequncy domain data for a single baseline.}
+\label{fig:x_example}
+\end{figure}
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/C_example.png}
+\caption{The covariance matix for a single baseline of the frequncy data in
+figure \ref{fig:x_example}.} 
+\label{fig:C_example}
+\end{figure}
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/_Cx_example.png}
+\caption{Frequency vs. time data of a single baseline weighted by the inverse of
+the covariance matrix shown in figure \ref{fig:C_example}} 
+\label{fig:_Cx_example}
+\end{figure}
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/lamV_example.png}
+\caption{The eigeinmodes of the covariance matrix in figure \ref{fig:C_example}
+weighted by their corresponding eigeinvalue.} 
+\label{fig:lamV_example}
+\end{figure}
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/lam_example.png}
+\caption{The eigen spectrum of the covaraince matrix for a singel baseline.}
+\label{fig:lam_example}
+\end{figure}
 
 
 %plots:
