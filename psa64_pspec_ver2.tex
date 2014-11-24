@@ -162,59 +162,47 @@ discussed below and figure \ref{fig:analysis_pipeline} shows a block diagram of
 the analysis pipeline.
 
 \subsection{Preprocessing Compression}
-As the number of elements in an interferometer increase, the amount of data to
-be stored increase by order $\Omega{N^{2}}$, where $N$ is the number antennas.
-Hence, a doubling of an array, increases the data volume by a factor of 4. For
-large $N$ arrays, this volume of data could be prohibitive to store on disks and
-can become a bottleneck in data analaysis due it being slow to comb trhough the
-data. New methods of data compression and analysis that can either
-reduce the data volume or provide a streaming analysis pipeline are needed for
-these large arrays. 
+Reference the compression pipeline in the appendix \cite{parsons_et_al2014a}.
+The same pipeline was run on this data from the PSA32 data set. 
 
-PAPER employs a compression method that employs the use of a delay/delay-rate
-filter described in \cite{parsons_backer2009}. In short, the algorithm makes use
-of the fact that for a given maximum baseline (in our case, 300 meters), there is
-a maximum delay sky emission can enter a baseline, given by 
-
-\begin{equation}
-    \tau_{g} < \frac{|\mathbf{b}|}{c}.
-\end{equation}
-
-Hence, if we filter out delays that are higher than this maximum delay, we can
-down sample the frequency axis by the Nyquist rate. This is where reduction in
-data volume comes in.  Similarily, in delay-rate space, there is a maximum
-delay rate a model point source can have, which is given by, 
-
-\begin{equation}
-    -\omega_{\oplus}\frac{|b_{y}|}{c} \leq \frac{d\tau_{g}}{dt} 
-                                     \leq \omega_{\oplus}\frac{|b_{y}|}{c}.
-\end{equation}
-
-This equation is valid at an Hour Angle of $h = 0^{\circ}$ and and a declination
-of $\delta = 0^{\circ}$, where the maximum delay-rates occur. 
-By filtering out delay-rates that are outside of this range, we are removing
-sources that have a high rate of change with respect to the rotation of the
-earth. That is fast transient sources will be removed. We can then decimate in
-time with respect to the Nyquist rate, giving us another dimension to decrease
-data volume. For greater detail, see \cite{parsons_et_al2014a}.
-
-Note that the only parameter the compression described above depends on is a baseline
-orientation and length. For this dataset, we used a baseline oriented along the
-east-west direction at a latitude of $-30^{\circ}$ with a length of
-300 meters.
-Applying the compression to a 10 minute file consisting of 1024 channels over a
-100 MHz bandwidth and 60 time samples consisting of 
-10 second integrations, outputs a file consisting of 203 channels over the same
-bandwidth and 14 time samples consisting of 42.8 second integrations. This is a
-factor of 20 reduction in data volume. Originally, this dataset required 40 TB
-of storage in its raw form. After compression, this data set required 2TB of
-storage. This reduction in data volume greatly facilitated analysis (how?) and
-allowed us to use shredder (describe shredder).
-
-(Show plot of raw data and compressed data? )
+Discuss the way we RFI flag the data before the compression step.
 
 
 \subsection{Calibrations}
+\begin{itemize}
+    \item{Overview of the calibration with emphasis on Omnical.}
+    \item{Rough Calibration : Can cite Parsons 2014 for the details.}
+    \begin{itemize}
+        \item{Discuss the first pass of redundant phase and gain calibration.
+              Absolute phase calibration using pictor, fornax and crab in the
+              fit.}
+        \item{Absolute flux scale using Pictor A. Want to address signal loss.
+             Maybe delay the issue of signal loss to a "Signal Loss" section
+             which takes into account the signal loss in various stages of the 
+             analysis?}
+        \item{Add in details of the loss of eor signal. Do simulations to get
+              numbers. }
+        \item{Plots : Measured pictor spectrum with comparison to the Danny
+              pictor spectrum. Maybe some simulation plots showing the signal
+              loss due to the polynomial fit to pic spec.}
+    \end{itemize}
+    \item{Omnical}
+    \begin{itemize}
+        \item{What is omnical?}
+        \item{Why are we using it? To get a frequency/time dependent
+calibration. Need to address why this is not overfitting. That is why is this
+just not flatting everything out.}
+        \item{Address non-possibility of signal loss.}
+        \item{Refresh formalism (do this here or in the intro of calibration?)}
+        \item{What is it doing? logcal/lincal. Chi-squared and how that
+              determines the goodness of the fits to the model baselines. What
+model are we using? Is it a good model?}
+        \item{Plots: Chi-squared plots. Compex plane plots that show
+              improvements over uncalibrated/rough/omnical calibrated.}
+    \end{itemize} 
+\end{itemize}
+
+
 \subsubsection{Overview}
 As the name suggests, redundant calibration (\cite{liu_et_al2010},
 \cite{zheng_et_al2014}) uses redundancy within the array to solve for relative
@@ -357,79 +345,20 @@ dataset. Infact, this is what is done.
 
 
 \subsection{WB delay filtering}
-After calibration, we form our estimate of stokes I by combining the two linear
-polarizations as $V_{I} = .5 (V_{xx} + V_{yy})$, where $V{xx}$ and $V{yy}$ are
-the visibilities for the $xx$ and $yy$ linear polarizations for the same
-antenna. We then perform 
+\begin{itemize}
+    \item{Can cite Parsons 2014 for the bulk of this because we are doing the
+same foreground removal technique, even the addition of 15 ns to the filter.}
+    \item{Delay filtering signal loss. Need to simulate the signal loss using
+similar techniques described in the previous paper.}
+    \item{PLOTS: before and after delay filtering waterfalls. Plots of signal
+loss versus k-bin.}
+\end{itemize}
 
-
-Galactic synchrotron and extragalactic point sources, generally foregrounds,
-greatly contaminate the EOR signal. They are 5 orders of magnitude (in K)
-(Pober 2013a) above the expected level of EOR and can hide low order RFI events
-and cross-talk. Removing foregrounds is a critical step in getting to a
-detection of EoR. In addition to dominating the EOR signal, foregrounds can
-corrupt higher-order $k$ modes in the power spectrum measurement from the
-sidelobes arising from RFI flagging and the finite bandwidth used in the line
-of sight Fourier transform (corresponding to $k_{\parallel}$). 
-
-PAPER uses the delay filtering technique described in \citep{parsons_et_al2012b} to
-remove smooth spectrum foregrounds that mask EoR. Taking the fourier transform
-along the freuqncy axis for a visibility, which defines the delay transform,
-maps sky emission in to delay space. Flat spectrum sources in this space are
-show up as dirac delta functions. This method of localizing sources relies on
-the fact that for a given baseline, there is a maximum delay points on the sky
-can come in at. This maximum delay is given light travel time between the two
-antennas in a baseline. Physically, this corresponds to emission from the
-horizon. Therfore, all sky emission is localized to this "horizon limit."
-
-Following the technique described in \citep{parsons_et_al2012b}, the delay transform
-of a visibility takes the form 
-
-\begin{align}\label{eqn:delay_transform}
-    \tilde{V} &= \int{W(\nu)S(\nu)V(\nu)e^{-2\pi{i}\tau\nu}d\nu} \\
-              &= \tilde{W}(\tau) \ast \tilde{S}(\tau) \ast \tilde{V}(\tau) \ast
-                 \delta(\tau_{s} - \tau)
-\end{align}
-where $V(\nu)$ is the visibility measured, $W(\nu)$ is a blackman-harris
-windowing function and $S(\nu)$ is the weighting function that encodes the
-boolean flags for the data. As mentioned above, a flat spectrum source will show
-up as a delta function in delay space, but if there is any spectral structure,
-the shape of that structure will become a convolving kernel in delay space,
-increasing the footprint of the source in delay space. Since foregrounds are
-modeled as having a smooth spectrum, the convolving kernel is narrow in delay
-space, whereas EoR is expected to have a large amount of frequency structure
-and hence has a wide convolution kernel, scattering signal outside of the
-horizon limit. By removing smooth spectrum foregrounds by fourier filtering in
-delay space, we can remove bright foregrounds that keep us from detecting EoR.
-
-On a practical note, the boolean flags in equation \ref{eqn:delay_transform} are
-usually not regularily sampled and create structure in delay space due to the
-uneven sampling and sharp frequency structure. This will cause the normally
-localized smooth spectrum foregrounds to scatter emission in to otherwise
-uncorrupted delay modes. As described in \cite{parsons_backer2009}, we use a
-CLEAN algorithim that treats the boolean flags as a sampling function and
-iteratively fits the brightest peak in delay space to some threshold. This does
-an excellent job in filling in the gaps of the delay transform, due to the
-exactly known sampling function, and returns a model of the data without any
-flags. 
-
-In the above CLEAN, we restrict the clean components to fall within 15 ns beyond
-the horizon. This limit lets CLEAN model foreground emission pushed beyond the
-horizon (due to spectral structure). This CLEAN model is then subtracted from
-the delay transform and suppresses smooth spectrum foreground. As seen in figure
-\ref{fig:wideband_delay_removal}, this filter is responsible for 3 orders of
-magnitude of foreground removal (in mK) within the horizon. For our 30 meter baselines
-used in this analyisis, the horizon limit is at 100 nanoseconds in delay domain,
-which at a frequency of 164 MHz, corresponds to $k = \pm .057 h MPc^{-1}$.
-Talk about signal loss.
-Using the entire bandwidth increases the degree of foreground separation and is
-impereative to get the best estimate of foreground isolation. We apply the delay
-transform defined above to every baseline over the entire 100 Mhz. Figure
-\ref{fig:delaytransform} shows the localization of foregrounds for a 30 meter
-baseline within the horizon of 100 ns. After the filter is applied we see 3
-orders of magintude in reduction of foreground isolation.  This is a factor of 6
-in powerspectra! 
-
+\subsection{RFI and Crosstalk mitigation}
+\begin{itemize}
+    \item{Discuss, briefly, RFI and Crosstalk removal. Note that this happens
+after foreground removal. Possibility of signal loss?}
+\end{itemize}
 After the wideband delay filter, we conduct another round of RFI and crosstalk
 removal which was overshadowed by the foreground signal. For RFI excision we
 apply a median filter which flags above $3\sigma$. Foregrounds kept us using the
@@ -445,14 +374,23 @@ complication since bright foregrounds are not dominating the average and are
 able to remove the offset by subtracting shorter sums.
 
 \subsection{Binning}
+\begin{itemize}
+    \item{Discuss the dataset being LST binned. How many days went in to it.
+Number of different LST datasets we are going to use (both for jack-knifing
+purposes and other purposes)}
+    \item{Discuss the median filtering step. Why are we filtering it? Because of
+outliers in time that find it's way into the dataset.}
+    \item{Signal Loss, if any.}
+    \item{Mention the statistics that are saved and how we are going to use those.}
+    \item{What plots, if any?}
+\end{itemize}
 
 Once smooth sources have been removed and a final pass of RFI excision and
 crosstalk removal have been performed, the data is averaged in local sidereal
 time (LST) with bins of width 43 seconds to match the integration time of the
 data. The data set consisted of 135 unevenly sampled days with the effective
 number of total days being 123.57. This uneven sampling in the data set was due
-to technical difficulties in the recording of disks. Future publications of this
-data set will have an evenly sampled data set.
+to technical difficulties in the recording of disks.
 
 Sporadic RFI events can skew individual LST bins away from the median value of
 the sky at a given LST. Therefore, we compute the median in a given LST bin for
@@ -498,6 +436,24 @@ lst range of 1-7hours.}
 
 
 \subsection{optimal Fringe-rate filter}
+\begin{itemize}
+    \item{What is fringe rate filtering? A way to average in time. Cite FRF
+paper that is going to come out in conjuction with this paper. This section will
+be an application of that paper to real data. Not too much review in the case of
+the background of frf.}
+    \item{Corresponding signal loss of the application of the optimal fringe
+rate filter. Do this or cite from Parsons and Liu.} 
+    \item{How do we create the fringe rate filter and application details. We
+create a filter at one frequency and scale it to other frequencies. Use the
+PAPER beam. Address errors.}
+    \item{What is the averaging timescale? How do we make that calculation?}
+    \item{Discuss factors of the beam in making the fringe rate filter. Which
+one do we use? (I realize that this is something we should nail down. All of the
+current analysis has one factor of the beam)}
+    \item{PLOTS: Show fringe rate filters in both frate and time domain. Show
+what happens when it is applied to data. Show waterfalls before and after fringe
+rate filtering.}
+\end{itemize}
 Before forming power spectra we need to time average visibilities that measure
 the same $k$ mode on the sky. This is the best way to combine data because we
 get a $\sqrt{N}$, where N is the number of samples, gain in sensitivity. This is
@@ -542,8 +498,8 @@ filter spans ~15 minutes for a 30 meter baseline. This
 Since the PAPER beam is ~45 degrees, and the array is located at a declination
 of $-30^{\circ}$ the fringe rates associated with the low signal to noise (down
 in the beam) correspond to very high and very low/negative fringe rates. Figure
-\ref{fig:fringe_rate_cut} shows a cut of the optimal fringe rate at MHz for a 30
-m east west baseline. Therfore, the implemented fringe rate filter removes some
+\ref{fig:fringe_rate_cut} shows a cut of the optimal fringe rate at XXXMHz for a 30
+m east west baseline. Therefore, the implemented fringe rate filter removes some
 sky signal, signal associated with fringe rates outside of the ranges shown in
 Figure \ref{fig:fringe_rate_cut}. Figure \ref{fig:fr_preserved_signal} shows
 that the applied filter removes sky associated with negative fringe rates and
@@ -594,6 +550,10 @@ averaged, normal fringe rate filter, optimal fringe rate filtering.}
 
 
 \subsection{Optimal Quadratic Estimator}
+\begin{itemize}
+    \item{Present the OQE method, breifly. Cite Dillion, Liu, Tegmark etc...}
+    \item{what is the method we are using?}
+\end{itemize}
 
 \begin{figure}[h!]\centering
 \includegraphics[width=2\columnwidth, height=.8\columnwidth]{plots/x_example.png}
