@@ -139,21 +139,26 @@ pipeline and includes some information on simuations and signal loss.
 
 \subsection{Calibration}
 \subsubsection{Redundant Calibration}
-%    Principles of redundant calibration. Fact that there is no signal loss in
-%this kind of measurement.
+%    -Principles of redundant calibration. Fact that there is no signal loss in
+%       this kind of measurement.
+%       --PAPER has a redundant configuration.
+%       --Introduce uniqe baseline types.
+%       --All baselines in a unique baseline type measure the same thing and
+%         therefore, differences between them are what need to be calibrated out.
+%       --There is no signal loss in this method because the amount of
+%         calibration 
+%    -What can we solve for and what can't we solve for. We can solve for the
+%     relative complex gains between antennas, but not the absolute gain and phase.
 %
-%    What can we solve for and what can't we solve for. We can solve for the
-%relative complex gains between antennas, but not the absolute gain and phase.
+%    -Summary of the procedure of redundant calibration. This should be mixed in
+%     with the equations from Zheng et. al.
 %
-%    Summary of the procedure of redundant calibration. This should be mixed in
-%with the equations from Zheng et. al.
-%
-%    How was this calibration applied to the data. Using omnical package.
+%    -How was this calibration applied to the data. Using omnical package.
 %    
-%    Removing additive offset and what is the time cadence of all of this.
+%    -Removing additive offset and what is the time cadence of all of this.
 %
-%    Diagnostic figures : Chi-squared, complex plane, stability vs. time and
-%frequency. 
+%    -Diagnostic figures : Chi-squared, complex plane, stability vs. time and
+%                          frequency.
 
 PAPER is arranged in a highly redundant configuration and thus lends itself to
 use the redunancy in baselines for a relative calibration. Every instance of a
@@ -190,13 +195,11 @@ the previous homegrown routine used in \cite{parsons_et_al2014a}.
 XXXadd in duscussion about removing additive offsets and time cadence of
 that)XXX.
 
-
-
 \subsubsection{Absolute Phase Calibration}
-%    selfcal to pictor, fornax, and crab (to get the north-south components).    
+%    -Selfcal to pictor, fornax, and crab (to get the north-south components).    
 %
-%    Show Field image from Bernardi. This will give confidence in a good absolute
-%phase calibration.
+%    -Diagnostic Plots: Show Field image from Bernardi. This will give
+%     confidence in a good absolute phase calibration.
 
 After solving for the relative phases and gains of the antennas using redcal, an
 overall phase and gain calibration needs to be solved for. We use the standard self
@@ -207,208 +210,220 @@ image of the field with Pictor A (ra, dec)  and Fornax A (ra, dec). The
 measured source positions are the same as the the catalogue positions for these
 sources.XXX make sure of this statementXXX
 
-\subsubsection{Absolute Gain Calibration
-    Calibrated to Pictor A. 
-
-    Our bandpass model is a 9th degree polynomial. 
-
-    Tabulate signal loss due to this model. Averaging over Nbls, times gives us
-an average over independent uv modes.
-
-    The actual signal loss on a given mode is L/N where L is the loss for a
-single instance of the beamform (one time, one baseline) and N is the number of
-baseline and times that were summed.
-
-    PLOTS: A plot that is the phased to pictor beamform gain, the measured and
-theoretical pictor spectrum, a comparison to the PSA32 Flux CAL.
-
-These lists were My bullet points.
-\begin{itemize}
-    \item{Overview of the calibration with emphasis on Omnical.}
-    \item{Rough Calibration : Can cite Parsons 2014 for the details.}
-    \begin{itemize}
-        \item{Discuss the first pass of redundant phase and gain calibration.
-              Absolute phase calibration using pictor, fornax and crab in the
-              fit.}
-        \item{Absolute flux scale using Pictor A. Want to address signal loss.
-             Maybe delay the issue of signal loss to a "Signal Loss" section
-             which takes into account the signal loss in various stages of the 
-             analysis?}
-        \item{Add in details of the loss of eor signal. Do simulations to get
-              numbers. }
-        \item{Plots : Measured pictor spectrum with comparison to the Danny
-              pictor spectrum. Maybe some simulation plots showing the signal
-              loss due to the polynomial fit to pic spec.}
-    \end{itemize}
-    \item{Omnical}
-    \begin{itemize}
-        \item{What is omnical?}
-        \item{Why are we using it? To get a frequency/time dependent
-calibration. Need to address why this is not overfitting. That is why is this
-just not flatting everything out.}
-        \item{Address non-possibility of signal loss.}
-        \item{Refresh formalism (do this here or in the intro of calibration?)}
-        \item{What is it doing? logcal/lincal. Chi-squared and how that
-              determines the goodness of the fits to the model baselines. What
-model are we using? Is it a good model?}
-        \item{Plots: Chi-squared plots. Compex plane plots that show
-              improvements over uncalibrated/rough/omnical calibrated. 
-              Time and frequency stability.}
-    phase to pic gain, pic spec, comparison to psa32.
-    \end{itemize} 
-\end{itemize}
-
-
-\subsubsection{Overview}
-As the name suggests, redundant calibration (\cite{liu_et_al2010},
-\cite{zheng_et_al2014}) uses redundancy within the array to solve for relative
-phases and gains of the antennas. To explain redundant calibration, suppose that
-the baseline between antennas $i,j$ measure a visibility $v_{ij}$, then we have 
-
-\begin{equation}\label{eqn:redcal}
-    v_{ij} = g_{i}g_{j}^{*}y_{i-j} + n_{ij},   
-\end{equation}
-where $g_{i}$,$g_{j}$ are the complex gains due to antenna $i$ and antenna $j$,
-respectively, $y_{i-j}$ is the true visibility measured by perfect antennas
-$i$,$j$ for the given baseline type, and $n_{ij}$ is the residual noise from
-the baseline.  If the number of baselines of a given type is much greater than
-the number of baselines types this problem is over constrained and $g_{i}i$,
-$g_{j}$, and $y_{i-j}$ can be solved for. PAPER is in this limit due to the
-maximally redundant configuration as shown in figure \ref{fig:antenna_pos}. 
-
-Redundant calibration comes in two flavors: log calibration and linear
-calibration. Log calibration, or logcal for short, takes the logarithm of
-equation \ref{eqn:redcal} to give a linearized system. Hence, solutions can be
-solved for by using standard linear algebra techniques. However, this method is
-biased. On the other hand linear calibration, or lincal for short, is an
-unbiased method of solving for the complex gain solutions. In this method
-equation \ref{eqn:redcal} is Taylor expanded about an initial guess for the
-$g_{i}$'s and $y_{i-j}$'s to give a linearized equation which can be used to
-solve for the complex gains and sky model. 
-
-In this analysis we used a logcal algorithm based in delay space to get a rough
-calibration of the dataset. This was followed by an absolute calibration to set
-the overall phase and flux scale using a self calibration. We used model phase
-centers of Pictor, Fornax A, and Crab Nebula. The absolute amplitude is set
-by the flux of Pictor A found in \cite{jacobs_et_al2013}, whose spectrum is
-defined by 
-\begin{equation}
-    S_{\nu} = 382(\frac{\nu}{150 MHz})^{-.76} Jy.
-\end{equation}
-
-Finally, we used the Omnical calibration package to do another round of
-redundant calibration to get even more accurate calibration parameters.
-
-\subsection{logcal-for lack of a better title}
-We first perform the same calibration that was
-done in \citep{parsons_et_al2014a}. That is, we use redundancy to do a relative
-phase\footnote{In actuality, we solve for delays to get around phase wrapping
-issues. These delays are applied to visibilities as $e^{2\pi{i}\tau\nu}$}
-calibration between antennas, which removes the electrical delays from cables in
-the signal path. Due to redundancy, we can calibrate out all of the per-antennas
-delays in the signal path relative to two delay parameters which we call
-$\tau_{ns}$ and $\tau_{es}$. These delays are the relative electrical delays
-that correspond to baseline delays in the north-south and east-west component
-for 2 reference baselines (49-10 and 49-41,respectively). These solutions were
-then applied to the data set which was calibrated again with Omnical. 
-
-The application of this calibration to the data set before Omnical was needed
-because in order to calibrate accurately, Omnical needs to have a rough estimate
-for the calibration solutions for every antenna. In \cite{zheng_et_al2014}, a
-model of the sky was used in order get the rough estimate of the solutions.
-Here, we use actual sky data to get the rough calibration. Because the solutions
-are derived from the instrument, we can incorporate into the solutions antenna
-based variations. 
- 
-The antenna based
-delay solutions vary as much as a couple nanoseconds day to day when solutions
-are averaged over hour long timescales withing a day. However, the variations in
-solutions is worse when only averaging over ten minute time scales. Therefore
-need for better calibration is requred.  We use self calibration to derive the
-two unknow parameters, $\tau_{ns}$ and $\tau_{ew}$, by using the Crab Nebula,
-Fornax A, and Pictor A.
-
-Note that there is no possibility of signal loss (see \citep{parsons_et_al2014a}).
-
-\subsection{Gain Calibration}
-Gain calibration was derived on the basis of redundancy and self calibration.
-The phase calibrations described above, simultaneously also calibrated for the
-relative gain variation between antennas. Again we can only calibrate to a fiducial
-antenna (49) whose gain is defined as unity. We then perform a self calibration
-to set the flux scale to Pictor A whose spectrum is derived in
-\citep{jacobs_et_al2013}. We use the same methods describes in \citep{parsons_et_al2014a}.
-
-Figure \ref{fig:bmfom_pic} shows that dataset beamformed to Pictor A, with log
-janskies on the y axis and lst on the xaxis for a frequncy of .1 + (120/203)*.1/203. 
-As can be seen, the day to day variation in the formed beam has a fractional
-spread of about 10$\%$.  This shows the stability of the instrument and the well
-behaved calibration solutions derived above. 
-
-\subsection{Omnical}
-(How did we know that our calibrations were not good enough? Because of the power
-spectrum? PSA32? We did beamform data to pictorA and say that vs LST, the
-beamform matched well day to day with a fractional spread of about 10$\%$) 
-
-The complex gain solutions found in the previous calibration pipeline were
-averaged together in time and one solution per frequency was used for the array.
-This jived with the philosophy that the array was stable in time and frequency.
-However, upon further review of this data set, it seemed more and more likely
-that this was not the case anymore. (Is this even true? What specifically? Think
-Man!) 
-
-Due to clues that showed that our data set had time dependent calibration
-solutions, it was imperative that we do a better job at calibrating our array.
-
-The Omnical redundant calibrator
-package\footnote{https://github.com/jeffzhen/omnical} (omnical) performs
-redundant calibration for every time and frequency in a dataset using both
-logcal and lincal methods as described in \cite{zheng_et_al2014}. It also
-contains methods on the quality of the solutions by providin a chi-square for
-the fits to the data. 
-
-For this dataset, omnical first performed a logcal (again) to attain a solution
-per time and frequency. This solution was passed to lincal which iteratively
-solved for the complex gain solutions. The convergence criteria was when the
-$\chi^{2}$ decreased by less than $.01\%$. The $\chi^{2}$ for the fit used in
-Omnical is given by 
-\begin{equation}
-    \chi^{2} = \sum_{ij}|v_{ij} - y_{i-j}g_{i}^{*}g_{j}|^{2},
-\end{equation}
-
-which differs from normal nomenclature because we are not inverse varaince
-weighting. Note that this $\chi^{2}$ is summing over all baselines and hence 
-giving more weight to higher gains. Note that omnical fits for each of the
-complex gains and the model visibility, $y_{i-j}$,  for a unique baseline.
-Using this information, figure \ref{fig:chi_2} shows that the $\chi^{2}$ is close
-to 1 for all channels and time (for this day of data). need noise model for
-this.
-
-Figure \ref{fig:gain_solutions} shows the gain solutions output by omnical. The
-amplitude of the gains are roughly order unity through out. These are relative
-gains between antennas and hence the over flux scale set to Pictor A is still
-valid. The absolute calibration is still valid. 
-
-Since Omnical outputs a model visibility of what a unique baseline should
-measure, which is derived from the data by removing all of the variation between
-unique types of baselines and averaging, we are able to use these outputs as our
-dataset. Infact, this is what is done. 
-%waterfalls of chi squared and solutions.
-%day to day repeatability.
-%The output of the omnical - 
+\subsubsection{Absolute Gain Calibration}
+%    -Calibrated to Pictor A. 
 %
+%    -Our bandpass model is a 9th degree polynomial. 
+%
+%    -Tabulate signal loss due to this model. Averaging over Nbls, times gives us
+%     an average over independent uv modes.
+%
+%    -The actual signal loss on a given mode is L/N where L is the loss for a
+%     single instance of the beamform (one time, one baseline) and N is the
+%     number of baseline and times that were summed.
+%
+%    -PLOTS: 
+%        --A plot that is the phased to pictor beamform gain 
+%          (or maybe just a single channel for all days.
+%        --The measured and theoretical pictor spectrum 
+%        --A comparison to the PSA32 Flux CAL.
 
 
 
 
-\subsection{WB delay filtering}
-\begin{itemize}
-    \item{Can cite Parsons 2014 for the bulk of this because we are doing the
-same foreground removal technique, even the addition of 15 ns to the filter.}
-    \item{Delay filtering signal loss. Need to simulate the signal loss using
-similar techniques described in the previous paper.}
-    \item{PLOTS: before and after delay filtering waterfalls. Plots of signal
-loss versus k-bin.}
-\end{itemize}
+
+
+
+
+
+
+
+
+
+%These lists were My bullet points.
+%\begin{itemize}
+%    \item{Overview of the calibration with emphasis on Omnical.}
+%    \item{Rough Calibration : Can cite Parsons 2014 for the details.}
+%    \begin{itemize}
+%        \item{Discuss the first pass of redundant phase and gain calibration.
+%              Absolute phase calibration using pictor, fornax and crab in the
+%              fit.}
+%        \item{Absolute flux scale using Pictor A. Want to address signal loss.
+%             Maybe delay the issue of signal loss to a "Signal Loss" section
+%             which takes into account the signal loss in various stages of the 
+%             analysis?}
+%        \item{Add in details of the loss of eor signal. Do simulations to get
+%              numbers. }
+%        \item{Plots : Measured pictor spectrum with comparison to the Danny
+%              pictor spectrum. Maybe some simulation plots showing the signal
+%              loss due to the polynomial fit to pic spec.}
+%    \end{itemize}
+%    \item{Omnical}
+%    \begin{itemize}
+%        \item{What is omnical?}
+%        \item{Why are we using it? To get a frequency/time dependent
+%calibration. Need to address why this is not overfitting. That is why is this
+%just not flatting everything out.}
+%        \item{Address non-possibility of signal loss.}
+%        \item{Refresh formalism (do this here or in the intro of calibration?)}
+%        \item{What is it doing? logcal/lincal. Chi-squared and how that
+%              determines the goodness of the fits to the model baselines. What
+%model are we using? Is it a good model?}
+%        \item{Plots: Chi-squared plots. Compex plane plots that show
+%              improvements over uncalibrated/rough/omnical calibrated. 
+%              Time and frequency stability.}
+%    phase to pic gain, pic spec, comparison to psa32.
+%    \end{itemize} 
+%\end{itemize}
+
+%OLD TEXT START
+%\subsubsection{Overview}
+%As the name suggests, redundant calibration (\cite{liu_et_al2010},
+%\cite{zheng_et_al2014}) uses redundancy within the array to solve for relative
+%phases and gains of the antennas. To explain redundant calibration, suppose that
+%the baseline between antennas $i,j$ measure a visibility $v_{ij}$, then we have 
+%
+%\begin{equation}\label{eqn:redcal}
+%    v_{ij} = g_{i}g_{j}^{*}y_{i-j} + n_{ij},   
+%\end{equation}
+%where $g_{i}$,$g_{j}$ are the complex gains due to antenna $i$ and antenna $j$,
+%respectively, $y_{i-j}$ is the true visibility measured by perfect antennas
+%$i$,$j$ for the given baseline type, and $n_{ij}$ is the residual noise from
+%the baseline.  If the number of baselines of a given type is much greater than
+%the number of baselines types this problem is over constrained and $g_{i}i$,
+%$g_{j}$, and $y_{i-j}$ can be solved for. PAPER is in this limit due to the
+%maximally redundant configuration as shown in figure \ref{fig:antenna_pos}. 
+%
+%Redundant calibration comes in two flavors: log calibration and linear
+%calibration. Log calibration, or logcal for short, takes the logarithm of
+%equation \ref{eqn:redcal} to give a linearized system. Hence, solutions can be
+%solved for by using standard linear algebra techniques. However, this method is
+%biased. On the other hand linear calibration, or lincal for short, is an
+%unbiased method of solving for the complex gain solutions. In this method
+%equation \ref{eqn:redcal} is Taylor expanded about an initial guess for the
+%$g_{i}$'s and $y_{i-j}$'s to give a linearized equation which can be used to
+%solve for the complex gains and sky model. 
+%
+%In this analysis we used a logcal algorithm based in delay space to get a rough
+%calibration of the dataset. This was followed by an absolute calibration to set
+%the overall phase and flux scale using a self calibration. We used model phase
+%centers of Pictor, Fornax A, and Crab Nebula. The absolute amplitude is set
+%by the flux of Pictor A found in \cite{jacobs_et_al2013}, whose spectrum is
+%defined by 
+%\begin{equation}
+%    S_{\nu} = 382(\frac{\nu}{150 MHz})^{-.76} Jy.
+%\end{equation}
+%
+%Finally, we used the Omnical calibration package to do another round of
+%redundant calibration to get even more accurate calibration parameters.
+%
+%\subsection{logcal-for lack of a better title}
+%We first perform the same calibration that was
+%done in \citep{parsons_et_al2014a}. That is, we use redundancy to do a relative
+%phase\footnote{In actuality, we solve for delays to get around phase wrapping
+%issues. These delays are applied to visibilities as $e^{2\pi{i}\tau\nu}$}
+%calibration between antennas, which removes the electrical delays from cables in
+%the signal path. Due to redundancy, we can calibrate out all of the per-antennas
+%delays in the signal path relative to two delay parameters which we call
+%$\tau_{ns}$ and $\tau_{es}$. These delays are the relative electrical delays
+%that correspond to baseline delays in the north-south and east-west component
+%for 2 reference baselines (49-10 and 49-41,respectively). These solutions were
+%then applied to the data set which was calibrated again with Omnical. 
+%
+%The application of this calibration to the data set before Omnical was needed
+%because in order to calibrate accurately, Omnical needs to have a rough estimate
+%for the calibration solutions for every antenna. In \cite{zheng_et_al2014}, a
+%model of the sky was used in order get the rough estimate of the solutions.
+%Here, we use actual sky data to get the rough calibration. Because the solutions
+%are derived from the instrument, we can incorporate into the solutions antenna
+%based variations. 
+% 
+%The antenna based
+%delay solutions vary as much as a couple nanoseconds day to day when solutions
+%are averaged over hour long timescales withing a day. However, the variations in
+%solutions is worse when only averaging over ten minute time scales. Therefore
+%need for better calibration is requred.  We use self calibration to derive the
+%two unknow parameters, $\tau_{ns}$ and $\tau_{ew}$, by using the Crab Nebula,
+%Fornax A, and Pictor A.
+%
+%Note that there is no possibility of signal loss (see \citep{parsons_et_al2014a}).
+%
+%\subsection{Gain Calibration}
+%Gain calibration was derived on the basis of redundancy and self calibration.
+%The phase calibrations described above, simultaneously also calibrated for the
+%relative gain variation between antennas. Again we can only calibrate to a fiducial
+%antenna (49) whose gain is defined as unity. We then perform a self calibration
+%to set the flux scale to Pictor A whose spectrum is derived in
+%\citep{jacobs_et_al2013}. We use the same methods describes in \citep{parsons_et_al2014a}.
+%
+%Figure \ref{fig:bmfom_pic} shows that dataset beamformed to Pictor A, with log
+%janskies on the y axis and lst on the xaxis for a frequncy of .1 + (120/203)*.1/203. 
+%As can be seen, the day to day variation in the formed beam has a fractional
+%spread of about 10$\%$.  This shows the stability of the instrument and the well
+%behaved calibration solutions derived above. 
+%
+%\subsection{Omnical}
+%(How did we know that our calibrations were not good enough? Because of the power
+%spectrum? PSA32? We did beamform data to pictorA and say that vs LST, the
+%beamform matched well day to day with a fractional spread of about 10$\%$) 
+%
+%The complex gain solutions found in the previous calibration pipeline were
+%averaged together in time and one solution per frequency was used for the array.
+%This jived with the philosophy that the array was stable in time and frequency.
+%However, upon further review of this data set, it seemed more and more likely
+%that this was not the case anymore. (Is this even true? What specifically? Think
+%Man!) 
+%
+%Due to clues that showed that our data set had time dependent calibration
+%solutions, it was imperative that we do a better job at calibrating our array.
+%
+%The Omnical redundant calibrator
+%package\footnote{https://github.com/jeffzhen/omnical} (omnical) performs
+%redundant calibration for every time and frequency in a dataset using both
+%logcal and lincal methods as described in \cite{zheng_et_al2014}. It also
+%contains methods on the quality of the solutions by providin a chi-square for
+%the fits to the data. 
+%
+%For this dataset, omnical first performed a logcal (again) to attain a solution
+%per time and frequency. This solution was passed to lincal which iteratively
+%solved for the complex gain solutions. The convergence criteria was when the
+%$\chi^{2}$ decreased by less than $.01\%$. The $\chi^{2}$ for the fit used in
+%Omnical is given by 
+%\begin{equation}
+%    \chi^{2} = \sum_{ij}|v_{ij} - y_{i-j}g_{i}^{*}g_{j}|^{2},
+%\end{equation}
+%
+%which differs from normal nomenclature because we are not inverse varaince
+%weighting. Note that this $\chi^{2}$ is summing over all baselines and hence 
+%giving more weight to higher gains. Note that omnical fits for each of the
+%complex gains and the model visibility, $y_{i-j}$,  for a unique baseline.
+%Using this information, figure \ref{fig:chi_2} shows that the $\chi^{2}$ is close
+%to 1 for all channels and time (for this day of data). need noise model for
+%this.
+%
+%Figure \ref{fig:gain_solutions} shows the gain solutions output by omnical. The
+%amplitude of the gains are roughly order unity through out. These are relative
+%gains between antennas and hence the over flux scale set to Pictor A is still
+%valid. The absolute calibration is still valid. 
+%
+%Since Omnical outputs a model visibility of what a unique baseline should
+%measure, which is derived from the data by removing all of the variation between
+%unique types of baselines and averaging, we are able to use these outputs as our
+%dataset. Infact, this is what is done. 
+%%waterfalls of chi squared and solutions.
+%%day to day repeatability.
+%%The output of the omnical - 
+%%
+%OLD TEXT END
+
+
+
+\subsection{Wideband delay filtering}
+%   -Can cite Parsons 2014a
+%   -Quantify signal loss. 
+%   -PLOTS:
+%        --waterfalls of before and after cleaning.
+%       --signal loss vs. k_parallel
 
 \subsection{RFI and Crosstalk mitigation}
 \begin{itemize}
@@ -429,17 +444,13 @@ bias that is crosstalk. For foreground removed data, we do not have this
 complication since bright foregrounds are not dominating the average and are
 able to remove the offset by subtracting shorter sums.
 
-\subsection{Binning}
-\begin{itemize}
-    \item{Discuss the dataset being LST binned. How many days went in to it.
-Number of different LST datasets we are going to use (both for jack-knifing
-purposes and other purposes)}
-    \item{Discuss the median filtering step. Why are we filtering it? Because of
-outliers in time that find it's way into the dataset.}
-    \item{Signal Loss, if any.}
-    \item{Mention the statistics that are saved and how we are going to use those.}
-    \item{What plots, if any?}
-\end{itemize}
+\subsection{Stokes I : cite Moore et.al.}
+\subsection{LST Binning}
+%   -Practicals: bin size, number of days, range of days
+%   -N lst data sets. Jack-knifing etc.
+%   -Median Filter : no signal loss. Filtering because of outliers in time that
+%    find their way into the data 
+%   -Plots: Integration counts vs. LST/freq  waterfall.
 
 Once smooth sources have been removed and a final pass of RFI excision and
 crosstalk removal have been performed, the data is averaged in local sidereal
@@ -454,37 +465,37 @@ each frequency and flag off data that is 3 sigma outside of that median before
 averaging. This filter mitigates the adverse effects of RFI from dominating a
 LST bin. 
 
-\subsubsection{A noise study}
-During the LST averaging, we compute the median and the variance for every LST
-and frequency bin. The variance in particular is of importance becuase it allows
-us to estimate the system temperature, $T_{sys}$, as a function of LST and
-frequency. The variance is computed, per frequency, for all the visibilities
-that are included in a given LST bin, which gives us an estimate ${I_{rms}}$,
-the specific intensity in Jy, which is then converted to a $T_{rms}$ in the
-usual way, 
-\begin{equation}
-    T_{rms} = \frac{I_{rms}\lambda^{2}}{2k\Omega}.
-\end{equation}
-
-where $\lambda$ is the observing wavelength, $\Omega$ is the size of the beam in
-steradian, and $k$ is the boltzmann constant. We convert $T_{rms}$ to a system
-temperature by scaling up the rms with the effective integration time and
-bandwidth used. That is, 
-\begin{equation}
-    T_{sys} = T_{rms} \times \sqrt{\Delta{B}t_{int}}.
-\end{equation}
-
-Figure \ref{fig:tsys_lst_fq} shows the system temperature as a function of
-LST and frequncy. In our "cold" patch, we find that $T_{sys}$ is around $500K$.
-
-
-\begin{figure}
-\centering
-\includegraphics[width=\columnwidth]{plots/tsys_lst_freq.png}
-\caption{Tsys as a function of lst and frequency. The cold spot resides in the
-lst range of 1-7hours.}
-\ref{fig:tsys_lst_fq}
-\end{figure}
+%\subsubsection{A noise study}
+%During the LST averaging, we compute the median and the variance for every LST
+%and frequency bin. The variance in particular is of importance becuase it allows
+%us to estimate the system temperature, $T_{sys}$, as a function of LST and
+%frequency. The variance is computed, per frequency, for all the visibilities
+%that are included in a given LST bin, which gives us an estimate ${I_{rms}}$,
+%the specific intensity in Jy, which is then converted to a $T_{rms}$ in the
+%usual way, 
+%\begin{equation}
+%    T_{rms} = \frac{I_{rms}\lambda^{2}}{2k\Omega}.
+%\end{equation}
+%
+%where $\lambda$ is the observing wavelength, $\Omega$ is the size of the beam in
+%steradian, and $k$ is the boltzmann constant. We convert $T_{rms}$ to a system
+%temperature by scaling up the rms with the effective integration time and
+%bandwidth used. That is, 
+%\begin{equation}
+%    T_{sys} = T_{rms} \times \sqrt{\Delta{B}t_{int}}.
+%\end{equation}
+%
+%Figure \ref{fig:tsys_lst_fq} shows the system temperature as a function of
+%LST and frequncy. In our "cold" patch, we find that $T_{sys}$ is around $500K$.
+%
+%
+%\begin{figure}
+%\centering
+%\includegraphics[width=\columnwidth]{plots/tsys_lst_freq.png}
+%\caption{Tsys as a function of lst and frequency. The cold spot resides in the
+%lst range of 1-7hours.}
+%\ref{fig:tsys_lst_fq}
+%\end{figure}
 
 
 
@@ -492,24 +503,17 @@ lst range of 1-7hours.}
 
 
 \subsection{optimal Fringe-rate filter}
-\begin{itemize}
-    \item{What is fringe rate filtering? A way to average in time. Cite FRF
-paper that is going to come out in conjuction with this paper. This section will
-be an application of that paper to real data. Not too much review in the case of
-the background of frf.}
-    \item{Corresponding signal loss of the application of the optimal fringe
-rate filter. Do this or cite from Parsons and Liu.} 
-    \item{How do we create the fringe rate filter and application details. We
-create a filter at one frequency and scale it to other frequencies. Use the
-PAPER beam. Address errors.}
-    \item{What is the averaging timescale? How do we make that calculation?}
-    \item{Discuss factors of the beam in making the fringe rate filter. Which
-one do we use? (I realize that this is something we should nail down. All of the
-current analysis has one factor of the beam)}
-    \item{PLOTS: Show fringe rate filters in both frate and time domain. Show
-what happens when it is applied to data. Show waterfalls before and after fringe
-rate filtering.}
-\end{itemize}
+%   -What is fringe rate filtering. Cite Parsons And Liu 2014.
+%   -Effective beam areas.
+%   -effective integration time and number of modes. 
+%       --Do calculations.
+%   -PLOTS: 
+%       --FR filter (both in fr and time space), applied to data.
+%       --Beam after fringe-rate filter. 
+%       --Waterfalls.
+%       -- apply filters to foreground data. Compute fr of pica and show that we
+%          are not killing the sky.
+
 Before forming power spectra we need to time average visibilities that measure
 the same $k$ mode on the sky. This is the best way to combine data because we
 get a $\sqrt{N}$, where N is the number of samples, gain in sensitivity. This is
@@ -595,21 +599,48 @@ bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
 \end{figure}
 
 
-\begin{figure}[h!]\centering
-\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/noise_vs_fq_plot.png}
-\caption{Estimates of noise temperature. Magenta is frequncy differenced
-estimate where the cyan is the time differenced estimate. Averaged in LST from 3
-to 5 hours. on uv files calibrated with omnical. fg,delay filtered, baseline
-averaged, normal fringe rate filter, optimal fringe rate filtering.}
-\label{fig:noise_omni_uv}
-\end{figure}
+%\begin{figure}[h!]\centering
+%\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/noise_vs_fq_plot.png}
+%\caption{Estimates of noise temperature. Magenta is frequncy differenced
+%estimate where the cyan is the time differenced estimate. Averaged in LST from 3
+%to 5 hours. on uv files calibrated with omnical. fg,delay filtered, baseline
+%averaged, normal fringe rate filter, optimal fringe rate filtering.}
+%\label{fig:noise_omni_uv}
+%\end{figure}
 
 
-\subsection{Optimal Quadratic Estimator}
-\begin{itemize}
-    \item{Present the OQE method, breifly. Cite Dillion, Liu, Tegmark etc...}
-    \item{what is the method we are using?}
-\end{itemize}
+\subsection{Optimal Quadratic Estimator and Covariance}
+%   -Motivate method with discussion of empirical estimate of covariances and
+%    problem of limited modes.
+%   
+%   -Mathematics compared to ideal optimal Quadratic Estimator.
+%   
+%   -Counting of independent modes. 
+%
+%   -Potential for signal loss.
+%
+%   -Cholesky Decomposition and window functions.
+%
+%   -Maybe : Problem of low noise measurements in this method of analysis i.e.
+%    singular matrics.
+%
+%   -Boot strapping 
+%
+%   -PLOTS:
+%       --example covariance matrices (with foregrounds, without, fringe rate
+%         filtering.
+%       --Before and After covariance application waterfall plots.
+%
+%       --Eigen Spectra and shape of the eigen modes.
+%
+%       --Window Functions : not waterfalls.
+%
+%       --Fisher matrices.
+%
+%       --Power spectrum waterfall plots for different separations. 
+%
+%       --Maybe the wedge.
+%
 
 \begin{figure}[h!]\centering
 \includegraphics[width=2\columnwidth, height=.8\columnwidth]{plots/x_example.png}
@@ -645,12 +676,6 @@ weighted by their corresponding eigeinvalue.}
 \end{figure}
 
 
-%plots:
-% filters used. 
-% apply filters to foreground data. Compute fr of pica and show that we are not 
-%   killing the sky.
-% 
-
 \section{Summary of Improvements from PSA32}
 XXX Should this section be here XXX
 In comparison to the previous PAPER pipeline (see \cite{parsons_et_al2014a}),
@@ -677,9 +702,37 @@ turned on. We can see the gradual improvement of the power spectra (hopefully).
 
 
 \section{Results}
+%   -Tsys, and Tsys vs. time ?
+%
+%   -Final Pspecs and from various stages 
+%       --before/after omnical
+%       --before/after frf
+%       --before after foregrounds.
+%
+%   -Implications for polarized foregrounds.
+%   -Radio recombination and other unsmooth foregrounds.
+%   -Summarize Jonnies Result.
 
-\section{Science}
-
+\section{Discussion}
+%   -Future datasets. Things to look forward to.
+%
+%   -HERA
+%
+%   -Relative merrits of foreground avoidance vs fg filtering.
+%
+%   -relative importance of improvements of psa32.
+%
+%   -vamp on consistency with zero.
+%
+%   -Remaining challenges.
+%
+%       --Polarization leakage.
+%       --Sensitivity 
+%       --Seeing foregrounds.
+%
+%
+%
+%
 \section{Conclusions}
 
 
