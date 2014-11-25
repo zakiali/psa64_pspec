@@ -1,0 +1,2 @@
+Loading up with lstbin_even data at various stages of analysis for plotting purposes.
+Only collecting sep0,1 data.  Should probably even downselect to a few baselines of interest.
