@@ -122,31 +122,10 @@ the center of the galaxy).
 \label{fig:antenna_positions}
 \end{figure*}
 
-\section{Summary of Improvements from PSA32}
-XXX Should this section be here XXX
-In comparison to the previous PAPER pipeline (see \cite{parsons_et_al2014a}),
-this analysis took a slightly different approach which included some critical
-steps to improve our upper limit. In short, the improvements included using a
-new, refined redundant calibration method (Zheng 2014), increasing the width of
-the wideband delay filter that removes smooth spectrum foregrounds, weighting
-the lst binned data sets, and optimal fringe rate filtering. In section
-\ref{sec:analysis}, we dicuss each of the improvements in more detail.
-
-Figure \ref{fig:step_through_pspec} (TBD) shows the power spectra when each of
-the steps mentioned above are turned off and for the one where all of them are
-turned on. We can see the gradual improvement of the power spectra (hopefully).
-
-
-
-%A more rigorous calibrations. Forward Ref.
-%omnical
-%lstbinning with chi-sq weighting
-%horizon cut at 200ns = 100 + 100 (instead of 100 + 15)
-%optimal fringe-rate filtereing
-%want the 4(5?) figures in this section. Incrementally step back through improvement points.
-
 
 \section{Analysis}
+XXX FLOW CHART FIGURE XXX
+
 Here we describe the analysis pipeline of the data set obtained in 2012/2013
 observing season. 
 Data was first run through a preprocessing compression pipeline which reduces
@@ -168,7 +147,46 @@ The same pipeline was run on this data from the PSA32 data set.
 Discuss the way we RFI flag the data before the compression step.
 
 
-\subsection{Calibrations}
+\subsection{Calibration}
+\subsubsection{Redundant Calibration}
+    Principles of redundant calibration. Fact that there is no signal loss in
+this kind of measurement.
+
+    What can we solve for and what can't we solve for. We can solve for the
+relative complex gains between antennas, but not the absolution gain and phase.
+
+    Summary of the procedure of redundant calibration. This should be mixed in
+with the equations from Zheng et. al.
+
+    How was this calibration applied to the data. Using omnical package.
+    
+    Removing additive offset and what is the time cadence of all of this.
+
+    Diagnostic figures : Chi-squared, complex plane, stability vs. time and
+frequency. 
+
+\subsubsection{Absolute Phase Calibration}
+    selfcal to pictor, fornax, and crab (to get the north-south components).    
+
+    Show Field image from Bernardi. This will give confidence in a good absolute
+phase calibration.
+
+\subsubsection{Absolute Gain Calibration}
+    Calibrated to Pictor A. 
+
+    Our bandpass model is a 9th degree polynomial. 
+
+    Tabulate signal loss due to this model. Averaging over Nbls, times gives us
+an average over independent uv modes.
+
+    The actual signal loss on a given mode is L/N where L is the loss for a
+single instance of the beamform (one time, one baseline) and N is the number of
+baseline and times that were summed.
+
+    PLOTS: A plot that is the phased to pictor beamform gain, the measured and
+theoretical pictor spectrum, a comparison to the PSA32 Flux CAL.
+
+These lists were My bullet points.
 \begin{itemize}
     \item{Overview of the calibration with emphasis on Omnical.}
     \item{Rough Calibration : Can cite Parsons 2014 for the details.}
@@ -198,7 +216,9 @@ just not flatting everything out.}
               determines the goodness of the fits to the model baselines. What
 model are we using? Is it a good model?}
         \item{Plots: Chi-squared plots. Compex plane plots that show
-              improvements over uncalibrated/rough/omnical calibrated.}
+              improvements over uncalibrated/rough/omnical calibrated. 
+              Time and frequency stability.}
+    phase to pic gain, pic spec, comparison to psa32.
     \end{itemize} 
 \end{itemize}
 
@@ -594,6 +614,30 @@ weighted by their corresponding eigeinvalue.}
 % apply filters to foreground data. Compute fr of pica and show that we are not 
 %   killing the sky.
 % 
+
+\section{Summary of Improvements from PSA32}
+XXX Should this section be here XXX
+In comparison to the previous PAPER pipeline (see \cite{parsons_et_al2014a}),
+this analysis took a slightly different approach which included some critical
+steps to improve our upper limit. In short, the improvements included using a
+new, refined redundant calibration method (Zheng 2014), increasing the width of
+the wideband delay filter that removes smooth spectrum foregrounds, weighting
+the lst binned data sets, and optimal fringe rate filtering. In section
+\ref{sec:analysis}, we dicuss each of the improvements in more detail.
+
+Figure \ref{fig:step_through_pspec} (TBD) shows the power spectra when each of
+the steps mentioned above are turned off and for the one where all of them are
+turned on. We can see the gradual improvement of the power spectra (hopefully).
+
+
+
+%A more rigorous calibrations. Forward Ref.
+%omnical
+%lstbinning with chi-sq weighting
+%horizon cut at 200ns = 100 + 100 (instead of 100 + 15)
+%optimal fringe-rate filtereing
+%want the 4(5?) figures in this section. Incrementally step back through improvement points.
+
 
 
 \section{Results}
