@@ -139,21 +139,21 @@ pipeline and includes some information on simuations and signal loss.
 
 \subsection{Calibration}
 \subsubsection{Redundant Calibration}
-    Principles of redundant calibration. Fact that there is no signal loss in
-this kind of measurement.
-
-    What can we solve for and what can't we solve for. We can solve for the
-relative complex gains between antennas, but not the absolute gain and phase.
-
-    Summary of the procedure of redundant calibration. This should be mixed in
-with the equations from Zheng et. al.
-
-    How was this calibration applied to the data. Using omnical package.
-    
-    Removing additive offset and what is the time cadence of all of this.
-
-    Diagnostic figures : Chi-squared, complex plane, stability vs. time and
-frequency. 
+%    Principles of redundant calibration. Fact that there is no signal loss in
+%this kind of measurement.
+%
+%    What can we solve for and what can't we solve for. We can solve for the
+%relative complex gains between antennas, but not the absolute gain and phase.
+%
+%    Summary of the procedure of redundant calibration. This should be mixed in
+%with the equations from Zheng et. al.
+%
+%    How was this calibration applied to the data. Using omnical package.
+%    
+%    Removing additive offset and what is the time cadence of all of this.
+%
+%    Diagnostic figures : Chi-squared, complex plane, stability vs. time and
+%frequency. 
 
 PAPER is arranged in a highly redundant configuration and thus lends itself to
 use the redunancy in baselines for a relative calibration. Every instance of a
@@ -182,19 +182,32 @@ the visibility around some initial estimates of the gains and model visibility.
 The benefit of lincal is that it is not a biased estimator as opposed to logcal
 which takes the logarithm of additive noise.
 
-
-
-Implementaion of redundant calibration was done with the Omnical package, an
+Implementaion of redundant calibration was done with the ${Omnical}$ package, an
 open source redundant calibration package written by Jeff
-Zheng \footnote{https://github.com/jeffzhen/omnical}\cite{zheng_et_al2014}. 
+Zheng \footnote{https://github.com/jeffzhen/omnical}\cite{zheng_et_al2014}. This
+package implements both logcal and lincal with an incredible speed up from
+the previous homegrown routine used in \cite{parsons_et_al2014a}. 
+XXXadd in duscussion about removing additive offsets and time cadence of
+that)XXX.
+
+
 
 \subsubsection{Absolute Phase Calibration}
-    selfcal to pictor, fornax, and crab (to get the north-south components).    
+%    selfcal to pictor, fornax, and crab (to get the north-south components).    
+%
+%    Show Field image from Bernardi. This will give confidence in a good absolute
+%phase calibration.
 
-    Show Field image from Bernardi. This will give confidence in a good absolute
-phase calibration.
+After solving for the relative phases and gains of the antennas using redcal, an
+overall phase and gain calibration needs to be solved for. We use the standard self
+calibration (selfcal) method for radio interferometers in order to solve for
+these over all parameters. The absolute phase calibration was solved for using using 
+Pictor A, Fornax A, and Crab Nebula. Figure \ref{fig:field_image} shows an
+image of the field with Pictor A (ra, dec)  and Fornax A (ra, dec). The
+measured source positions are the same as the the catalogue positions for these
+sources.XXX make sure of this statementXXX
 
-\subsubsection{Absolute Gain Calibration}
+\subsubsection{Absolute Gain Calibration
     Calibrated to Pictor A. 
 
     Our bandpass model is a 9th degree polynomial. 
