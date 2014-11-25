@@ -125,27 +125,17 @@ the center of the galaxy).
 
 \section{Analysis}
 XXX FLOW CHART FIGURE XXX
-
-Here we describe the analysis pipeline of the data set obtained in 2012/2013
-observing season. 
-Data was first run through a preprocessing compression pipeline which reduces
-the volume of the data by a factor of forty. Afterwards we calibrate the
-relative phases of our array on the basis of redundancy using a logcal approach
-in delay space, and then get the absoultue phase calibration by fitting. We then
-set the flux scale of our observations by using Pictor A. The logcal done above
-was a rough estimate of the phase calibration and hence we used Omnical to get
-the calibrations to higher accuracy. This was a major difference in the pipeline
-from previous iterations on PAPER data. We then remove foregrounds using the
-delay filtering technique and form power spectra. The detalis of the above are
-discussed below and figure \ref{fig:analysis_pipeline} shows a block diagram of
-the analysis pipeline.
-
-\subsection{Preprocessing Compression}
-Reference the compression pipeline in the appendix \cite{parsons_et_al2014a}.
-The same pipeline was run on this data from the PSA32 data set. 
-
-Discuss the way we RFI flag the data before the compression step.
-
+We now describe the analysis pipeline leading up to the final power spectrum
+measurement of our data set. To begin, we run a compression algorithm to reduce
+the data volume of our raw data. This step, described in the appendix of
+\cite{parsons_et_al2014a}, reduces data volume by a factor of 40. We then
+calibrate the this data on the basis of redundancy before using self-calibration
+to solve for the absolute parameters. After suppressing foregrounds with a
+wide-band delay filter, we average the data in local sidereal time. Finally, we
+apply a frine rate filter to optimally combine the time domain data and use
+optimal quadratic estimators to make our estimae of the 21 cm power spectrum.
+Figure \ref{fig:analysis_pipeline} shows a block diagram of the analysis
+pipeline and includes some information on simuations and signal loss.
 
 \subsection{Calibration}
 \subsubsection{Redundant Calibration}
@@ -153,7 +143,7 @@ Discuss the way we RFI flag the data before the compression step.
 this kind of measurement.
 
     What can we solve for and what can't we solve for. We can solve for the
-relative complex gains between antennas, but not the absolution gain and phase.
+relative complex gains between antennas, but not the absolute gain and phase.
 
     Summary of the procedure of redundant calibration. This should be mixed in
 with the equations from Zheng et. al.
@@ -164,6 +154,39 @@ with the equations from Zheng et. al.
 
     Diagnostic figures : Chi-squared, complex plane, stability vs. time and
 frequency. 
+
+PAPER is arranged in a highly redundant configuration and thus lends itself to
+use the redunancy in baselines for a relative calibration. Every instance of a
+baseline of a given unique baseline type, for example the baseline 1-4 belongs
+to the one column spacing and no row spaceing unique baseline type, measures the
+same sky signal. On this basis, all of the differences between baselines of a
+given unique baseline type, should be calibrated out. In addition, when using
+the redundancy to calibrate, we take ratios of the baselines with one another
+and therefore the signal cancels out. Because of this, there is no possibility
+if signal loss due to redundant calibration.
+
+Redundant calibration is a relative calibration procedure, hence we can only
+solve for the relative complex gains of the antennas. Redundant calibration does
+not set the absolute phase or gain scales due to the fact that it only knows
+about other antennas, not absolute sky.  
+
+Practiaclly, redundant calibration has two flavors, log calibration (logcal) and linear
+calibration (lincal) \cite{liu_et_al2010,zheng_et_al2014}. Logcal, takes the
+logarithm of a visibility (equation 4 of \cite{zheng_et_al2014}) to give a
+linearized system which can then be fit to using linear least square. In this
+linear case, we solve for $\log{g_{i}},\log{g_{i}}$ and $\log{y_{i-j}}$, where
+the $g_{i}$'s are the complex gains of an antenna and $y_{i-j}$ is the true
+visibility of the given baseline. Redundancy gives us an overconstrained system
+of equations and we can thus solve for every complex gain. Lincal taylor expands
+the visibility around some initial estimates of the gains and model visibility.
+The benefit of lincal is that it is not a biased estimator as opposed to logcal
+which takes the logarithm of additive noise.
+
+
+
+Implementaion of redundant calibration was done with the Omnical package, an
+open source redundant calibration package written by Jeff
+Zheng \footnote{https://github.com/jeffzhen/omnical}\cite{zheng_et_al2014}. 
 
 \subsubsection{Absolute Phase Calibration}
     selfcal to pictor, fornax, and crab (to get the north-south components).    
