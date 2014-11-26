@@ -223,8 +223,11 @@ that)XXX.
 \subsubsection{Absolute Phase Calibration}
 %    -Selfcal to pictor, fornax, and crab (to get the north-south components).
 %       --Reiterate that redundant cal does not solve for the overall flux and
-%         phase parameters. 
-%       --We use self calibration to solve for the global antenna 
+%         phase parameters. There are two final phase parameters we must solve
+%         for in order to correctly phase to a source on the sky. 
+%       --We use self calibration to solve for the global phase parameters using
+%       Pictor A, Fornax A, and Crab Nebula. 
+%
 %    -Diagnostic Plots: Show Field image from Bernardi. This will give
 %     confidence in a good absolute phase calibration.
 
@@ -239,9 +242,16 @@ sources.XXX make sure of this statementXXX
 
 \subsubsection{Absolute Gain Calibration}
 %    -Calibrated to Pictor A. 
-%
+%       --As before, redundant calibration cannot set a global flux scale. For
+%       our measurements to be correct, we need to set a fluxscale. We use
+%       Pictor A to set our fluxscale. Cite Dannys pictor paper.
+%      
 %    -Our bandpass model is a 9th degree polynomial. 
-%
+%       --In order to set our fluxscale, we beamform our data upto pictor A,
+%         summing baselines, and then then fit a 9th degree polynomial to the
+%         bandpass. This is our measure of the spectrum of Pictor A. 
+%       --Because we are beamforming to pictor and fitting a polynomial to the
+%         bandpass, there is signal loss. This signal loss is of the 
 %    -Tabulate signal loss due to this model. Averaging over Nbls, times gives us
 %     an average over independent uv modes.
 %
@@ -447,6 +457,8 @@ sources.XXX make sure of this statementXXX
 
 \subsection{Wideband delay filtering}
 %   -Can cite Parsons 2014a
+%       --We use the same wbd filter as in Parsons 2014a. That is we do a per
+%         baseline delay filtering with a buffer of 15 nanoseconds. 
 %   -Quantify signal loss. 
 %   -PLOTS:
 %        --waterfalls of before and after cleaning.
@@ -457,6 +469,7 @@ sources.XXX make sure of this statementXXX
     \item{Discuss, briefly, RFI and Crosstalk removal. Note that this happens
 after foreground removal. Possibility of signal loss?}
 \end{itemize}
+
 After the wideband delay filter, we conduct another round of RFI and crosstalk
 removal which was overshadowed by the foreground signal. For RFI excision we
 apply a median filter which flags above $3\sigma$. Foregrounds kept us using the
@@ -472,11 +485,24 @@ complication since bright foregrounds are not dominating the average and are
 able to remove the offset by subtracting shorter sums.
 
 \subsection{Stokes I : cite Moore et.al.}
+%We form stokes I = .5 (xx + yy)
 \subsection{LST Binning}
-%   -Practicals: bin size, number of days, range of days
+%   -Practicals: bin size, number of days, range of days 
+%       --We LST bin the data over the 120 night data set into time bins of
+%         42.95 seconds. 
+%       --WE form multiple LST data sets which bin different days throughout the
+%       observation together. These datasets help us remove systematics in the
+%       power spectrum estimation. They also provide us a way to jackknife the
+%       data set.
 %   -N lst data sets. Jack-knifing etc.
 %   -Median Filter : no signal loss. Filtering because of outliers in time that
 %    find their way into the data 
+%       --While lst binning, we apply a median filter which for a given lst and
+%       frequency bin, removes data which falls outside 3 sigma of the median of
+%       the dataset. This filtering is necessary, because of the non gaussian
+%       events that crept their way into the data set, such as RFI, etc...
+%       --There is no signal loss associated with this because we are using
+%       median statistics. 
 %   -Plots: Integration counts vs. LST/freq  waterfall.
 
 Once smooth sources have been removed and a final pass of RFI excision and
