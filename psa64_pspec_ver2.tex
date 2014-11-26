@@ -557,9 +557,33 @@ LST bin.
 
 \subsection{optimal Fringe-rate filter}
 %   -What is fringe rate filtering. Cite Parsons And Liu 2014.
+%       --Fringe Rate filtering is nothing more then a time domain weighted
+%         average per frequency of of visibilities. The filter can be applied 
+%         as either a convolution in the time domain or a multiplicative fourier
+%         filter in fringe rate space. 
+%       --We first calculate fringe rate filter such that we upweight the more
+%         sensitive fringe rates versus the not so sensitve fringe rates by
+%         weighting the fringe rates for a given baseline by its beam.
 %   -Effective beam areas.
+%       --When fringe rate filtering, we are upweighting fringe rates that
+%         are most sensitive. That is we are weighting these fringe rates by the
+%         beam of a baseline. This has the effect of narrowing the effective
+%         beam. It turns out that we are removing more noise than signal,
+%         because we are essentially keeping the most sensitive parts of the
+%         sky. This actually gives us a sensitivity boost of about a factor of
+%         2. 
 %   -effective integration time and number of modes. 
 %       --Do calculations.
+%       --Fringe rate filtering is evvectively a weighted average in time and
+%       thus there is an effective integration time. We can calculate this
+%       integration time by noting that power (or variance) is a conserved
+%       quantity. Therefore, comparing the integral of a variance=1 noise signal
+%       when it is fringe rate filtered to when it is not, gives us a fractional
+%       integration time. 
+%           \frac{ \int_{t_{start}}^t_{end}{\sigma^{2}*F_{constant}(t)dt
+%           }}{\int_{t_{start}}^t_{end}{\sigma^{2}*F_{filter}(t)dt = fraction.
+%            t_int = fraction * t_start-t_end
+%           Something like that.
 %   -PLOTS: 
 %       --FR filter (both in fr and time space), applied to data.
 %       --Beam after fringe-rate filter. 
