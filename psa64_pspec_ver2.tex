@@ -584,12 +584,23 @@ LST bin.
 %           }}{\int_{t_{start}}^t_{end}{\sigma^{2}*F_{filter}(t)dt = fraction.
 %            t_int = fraction * t_start-t_end
 %           Something like that.
+%       --Due to the fact that fringe rate filtering is effectively averaging in
+%         time, A fringe rate filter reduces the number of independent modes on
+%         the sky. The number of modes in an entire day drop just 45
+%         (24hrs/1900sec)  independent modes on the sky. 
 %   -PLOTS: 
 %       --FR filter (both in fr and time space), applied to data.
 %       --Beam after fringe-rate filter. 
 %       --Waterfalls.
 %       -- apply filters to foreground data. Compute fr of pica and show that we
 %          are not killing the sky.
+%   
+%   code to get the integration time of fringe rate filter. This is 1894 for channel 100
+%   beam_w_fr = frf_conv.get_beam_w_fr(aa, (1,4))
+%   t,firs,frbins,frspace = frf_conv.get_fringe_rate_kernels(beam_w_fr, 42.8, 401)
+%   fr100 = frspace[100]
+%   t_int = 42.8/n.mean(fr100)
+%   
 
 Before forming power spectra we need to time average visibilities that measure
 the same $k$ mode on the sky. This is the best way to combine data because we
@@ -689,19 +700,63 @@ bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
 \subsection{Optimal Quadratic Estimator and Covariance}
 %   -Motivate method with discussion of empirical estimate of covariances and
 %    problem of limited modes.
-%   
+%       --Because we dont know the true covariances between baselines and
+%         channels we have to estimate the covariances epirically from data. 
+%       --We do this by taking the outer product of our data vector (consisting
+%         of a visibilies for every baseline of a given unique baseline type).
+%         The outer product is calculated per time sample, thus we average over
+%         a clean (what do i mean by this?) lst range.
+%       --Hence, the quality of the estimate of the covariances between
+%         baselines depends on the average in time and if there is enough
+%         information to invert covariance matricies. 
+%       --After fringerate filtering, the number of independent modes on the
+%         decreases substantially because we are averaging over 1900 seconds
+%         ~=31.67 minutes. Therefore the number of independent modes decreases
+%         1900/(the beam in time).
+%       --
 %   -Mathematics compared to ideal optimal Quadratic Estimator.
-%   
+%       --In the quadratic estimator formalism, the value of the power spectrum,
+%         $p_{\alpha}$  in the $\alpha^{th}$ bin is given by
+%         $Mq_{\alpha}=$Mx^{\dagger}C{-1}Q_{\alpha}C^{-1}x, where x is a vector
+%         containing the binned data in frequency domain, $x = V(\nu)$, C is the
+%         estimate of the covariance matrix of of our data, C = <xx^{\dagger}>,
+%         $Q_{\alpha}$ is defined such that $Q_{\alpha}=\frac{dC}{d\alpha}$, and
+%         M is a normalization matrix that normalizes the estimator.
+%       --Generally, the covaraince matrix used is the full covaraince between
+%         all baselines and channels. 
+%       --Because of redundancy, the matrix is singular and not invertible. We
+%         therefore construct a pseudo inverse for C. In addtion to the psaudo
+%         inverse we take only the auto-baseline covarainces, masking out the
+%         covariances between baselines. This, is invertible. WE can thus apply
+%         the inverse of C in the above equation.
+%       --
 %   -Counting of independent modes. 
+%       --Number of independent modes = 2*#of lst hours used in analysis. This
+%         is because 1900 seconds ~ 30 minutes.
 %
 %   -Potential for signal loss.
 %
 %   -Cholesky Decomposition and window functions.
+%       --The optimal window functions (that minimize the vertical error bars of
+%       the estimate, are given by the inverse of the Fisher matrix. However,
+%       there is a trade off such that this incorporates information from all of
+%       the k-modes. 
+%       --Some other choices of the window functions are the sqare root of the
+%       fisher matrix or the identity. 
+%       --We use the cholesky decomposition of the Fisher Matrix such that we
+%       can wrtie F = LL^{\dagger}, where L is a lower triangular matrix. This
+%       is possible for any hermitian positive-definite matrix.
+%       --We use L for our window functions because for every k-bin, it does not
+%       use information from the k-bins below it. And thus there is no mixing of
+%       modes lower than it. 
+%       --This is particularily important becasue it doesn't insures that there
+%       is no leakage of the modes within the horizon to modes outside of it.         
 %
 %   -Maybe : Problem of low noise measurements in this method of analysis i.e.
 %    singular matrics.
 %
 %   -Boot strapping 
+%       --We bootstrap our errors over all the separation types. 
 %
 %   -PLOTS:
 %       --example covariance matrices (with foregrounds, without, fringe rate
@@ -789,6 +844,7 @@ turned on. We can see the gradual improvement of the power spectra (hopefully).
 %   -Implications for polarized foregrounds.
 %   -Radio recombination and other unsmooth foregrounds.
 %   -Summarize Jonnies Result.
+%   -the wedge
 
 \section{Discussion}
 %   -Future datasets. Things to look forward to.
