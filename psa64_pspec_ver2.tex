@@ -141,14 +141,21 @@ pipeline and includes some information on simuations and signal loss.
 \subsubsection{Redundant Calibration}
 %    -Principles of redundant calibration. Fact that there is no signal loss in
 %       this kind of measurement.
-%       --PAPER has a redundant configuration.
-%       --Introduce uniqe baseline types.
-%       --All baselines in a unique baseline type measure the same thing and
-%         therefore, differences between them are what need to be calibrated out.
+%       --PAPER has a redundant configuration. Therefore the number of baselines
+%         is larger than the number of unique baselines in the array. There are
+%         multiple baselines that measure the same sky.
+%       --Introduce uniqe baseline. We define a unique baseline to be the set of
+%         redundant baselines of a unique orientation.
+%       --All baselines of a unique baseline measure the same sky and
+%         therefore, differences between them are what need to be calibrated
+%         out. These are the gain variations imparted on the incoming signal by
+%         the antenna.
 %       --There is no signal loss in this method. Sky signal is the same for
-%       each of the redundant baselines is the same and hence any algorithm that
-%       preserves common mode signal (which is what redcal does) is necessarily
-%       lossless.
+%         each of the redundant baselines is the same and hence any algorithm that
+%         preserves common mode signal (which is what redcal does) is necessarily
+%         lossless. This is an important point!  
+%       --In addtion, because gains are normalized to have a unity magnitude the
+%         input arn output flux scale are the same. (This is an omnical thing)
 %         
 %    -What can we solve for and what can't we solve for. We can solve for the
 %     relative complex gains between antennas, but not the absolute gain and phase.
@@ -157,12 +164,8 @@ pipeline and includes some information on simuations and signal loss.
 %         relative calibration scheme that solves for the relative gains and
 %         phases of antennas within the array. 
 %       --Therefore, we cannot solve for the absolute phase and gain of the
-%         array. There is not enough information to solve for these.
-%       --
-%
-%
-%
-%
+%         array. There is not enough information.
+%       --Absoulte phase and gain calibration are addressed in later sections.
 %
 %    -Summary of the procedure of redundant calibration. This should be mixed in
 %     with the equations from Zheng et. al.
@@ -171,17 +174,23 @@ pipeline and includes some information on simuations and signal loss.
 %       --logcal takes log of equation 3 in zheng et. al., and thus becomes a
 %         linear system. Can then solve for the log of the antenna gains, as
 %         well as the true visibility of the sky as measured from a unique
-%         baseline.
+%         baseline. 
 %       --lincal is the linearization via taylor expansion of the same equation
 %         3. This provides us with a better solution. The reason for doing
 %         lincal is that logcal is a biased estimator. 
+%       --Because there are more baselines than the number of unique baselines, 
+%         we have an overdetermined system of equations and therefore can
+%         uniquely solve for all of the gains and "true" visibilities.
 %    -How was this calibration applied to the data. 
 %       --Using omnical package. Give credit jeff and url to omnical. Cite
 %         paper.
 %       --Implements both logcal and lincal. Discuss the speed ups. 
+%       --gains were applied to the uv datasets and written out in the same
+%         format. However, Omnical is quite general and solutions can be written
+%         out in text files and adapted to other file formats.
 %    
 %    -Removing additive offset and what is the time cadence of all of this.
-%
+%       
 %    -Diagnostic figures : Chi-squared, complex plane, stability vs. time and
 %                          frequency.
 
@@ -226,7 +235,8 @@ that)XXX.
 %         phase parameters. There are two final phase parameters we must solve
 %         for in order to correctly phase to a source on the sky. 
 %       --We use self calibration to solve for the global phase parameters using
-%       Pictor A, Fornax A, and Crab Nebula. 
+%         Pictor A, Fornax A, and Crab Nebula. 
+%       --
 %
 %    -Diagnostic Plots: Show Field image from Bernardi. This will give
 %     confidence in a good absolute phase calibration.
@@ -462,7 +472,7 @@ sources.XXX make sure of this statementXXX
 %   -Quantify signal loss. 
 %   -PLOTS:
 %        --waterfalls of before and after cleaning.
-%       --signal loss vs. k_parallel
+%        --signal loss vs. k_parallel
 
 \subsection{RFI and Crosstalk mitigation}
 \begin{itemize}
