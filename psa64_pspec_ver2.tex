@@ -741,22 +741,32 @@ bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
 %       the estimate, are given by the inverse of the Fisher matrix. However,
 %       there is a trade off such that this incorporates information from all of
 %       the k-modes. 
-%       --Some other choices of the window functions are the sqare root of the
+%       --Some other choices of the window functions are the square root of the
 %       fisher matrix or the identity. 
 %       --We use the cholesky decomposition of the Fisher Matrix such that we
-%       can wrtie F = LL^{\dagger}, where L is a lower triangular matrix. This
+%       can write F = LL^{\dagger}, where L is a lower triangular matrix. This
 %       is possible for any hermitian positive-definite matrix.
 %       --We use L for our window functions because for every k-bin, it does not
 %       use information from the k-bins below it. And thus there is no mixing of
 %       modes lower than it. 
-%       --This is particularily important becasue it doesn't insures that there
+%       --This is particularly important because it doesn't insures that there
 %       is no leakage of the modes within the horizon to modes outside of it.         
 %
 %   -Maybe : Problem of low noise measurements in this method of analysis i.e.
-%    singular matrics.
+%    singular matrics - For Adrian.
 %
 %   -Boot strapping 
-%       --We bootstrap our errors over all the separation types. 
+%       --In order to calculate the residual noise in our power spectrum
+%         estimate, we bootstrap the baseline samples at the output of the
+%         quadratic estimator. 
+%       --Doing this gives us the variance of the power spectrum estimate and
+%         thus derives the 2 sigma error bars shown in the power spectrum. 
+%       --We are careful to not incur a noise bias by making sure that the
+%         groups used do not contain the same baselines. However, the pull from
+%         each group is random with replacement. Each group can have a repeat of
+%         a baseline. 
+%       --We use 100 bootstraps to derive our error bars, setting a $2\sigma$
+%         bound on the errors.
 %
 %   -PLOTS:
 %       --example covariance matrices (with foregrounds, without, fringe rate
@@ -837,13 +847,23 @@ turned on. We can see the gradual improvement of the power spectra (hopefully).
 %   -Tsys, and Tsys vs. time ?
 %
 %   -Final Pspecs and from various stages 
-%       --before/after omnical
-%       --before/after frf
-%       --before after foregrounds.
+%       --before/after omnical: Data in
+%           /data2/home/zakiali/psa_live/forlstbinning for the before data set.
+%           Currently being binned.
+%           Note that this data set has ~271 fewer files ~ 48 hours. Hence, it
+%           is not the same as the omnical data set.
+%           After data set is the one we have always been using : 
+%           /data2/home/zakiali/psa_live/forlstbinning_omnical_2 :
+%           lstbin_even and lstbin_odd.
+%       --before/after frf. Ditto in the above directories.
+%       --before after foregrounds. There is foreground data in there as well.
+%       SHould we make a foreground run with the non omnical set as well.
 %
 %   -Implications for polarized foregrounds.
+%       --Flip this around on David and James : We don't see anything at this
+%         level, which implies such and such for polarized emission.
 %   -Radio recombination and other unsmooth foregrounds.
-%   -Summarize Jonnies Result.
+%   -Summarize Jonnie's Result.
 %   -the wedge
 
 \section{Discussion}
