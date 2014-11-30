@@ -733,15 +733,20 @@ bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
 %       --We do this by taking the outer product of our data vector (consisting
 %         of a visibilies for every baseline of a given unique baseline type).
 %         The outer product is calculated per time sample, thus we average over
-%         a clean (what do i mean by this?) lst range.
+%         a "clean" (what do i mean by this?) lst range.
 %       --Hence, the quality of the estimate of the covariances between
 %         baselines depends on the average in time and if there is enough
 %         information to invert covariance matricies. 
 %       --After fringerate filtering, the number of independent modes on the
 %         decreases substantially because we are averaging over 1900 seconds
 %         ~=31.67 minutes. Therefore the number of independent modes decreases
-%         1900/(the beam in time).
-%       --
+%         1900/(the beam in time). 
+%       --In our range of lsts used, we only have roughly 20 independent
+%         samples. Therefore we end up with an ill determined covariance matrix
+%         to describe our data. 
+%       --In addition, inverting this full covariance matrix is also problematic
+%         because of the shear amount of redundancy in our measurements. Every
+%         baseline is the same. Leading to a singular covariance matrix. 
 %   -Mathematics compared to ideal optimal Quadratic Estimator.
 %       --In the quadratic estimator formalism, the value of the power spectrum,
 %         $p_{\alpha}$  in the $\alpha^{th}$ bin is given by
@@ -763,7 +768,14 @@ bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
 %         is because 1900 seconds ~ 30 minutes.
 %
 %   -Potential for signal loss.
-%
+%       --In a traditional OQE method, the process is lossless by construction.
+%         Because we are tweaking this method, and the fact that we have non
+%         gaussian systematics in our data, there is a potential for signal
+%         loss. 
+%   -Simulations
+%       --In order to show the degree that there could be signal was we run
+%         simulations to show that an EOR -like signal does pop come out in our
+%         data. 
 %   -Cholesky Decomposition and window functions.
 %       --The optimal window functions (that minimize the vertical error bars of
 %       the estimate, are given by the inverse of the Fisher matrix. However,
