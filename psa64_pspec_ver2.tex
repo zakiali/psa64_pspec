@@ -773,9 +773,19 @@ bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
 %         gaussian systematics in our data, there is a potential for signal
 %         loss. 
 %   -Simulations
-%       --In order to show the degree that there could be signal was we run
+%       --In order to show the degree that there could be signal loss, we run
 %         simulations to show that an EOR -like signal does pop come out in our
 %         data. 
+%       --We inject a common eor like signal, a complex random white noise
+%         signal, on to all of the baseline data used in this analysisi for a
+%         given time. This signal is fringe rate filtered to match the data and
+%         therefore, the number of independent modes matches the input data. 
+%       --We run this simulation for varying signal levels, showing that this
+%         signal can infact be recovered, with some signal loss.
+%       --These simulations show that there is signal loss in this method.
+%         However, if the signal was bright enough, we would be able to see it.
+%         Since we don't see signal in the actual data, we can say that we have
+%         not detected the EOR signal yet.
 %   -Cholesky Decomposition and window functions.
 %       --The optimal window functions (that minimize the vertical error bars of
 %       the estimate, are given by the inverse of the Fisher matrix. However,
@@ -904,7 +914,7 @@ turned on. We can see the gradual improvement of the power spectra (hopefully).
 %         level, which implies such and such for polarized emission.
 %   -Radio recombination and other unsmooth foregrounds.
 %   -Summarize Jonnie's Result.
-%   -the wedge
+%   -the wedge - maybe?
 
 \section{Discussion}
 %   -Future datasets. Things to look forward to.
