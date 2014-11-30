@@ -232,8 +232,11 @@ that)XXX.
 \subsubsection{Absolute Phase Calibration}
 %    -Selfcal to pictor, fornax, and crab (to get the north-south components).
 %       --Reiterate that redundant cal does not solve for the overall flux and
-%         phase parameters. There are two final phase parameters we must solve
-%         for in order to correctly phase to a source on the sky. 
+%         phase parameters. 
+%       --There are two final phase parameters we must solve
+%         for in order to correctly phase to a source on the sky. Redundancy
+%         only gets you so far, but still need to be able to unambiguously phase
+%         to sources.
 %       --We use self calibration to solve for the global phase parameters using
 %         Pictor A, Fornax A, and Crab Nebula. 
 %       --
@@ -264,6 +267,7 @@ sources.XXX make sure of this statementXXX
 %         bandpass, there is signal loss. This signal loss is of the 
 %    -Tabulate signal loss due to this model. Averaging over Nbls, times gives us
 %     an average over independent uv modes.
+%       --Working on this... a few questions about it.
 %
 %    -The actual signal loss on a given mode is L/N where L is the loss for a
 %     single instance of the beamform (one time, one baseline) and N is the
@@ -470,9 +474,23 @@ sources.XXX make sure of this statementXXX
 %       --We use the same wbd filter as in Parsons 2014a. That is we do a per
 %         baseline delay filtering with a buffer of 15 nanoseconds. 
 %   -Quantify signal loss. 
+%       --I think this is the same as before. Since delay filtering is done on a
+%       per baseline basis, the signal loss from the previous paper and this one
+%       is the same. We are using the same filter.
 %   -PLOTS:
 %        --waterfalls of before and after cleaning.
 %        --signal loss vs. k_parallel
+
+For a detailed description of delay filtering, we refer the reader to
+\cite{parsons_backer2009}. In this analysis we use the same wideband delay
+filter as described \cite{parsons_et_al2014a}, namely the horizon limit for a
+given baseline plus a 15 nanosecond buffer to account for leakage of foregrounds
+outside of the horizon. We note that since delay filtering is applied on a per
+baseline basis, the signal loss associated with this type of filter is the same
+as in \cite{parsons_et_al2014a}. We reiterate the results here: there is a 4.8\%
+signal loss for the first mode outside of the horizon, 1.3\% for the next mode
+out, and less than .0015\% for the higher modes.
+
 
 \subsection{RFI and Crosstalk mitigation}
 \begin{itemize}
