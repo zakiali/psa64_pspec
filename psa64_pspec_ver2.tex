@@ -602,7 +602,7 @@ LST bin.
 %         2. 
 %   -effective integration time and number of modes. 
 %       --Do calculations.
-%       --Fringe rate filtering is evvectively a weighted average in time and
+%       --Fringe rate filtering is effectively a weighted average in time and
 %       thus there is an effective integration time. We can calculate this
 %       integration time by noting that power (or variance) is a conserved
 %       quantity. Therefore, comparing the integral of a variance=1 noise signal
@@ -735,8 +735,11 @@ bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
 %         The outer product is calculated per time sample, thus we average over
 %         a "clean" (what do i mean by this?) lst range.
 %       --Hence, the quality of the estimate of the covariances between
-%         baselines depends on the average in time and if there is enough
-%         information to invert covariance matricies. 
+%         baselines depends on the average in time ( the ensemble average). 
+%       --The fact that we do not know what the full covariance matrix looks
+%         like leads to signal loss. We have an estimate of the covariance, not
+%         the true covariance matrix. There is no way to truly know what the
+%         covariance matrix is for our data set. 
 %       --After fringerate filtering, the number of independent modes on the
 %         decreases substantially because we are averaging over 1900 seconds
 %         ~=31.67 minutes. Therefore the number of independent modes decreases
@@ -744,9 +747,9 @@ bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
 %       --In our range of lsts used, we only have roughly 20 independent
 %         samples. Therefore we end up with an ill determined covariance matrix
 %         to describe our data. 
-%       --In addition, inverting this full covariance matrix is also problematic
-%         because of the shear amount of redundancy in our measurements. Every
-%         baseline is the same. Leading to a singular covariance matrix. 
+%       --In addition, because of the highly redundant nature of the array,
+%         the covariance matrix is highly singular and therefore not invertible.
+%
 %   -Mathematics compared to ideal optimal Quadratic Estimator.
 %       --In the quadratic estimator formalism, the value of the power spectrum,
 %         $p_{\alpha}$  in the $\alpha^{th}$ bin is given by
@@ -912,7 +915,8 @@ turned on. We can see the gradual improvement of the power spectra (hopefully).
 %   -Implications for polarized foregrounds.
 %       --Flip this around on David and James : We don't see anything at this
 %         level, which implies such and such for polarized emission.
-%   -Radio recombination and other unsmooth foregrounds.
+%   -Radio recombination and other unsmooth foregrounds. 
+%       --paper by peng, Oh. We could maybe confirm this??
 %   -Summarize Jonnie's Result.
 %   -the wedge - maybe?
 
