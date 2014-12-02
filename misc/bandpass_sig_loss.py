@@ -18,13 +18,15 @@ delays = n.fft.fftfreq(NCHAN, fq[1]-fq[0])
 dk_deta = C.pspec.dk_deta(C.pspec.f2z(.1515))
 BP = n.polyval(POLY, fq)
 offset = 1e5
+nmodes = 1017
 
 avg1 = 0
 avg2 = 0
 avg = 0
 for i in xrange(CNT):
     ns = []
-    for nbl in range(len(ubls)):
+    #for nbl in range(len(ubls)):
+    for nbl in range(nmodes):
         #create new random noise for a new type of baseline.
         ns.append(n.random.normal(size=NCHAN) * n.exp(2j*n.pi*n.random.uniform(size=NCHAN)))
 #    ns = n.random.normal(size=NCHAN) * n.exp(2j*n.pi*n.random.uniform(size=NCHAN))
