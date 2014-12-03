@@ -20,6 +20,7 @@
 \def\kp{\mathbf{k}^\prime}
 \def\kpp{\mathbf{k}^{\prime\prime}}
 \def\V{\mathbb{V}}
+\def\expval#1{\langle #1 \rangle}
 \def\At{\tilde{A}}
 \def\Vt{\tilde{V}}
 \def\Tt{\tilde{T}}
@@ -90,8 +91,8 @@ section \ref{sec:analysis}. Seciton \ref{sec:results} describes the results of
 
 \section{Observations}\ref{sec:observations}
 Here, we describe the features of the data set used in this analysis. 
-The observations discussed in this paper were taken when PAPER consisted of 64
-dual polarization antennas deployed in the Fall of 2012.  The antennas were
+The observations discussed in this condsider data taken while PAPER consisted of 64
+dual polarization antennas deployed in the Fall of 2012. The antennas were
 arranged in a maximally redundant configuration as seen in Figure
 \ref{fig:antenna_positions}). We rely on all
 of the baselines for the calibration procedure to , but only using a
@@ -129,13 +130,14 @@ We now describe the analysis pipeline leading up to the final power spectrum
 measurement of our data set. To begin, we run a compression algorithm to reduce
 the data volume of our raw data. This step, described in the appendix of
 \cite{parsons_et_al2014a}, reduces data volume by a factor of 40. We then
-calibrate the this data on the basis of redundancy before using self-calibration
-to solve for the absolute parameters. After suppressing foregrounds with a
-wide-band delay filter, we average the data in local sidereal time. Finally, we
-apply a frine rate filter to optimally combine the time domain data and use
-optimal quadratic estimators to make our estimae of the 21 cm power spectrum.
-Figure \ref{fig:analysis_pipeline} shows a block diagram of the analysis
-pipeline and includes some information on simuations and signal loss.
+calibrate on the basis of redundancy before using self-calibration
+to solve for the absolute phase and gain parameters. After suppressing
+foregrounds with a wide-band delay filter, we average the data in local
+sidereal time. Finally, we apply a frine rate filter to optimally combine the
+time domain data and use optimal quadratic estimators to make our estimae of
+the 21 cm power spectrum.  Figure \ref{fig:analysis_pipeline} shows a block
+diagram of the analysis pipeline and includes some information on simuations
+and signal loss.
 
 \subsection{Calibration}
 \subsubsection{Redundant Calibration}
@@ -156,6 +158,20 @@ pipeline and includes some information on simuations and signal loss.
 %         lossless. This is an important point!  
 %       --In addtion, because gains are normalized to have a unity magnitude the
 %         input arn output flux scale are the same. (This is an omnical thing)
+
+PAPER is arranged in a highly redundant configuration and thus lends itself to
+use the redunancy in baselines for a relative calibration. Every instance of a
+baseline of a given unique baseline type, for example the baseline 1-4 belongs
+to the one column spacing and no row spaceing unique baseline type, measures the
+same sky signal. On this basis, all of the differences between baselines of a
+given unique baseline type are attributed to differences in signal chain, which
+include variations in antennas, cables, and receivers, and should be calibrated
+out. Redundant calibration inherently preserves common mode signal between
+redundant baselines, and therefore this type of calibration is necessarily
+lossless. 
+
+
+
 %         
 %    -What can we solve for and what can't we solve for. We can solve for the
 %     relative complex gains between antennas, but not the absolute gain and phase.
@@ -166,6 +182,13 @@ pipeline and includes some information on simuations and signal loss.
 %       --Therefore, we cannot solve for the absolute phase and gain of the
 %         array. There is not enough information.
 %       --Absoulte phase and gain calibration are addressed in later sections.
+Redundant calibration is a relative calibration procedure, hence we can only
+solve for the relative complex gains between antennas. Redundant calibration
+does not set anabsolute phase or gain scales due to the fact that it only
+knows about other antennas, not absolute sky. Hence, there needs to be a second
+round of calibration which folds in information about the sky to solve for the
+absolution phases in order correctly phase to sourcese on the celestial sphere.
+
 %
 %    -Summary of the procedure of redundant calibration. This should be mixed in
 %     with the equations from Zheng et. al.
@@ -181,6 +204,26 @@ pipeline and includes some information on simuations and signal loss.
 %       --Because there are more baselines than the number of unique baselines, 
 %         we have an overdetermined system of equations and therefore can
 %         uniquely solve for all of the gains and "true" visibilities.
+Practiaclly, redundant calibration takes on two flavors, log calibration (logcal) and
+linear calibration (lincal) (\cite{liu_et_al2010,zheng_et_al2014}). Logcal, takes
+the logarithm of the visibility measured by an interferometer (equation 4 of
+\cite{zheng_et_al2014}) to give a linearized system which can then be fit to
+using linear least square. We end up fitting 
+\begin{equation}
+    \log{v_{ij}} = \log{g_{i}^{*}} + \log{g_{j}} + \log{y_{i-j}},
+\end{equation}
+where the $g_{i}$'s are the
+complex gains of each antenna and $y_{i-j}$ is the visibility of the given
+baseline if it measured the perfect sky. Redundancy gives us an overconstrained
+system of equations and we can thus solve for complex gains from each antenna.
+In addition we also get a model visibility of for a given given baseline.
+Averaging these models together for redundant baselines gives us a an estimate
+of our model visibility for a given baseline type.
+
+Lincal taylor expands the visibility around some initial estimates of the gains
+and model visibilities.  The benefit of lincal is that it is not a biased
+estimator as opposed to logcal which takes the logarithm of additive noise.
+
 %    -How was this calibration applied to the data. 
 %       --Using omnical package. Give credit jeff and url to omnical. Cite
 %         paper.
@@ -194,38 +237,13 @@ pipeline and includes some information on simuations and signal loss.
 %    -Diagnostic figures : Chi-squared, complex plane, stability vs. time and
 %                          frequency.
 
-PAPER is arranged in a highly redundant configuration and thus lends itself to
-use the redunancy in baselines for a relative calibration. Every instance of a
-baseline of a given unique baseline type, for example the baseline 1-4 belongs
-to the one column spacing and no row spaceing unique baseline type, measures the
-same sky signal. On this basis, all of the differences between baselines of a
-given unique baseline type, should be calibrated out. In addition, when using
-the redundancy to calibrate, we take ratios of the baselines with one another
-and therefore the signal cancels out. Because of this, there is no possibility
-if signal loss due to redundant calibration.
-
-Redundant calibration is a relative calibration procedure, hence we can only
-solve for the relative complex gains of the antennas. Redundant calibration does
-not set the absolute phase or gain scales due to the fact that it only knows
-about other antennas, not absolute sky.  
-
-Practiaclly, redundant calibration has two flavors, log calibration (logcal) and linear
-calibration (lincal) \cite{liu_et_al2010,zheng_et_al2014}. Logcal, takes the
-logarithm of a visibility (equation 4 of \cite{zheng_et_al2014}) to give a
-linearized system which can then be fit to using linear least square. In this
-linear case, we solve for $\log{g_{i}},\log{g_{i}}$ and $\log{y_{i-j}}$, where
-the $g_{i}$'s are the complex gains of an antenna and $y_{i-j}$ is the true
-visibility of the given baseline. Redundancy gives us an overconstrained system
-of equations and we can thus solve for every complex gain. Lincal taylor expands
-the visibility around some initial estimates of the gains and model visibility.
-The benefit of lincal is that it is not a biased estimator as opposed to logcal
-which takes the logarithm of additive noise.
-
 Implementaion of redundant calibration was done with the ${Omnical}$ package, an
 open source redundant calibration package written by Jeff
 Zheng \footnote{https://github.com/jeffzhen/omnical}\cite{zheng_et_al2014}. This
 package implements both logcal and lincal with an incredible speed up from
 the previous homegrown routine used in \cite{parsons_et_al2014a}. 
+
+
 XXXadd in duscussion about removing additive offsets and time cadence of
 that)XXX.
 
@@ -249,9 +267,9 @@ overall phase and gain calibration needs to be solved for. We use the standard s
 calibration (selfcal) method for radio interferometers in order to solve for
 these over all parameters. The absolute phase calibration was solved for using using 
 Pictor A, Fornax A, and Crab Nebula. Figure \ref{fig:field_image} shows an
-image of the field with Pictor A (ra, dec)  and Fornax A (ra, dec). The
-measured source positions are the same as the the catalogue positions for these
-sources.XXX make sure of this statementXXX
+image of the field with Pictor A (5:19:49.70, -45:46:45.0)  and Fornax A
+(3:22:41.70,-37:12:30.0). The measured source positions are the same as the the
+catalogue positions for these sources.XXX make sure of this statementXXX
 
 \subsubsection{Absolute Gain Calibration}
 %    -Calibrated to Pictor A. 
@@ -749,6 +767,22 @@ bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
 %         to describe our data. 
 %       --In addition, because of the highly redundant nature of the array,
 %         the covariance matrix is highly singular and therefore not invertible.
+There are inherent covariances in the data between baselines and frequencies.
+Figure \ref{fig:covariances} shows these covariances estimated empirically from
+the data itself. This estimate is the outer product of our data vector with
+itself and in our case, this averagse per baseline visibilities of a unique type
+over time. Hence, the quality of the estimate of the data covariance matrix
+depends on the number of independent modes we are averaging over. After
+fringe-rate filtering, the number of independent modes  decreases significantly
+leaving us with only ~20 independent measurements of the sky. This reduction in
+modes leads to a noisy estimate of the covaraince matrix. This leads to a
+broader problem in this type of analysis: the fact that we estimate our
+covariances from the data and do not know the true covariance matrix itself,
+leads to signal loss. Knowing the true covaraiance a data set requires complete
+knowledge of the instrument and the sky. 
+
+
+
 %
 %   -Mathematics compared to ideal optimal Quadratic Estimator.
 %       --In the quadratic estimator formalism, the value of the power spectrum,
@@ -765,16 +799,65 @@ bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
 %         inverse we take only the auto-baseline covarainces, masking out the
 %         covariances between baselines. This, is invertible. WE can thus apply
 %         the inverse of C in the above equation.
-%       --
-%   -Counting of independent modes. 
+%
+%   -Counting of independent modes.
 %       --Number of independent modes = 2*#of lst hours used in analysis. This
 %         is because 1900 seconds ~ 30 minutes.
+Here we briefly review the optimal quadratic esitimator (OQE) formalism with on
+emphasis on an application to our data. The goal here is to make an estimate of
+the 21 cm power spectrum, $P(\k)$, defined such that 
+
+\begin{equation}
+\label{eqn:pspec_def}
+    \expval{\tilde{T}_{b}(\k)\tilde{T}^{*}_{b}(\k^{\prime})} =
+            (2\pi)^{3}\delta^{D}(\k - \k^{\prime})P(\k). 
+\end{equation}
+Then for a data vector $\x$, the optimal quadratic estimator is given by 
+\begin{equation}
+\label{eqn:quad_est}
+    \hat{q}_{\alpha} = \frac{1}{2}\x^{t}\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\x - b_{\alpha},
+\end{equation}
+up to some normalization matrix $\mathbf{M}$, such that the estimate of the
+power spectrum is given by 
+\begin{equation}
+    \hat{p}_{\alpha} = \mathbf{M}\hat{q}_{\alpha}, 
+\end{equation}
+where , in our analysis, $\x$ is the set of visibilities for all redundant
+baselines of a certain type, $\mathbf{C} = \expval{\x^{t}\x}$, $\mathbf{Q}$ is
+the derivative of $\mathbf{C}$ with respect to $\alpha$, and $b_{\alpha}$ is a
+bias to the estimate. The normaliztion matrix is defined such that
+\begin{equation}
+    \mathbf{W} = \mathbf{M}\mathbf{F}, 
+\end{equation}
+where $\mathbf{F}$ is the Fisher information matrix and $\mathbf{W}$ is defined
+as the window function matrix.
+
+In order to 
+
+A few issues arise in our application of this optimal method. These issues have
+various effects on our analysis choices. First, the input data is highly
+redundant and hence the covariance matrix is singular and thus not invertible.
+However, we consider a covariance matrix made up of the covariances of each
+baseline with itself and mask of the covariance between baselines (see figure
+\ref{fig:covariance_matrix}). This decreases the degrees of freedom available
+and hence $\mathbf{C}$ becomes non-singular. Therefore, the weighting we apply
+to our data does not take into account the covaraiance between baselines, only
+the covariances between frequencies for a baseline. 
+
+
 %
 %   -Potential for signal loss.
 %       --In a traditional OQE method, the process is lossless by construction.
 %         Because we are tweaking this method, and the fact that we have non
 %         gaussian systematics in our data, there is a potential for signal
 %         loss. 
+Secondly, our estimate of the covariance matrix by the limited
+number of independent modes we observe in our data. Hence, there is a high
+possibility of signal loss. In order to quntify the signal loss in our analysis,
+we run simulations of an injected eor signal through our pipeline. This will be
+discussed further below.
+
+
 %   -Simulations
 %       --In order to show the degree that there could be signal loss, we run
 %         simulations to show that an EOR -like signal does pop come out in our
@@ -789,6 +872,14 @@ bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
 %         However, if the signal was bright enough, we would be able to see it.
 %         Since we don't see signal in the actual data, we can say that we have
 %         not detected the EOR signal yet.
+
+In order to show the degree of signal loss due to our empirical estimates of the
+covariances, we run monte carlo simulations. These simulations consists of
+injecting a model eor signal on top of the the data and run through our power
+spectrum estimator. We then compare the output power spectrum to the true power
+spectrum of the input model to determine the signal loss. The eor model used is
+a simulation of a random eor signal in fi        
+
 %   -Cholesky Decomposition and window functions.
 %       --The optimal window functions (that minimize the vertical error bars of
 %       the estimate, are given by the inverse of the Fisher matrix. However,
@@ -837,11 +928,11 @@ bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
 %       --Maybe the wedge.
 %
 
-\begin{figure}[h!]\centering
+\begin{figure*}[h!]\centering
 \includegraphics[width=2\columnwidth, height=.8\columnwidth]{plots/x_example.png}
 \caption{Input fringe rate filtered frequncy domain data for a single baseline.}
 \label{fig:x_example}
-\end{figure}
+\end{figure*}
 
 \begin{figure}[h!]\centering
 \includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/C_example.png}
@@ -918,6 +1009,8 @@ turned on. We can see the gradual improvement of the power spectra (hopefully).
 %   -Radio recombination and other unsmooth foregrounds. 
 %       --paper by peng, Oh. We could maybe confirm this??
 %   -Summarize Jonnie's Result.
+%   -Repeat the science measurement in Parsons 2014. This will compliment the
+%    Jonnies result.
 %   -the wedge - maybe?
 
 \section{Discussion}
