@@ -803,8 +803,8 @@ knowledge of the instrument and the sky.
 %   -Counting of independent modes.
 %       --Number of independent modes = 2*#of lst hours used in analysis. This
 %         is because 1900 seconds ~ 30 minutes.
-Here we briefly review the optimal quadratic esitimator (OQE) formalism with on
-emphasis on an application to our data. The goal here is to make an estimate of
+Here we briefly review the optimal quadratic esitimator (OQE) formalism with an
+emphasis on application to our data. The end goal is to make an estimate of
 the 21 cm power spectrum, $P(\k)$, defined such that 
 
 \begin{equation}
@@ -812,27 +812,31 @@ the 21 cm power spectrum, $P(\k)$, defined such that
     \expval{\tilde{T}_{b}(\k)\tilde{T}^{*}_{b}(\k^{\prime})} =
             (2\pi)^{3}\delta^{D}(\k - \k^{\prime})P(\k). 
 \end{equation}
-Then for a data vector $\x$, the optimal quadratic estimator is given by 
+For a data vector $\x$, the optimal quadratic estimator is given by 
 \begin{equation}
 \label{eqn:quad_est}
     \hat{q}_{\alpha} = \frac{1}{2}\x^{t}\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\x - b_{\alpha},
 \end{equation}
-up to some normalization matrix $\mathbf{M}$, such that the estimate of the
-power spectrum is given by 
+up to some normalization matrix $\mathbf{M}$. With the normalization mtrix, the
+estimate of the power spectrum in bin $\alpha$ is given by
 \begin{equation}
     \hat{p}_{\alpha} = \mathbf{M}\hat{q}_{\alpha}, 
 \end{equation}
-where , in our analysis, $\x$ is the set of visibilities for all redundant
-baselines of a certain type, $\mathbf{C} = \expval{\x^{t}\x}$, $\mathbf{Q}$ is
-the derivative of $\mathbf{C}$ with respect to $\alpha$, and $b_{\alpha}$ is a
-bias to the estimate. The normaliztion matrix is defined such that
+where $\hat{p}_{\alpha}$ is the estimate of the power spectrum.
+In our analysis, $\x$ is the set of visibilities for all redundant
+baselines of a single column east-west spacing. The covariance matrix is defined
+as the outer product of the data vector with itself, $\mathbf{C} =
+\expval{\x^{t}\x}$.  $\mathbf{Q}$ is the derivative of $\mathbf{C}$
+with respect to $\alpha$, and $b_{\alpha}$ is a bias to the estimate. The
+normaliztion matrix is defined such that
 \begin{equation}
     \mathbf{W} = \mathbf{M}\mathbf{F}, 
 \end{equation}
 where $\mathbf{F}$ is the Fisher information matrix and $\mathbf{W}$ is defined
 as the window function matrix.
 
-In order to 
+In our analysis we are constructing an unbiased estimator and therefore do not
+need to subtract the bias term in equation \ref{eqn:quad_est}. 
 
 A few issues arise in our application of this optimal method. These issues have
 various effects on our analysis choices. First, the input data is highly
@@ -873,12 +877,40 @@ discussed further below.
 %         Since we don't see signal in the actual data, we can say that we have
 %         not detected the EOR signal yet.
 
-In order to show the degree of signal loss due to our empirical estimates of the
-covariances, we run monte carlo simulations. These simulations consists of
-injecting a model eor signal on top of the the data and run through our power
-spectrum estimator. We then compare the output power spectrum to the true power
-spectrum of the input model to determine the signal loss. The eor model used is
-a simulation of a random eor signal in fi        
+In order to understand the degree of signal loss due to our empirical estimates of
+the covariances, we simulate the injection of an eor model and measure the
+signal loss associated with running the full covariance analysis. These
+simulations consist of injecting a model eor signal on top of the the data and
+running through our power spectrum estimator. In order to quantify this, we
+subtract the final power spectrum from one that had no model injection to
+measure the final injected signal power spectrum. Comparing this to the input
+data gives us an estimate of the signal loss associated with our pipeline.
+
+The eor model used in the simulations described consists of a sky modeled to
+have a flat power spectrum in $P(k)$. We necessitate that the sky has this flat
+power spectrum and work backward to derive visibilities that describe that sky. 
+Some more detail here would be nice, giving credit to Carina. ... This signal is
+then fringe rate filtered to match the data. Hence, the number of independent
+modes in these simulations is the same as the data, which is ~20 independent modes.
+
+Table \ref{table:pspec_sig_loss} tabulates the signal loss associated with our
+powerspectrum pipeline as a function of the input signal level. We tabulate this
+as a function of $k$. 
+
+\begin{table}[!h]
+\caption{Table of signal loss associated with the power spectrum pipeline as a
+function of the input signal level.}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline 
+a&a&a&a&a&a&a\\
+\hline
+\end{tabular}
+\end{center}
+\label{table:pspec_sig_loss}
+\end{table}%
+
+
 
 %   -Cholesky Decomposition and window functions.
 %       --The optimal window functions (that minimize the vertical error bars of
@@ -1012,6 +1044,13 @@ turned on. We can see the gradual improvement of the power spectra (hopefully).
 %   -Repeat the science measurement in Parsons 2014. This will compliment the
 %    Jonnies result.
 %   -the wedge - maybe?
+\begin{figure}[h!]\centering
+\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/lam_example.png}
+\caption{The eigen spectrum of the covaraince matrix for a singel baseline.}
+\label{fig:lam_example}
+\end{figure}
+
+
 
 \section{Discussion}
 %   -Future datasets. Things to look forward to.
