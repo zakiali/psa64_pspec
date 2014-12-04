@@ -876,7 +876,7 @@ spectrum in the $\alpha$'th bin of only coupling modes larger than the
 $\alpha$'th mode are coupled in to the estimate.  Therefore, this has the
 consequence of not coupling the modes inside to horizon in to measurments of the
 power spectrum outside the horizon. Figure \ref{fig:window_functions} shows
-these window functions.
+these window functions.%XXX be more clear, and get the math right.
 
 A few issues arise in our application of this optimal method. These issues have
 various effects on our analysis choices. First, the input data is highly
@@ -933,7 +933,7 @@ Some more detail here would be nice, giving credit to Carina. ... This signal is
 then fringe rate filtered to match the data. Hence, the number of independent
 modes in these simulations is the same as the data, which is ~20 independent modes.
 
-Table \ref{table:pspec_sig_loss} tabulates the signal loss associated with our
+Figure \ref{table:pspec_sig_loss} tabulates the signal loss associated with our
 powerspectrum pipeline as a function of the input signal level. We tabulate this
 as a function of $k$. 
 
@@ -968,6 +968,11 @@ a&a&a&a&a&a&a\\
 %         a baseline. 
 %       --We use 100 bootstraps to derive our error bars, setting a $2\sigma$
 %         bound on the errors.
+
+%XXX QUESTION FOR BOOTSTRAPPING, Use the input data to the quad est vs output
+%data? Is this why the error bars were so wacked out before?
+We measure the error in our final power spectrum estimate by bootstrapping over
+baseline samples from the output of the quadratic estimator.
 %
 %   -PLOTS:
 %       --example covariance matrices (with foregrounds, without, fringe rate
@@ -993,7 +998,7 @@ a&a&a&a&a&a&a\\
 
 \begin{figure}[h!]\centering
 \includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/C_example.png}
-\caption{The covariance matix for a single baseline of the frequncy data in
+\caption{The covariance matix for a single baseline of the frequency data in
 figure \ref{fig:x_example}.} 
 \label{fig:C_example}
 \end{figure}
@@ -1046,6 +1051,8 @@ turned on. We can see the gradual improvement of the power spectra (hopefully).
 
 \section{Results}
 %   -Tsys, and Tsys vs. time ?
+\subsection{Noise Levels}
+
 %
 %   -Final Pspecs and from various stages 
 %       --before/after omnical: Data in
@@ -1059,6 +1066,12 @@ turned on. We can see the gradual improvement of the power spectra (hopefully).
 %       --before/after frf. Ditto in the above directories.
 %       --before after foregrounds. There is foreground data in there as well.
 %       SHould we make a foreground run with the non omnical set as well.
+\subsection{Power Spectrum}
+Figure \ref{fig:final_pspec} shows the speherically averaged power spectrum we
+measure. 
+Figure \ref{fig:final_posterior} shows the posterior distribution of the power
+spectrum by fitting a flat (in $\Delta^{2}$) curve to the powerspectrum
+assuming gaussian error bars.
 %
 %   -Implications for polarized foregrounds.
 %       --Flip this around on David and James : We don't see anything at this
@@ -1069,12 +1082,17 @@ turned on. We can see the gradual improvement of the power spectra (hopefully).
 %   -Repeat the science measurement in Parsons 2014. This will compliment the
 %    Jonnies result.
 %   -the wedge - maybe?
-\begin{figure}[h!]\centering
-\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/lam_example.png}
-\caption{The eigen spectrum of the covaraince matrix for a singel baseline.}
-\label{fig:lam_example}
-\end{figure}
+\begin{figure*}[h!]\centering
+\includegraphics[width=1.5\columnwidth, height=1\columnwidth]{plots/pk_k3pk.png}
+\caption{The final power spectrum result.}
+\label{fig:final_pspec}
+\end{figure*}
 
+\begin{figure}[h!]\centering
+\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/flat_k3pk_posterior.png}
+\caption{The posteriror distributiom assuming a flat, gaussian spectrum in $\Delta^{2}$.}
+\label{fig:final_posterioir}
+\end{figure}
 
 
 \section{Discussion}
