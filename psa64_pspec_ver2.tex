@@ -723,14 +723,14 @@ applied in fringe rate space and retains foregrounds.}
 \label{fig:fr_preserved_signal}
 \end{figure*}
 
-\begin{figure}[h!]\centering
-\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/noise_t_35.png}
-\caption{Estimates of noise temperature. Magenta is frequncy differenced
-estimate where the cyan is the time differenced estimate. All curves are
-averaged over all 30m east-west baselines (56) and averaged incoherently in 43s
-bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
-\label{fig:noise_t}
-\end{figure}
+%\begin{figure}[h!]\centering
+%\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/noise_t_35.png}
+%\caption{Estimates of noise temperature. Magenta is frequncy differenced
+%estimate where the cyan is the time differenced estimate. All curves are
+%averaged over all 30m east-west baselines (56) and averaged incoherently in 43s
+%bins of LST from LST 3 to 5 hours with a channel bandwidth of 490 kHz.}
+%\label{fig:noise_t}
+%\end{figure}
 
 
 %\begin{figure}[h!]\centering
@@ -803,8 +803,8 @@ knowledge of the instrument and the sky.
 %   -Counting of independent modes.
 %       --Number of independent modes = 2*#of lst hours used in analysis. This
 %         is because 1900 seconds ~ 30 minutes.
-Here we briefly review the optimal quadratic esitimator (OQE) formalism with on
-emphasis on an application to our data. The goal here is to make an estimate of
+Here we briefly review the optimal quadratic esitimator (OQE) formalism with an
+emphasis on application to our data. The end goal is to make an estimate of
 the 21 cm power spectrum, $P(\k)$, defined such that 
 
 \begin{equation}
@@ -812,27 +812,71 @@ the 21 cm power spectrum, $P(\k)$, defined such that
     \expval{\tilde{T}_{b}(\k)\tilde{T}^{*}_{b}(\k^{\prime})} =
             (2\pi)^{3}\delta^{D}(\k - \k^{\prime})P(\k). 
 \end{equation}
-Then for a data vector $\x$, the optimal quadratic estimator is given by 
+For a data vector $\x$, the optimal quadratic estimator is given by 
 \begin{equation}
 \label{eqn:quad_est}
     \hat{q}_{\alpha} = \frac{1}{2}\x^{t}\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\x - b_{\alpha},
 \end{equation}
-up to some normalization matrix $\mathbf{M}$, such that the estimate of the
-power spectrum is given by 
+up to some normalization matrix $\mathbf{M}$. With the normalization mtrix, the
+estimate of the power spectrum in bin $\alpha$ is given by
 \begin{equation}
     \hat{p}_{\alpha} = \mathbf{M}\hat{q}_{\alpha}, 
 \end{equation}
-where , in our analysis, $\x$ is the set of visibilities for all redundant
-baselines of a certain type, $\mathbf{C} = \expval{\x^{t}\x}$, $\mathbf{Q}$ is
-the derivative of $\mathbf{C}$ with respect to $\alpha$, and $b_{\alpha}$ is a
-bias to the estimate. The normaliztion matrix is defined such that
+where $\hat{p}_{\alpha}$ is the estimate of the power spectrum.
+In our analysis, $\x$ is the set of visibilities for the redundant baselines of
+a single column east-west spacing for a frequency spanning 10 MHz centered at
+151.5 MHz. To first order we estimate our covariance matrix by taking the outer
+product of our data vector with itself, $\mathbf{C} = \expval{\x^{t}\x}$,
+collapsing over the time axis. We discuss the consequences of the covariance
+matrix later in this section.  $\mathbf{Q}$ is defined as the derivative of
+$\mathbf{C}$ with respect to $\alpha$. The $\mathbf{Q}$ matrix encodes the delay
+transform to go from frequency domain to delay domain, where $P(k)$ can be
+estimated. Finally, $b_{\alpha}$ is a bias to the estimate that needs to be
+subtracted off. In our analysis, we are constructing an unbiased estimator and
+therefore do not need to subtract this term. The normaliztion matrix is defined
+such that
 \begin{equation}
     \mathbf{W} = \mathbf{M}\mathbf{F}, 
 \end{equation}
-where $\mathbf{F}$ is the Fisher information matrix and $\mathbf{W}$ is defined
-as the window function matrix.
+where $\mathbf{F}$ is the Fisher information matrix, given by $F = cov(\hat{q})
+= 2tr(C^{-1}Q_{\alpha}C^{-1}Q_{\beta})$ and $\mathbf{W}$ is 
+the window function matrix. The window functions measure the degree to which
+power from $k$ bins couple into the measurement of the power measured in the
+$\alpha$'th bin.
 
-In order to 
+%   -Cholesky Decomposition and window functions.
+%       --The optimal window functions (that minimize the vertical error bars of
+%       the estimate, are given by the inverse of the Fisher matrix. However,
+%       there is a trade off such that this incorporates information from all of
+%       the k-modes. 
+%       --Some other choices of the window functions are the square root of the
+%       fisher matrix or the identity. 
+%       --We use the cholesky decomposition of the Fisher Matrix such that we
+%       can write F = LL^{\dagger}, where L is a lower triangular matrix. This
+%       is possible for any hermitian positive-definite matrix.
+%       --We use L for our window functions because for every k-bin, it does not
+%       use information from the k-bins below it. And thus there is no mixing of
+%       modes lower than it. 
+%       --This is particularly important because it doesn't insures that there
+%       is no leakage of the modes within the horizon to modes outside of it.         
+%
+
+The choice for the normalization matrix is up to the analyst. Picking
+$\mathbf{M} = \mathbf{F}^{-1}$  minimizes the error bars in the final power
+spectrum estimate with the trade off that the estimate of the power spectrum in
+the $\alpha$'th bin is coupled with every other measurement in other bins. Even
+though this choice gives us the smallest error bars possible, we opt for a
+different choice of window function. We first take the Cholesky-decompositon of
+the Fisher matrix such that $\mathbf{F} = \mathbf{L}\mathbf{L}^{\dagger}$, where
+$\mathbf{L}$ is a lower triangular matrix. Then, we take ${\mathbf{M}} =
+\mathbf{L}^{-1}$ to be our normalization matrix. Therefore, ${\mathbf{M}}$ is
+still a lower triangular and the window function matrix is also block diagonal.
+This choice of $\mathbf{M}$ has the effect on the final estimate of the power
+spectrum in the $\alpha$'th bin of only coupling modes larger than the
+$\alpha$'th mode are coupled in to the estimate.  Therefore, this has the
+consequence of not coupling the modes inside to horizon in to measurments of the
+power spectrum outside the horizon. Figure \ref{fig:window_functions} shows
+these window functions.%XXX be more clear, and get the math right.
 
 A few issues arise in our application of this optimal method. These issues have
 various effects on our analysis choices. First, the input data is highly
@@ -873,29 +917,42 @@ discussed further below.
 %         Since we don't see signal in the actual data, we can say that we have
 %         not detected the EOR signal yet.
 
-In order to show the degree of signal loss due to our empirical estimates of the
-covariances, we run monte carlo simulations. These simulations consists of
-injecting a model eor signal on top of the the data and run through our power
-spectrum estimator. We then compare the output power spectrum to the true power
-spectrum of the input model to determine the signal loss. The eor model used is
-a simulation of a random eor signal in fi        
+In order to understand the degree of signal loss due to our empirical estimates of
+the covariances, we simulate the injection of an eor model and measure the
+signal loss associated with running the full covariance analysis. These
+simulations consist of injecting a model eor signal on top of the the data and
+running through our power spectrum estimator. In order to quantify this, we
+subtract the final power spectrum from one that had no model injection to
+measure the final injected signal power spectrum. Comparing this to the input
+data gives us an estimate of the signal loss associated with our pipeline.
 
-%   -Cholesky Decomposition and window functions.
-%       --The optimal window functions (that minimize the vertical error bars of
-%       the estimate, are given by the inverse of the Fisher matrix. However,
-%       there is a trade off such that this incorporates information from all of
-%       the k-modes. 
-%       --Some other choices of the window functions are the square root of the
-%       fisher matrix or the identity. 
-%       --We use the cholesky decomposition of the Fisher Matrix such that we
-%       can write F = LL^{\dagger}, where L is a lower triangular matrix. This
-%       is possible for any hermitian positive-definite matrix.
-%       --We use L for our window functions because for every k-bin, it does not
-%       use information from the k-bins below it. And thus there is no mixing of
-%       modes lower than it. 
-%       --This is particularly important because it doesn't insures that there
-%       is no leakage of the modes within the horizon to modes outside of it.         
-%
+The eor model used in the simulations described consists of a sky modeled to
+have a flat power spectrum in $P(k)$. We necessitate that the sky has this flat
+power spectrum and work backward to derive visibilities that describe that sky. 
+Some more detail here would be nice, giving credit to Carina. ... This signal is
+then fringe rate filtered to match the data. Hence, the number of independent
+modes in these simulations is the same as the data, which is ~20 independent modes.
+
+Figure \ref{table:pspec_sig_loss} tabulates the signal loss associated with our
+powerspectrum pipeline as a function of the input signal level. We tabulate this
+as a function of $k$. 
+
+\begin{table}[!h]
+\caption{Table of signal loss associated with the power spectrum pipeline as a
+function of the input signal level.}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline 
+a&a&a&a&a&a&a\\
+\hline
+\end{tabular}
+\end{center}
+\label{table:pspec_sig_loss}
+\end{table}%
+
+
+
+
 %   -Maybe : Problem of low noise measurements in this method of analysis i.e.
 %    singular matrics - For Adrian.
 %
@@ -911,6 +968,11 @@ a simulation of a random eor signal in fi
 %         a baseline. 
 %       --We use 100 bootstraps to derive our error bars, setting a $2\sigma$
 %         bound on the errors.
+
+%XXX QUESTION FOR BOOTSTRAPPING, Use the input data to the quad est vs output
+%data? Is this why the error bars were so wacked out before?
+We measure the error in our final power spectrum estimate by bootstrapping over
+baseline samples from the output of the quadratic estimator.
 %
 %   -PLOTS:
 %       --example covariance matrices (with foregrounds, without, fringe rate
@@ -936,7 +998,7 @@ a simulation of a random eor signal in fi
 
 \begin{figure}[h!]\centering
 \includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/C_example.png}
-\caption{The covariance matix for a single baseline of the frequncy data in
+\caption{The covariance matix for a single baseline of the frequency data in
 figure \ref{fig:x_example}.} 
 \label{fig:C_example}
 \end{figure}
@@ -989,6 +1051,8 @@ turned on. We can see the gradual improvement of the power spectra (hopefully).
 
 \section{Results}
 %   -Tsys, and Tsys vs. time ?
+\subsection{Noise Levels}
+
 %
 %   -Final Pspecs and from various stages 
 %       --before/after omnical: Data in
@@ -1002,6 +1066,12 @@ turned on. We can see the gradual improvement of the power spectra (hopefully).
 %       --before/after frf. Ditto in the above directories.
 %       --before after foregrounds. There is foreground data in there as well.
 %       SHould we make a foreground run with the non omnical set as well.
+\subsection{Power Spectrum}
+Figure \ref{fig:final_pspec} shows the speherically averaged power spectrum we
+measure. 
+Figure \ref{fig:final_posterior} shows the posterior distribution of the power
+spectrum by fitting a flat (in $\Delta^{2}$) curve to the powerspectrum
+assuming gaussian error bars.
 %
 %   -Implications for polarized foregrounds.
 %       --Flip this around on David and James : We don't see anything at this
@@ -1012,6 +1082,18 @@ turned on. We can see the gradual improvement of the power spectra (hopefully).
 %   -Repeat the science measurement in Parsons 2014. This will compliment the
 %    Jonnies result.
 %   -the wedge - maybe?
+\begin{figure*}[h!]\centering
+\includegraphics[width=1.5\columnwidth, height=1\columnwidth]{plots/pk_k3pk.png}
+\caption{The final power spectrum result.}
+\label{fig:final_pspec}
+\end{figure*}
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/flat_k3pk_posterior.png}
+\caption{The posteriror distributiom assuming a flat, gaussian spectrum in $\Delta^{2}$.}
+\label{fig:final_posterioir}
+\end{figure}
+
 
 \section{Discussion}
 %   -Future datasets. Things to look forward to.
