@@ -1050,6 +1050,7 @@ turned on. We can see the gradual improvement of the power spectra (hopefully).
 
 
 \section{Results}
+
 %   -Tsys, and Tsys vs. time ?
 \subsection{Noise Levels}
 
@@ -1093,6 +1094,52 @@ assuming gaussian error bars.
 \caption{The posteriror distributiom assuming a flat, gaussian spectrum in $\Delta^{2}$.}
 \label{fig:final_posterioir}
 \end{figure}
+
+\section{Comparison}
+%   -We now compare and contrast our result with those without some of the key
+%   components of our analysis pipeline.
+%
+%   -First we consider the effect from omnical. 
+%       -Applying a more precise calibration scheme increases the redundancy
+%       between baselines. Hence, this decrease the noise in the measurement. 
+%       -This is exactly what we see in the  final power spectrum measurement. 
+%       figure \pspecfigure shows the power spectrum of data that has not had
+%       omnical applied to it. THe error bars here are reduced by a factor of a
+%       few. 
+%
+%   -Next we consider the effect of using an optimal fringe rate filter. 
+%       -By applying an optimal fringe rate filter, we down weight fringe rate
+%       bins that are less sensitive, and hence have less signal, and upweight
+%       the more sensitive parts of the sky. 
+%       -Figure \ref{fig:frf_pspec} shows the power spectrum with a naive fringe
+%       rate filer, which is a flat filter and throws out the the fringe rates
+%       outside of those possible for a baseline of the eor baselines used in
+%       this analysis. 
+%       -This gives us a sensitivity benefit of a factor of 3(XXX), as seen
+%       in the figure. Note that this data does have omnical applied to it.
+%
+%
+%
+%
+%
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/pk_k3pk_nomni.png}
+\caption{Power spectrum with no omnical applied. Does have optimal fringe rate
+        filtering}
+\label{fig:pspec_nomni}
+\end{figure}
+
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/pk_k3pk_nofrf.png}
+\caption{Power spectrum without optimal fringe rate filtering. Has omnical
+applied to it}
+\label{fig:pspec_nofrf}
+\end{figure}
+
+
+
 
 
 \section{Discussion}
