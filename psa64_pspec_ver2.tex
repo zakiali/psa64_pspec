@@ -648,13 +648,26 @@ LST bin.
 %   t_int = 42.8/n.mean(fr100)
 %   
 
-Before forming power spectra we need to time average visibilities that measure
-the same $k$ mode on the sky. This is the best way to combine data because we
-get a $\sqrt{N}$, where N is the number of samples, gain in sensitivity. This is
-in oppostion to weighting after forming power spectra, where noise beats down as
-the $\sqrt{N}$. Rather than a straight averaging in time, we can do better by
-using a weighted averge. Specifically, we want to upweight samples that have
-higher signal-to-noise. 
+Prior to forming power spectra we need to time average visibilities that measure
+the same $k$ mode on the sky. The motivation for this is that we want to combine
+coherent $k$-modes on the sky before squaring to get the maximum sensitivity. We
+therefore get a $\frac{1}{N}$ sensitivity boost, rather than averaging in $P(k)$
+which would only give us a $\sqrt{N}$ sensitivity benefit. However, rather than
+a straight average, we can apply a carefully crafted fringe-rate filter that
+weights higher sensitivity portions of the sky higher than those lower in the
+sky.
+
+Broadly, for a given baseline and frequency, different parts of the sky
+correspond to a specific fringe-rate, but not a unique one. Maximum fringe rates
+are found along the equatorial plane, where the rotation rate of the earth is
+highest, and zero fringe rates are found at the poles, where the rotation rate
+of the earth is zero and hence sources do not move through your baelines fringe
+pattern. We can use this fact to pick out certain points on the sky, but because
+this mapping of fringe-rate to sky is not one to one, we can only pick out
+stripes of constant fringe rate.
+
+
+
 
 This is acheived by applying a carefully crafted filter in fringe rate domain,
 the fourier dual to time. Different patches on the sky correspond to different
@@ -926,6 +939,20 @@ subtract the final power spectrum from one that had no model injection to
 measure the final injected signal power spectrum. Comparing this to the input
 data gives us an estimate of the signal loss associated with our pipeline.
 
+%XXX Carina's Text of the eor model goes here.
+In order to effectively characterize signal loss in our analysis pipeline, we
+simulate visibilities that accurately capture the instrumental effects of PAPER
+for the frequency bins (used in this paper?). The signal injected into the
+simulation is comprised of two components - an artificial power spectrum P(k)
+and frequency extrapolated galactic foregrounds from the Global Sky Model (GSM)
+(de Oliveira-Costa et al. 2008). The injected power spectrum is flat in P(k) for
+a k-range of 0.1-10 $\text{hMpc}^{-1}$, and the angular power spectrum is computed from
+this (Datta et al. 2007, Lewis & Challinor 2007), ensuring correlation in
+frequency/redshift for the power spectrum maps. PAPER visibilities are simulated
+for both the GSM and power spectrum maps by explicitly integrating fringes on
+the sky every 42.8s for an East-West baseline of 30m.
+
+
 The eor model used in the simulations described consists of a sky modeled to
 have a flat power spectrum in $P(k)$. We necessitate that the sky has this flat
 power spectrum and work backward to derive visibilities that describe that sky. 
@@ -1024,19 +1051,19 @@ weighted by their corresponding eigeinvalue.}
 \end{figure}
 
 
-\section{Summary of Improvements from PSA32}
-XXX Should this section be here XXX
-In comparison to the previous PAPER pipeline (see \cite{parsons_et_al2014a}),
-this analysis took a slightly different approach which included some critical
-steps to improve our upper limit. In short, the improvements included using a
-new, refined redundant calibration method (Zheng 2014), increasing the width of
-the wideband delay filter that removes smooth spectrum foregrounds, weighting
-the lst binned data sets, and optimal fringe rate filtering. In section
-\ref{sec:analysis}, we dicuss each of the improvements in more detail.
-
-Figure \ref{fig:step_through_pspec} (TBD) shows the power spectra when each of
-the steps mentioned above are turned off and for the one where all of them are
-turned on. We can see the gradual improvement of the power spectra (hopefully).
+%\section{Summary of Improvements from PSA32}
+%XXX Should this section be here XXX
+%In comparison to the previous PAPER pipeline (see \cite{parsons_et_al2014a}),
+%this analysis took a slightly different approach which included some critical
+%steps to improve our upper limit. In short, the improvements included using a
+%new, refined redundant calibration method (Zheng 2014), increasing the width of
+%the wideband delay filter that removes smooth spectrum foregrounds, weighting
+%the lst binned data sets, and optimal fringe rate filtering. In section
+%\ref{sec:analysis}, we dicuss each of the improvements in more detail.
+%
+%Figure \ref{fig:step_through_pspec} (TBD) shows the power spectra when each of
+%the steps mentioned above are turned off and for the one where all of them are
+%turned on. We can see the gradual improvement of the power spectra (hopefully).
 
 
 
@@ -1095,7 +1122,7 @@ assuming gaussian error bars.
 \label{fig:final_posterioir}
 \end{figure}
 
-\section{Comparison}
+\section{Comparison and Improvements From PSA-32}
 %   -We now compare and contrast our result with those without some of the key
 %   components of our analysis pipeline.
 %
