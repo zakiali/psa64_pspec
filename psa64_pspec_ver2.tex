@@ -658,49 +658,33 @@ weights higher sensitivity portions of the sky higher than those lower in the
 sky.
 
 Broadly, for a given baseline and frequency, different parts of the sky
-correspond to a specific fringe-rate, but not a unique one. Maximum fringe rates
-are found along the equatorial plane, where the rotation rate of the earth is
-highest, and zero fringe rates are found at the poles, where the rotation rate
-of the earth is zero and hence sources do not move through your baelines fringe
-pattern. We can use this fact to pick out certain points on the sky, but because
-this mapping of fringe-rate to sky is not one to one, we can only pick out
-stripes of constant fringe rate.
+correspond to different fringe-rates, albeit not a one-to-one correspondense.
+Maximum fringe rates are found along the equatorial plane, where the rotation
+rate of the earth is highest, and zero fringe rates are found at the poles,
+where the rotation rate of the earth is zero and hence sources do not move
+through your baelines fringe pattern. We can use this fact to pick out certain
+points on the sky, but because this mapping of fringe-rate to sky is not one to
+one, we can only pick out stripes of constant fringe rate.
 
+To optimally combine the time data we can cater our fringe rate filter to
+upweight points of the sky that are more sensitive to our instrument and down
+weight thos points that are not so sensitive. That is, if we weight fringe rate
+bins by the beam, we can get a net increase in sensitivity. This is due to the
+fact that all fringe rate bins roughly have the same noise in them, but the
+amount of signal varies. Upweighting the bins with higher signal relative to
+those with less signal, gives us a net increase in signal-to-noise, even though
+we are getting rid of signal from some of the bins. 
 
-
-
-This is acheived by applying a carefully crafted filter in fringe rate domain,
-the fourier dual to time. Different patches on the sky correspond to different
-fringe rates, for a given baseline and frequency. Maximum fringe rates are found
-along the equatorial plane where zero fringe rates are found around the poles
-(sources at the poles do not move through the fringes of a baselines). Sources
-on the other side of the pole, corresponds to negative fringe rates, because
-they move through the fringe pattern in the opposite direction. By weighing the
-fringe rates sampled by a baseline by the beam response of the baseline, gives
-us the optimal fringe rate filer to use for time averaging. See Parsons/Liu 2014
-for a detailed discussion.
-
-We implement the optimal fringe rate filter by first calculating the fringe rate
-of everypoint on the sky and weighting it the beam of a given baseline, summing
-along constant fringe rate contours. Note that because the data already has one
-factor of the power beam in it, we only need to weight the fringe rates by the
-power beam and not square it. That is we are upweighting fringe rate bins that
-have greater signal-to-noise.  We then fit a gaussian to the optimal filter to
-have a smooth function, along with tanh function for to have a smooth cut off
-at the maximum fringe rate for the given baseline and frequency.  Note that
-this only calculated for a given frequency and scaled to other frequencies, due
-to the fact that fringe rate scales linearly with frequency via
-
-\begin{equation}
-    f_{max} = \frac{|\mathbf{b}_{eq}|}{c}\omega_{\oplus}\nu
-\end{equation}
-
-
-We then fourier transform the omptimal fringe rate filter and multipy by a
-blackman-harris window function. This convolution kernel is then applied to 
-visibilities for every baseline at every frequncy. We implement the fringe rate
-filter over the span of 17163 seconds even though the full with half max of the
-filter spans ~15 minutes for a 30 meter baseline. This 
+We implement the optimal fringe rate filter by calculating the fringe rates at
+every point on the sky and weighting it bye the beam of a given baseline. It is
+worth noting that fringe-rate filtering is baseline dependent and hence is
+implemented on a per baseline basis. We weight the fringe rate bins on the sky
+by the beam pattern at the same point on the sky. In order to obtain a smoothe
+filter in the fringe rate domain, we fit a gaussian with a tanh tail to
+this filter as shown in figure \ref{fig:fringe_rate_cut}. We then fourier
+transform this to obtain the time domain filter, multiply by a blackman-harris
+window function to damp the tails of the filter, and finally convolve with the
+visibilites to effect time domain integration.
 
 Since the PAPER beam is ~45 degrees, and the array is located at a declination
 of $-30^{\circ}$ the fringe rates associated with the low signal to noise (down
