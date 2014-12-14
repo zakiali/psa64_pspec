@@ -30,6 +30,7 @@
 \newcommand{\xhat}{\hat{\mathbf{x}}}
 \newcommand{\A}{\mathbf{A}}
 \newcommand{\N}{\mathbf{N}}
+\newcommand{\C}{\mathbf{C}}
 \newcommand{\rhat}{\hat{\mathbf{r}}}
 
 \begin{document}
@@ -487,7 +488,7 @@ catalogue positions for these sources.XXX make sure of this statementXXX
 
 
 
-\subsection{Wideband delay filtering}
+\subsection{Wideband Delay Filtering}
 %   -Can cite Parsons 2014a
 %       --We use the same wbd filter as in Parsons 2014a. That is we do a per
 %         baseline delay filtering with a buffer of 15 nanoseconds. 
@@ -510,7 +511,7 @@ signal loss for the first mode outside of the horizon, 1.3\% for the next mode
 out, and less than .0015\% for the higher modes.
 
 
-\subsection{RFI and Crosstalk mitigation}
+\subsection{RFI and Crosstalk Mitigation}
 \begin{itemize}
     \item{Discuss, briefly, RFI and Crosstalk removal. Note that this happens
 after foreground removal. Possibility of signal loss?}
@@ -601,7 +602,7 @@ LST bin.
 
 
 
-\subsection{optimal Fringe-rate filter}
+\subsection{Optimal Fringe-Rate Filter}
 %   -What is fringe rate filtering. Cite Parsons And Liu 2014.
 %       --Fringe Rate filtering is nothing more then a time domain weighted
 %         average per frequency of of visibilities. The filter can be applied 
@@ -667,8 +668,8 @@ points on the sky, but because this mapping of fringe-rate to sky is not one to
 one, we can only pick out stripes of constant fringe rate.
 
 To optimally combine the time data we can cater our fringe rate filter to
-upweight points of the sky that are more sensitive to our instrument and down
-weight thos points that are not so sensitive. That is, if we weight fringe rate
+upweight points of the sky that contain more signal to our instrument and down
+weight those points that do not. That is, if we weight fringe rate
 bins by the beam, we can get a net increase in sensitivity. This is due to the
 fact that all fringe rate bins roughly have the same noise in them, but the
 amount of signal varies. Upweighting the bins with higher signal relative to
@@ -676,7 +677,7 @@ those with less signal, gives us a net increase in signal-to-noise, even though
 we are getting rid of signal from some of the bins. 
 
 We implement the optimal fringe rate filter by calculating the fringe rates at
-every point on the sky and weighting it bye the beam of a given baseline. It is
+every point on the sky and weighting each bin by the beam of a given baseline. It is
 worth noting that fringe-rate filtering is baseline dependent and hence is
 implemented on a per baseline basis. We weight the fringe rate bins on the sky
 by the beam pattern at the same point on the sky. In order to obtain a smoothe
@@ -770,14 +771,19 @@ the data itself. This estimate is the outer product of our data vector with
 itself and in our case, this averagse per baseline visibilities of a unique type
 over time. Hence, the quality of the estimate of the data covariance matrix
 depends on the number of independent modes we are averaging over. After
-fringe-rate filtering, the number of independent modes  decreases significantly
-leaving us with only ~20 independent measurements of the sky. This reduction in
-modes leads to a noisy estimate of the covaraince matrix. This leads to a
-broader problem in this type of analysis: the fact that we estimate our
-covariances from the data and do not know the true covariance matrix itself,
-leads to signal loss. Knowing the true covaraiance a data set requires complete
-knowledge of the instrument and the sky. 
+fringe-rate filtering, the number of independent modes  decreases significantly,
+leaving us with only ~20 independent measurements over the lst range
+we are considering. This reduction in modes leads to a noisy estimate of the
+covaraince matrix. This leads to a broader problem in this type of analysis: the
+fact that we estimate our covariances from the data and do not know the true
+covariance matrix itself, leads to signal loss. Knowing the true covaraiance of
+a data set requires complete knowledge of the instrument and the sky. 
 
+This section is divided to break up the formalism and practical use of the
+optimal quadratic estimator method to measure the power spectrum. We first
+review the formalism, with an emphasis on our analysis, followed by a walk
+through of our application of the OQE method to our data, and finally discuss
+the effects of an empirical estimate of covariance matrices.
 
 
 %
@@ -800,6 +806,9 @@ knowledge of the instrument and the sky.
 %   -Counting of independent modes.
 %       --Number of independent modes = 2*#of lst hours used in analysis. This
 %         is because 1900 seconds ~ 30 minutes.
+\subsubsection{Review}
+We use the optimal quadratic estimator method to estimate our power spectrum
+\cite{dillon_et_al2013a, liu_tegmark2011}.
 Here we briefly review the optimal quadratic esitimator (OQE) formalism with an
 emphasis on application to our data. The end goal is to make an estimate of
 the 21 cm power spectrum, $P(\k)$, defined such that 
@@ -814,7 +823,7 @@ For a data vector $\x$, the optimal quadratic estimator is given by
 \label{eqn:quad_est}
     \hat{q}_{\alpha} = \frac{1}{2}\x^{t}\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\x - b_{\alpha},
 \end{equation}
-up to some normalization matrix $\mathbf{M}$. With the normalization mtrix, the
+up to some normalization matrix $\mathbf{M}$. With the normalization matrix, the
 estimate of the power spectrum in bin $\alpha$ is given by
 \begin{equation}
     \hat{p}_{\alpha} = \mathbf{M}\hat{q}_{\alpha}, 
@@ -826,12 +835,12 @@ a single column east-west spacing for a frequency spanning 10 MHz centered at
 product of our data vector with itself, $\mathbf{C} = \expval{\x^{t}\x}$,
 collapsing over the time axis. We discuss the consequences of the covariance
 matrix later in this section.  $\mathbf{Q}$ is defined as the derivative of
-$\mathbf{C}$ with respect to $\alpha$. The $\mathbf{Q}$ matrix encodes the delay
-transform to go from frequency domain to delay domain, where $P(k)$ can be
-estimated. Finally, $b_{\alpha}$ is a bias to the estimate that needs to be
-subtracted off. In our analysis, we are constructing an unbiased estimator and
-therefore do not need to subtract this term. The normaliztion matrix is defined
-such that
+$\mathbf{C}$ with respect to $\alpha$ ($\frac{\partial C}{\partial \alpha}$). The
+$\mathbf{Q}$ matrix encodes the delay transform to go from frequency domain to
+delay domain, where $P(k)$ can be estimated. Finally, $b_{\alpha}$ is the  bias to
+the estimate that needs to be subtracted off. In our analysis, we are
+constructing an unbiased estimator and therefore ignore this term. 
+The normaliztion matrix is defined such that
 \begin{equation}
     \mathbf{W} = \mathbf{M}\mathbf{F}, 
 \end{equation}
@@ -857,23 +866,84 @@ $\alpha$'th bin.
 %       --This is particularly important because it doesn't insures that there
 %       is no leakage of the modes within the horizon to modes outside of it.         
 %
+The normalization matrix is the analysts choice, and is the last chance to
+weight the measurements in the power spectrum estimates. Picking $\mathbf{M} =
+\mathbf{F}^{-1}$, and hence $\mathbf{W} = \mathbf{I}$, minimizes the error bars
+in the final power spectrum estimate with the trade off that the estimate of the
+power spectrum in the $\alpha$'th bin is coupled with every other band power.
+Even though this choice gives us the smallest error bars possible, we opt for a
+different choice of window function as follows. We first take the
+Cholesky-decompositon of the Fisher matrix such that $\mathbf{F} =
+\mathbf{L}\mathbf{L}^{\dagger}$, where $\mathbf{L}$ is a lower triangular
+matrix\footnote{This is possible for any positive definite matrix}. Then, we
+take ${\mathbf{M}} = (\mathbf{L}^{\dagger})^{-1}$ to be our normalization
+matrix. In this case, the window function matrix becomes,
+$\mathbf{W}=\mathbf{L}^{\dagger}$. This choice of $\mathbf{M}$ has the effect on
+the final estimate of the power spectrum in the $\alpha$'th bin of only coupling
+modes exterior to $\alpha$ in to the estimate.  This has the consequence of not
+coupling the modes inside to horizon in to measurments of the power spectrum
+outside the horizon. Figure \ref{fig:window_func} shows these window
+functions.
 
-The choice for the normalization matrix is up to the analyst. Picking
-$\mathbf{M} = \mathbf{F}^{-1}$  minimizes the error bars in the final power
-spectrum estimate with the trade off that the estimate of the power spectrum in
-the $\alpha$'th bin is coupled with every other measurement in other bins. Even
-though this choice gives us the smallest error bars possible, we opt for a
-different choice of window function. We first take the Cholesky-decompositon of
-the Fisher matrix such that $\mathbf{F} = \mathbf{L}\mathbf{L}^{\dagger}$, where
-$\mathbf{L}$ is a lower triangular matrix. Then, we take ${\mathbf{M}} =
-\mathbf{L}^{-1}$ to be our normalization matrix. Therefore, ${\mathbf{M}}$ is
-still a lower triangular and the window function matrix is also block diagonal.
-This choice of $\mathbf{M}$ has the effect on the final estimate of the power
-spectrum in the $\alpha$'th bin of only coupling modes larger than the
-$\alpha$'th mode are coupled in to the estimate.  Therefore, this has the
-consequence of not coupling the modes inside to horizon in to measurments of the
-power spectrum outside the horizon. Figure \ref{fig:window_functions} shows
-these window functions.%XXX be more clear, and get the math right.
+\begin{figure}[h!]\centering
+\includegraphics[width=\columnwidth, height=\columnwidth]{plots/window.png}
+\caption{Window function matrix. The i'th row corresponds to the window function
+used in the estimate of the power spectrum for the i'th $k$-mode.}
+\label{fig:window_func}
+\end{figure}
+
+
+\subsubsection{Application}
+We apply the quadratic estimator formalism on a per baseline basis, which leads
+to a simplification of the equations in the formalism above. For each
+baseline, we empirically estimate the covariance matrix and apply the inverse to
+the data itself. Figure \ref{fig:inv_cov} shows the application of the
+inverse covariance to both foreground and delay filtered data, in the frequency
+domain. Applying the invsere covariance to $\x$ down weights the strongest
+eigen modes of $\mathbf{C}$ and upweights the weakest eigen modes. In
+comparison, for random white noise, the optimal weighting scheme is inverse
+variance weighting. For an infinite sample of random white noise, the covariance
+matrix would be diagoanl and applying the inverse covariance would be identical
+to inverse variance weighting. The diagonal of this inverse covariance matrix
+are the eigenvalues and correspond to the the eigenmodes. Therefore, the most
+downweighted modes correspond to the largest eigenvalues of $\C$. Similarily,
+applying the inverse covariance to the baseline data vector, $\x$, the strongest
+modes get down weighted. 
+
+\begin{figure}[h!]\centering
+
+\includegraphics[width=\columnwidth, height=\columnwidth]{plots/inv_cov.png}
+\caption{Applying the inverse covariance to baseleines.}
+\label{fig:inv_cov}
+\end{figure}
+
+For foreground contained data the strongest eigenmodes of the covariance matrix
+correspond to delay modes (sine waves in frequency; see figure \ref{fig:eigs}).
+The strongest modes for delay filtered data look like noise and lack coherent
+structure.
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\columnwidth, height=\columnwidth]{plots/eig.png}
+\caption{Eigenvalues of the covariance matrix from foreground contained data
+(blue) and foreground removed data (green), via the wideband delay filter.
+Correspondingly, the strongest four eigenmodes for foreground contained (top
+right), and foreground remved data (bottom right).}
+\label{fig:eigs}
+\end{figure}
+
+
+
+The data vector used in our quadratic estimator is arranged such that redundant
+baselines and frequency channels are serialized into the the vector
+$\mathbf{x}$, where the channels are cycled through more frequenctly then
+baselines. The columns of our vector consist of the time samples for each of the
+vectors. As stated above, the covariance matrix is given by $\mathbf{C} =
+\expval{\x\x^{\dagger}}$. Hence the ensemble average of the covariance occurs
+over the time axis, where because of fringe rate filtering, the number of
+independent modes is ~20. 
+
+
+
 
 A few issues arise in our application of this optimal method. These issues have
 various effects on our analysis choices. First, the input data is highly
@@ -931,18 +1001,11 @@ simulation is comprised of two components - an artificial power spectrum P(k)
 and frequency extrapolated galactic foregrounds from the Global Sky Model (GSM)
 (de Oliveira-Costa et al. 2008). The injected power spectrum is flat in P(k) for
 a k-range of 0.1-10 $\text{hMpc}^{-1}$, and the angular power spectrum is computed from
-this (Datta et al. 2007, Lewis & Challinor 2007), ensuring correlation in
+this (\cite{datta_et_al2007, lewis_challinor_2007}), ensuring correlation in
 frequency/redshift for the power spectrum maps. PAPER visibilities are simulated
 for both the GSM and power spectrum maps by explicitly integrating fringes on
 the sky every 42.8s for an East-West baseline of 30m.
 
-
-The eor model used in the simulations described consists of a sky modeled to
-have a flat power spectrum in $P(k)$. We necessitate that the sky has this flat
-power spectrum and work backward to derive visibilities that describe that sky. 
-Some more detail here would be nice, giving credit to Carina. ... This signal is
-then fringe rate filtered to match the data. Hence, the number of independent
-modes in these simulations is the same as the data, which is ~20 independent modes.
 
 Figure \ref{table:pspec_sig_loss} tabulates the signal loss associated with our
 powerspectrum pipeline as a function of the input signal level. We tabulate this
@@ -1001,38 +1064,6 @@ baseline samples from the output of the quadratic estimator.
 %       --Maybe the wedge.
 %
 
-\begin{figure*}[h!]\centering
-\includegraphics[width=2\columnwidth, height=.8\columnwidth]{plots/x_example.png}
-\caption{Input fringe rate filtered frequncy domain data for a single baseline.}
-\label{fig:x_example}
-\end{figure*}
-
-\begin{figure}[h!]\centering
-\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/C_example.png}
-\caption{The covariance matix for a single baseline of the frequency data in
-figure \ref{fig:x_example}.} 
-\label{fig:C_example}
-\end{figure}
-
-\begin{figure}[h!]\centering
-\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/_Cx_example.png}
-\caption{Frequency vs. time data of a single baseline weighted by the inverse of
-the covariance matrix shown in figure \ref{fig:C_example}} 
-\label{fig:_Cx_example}
-\end{figure}
-
-\begin{figure}[h!]\centering
-\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/lamV_example.png}
-\caption{The eigeinmodes of the covariance matrix in figure \ref{fig:C_example}
-weighted by their corresponding eigeinvalue.} 
-\label{fig:lamV_example}
-\end{figure}
-
-\begin{figure}[h!]\centering
-\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/lam_example.png}
-\caption{The eigen spectrum of the covaraince matrix for a singel baseline.}
-\label{fig:lam_example}
-\end{figure}
 
 
 %\section{Summary of Improvements from PSA32}
