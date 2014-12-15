@@ -720,7 +720,7 @@ of time.
 %       -- apply filters to foreground data. Compute fr of pica and show that we
 %          are not killing the sky.
 %   
-%   code to get the integration time of fringe rate filter. This is 1894 for channel 100
+%   code to get the integration time of fringe rate filter. This is 1886 for channel 100
 %   beam_w_fr = frf_conv.get_beam_w_fr(aa, (1,4))
 %   t,firs,frbins,frspace = frf_conv.get_fringe_rate_kernels(beam_w_fr, 42.8, 401)
 %   fr100 = frspace[100]
@@ -745,33 +745,53 @@ through your baelines fringe pattern. We can use this fact to pick out certain
 points on the sky, but because this mapping of fringe-rate to sky is not one to
 one, we can only pick out stripes of constant fringe rate.
 
-To optimally combine the time data we can cater our fringe rate filter to
+As motivation, we discuss the use of fringe rate filters in cross talk removal.
+Crosstalk is modeled as a time independent coupling of signal between two
+different signal paths, be it at the antenna or to to input our the analog to
+digital converters. Since crosstalk does not vary as a function of time, in
+fringe rate space, cross talk piles up at the poles which correspond to zero
+fringe rates. In this view crosstalk is a DC bias. To remove crosstalk, we can
+apply a notch filter to the fringe rate transform of the time series visibility
+(per frequency) and inverse transform to go back into time domain. This
+interpretation of crosstalk being a DC offset jives with our method of crosstalk
+removal discussed above. In order to remove a DC offset from a time series, we
+subtract the average.
+
+Now, to optimally combine the time data we can cater our fringe rate filter to
 upweight points of the sky that contain more signal to our instrument and down
 weight those points that do not. That is, if we weight fringe rate
-bins by the beam, we can get a net increase in sensitivity. This is due to the
-fact that all fringe rate bins roughly have the same noise in them, but the
-amount of signal varies. Upweighting the bins with higher signal relative to
-those with less signal, gives us a net increase in signal-to-noise, even though
-we are getting rid of signal from some of the bins. 
+bins by the beam, we can get a net increase in sensitivity. Roughly, all fringe
+rate bins contain the same amount of noise in them, but the amount of signal
+varies and is determined by how the primary beam illuminates the sky.
+Upweighting the bins with higher signal relative to those with less signal
+gives us a net increase in signal-to-noise, even though we are removing 
+signal by applying signal from this filter. 
+
+The effective beam area from applying an optimal fringe rate filter decreases,
+which implies that the signal has been attenuated, as noted above. But because
+the noise is attenuated more, because of beam weigting fringe rate bins, the SNR
+increases. For the PAPER array, the boost in SNR is a factor of 2. The net boost
+in SNR depends on where the array is located. 
 
 We implement the optimal fringe rate filter by calculating the fringe rates at
-every point on the sky and weighting each bin by the beam of a given baseline. It is
-worth noting that fringe-rate filtering is baseline dependent and hence is
-implemented on a per baseline basis. We weight the fringe rate bins on the sky
-by the beam pattern at the same point on the sky. In order to obtain a smoothe
-filter in the fringe rate domain, we fit a gaussian with a tanh tail to
-this filter as shown in figure \ref{fig:fringe_rate_cut}. We then fourier
-transform this to obtain the time domain filter, multiply by a blackman-harris
-window function to damp the tails of the filter, and finally convolve with the
-visibilites to effect time domain integration.
+every point on the sky, for a given frequency, and weighting each bin by the
+beam of a given baseline. It is worth noting that fringe-rate filtering is
+baseline dependent and hence is implemented on a per baseline basis. We weight
+the fringe rate bins on the sky by the beam pattern at the same point on the
+sky. In order to obtain a smoothe filter in the fringe rate domain, we fit a
+gaussian with a tanh tail to this filter as shown in figure
+\ref{fig:fringe_rate_cut}. We then fourier transform this to obtain the time
+domain filter, multiply by a blackman-harris window function to damp the tails
+of the filter, and finally convolve with the visibilites to effect time domain
+integration.
 
 Since the PAPER beam is ~45 degrees, and the array is located at a declination
 of $-30^{\circ}$ the fringe rates associated with the low signal to noise (down
 in the beam) correspond to very high and very low/negative fringe rates. Figure
-\ref{fig:fringe_rate_cut} shows a cut of the optimal fringe rate at XXXMHz for a 30
-m east west baseline. Therefore, the implemented fringe rate filter removes some
-sky signal, signal associated with fringe rates outside of the ranges shown in
-Figure \ref{fig:fringe_rate_cut}. Figure \ref{fig:fr_preserved_signal} shows
+\ref{fig:fringe_rate_cut} shows a cut of the optimal fringe rate at 159 MHz for
+a 30 m east west baseline. Therefore, the implemented fringe rate filter removes
+some sky signal, signal associated with fringe rates outside of the ranges shown
+in Figure \ref{fig:fringe_rate_cut}. Figure \ref{fig:fr_preserved_signal} shows
 that the applied filter removes sky associated with negative fringe rates and
 very high fringe rates. 
 
@@ -798,6 +818,22 @@ fringe rate filtered visibilities. The fringe rate filter is just a weighting
 applied in fringe rate space and retains foregrounds.}
 \label{fig:fr_preserved_signal}
 \end{figure*}
+
+For the power spectrum baselines in question (30 m East-West baselines), the
+effective integration time is calculated by comparing the variance statistic for
+a fringe rate filter that is a flat weighting vs that with an optimal filter
+weighting as described. We apply these filters to random noise with variance 1,
+without loss of generality. We can conclde that 
+\begin{align}
+    t_{int} &= \frac{\int{\sigma^{2}dt}}{\int{\sigma^{2}fr^{2}dt}}\\
+            &= 1886 \text{seconds},
+\end{align}
+for an optimal fringe rate filter on a 30 m East-West baseline at 149.5 MHz.
+Over the range of frequencies used in our power spectrum estimate, the
+integration times range from 1936 s to 1790 s, correspinding to an average of 31
+minutes. Because the fringe rate filter in effect integrates in time, the number
+of statistically independent samples of the sky drastically decreases. We are
+left with $\sim2$ independent samples per hour.
 
 %\begin{figure}[h!]\centering
 %\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/noise_t_35.png}
@@ -843,20 +879,6 @@ applied in fringe rate space and retains foregrounds.}
 %         to describe our data. 
 %       --In addition, because of the highly redundant nature of the array,
 %         the covariance matrix is highly singular and therefore not invertible.
-There are inherent covariances in the data between baselines and frequencies.
-Figure \ref{fig:covariances} shows these covariances estimated empirically from
-the data itself. This estimate is the outer product of our data vector with
-itself and in our case, this averagse per baseline visibilities of a unique type
-over time. Hence, the quality of the estimate of the data covariance matrix
-depends on the number of independent modes we are averaging over. After
-fringe-rate filtering, the number of independent modes  decreases significantly,
-leaving us with only ~20 independent measurements over the lst range
-we are considering. This reduction in modes leads to a noisy estimate of the
-covaraince matrix. This leads to a broader problem in this type of analysis: the
-fact that we estimate our covariances from the data and do not know the true
-covariance matrix itself, leads to signal loss. Knowing the true covaraiance of
-a data set requires complete knowledge of the instrument and the sky. 
-
 This section is divided to break up the formalism and practical use of the
 optimal quadratic estimator method to measure the power spectrum. We first
 review the formalism, with an emphasis on our analysis, followed by a walk
@@ -1044,6 +1066,13 @@ of the information contained in the estimate.
 %XXX This part needs work. My understanding of the Fisher Matrix is still
 %undeveloped. Noisier modes are upweighted in k-space? 
 
+%Yea...we are not actually doing this. What are we doing?
+We apply this method to the sum and difference of the odd and even data sets. We
+note that the summed lst data contains signal and noise while the differenced
+data set only contains the noise. After computing the power spectrum estimates,
+we take the difference of the signal and noise power spectrum to get our final
+result. 
+
 \begin{figure}[h!]\centering
 \includegraphics[width=\columnwidth, height=\columnwidth]{plots/fisher.png}
 \caption{The Fisher information matrix for a given baseline.}
@@ -1064,6 +1093,21 @@ of the information contained in the estimate.
 %   -happy coincidence?
 %
 %XXX need to check lst range. 
+
+There are inherent covariances in the data between baselines and frequencies.
+Figure \ref{fig:covariances} shows these covariances estimated empirically from
+the data itself. This estimate is the outer product of our data vector with
+itself and in our case, this averagse per baseline visibilities of a unique type
+over time. Hence, the quality of the estimate of the data covariance matrix
+depends on the number of independent modes we are averaging over. After
+fringe-rate filtering, the number of independent modes  decreases significantly,
+leaving us with only ~20 independent measurements over the lst range
+we are considering. This reduction in modes leads to a noisy estimate of the
+covaraince matrix. This leads to a broader problem in this type of analysis: the
+fact that we estimate our covariances from the data and do not know the true
+covariance matrix itself, leads to signal loss. Knowing the true covaraiance of
+a data set requires complete knowledge of the instrument and the sky. 
+
 We now discuss the issues of empirically estimating the covariance matrix from
 the data. For a single baseline, the data vector $\x$, consists of 10 Mhz
 bandwidth centered at 151.72 MHz, equating to 20 frequency channels.
@@ -1219,7 +1263,6 @@ baseline samples from the output of the quadratic estimator.
 
 %   -Tsys, and Tsys vs. time ?
 \subsection{Noise Levels}
-
 %
 %   -Final Pspecs and from various stages 
 %       --before/after omnical: Data in
@@ -1233,6 +1276,14 @@ baseline samples from the output of the quadratic estimator.
 %       --before/after frf. Ditto in the above directories.
 %       --before after foregrounds. There is foreground data in there as well.
 %       SHould we make a foreground run with the non omnical set as well.
+
+
+
+
+
+
+
+
 \subsection{Power Spectrum}
 Figure \ref{fig:final_pspec} shows the speherically averaged power spectrum we
 measure. 
@@ -1261,7 +1312,9 @@ assuming gaussian error bars.
 \label{fig:final_posterioir}
 \end{figure}
 
-\section{Comparison and Improvements From PSA-32}
+
+
+\subsection{Comparison with PSA32}
 %   -We now compare and contrast our result with those without some of the key
 %   components of our analysis pipeline.
 %
@@ -1289,6 +1342,7 @@ assuming gaussian error bars.
 %
 %
 
+
 \begin{figure}[h!]\centering
 \includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/pk_k3pk_nomni.png}
 \caption{Power spectrum with no omnical applied. Does have optimal fringe rate
@@ -1303,6 +1357,35 @@ assuming gaussian error bars.
 applied to it}
 \label{fig:pspec_nofrf}
 \end{figure}
+
+
+
+%   -We now compare and contrast our result with those without some of the key
+%   components of our analysis pipeline.
+%
+%   -First we consider the effect from omnical. 
+%       -Applying a more precise calibration scheme increases the redundancy
+%       between baselines. Hence, this decrease the noise in the measurement. 
+%       -This is exactly what we see in the  final power spectrum measurement. 
+%       figure \pspecfigure shows the power spectrum of data that has not had
+%       omnical applied to it. THe error bars here are reduced by a factor of a
+%       few. 
+%
+%   -Next we consider the effect of using an optimal fringe rate filter. 
+%       -By applying an optimal fringe rate filter, we down weight fringe rate
+%       bins that are less sensitive, and hence have less signal, and upweight
+%       the more sensitive parts of the sky. 
+%       -Figure \ref{fig:frf_pspec} shows the power spectrum with a naive fringe
+%       rate filer, which is a flat filter and throws out the the fringe rates
+%       outside of those possible for a baseline of the eor baselines used in
+%       this analysis. 
+%       -This gives us a sensitivity benefit of a factor of 3(XXX), as seen
+%       in the figure. Note that this data does have omnical applied to it.
+%
+%
+%
+%
+%
 
 
 
@@ -1331,7 +1414,7 @@ applied to it}
 \section{Conclusions}
 
 
-%\clearpage
+\clearpage
 %\nocite{*}
 \bibliographystyle{apj}
 \bibliography{biblio}
