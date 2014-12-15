@@ -31,6 +31,7 @@
 \newcommand{\A}{\mathbf{A}}
 \newcommand{\N}{\mathbf{N}}
 \newcommand{\C}{\mathbf{C}}
+\newcommand{\Q}{\mathbf{Q}}
 \newcommand{\rhat}{\hat{\mathbf{r}}}
 
 \begin{document}
@@ -74,12 +75,14 @@ in South Africa.
 
 The current best upper limit on 21 cm signal level is at $(41 mK)^{2}$ at
 $k=.27 h \text{Mpc}^{-1}$ which was measured by PAPER in a 32 antenna redundant
-configuration (\ref{parsons_et_al2014a}). This limit was acheived by using the
+configuration (\cite{parsons_et_al2014a}). This limit was acheived by using the
 delay-spectrum technique to remove foregrounds and using the  maximum
 redundancy array to repeatedly measure the same fourier mode, boosting
 sensitivity. In this analysis we employ the same techniques mentioned, as well
 is introduce an optimal fringe-fringe rate filter to  boost sensitivity and
 make use of improved calibration via the Omnical redundant calibrator package. 
+Additionally, we employ optimal quadratic estimators to make our power spectrum
+estimates.
 
 The paper is outlined as follows. In section \ref{sec:observations} we describe
 the observations used in this analysis. In \ref{sec:improvements} we discuss the
@@ -90,30 +93,30 @@ section \ref{sec:analysis}. Seciton \ref{sec:results} describes the results of
 \ref{sec:conclusion}.
 
 
-\section{Observations}\ref{sec:observations}
-Here, we describe the features of the data set used in this analysis. 
-The observations discussed in this condsider data taken while PAPER consisted of 64
-dual polarization antennas deployed in the Fall of 2012. The antennas were
-arranged in a maximally redundant configuration as seen in Figure
-\ref{fig:antenna_positions}). We rely on all
-of the baselines for the calibration procedure to , but only using a
-subset of the baselines for the power spectrum analysis. The columns are
-separated by 30 meters and the rows by 5 meters. For the power spectrum analysis
-we are using the baselines that correspond to the width between two columns
-(e.g.  49-41) as well as those that correspond to over and up and down one
-antenna (e.g. 10-41 and 10-58, respectively). These 154 baselines are
-instantaneously redundant and therefore they measure the same Fourier modes on
-the sky. Within a single group of the three types of baselines above, the
-measurements add coherently, whereas between groups they add in quadrature.
-Having repeated measurements of the same baseline type greatly increases
-sensitivity. 
+\section{Observations}\label{sec:observations}
+Here, we describe the chief features of the data set used in this analysis.
+We use data taken while PAPER consisted of 64 dual polarization antennas
+deployed in the Fall of 2012, arranged in a maximally
+redundant configuration as seen in Figure \ref{fig:antenna_positions}. The
+correlator process all 64 dual polarization antennas with 100 MHz of 
+instantaneous bandwidth ranging from 100-200MHz channelized to 1024
+channels. We write data for both X and Y polarization as well as their cross
+products, but this analysis focusses on the XX and YY polarizations. 
+
+We rely on all 2016 baselines for the calibration procedure to, but only use a
+subset of the baselines for the power spectrum analysis. This subset encompases
+3 separation types; the shortest spaceing east-west baselines (e.g. 41-47) and
+those of the same type except slanted up and down one row (e.g. 10-41 and 10-58,
+respectively). Baselines in each of the 3 separation types (or redundant groups)
+are instantaneously redundant within the group and therefore measure the same
+fourier modes on the sky. 
 
 The observation of this 64 antenna data set spanned a 135 day period that
 commenced on 2012 November 8 (JD62456240) and ended  2013 March 23 (JD62456375). 
 Each baseline instantaneously measured the 100-200 MHz band which was divided
 into 1024 frequency channels of resolution 97.66 kHz and integrated for 10.7
 seconds. In this analysis we analyze observations that spanned, in local
-siderial time (LST), a range of 1:00 to 10:00 hours. This range corresponds to
+siderial time (LST), a range of 0:00 to 10:00 hours. This range corresponds to
 the "EoR cold patch", in which galaxtic synchrotron power is minimal (away from
 the center of the galaxy).
 %XXX lst range will change.
@@ -125,7 +128,7 @@ the center of the galaxy).
 \end{figure*}
 
 
-\section{Analysis}
+\section{Analysis}\label{sec:analysis}
 XXX FLOW CHART FIGURE XXX
 We now describe the analysis pipeline leading up to the final power spectrum
 measurement of our data set. To begin, we run a compression algorithm to reduce
@@ -134,13 +137,13 @@ the data volume of our raw data. This step, described in the appendix of
 calibrate on the basis of redundancy before using self-calibration
 to solve for the absolute phase and gain parameters. After suppressing
 foregrounds with a wide-band delay filter, we average the data in local
-sidereal time. Finally, we apply a frine rate filter to optimally combine the
-time domain data and use optimal quadratic estimators to make our estimae of
-the 21 cm power spectrum.  Figure \ref{fig:analysis_pipeline} shows a block
-diagram of the analysis pipeline and includes some information on simuations
-and signal loss.
+sidereal time and apply a frine rate filter to optimally combine the
+time domain data. Finally, we use optimal quadratic estimators to make our
+estimate of the 21 cm power spectrum.  Figure \ref{fig:analysis_pipeline} shows
+a block diagram of the analysis pipeline and includes some information on
+simuations and signal loss.
 
-\subsection{Calibration}
+\subsection{Calibration}\label{sec:calibration}
 \subsubsection{Redundant Calibration}
 %    -Principles of redundant calibration. Fact that there is no signal loss in
 %       this kind of measurement.
@@ -160,14 +163,16 @@ and signal loss.
 %       --In addtion, because gains are normalized to have a unity magnitude the
 %         input arn output flux scale are the same. (This is an omnical thing)
 
-PAPER is arranged in a highly redundant configuration and thus lends itself to
-use the redunancy in baselines for a relative calibration. Every instance of a
-baseline of a given unique baseline type, for example the baseline 1-4 belongs
-to the one column spacing and no row spaceing unique baseline type, measures the
-same sky signal. On this basis, all of the differences between baselines of a
+PAPER's highly redundant configuration lends itself to
+use the redunancy in baselines for a relative calibration. Multiple baselines of
+the same length and orientation measure the same sky signal. 
+On this basis, all of the differences between baselines of a
 given unique baseline type are attributed to differences in signal chain, which
-include variations in antennas, cables, and receivers, and should be calibrated
-out. Redundant calibration inherently preserves common mode signal between
+include variations in antennas, cables, and receivers, and are calibrated
+out. This leads to a relative calibration solutions that relate the antennas
+within the array. Redundant calibration does not give absolute solutions, and
+therefore we are not able to phase to a source, for example, after applying
+these solutions. Redundant calibration inherently preserves common mode signal between
 redundant baselines, and therefore this type of calibration is necessarily
 lossless. 
 
@@ -185,7 +190,7 @@ lossless.
 %       --Absoulte phase and gain calibration are addressed in later sections.
 Redundant calibration is a relative calibration procedure, hence we can only
 solve for the relative complex gains between antennas. Redundant calibration
-does not set anabsolute phase or gain scales due to the fact that it only
+does not set an absolute phase or gain scales due to the fact that it only
 knows about other antennas, not absolute sky. Hence, there needs to be a second
 round of calibration which folds in information about the sky to solve for the
 absolution phases in order correctly phase to sourcese on the celestial sphere.
@@ -242,7 +247,18 @@ Implementaion of redundant calibration was done with the ${Omnical}$ package, an
 open source redundant calibration package written by Jeff
 Zheng \footnote{https://github.com/jeffzhen/omnical}\cite{zheng_et_al2014}. This
 package implements both logcal and lincal with an incredible speed up from
-the previous homegrown routine used in \cite{parsons_et_al2014a}. 
+the previous homegrown routine used in \cite{parsons_et_al2014a}. Figure
+\ref{fig:omniview} shows complex visibilites after complex gain solutions
+derived from Omnical were applied to the uncalibrated visibilities. This
+comparison shows the merrit of using Omnical.
+
+\begin{figure*}
+\centering
+\includegraphics[width=2\columnwidth]{plots/omniview_64.png}
+\caption{omniview plot.}
+\label{fig:omniview}
+\end{figure*}
+
 
 
 XXXadd in duscussion about removing additive offsets and time cadence of
@@ -265,12 +281,20 @@ that)XXX.
 
 After solving for the relative phases and gains of the antennas using redcal, an
 overall phase and gain calibration needs to be solved for. We use the standard self
-calibration (selfcal) method for radio interferometers in order to solve for
+calibration (selfcal) method for radio interferometers to solve for
 these over all parameters. The absolute phase calibration was solved for using using 
 Pictor A, Fornax A, and Crab Nebula. Figure \ref{fig:field_image} shows an
 image of the field with Pictor A (5:19:49.70, -45:46:45.0)  and Fornax A
 (3:22:41.70,-37:12:30.0). The measured source positions are the same as the the
 catalogue positions for these sources.XXX make sure of this statementXXX
+
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth]{plots/gianni_pic_image.pdf}
+\caption{Image of Pictor.}
+\label{fig:field_image}
+\end{figure}
+
 
 \subsubsection{Absolute Gain Calibration}
 %    -Calibrated to Pictor A. 
@@ -298,10 +322,28 @@ catalogue positions for these sources.XXX make sure of this statementXXX
 %        --The measured and theoretical pictor spectrum 
 %        --A comparison to the PSA32 Flux CAL.
 
+As before, redundant calibration does not set a global flux scale to accurately
+measure the brightness of the sky. To set the absolute flux scale, we use Pictor
+A as our calibrator source using the value derived in \cite{jacobs_et_al2013}.
 
+To derive the source spectrum from our measurements, we use lstbinned data (see
+section \ref{sec:lstbin}) containing foregrounds around the hour where Pictor
+transits. We image snapshots every 15 minutes for an hour before and after
+transit of Pictor A, imaging every frequency channel. We derive the source
+spectra per snapshot and average these together, weighting by the primary beam
+in the direction of Pic A. We fit a ninth-order polynomial to the measured
+Pictor A spectrum over a frequency range from 120-170MHz. Figure
+\ref{fig:pic_spec} shows that polynomial fit to Pic A for stokes I, the
+measured, and theoretical spectrum for Pictor A.
 
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth]{plots/pic_spec.pdf}
+\caption{Pictor spectrum.}
+\label{fig:pic_spec}
+\end{figure}
 
-
+XXX Need to include discussion of signal loss due to fitting the polynomial. XXX
 
 
 
@@ -488,7 +530,7 @@ catalogue positions for these sources.XXX make sure of this statementXXX
 
 
 
-\subsection{Wideband Delay Filtering}
+\subsection{Wideband Delay Filtering}\label{sec:wbd_filtering}
 %   -Can cite Parsons 2014a
 %       --We use the same wbd filter as in Parsons 2014a. That is we do a per
 %         baseline delay filtering with a buffer of 15 nanoseconds. 
@@ -511,11 +553,7 @@ signal loss for the first mode outside of the horizon, 1.3\% for the next mode
 out, and less than .0015\% for the higher modes.
 
 
-\subsection{RFI and Crosstalk Mitigation}
-\begin{itemize}
-    \item{Discuss, briefly, RFI and Crosstalk removal. Note that this happens
-after foreground removal. Possibility of signal loss?}
-\end{itemize}
+\subsection{RFI and Crosstalk Mitigation}\label{sec:rfi}
 
 After the wideband delay filter, we conduct another round of RFI and crosstalk
 removal which was overshadowed by the foreground signal. For RFI excision we
@@ -531,9 +569,12 @@ bias that is crosstalk. For foreground removed data, we do not have this
 complication since bright foregrounds are not dominating the average and are
 able to remove the offset by subtracting shorter sums.
 
-\subsection{Stokes I : cite Moore et.al.}
-%We form stokes I = .5 (xx + yy)
-\subsection{LST Binning}
+\subsection{Stokes I}
+Before binning in local sidereal time we form the total power stokes I
+measurement (\cite{moore_et_al2013}). 
+
+
+\subsection{LST Binning and Stability}\label{sec:lstbin}
 %   -Practicals: bin size, number of days, range of days 
 %       --We LST bin the data over the 120 night data set into time bins of
 %         42.95 seconds. 
@@ -556,14 +597,51 @@ Once smooth sources have been removed and a final pass of RFI excision and
 crosstalk removal have been performed, the data is averaged in local sidereal
 time (LST) with bins of width 43 seconds to match the integration time of the
 data. The data set consisted of 135 unevenly sampled days with the effective
-number of total days being 123.57. This uneven sampling in the data set was due
-to technical difficulties in the recording of disks.
+number of total days being 123.57. 
 
 Sporadic RFI events can skew individual LST bins away from the median value of
 the sky at a given LST. Therefore, we compute the median in a given LST bin for
 each frequency and flag off data that is 3 sigma outside of that median before
 averaging. This filter mitigates the adverse effects of RFI from dominating a
-LST bin. 
+LST bin. More generally, the filter mitigates the effects of non gaussianity in
+time. The median statistics used here necessitate that there is no signal
+loss due to this filter.
+
+We make two separate lst binned data sets, binning every other julian day
+together, obtaining an "even" and "odd" dataset.  As we will see later, this
+allows us to construct an unbiased power spectrum estimate as well as running
+jackknife tests on our observations. 
+
+One of the key aspects of the paper instrument is the stability of the
+instrument between baselines and in time. Figure \ref{fig:density} shows for a
+given redundant group of baselines, the spread in the visibilites for all of the
+baselines in that group as a function of LST's. We get more samples per LST bin
+during the lst range of 2-10 hours due to our observing season. For each LST
+bin, the spread in the samples is ~100 Jy.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=2.3\columnwidth]{plots/density.png}
+\caption{Visibility density for a redundant baseline group.}
+\label{fig:density}
+\end{figure*}
+
+%XXX need to refresh my memort of this plot. FFt of a single baseline, lstbined?
+Figure \ref{fig:stability} shows the stability of the instrument as a function
+of time. 
+
+
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth]{plots/stability.png}
+\caption{Time stability of the instrument.}
+\label{fig:stability}
+\end{figure}
+
+
+
+
+
 
 %\subsubsection{A noise study}
 %During the LST averaging, we compute the median and the variance for every LST
@@ -602,7 +680,7 @@ LST bin.
 
 
 
-\subsection{Optimal Fringe-Rate Filter}
+\subsection{Optimal Fringe-Rate Filter}\label{sec:frf}
 %   -What is fringe rate filtering. Cite Parsons And Liu 2014.
 %       --Fringe Rate filtering is nothing more then a time domain weighted
 %         average per frequency of of visibilities. The filter can be applied 
@@ -741,7 +819,7 @@ applied in fringe rate space and retains foregrounds.}
 %\end{figure}
 
 
-\subsection{Optimal Quadratic Estimator and Covariance}
+\subsection{Optimal Quadratic Estimator and Covariance}\label{sec:oqe}
 %   -Motivate method with discussion of empirical estimate of covariances and
 %    problem of limited modes.
 %       --Because we dont know the true covariances between baselines and
@@ -784,6 +862,7 @@ optimal quadratic estimator method to measure the power spectrum. We first
 review the formalism, with an emphasis on our analysis, followed by a walk
 through of our application of the OQE method to our data, and finally discuss
 the effects of an empirical estimate of covariance matrices.
+
 
 
 %
@@ -894,6 +973,8 @@ used in the estimate of the power spectrum for the i'th $k$-mode.}
 
 
 \subsubsection{Application}
+% A walk through of the application to the data.
+
 We apply the quadratic estimator formalism on a per baseline basis, which leads
 to a simplification of the equations in the formalism above. For each
 baseline, we empirically estimate the covariance matrix and apply the inverse to
@@ -902,16 +983,16 @@ inverse covariance to both foreground and delay filtered data, in the frequency
 domain. Applying the invsere covariance to $\x$ down weights the strongest
 eigen modes of $\mathbf{C}$ and upweights the weakest eigen modes. In
 comparison, for random white noise, the optimal weighting scheme is inverse
-variance weighting. For an infinite sample of random white noise, the covariance
-matrix would be diagoanl and applying the inverse covariance would be identical
-to inverse variance weighting. The diagonal of this inverse covariance matrix
-are the eigenvalues and correspond to the the eigenmodes. Therefore, the most
-downweighted modes correspond to the largest eigenvalues of $\C$. Similarily,
-applying the inverse covariance to the baseline data vector, $\x$, the strongest
-modes get down weighted. 
+variance weighting, which leads to the smallest error bars. For an infinite
+sample of random white noise, the covariance matrix would be diagoanl and
+applying the inverse covariance would be identical to inverse variance
+weighting. The diagonal of this inverse covariance matrix are the eigenvalues
+and correspond to the the eigenmodes. Therefore, the most downweighted modes
+correspond to the largest eigenvalues of $\C$, and hence the strongest modes.
+Similarily, applying the inverse covariance to the baseline data vector, $\x$,
+the strongest modes get down weighted. 
 
 \begin{figure}[h!]\centering
-
 \includegraphics[width=\columnwidth, height=\columnwidth]{plots/inv_cov.png}
 \caption{Applying the inverse covariance to baseleines.}
 \label{fig:inv_cov}
@@ -919,8 +1000,12 @@ modes get down weighted.
 
 For foreground contained data the strongest eigenmodes of the covariance matrix
 correspond to delay modes (sine waves in frequency; see figure \ref{fig:eigs}).
-The strongest modes for delay filtered data look like noise and lack coherent
-structure.
+In contrast, the strongest modes for delay filtered do not look like clear cut
+delay modes, but do have some structure in them. This indicates that there are
+modes that describe signal, but are buried in the noise. The strength of these
+modes are indicated by eigenvalues of the corresponding covariance matrix. The
+strongest eigenmodse for foreground contained to foreground filtered data is
+five orders of magnitude, owning to the wideband delay filter.
 
 \begin{figure}[h!]\centering
 \includegraphics[width=\columnwidth, height=\columnwidth]{plots/eig.png}
@@ -931,30 +1016,69 @@ right), and foreground remved data (bottom right).}
 \label{fig:eigs}
 \end{figure}
 
+We then construct our optimal estimator by applying equation \ref{eqn:quad_est}
+to the baseline data. In the per baseline application, the optimal quadratic
+estimator becomes 
+\begin{align}\label{eqn:quad_est_perbl}
+    \hat{\mathbf{q}}_{\alpha} &=
+\sum_{bli,blj}{\frac{1}{2}\x_{bli}^{t}\C^{-1}_{bli}\mathbf{m}_{\alpha}\mathbf{m}_{\alpha}^{t}\C^{-1}_{blj}\x_{blj}}\\
+&=
+\frac{1}{2}(\sum_{bli}{\x_{bli}^{\dagger}\C_{bli}^{-1}})\mathbf{m}_{\alpha}\mathbf{m}^{\dagger}_{\alpha}(\sum_{blj}{\C_{blj}^{-1}\x_{blj}}),
+\end{align}
+where $bli$ and $blj$ are 2 different baselines. We neccessarily want to use
+baseline cross products in our estimate to avoid incurring a noise bias. The 
+$\mathbf{m}$ matrix is half of the $\Q$ matrix in equation \ref{eqn:quad_est},
+and encompasses the delay transform. Hence, the two halves of equation
+\ref{eqn:quad_est_perbl} are delay transforms.\footnote{This is computationally
+beneficial because it requires delay transforming (fft) every baselines data.
+This leads to $N_{ch}^{2}\log{N_{ch}} $ computations rather than $N_{ch}^{3}$
+computations.} 
+
+Finally, we normalize our power spectrum estimate following the normalization
+scheme noted above and choose $\mathbf{M} = \mathbf{L}$, where $\mathbf{L}$ is the lower
+diagonal matrix from the Cholesky decompostion of the Fisher information matrix,
+$\mathbf{F}$. The Fisher matrix, shown in figure \ref{fig:fisher}, presents the amount
+of information there is in every $k_{\parallel}$ mode. The Fisher matrix is
+derived using all of the baselines, not just a baseline pair and consists of all
+of the information contained in the estimate.
+%XXX This part needs work. My understanding of the Fisher Matrix is still
+%undeveloped. Noisier modes are upweighted in k-space? 
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\columnwidth, height=\columnwidth]{plots/fisher.png}
+\caption{The Fisher information matrix for a given baseline.}
+\label{fig:fisher}
+\end{figure}
 
 
-The data vector used in our quadratic estimator is arranged such that redundant
-baselines and frequency channels are serialized into the the vector
-$\mathbf{x}$, where the channels are cycled through more frequenctly then
-baselines. The columns of our vector consist of the time samples for each of the
-vectors. As stated above, the covariance matrix is given by $\mathbf{C} =
-\expval{\x\x^{\dagger}}$. Hence the ensemble average of the covariance occurs
-over the time axis, where because of fringe rate filtering, the number of
-independent modes is ~20. 
 
+\subsubsection{The Covariance Matrix}
+%Covariance matrix nuances.
+%   -describe covariance matrix and data vectors.
+%   -How we get the covariance matrix. 
+%   -eigenvalue decomposition.
+%mode counting and nonsingular-ness.
+%   -Count independent modes.
+%   -covaraiance is independent only if we have enough indendent modes.
+%   -inverse covariance is tricky because of this. 
+%   -happy coincidence?
+%
+%XXX need to check lst range. 
+We now discuss the issues of empirically estimating the covariance matrix from
+the data. For a single baseline, the data vector $\x$, consists of 10 Mhz
+bandwidth centered at 151.72 MHz, equating to 20 frequency channels.
+All time samples are also kept ranging from 0 to 10 LST hours. Again, we
+estimate the covariance in the usual way, $\C = \expval{\x\x^{\dagger}}$, taking
+the ensemble average over time. The covariance matrix for this baseline is a
+$N_{ch}\times N_{ch}$ matrix consisting of the covariances of all channels with
+each other. This covariance matrix is invertible only if it nonsingular, which
+requires it to be a rank $N_{ch}$ matrix. This occurs only if there are $N_{ch}$
+independent modes. 
 
-
-
-A few issues arise in our application of this optimal method. These issues have
-various effects on our analysis choices. First, the input data is highly
-redundant and hence the covariance matrix is singular and thus not invertible.
-However, we consider a covariance matrix made up of the covariances of each
-baseline with itself and mask of the covariance between baselines (see figure
-\ref{fig:covariance_matrix}). This decreases the degrees of freedom available
-and hence $\mathbf{C}$ becomes non-singular. Therefore, the weighting we apply
-to our data does not take into account the covaraiance between baselines, only
-the covariances between frequencies for a baseline. 
-
+As noted in section \ref{sec:frf} the optimal fringe rate filter corrsponds to
+averageing time samples for roughly 30 minutes. Over the 10 hour LST range used in this
+analysis, this corresponds to ~20 independent modes on the sky. This is a
+fundamental limit of the amount of information we have. 
 
 %
 %   -Potential for signal loss.
