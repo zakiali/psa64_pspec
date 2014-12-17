@@ -66,8 +66,8 @@ hydrogen during EoR and the dark ages. GMRT (\cite{paciga_et_al2011}),
 LOFAR(\cite{rottgering_et_al2006}), MWA(\cite{tingay_et_al2013}),
 PAPER(\cite{parsons_et_al2010}), and 21CMA are all aiming for the power spectrum
 detection of the fluctuations in the 21 cm line, whereas experiments like EDGES
-(\cite{bowman_et_al2010}, LWA, LEDA (\cite{lincoln_bernardi_2012}, DARE
-(\cite{burns_et_al2012} , and SciHi (\cite{tabitha_et_al2014}) are after the
+(\cite{bowman_et_al2010}), LWA, LEDA (\cite{lincoln_bernardi_2012}), DARE
+(\cite{burns_et_al2012}) , and SciHi (\cite{tabitha_et_al2014}) are after the
 mean brightness temperature of 21 cm relative to the CMB background. 
 
 Like CMB experiments, foreground contamination is a major concern for 21 cm
@@ -113,32 +113,52 @@ contraints on EoR. We conclude in \ref{sec:conclusion}.
 
 
 \section{Observations}\label{sec:observations}
-Here, we describe the chief features of the data set used in this analysis.
-We use data taken while PAPER consisted of 64 dual polarization antennas
-deployed in the Fall of 2012, arranged in a maximally
-redundant configuration as seen in Figure \ref{fig:antenna_positions}. The
-correlator cross correlates all 64 dual polarization antennas with 100 MHz of 
-instantaneous bandwidth ranging from 100-200MHz channelized to 1024
-channels. We write data for both X and Y polarization as well as their cross
-products, but this analysis focusses on the XX and YY polarizations. 
+PAPER is a driftscan array deployed at the Square Kilometer Array South Africa
+(SKA-SA) reseve in the Karoo desert located at (21:25:41:9,
+-30:43:17:15)(\cite{parsons_et_al2010}) . Observations discussed in this paper
+were taken while PAPER consisted of 64 dual polarization antennas deployed in
+the Fall of 2012. The array was configured into a maximally redundant antenna
+layout (see figure \ref{fig:antenna_positions}) where multiple baselines measure
+the same fourier mode on the sky
+(\cite{parsons_et_al_2012},\cite{parsons_et_al2014a}). The PAPER antennas are a
+cross-dipole design in which both polarizations (X and Y) are processed
+independently. 
 
-We rely on all 2016 baselines for the calibration procedure, but only use a
-subset of the baselines for the power spectrum analysis. This subset encompases
-3 separation types; the shortest spaceing east-west baselines (e.g. 41-47) and
-those of the same type except slanted up and down one row (e.g. 10-41 and 10-58,
-respectively). Baselines in each of the 3 separation types (or redundant groups)
-are instantaneously redundant within the group and therefore measure the same
-fourier modes on the sky. This allows us to coherently add fourier modes,
-building sensitivity as $N$  rather than $\sqrt{N}$.
+The PAPER-64 correlator processes a 100 MHz to 200 MHz bandwidth, first
+channelizing the 100 MHz band into 1024 channls of width 97.6 kHz, and then
+cross multiplying every antenna and polarization with one another for a total of
+8256 cross products, including auto correlations. The architecture of this
+correlator is based on CASPER open source, reconfigurable hardware
+(\cite{parsons_et_al2008}). The channelizer, which includes the PFB-FFT and
+corner turn, consisted of 16 ROACH boards with eight 8 bit analog to digital
+converters. The cross multilication engine (X engine) was moved to GPU's based
+on the X-GPU, a general purpose X engine for GPU's (mike clark xgpu 2011?). 
+Visibility cross products are integrated for 10.7 seconds on the GPU's before
+being written to disk. We write all stokes parameters to disk, however the
+analaysis described here only apply to the XX and YY polariztion products.
+
+We rely on all 2016 (for each polariztion) baselines for the calibration
+procedure, but only use a subset of the baselines for the power spectrum
+analysis. This subset encompases 3 separation types; the shortest spaceing
+east-west baselines (e.g. 41-47) and those of the same type except slanted up
+and down one row (e.g. 10-41 and 10-58, respectively). Baselines in each of the
+3 separation types (or redundant groups) are instantaneously redundant within
+the group and therefore measure the same fourier modes on the sky. This allows
+us to coherently add fourier modes, building sensitivity as $N$  rather than
+$\sqrt{N}$.
 
 The observation of this 64 antenna data set spanned a 135 day period that
 commenced on 2012 November 8 (JD62456240) and ended  2013 March 23 (JD62456375). 
-Each baseline instantaneously measured the 100-200 MHz band which was divided
-into 1024 frequency channels of resolution 97.66 kHz and integrated for 10.7
-seconds. In this analysis we analyze observations that spanned, in local
-siderial time (LST), a range of 0:00 to 10:00 hours. This range corresponds to
-the "EoR cold patch", in which galaxtic synchrotron power is minimal (away from
-the center of the galaxy).
+For the power spectrum analysis, we use data that spanned, in local sidereal
+time (LST), a range of 0:00 to 10:00 hours. This range corresponds to
+the "EoR cold patch", in which galactic synchrotron power is minimal (away from
+the center of the galaxy). Due to LST drift of 3:56 minutes every solar ay, we
+unevenly sample every lst in our observations, giving us more samples of certain
+lsts than others. The lsts with the greatest number of smaples are those used in
+the power spectrum analysis (along with those corresponding to the cold patch).
+Figure \ref{fig:coverage} shows our observing field with the contours labeling
+the beam weighted observing time relative to the peak, directly over head the
+array.
 %XXX lst range will change.
 
 \begin{figure*}[!t]\centering
@@ -146,6 +166,14 @@ the center of the galaxy).
 \caption{Antenna positions for the PAPER 64 observation run.}
 \label{fig:antenna_positions}
 \end{figure*}
+
+\begin{figure*}[!t]\centering
+\includegraphics[width=2\columnwidth,height=\columnwidth]{plots/coverage.png}
+\caption{The PAPER field. Contours are the beam weighted observing times
+relative to the peak observing time/beam.}
+\label{fig:coverage}
+\end{figure*}
+
 
 
 \section{Analysis}\label{sec:analysis}
@@ -1027,11 +1055,11 @@ correspond to the largest eigenvalues of $\C$, and hence the strongest modes.
 Similarily, applying the inverse covariance to the baseline data vector, $\x$,
 the strongest modes get down weighted. 
 
-\begin{figure}[h!]\centering
-\includegraphics[width=\columnwidth, height=\columnwidth]{plots/inv_cov.png}
+\begin{figure*}[h!]\centering
+\includegraphics[width=2\columnwidth, height=5.5in]{plots/inv_cov.png}
 \caption{Applying the inverse covariance to baseleines.}
 \label{fig:inv_cov}
-\end{figure}
+\end{figure*}
 
 For foreground contained data the strongest eigenmodes of the covariance matrix
 correspond to delay modes (sine waves in frequency; see figure \ref{fig:eigs}).
