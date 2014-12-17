@@ -1,96 +1,115 @@
-%\documentclass[preprint]{aastex}  % USE THIS TO MAKE BIB, THEN FORMAT USING EMULATEAPJ
-\documentclass[twocolumn,numberedappendix]{emulateapj}
-\shorttitle{PSA64}
+%\documentclass[preprint]{aastex}  % USE THIS TO MAKE BIB, THEN FORMAT USING 
+%EMULATEAPJ
+\documentclass[twocolumn,numberedappendix]{emulateapj} \shorttitle{PSA64}
 \shortauthors{Ali, et al.}
 
-\usepackage{amsmath}
-\usepackage{graphicx}
-\usepackage[figuresright]{rotating}
+\usepackage{amsmath} \usepackage{graphicx} \usepackage[figuresright]{rotating}
 %\usepackage{rotating}
 \usepackage{natbib}
-%\usepackage{pdflscape}
-%\usepackage{lscape}
+%\usepackage{pdflscape} \usepackage{lscape}
 \citestyle{aa}
 
-\def\b{\mathbf{b}}
-\def\k{\mathbf{k}}
-\def\r{\mathbf{r}}
-\def\q{\mathbf{q}}
-\def\b{\mathbf{b}}
-\def\kp{\mathbf{k}^\prime}
-\def\kpp{\mathbf{k}^{\prime\prime}}
-\def\V{\mathbb{V}}
-\def\expval#1{\langle #1 \rangle}
-\def\At{\tilde{A}}
-\def\Vt{\tilde{V}}
-\def\Tt{\tilde{T}}
-\def\tb{\langle T_b\rangle}
-\newcommand{\vis}{\mathbf{v}}
-\newcommand{\x}{\mathbf{x}}
-\newcommand{\xhat}{\hat{\mathbf{x}}}
-\newcommand{\A}{\mathbf{A}}
-\newcommand{\N}{\mathbf{N}}
-\newcommand{\C}{\mathbf{C}}
-\newcommand{\Q}{\mathbf{Q}}
+\def\b{\mathbf{b}} \def\k{\mathbf{k}} \def\r{\mathbf{r}} \def\q{\mathbf{q}}
+\def\b{\mathbf{b}} \def\kp{\mathbf{k}^\prime}
+\def\kpp{\mathbf{k}^{\prime\prime}} \def\V{\mathbb{V}} \def\expval#1{\langle #1
+\rangle} \def\At{\tilde{A}} \def\Vt{\tilde{V}} \def\Tt{\tilde{T}}
+\def\tb{\langle T_b\rangle} \newcommand{\vis}{\mathbf{v}}
+\newcommand{\x}{\mathbf{x}} \newcommand{\xhat}{\hat{\mathbf{x}}}
+\newcommand{\A}{\mathbf{A}} \newcommand{\N}{\mathbf{N}}
+\newcommand{\C}{\mathbf{C}} \newcommand{\Q}{\mathbf{Q}}
 \newcommand{\rhat}{\hat{\mathbf{r}}}
 
-\begin{document}
-\title{PSA-64 Power Spectrum}
+\begin{document} \title{PSA-64 Power Spectrum}
 
-\author{
-Zaki S. Ali\altaffilmark{1},
-Aaron R. Parsons\altaffilmark{1,2},
-Jeff Zheng,
-Jonathan C. Pober\altaffilmark{4},
-James E. Aguirre\altaffilmark{3},
-David R. DeBoer\altaffilmark{2},
-Daniel C. Jacobs\altaffilmark{8},
-Adrian Liu\altaffilmark{1},
-David F. Moore\altaffilmark{3}
+\author{ Zaki S. Ali\altaffilmark{1}, Aaron R. Parsons\altaffilmark{1,2}, Jeff
+Zheng, Jonathan C. Pober\altaffilmark{4}, James E. Aguirre\altaffilmark{3},
+David R. DeBoer\altaffilmark{2}, Daniel C. Jacobs\altaffilmark{8}, Adrian
+Liu\altaffilmark{1}, David F. Moore\altaffilmark{3}
 % XXX if includes paper data, needs full author list
 }
 %\tableofcontents
 
 \altaffiltext{1}{Astronomy Dept., U. California, Berkeley, CA}
 \altaffiltext{2}{Radio Astronomy Lab., U. California, Berkeley, CA}
-\altaffiltext{3}{Dept. of Physics and Astronomy, U. Pennsylvania, Philadelphia, PA}
-\altaffiltext{4}{Physics Dept.  U. Washington, Seattle, WA}
-\altaffiltext{8}{School of Earth and Space Exploration, Arizona State U., Tempe, AZ}
+\altaffiltext{3}{Dept. of Physics and Astronomy, U. Pennsylvania, Philadelphia,
+PA} \altaffiltext{4}{Physics Dept.  U. Washington, Seattle, WA}
+\altaffiltext{8}{School of Earth and Space Exploration, Arizona State U., Tempe,
+AZ}
 
-\begin{abstract}
-\end{abstract}
+\begin{abstract} \end{abstract}
 
-% XXX fringe weighting profile
-% XXX delay spectrum not violated by freq-dependent fringe rate weights
+% XXX fringe weighting profile XXX delay spectrum not violated by freq-dependent
+% fringe rate weights
 
-\section{Introduction}
-The Donald C. Backer Precision Array for Probing the Epoch of Reionization
-(PAPER) is a dedicated experiment to measure the power spectrum of highly
-redshifted 21 cm emission during the Epoch of Reionization. PAPER is but one
-experiment that aims to detect this faint signal. Other telescopes that have the
-same goal are the Giant Meter-wave Radio Telescope (GMRT), the LOw Frequency
-ARray (LOFAR), and the Murchison Widefield Array (MWA). PAPER currently consists
-of 128 dual-polarization antennaes in a 100-200MHz band out in the Karoo desert
-in South Africa. 
+\section{Introduction} The hyperfine transition in the ground state of hydrogen
+leads to the emission of the infamous 21 cm wavelength photon. The 21 cm
+transition is thought to be one the most promising probes of the early universe
+due to the fact that it the frequency of observed radiation maps to a specific
+redshift. It has the potential to map the never before seen dark ages
+($z\tilde{30}$), where the first galaxies and stars were beginning to form, as
+well as when the Epoch of Reionization (EoR), when neutral hydrogen was
+completely ionized by the photons emitted by the first sources. The wealth of
+information that can be obtained from the use of this optically thin transition
+include the formation of the first stars and galaxies, neutrino masses, and
+initial inflation power spectrum, amongst other cool science. Using 21 cm to map
+the universe has the ability to surpass the Cosmic Microwave Background (CMB) in
+terms of the wealth of science it can deliver. Refer to
+\cite{furlanetto_et_al2006}, \cite{morales_wyithe2010}, and
+\cite{pritchard_loeb2012} for reviews on using the 21 cm transition as a
+cosmological probe.
 
-The current best upper limit on 21 cm signal level is at $(41 mK)^{2}$ at
-$k=.27 h \text{Mpc}^{-1}$ which was measured by PAPER in a 32 antenna redundant
-configuration (\cite{parsons_et_al2014a}). This limit was acheived by using the
-delay-spectrum technique to remove foregrounds and using the  maximum
-redundancy array to repeatedly measure the same fourier mode, boosting
-sensitivity. In this analysis we employ the same techniques mentioned, as well
-is introduce an optimal fringe-fringe rate filter to  boost sensitivity and
-make use of improved calibration via the Omnical redundant calibrator package. 
-Additionally, we employ optimal quadratic estimators to make our power spectrum
-estimates.
+There are two different approaches to probe the 21 cm transition - via
+statistical power spectrum measurements or by measuring the \emph{global} 21 cm
+signal, which is the mean of the signal over the entire sky. Both of these
+techniques have their merits and many experiments are aimed to detect neutral
+hydrogen during EoR and the dark ages. GMRT (\cite{paciga_et_al2011}),
+LOFAR(\cite{rottgering_et_al2006}), MWA(\cite{tingay_et_al2013}),
+PAPER(\cite{parsons_et_al2010}), and 21CMA are all aiming for the power spectrum
+detection of the fluctuations in the 21 cm line, whereas experiments like EDGES
+(\cite{bowman_et_al2010}, LWA, LEDA (\cite{lincoln_bernardi_2012}, DARE
+(\cite{burns_et_al2012} , and SciHi (\cite{tabitha_et_al2014}) are after the
+mean brightness temperature of 21 cm relative to the CMB background. 
 
-The paper is outlined as follows. In section \ref{sec:observations} we describe
-the observations used in this analysis. In \ref{sec:improvements} we discuss the
-improvements in this pipeline with respect to the previous analysis of PSA-32
-\cite{parsons_et_al2014a}. We then move on to the data analysis pipeline in
-section \ref{sec:analysis}. Seciton \ref{sec:results} describes the results of
- our efforts and provides new contraints on EoR. We conclude in
-\ref{sec:conclusion}.
+Like CMB experiments, foreground contamination is a major concern for 21 cm
+experiments. Sources of foregrounds for these low frequency experiments include
+synchrotron radiation from the Milky Way, extragalactic radio sources and
+supernova remanants. Since all 21 cm experiments are low frequency by nature
+(ranging from 50MHz - 200MHz), emission from these foregrounds drastically
+drowns out the faint EoR signal by atleast 5 orders of magnitude
+(\cite{furlanetto_et_al2006}, \cite{santos_et_al2005}) at these frequencies; the
+sky is much brighter at low frequencies than higher frequencies owning the the
+power law spectral distrbutions of sources. However, because the brightest
+foregrounds are spectrally smoothe, many techniques have been developed to use
+this fact to isolate and remove foregrounds (\cite{morales_et_al2006a},
+\cite{bowman_et_al2009}, \cite{liu_et_al2009}, \cite{liu_tegmark2011},
+\cite{parsons_et_al2012b},\cite{dillon_et_al2013a}).
+
+Currently, the best statistical upper limit on the 21 cm power spectrum was made
+with PAPER and is held at $(41 mk)^{2}$ at $k=.27 h \text{Mpc}^{-1}$. However,
+all major 21 cm experiments (LOFAR, MWA, and PAPER) are at the cusp of detection
+and all have the sensitivity to rule out the optimistic reionization scenarios.
+However, even with a detection from anyone of these experiments, the
+characterization of the 21 cm power spectrum and imaging of EoR will have to
+wait until future 21 cm experiments such as the Hydrogen Epoch of Reionization
+Array (HERA) and the Square Kilometer Array (SKA) which will have more raw
+collecting area and greater sensitivity. 
+
+In addition to using the 21 cm transtion as a probe of the early universe, and
+specifically EoR, the CMB and the Gunn-Peterson effect can also be used to
+constrain reionization. The Gunn-Peterson effect toward distant quasars gives
+the constraint that the intergalactic medium (IGM) was fully ionized by $z=6$
+(\cite{fan_et_al2006}). In addition, Planck results of the optical depth
+parameter...
+
+This paper reports on the results from the Donald C. Backer Array for Probing
+the Epoch of Reionization (PAPER) -  64 antenna dual polarization minimum
+redundancy configuration.  The paper is outlined as follows. In section
+\ref{sec:observations} we describe the observations used in this analysis. In
+\ref{sec:improvements} we discuss the improvements in this pipeline with respect
+to the previous analysis of PSA-32 \cite{parsons_et_al2014a}. We then move on to
+the data analysis pipeline in section \ref{sec:analysis}. Seciton
+\ref{sec:results} describes the results of our efforts and provides new
+contraints on EoR. We conclude in \ref{sec:conclusion}.
 
 
 \section{Observations}\label{sec:observations}
@@ -98,18 +117,19 @@ Here, we describe the chief features of the data set used in this analysis.
 We use data taken while PAPER consisted of 64 dual polarization antennas
 deployed in the Fall of 2012, arranged in a maximally
 redundant configuration as seen in Figure \ref{fig:antenna_positions}. The
-correlator process all 64 dual polarization antennas with 100 MHz of 
+correlator cross correlates all 64 dual polarization antennas with 100 MHz of 
 instantaneous bandwidth ranging from 100-200MHz channelized to 1024
 channels. We write data for both X and Y polarization as well as their cross
 products, but this analysis focusses on the XX and YY polarizations. 
 
-We rely on all 2016 baselines for the calibration procedure to, but only use a
+We rely on all 2016 baselines for the calibration procedure, but only use a
 subset of the baselines for the power spectrum analysis. This subset encompases
 3 separation types; the shortest spaceing east-west baselines (e.g. 41-47) and
 those of the same type except slanted up and down one row (e.g. 10-41 and 10-58,
 respectively). Baselines in each of the 3 separation types (or redundant groups)
 are instantaneously redundant within the group and therefore measure the same
-fourier modes on the sky. 
+fourier modes on the sky. This allows us to coherently add fourier modes,
+building sensitivity as $N$  rather than $\sqrt{N}$.
 
 The observation of this 64 antenna data set spanned a 135 day period that
 commenced on 2012 November 8 (JD62456240) and ended  2013 March 23 (JD62456375). 
@@ -137,7 +157,7 @@ the data volume of our raw data. This step, described in the appendix of
 calibrate on the basis of redundancy before using self-calibration
 to solve for the absolute phase and gain parameters. After suppressing
 foregrounds with a wide-band delay filter, we average the data in local
-sidereal time and apply a frine rate filter to optimally combine the
+sidereal time and apply a fringe rate filter to optimally combine the
 time domain data. Finally, we use optimal quadratic estimators to make our
 estimate of the 21 cm power spectrum.  Figure \ref{fig:analysis_pipeline} shows
 a block diagram of the analysis pipeline and includes some information on
@@ -162,22 +182,6 @@ simuations and signal loss.
 %         lossless. This is an important point!  
 %       --In addtion, because gains are normalized to have a unity magnitude the
 %         input arn output flux scale are the same. (This is an omnical thing)
-
-PAPER's highly redundant configuration lends itself to
-use the redunancy in baselines for a relative calibration. Multiple baselines of
-the same length and orientation measure the same sky signal. 
-On this basis, all of the differences between baselines of a
-given unique baseline type are attributed to differences in signal chain, which
-include variations in antennas, cables, and receivers, and are calibrated
-out. This leads to a relative calibration solutions that relate the antennas
-within the array. Redundant calibration does not give absolute solutions, and
-therefore we are not able to phase to a source, for example, after applying
-these solutions. Redundant calibration inherently preserves common mode signal between
-redundant baselines, and therefore this type of calibration is necessarily
-lossless. 
-
-
-
 %         
 %    -What can we solve for and what can't we solve for. We can solve for the
 %     relative complex gains between antennas, but not the absolute gain and phase.
@@ -188,14 +192,22 @@ lossless.
 %       --Therefore, we cannot solve for the absolute phase and gain of the
 %         array. There is not enough information.
 %       --Absoulte phase and gain calibration are addressed in later sections.
-Redundant calibration is a relative calibration procedure, hence we can only
-solve for the relative complex gains between antennas. Redundant calibration
-does not set an absolute phase or gain scales due to the fact that it only
-knows about other antennas, not absolute sky. Hence, there needs to be a second
-round of calibration which folds in information about the sky to solve for the
-absolution phases in order correctly phase to sourcese on the celestial sphere.
-
 %
+
+PAPER's highly redundant configuration lends itself to
+use the redunancy in baselines for a relative calibration. Multiple baselines of
+the same length and orientation measure the same sky signal. 
+On this basis, all of the differences between baselines of a
+given unique baseline type are attributed to differences in signal chain, which
+include variations in antennas, cables, and receivers, and are calibrated
+out. This leads to relative calibration solutions that relate the antennas
+within the array. Hence, there needs to be a second round of calibration which
+folds in information about the sky to solve for the absolution phases in order
+correctly phase to sourcese on the celestial sphere. Redundant calibration
+inherently preserves common mode signal between redundant baselines, and
+therefore this type of calibration is necessarily lossless. 
+
+
 %    -Summary of the procedure of redundant calibration. This should be mixed in
 %     with the equations from Zheng et. al.
 %       --Two flavors of redundant calibration : logcal and lincal. Cite
@@ -214,17 +226,18 @@ Practiaclly, redundant calibration takes on two flavors, log calibration (logcal
 linear calibration (lincal) (\cite{liu_et_al2010,zheng_et_al2014}). Logcal, takes
 the logarithm of the visibility measured by an interferometer (equation 4 of
 \cite{zheng_et_al2014}) to give a linearized system which can then be fit to
-using linear least square. We end up fitting 
+using linear least square. We are fitting 
 \begin{equation}
     \log{v_{ij}} = \log{g_{i}^{*}} + \log{g_{j}} + \log{y_{i-j}},
 \end{equation}
 where the $g_{i}$'s are the
 complex gains of each antenna and $y_{i-j}$ is the visibility of the given
 baseline if it measured the perfect sky. Redundancy gives us an overconstrained
-system of equations and we can thus solve for complex gains from each antenna.
-In addition we also get a model visibility of for a given given baseline.
-Averaging these models together for redundant baselines gives us a an estimate
-of our model visibility for a given baseline type.
+system of equations and we can thus solve for complex gains from each antenna
+using traditional linear algebra techniques.  In addition we also get a model
+visibility of for a given given baseline.  Averaging these models together for
+redundant baselines gives us a an estimate of our model visibility for a given
+baseline type.
 
 Lincal taylor expands the visibility around some initial estimates of the gains
 and model visibilities.  The benefit of lincal is that it is not a biased
@@ -1094,24 +1107,10 @@ result.
 %
 %XXX need to check lst range. 
 
-There are inherent covariances in the data between baselines and frequencies.
-Figure \ref{fig:covariances} shows these covariances estimated empirically from
-the data itself. This estimate is the outer product of our data vector with
-itself and in our case, this averagse per baseline visibilities of a unique type
-over time. Hence, the quality of the estimate of the data covariance matrix
-depends on the number of independent modes we are averaging over. After
-fringe-rate filtering, the number of independent modes  decreases significantly,
-leaving us with only ~20 independent measurements over the lst range
-we are considering. This reduction in modes leads to a noisy estimate of the
-covaraince matrix. This leads to a broader problem in this type of analysis: the
-fact that we estimate our covariances from the data and do not know the true
-covariance matrix itself, leads to signal loss. Knowing the true covaraiance of
-a data set requires complete knowledge of the instrument and the sky. 
-
 We now discuss the issues of empirically estimating the covariance matrix from
 the data. For a single baseline, the data vector $\x$, consists of 10 Mhz
 bandwidth centered at 151.72 MHz, equating to 20 frequency channels.
-All time samples are also kept ranging from 0 to 10 LST hours. Again, we
+All time samples are also kept, ranging from 0 to 10 LST hours. Again, we
 estimate the covariance in the usual way, $\C = \expval{\x\x^{\dagger}}$, taking
 the ensemble average over time. The covariance matrix for this baseline is a
 $N_{ch}\times N_{ch}$ matrix consisting of the covariances of all channels with
@@ -1120,9 +1119,14 @@ requires it to be a rank $N_{ch}$ matrix. This occurs only if there are $N_{ch}$
 independent modes. 
 
 As noted in section \ref{sec:frf} the optimal fringe rate filter corrsponds to
-averageing time samples for roughly 30 minutes. Over the 10 hour LST range used in this
-analysis, this corresponds to ~20 independent modes on the sky. This is a
-fundamental limit of the amount of information we have. 
+averageing time samples for 31 minutes. Over the 10 hour LST range used in this
+analysis, this corresponds to approximately 20 statistically independent modes
+on the sky. This is a fundamental limit of the amount of information we have in
+our measurements. Coincidentally, the covariance matrix for a given baseline is
+an $N_{ch} \times N_{ch}$ matrix, where $N_{ch}=20$.  Therefore, the covariance
+matrices for every baseline are infact invertible because they are full rank 
+and contain 20 statistically independent measurements of the sky. The covariance
+matrix is thus invertible and can be applied to the data vectors, $\x$. 
 
 %
 %   -Potential for signal loss.
@@ -1130,12 +1134,11 @@ fundamental limit of the amount of information we have.
 %         Because we are tweaking this method, and the fact that we have non
 %         gaussian systematics in our data, there is a potential for signal
 %         loss. 
-Secondly, our estimate of the covariance matrix by the limited
-number of independent modes we observe in our data. Hence, there is a high
-possibility of signal loss. In order to quntify the signal loss in our analysis,
-we run simulations of an injected eor signal through our pipeline. This will be
-discussed further below.
-
+Even though we have encountered a fortuitous event in having full rank
+covariance matrices, we are still estimating our covariance matrix using a
+limited sample size. This limitation leads to an imperfect characterization of
+the covariances between modes and ultimately leads to signal loss in this type
+of analysis. 
 
 %   -Simulations
 %       --In order to show the degree that there could be signal loss, we run
@@ -1152,47 +1155,47 @@ discussed further below.
 %         Since we don't see signal in the actual data, we can say that we have
 %         not detected the EOR signal yet.
 
-In order to understand the degree of signal loss due to our empirical estimates of
-the covariances, we simulate the injection of an eor model and measure the
-signal loss associated with running the full covariance analysis. These
-simulations consist of injecting a model eor signal on top of the the data and
-running through our power spectrum estimator. In order to quantify this, we
-subtract the final power spectrum from one that had no model injection to
-measure the final injected signal power spectrum. Comparing this to the input
-data gives us an estimate of the signal loss associated with our pipeline.
+We now characterize this signal loss by running simulations through our power
+spectrum pipeline.  In order to understand the degree of signal loss due to our
+empirical estimates of the covariances, we simulate the injection of an eor
+model and measure the signal loss associated with running the full covariance
+analysis. These simulations consist of injecting a model eor signal on top of
+the data and running through our power spectrum estimator. In order to
+quantify this, we subtract the final power spectrum from one that had no model
+injection to measure the final injected signal power spectrum. Comparing this to
+the input data gives us an estimate of the signal loss associated with our
+pipeline.
 
 %XXX Carina's Text of the eor model goes here.
-In order to effectively characterize signal loss in our analysis pipeline, we
-simulate visibilities that accurately capture the instrumental effects of PAPER
-for the frequency bins (used in this paper?). The signal injected into the
-simulation is comprised of two components - an artificial power spectrum P(k)
-and frequency extrapolated galactic foregrounds from the Global Sky Model (GSM)
-(de Oliveira-Costa et al. 2008). The injected power spectrum is flat in P(k) for
-a k-range of 0.1-10 $\text{hMpc}^{-1}$, and the angular power spectrum is computed from
-this (\cite{datta_et_al2007, lewis_challinor_2007}), ensuring correlation in
-frequency/redshift for the power spectrum maps. PAPER visibilities are simulated
-for both the GSM and power spectrum maps by explicitly integrating fringes on
-the sky every 42.8s for an East-West baseline of 30m.
+The model eor signal used was a simulation of a flat power spectrum, in P($k$),
+from $k$-modes ranging from .1-10 $\text{hMpc}^{-1}$. From this an angular power
+spectrum is computed (\cite{datta_et_al2007, lewis_challinor_2007}), ensuring
+correlation in frequency/redshift for the power spectrum maps. Visibilities are
+then simulated for this power spectrum map by explicitly integrating fringes on
+the sky every 42.8 seconds for an East-West baselin of 30 m.
+
+By using these simulations, we vary the amplitude of the eor signal input into
+the oqe by multiplying by a scalar to each simulated visibility. Figure
+\ref{fig:simulate} shows that the signal loss is monatonic with increasing
+input signal amplitude. With this we argue that if there was an eor signal at
+any substatial level, a detection would have been made. Because our power
+spectra are still consistent with zero, we conclude that a positive detection of
+EoR has not been made. 
+%In order to effectively characterize signal loss in our analysis pipeline, we
+%simulate visibilities that accurately capture the instrumental effects of PAPER
+%for the frequency bins used in the analysis. The signal injected into the
+%simulation is comprised of two components - an artificial power spectrum P(k)
+%and frequency extrapolated galactic foregrounds from the Global Sky Model (GSM)
+%(de Oliveira-Costa et al. 2008). The injected power spectrum is flat in P(k) for
+%a k-range of 0.1-10 $\text{hMpc}^{-1}$, and the angular power spectrum is computed from
+%this (\cite{datta_et_al2007, lewis_challinor_2007}), ensuring correlation in
+%frequency/redshift for the power spectrum maps. PAPER visibilities are simulated
+%for both the GSM and power spectrum maps by explicitly integrating fringes on
+%the sky every 42.8s for an East-West baseline of 30m.
 
 
-Figure \ref{table:pspec_sig_loss} tabulates the signal loss associated with our
-powerspectrum pipeline as a function of the input signal level. We tabulate this
-as a function of $k$. 
-
-\begin{table}[!h]
-\caption{Table of signal loss associated with the power spectrum pipeline as a
-function of the input signal level.}
-\begin{center}
-\begin{tabular}{|c|c|c|c|c|c|c|}
-\hline 
-a&a&a&a&a&a&a\\
-\hline
-\end{tabular}
-\end{center}
-\label{table:pspec_sig_loss}
-\end{table}%
-
-
+%Need to argue that the detections are not gaussian and therefore are not eor
+%detections.
 
 
 %   -Maybe : Problem of low noise measurements in this method of analysis i.e.
@@ -1250,19 +1253,30 @@ baseline samples from the output of the quadratic estimator.
 
 
 
-%A more rigorous calibrations. Forward Ref.
-%omnical
-%lstbinning with chi-sq weighting
-%horizon cut at 200ns = 100 + 100 (instead of 100 + 15)
-%optimal fringe-rate filtereing
-%want the 4(5?) figures in this section. Incrementally step back through improvement points.
-
-
 
 \section{Results}
 
 %   -Tsys, and Tsys vs. time ?
-\subsection{Noise Levels}
+\subsection{Noise Levels}   
+During the LST binning step, the variance of the visibilities on a frequency and
+time basis, are recorded. Using these variance, we calculate the system
+temperature as a function of LST, averaging over each LST hour. Figure
+\ref{fig:tsys} shows the results of this calculation. In this observing season,
+the system temperature decreased significantly, coming down to $T_{sys} = 375K$
+at 160 MHz, as compared to \cite{parsons_et_al2014a,jacobs_et_al2014a}, which
+used the PAPER 32 antenna data set and deduced a system temperature of 560K at
+160 MHz.
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\columnwidth]{plots/tsys.png}
+\caption{System temperature as a function of time.}
+\label{fig:tsys}
+\end{figure}
+
+Offer some thoughts on why this system temperature came down.
+
+
+
 %
 %   -Final Pspecs and from various stages 
 %       --before/after omnical: Data in
@@ -1286,10 +1300,10 @@ baseline samples from the output of the quadratic estimator.
 
 \subsection{Power Spectrum}
 Figure \ref{fig:final_pspec} shows the speherically averaged power spectrum we
-measure. 
-Figure \ref{fig:final_posterior} shows the posterior distribution of the power
-spectrum by fitting a flat (in $\Delta^{2}$) curve to the powerspectrum
-assuming gaussian error bars.
+measure. Figure \ref{fig:final_posterior} shows the posterior distribution of
+the power spectrum by fitting a flat (in $\Delta^{2}$) curve to the
+power spectrum assuming gaussian error bars. The posterior distribution uses all
+of the data points to determine the 2 sigma upper limit in EoR.
 %
 %   -Implications for polarized foregrounds.
 %       --Flip this around on David and James : We don't see anything at this
@@ -1307,7 +1321,7 @@ assuming gaussian error bars.
 \end{figure*}
 
 \begin{figure}[h!]\centering
-\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/flat_k3pk_posterior.png}
+\includegraphics[width=\columnwidth]{plots/flat_k3pk_posterior.png}
 \caption{The posteriror distributiom assuming a flat, gaussian spectrum in $\Delta^{2}$.}
 \label{fig:final_posterioir}
 \end{figure}
@@ -1342,17 +1356,59 @@ assuming gaussian error bars.
 %
 %
 
+Here, we discuss the effect to the power spectrum if various stages of the
+analysis were kept out. Specifically, we will discuss the effects of using
+Omnical and optimal fringe rate filtering vs. not using them. This will give a
+sense of how different analyses effect the power spectrum.
 
-\begin{figure}[h!]\centering
-\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/pk_k3pk_nomni.png}
+The merits of using omnical were described above and it has the effect of
+bringing redundant baselines into better agreement with one another by
+calibrating out the differences between them. With this picture, we expect
+that for the power spectrum, error bars would become tighter. That is the
+noise in the measurement would be reduced. Comparing P($k$) for data that has
+been Omnical calibrated vs data that has not, but does have the redundant
+calibration that was used in \cite{parsons_et_al2014a} applied to it, we see that
+the error bars have decreased. This is shown in figure \ref{fig:pspec_nomni}.
+Note that the error bars shrink for the higher $k$-modes, the error bars for the
+2 modes outside of the horizon do not have this systematic reduction because of
+the wideband delay filter. The wideband delay filter is applied after the
+calibration solutions have been applied to the visibilities and the 2 modes
+outside of the horizon are artifacts of the foregrounds leaking outside of the
+horizon. 
+
+\begin{figure}[t!]\centering
+\includegraphics[width=\columnwidth]{plots/pk_k3pk_nomni.png}
 \caption{Power spectrum with no omnical applied. Does have optimal fringe rate
-        filtering}
+        filtering. This plot should be a side by side comparison with and
+        without omnical.}
 \label{fig:pspec_nomni}
 \end{figure}
 
+Optimal fringe rate filtering is a new technique that we have employed in our
+analysis and the effect it has on the power spectrum is crucial, considering it
+has a sensitivity benefit of a factor of 2. First of all, this fringe rate
+filter improves the SNR by a factor of 2 for PAPER, increasing the total
+sensitivity of our measurement. Briefly, the filter does this by up weighting
+parts of the sky that are illuminated by the primary beam and down weighting
+parts of the sky that contain more noise. This has the effect of de noising the
+data. Figure \ref{fig:pspec_nofrf} shows the effect of minimal fringe rate
+filtering. The filter applied here is the same as described in
+\cite{parsons_et_al2014a}. It evenly weights fringe rates from 0 to $f_{max}$,
+where $f_{max}$ is the maximum fringe rate possible for a given baseline and
+frequency, discarding negative fringe rates. As can be seen in figure
+\ref{pspec:nofrf}, the power spectrum in $\Delta^{2}$ comes down by a factor of
+2-3. The two modes outside of the horizon, which are dominated by foregrounds
+and are clear detections, also come down. The fact that these come down, implies
+that the foregrounds are down in the beam possibly near the horizon. Therefore,
+the signal there is attenuated by the use of this fringe rate filter. 
 
-\begin{figure}[h!]\centering
-\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/pk_k3pk_nofrf.png}
+It is interesting that at $k\approx.25$, we get a detection of something that
+wasnt there before. Foregrounds? probably low level systematics we are hitting
+up against. Going to take some convincing...
+
+
+\begin{figure}[t!]\centering
+\includegraphics[width=\columnwidth]{plots/pk_k3pk_nofrf.png}
 \caption{Power spectrum without optimal fringe rate filtering. Has omnical
 applied to it}
 \label{fig:pspec_nofrf}
