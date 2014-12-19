@@ -119,7 +119,15 @@ the data analysis pipeline in section \ref{sec:analysis}. Seciton
 \ref{sec:results} describes the results of our efforts and provides new
 contraints on EoR. We conclude in \ref{sec:conclusion}.
 
+\begin{figure*}[!t]\centering
+\includegraphics[width=1.85\columnwidth,height=\columnwidth]{plots/antenna_positions.png}
+\caption{Antenna positions for the PAPER 64 observation run.}
+\label{fig:antenna_positions}
+\end{figure*}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Observations}\label{sec:observations}
 PAPER is a driftscan array deployed at the Square Kilometer Array South Africa
 (SKA-SA) reseve in the Karoo desert located at (21:25:41:9,
@@ -130,7 +138,9 @@ layout (see figure \ref{fig:antenna_positions}) where multiple baselines measure
 the same fourier mode on the sky
 (\cite{parsons_et_al_2012},\cite{parsons_et_al2014a}). The PAPER antennas are a
 cross-dipole design in which both polarizations (X and Y) are processed
-independently. 
+independently. The PAPER beam is speactrally and spatially smooth down to the
+horizon with a $60^{\circ}$ FWHM (\cite{jacobs_et_al2011},
+\cite{parsons_et_al2010}, \cite{stefan_et_al2013}). 
 
 The PAPER-64 correlator processes a 100 MHz to 200 MHz bandwidth, first
 channelizing the 100 MHz band into 1024 channls of width 97.6 kHz, and then
@@ -148,12 +158,12 @@ analaysis described here only apply to the XX and YY polariztion products.
 We rely on all 2016 (for each polariztion) baselines for the calibration
 procedure, but only use a subset of the baselines for the power spectrum
 analysis. This subset encompases 3 separation types; the shortest spaceing
-east-west baselines (e.g. 41-47) and those of the same type except slanted up
-and down one row (e.g. 10-41 and 10-58, respectively). Baselines in each of the
-3 separation types (or redundant groups) are instantaneously redundant within
-the group and therefore measure the same fourier modes on the sky. This allows
-us to coherently add fourier modes, building sensitivity as $N$  rather than
-$\sqrt{N}$.
+east-west baselines (e.g. 41-47) and those of the same East-West column spacing,
+except slanted up and down one row (e.g. 10-41 and 10-58, respectively).
+Baselines in each of the 3 separation types (or redundant groups) are
+instantaneously redundant within the group and therefore measure the same
+fourier modes on the sky. This allows us to coherently add fourier modes,
+building sensitivity as $N$  rather than $\sqrt{N}$.
 
 The observation of this 64 antenna data set spanned a 135 day period that
 commenced on 2012 November 8 (JD62456240) and ended  2013 March 23 (JD62456375). 
@@ -168,12 +178,6 @@ Figure \ref{fig:coverage} shows our observing field with the contours labeling
 the beam weighted observing time relative to the peak, directly over head the
 array.
 %XXX lst range will change.
-
-\begin{figure*}[!t]\centering
-\includegraphics[width=1.85\columnwidth,height=\columnwidth]{plots/antenna_positions.png}
-\caption{Antenna positions for the PAPER 64 observation run.}
-\label{fig:antenna_positions}
-\end{figure*}
 
 \begin{figure*}[!t]\centering
 \includegraphics[width=2\columnwidth,height=\columnwidth]{plots/coverage.png}
@@ -199,8 +203,14 @@ estimate of the 21 cm power spectrum.  Figure \ref{fig:analysis_pipeline} shows
 a block diagram of the analysis pipeline and includes some information on
 simuations and signal loss.
 
-\subsection{Calibration}\label{sec:calibration}
-\subsubsection{Redundant Calibration}
+\section{Calibration}\label{sec:calibration}
+The calibration procedure employed in this analysis is twofold: a relative
+calibration and an absolution calibration. The relative calibration employed
+uses the fact that PAPER contains numerous redundant baselines. As usual, the
+absolute calibration uses the usual self calibration methods employed by radio
+interferometers. Here we describe both procedures.
+
+\subsection{Relative Calibration}
 %    -Principles of redundant calibration. Fact that there is no signal loss in
 %       this kind of measurement.
 %       --PAPER has a redundant configuration. Therefore the number of baselines
@@ -230,18 +240,18 @@ simuations and signal loss.
 %       --Absoulte phase and gain calibration are addressed in later sections.
 %
 
-PAPER's highly redundant configuration lends itself to
-use the redunancy in baselines for a relative calibration. Multiple baselines of
-the same length and orientation measure the same sky signal. 
-On this basis, all of the differences between baselines of a
-given unique baseline type are attributed to differences in signal chain, which
-include variations in antennas, cables, and receivers, and are calibrated
-out. This leads to relative calibration solutions that relate the antennas
-within the array. Hence, there needs to be a second round of calibration which
-folds in information about the sky to solve for the absolution phases in order
-correctly phase to sourcese on the celestial sphere. Redundant calibration
-inherently preserves common mode signal between redundant baselines, and
-therefore this type of calibration is necessarily lossless. 
+The highly redundant configuration of PAPER lends itself to
+use the redunancy in baselines for a relative calibration between anteannas.
+Multiple baselines of the same length and orientation measure the same sky
+signal. On this basis, all of the differences between redundant baselines are
+attributed to differences in the signal chain, including effects from variations
+in antennas, cables lengths, and receivers. These are the variations that are
+calibrated out and leads to relative calibration solutions between all the
+antennas within the array.  Note that this relative calibration using redundancy
+(i.e. redundat calibration) only constrains the relative complex gain solutions
+between antennas and has no information about the sky. Furthermore, redundant
+calibration inherently preserves common mode signal between redundant baselines,
+and therefore this type of calibration is necessarily lossless. 
 
 
 %    -Summary of the procedure of redundant calibration. This should be mixed in
@@ -262,8 +272,8 @@ Practiaclly, redundant calibration takes on two flavors, log calibration (logcal
 linear calibration (lincal) (\cite{liu_et_al2010,zheng_et_al2014}). Logcal, takes
 the logarithm of the visibility measured by an interferometer (equation 4 of
 \cite{zheng_et_al2014}) to give a linearized system which can then be fit to
-using linear least square. We are fitting 
-\begin{equation}
+using linear least square. We are fitting to
+\begin{equation}\label{eqn:logcal}
     \log{v_{ij}} = \log{g_{i}^{*}} + \log{g_{j}} + \log{y_{i-j}},
 \end{equation}
 where the $g_{i}$'s are the
@@ -276,8 +286,16 @@ redundant baselines gives us a an estimate of our model visibility for a given
 baseline type.
 
 Lincal taylor expands the visibility around some initial estimates of the gains
-and model visibilities.  The benefit of lincal is that it is not a biased
-estimator as opposed to logcal which takes the logarithm of additive noise.
+and model visibilities via the equation 
+\begin{equation}\label{eqn:lincal}
+v_{ij} = g_{i}^{0*}g_{j}^{0}y_{i-j}^{0} + g_{i}^{1*}g_{j}^{0}y_{i-j}^{0} +
+         g_{i}^{0*}g_{j}^{1}y_{i-j}^{0}+g_{i}^{0*}g_{j}^{0}y_{i-j}^{1},
+\end{equation}
+where the $0$ indexes are the intial estimates and the $1$ indexes are the
+solutions we fit for. In the implementation, described below, the initial
+estimates of the solutions are taken as the outputs of logcal. The benefit of
+lincal is that it is not a biased estimator as opposed to logcal which takes the
+logarithm of additive noise(\cite{liu_et_al2010}).
 
 %    -How was this calibration applied to the data. 
 %       --Using omnical package. Give credit jeff and url to omnical. Cite
@@ -293,13 +311,11 @@ estimator as opposed to logcal which takes the logarithm of additive noise.
 %                          frequency.
 
 Implementaion of redundant calibration was done with the ${Omnical}$ package, an
-open source redundant calibration package written by Jeff
-Zheng \footnote{https://github.com/jeffzhen/omnical}\cite{zheng_et_al2014}. This
-package implements both logcal and lincal with an incredible speed up from
-the previous homegrown routine used in \cite{parsons_et_al2014a}. Figure
-\ref{fig:omniview} shows complex visibilites after complex gain solutions
-derived from Omnical were applied to the uncalibrated visibilities. This
-comparison shows the merrit of using Omnical.
+open source redundant calibration package written by Jeff Zheng
+\footnote{https://github.com/jeffzhen/omnical}\cite{zheng_et_al2014}. This
+package implements both logcal and lincal, solving for a complex gain solution
+per antenna, frequency, and integration. The per integration solutions are then
+applied to visibilities and the results are shown in \ref{fig:omniview}.
 
 \begin{figure*}
 \centering
@@ -308,12 +324,40 @@ comparison shows the merrit of using Omnical.
 \label{fig:omniview}
 \end{figure*}
 
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth]{plots/august_chi2.png}
+\caption{chi squared}
+\label{fig:chi2}
+\end{figure}
 
 
-XXXadd in duscussion about removing additive offsets and time cadence of
-that)XXX.
+In addition to solving for gain solutions, Omnical also characterizes the
+quality of the calibration by calculating the $\chi^{2}$ for every integration.
+Figure \ref{fig:chi2} shows the $\chi^{2}$ squared waterfall for a full
+nights worth of calibrations. From \cite{zheng_et_al2014}, the
+$\chi^{2}/\text{DoF}$, where $\text{DoF} = 2N_{baselines} - 2(N_{antennas} +
+N_{\text{unique basleines}} $ is the number of degrees of freedom. For a good
+fit, the $\chi^{2}/DoF$ is drawn from a mean 1 distribution with variance
+$\frac{2}{\text{DoF}}$. The distribtuion of the $\xi^{2}$ in figure
+\ref{fig:chi2} has a mean of 2, meaning that the fit was not the best to what
+our noise model is.
+The noise model used was obtained from the variance statistic calculated during
+the binning of days in local sidereal time, which occurs after the
+application of crosstalk removal, combining X and Y polarization, and the
+wideband delay filter. Hence, the noise model may not be well suited for the
+$\chi^{2}$, and is a likely reason that the distribution has a mean of 2.
+%XXX This may change and we may get a chi-squared of around one.% 
 
-\subsubsection{Absolute Phase Calibration}
+The calibration parameters solved for in Omnical also have a time independent
+additive offset associated with them, This additive offset is associated with
+crosstalk between antennas, especially the shorter north south baselines.
+To remove this crosstalk, Omnical calculates an averaged (over ten minutes)
+additive offset that it subtracts from each visibility before running fitting
+for solutions once again. This additive offset is in effect averaging deviations
+from the $chi^{2}$ over 10 minutes and subtracting that deviation off.
+
+\subsection{Absolute Calibration} 
 %    -Selfcal to pictor, fornax, and crab (to get the north-south components).
 %       --Reiterate that redundant cal does not solve for the overall flux and
 %         phase parameters. 
@@ -328,14 +372,14 @@ that)XXX.
 %    -Diagnostic Plots: Show Field image from Bernardi. This will give
 %     confidence in a good absolute phase calibration.
 
-After solving for the relative phases and gains of the antennas using redcal, an
+After solving for the relative complex gains of the antennas using redcal, an
 overall phase and gain calibration needs to be solved for. We use the standard self
-calibration (selfcal) method for radio interferometers to solve for
-these over all parameters. The absolute phase calibration was solved for using using 
-Pictor A, Fornax A, and Crab Nebula. Figure \ref{fig:field_image} shows an
-image of the field with Pictor A (5:19:49.70, -45:46:45.0)  and Fornax A
+calibration (selfcal) method for radio interferometers to solve for the absolute
+phase calibration. We used Pictor A, Fornax A, and Crab Nebula in our selfcal
+fit for the overall phase solutions. Figure \ref{fig:field_image} shows an image
+of the field with Pictor A (5:19:49.70, -45:46:45.0)  and Fornax A
 (3:22:41.70,-37:12:30.0). The measured source positions are the same as the the
-catalogue positions for these sources.XXX make sure of this statementXXX
+catalogue positions for these sources.
 
 \begin{figure}
 \centering
@@ -345,7 +389,6 @@ catalogue positions for these sources.XXX make sure of this statementXXX
 \end{figure}
 
 
-\subsubsection{Absolute Gain Calibration}
 %    -Calibrated to Pictor A. 
 %       --As before, redundant calibration cannot set a global flux scale. For
 %       our measurements to be correct, we need to set a fluxscale. We use
@@ -371,9 +414,12 @@ catalogue positions for these sources.XXX make sure of this statementXXX
 %        --The measured and theoretical pictor spectrum 
 %        --A comparison to the PSA32 Flux CAL.
 
-As before, redundant calibration does not set a global flux scale to accurately
-measure the brightness of the sky. To set the absolute flux scale, we use Pictor
-A as our calibrator source using the value derived in \cite{jacobs_et_al2013}.
+We then set our over all flux scale by using Pictor A as our calibrator source
+with source spectra as derived in \cite{jacobs_et_al2013}, 
+\begin{equation}
+    S_{\nu} = S_{150}\times\left(\frac{\nu}{150MHz}\right)^{\alpha},
+\end{equation}
+where $S_{150} = 382 \text{Jy} \pm 5.4$ and $\alpha = -.76 \pm .01$.
 
 To derive the source spectrum from our measurements, we use lstbinned data (see
 section \ref{sec:lstbin}) containing foregrounds around the hour where Pictor
