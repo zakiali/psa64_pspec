@@ -419,33 +419,42 @@ with source spectra as derived in \cite{jacobs_et_al2013},
 \begin{equation}
     S_{\nu} = S_{150}\times\left(\frac{\nu}{150MHz}\right)^{\alpha},
 \end{equation}
-where $S_{150} = 382 \text{Jy} \pm 5.4$ and $\alpha = -.76 \pm .01$.
+where $S_{150} = 382 \text{Jy} \pm 5.4$ and $\alpha = -.76 \pm .01$, with
+1$\sigma$ error bars.
 
-To derive the source spectrum from our measurements, we use lstbinned data (see
-section \ref{sec:lstbin}) containing foregrounds around the hour where Pictor
-transits. We image snapshots every 15 minutes for an hour before and after
-transit of Pictor A, imaging every frequency channel. We derive the source
-spectra per snapshot and average these together, weighting by the primary beam
-in the direction of Pic A. We fit a ninth-order polynomial to the measured
-Pictor A spectrum over a frequency range from 120-170MHz. Figure
-\ref{fig:pic_spec} shows that polynomial fit to Pic A for stokes I, the
-measured, and theoretical spectrum for Pictor A.
+
+To derive the source spectrum from our measurements, we use lst averaged data (see
+section \ref{sec:lstbin}) containing foregrounds for the hour before and after from
+where Pictor A transits. We image, in 15 minute snapshots for this data set,
+every frequency channel. The source spectra is derived per snapshot and we average
+these together, weighting by the primary beam in the direction of Pic A to get
+the measured spectrum of Pictor A. To fit our bandpass, we divide the model
+spectrum with ourAmeasured spectrum and fit a ninth-order polynomial over a
+frequency range from 120-170MHz. Figure \ref{fig:pic_spec} shows the derived
+Pictor A spectrum and the model spectrum derived from \cite{jacobs_et_al2013}.
 
 \begin{figure}
 \centering
-\includegraphics[width=\columnwidth]{plots/pic_spec.pdf}
+\includegraphics[width=\columnwidth]{plots/PicA_normalized_spectrum.pdf}
 \caption{Pictor spectrum.}
 \label{fig:pic_spec}
 \end{figure}
 
-XXX Need to include discussion of signal loss due to fitting the polynomial. XXX
-
-
-
-
-
-
-
+Fitting a polynomial to the bandpass has the potential for signal loss which
+would include fitting out some modes of the EoR fluctuations. In order to
+quantify the signal loss associated with fitting a ninth degree polynomial to
+the bandpass, we run a Monte Carlo simulation of the effect the bandpass has on
+an EoR signal. We construct a bandpass resulting from the fitted
+polynomial and add a low level EoR signal on top of that bandpass, modeled as a
+white noise with a unformly varying phase, for each baseline and independent
+time mode due for the beamforming to Pictor A. The total number of independent
+modes we average over before fitting a 9th degree polynomial to the simulated
+signal is 1017, which inlcued number of unique baselines and the number of
+independent modes over the 2 hours we used to measure the spectrum source. We
+finally compare the output amplitude of the EoR signal to the input amplitude in
+power spectrum domain and find that between $-.06 < k < .06$, the signal loss is
+less than $3\%$ and at the mode right outside the horizon is $.0000002\%$. The
+signal loss descreases for higher $k$'s.
 
 %These lists were My bullet points.
 %\begin{itemize}
