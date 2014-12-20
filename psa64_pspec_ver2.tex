@@ -381,7 +381,7 @@ of the field with Pictor A (5:19:49.70, -45:46:45.0)  and Fornax A
 (3:22:41.70,-37:12:30.0). The measured source positions are the same as the the
 catalogue positions for these sources.
 
-\begin{figure}
+\begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{plots/gianni_pic_image.pdf}
 \caption{Image of Pictor.}
@@ -433,7 +433,7 @@ spectrum with ourAmeasured spectrum and fit a ninth-order polynomial over a
 frequency range from 120-170MHz. Figure \ref{fig:pic_spec} shows the derived
 Pictor A spectrum and the model spectrum derived from \cite{jacobs_et_al2013}.
 
-\begin{figure}
+\begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{plots/PicA_normalized_spectrum.pdf}
 \caption{Pictor spectrum.}
@@ -634,7 +634,7 @@ signal loss descreases for higher $k$'s.
 
 
 
-\subsection{Wideband Delay Filtering}\label{sec:wbd_filtering}
+\section{Wideband Delay Filtering}\label{sec:wbd_filtering}
 %   -Can cite Parsons 2014a
 %       --We use the same wbd filter as in Parsons 2014a. That is we do a per
 %         baseline delay filtering with a buffer of 15 nanoseconds. 
@@ -646,18 +646,65 @@ signal loss descreases for higher $k$'s.
 %        --waterfalls of before and after cleaning.
 %        --signal loss vs. k_parallel
 
-For a detailed description of delay filtering, we refer the reader to
-\cite{parsons_backer2009}. In this analysis we use the same wideband delay
-filter as described \cite{parsons_et_al2014a}, namely the horizon limit for a
-given baseline plus a 15 nanosecond buffer to account for leakage of foregrounds
-outside of the horizon. We note that since delay filtering is applied on a per
-baseline basis, the signal loss associated with this type of filter is the same
-as in \cite{parsons_et_al2014a}. We reiterate the results here: there is a 4.8\%
-signal loss for the first mode outside of the horizon, 1.3\% for the next mode
-out, and less than .0015\% for the higher modes.
 
+Before implementing our foreground removal techniques, we combine the two
+polarizations for a course estimate of stokes I as per \cite{moore_et_a2013}.
+Namely, the Stokes I estimate is estimated as $I = .5(XX+YY)$. This estimate
+neglects the beam mismatch between the beam of the two polarizations, which
+leads to polarization leakage from Stokes Q into Stokes I, contaminating the
+measurement. We offer no correction for this, but in turn put some limits on
+polarization leakage discussed later.
 
-\subsection{RFI and Crosstalk Mitigation}\label{sec:rfi}
+Amongst the cornucopia of foreground removal techniques (cite papers) at our
+disposal, we opt for the per-baseline approach of delay filtering described in
+\cite{parsons_et_al2012b}. This technique is well suited for PAPER because it
+doesn't rely on making images and localizing sources for subtraction, which 
+the current maximum redundant configuration of PAPER is not well suited for.
+
+The delay transform method for localizing sources relies on the fact that
+foregrounds are spectrally smooth. For a given visibility, the delay transform
+is defined as the Fourier transform of a visibility with respect to frequency, 
+
+\begin{align}\label{eqn:delay_transform}
+\tilde{V}(\tau) &= \int{W(\nu)S(\nu)A(\nu)B(\nu)I(\nu)
+                   e^{-2\pi{i}\tau_{g}}e^{2\pi{i}\tau\nu}d\nu} \\
+                &= \int{W(\nu)S(\nu)A(\nu)B(\nu)I(\nu)
+                   e^{-2\pi{i}\nu(\tau_{g}-\tau)}d\nu} \\
+                &= \tilde{W}(\tau) \ast\tilde{S}(\tau) \ast \tilde{A}(\tau) \ast
+                   \tilde{B}(\tau) \ast \tilde{I}(\tau) \ast
+                   \delta(\tau_{g} - \tau),
+\end{align}
+where $A(\nu)$ is the frequency dependent beam, $B(\nu)$ is the bandpass,
+$W(\nu)$ is a Blackman-Harris taper function to minimize band edge effects,
+$S(\nu)$ is the frequency sampling function due to RFI flagging  and $I(\nu)$ is
+the source spectrum. In delay domain a source is a delta function at delay
+$\tau_{g}$ convolved by the spectrum shape, the beam, and the bandpass, the
+taper function and the sampling function. The source shape, $A(\nu)$, and
+$B(\nu)$,  imprint a width onto the delta function and leads to leakage of
+power outside of the horizon limits imposed by the baseline length.  As per
+\cite{parsons_et_al2009} and \cite{parsons_et_al_2014a}, we deconvolve the
+kernel resulting from $W(\tau)S(\tau)$ using an iterative CLEAN procedure
+\citep{hogbom1974} restricting CLEAN components to fall within the horizon plus
+a 15 ns buffer for each baseline that accounts for for shape of the source
+spectrum and the use of the limited bandwidth used in the delay transform, which
+is limited by $1/B \approx 10 ns$. To remove the smooth spectrum foreground
+emission we subtract the clean components from the original visibility.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=2.3\columnwidth]{plots/waterfalls.png}
+\caption{Waterfalls of data.}
+\label{fig:waterfalls}
+\end{figure*}
+
+For the 30 m East-West baselines used in the power spectrum analysis,
+foregrounds are suppressed by $\sim$5 orders of magnitude in power,
+effectively getting -50 dB of foreground suppression. The signal loss associated
+with this type of filter is the same as in \cite{parsons_et_al2014a} because we
+are using same filter with the same 15 ns buffer outside the horizon per
+baseline.  We reiterate the results here: there is a 4.8\% signal loss for the
+first mode outside of the horizon, 1.3\% for the next mode out, and less than
+.0015\% for the higher modes.
 
 After the wideband delay filter, we conduct another round of RFI and crosstalk
 removal which was overshadowed by the foreground signal. For RFI excision we
@@ -673,12 +720,8 @@ bias that is crosstalk. For foreground removed data, we do not have this
 complication since bright foregrounds are not dominating the average and are
 able to remove the offset by subtracting shorter sums.
 
-\subsection{Stokes I}
-Before binning in local sidereal time we form the total power stokes I
-measurement (\cite{moore_et_al2013}). 
 
-
-\subsection{LST Binning and Stability}\label{sec:lstbin}
+\section{LST Binning and Stability}\label{sec:lstbin}
 %   -Practicals: bin size, number of days, range of days 
 %       --We LST bin the data over the 120 night data set into time bins of
 %         42.95 seconds. 
@@ -699,9 +742,9 @@ measurement (\cite{moore_et_al2013}).
 
 Once smooth sources have been removed and a final pass of RFI excision and
 crosstalk removal have been performed, the data is averaged in local sidereal
-time (LST) with bins of width 43 seconds to match the integration time of the
-data. The data set consisted of 135 unevenly sampled days with the effective
-number of total days being 123.57. 
+time (LST) with bins of width 43 seconds to match the fringe rate filter applied
+in the compression. The data set consisted of 135 unevenly sampled days with the
+effective number of total days being 123.57. 
 
 Sporadic RFI events can skew individual LST bins away from the median value of
 the sky at a given LST. Therefore, we compute the median in a given LST bin for
@@ -735,7 +778,7 @@ Figure \ref{fig:stability} shows the stability of the instrument as a function
 of time. 
 
 
-\begin{figure}
+\begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{plots/stability.png}
 \caption{Time stability of the instrument.}
@@ -899,7 +942,7 @@ in Figure \ref{fig:fringe_rate_cut}. Figure \ref{fig:fr_preserved_signal} shows
 that the applied filter removes sky associated with negative fringe rates and
 very high fringe rates. 
 
-\begin{figure}
+\begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{plots/fr_filter_slice.png}
 \caption{slice of a fringe rate filter at a frequency of 159MHz. Top is the
@@ -1133,14 +1176,14 @@ modes are indicated by eigenvalues of the corresponding covariance matrix. The
 strongest eigenmodse for foreground contained to foreground filtered data is
 five orders of magnitude, owning to the wideband delay filter.
 
-\begin{figure}[h!]\centering
-\includegraphics[width=\columnwidth, height=\columnwidth]{plots/eig.png}
+\begin{figure*}[t!]\centering
+\includegraphics[width=1.5\columnwidth]{plots/eig.png}
 \caption{Eigenvalues of the covariance matrix from foreground contained data
 (blue) and foreground removed data (green), via the wideband delay filter.
 Correspondingly, the strongest four eigenmodes for foreground contained (top
 right), and foreground remved data (bottom right).}
 \label{fig:eigs}
-\end{figure}
+\end{figure*}
 
 We then construct our optimal estimator by applying equation \ref{eqn:quad_est}
 to the baseline data. In the per baseline application, the optimal quadratic
