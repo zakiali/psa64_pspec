@@ -743,28 +743,28 @@ able to remove the offset by subtracting shorter sums.
 Once smooth sources have been removed and a final pass of RFI excision and
 crosstalk removal have been performed, the data is averaged in local sidereal
 time (LST) with bins of width 43 seconds to match the fringe rate filter applied
-in the compression. The data set consisted of 135 unevenly sampled days with the
-effective number of total days being 123.57. 
+in the compression. The averaged data set consisted of 135 unevenly sampled
+days with the effective number of total days being 123.57. 
 
 Sporadic RFI events can skew individual LST bins away from the median value of
-the sky at a given LST. Therefore, we compute the median in a given LST bin for
-each frequency and flag off data that is 3 sigma outside of that median before
-averaging. This filter mitigates the adverse effects of RFI from dominating a
-LST bin. More generally, the filter mitigates the effects of non gaussianity in
-time. The median statistics used here necessitate that there is no signal
+the sky at a given LST, deviating from gaussian statistics. To catch these
+events, we compute the median of a LST bin for each frequency and flag off 3
+sigma outliers of the median before averaging. This filter mitigates
+the effects of non gaussianity in time, which is most likely due to spurious
+RFI events. The median statistics used here necessitate that there is no signal
 loss due to this filter.
 
-We make two separate lst binned data sets, binning every other julian day
-together, obtaining an "even" and "odd" dataset.  As we will see later, this
-allows us to construct an unbiased power spectrum estimate as well as running
+We make two separate lst binned data sets, averaging every other julian day
+together to obtain an "even" and "odd" dataset. The use of these two data sets
+allows us to conststruct an unbiased power spectrum estimate, as well as running
 jackknife tests on our observations. 
 
-One of the key aspects of the paper instrument is the stability of the
-instrument between baselines and in time. Figure \ref{fig:density} shows for a
-given redundant group of baselines, the spread in the visibilites for all of the
-baselines in that group as a function of LST's. We get more samples per LST bin
-during the lst range of 2-10 hours due to our observing season. For each LST
-bin, the spread in the samples is ~100 Jy.
+One of the key aspects of PAPER is the stability of the instrument between
+baselines and in time. Figure \ref{fig:density} shows for a given redundant
+group of baselines, the spread in the visibilites for all of the baselines in
+that group as a function of LST's. We get more samples per LST bin during the
+lst range of 2-10 hours due to our observing season. For each LST bin, the
+spread in the samples is ~100 Jy.
 
 \begin{figure*}[!t]
 \centering
@@ -1388,27 +1388,9 @@ baseline samples from the output of the quadratic estimator.
 
 
 
-\section{Results}
+\section{Results and Discussion}
 
 %   -Tsys, and Tsys vs. time ?
-\subsection{Noise Levels}   
-During the LST binning step, the variance of the visibilities on a frequency and
-time basis, are recorded. Using these variance, we calculate the system
-temperature as a function of LST, averaging over each LST hour. Figure
-\ref{fig:tsys} shows the results of this calculation. In this observing season,
-the system temperature decreased significantly, coming down to $T_{sys} = 375K$
-at 160 MHz, as compared to \cite{parsons_et_al2014a,jacobs_et_al2014a}, which
-used the PAPER 32 antenna data set and deduced a system temperature of 560K at
-160 MHz.
-
-\begin{figure}[h!]\centering
-\includegraphics[width=\columnwidth]{plots/tsys.png}
-\caption{System temperature as a function of time.}
-\label{fig:tsys}
-\end{figure}
-
-Offer some thoughts on why this system temperature came down.
-
 
 
 %
@@ -1425,7 +1407,25 @@ Offer some thoughts on why this system temperature came down.
 %       --before after foregrounds. There is foreground data in there as well.
 %       SHould we make a foreground run with the non omnical set as well.
 
-
+%   -Future datasets. Things to look forward to.
+%
+%   -HERA
+%
+%   -Relative merrits of foreground avoidance vs fg filtering.
+%
+%   -relative importance of improvements of psa32.
+%
+%   -vamp on consistency with zero.
+%
+%   -Remaining challenges.
+%
+%       --Polarization leakage.
+%       --Sensitivity 
+%       --Seeing foregrounds.
+%
+%
+%
+%
 
 
 
@@ -1460,6 +1460,23 @@ of the data points to determine the 2 sigma upper limit in EoR.
 \label{fig:final_posterioir}
 \end{figure}
 
+\subsection{Noise Levels}   
+During the LST binning step, the variance of the visibilities on a frequency and
+time basis, are recorded. Using these variance, we calculate the system
+temperature as a function of LST, averaging over each LST hour. Figure
+\ref{fig:tsys} shows the results of this calculation. In this observing season,
+the system temperature decreased significantly, coming down to $T_{sys} = 375K$
+at 160 MHz, as compared to \cite{parsons_et_al2014a,jacobs_et_al2014a}, which
+used the PAPER 32 antenna data set and deduced a system temperature of 560K at
+160 MHz.
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\columnwidth]{plots/tsys.png}
+\caption{System temperature as a function of time.}
+\label{fig:tsys}
+\end{figure}
+
+Offer some thoughts on why this system temperature came down.
 
 
 \subsection{Comparison with PSA32}
@@ -1485,10 +1502,6 @@ of the data points to determine the 2 sigma upper limit in EoR.
 %       -This gives us a sensitivity benefit of a factor of 3(XXX), as seen
 %       in the figure. Note that this data does have omnical applied to it.
 %
-%
-%
-%
-%
 
 Here, we discuss the effect to the power spectrum if various stages of the
 analysis were kept out. Specifically, we will discuss the effects of using
@@ -1498,7 +1511,7 @@ sense of how different analyses effect the power spectrum.
 The merits of using omnical were described above and it has the effect of
 bringing redundant baselines into better agreement with one another by
 calibrating out the differences between them. With this picture, we expect
-that for the power spectrum, error bars would become tighter. That is the
+that for the power spectrum, error bars should become tighter. That is the
 noise in the measurement would be reduced. Comparing P($k$) for data that has
 been Omnical calibrated vs data that has not, but does have the redundant
 calibration that was used in \cite{parsons_et_al2014a} applied to it, we see that
@@ -1549,60 +1562,86 @@ applied to it}
 \end{figure}
 
 
-
-%   -We now compare and contrast our result with those without some of the key
-%   components of our analysis pipeline.
-%
-%   -First we consider the effect from omnical. 
-%       -Applying a more precise calibration scheme increases the redundancy
-%       between baselines. Hence, this decrease the noise in the measurement. 
-%       -This is exactly what we see in the  final power spectrum measurement. 
-%       figure \pspecfigure shows the power spectrum of data that has not had
-%       omnical applied to it. THe error bars here are reduced by a factor of a
-%       few. 
-%
-%   -Next we consider the effect of using an optimal fringe rate filter. 
-%       -By applying an optimal fringe rate filter, we down weight fringe rate
-%       bins that are less sensitive, and hence have less signal, and upweight
-%       the more sensitive parts of the sky. 
-%       -Figure \ref{fig:frf_pspec} shows the power spectrum with a naive fringe
-%       rate filer, which is a flat filter and throws out the the fringe rates
-%       outside of those possible for a baseline of the eor baselines used in
-%       this analysis. 
-%       -This gives us a sensitivity benefit of a factor of 3(XXX), as seen
-%       in the figure. Note that this data does have omnical applied to it.
-%
-%
-%
-%
-%
+The new techniques and improvements to calibration used in this analysis are a
+considerable improvement from the PAPER-32 analysis from
+\cite{parsons_et_al2014a}. These new techniques bring into light the new ways in
+which we can gain sensitivity and accurately describe our instrument. The use of
+Omnical to accurately calibrate the relative complex gains of the antennas has
+shown to be a major improvement to the pipeline. The accuracy and improvement of
+this calibration brings redundant baselines more into agreement with one another
+and provides and axis for us to check the status of the array. The output 
+chi-squared from Omnical provides a metric for us to monitor the health of the
+array and another axis for us to flag off bad RFI events. Furthermore, the
+precise calbration of antennas is imperative to accurately model and remove
+foregrounds. Using the delay spectrum technique employed here, precise
+calibration is necessary to mitigate the leakage of foreground power to modes
+outside of the horizon for a given baseline. 
 
 
+\subsection{Future Work}
+As the sensitivity of the first generation 21 cm EoR experiments maxes out, the
+need for bigger arrays with increased collecting area is necessary. Proposed
+experiments such as the Square-Kilometer Array (SKA) and the Hydrogen Epoch of
+Reionization Array (HERA) are set to fill this need. HERA is a collaborative
+experiment dedicated to detect and characterize the 21 cm EoR power spectrum as
+well as eventually image it. The HERA instrument is proposed to be compsed of a
+closely packed 547 element array aranged in a hexagon \citep{pober_et_al2014a}.
+Each element is a 14-m diamter reflecting-dish, with a total array area of
+$\sim.1km^{2}$. Sensitivity forcasts derived in \cite{pober_et_al2014a}
+showed that HERA has the ability to make a detection of EoR to a significance
+from $\sim32\sigma$ to $\sim133\sigma$ depending on the foreground removal
+scheme used. The lower bound is for the delay spectrum technique used in this
+paper, where modes within the horizon are irrevocably corrupted, whereas the
+higher bound equates to when we can perfectly work within the the wedge. That
+is, it is possible to perfectly subtract sources within the horizon.
+
+PAPER itself, is also looking forward to 2 seasons of maximally redundant 128
+antenna configuration  data set. This data set has to potential to gain a factor
+of $3.5$ in sensitivity as compared to the data set used in this paper. However,
+due to constraints on the PAPER site in South Africa, the shortest baselines for
+this array are $8\lambda$ (16m), instead of the $16\lambda$ (32m) baselines used
+in this analysis. The shorter 8m baselines have not been used in PAPER analysis
+before and may be riddled with systematics due to cross coupling and reflections
+whithin the array. Therefore, only considering the 16 m East-West baselines,
+there will be a total sensitivity benefit of $3$. However, there is the
+potential to use the $48m$ nd $64m$ baselines in this analysis as well, boosting
+the sensitivity to by another factor of 2.
 
 
+\subsection{Remaining Challanges}
+The closer we get to a detection of the 21 cm EoR fluctuations, the more we need
+to know what the systematics can be and at what level they can come in at. One
+of the biggest challanges remaining, as metioned above, is the limited
+sensitivity of current EoR experiments. Even with the full sensitivity of the
+PAPER array at full build out, there will only be a $1.65\sigma$ EoR detection
+with the current method of foreground avoidence to detect the power spectrum.
+With the complete optimist approach of working withing the wedge, there will be
+a $8.86\sigma$ detection of the 21 cm power spectrum \citep{pober_et_al2014a}.
+However, the configuration of PAPER makes it difficult to localize sources for
+removal and makes it hard to work within the wedge. These sensitivity benefits
+are being addressed by second generation EoR experiments, whose goal is to
+characterize the 21 cm power spectrum at high redshifts.
 
-\section{Discussion}
-%   -Future datasets. Things to look forward to.
-%
-%   -HERA
-%
-%   -Relative merrits of foreground avoidance vs fg filtering.
-%
-%   -relative importance of improvements of psa32.
-%
-%   -vamp on consistency with zero.
-%
-%   -Remaining challenges.
-%
-%       --Polarization leakage.
-%       --Sensitivity 
-%       --Seeing foregrounds.
-%
-%
-%
-%
+In addition to sensitivity limitations, foregrounds are also a challange that
+needs to be met. The delay spectrum approach requires that foregrounds need to
+be spectrally smooth so that they are localized to inside the horizon. As seen
+from equation \ref{eqn:delay_filter}, this approach also requires the need to
+know your beam and bandpass very well to mitigate the effect of spreading power
+outside the horizon. The PAPER beam is both spaitially and spectrally smooth
+\cite{pober_et_al2011}, but even small variations have the effect of
+making sppilling power outside of the horizon. In addition to the beam, the
+major source of error is in the bandpass. The 9th order polynomial fit to the
+bandpass is strictly not just the bandpass but contains ripples imprinted by
+sources other than Pictor A. Therefore characterizing the true bandpass of the
+instruement is hard and largely unknown for PAPER.
+
+Finally, one of the possibly biggest challenges we face is that of polarization
+leakage due to Faraday rotation of polarized sources from Stokes Q into Stokes
+I. 
+
 \section{Conclusions}
 
+\section{Acknowledgements}
 
 \clearpage
 %\nocite{*}
