@@ -423,15 +423,35 @@ where $S_{150} = 382 \text{Jy} \pm 5.4$ and $\alpha = -.76 \pm .01$, with
 1$\sigma$ error bars.
 
 
-To derive the source spectrum from our measurements, we use lst averaged data (see
-section \ref{sec:lstbin}) containing foregrounds for the hour before and after from
-where Pictor A transits. We image, in 15 minute snapshots for this data set,
-every frequency channel. The source spectra is derived per snapshot and we average
-these together, weighting by the primary beam in the direction of Pic A to get
-the measured spectrum of Pictor A. To fit our bandpass, we divide the model
-spectrum with ourAmeasured spectrum and fit a ninth-order polynomial over a
-frequency range from 120-170MHz. Figure \ref{fig:pic_spec} shows the derived
-Pictor A spectrum and the model spectrum derived from \cite{jacobs_et_al2013}.
+%To derive the source spectrum from our measurements, we use lst averaged data (see
+%section \ref{sec:lstbin}) containing foregrounds for the hour before and after from
+%where Pictor A transits. We image, in 15 minute snapshots for this data set,
+%every frequency channel. The source spectra is derived per snapshot and we average
+%these together, weighting by the primary beam in the direction of Pic A to get
+%the measured spectrum of Pictor A. To fit our bandpass, we divide the model
+%spectrum with ourAmeasured spectrum and fit a ninth-order polynomial over a
+%frequency range from 120-170MHz. Figure \ref{fig:pic_spec} shows the derived
+%Pictor A spectrum and the model spectrum derived from \cite{jacobs_et_al2013}.
+
+
+To derive the source spectrum from our measurements, we use LST-averaged data
+(see section \ref{sec:lstbin}) prior the wide-band delay filter, for the hour
+before and after the transit of Pictor A. We image a $30^\circ \times 30^\circ$
+field of view for every frequency channel for each 10 minute snapshot and apply
+uniform weights to the gridded visibilities. We account for the required three
+dimensional Fourier transform in wide field imaging by using the w-stacking
+algorithm implemented in WSclean \citep{offringa_et_al2014} – although we note that
+the standard w-projection algorithm implemented in
+CASA\footnote{http://casa.nrao.edu} gives similar performances as the PAPER
+array is essentially instantaneously coplanar.  A source spectra is derived for
+each snapshot by fitting a two dimensional Gaussian to Pictor A by using the
+PyBDSM\footnote{$http://www.lofar.org/wiki/doku.php?id=public:user_software:pybdsm$}
+source extractor. Spectra are optimally averaged together by weighting them with
+the primary beam model evaluated in the direction of Pictor A. To fit our
+bandpass, we divide the model spectrum by the measured one and fit a 9-th order
+polynomial over the 120-170 MHz frequency range. Figure \ref{fig:pic_spec} shows
+the calibrated Pictor A spectrum and the model spectrum from
+\cite{Jacobs_et_al2013}.
 
 \begin{figure}[!t]
 \centering
@@ -1666,6 +1686,7 @@ effects, which may be up to 2 orders of magnitude brighter than the EoR signal,
 is a necessity.
 
 \section{Conclusions}
+We find that 
 
 \section{Acknowledgements} 
 PAPER is supported by grants from the  National Science Foundation (grant
@@ -1674,7 +1695,7 @@ for computing resources.  We graciously thank SKA-SA for onsite infrastructure
 and observing support. We would like to thank Josh Dillion, Adrian Liu,
 Johnathan Pober, and Jeff Zheng for helpful discussions.
 
-\clearpage
+%\clearpage
 %\nocite{*}
 \bibliographystyle{apj}
 \bibliography{biblio}
