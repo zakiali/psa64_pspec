@@ -782,9 +782,27 @@ jackknife tests on our observations.
 One of the key aspects of PAPER is the stability of the instrument between
 baselines and in time. Figure \ref{fig:density} shows for a given redundant
 group of baselines, the spread in the visibilites for all of the baselines in
-that group as a function of LST's. We get more samples per LST bin during the
-lst range of 2-10 hours due to our observing season. For each LST bin, the
-spread in the samples is ~100 Jy.
+that group as a function of LST's. Specifically, we histogram the real part of
+the visibilities for all baselines belonging to the East-West 30 m redundant
+baseline in a given LST bin for foreground contained data. We see that for a
+given LST bin the, spread in the value for all the baselines is ~100 Jy.  We get
+more samples per LST bin during the lst range of 2-10 hours due to our observing
+season, therefore the density of points in this LST region is greater, set by
+the color scale. This density plot shows that redundant baselines, especially
+the EoR baselines we are using the power spectrum analyisis, agree very well
+with one another. This is another nod to the use of Omnical for redundant
+calibration. 
+
+In addition to stability between redundant baselines, we also consider the
+stability in time for the PAPER instrument. In order to quantify the stability
+in time we extract one channel for a given baseline for every observation day
+and bin in LST. We then Fourier transform along the time direction for every LST
+bin and compute the power spectrum. The DC bin is the average of all of the days
+and clearly there is excess power there. However, for time modes greater than 1
+day, we see that there is little correlation between days, showing that there
+are no systematics in time. However, we do note that on the 2 day time scale,
+there is a slight increase power owning the fact that neighboring days are
+slightly correlated with each other. 
 
 \begin{figure*}[!t]
 \centering
@@ -847,7 +865,7 @@ of time.
 
 
 
-\subsection{Optimal Fringe-Rate Filter}\label{sec:frf}
+\section{Optimal Fringe-Rate Filter}\label{sec:frf}
 %   -What is fringe rate filtering. Cite Parsons And Liu 2014.
 %       --Fringe Rate filtering is nothing more then a time domain weighted
 %         average per frequency of of visibilities. The filter can be applied 
@@ -1022,7 +1040,7 @@ left with $\sim2$ independent samples per hour.
 %\end{figure}
 
 
-\subsection{Optimal Quadratic Estimator and Covariance}\label{sec:oqe}
+\section{Optimal Quadratic Estimator and Covariance}\label{sec:oqe}
 %   -Motivate method with discussion of empirical estimate of covariances and
 %    problem of limited modes.
 %       --Because we dont know the true covariances between baselines and
@@ -1074,7 +1092,7 @@ the effects of an empirical estimate of covariance matrices.
 %   -Counting of independent modes.
 %       --Number of independent modes = 2*#of lst hours used in analysis. This
 %         is because 1900 seconds ~ 30 minutes.
-\subsubsection{Review}
+\subsection{Review}
 We use the optimal quadratic estimator method to estimate our power spectrum
 \cite{dillon_et_al2013a, liu_tegmark2011}.
 Here we briefly review the optimal quadratic esitimator (OQE) formalism with an
@@ -1161,7 +1179,7 @@ used in the estimate of the power spectrum for the i'th $k$-mode.}
 \end{figure}
 
 
-\subsubsection{Application}
+\subsection{Application}
 % A walk through of the application to the data.
 
 We apply the quadratic estimator formalism on a per baseline basis, which leads
@@ -1248,7 +1266,7 @@ result.
 
 
 
-\subsubsection{The Covariance Matrix}
+\subsection{The Covariance Matrix}
 %Covariance matrix nuances.
 %   -describe covariance matrix and data vectors.
 %   -How we get the covariance matrix. 
@@ -1729,7 +1747,7 @@ effects, which may be up to 2 orders of magnitude brighter than the EoR signal,
 is a necessity.
 
 \section{Conclusions}
-We find that 
+We find an upper limit of the 21 cm EoR power spectrum at 
 
 \section{Acknowledgements} 
 PAPER is supported by grants from the  National Science Foundation (grant
