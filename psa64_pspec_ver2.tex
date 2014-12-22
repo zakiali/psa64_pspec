@@ -1423,6 +1423,13 @@ baseline samples from the output of the quadratic estimator.
 %the steps mentioned above are turned off and for the one where all of them are
 %turned on. We can see the gradual improvement of the power spectra (hopefully).
 
+\begin{figure*}[t!]\centering
+\includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
+\caption{$k$-modes integrating down.}
+\label{fig:pspec_variance}
+\end{figure*}
+
+
 
 
 
@@ -1549,7 +1556,7 @@ temperature as a function of LST, averaging over each LST hour. Figure
 the system temperature decreased significantly, coming down to $T_{sys} = 375K$
 at 160 MHz, as compared to \cite{parsons_et_al2014,jacobs_et_al2014a}, which
 used the PAPER 32 antenna data set and deduced a system temperature of 560K at
-160 MHz.
+160 MHz. 
 
 \begin{figure}[h!]\centering
 \includegraphics[width=\columnwidth]{plots/tsys.png}
@@ -1557,7 +1564,7 @@ used the PAPER 32 antenna data set and deduced a system temperature of 560K at
 \label{fig:tsys}
 \end{figure}
 
-Offer some thoughts on why this system temperature came down.
+The system temperature estimated here
 
 
 \subsection{Comparison with PSA32}
@@ -1641,7 +1648,6 @@ up against. Going to take some convincing...
 applied to it}
 \label{fig:pspec_nofrf}
 \end{figure}
-
 
 The new techniques and improvements to calibration used in this analysis are a
 considerable improvement from the PAPER-32 analysis from
@@ -1756,13 +1762,22 @@ the limits on the 21 cm mean brightness temperature set in
 \cite{parsons_et_al2014}.
 
 We also continue to demonstrate the efficacy of using delay filters for
-foreground suppression and the foreground avoidance in measuring the power
+foreground suppression and the foreground avoidance technique in measuring the power
 spectrum. In addition, we employ novel techniques in this analysis and show that
 the necessity of precise calibration is needed to make accurate and believable
 measurements of the 21 cm EoR power spectrum. We also show that the use of beam
 weighted measurements in the optimal fringe rate filter is critical to
 increasing sensitivity for instruments with natively low sensitivity due to
 collecting area, increasing the SNR on the measurement by a factor of atleast 2.
+We have also demonstrated the stability of the PAPER instrument both in time and
+between redundant baselines, showing that baselines agree on the same sky up to
+systematical errors and that the time correlation between days is low in the
+noise.
+
+At the acheived levels of the power spectrum, we also put constraints on the
+amount polarization leakage that could possibly corrupt the Stokes I power
+spectrum. We show that polarization leakage is not shown for most $k$-modes at
+the level of $\sim10^{3}\ \text{mK}^{2}$. In addition, 
 
 Furthermore, the analysis in this paper is extended in (cite pobers science
 paper) by showing the science implications of this upper limit. They show that
@@ -1771,6 +1786,16 @@ and neutral fraction, $x$, that are not consistent with this result. In
 addition, they compare this result with current X-ray lumiosity functions and
 show that there are not enough X-ray sources to cause heating of the IGM at
 $z=8.4$ that are consistent with these results.
+
+PAPER is continuing to integrate down on the 21 cm EoR signal and gaining ground
+on overcoming challanges in systematics in the instrument as well being able to
+look past foregrounds. Future work will again characterize the EoR power
+spectrum over a range of redshifts and to measure directly the polarized power
+spectrum. We also look forward to two seasons of 128 dual polarization PAPER
+data which will increase the sensitivity of measurements by almost an order of
+magnitude from the data used here. Also, construction of HERA is also under way,
+which will have the sensitiviy to make a $n\sigma$ detection of the 21 cm power
+spectrum. We look forward to this.
 
 \section{Acknowledgements} 
 PAPER is supported by grants from the  National Science Foundation (grant
