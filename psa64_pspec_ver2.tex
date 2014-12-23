@@ -32,8 +32,9 @@ Liu\altaffilmark{1}, David F. Moore\altaffilmark{3}
 \altaffiltext{1}{Astronomy Dept., U. California, Berkeley, CA}
 \altaffiltext{2}{Radio Astronomy Lab., U. California, Berkeley, CA}
 \altaffiltext{3}{Dept. of Physics and Astronomy, U. Pennsylvania, Philadelphia,
-PA} \altaffiltext{4}{Physics Dept.  U. Washington, Seattle, WA}
-\altaffiltext{8}{School of Earth and Space Exploration, Arizona State U., Tempe,
+PA} 
+\altaffiltext{4}{Physics Dept.  U. Washington, Seattle, WA}
+\altaffiltext{5}{School of Earth and Space Exploration, Arizona State U., Tempe,
 AZ}
 
 \begin{abstract} \end{abstract}
@@ -119,11 +120,11 @@ the data analysis pipeline in section \ref{sec:analysis}. Seciton
 \ref{sec:results} describes the results of our efforts and provides new
 contraints on EoR. We conclude in \ref{sec:conclusion}.
 
-\begin{figure*}[!t]\centering
-\includegraphics[width=1.85\columnwidth,height=\columnwidth]{plots/antenna_positions.png}
-\caption{Antenna positions for the PAPER 64 observation run.}
+\begin{figure}[!t]\centering
+\includegraphics[width=\columnwidth]{plots/antenna_positions.png}
+\caption{Antenna layout for the PAPER 64 observation run.}
 \label{fig:antenna_positions}
-\end{figure*}
+\end{figure}
 
 
 
@@ -1526,6 +1527,35 @@ are spreading power outside of the horizon and instrumental systematics. In
 addition our $2\sigma$ upper limit is also consistent with zero and therefore we
 are noise dominated and are hence lacking sensitivity.
 
+
+\subsection{Integrating $k$-modes}
+The power spectrum shown in figure \ref{fig:final_pspec} is an average of
+multiple baselines together. To show how the modes in each power spectrum
+integrate together and to what degree they integrate down as noise are not, an
+allan variance test, is shown in Figure \ref{fig:pspec_variance}. Color
+represents a different $k$ mode measured in $\Delta^{2}$ along with the
+different bootstraps. Here we are showing the effect of integrating down on
+different $k$ modes as we include a wider range in time, and hence more
+independent modes. From the discussion on optimal fringe rate filtering we know
+we have 2 independent modes on the sky per LST hour. Hence, integrating modes
+upto a thousand modes, where not all are independent we expect to hit up against
+a floor, which we see. These curves are plotted for $P(k)$ and therefore, the
+colors represent both positive negative $k$'s with green curves haveing the
+highest absolute value for $k$ and blue curves are modes closer to the horizon.
+
+
+We see a slight difference in the mean and median statistic when estimating the
+total value of modes. Modes tend to level off for both the statistcs and the
+amount of independent modes is capped when modes flatten out at roughly ~60
+samples. We find that this is close to the number of independent modes on the
+sky and baselines. In addtion modes close to the horizon (blue) tend to flatten
+out with the mean statictic, however there is an increased spread for the median
+statistic. 
+
+In addtion there is a sharp decline in power when integrating ~1024 modes for
+certain modes when dealing with the mean and median statistic. These modes show
+unexpected behaviour due to the sharp slope of the fall in power. Further
+investigation of these modes is to be conducted.
 %
 %   -Implications for polarized foregrounds.
 %       --Flip this around on David and James : We don't see anything at this
@@ -1548,7 +1578,7 @@ are noise dominated and are hence lacking sensitivity.
 \label{fig:final_posterioir}
 \end{figure}
 
-\subsection{Noise Levels}   
+\subsection{System Temperature}   
 During the LST binning step, the variance of the visibilities on a frequency and
 time basis, are recorded. Using these variance, we calculate the system
 temperature as a function of LST, averaging over each LST hour. Figure
@@ -1564,7 +1594,29 @@ used the PAPER 32 antenna data set and deduced a system temperature of 560K at
 \label{fig:tsys}
 \end{figure}
 
-The system temperature estimated here
+The system temperature estimated here is estimated from the variance in a given
+LST bin from all of the visibilities that correspond to that bin. We saw in
+figure \ref{fig:density} that redundant baselines agree at a fine level and the
+fractional spread in the data points is roughly 100 Jy. This variance, but of
+the complex visibility rather than just the real part, is what we are using in
+order to estimate the system temperature via the usual equation, 
+\begin{equation}
+    T_{sys} = \frac{T_{rms}}{\sqrt{\Delta\nu t_{int}}},
+\end{equation}
+where $\Delta\nu$ is the bandwidth, $t_{int}$ is the integration time, and
+$T_{rms}$ is the RMS temperature. Since this is the metric we are using to
+measure the system temperature, the increased precision in omnical has reduced
+the RMS noise in our measurements and therfore we measure a lower, and truer,
+noise temperature for our instrument. The system temperature measured here is
+closer to what was originally expected for the PAPER instrument
+\citep{parsons_et_al2010}.
+
+Previous estimates of the system temperatue
+\citep{parsons_et_al2014,jacobs_et_al2014} relied on differencing and averaging
+baselines, time samples, and/or frequency channels. In addition those datasets
+were not precisely calibrated with the Omnical redundant calibration package.
+They therfore had the possibility of having their RMS noise being dominated by
+variations between baselines, producing a larger system temperature.
 
 
 \subsection{Comparison with PSA32}
@@ -1591,6 +1643,14 @@ The system temperature estimated here
 %       in the figure. Note that this data does have omnical applied to it.
 %
 
+\begin{figure*}[t!]\centering
+\includegraphics[width=1.5\columnwidth]{plots/pspec_comparison.png}
+\caption{Power spectrum with no omnical applied. Does have optimal fringe rate
+        filtering. This plot should be a side by side comparison with and
+        without omnical.}
+\label{fig:pspec_comp}
+\end{figure*}
+
 Here, we discuss the effect to the power spectrum if various stages of the
 analysis were kept out. Specifically, we will discuss the effects of using
 Omnical and optimal fringe rate filtering vs. not using them. This will give a
@@ -1611,14 +1671,6 @@ calibration solutions have been applied to the visibilities and the 2 modes
 outside of the horizon are artifacts of the foregrounds leaking outside of the
 horizon. 
 
-\begin{figure}[t!]\centering
-\includegraphics[width=\columnwidth]{plots/pk_k3pk_nomni.png}
-\caption{Power spectrum with no omnical applied. Does have optimal fringe rate
-        filtering. This plot should be a side by side comparison with and
-        without omnical.}
-\label{fig:pspec_nomni}
-\end{figure}
-
 Optimal fringe rate filtering is a new technique that we have employed in our
 analysis and the effect it has on the power spectrum is crucial, considering it
 has a sensitivity benefit of a factor of 2. First of all, this fringe rate
@@ -1626,12 +1678,12 @@ filter improves the SNR by a factor of 2 for PAPER, increasing the total
 sensitivity of our measurement. Briefly, the filter does this by up weighting
 parts of the sky that are illuminated by the primary beam and down weighting
 parts of the sky that contain more noise. This has the effect of de noising the
-data. Figure \ref{fig:pspec_nofrf} shows the effect of minimal fringe rate
+data. Figure \ref{fig:pspec_comp} shows the effect of minimal fringe rate
 filtering. The filter applied here is the same as described in
 \cite{parsons_et_al2014}. It evenly weights fringe rates from 0 to $f_{max}$,
 where $f_{max}$ is the maximum fringe rate possible for a given baseline and
 frequency, discarding negative fringe rates. As can be seen in figure
-\ref{pspec:nofrf}, the power spectrum in $\Delta^{2}$ comes down by a factor of
+\ref{fig:pspec_comp}, the power spectrum in $\Delta^{2}$ comes down by a factor of
 2-3. The two modes outside of the horizon, which are dominated by foregrounds
 and are clear detections, also come down. The fact that these come down, implies
 that the foregrounds are down in the beam possibly near the horizon. Therefore,
@@ -1640,14 +1692,6 @@ the signal there is attenuated by the use of this fringe rate filter.
 It is interesting that at $k\approx.25$, we get a detection of something that
 wasnt there before. Foregrounds? probably low level systematics we are hitting
 up against. Going to take some convincing...
-
-
-\begin{figure}[t!]\centering
-\includegraphics[width=\columnwidth]{plots/pk_k3pk_nofrf.png}
-\caption{Power spectrum without optimal fringe rate filtering. Has omnical
-applied to it}
-\label{fig:pspec_nofrf}
-\end{figure}
 
 The new techniques and improvements to calibration used in this analysis are a
 considerable improvement from the PAPER-32 analysis from
