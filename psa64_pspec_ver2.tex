@@ -112,7 +112,7 @@ reionization
 
 This paper reports on the results from the Donald C. Backer Array for Probing
 the Epoch of Reionization (PAPER) -  64 antenna dual polarization minimum
-redundancy configuration.  The paper is outlined as follows. In section
+redundancy configuration. This paper is outlined as follows. In section
 \ref{sec:observations} we describe the observations used in this analysis. In
 \ref{sec:improvements} we discuss the improvements in this pipeline with respect
 to the previous analysis of PSA-32 \cite{parsons_et_al2014}. We then move on to
@@ -122,7 +122,13 @@ contraints on EoR. We conclude in \ref{sec:conclusion}.
 
 \begin{figure}[!t]\centering
 \includegraphics[width=\columnwidth]{plots/antenna_positions.png}
-\caption{Antenna layout for the PAPER 64 observation run.}
+\caption{Antenna layout for the PAPER 64 observation season. We use a subset of
+the total number of baselines for in the power spectrum analysis. We use only
+the East-West single column separation baselines (49-41,41-47,47-19,10-3,3-25,
+etc...), the near East-West baselines with a North-South component equaling
+$+1$ row spacing (10-41,9-3,3-47,58-25, etc...) and the $-1$ spacing
+(49-3,10-58,41-25,3-1, etc...). These baselines constitute the bulk of the
+sensitivity of for the power spectrum analysis.}
 \label{fig:antenna_positions}
 \end{figure}
 
@@ -151,7 +157,7 @@ correlator is based on CASPER open source, reconfigurable hardware
 (\cite{parsons_et_al2008}). The channelizer, which includes the PFB-FFT and
 corner turn, consisted of 16 ROACH boards with eight 8 bit analog to digital
 converters. The cross multilication engine (X engine) was moved to GPU's based
-on the X-GPU, a general purpose X engine for GPU's (mike clark xgpu 2011?). 
+on the X-GPU, a general purpose X engine for GPU's \citep{clark_et_al2013}. 
 Visibility cross products are integrated for 10.7 seconds on the GPU's before
 being written to disk. We write all stokes parameters to disk, however the
 analaysis described here only apply to the XX and YY polariztion products.
@@ -171,7 +177,7 @@ commenced on 2012 November 8 (JD62456240) and ended  2013 March 23 (JD62456375).
 For the power spectrum analysis, we use data that spanned, in local sidereal
 time (LST), a range of 0:00 to 10:00 hours. This range corresponds to
 the "EoR cold patch", in which galactic synchrotron power is minimal (away from
-the center of the galaxy). Due to LST drift of 3:56 minutes every solar ay, we
+the center of the galaxy). Due to LST drift of 3:56 minutes every solar day, we
 unevenly sample every lst in our observations, giving us more samples of certain
 lsts than others. The lsts with the greatest number of smaples are those used in
 the power spectrum analysis (along with those corresponding to the cold patch).
@@ -182,8 +188,9 @@ array.
 
 \begin{figure*}[!t]\centering
 \includegraphics[width=2\columnwidth,height=\columnwidth]{plots/coverage.png}
-\caption{The PAPER field. Contours are the beam weighted observing times
-relative to the peak observing time/beam.}
+\caption{The Global Sky Model (GSM) with the PAPER field overlayed during this
+observing season. The contours shown here are the beam weighted obsering times
+relative to the peak observing time.}
 \label{fig:coverage}
 \end{figure*}
 
@@ -321,14 +328,17 @@ applied to visibilities and the results are shown in \ref{fig:omniview}.
 \begin{figure*}
 \centering
 \includegraphics[width=2\columnwidth]{plots/omniview_64.png}
-\caption{omniview plot.}
+\caption{Real-Imaginary plot of the complex visibilities measured by all of the
+baselines with a cursory calibration (left) and after applying solutions
+obtained with Omnical (rigth). Each shape and color combination correspond to
+a set of redundant baselines. }
 \label{fig:omniview}
 \end{figure*}
 
-\begin{figure}
+\begin{figure}[!b]
 \centering
 \includegraphics[width=\columnwidth]{plots/august_chi2.png}
-\caption{chi squared}
+\caption{chi squared. This plot should be horizontal. ask jeff.}
 \label{fig:chi2}
 \end{figure}
 
@@ -382,12 +392,6 @@ of the field with Pictor A (5:19:49.70, -45:46:45.0)  and Fornax A
 (3:22:41.70,-37:12:30.0). The measured source positions are the same as the the
 catalogue positions for these sources.
 
-\begin{figure}[!t]
-\centering
-\includegraphics[width=\columnwidth]{plots/gianni_pic_image.pdf}
-\caption{Image of Pictor.}
-\label{fig:field_image}
-\end{figure}
 
 
 %    -Calibrated to Pictor A. 
@@ -453,6 +457,14 @@ bandpass, we divide the model spectrum by the measured one and fit a 9-th order
 polynomial over the 120-170 MHz frequency range. Figure \ref{fig:pic_spec} shows
 the calibrated Pictor A spectrum and the model spectrum from
 \cite{jacobs_et_al2013}.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{plots/gianni_pic_image.pdf}
+\caption{Image of Pictor.}
+\label{fig:field_image}
+\end{figure}
+
 
 \begin{figure}[!t]
 \centering
@@ -714,7 +726,20 @@ emission we subtract the clean components from the original visibility.
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=2.3\columnwidth]{plots/waterfalls.png}
-\caption{Waterfalls of data.}
+\caption{LST vs. frequency waterfall plots of LST averaged data for the entire
+observing season with log amplitude on the top and phase on the bottom row.
+Foreground averaged data (left) is fringe rate filtered with the optimal fringe
+rate filter (second left) and signal is retained, but signal low in the beam is
+down weighted. Visibilities have a wideband delay filter applied to them to
+suppress foreground signal (middle)i which achieves a 2 orders of magnitude
+signal suppression in Jansky's. After applying the optimal fringe rate filter to
+the foreground filtered data (second right), we achieve 3 orders of magnitude
+suppression of foregrounds, but the fringe rate filter also suppresses the
+cosmological signal as well. However, because the optimal fringe rate filter is
+an time averaging filter, it has the effect of de-noising the data, suppressing
+noise even more than the signal, increasing the SNR. Finally, averaging all of
+the redundant 30 m East-West baseline, effecting 4 orders of magnitude below the
+foregrounds in Jansky.} 
 \label{fig:waterfalls}
 \end{figure*}
 
