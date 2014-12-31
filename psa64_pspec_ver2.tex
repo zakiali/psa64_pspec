@@ -196,7 +196,7 @@ relative to the peak observing time.}
 
 
 
-\section{Analysis}\label{sec:analysis}
+\section{Calibration and Analysis}\label{sec:analysis}
 XXX FLOW CHART FIGURE XXX
 We now describe the analysis pipeline leading up to the final power spectrum
 measurement of our data set. To begin, we run a compression algorithm to reduce
@@ -211,14 +211,14 @@ estimate of the 21 cm power spectrum.  Figure \ref{fig:analysis_pipeline} shows
 a block diagram of the analysis pipeline and includes some information on
 simuations and signal loss.
 
-\section{Calibration}\label{sec:calibration}
+\subsection{Calibration}\label{sec:calibration}
 The calibration procedure employed in this analysis is twofold: a relative
 calibration and an absolution calibration. The relative calibration employed
 uses the fact that PAPER contains numerous redundant baselines. As usual, the
 absolute calibration uses the usual self calibration methods employed by radio
 interferometers. Here we describe both procedures.
 
-\subsection{Relative Calibration}
+\subsubsection{Relative Calibration}
 %    -Principles of redundant calibration. Fact that there is no signal loss in
 %       this kind of measurement.
 %       --PAPER has a redundant configuration. Therefore the number of baselines
@@ -368,7 +368,7 @@ additive offset that it subtracts from each visibility before running fitting
 for solutions once again. This additive offset is in effect averaging deviations
 from the $chi^{2}$ over 10 minutes and subtracting that deviation off.
 
-\subsection{Absolute Calibration} 
+\subsubsection{Absolute Calibration} 
 %    -Selfcal to pictor, fornax, and crab (to get the north-south components).
 %       --Reiterate that redundant cal does not solve for the overall flux and
 %         phase parameters. 
@@ -667,7 +667,7 @@ signal loss descreases for higher $k$'s.
 
 
 
-\section{Wideband Delay Filtering}\label{sec:wbd_filtering}
+\subsection{Wideband Delay Filtering}\label{sec:wbd_filtering}
 %   -Can cite Parsons 2014a
 %       --We use the same wbd filter as in Parsons 2014a. That is we do a per
 %         baseline delay filtering with a buffer of 15 nanoseconds. 
@@ -766,26 +766,6 @@ bias that is crosstalk. For foreground removed data, we do not have this
 complication since bright foregrounds are not dominating the average and are
 able to remove the offset by subtracting shorter sums.
 
-
-\section{LST Binning and Stability}\label{sec:lstbin}
-%   -Practicals: bin size, number of days, range of days 
-%       --We LST bin the data over the 120 night data set into time bins of
-%         42.95 seconds. 
-%       --WE form multiple LST data sets which bin different days throughout the
-%       observation together. These datasets help us remove systematics in the
-%       power spectrum estimation. They also provide us a way to jackknife the
-%       data set.
-%   -N lst data sets. Jack-knifing etc.
-%   -Median Filter : no signal loss. Filtering because of outliers in time that
-%    find their way into the data 
-%       --While lst binning, we apply a median filter which for a given lst and
-%       frequency bin, removes data which falls outside 3 sigma of the median of
-%       the dataset. This filtering is necessary, because of the non gaussian
-%       events that crept their way into the data set, such as RFI, etc...
-%       --There is no signal loss associated with this because we are using
-%       median statistics. 
-%   -Plots: Integration counts vs. LST/freq  waterfall.
-
 Once smooth sources have been removed and a final pass of RFI excision and
 crosstalk removal have been performed, the data is averaged in local sidereal
 time (LST) with bins of width 43 seconds to match the fringe rate filter applied
@@ -805,49 +785,26 @@ together to obtain an "even" and "odd" dataset. The use of these two data sets
 allows us to conststruct an unbiased power spectrum estimate, as well as running
 jackknife tests on our observations. 
 
-One of the key aspects of PAPER is the stability of the instrument between
-baselines and in time. Figure \ref{fig:density} shows for a given redundant
-group of baselines, the spread in the visibilites for all of the baselines in
-that group as a function of LST's. Specifically, we histogram the real part of
-the visibilities for all baselines belonging to the East-West 30 m redundant
-baseline in a given LST bin for foreground contained data. We see that for a
-given LST bin the, spread in the value for all the baselines is ~100 Jy.  We get
-more samples per LST bin during the lst range of 2-10 hours due to our observing
-season, therefore the density of points in this LST region is greater, set by
-the color scale. This density plot shows that redundant baselines, especially
-the EoR baselines we are using the power spectrum analyisis, agree very well
-with one another. This is another nod to the use of Omnical for redundant
-calibration. 
-
-In addition to stability between redundant baselines, we also consider the
-stability in time for the PAPER instrument. In order to quantify the stability
-in time we extract one channel for a given baseline for every observation day
-and bin in LST. We then Fourier transform along the time direction for every LST
-bin and compute the power spectrum. The DC bin is the average of all of the days
-and clearly there is excess power there. However, for time modes greater than 1
-day, we see that there is little correlation between days, showing that there
-are no systematics in time. However, we do note that on the 2 day time scale,
-there is a slight increase power owning the fact that neighboring days are
-slightly correlated with each other. 
-
-\begin{figure*}[!t]
-\centering
-\includegraphics[width=2.3\columnwidth]{plots/density.png}
-\caption{Visibility density for a redundant baseline group.}
-\label{fig:density}
-\end{figure*}
-
-%XXX need to refresh my memort of this plot. FFt of a single baseline, lstbined?
-Figure \ref{fig:stability} shows the stability of the instrument as a function
-of time. 
 
 
-\begin{figure}[!t]
-\centering
-\includegraphics[width=\columnwidth]{plots/stability.png}
-\caption{Time stability of the instrument.}
-\label{fig:stability}
-\end{figure}
+%\section{LST Binning and Stability}\label{sec:lstbin}
+%   -Practicals: bin size, number of days, range of days 
+%       --We LST bin the data over the 120 night data set into time bins of
+%         42.95 seconds. 
+%       --WE form multiple LST data sets which bin different days throughout the
+%       observation together. These datasets help us remove systematics in the
+%       power spectrum estimation. They also provide us a way to jackknife the
+%       data set.
+%   -N lst data sets. Jack-knifing etc.
+%   -Median Filter : no signal loss. Filtering because of outliers in time that
+%    find their way into the data 
+%       --While lst binning, we apply a median filter which for a given lst and
+%       frequency bin, removes data which falls outside 3 sigma of the median of
+%       the dataset. This filtering is necessary, because of the non gaussian
+%       events that crept their way into the data set, such as RFI, etc...
+%       --There is no signal loss associated with this because we are using
+%       median statistics. 
+%   -Plots: Integration counts vs. LST/freq  waterfall.
 
 
 
@@ -891,7 +848,7 @@ of time.
 
 
 
-\section{Optimal Fringe-Rate Filter}\label{sec:frf}
+\subsection{Optimal Fringe-Rate Filter}\label{sec:frf}
 %   -What is fringe rate filtering. Cite Parsons And Liu 2014.
 %       --Fringe Rate filtering is nothing more then a time domain weighted
 %         average per frequency of of visibilities. The filter can be applied 
@@ -1066,7 +1023,7 @@ left with $\sim2$ independent samples per hour.
 %\end{figure}
 
 
-\section{Optimal Quadratic Estimator and Covariance}\label{sec:oqe}
+\subsection{Optimal Quadratic Estimator and Covariance}\label{sec:oqe}
 %   -Motivate method with discussion of empirical estimate of covariances and
 %    problem of limited modes.
 %       --Because we dont know the true covariances between baselines and
@@ -1118,7 +1075,7 @@ the effects of an empirical estimate of covariance matrices.
 %   -Counting of independent modes.
 %       --Number of independent modes = 2*#of lst hours used in analysis. This
 %         is because 1900 seconds ~ 30 minutes.
-\subsection{Review}
+\subsubsection{Review}
 We use the optimal quadratic estimator method to estimate our power spectrum
 \cite{dillon_et_al2013a, liu_tegmark2011}.
 Here we briefly review the optimal quadratic esitimator (OQE) formalism with an
@@ -1197,7 +1154,7 @@ coupling the modes inside to horizon in to measurments of the power spectrum
 outside the horizon. Figure \ref{fig:window_func} shows these window
 functions.
 
-\begin{figure}[h!]\centering
+\begin{figure}[t!]\centering
 \includegraphics[width=\columnwidth, height=\columnwidth]{plots/window.png}
 \caption{Window function matrix. The i'th row corresponds to the window function
 used in the estimate of the power spectrum for the i'th $k$-mode.}
@@ -1205,7 +1162,7 @@ used in the estimate of the power spectrum for the i'th $k$-mode.}
 \end{figure}
 
 
-\subsection{Application}
+\subsubsection{Application}
 % A walk through of the application to the data.
 
 We apply the quadratic estimator formalism on a per baseline basis, which leads
@@ -1284,59 +1241,18 @@ data set only contains the noise. After computing the power spectrum estimates,
 we take the difference of the signal and noise power spectrum to get our final
 result. 
 
-\begin{figure}[h!]\centering
+\begin{figure}[b!]\centering
 \includegraphics[width=\columnwidth, height=\columnwidth]{plots/fisher.png}
 \caption{The Fisher information matrix for a given baseline.}
 \label{fig:fisher}
 \end{figure}
 
 
-
-\subsection{The Covariance Matrix}
-%Covariance matrix nuances.
-%   -describe covariance matrix and data vectors.
-%   -How we get the covariance matrix. 
-%   -eigenvalue decomposition.
-%mode counting and nonsingular-ness.
-%   -Count independent modes.
-%   -covaraiance is independent only if we have enough indendent modes.
-%   -inverse covariance is tricky because of this. 
-%   -happy coincidence?
-%
-%XXX need to check lst range. 
-
-We now discuss the issues of empirically estimating the covariance matrix from
-the data. For a single baseline, the data vector $\x$, consists of 10 Mhz
-bandwidth centered at 151.72 MHz, equating to 20 frequency channels.
-All time samples are also kept, ranging from 0 to 10 LST hours. Again, we
-estimate the covariance in the usual way, $\C = \expval{\x\x^{\dagger}}$, taking
-the ensemble average over time. The covariance matrix for this baseline is a
-$N_{ch}\times N_{ch}$ matrix consisting of the covariances of all channels with
-each other. This covariance matrix is invertible only if it nonsingular, which
-requires it to be a rank $N_{ch}$ matrix. This occurs only if there are $N_{ch}$
-independent modes. 
-
-As noted in section \ref{sec:frf} the optimal fringe rate filter corrsponds to
-averageing time samples for 31 minutes. Over the 10 hour LST range used in this
-analysis, this corresponds to approximately 20 statistically independent modes
-on the sky. This is a fundamental limit of the amount of information we have in
-our measurements. Coincidentally, the covariance matrix for a given baseline is
-an $N_{ch} \times N_{ch}$ matrix, where $N_{ch}=20$.  Therefore, the covariance
-matrices for every baseline are infact invertible because they are full rank 
-and contain 20 statistically independent measurements of the sky. The covariance
-matrix is thus invertible and can be applied to the data vectors, $\x$. 
-
-%
-%   -Potential for signal loss.
-%       --In a traditional OQE method, the process is lossless by construction.
-%         Because we are tweaking this method, and the fact that we have non
-%         gaussian systematics in our data, there is a potential for signal
-%         loss. 
-Even though we have encountered a fortuitous event in having full rank
-covariance matrices, we are still estimating our covariance matrix using a
-limited sample size. This limitation leads to an imperfect characterization of
-the covariances between modes and ultimately leads to signal loss in this type
-of analysis. 
+\begin{figure*}[t!]\centering
+\includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
+\caption{$k$-modes integrating down.}
+\label{fig:pspec_variance}
+\end{figure*}
 
 %   -Simulations
 %       --In order to show the degree that there could be signal loss, we run
@@ -1352,7 +1268,7 @@ of analysis.
 %         However, if the signal was bright enough, we would be able to see it.
 %         Since we don't see signal in the actual data, we can say that we have
 %         not detected the EOR signal yet.
-
+\subsubsection{Signal Loss}
 We now characterize this signal loss by running simulations through our power
 spectrum pipeline.  In order to understand the degree of signal loss due to our
 empirical estimates of the covariances, we simulate the injection of an eor
@@ -1412,10 +1328,26 @@ EoR has not been made.
 %       --We use 100 bootstraps to derive our error bars, setting a $2\sigma$
 %         bound on the errors.
 
+\subsubsection{Bootstrapped Errors}
 %XXX QUESTION FOR BOOTSTRAPPING, Use the input data to the quad est vs output
 %data? Is this why the error bars were so wacked out before?
 We measure the error in our final power spectrum estimate by bootstrapping over
-baseline samples from the output of the quadratic estimator.
+baseline samples from the output of the quadratic estimator. That is, we are
+bootstrapping over power spectra averaged over baselines per LST sample. In order
+to tease out the variations between baselines, each bootstrap is a random pull
+of the baselines involvled in the analysis, choosing $N-5$ out of $N$
+baselines. For different baseline types, $N$ ranges from 46 (up/under one and
+over one baselines) to 51 (East-West). 
+
+In order to avoid incurring a noise bias, a few restrictions are needed to the
+bootstrapping and power spectrum estimation. First, we break the baselines into
+five groups and use the two "even" and "odd" LST averaged data sets discussed
+above. We use only baselines in the quadratic estimator that are not the same
+as well as data that fall in the different averaged data sets.
+
+
+
+
 %
 %   -PLOTS:
 %       --example covariance matrices (with foregrounds, without, fringe rate
@@ -1449,59 +1381,11 @@ baseline samples from the output of the quadratic estimator.
 %the steps mentioned above are turned off and for the one where all of them are
 %turned on. We can see the gradual improvement of the power spectra (hopefully).
 
-\begin{figure*}[t!]\centering
-\includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
-\caption{$k$-modes integrating down.}
-\label{fig:pspec_variance}
-\end{figure*}
 
 
 
 
-
-\section{Results and Discussion}
-
-%   -Tsys, and Tsys vs. time ?
-
-
-%
-%   -Final Pspecs and from various stages 
-%       --before/after omnical: Data in
-%           /data2/home/zakiali/psa_live/forlstbinning for the before data set.
-%           Currently being binned.
-%           Note that this data set has ~271 fewer files ~ 48 hours. Hence, it
-%           is not the same as the omnical data set.
-%           After data set is the one we have always been using : 
-%           /data2/home/zakiali/psa_live/forlstbinning_omnical_2 :
-%           lstbin_even and lstbin_odd.
-%       --before/after frf. Ditto in the above directories.
-%       --before after foregrounds. There is foreground data in there as well.
-%       SHould we make a foreground run with the non omnical set as well.
-
-%   -Future datasets. Things to look forward to.
-%
-%   -HERA
-%
-%   -Relative merrits of foreground avoidance vs fg filtering.
-%
-%   -relative importance of improvements of psa32.
-%
-%   -vamp on consistency with zero.
-%
-%   -Remaining challenges.
-%
-%       --Polarization leakage.
-%       --Sensitivity 
-%       --Seeing foregrounds.
-%
-%
-%
-%
-
-
-
-
-
+\section{Results}
 
 \subsection{Power Spectrum}
 Figure \ref{fig:final_pspec} shows the spherically averaged power spectrum,
@@ -1551,6 +1435,180 @@ integrating down. The systematics we are facing are most likely foregrounds that
 are spreading power outside of the horizon and instrumental systematics. In
 addition our $2\sigma$ upper limit is also consistent with zero and therefore we
 are noise dominated and are hence lacking sensitivity.
+
+\section{Discussion}
+
+
+%   -Tsys, and Tsys vs. time ?
+
+
+%
+%   -Final Pspecs and from various stages 
+%       --before/after omnical: Data in
+%           /data2/home/zakiali/psa_live/forlstbinning for the before data set.
+%           Currently being binned.
+%           Note that this data set has ~271 fewer files ~ 48 hours. Hence, it
+%           is not the same as the omnical data set.
+%           After data set is the one we have always been using : 
+%           /data2/home/zakiali/psa_live/forlstbinning_omnical_2 :
+%           lstbin_even and lstbin_odd.
+%       --before/after frf. Ditto in the above directories.
+%       --before after foregrounds. There is foreground data in there as well.
+%       SHould we make a foreground run with the non omnical set as well.
+
+%   -Future datasets. Things to look forward to.
+%
+%   -HERA
+%
+%   -Relative merrits of foreground avoidance vs fg filtering.
+%
+%   -relative importance of improvements of psa32.
+%
+%   -vamp on consistency with zero.
+%
+%   -Remaining challenges.
+%
+%       --Polarization leakage.
+%       --Sensitivity 
+%       --Seeing foregrounds.
+%
+%
+%
+%
+
+
+
+
+\subsection{Instrument Stability}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=2.3\columnwidth]{plots/density.png}
+\caption{Visibility density for a redundant baseline group.}
+\label{fig:density}
+\end{figure*}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{plots/stability.png}
+\caption{Time stability of the instrument.}
+\label{fig:stability}
+\end{figure}
+
+
+One of the key aspects of PAPER is the stability of the instrument between
+baselines and in time. Figure \ref{fig:density} shows for a given redundant
+group of baselines, the spread in the visibilites for all of the baselines in
+that group as a function of LST's. Specifically, we histogram the real part of
+the visibilities for all baselines belonging to the East-West 30 m redundant
+baseline in a given LST bin for foreground contained data. We see that for a
+given LST bin the, spread in the value for all the baselines is ~100 Jy.  We get
+more samples per LST bin during the lst range of 2-10 hours due to our observing
+season, therefore the density of points in this LST region is greater, set by
+the color scale. This density plot shows that redundant baselines, especially
+the EoR baselines we are using the power spectrum analyisis, agree very well
+with one another. This is another nod to the use of Omnical for redundant
+calibration. 
+
+In addition to stability between redundant baselines, we also consider the
+stability in time for the PAPER instrument. In order to quantify the stability
+in time we extract one channel for a given baseline for every observation day
+and bin in LST. We then Fourier transform along the time direction for every LST
+bin and compute the power spectrum. The DC bin is the average of all of the days
+and clearly there is excess power there. However, for time modes greater than 1
+day, we see that there is little correlation between days, showing that there
+are no systematics in time. However, we do note that on the 2 day time scale,
+there is a slight increase power owning the fact that neighboring days are
+slightly correlated with each other.  Figure \ref{fig:stability} shows the
+stability of the instrument as a function of time. 
+
+\subsection{System Temperature}   
+During the LST binning step, the variance of the visibilities on a frequency and
+time basis, are recorded. Using these variance, we calculate the system
+temperature as a function of LST, averaging over each LST hour. Figure
+\ref{fig:tsys} shows the results of this calculation. In this observing season,
+the system temperature decreased significantly, coming down to $T_{sys} = 375K$
+at 160 MHz, as compared to \cite{parsons_et_al2014,jacobs_et_al2014a}, which
+used the PAPER 32 antenna data set and deduced a system temperature of 560K at
+160 MHz. 
+
+\begin{figure}[b!]\centering
+\includegraphics[width=\columnwidth]{plots/tsys.png}
+\caption{System temperature as a function of time.}
+\label{fig:tsys}
+\end{figure}
+
+The system temperature estimated here is estimated from the variance in a given
+LST bin from all of the visibilities that correspond to that bin. We saw in
+figure \ref{fig:density} that redundant baselines agree at a fine level and the
+fractional spread in the data points is roughly 100 Jy. This variance, but of
+the complex visibility rather than just the real part, is what we are using in
+order to estimate the system temperature via the usual equation, 
+\begin{equation}
+    T_{sys} = \frac{T_{rms}}{\sqrt{\Delta\nu t_{int}}},
+\end{equation}
+where $\Delta\nu$ is the bandwidth, $t_{int}$ is the integration time, and
+$T_{rms}$ is the RMS temperature. Since this is the metric we are using to
+measure the system temperature, the increased precision in omnical has reduced
+the RMS noise in our measurements and therfore we measure a lower, and truer,
+noise temperature for our instrument. The system temperature measured here is
+closer to what was originally expected for the PAPER instrument
+\citep{parsons_et_al2010}.
+
+Previous estimates of the system temperatue
+\citep{parsons_et_al2014,jacobs_et_al2014} relied on differencing and averaging
+baselines, time samples, and/or frequency channels. In addition those datasets
+were not precisely calibrated with the Omnical redundant calibration package.
+They therfore had the possibility of having their RMS noise being dominated by
+variations between baselines, producing a larger system temperature.
+
+%move this to discussion section?
+\subsection{The Covariance Matrix}
+%Covariance matrix nuances.
+%   -describe covariance matrix and data vectors.
+%   -How we get the covariance matrix. 
+%   -eigenvalue decomposition.
+%mode counting and nonsingular-ness.
+%   -Count independent modes.
+%   -covaraiance is independent only if we have enough indendent modes.
+%   -inverse covariance is tricky because of this. 
+%   -happy coincidence?
+%
+%XXX need to check lst range. 
+
+We now discuss the issues of empirically estimating the covariance matrix from
+the data. For a single baseline, the data vector $\x$, consists of 10 Mhz
+bandwidth centered at 151.72 MHz, equating to 20 frequency channels.
+All time samples are also kept, ranging from 0 to 10 LST hours. Again, we
+estimate the covariance in the usual way, $\C = \expval{\x\x^{\dagger}}$, taking
+the ensemble average over time. The covariance matrix for this baseline is a
+$N_{ch}\times N_{ch}$ matrix consisting of the covariances of all channels with
+each other. This covariance matrix is invertible only if it nonsingular, which
+requires it to be a rank $N_{ch}$ matrix. This occurs only if there are $N_{ch}$
+independent modes. 
+
+As noted in section \ref{sec:frf} the optimal fringe rate filter corrsponds to
+averageing time samples for 31 minutes. Over the 10 hour LST range used in this
+analysis, this corresponds to approximately 20 statistically independent modes
+on the sky. This is a fundamental limit of the amount of information we have in
+our measurements. Coincidentally, the covariance matrix for a given baseline is
+an $N_{ch} \times N_{ch}$ matrix, where $N_{ch}=20$.  Therefore, the covariance
+matrices for every baseline are infact invertible because they are full rank 
+and contain 20 statistically independent measurements of the sky. The covariance
+matrix is thus invertible and can be applied to the data vectors, $\x$. 
+
+%
+%   -Potential for signal loss.
+%       --In a traditional OQE method, the process is lossless by construction.
+%         Because we are tweaking this method, and the fact that we have non
+%         gaussian systematics in our data, there is a potential for signal
+%         loss. 
+Even though we have encountered a fortuitous event in having full rank
+covariance matrices, we are still estimating our covariance matrix using a
+limited sample size. This limitation leads to an imperfect characterization of
+the covariances between modes and ultimately leads to signal loss in this type
+of analysis. 
+
 
 
 \subsection{Integrating $k$-modes}
@@ -1602,46 +1660,6 @@ investigation of these modes is to be conducted.
 \caption{The posteriror distributiom assuming a flat, gaussian spectrum in $\Delta^{2}$.}
 \label{fig:final_posterioir}
 \end{figure}
-
-\subsection{System Temperature}   
-During the LST binning step, the variance of the visibilities on a frequency and
-time basis, are recorded. Using these variance, we calculate the system
-temperature as a function of LST, averaging over each LST hour. Figure
-\ref{fig:tsys} shows the results of this calculation. In this observing season,
-the system temperature decreased significantly, coming down to $T_{sys} = 375K$
-at 160 MHz, as compared to \cite{parsons_et_al2014,jacobs_et_al2014a}, which
-used the PAPER 32 antenna data set and deduced a system temperature of 560K at
-160 MHz. 
-
-\begin{figure}[h!]\centering
-\includegraphics[width=\columnwidth]{plots/tsys.png}
-\caption{System temperature as a function of time.}
-\label{fig:tsys}
-\end{figure}
-
-The system temperature estimated here is estimated from the variance in a given
-LST bin from all of the visibilities that correspond to that bin. We saw in
-figure \ref{fig:density} that redundant baselines agree at a fine level and the
-fractional spread in the data points is roughly 100 Jy. This variance, but of
-the complex visibility rather than just the real part, is what we are using in
-order to estimate the system temperature via the usual equation, 
-\begin{equation}
-    T_{sys} = \frac{T_{rms}}{\sqrt{\Delta\nu t_{int}}},
-\end{equation}
-where $\Delta\nu$ is the bandwidth, $t_{int}$ is the integration time, and
-$T_{rms}$ is the RMS temperature. Since this is the metric we are using to
-measure the system temperature, the increased precision in omnical has reduced
-the RMS noise in our measurements and therfore we measure a lower, and truer,
-noise temperature for our instrument. The system temperature measured here is
-closer to what was originally expected for the PAPER instrument
-\citep{parsons_et_al2010}.
-
-Previous estimates of the system temperatue
-\citep{parsons_et_al2014,jacobs_et_al2014} relied on differencing and averaging
-baselines, time samples, and/or frequency channels. In addition those datasets
-were not precisely calibrated with the Omnical redundant calibration package.
-They therfore had the possibility of having their RMS noise being dominated by
-variations between baselines, producing a larger system temperature.
 
 
 \subsection{Comparison with PSA32}
