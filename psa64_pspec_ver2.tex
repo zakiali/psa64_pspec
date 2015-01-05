@@ -195,7 +195,7 @@ relative to the peak observing time.}
 \end{figure*}
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Calibration and Analysis}\label{sec:analysis}
 XXX FLOW CHART FIGURE XXX
 We now describe the analysis pipeline leading up to the final power spectrum
@@ -843,11 +843,6 @@ jackknife tests on our observations.
 %\ref{fig:tsys_lst_fq}
 %\end{figure}
 
-
-
-
-
-
 \subsection{Optimal Fringe-Rate Filter}\label{sec:frf}
 %   -What is fringe rate filtering. Cite Parsons And Liu 2014.
 %       --Fringe Rate filtering is nothing more then a time domain weighted
@@ -1184,7 +1179,17 @@ the strongest modes get down weighted.
 
 \begin{figure*}[h!]\centering
 \includegraphics[width=2\columnwidth, height=5.5in]{plots/inv_cov.png}
-\caption{Applying the inverse covariance to baseleines.}
+\caption{Application of inverse covariance weighting to three different
+baselines for foreground contained (left 3 columns) and foreground removed
+data(right three columns). Each baselines waterfall (top row) covers a LST range
+from 0-8:20 hours and frequencies 146-156 MHz. The covariance matrix (middle
+row) are constructed by taking the inner product of the data vector and itself,
+summing over the LST axis. The final application of the inverse covaraince to
+the data vector, $\x$, is shown in the last row, constituting one half of the
+quadratic estimator in the formalism shown here. Weighting the data by the
+inverse covariance down weights the strongest modes of the covariance matrix in
+the data, nominally upweighting the noise in the data as seen in the comparison
+of column 4 to column 5, where column 5 is siligtlhy less noisy than the others.} 
 \label{fig:inv_cov}
 \end{figure*}
 
@@ -1382,7 +1387,7 @@ as well as data that fall in the different averaged data sets.
 %turned on. We can see the gradual improvement of the power spectra (hopefully).
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \section{Results}
@@ -1436,9 +1441,8 @@ are spreading power outside of the horizon and instrumental systematics. In
 addition our $2\sigma$ upper limit is also consistent with zero and therefore we
 are noise dominated and are hence lacking sensitivity.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
-
-
 %   -Tsys, and Tsys vs. time ?
 
 
@@ -1475,9 +1479,6 @@ are noise dominated and are hence lacking sensitivity.
 %
 %
 %
-
-
-
 
 \subsection{Instrument Stability}
 
@@ -1609,7 +1610,23 @@ limited sample size. This limitation leads to an imperfect characterization of
 the covariances between modes and ultimately leads to signal loss in this type
 of analysis. 
 
-
+The optimal quadratic estimator has an application of the inverse covariance
+matrix to data vector $\x$. Applying an inverse covariance matrix to the data it
+is derived from has the effect of weighting the data by the covariance matrix.
+Therefore strong modes, corresponding to the eigenvectors of the covariance
+matrix, are downweighted in this scheme as seen in figure \ref{fig:inv_cov}.
+For foreground contained data, the strong modes correspond to the smooth
+spectrum foregrounds, and therefore the covaraince matrix is highly covriance
+since all of the frequency channels are correlated with one another. However,
+for foreground filtered data, the strongest modes correspond to modes that
+resemble residual foreground in the data. It is important to note that inverse
+covariance weighting is a powerful tool as seen by looking at the three
+baselines used in figure \ref{fig:inv_cov}. For the baseline data vector with
+the least amount of noise in the delay filtered plot (right half, middle
+column), we can see that weighing by the inverse covariance upweights modes in
+this baseline as compared to the other baselines, which have a slightly higher
+noise in the original data vector. This is even paralleled in the foreground
+contained data.
 
 \subsection{Integrating $k$-modes}
 The power spectrum shown in figure \ref{fig:final_pspec} is an average of
@@ -1623,7 +1640,7 @@ independent modes. From the discussion on optimal fringe rate filtering we know
 we have 2 independent modes on the sky per LST hour. Hence, integrating modes
 upto a thousand modes, where not all are independent we expect to hit up against
 a floor, which we see. These curves are plotted for $P(k)$ and therefore, the
-colors represent both positive negative $k$'s with green curves haveing the
+colors represent both positive and negative $k$'s with green curves haveing the
 highest absolute value for $k$ and blue curves are modes closer to the horizon.
 
 
@@ -1839,6 +1856,7 @@ with very significant confidence, the need to mitigate the polarization leakage
 effects, which may be up to 2 orders of magnitude brighter than the EoR signal,
 is a necessity.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
 We have shown a new upper limit on the 21 cm EoR power spectrum at $z=8.4$,
 showing an almost an order of magnitude of improvement from the previous result
