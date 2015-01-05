@@ -16,7 +16,7 @@ del(uv)
 freqs = aa.get_afreqs() * 1e3
 print freqs
 #This was from 'zaki_passband_9th_order.npz'
-bpfile = n.load('/Users/sherlock/projects/paper/analysis/psa64/spectrum_stuff_4_zaki/zaki_passband_9th_order.npz')
+bpfile = n.load('zaki_passband_9th_order.npz')
 gianni_bandpass_coeffs = bpfile['coeff']
 
 print gianni_bandpass_coeffs
