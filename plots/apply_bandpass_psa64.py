@@ -16,8 +16,12 @@ del(uv)
 freqs = aa.get_afreqs() * 1e3
 print freqs
 #This was from 'zaki_passband_9th_order.npz'
-bpfile = n.load('zaki_passband_9th_order.npz')
-gianni_bandpass_coeffs = bpfile['coeff']
+try:
+    passbandfile = os.path.dirname(os.path.realpath(__file__))
+    bpfile = n.load(passbandfile+'/zaki_passband_9th_order.npz')
+    gianni_bandpass_coeffs = bpfile['coeff']
+except:
+    print 'File Not Found. Exitting...'
 
 print gianni_bandpass_coeffs
 gianni_bandpass = n.polyval(gianni_bandpass_coeffs, freqs)
