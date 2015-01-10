@@ -43,32 +43,33 @@ AZ}
 % fringe rate weights
 
 \section{Introduction} The hyperfine transition in the ground state of hydrogen
-leads to the emission of the infamous 21 cm wavelength photon. The 21 cm
+leads to the emission of the infamous [XXX: infamous?!] 21 cm wavelength photon. The 21 cm
 transition is thought to be one the most promising probes of the early universe
 due to the fact that the frequency of observed radiation maps to a specific
 redshift. It has the potential to map the never before seen dark ages
 ($z\sim{30}$), where the first galaxies and stars were beginning to form, as
 well as when the Epoch of Reionization (EoR), when neutral hydrogen was
-completely ionized by the photons emitted by the first sources. The wealth of
+completely ionized by the photons emitted by the first luminous galaxies. The wealth of
 information that can be obtained from the use of this optically thin transition
 include the formation of the first stars and galaxies, neutrino masses, and
-initial inflation power spectrum, amongst other science (list and cite
+initial inflation power spectrum, amongst other science (XXX: list and cite
 exhaustively). Using 21 cm to map the universe has the ability to surpass the
 Cosmic Microwave Background (CMB) in terms of the wealth of science it can
-deliver. Refer to \cite{furlanetto_et_al2006}, \cite{morales_wyithe2010}, and
+deliver (see, e.g., \cite{furlanetto_et_al2006}, \cite{morales_wyithe2010}, and
 \cite{pritchard_loeb2012} for reviews on using the 21 cm transition as a
-cosmological probe.
+cosmological probe).
+XXX Should ideally separate out cosmological applications from astrophysical ones.
 
-There are two different approaches to probe the 21 cm transition - via
+There are two different approaches to probe the 21 cm transition---via
 statistical power spectrum measurements or by measuring the \emph{global} 21 cm
 signal, which is the mean of the signal over the entire sky. Both of these
 techniques have their merits and many experiments are aimed to detect neutral
-hydrogen during EoR and the dark ages. GMRT (\cite{paciga_et_al2011}),
+hydrogen during the EoR and the dark ages. GMRT (\cite{paciga_et_al2011}),
 LOFAR(\cite{rottgering_et_al2006}), MWA(\cite{tingay_et_al2013}),
 PAPER(\cite{parsons_et_al2010}), and 21CMA are all aiming for the power spectrum
 detection of the fluctuations in the 21 cm line, whereas experiments like EDGES
 (\cite{bowman_et_al2010}), LWA, LEDA (\cite{lincoln_bernardi_2012}), DARE
-(\cite{burns_et_al2012}) , and SciHi (\cite{tabitha_et_al2014}) are after the
+(\cite{burns_et_al2012}) , and SciHi (\cite{tabitha_et_al2014}) seek to measure the
 mean brightness temperature of 21 cm relative to the CMB background. 
 
 Like CMB experiments, foreground contamination is a major concern for 21 cm
@@ -80,19 +81,21 @@ drowns out the faint EoR signal by atleast 5 orders of magnitude
 (\cite{furlanetto_et_al2006}, \cite{santos_et_al2005}) at these frequencies; the
 sky is much brighter at low frequencies than higher frequencies owning the the
 power law spectral distrbutions of sources. However, because the brightest
-foregrounds are spectrally smoothe, many techniques have been developed to use
+foregrounds are spectrally smooth, many techniques have been developed to use
 this fact to isolate and remove foregrounds (\cite{morales_et_al2006a},
 \cite{bowman_et_al2009}, \cite{liu_et_al2009}, \cite{liu_tegmark2011},
 \cite{parsons_et_al2012b},\cite{dillon_et_al2013a}).
 
-Currently, the best statistical upper limit on the 21 cm power spectrum was made
-with PAPER and is held at $(41 mk)^{2}$ at $k=.27 h \text{Mpc}^{-1}$. However,
+%XXX: Last sentence is weird. You don't develop techniques because the foregrounds
+%are spectrally smooth. You develop techniques because the foregrounds are bright
+%and contaminating. The smoothness is just what enables you to do it.
+
+Currently, the best upper limit on the 21 cm power spectrum is $\Delta^2 (k) \leq (41\,\textrm{mK})^{2}$ at $k=0.27 h \text{Mpc}^{-1}$, measured by a 32-antenna element version of PAPER (XXX: cite PAPER paper). However,
 all major 21 cm experiments (LOFAR, MWA, and PAPER) are at the cusp of detection
 and all have the sensitivity to rule out the optimistic reionization scenarios.
-However, even with a detection from anyone of these experiments, the
-characterization of the 21 cm power spectrum and imaging of EoR will have to
+However, even with a detection from one of these experiments, a high signal-to-noise characterization of the 21 cm power spectrum and imaging of EoR will have to
 wait until future 21 cm experiments such as the Hydrogen Epoch of Reionization
-Array (HERA) and the Square Kilometer Array (SKA) which will have more raw
+Array (HERA) and the Square Kilometer Array (SKA), which will have more raw
 collecting area and greater sensitivity. 
 
 In addition to using the 21 cm transtion as a probe of the early universe, many
@@ -111,8 +114,9 @@ reionization
 (\cite{schenker_et_al2013,treu_et_al2013,faisst_et_al2014,bolton_et_al2011}.
 
 This paper reports on the results from the Donald C. Backer Array for Probing
-the Epoch of Reionization (PAPER) -  64 antenna dual polarization minimum
-redundancy configuration. This paper is outlined as follows. In section
+the Epoch of Reionization (PAPER) -  64 antenna dual polarization maximum
+redundancy configuration. XXX: Sell it more, and advertise Jonnie's paper.
+ This paper is outlined as follows. In section
 \ref{sec:observations} we describe the observations used in this analysis. In
 \ref{sec:improvements} we discuss the improvements in this pipeline with respect
 to the previous analysis of PSA-32 \cite{parsons_et_al2014}. We then move on to
@@ -145,41 +149,43 @@ layout (see figure \ref{fig:antenna_positions}) where multiple baselines measure
 the same fourier mode on the sky
 (\cite{parsons_et_al2012a},\cite{parsons_et_al2014}). The PAPER antennas are a
 cross-dipole design in which both polarizations (X and Y) are processed
-independently. The PAPER beam is speactrally and spatially smooth down to the
+independently. The PAPER beam is spectrally and spatially smooth down to the
 horizon with a $60^{\circ}$ FWHM (\cite{jacobs_et_al2011},
 \cite{parsons_et_al2010}, \cite{stefan_et_al2013}). 
 
 The PAPER-64 correlator processes a 100 MHz to 200 MHz bandwidth, first
-channelizing the 100 MHz band into 1024 channls of width 97.6 kHz, and then
+channelizing the 100 MHz band into 1024 channels of width 97.6 kHz, and then
 cross multiplying every antenna and polarization with one another for a total of
 8256 cross products, including auto correlations. The architecture of this
 correlator is based on CASPER open source, reconfigurable hardware
 (\cite{parsons_et_al2008}). The channelizer, which includes the PFB-FFT and
 corner turn, consisted of 16 ROACH boards with eight 8 bit analog to digital
-converters. The cross multilication engine (X engine) was moved to GPU's based
+converters. The cross multiplication engine (X engine) was moved to GPUs based
 on the X-GPU, a general purpose X engine for GPU's \citep{clark_et_al2013}. 
 Visibility cross products are integrated for 10.7 seconds on the GPU's before
-being written to disk. We write all stokes parameters to disk, however the
-analaysis described here only apply to the XX and YY polariztion products.
+being written to disk. We write all stokes parameters to disk; however the
+analysis described here only apply to the XX and YY polariztion products.
 
 We rely on all 2016 (for each polariztion) baselines for the calibration
 procedure, but only use a subset of the baselines for the power spectrum
-analysis. This subset encompases 3 separation types; the shortest spaceing
-east-west baselines (e.g. 41-47) and those of the same East-West column spacing,
+analysis. This subset encompasses 3 separation types; the shortest spaceing
+east-west baselines (e.g. 41-47 in Figure \ref{fig:antenna_positions}) and those of the same East-West column spacing,
 except slanted up and down one row (e.g. 10-41 and 10-58, respectively).
 Baselines in each of the 3 separation types (or redundant groups) are
 instantaneously redundant within the group and therefore measure the same
-fourier modes on the sky. This allows us to coherently add fourier modes,
-building sensitivity as $N$  rather than $\sqrt{N}$.
+Fourier modes on the sky. This allows us to coherently add Fourier modes,
+building sensitivity as $N$ rather than $\sqrt{N}$, where $N$ is the number of identical baselines.
 
 The observation of this 64 antenna data set spanned a 135 day period that
 commenced on 2012 November 8 (JD62456240) and ended  2013 March 23 (JD62456375). 
 For the power spectrum analysis, we use data that spanned, in local sidereal
 time (LST), a range of 0:00 to 10:00 hours. This range corresponds to
-the "EoR cold patch", in which galactic synchrotron power is minimal (away from
+the ``EoR cold patch", in which galactic synchrotron power is minimal (away from
 the center of the galaxy). Due to LST drift of 3:56 minutes every solar day, we
 unevenly sample every lst in our observations, giving us more samples of certain
-lsts than others. The lsts with the greatest number of smaples are those used in
+lsts than others. (XXX: Strange to have this be in the active voice, since 
+it's not like you're choosing to get different LST sampling on purpose)
+The lsts with the greatest number of samples are those used in
 the power spectrum analysis (along with those corresponding to the cold patch).
 Figure \ref{fig:coverage} shows our observing field with the contours labeling
 the beam weighted observing time relative to the peak, directly over head the
@@ -1043,7 +1049,9 @@ left with $\sim2$ independent samples per hour.
 %       --In addition, because of the highly redundant nature of the array,
 %         the covariance matrix is highly singular and therefore not invertible.
 This section is divided to break up the formalism and practical use of the
-optimal quadratic estimator method to measure the power spectrum. We first
+optimal quadratic estimator method to measure the power spectrum. (XXX: Rephrase
+the previous sentence. Divided into what?)
+We first
 review the formalism, with an emphasis on our analysis, followed by a walk
 through of our application of the OQE method to our data, and finally discuss
 the effects of an empirical estimate of covariance matrices.
@@ -1082,37 +1090,57 @@ the 21 cm power spectrum, $P(\k)$, defined such that
     \expval{\tilde{T}_{b}(\k)\tilde{T}^{*}_{b}(\k^{\prime})} =
             (2\pi)^{3}\delta^{D}(\k - \k^{\prime})P(\k). 
 \end{equation}
-For a data vector $\x$, the optimal quadratic estimator is given by 
+For a data vector $\x$, the optimal quadratic estimator is given by [XXX: make clear
+that this is not the power spectrum yet. I would refrain from calling this the optimal
+quadratic estimator (optimal quadratic estimator of what?). Instead, state that this is
+an intermediate quantity that will be needed to form our optimal quadratic estimator
+of our power spectrum]
 \begin{equation}
 \label{eqn:quad_est}
     \hat{q}_{\alpha} = \frac{1}{2}\x^{t}\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\x - b_{\alpha},
 \end{equation}
 up to some normalization matrix $\mathbf{M}$. With the normalization matrix, the
-estimate of the power spectrum in bin $\alpha$ is given by
+estimate of the power spectrum in bin $\alpha$ [XXX: make clear bins in what "space", i.e.
+these are bins in k] is given by
 \begin{equation}
     \hat{p}_{\alpha} = \mathbf{M}\hat{q}_{\alpha}, 
 \end{equation}
+[XXX: This equation has mixed notation, because you're doing half of it in bold vector/matrix
+notation and half writing out components. Pick one. If the latter, it ought to be beta on the right
+hand side, not alpha]
 where $\hat{p}_{\alpha}$ is the estimate of the power spectrum.
 In our analysis, $\x$ is the set of visibilities for the redundant baselines of
 a single column east-west spacing for a frequency spanning 10 MHz centered at
 151.5 MHz. To first order we estimate our covariance matrix by taking the outer
-product of our data vector with itself, $\mathbf{C} = \expval{\x^{t}\x}$,
+product of our data vector with itself, $\mathbf{C} = \expval{\x^{t}\x}$, [XXX: the transpose
+should be on the other copy of x. Also, I think we should define the angular brackets as
+the ensemble average, and then say that because we can't do an ensemble average,
+we approximate it using a time average]
 collapsing over the time axis. We discuss the consequences of the covariance
 matrix later in this section.  $\mathbf{Q}$ is defined as the derivative of
-$\mathbf{C}$ with respect to $\alpha$ ($\frac{\partial C}{\partial \alpha}$). The
+$\mathbf{C}$ with respect to $\alpha$ [XXX: you can't differentiate with respect to an index!
+I think you mean differentiating w.r.t. $p_\alpha$] ($\frac{\partial C}{\partial \alpha}$). The
 $\mathbf{Q}$ matrix encodes the delay transform to go from frequency domain to
 delay domain, where $P(k)$ can be estimated. Finally, $b_{\alpha}$ is the  bias to
 the estimate that needs to be subtracted off. In our analysis, we are
-constructing an unbiased estimator and therefore ignore this term. 
-The normaliztion matrix is defined such that
+constructing an unbiased estimator and therefore ignore this term. [XXX: Careful. The cross-correlation
+gets rid of the noise bias, but there's a foreground bias. Let's be careful and define the
+bias here as the instrumental noise bias. Also, since we're talking about cross-correlations,
+I think we should at some point say explicitly that the copies of $\mathbf{x}$ in the estimator
+are to be replaced with $\mathbf{x}_1$ and $\mathbf{x}_2$.]
+
+The normalization matrix is defined such that
 \begin{equation}
     \mathbf{W} = \mathbf{M}\mathbf{F}, 
 \end{equation}
 where $\mathbf{F}$ is the Fisher information matrix, given by $F = cov(\hat{q})
-= 2tr(C^{-1}Q_{\alpha}C^{-1}Q_{\beta})$ and $\mathbf{W}$ is 
+= 2tr(C^{-1}Q_{\alpha}C^{-1}Q_{\beta})$ [XXX: several things. First, use the proper bold fonts even
+if it's in the text. Everything in the trace should be bolded. Also, the $F$ needs to have indices
+$\alpha$ and $\beta$. The 2 should be a $1/2$, and the $\textrm{Cov}(\hat{q})$ is something I'd omit here. It's true, but it's less fundamental than the rest of the expression] and $\mathbf{W}$ is 
 the window function matrix. The window functions measure the degree to which
 power from $k$ bins couple into the measurement of the power measured in the
-$\alpha$'th bin.
+$\alpha$'th bin. [XXX: I suggest being more precise here, and actually writing out the
+relation between phat and p]
 
 %   -Cholesky Decomposition and window functions.
 %       --The optimal window functions (that minimize the vertical error bars of
@@ -1134,7 +1162,7 @@ The normalization matrix is the analysts choice, and is the last chance to
 weight the measurements in the power spectrum estimates. Picking $\mathbf{M} =
 \mathbf{F}^{-1}$, and hence $\mathbf{W} = \mathbf{I}$, minimizes the error bars
 in the final power spectrum estimate with the trade off that the estimate of the
-power spectrum in the $\alpha$'th bin is coupled with every other band power.
+power spectrum in the $\alpha$'th bin is coupled with every other band power. [XXX: Umm...no? I don't think it does]
 Even though this choice gives us the smallest error bars possible, we opt for a
 different choice of window function as follows. We first take the
 Cholesky-decompositon of the Fisher matrix such that $\mathbf{F} =
@@ -1147,7 +1175,9 @@ the final estimate of the power spectrum in the $\alpha$'th bin of only coupling
 modes exterior to $\alpha$ in to the estimate.  This has the consequence of not
 coupling the modes inside to horizon in to measurments of the power spectrum
 outside the horizon. Figure \ref{fig:window_func} shows these window
-functions.
+functions. [XXX: we need to be much more explicit here. For $\mathbf{L}$ to have the
+behavior we want, we need to order the data in $\mathbf{x}$ in a very particular order. We
+should also be talking about the error correlations in addition to the window functions]
 
 \begin{figure}[t!]\centering
 \includegraphics[width=\columnwidth, height=\columnwidth]{plots/window.png}
