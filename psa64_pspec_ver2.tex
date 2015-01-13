@@ -23,9 +23,11 @@
 
 \author{ Zaki S. Ali\altaffilmark{1}, Aaron R. Parsons\altaffilmark{1,2}, Jeff
 Zheng, Jonathan C. Pober\altaffilmark{4}, James E. Aguirre\altaffilmark{3},
+Richard F. Bradley, Gianni XXX Bernardi, Christopher L. Carilli,
 David R. DeBoer\altaffilmark{2}, Daniel C. Jacobs\altaffilmark{8}, Adrian
 Liu\altaffilmark{1}, David F. Moore\altaffilmark{3}
 % XXX if includes paper data, needs full author list
+% XXX add steve?
 }
 %\tableofcontents
 
@@ -42,80 +44,115 @@ AZ}
 % XXX fringe weighting profile XXX delay spectrum not violated by freq-dependent
 % fringe rate weights
 
-\section{Introduction} The hyperfine transition in the ground state of hydrogen
-leads to the emission of the infamous [XXX: infamous?!] 21 cm wavelength photon. The 21 cm
-transition is thought to be one the most promising probes of the early universe
-due to the fact that the frequency of observed radiation maps to a specific
-redshift. It has the potential to map the never before seen dark ages
-($z\sim{30}$), where the first galaxies and stars were beginning to form, as
-well as when the Epoch of Reionization (EoR), when neutral hydrogen was
-completely ionized by the photons emitted by the first luminous galaxies. The wealth of
-information that can be obtained from the use of this optically thin transition
-include the formation of the first stars and galaxies, neutrino masses, and
-initial inflation power spectrum, amongst other science (XXX: list and cite
-exhaustively). Using 21 cm to map the universe has the ability to surpass the
-Cosmic Microwave Background (CMB) in terms of the wealth of science it can
-deliver (see, e.g., \cite{furlanetto_et_al2006}, \cite{morales_wyithe2010}, and
-\cite{pritchard_loeb2012} for reviews on using the 21 cm transition as a
-cosmological probe).
-XXX Should ideally separate out cosmological applications from astrophysical ones.
+\section{Introduction}
 
-There are two different approaches to probe the 21 cm transition---via
-statistical power spectrum measurements or by measuring the \emph{global} 21 cm
-signal, which is the mean of the signal over the entire sky. Both of these
-techniques have their merits and many experiments are aimed to detect neutral
-hydrogen during the EoR and the dark ages. GMRT (\cite{paciga_et_al2011}),
-LOFAR(\cite{rottgering_et_al2006}), MWA(\cite{tingay_et_al2013}),
-PAPER(\cite{parsons_et_al2010}), and 21CMA are all aiming for the power spectrum
-detection of the fluctuations in the 21 cm line, whereas experiments like EDGES
-(\cite{bowman_et_al2010}), LWA, LEDA (\cite{lincoln_bernardi_2012}), DARE
-(\cite{burns_et_al2012}) , and SciHi (\cite{tabitha_et_al2014}) seek to measure the
-mean brightness temperature of 21 cm relative to the CMB background. 
+The {\it cosmic dawn} of the universe, which begins with the birth of the first stars and ends approximately
+one billion years later with the full
+reionization of the intergalactic medium (IGM), represents one of the last 
+unexplored phases in cosmic history. 
+Studying the formation of the first galaxies and their influence on the primordial IGM during this
+period is among the highest priorities in modern astronomy.
+During our cosmic dawn, IGM characteristics depend on the cosmic density field, the mass and clustering of 
+the first galaxies \citep{lidz_et_al2008} [XXX check], their ultraviolet luminosities [XXX],
+the abundance of X-ray sources and other sources of heating \citep{messinger_et_al2013} [XXX check],
+and higher-order cosmological effects like the relative velocities of baryons and dark matter \citep{visbal_et_al2012}.
 
-Like CMB experiments, foreground contamination is a major concern for 21 cm
-experiments. Sources of foregrounds for these low frequency experiments include
-synchrotron radiation from the Milky Way, extragalactic radio sources and
-supernova remanants. Since all 21 cm experiments are low frequency by nature
-(ranging from 50MHz - 200MHz), emission from these foregrounds drastically
-drowns out the faint EoR signal by atleast 5 orders of magnitude
-(\cite{furlanetto_et_al2006}, \cite{santos_et_al2005}) at these frequencies; the
-sky is much brighter at low frequencies than higher frequencies owning the the
-power law spectral distrbutions of sources. However, because the brightest
-foregrounds are spectrally smooth, many techniques have been developed to use
-this fact to isolate and remove foregrounds (\cite{morales_et_al2006a},
-\cite{bowman_et_al2009}, \cite{liu_et_al2009}, \cite{liu_tegmark2011},
-\cite{parsons_et_al2012b},\cite{dillon_et_al2013a}).
+Recent measurements
+have pinned down the bright end of the galaxy luminosity function
+at $z \la 8$ \citep{bouwens_et_al2010,schenker_et_al2013} and have detected a few sources at even greater
+distances \citep{ellis_et_al2013,oesch_et_al2013}. Still, this known population falls well short 
+of the requirements to reionize the universe \citep{robertson_et_al2013} [XXX is this the right cite?], 
+driving us to deeper observations with, e.g., JWST and ALMA, to reveal the fainter end of the luminosity function.
+In parallel, a number of indirect techniques have constrained the evolution of the neutral fraction
+with redshift. Examples include integral constraints on reionization from the
+optical depth of Thomson scattering to the CMB \citep{planck_et_al2013},
+large-scale CMB polarization anisotropies \citep{page_et_al2007}, and
+secondary temperature fluctuations generated by the kinetic Sunyaev-Zel'dovich effect \citep{zahn_et_al2012,mesinger_et_al2012}.
+Other examples probing the tail end of reionization include
+observations of resonant scattering of Ly$\alpha$ by the neutral IGM toward
+distant quasars (the `Gunn-Peterson' effect) \citep{fan_et_al2006},
+the demographics of Ly$\alpha$ emitting galaxies \citep{schenker_et_al2013,treu_et_al2013,Faisst_et_al2014},
+and the
+Ly$\alpha$ absorption profile toward very distant quasars \citep{bolton_et_al2011}.
 
-%XXX: Last sentence is weird. You don't develop techniques because the foregrounds
-%are spectrally smooth. You develop techniques because the foregrounds are bright
-%and contaminating. The smoothness is just what enables you to do it.
+%In addition to using the 21 cm transtion as a probe of the early universe, many
+%other techniques have been used to constrain reionization parameters such as
+%the redshift of reionization (when the neutral fraction, $\bar{x} = 0.5$), the
+%duration of reionization, and the end of reionization, amogst others. The
+%Gunn-Peterson effect has shown that the intergalactic medium was fully ionized
+%by $z=6$ (\cite{fan_et_al2006}). The most recent results from SPT have shown
+%the constraints of the duration of reionization to be  $\Delta{z} \textless 5.4$
+%(\cite{george_et_al2014}) using results from the kinetic Sunyaev-Zel'dovich
+%effect. The optical depth parameter, $\tau$, from the CMB also constrains
+%reionization with the Panck results (\cite{planck_et_al2013}) and CMB
+%polarization (\cite{page_et_al2007}). Lyman emitters and lyman alpha absorption
+%profiles towards distant quasars have also given limits on the end of
+%reionization
+%(\cite{schenker_et_al2013,treu_et_al2013,faisst_et_al2014,bolton_et_al2011}.
+% XXX merge with above
 
-Currently, the best upper limit on the 21 cm power spectrum is $\Delta^2 (k) \leq (41\,\textrm{mK})^{2}$ at $k=0.27 h \text{Mpc}^{-1}$, measured by a 32-antenna element version of PAPER (XXX: cite PAPER paper). However,
-all major 21 cm experiments (LOFAR, MWA, and PAPER) are at the cusp of detection
-and all have the sensitivity to rule out the optimistic reionization scenarios.
-However, even with a detection from one of these experiments, a high signal-to-noise characterization of the 21 cm power spectrum and imaging of EoR will have to
-wait until future 21 cm experiments such as the Hydrogen Epoch of Reionization
-Array (HERA) and the Square Kilometer Array (SKA), which will have more raw
-collecting area and greater sensitivity. 
 
-In addition to using the 21 cm transtion as a probe of the early universe, many
-other techniques have been used to constrain reionization parameters such as
-the redshift of reionization (when the neutral fraction, $\bar{x} = 0.5$), the
-duration of reionization, and the end of reionization, amogst others. The
-Gunn-Peterson effect has shown that the intergalactic medium was fully ionized
-by $z=6$ (\cite{fan_et_al2006}). The most recent results from SPT have shown
-the constraints of the duration of reionization to be  $\Delta{z} \textless 5.4$
-(\cite{george_et_al2014}) using results from the kinetic Sunyaev-Zel'dovich
-effect. The optical depth parameter, $\tau$, from the CMB also constrains
-reionization with the Panck results (\cite{planck_et_al2013}) and CMB
-polarization (\cite{page_et_al2007}). Lyman emitters and lyman alpha absorption
-profiles towards distant quasars have also given limits on the end of
-reionization
-(\cite{schenker_et_al2013,treu_et_al2013,faisst_et_al2014,bolton_et_al2011}.
+Complementing these probes of our cosmic dawn are experiments targeting
+the 21~cm ``spin-flip" transition of neutral hydrogen at high redshifts.
+This signal has been recognized as a potentially powerful probe
+of the cosmic dawn \citep{pritchard_loeb2012,morales_wyithe2010,furlanetto_et_al2006} that can reveal
+large-scale fluctuations in the ionization state and temperature of the IGM, opening
+a unique window into the complex astrophysical interplay between the first luminous
+structures and their surroundings.
+Cosmological redshifting maps 
+each observed frequency with a particular emission time (or distance), enabling 21~cm experiments 
+to some day reconstruct 
+three-dimensional pictures of the time-evolution of large scale structure in the universe. 
+While such maps can potentially probe nearly the entire observable universe \citep{mao_et_al2010},
+in the near term, 21~cm cosmology experiments are focusing on statistical or integrated measures
+of the signal.
 
-This paper reports on the results from the Donald C. Backer Array for Probing
-the Epoch of Reionization (PAPER) -  64 antenna dual polarization maximum
-redundancy configuration. XXX: Sell it more, and advertise Jonnie's paper.
+%The hyperfine transition in the ground state of hydrogen
+%leads to the emission of the infamous [XXX: infamous?!] 21 cm wavelength photon. The 21 cm
+%transition is thought to be one the most promising probes of the early universe
+%due to the fact that the frequency of observed radiation maps to a specific
+%redshift. It has the potential to map the never before seen dark ages
+%($z\sim{30}$), where the first galaxies and stars were beginning to form, as
+%well as when the Epoch of Reionization (EoR), when neutral hydrogen was
+%completely ionized by the photons emitted by the first luminous galaxies. The wealth of
+%information that can be obtained from the use of this optically thin transition
+%include the formation of the first stars and galaxies, neutrino masses, and
+%initial inflation power spectrum, amongst other science (XXX: list and cite
+%exhaustively). Using 21 cm to map the universe has the ability to surpass the
+%Cosmic Microwave Background (CMB) in terms of the wealth of science it can
+%deliver (see, e.g., \cite{furlanetto_et_al2006}, \cite{morales_wyithe2010}, and
+%\cite{pritchard_loeb2012} for reviews on using the 21 cm transition as a
+%cosmological probe).
+%XXX Should ideally separate out cosmological applications from astrophysical ones.
+
+There are two complementary experimental approaches to accessing 21~cm emission from
+our cosmic dawn.  So-called ``global" experiments such as 
+EDGES \citep{bowman_et_al2010}, 
+the LWA \citep{ellingson_et_al2010} [XXX check, does the LWA have an effort distict from LEDA?], 
+LEDA \citep{lincoln_bernardi_2012}), 
+DARE \citep{burns_et_al2012}, 
+SciHi \cite{tabitha_et_al2014}, 
+BigHorns \citep{XXX},
+and SARAS \citep{patra_et_al2015} 
+seek to measure the
+mean brightness temperature of 21 cm relative to the CMB background. These experiments
+typically rely on auto-correlations from a small number of dipole elements to access
+the sky-averaged 21~cm signal, although recent work indicates
+that cross-correlations from a compact interferometer may also work \citep{presley_et_al2015}.
+In contrast, experiments targeting statistical power-spectral measurements of the 21~cm
+signal employ larger interferometers.  Examples of such interferometers targeting
+the reionization signal include
+the GMRT \citep{paciga_et_al2011},
+LOFAR \citep{rottgering_et_al2006} [XXX update this cite], 
+the MWA \citep{tingay_et_al2013} [XXX cite dillon here if not elsewhere],
+the 21CMA [XXX cite],
+and the Donald C. Backer Precision Array to Probe the Epoch of Reionization (PAPER;\citealt{parsons_et_al2010}). 
+
+XXX paragraph about PAPER.  Descriptions, history, etc.
+Currently, the best upper limit on the 21 cm power spectrum is $\Delta^2 (k) \leq (41\,\textrm{mK})^{2}$ at $k=0.27 h \text{Mpc}^{-1}$, measured by a 32-antenna element version of PAPER \citep{parsons_et_al2014}.
+
+
+In this paper, we report on the results from a 64-element deployment of PAPER in South Africa.
  This paper is outlined as follows. In section
 \ref{sec:observations} we describe the observations used in this analysis. In
 \ref{sec:improvements} we discuss the improvements in this pipeline with respect
@@ -123,6 +160,9 @@ to the previous analysis of PSA-32 \cite{parsons_et_al2014}. We then move on to
 the data analysis pipeline in section \ref{sec:analysis}. Seciton
 \ref{sec:results} describes the results of our efforts and provides new
 contraints on EoR. We conclude in \ref{sec:conclusion}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Observations}\label{sec:observations}
 
 \begin{figure}[!t]\centering
 \includegraphics[width=\columnwidth]{plots/antenna_positions.png}
@@ -137,12 +177,9 @@ sensitivity of for the power spectrum analysis.}
 \end{figure}
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Observations}\label{sec:observations}
 PAPER is a driftscan array deployed at the Square Kilometer Array South Africa
 (SKA-SA) reseve in the Karoo desert located at (21:25:41:9,
--30:43:17:15)(\cite{parsons_et_al2010}) . Observations discussed in this paper
+-30:43:17:15) (\cite{parsons_et_al2010}) . Observations discussed in this paper
 were taken while PAPER consisted of 64 dual polarization antennas deployed in
 the Fall of 2012. The array was configured into a maximally redundant antenna
 layout (see figure \ref{fig:antenna_positions}) where multiple baselines measure
@@ -203,6 +240,42 @@ relative to the peak observing time.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Calibration and Analysis}\label{sec:analysis}
+
+Foreground contamination and signal sensitivity represent the two major concerns for 21~cm
+experiments targeting power-spectral measurements. Sources of foregrounds include
+galactic synchrotron radiation, supernova remnants, and extragalactic radio sources.
+In the low-frequency radio band (50--200 MHz) where 21~cm reionization experiments operate,
+emission from these foregrounds
+drowns out the faint reionization signal by more than 5 orders of magnitude
+\citep{deoliveira2008,jelic_et_al2008,santos_et_al2005}.
+However, the brightest foregrounds are spectrally smooth, and this provides an important hook
+for their isolation and removal \citep{liu_et_al2009,liu_tegmark2012}.  Unfortunately, interferometers, which are inherently chromatic
+instruments, interact with spectrally smooth foregrounds to produce unsmooth features that
+imitate line-of-sight Fourier modes over cosmological volumes \citep{bowman_et_al2009,morales_et_al2006a} [XXX any others?].
+One possible solution to this problem involves an ambitious calibration and modeling approach to spatially localize and
+remove foreground contaminants \citep{harker_et_al2009,liu_et_al2008,juddEarly} [XXX others? LOFAR?].  
+Perhaps the most impressive example of this approach is being undertaken by LOFAR, where dynamic ranges of XXX have
+been achieved in synthesis images \citep{yattawatta_et_al2013}, although it is expected that additional
+suppression of smooth-spectrum foreground emission will be necessary [XXX cite PCA LOFAR paper].
+
+The analysis for this paper employs a contrasting
+approach based on the fact that the chromaticity of an interferometer
+is fundamentally related to the length of an interferometric baseline.  This relationship, known
+colloquially as ``the wedge", was 
+derived analytically \citep{parsons_et_al2012b,vedantham_et_al2012}, and has been confirmed in 
+simulations \citep{datta_et_al2010,hazelton_et_al2013} and observationally
+\citep{pober_et_al2013,dillon_et_al2013b}.  As described in \citep{parsons_et_al2012b}, the wedge is the result of the delay
+between when a wavefront originating from foreground emission
+arrives at the two antennas in a baseline.  The fact that this delay is bounded by the light-crossing
+time between two antennas (which we call the ``horizon limit'' since such a wavefront would have to have
+been generated from foregrounds sitting on the horizon) places a fundamental bound on the chromaticity of
+an interferometric baseline.  So far, PAPER has had the most success in exploiting this bound
+\citep{parsons_et_al2014,jacobs_et_al2014}, although it is in the process of being applied to MWA
+observations \citep{nitya}.  
+
+XXX blend transition to actual analysis steps
+
+
 XXX FLOW CHART FIGURE XXX
 We now describe the analysis pipeline leading up to the final power spectrum
 measurement of our data set. To begin, we run a compression algorithm to reduce
@@ -1931,6 +2004,15 @@ data which will increase the sensitivity of measurements by almost an order of
 magnitude from the data used here. Also, construction of HERA is also under way,
 which will have the sensitiviy to make a $n\sigma$ detection of the 21 cm power
 spectrum. We look forward to this.
+
+%However, all major 21 cm experiments (LOFAR, MWA, and PAPER) are at the cusp of detection
+%and all have the sensitivity to rule out the optimistic reionization scenarios.
+% XXX don't put speculative stuff in intro
+XXX Might mention impact of wedge on predicted sensitivities.
+However, even with a detection from one of these experiments, a high signal-to-noise characterization of the 21 cm power spectrum and imaging of EoR will have to
+wait until future 21 cm experiments such as the Hydrogen Epoch of Reionization
+Array (HERA) and the Square Kilometer Array (SKA), which will have more raw
+collecting area and greater sensitivity \citep{pober_et_al2014}.
 
 \section{Acknowledgements} 
 PAPER is supported by grants from the  National Science Foundation (grant
