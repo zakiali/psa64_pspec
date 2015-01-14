@@ -29,3 +29,7 @@ p.subplots_adjust(right=.99, bottom=.2)
 p.xlabel('LST [radians]')
 p.ylabel('Visibility (real) [Jy]')
 p.show()
+
+for i in [500,1000,1500,2000]:
+    p.plot(density[:,i] - n.average(density[n.where(density[:,i] > 0),i]))
+p.show()
