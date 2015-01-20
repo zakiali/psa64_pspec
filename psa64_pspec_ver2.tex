@@ -1233,7 +1233,7 @@ other hand the foreground bias is also somewhat accounted for by using cross
 correlations. We try to remove this bias by cross correlating between different
 days and baselines. Due to the fact that we are using cross correlations in our
 quadratic estimator of the power spectrum, equation \ref{eqn:qalpha} becomes, 
-\begin{equation}
+\begin{equation}\label{eqn:qalpha_unbiased}
     q_{\alpha} =
 \frac{1}{2}\x_{1}^{t}\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\x_{2} - b_{\alpha},
 \end{equation}
@@ -1410,43 +1410,46 @@ of power spectra. For ease of notation, let us define
     \mathbf{z} =  \mathbf{C}^{-1}\mathbf{x},
 \end{equation}
 which is the weighting of the data by the inverse covariance. This is a crucial
-step in the analysis since it supresses cavariant signal between $k$-modes by
+step in the analysis since it supresses covariant signal between $k$-modes by
 down weighting that signal. The application of the covariance matrix to data has
 the same general suppression, however, different data sets have different
 covariances. Figure  \ref{fig:inv_cov} shows what happens when one applies the
-inverse covariance to a data vector that contains foregrounds and one which has
-the foregrounds removed via that wideband delay filter described in section
-\ref{sec:wbd_filtering}.
+inverse covariance to a data vector that contains foregrounds, and therefore
+highly covariant,  and one which has the foregrounds removed via that wideband
+delay filter described in section \ref{sec:wbd_filtering}.  In the figure, the
+top row corresponds to the the data vector $\mathbf{x}$, which is a waterfall of
+the visibilities with frequency on the $x$-axis and time on the $y$-axis. The
+middle section shows the empirical estimate of the covaraince by taking the
+outer product of $\x$ with itself and collapsing over the time axis. Finally,
+the last row is the application of inverse covariance weighting to the data,
+namely $\mathbf{z}$.  Applying the invsere covariance to $\x$ down weights the
+strongest eigen modes of the covaraince matrix, $\mathbf{C}$, and upweights the
+weakest eigen modes. In comparison, for random white noise, the optimal
+weighting scheme is inverse variance weighting, which leads to the smallest
+error bars. For an infinite sample of random white noise, the covariance matrix
+would be diagoanl and applying the inverse covariance would be identical to
+inverse variance weighting. The diagonal of this inverse covariance matrix are
+the eigenvalues and correspond to the the eigenmodes. Therefore, the most
+downweighted modes correspond to the largest eigenvalues of $\C$, and hence the
+strongest modes.  Similarily, applying the inverse covariance to the baseline
+data vector, $\x$, the strongest modes get down weighted. 
 
+Looking at $\mathbf{z}$ in figure \ref{fig:inv_cov} for the visibilities that
+still contain foreground signal (left half) shows the down weighting of
+the strongest modes which correspond to foregrounds. The strongest modes here,
+are the strongest eigen modes of the the covariance matrix. Figure
+\ref{fig:eigs} shows the eigen spectrum and the four strongest eigen modes of a
+covaraiance matrix derived from a data vector with foregrounds. As seen four
+strongest eigen modes are highly suggestive of smooth spectrum sources. In
+contrast, the right half of figure \ref{fig:inv_cov} shows the application of
+inverse covariance weighting to data which has the wideband delay filter applied
+to remove smooth spectrum foregrounds. Applying the covariance, is upweighting
+the weakest modes in the data and since the strongest, foreground, modes have
+been removed we are seeing the upweighting of the noise. This is paralleled by
+looking at the eigenspectrum and strongest eigenmodes of the foreground-less
+covariance matrix in which the strongest modes do not have any coherent
+structure to them and can be considered noise like.
 
-
-The application of the optimal quadratic estimator of the power spectrum
-diverges from the formalism discussed in the previous section in implementation.
-One of the major differences between the application and the actual
-implementation, which was touched on breifly, was the construction of an
-unbiased estimator by using cross correlations. As mentioned in section
-\ref{sec:wbd}, we have constructed two LST binned data sets, which are identical
-in sky signal, but have varying noise properties. This allows us to construct
-unbiased (in instrumental noise) quadratic estimator of the power spectrum, but
-will allow for a foreground bias if residual foregrounds are still in the data
-at some significant level after the application of the delay filter.
-
-We apply the quadratic estimator formalism on a per baseline basis, which leads
-to a simplification of the equations in the formalism above. For each
-baseline, we empirically estimate the covariance matrix and apply the inverse to
-the data itself. Figure \ref{fig:inv_cov} shows the application of the
-inverse covariance to both foreground and delay filtered data, in the frequency
-domain. Applying the invsere covariance to $\x$ down weights the strongest
-eigen modes of $\mathbf{C}$ and upweights the weakest eigen modes. In
-comparison, for random white noise, the optimal weighting scheme is inverse
-variance weighting, which leads to the smallest error bars. For an infinite
-sample of random white noise, the covariance matrix would be diagoanl and
-applying the inverse covariance would be identical to inverse variance
-weighting. The diagonal of this inverse covariance matrix are the eigenvalues
-and correspond to the the eigenmodes. Therefore, the most downweighted modes
-correspond to the largest eigenvalues of $\C$, and hence the strongest modes.
-Similarily, applying the inverse covariance to the baseline data vector, $\x$,
-the strongest modes get down weighted. 
 
 \begin{figure*}[h!]\centering
 \includegraphics[width=2\columnwidth, height=5.5in]{plots/inv_cov.png}
@@ -1464,15 +1467,6 @@ of column 4 to column 5, where column 5 is siligtlhy less noisy than the others.
 \label{fig:inv_cov}
 \end{figure*}
 
-For foreground contained data the strongest eigenmodes of the covariance matrix
-correspond to delay modes (sine waves in frequency; see figure \ref{fig:eigs}).
-In contrast, the strongest modes for delay filtered do not look like clear cut
-delay modes, but do have some structure in them. This indicates that there are
-modes that describe signal, but are buried in the noise. The strength of these
-modes are indicated by eigenvalues of the corresponding covariance matrix. The
-strongest eigenmodse for foreground contained to foreground filtered data is
-five orders of magnitude, owning to the wideband delay filter.
-
 \begin{figure*}[t!]\centering
 \includegraphics[width=1.5\columnwidth]{plots/eig.png}
 \caption{Eigenvalues of the covariance matrix from foreground contained data
@@ -1481,6 +1475,35 @@ Correspondingly, the strongest four eigenmodes for foreground contained (top
 right), and foreground remved data (bottom right).}
 \label{fig:eigs}
 \end{figure*}
+
+As noted in the previous section, we use cross correlations between baselines
+and times to construct an unbiased estimator of the power spectrum. This results
+in applying equation \ref{eqn:qalpha_unbiased}, without the bias term, namely, 
+\begin{equation}
+    q_{\alpha} =
+        \frac{1}{2}\x_{1}^{t}\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\x_{2}.
+\end{equation}
+Here, $\x_{1}$ and $\x_{2}$ are data vectors which have uncorrelated noise
+properties leading to the removal of the bias term. As mentioned in section
+\ref{sec:wbd}, we have constructed two LST binned data sets, which are identical
+in sky signal, but have varying noise properties, owning to being created with
+every other day of observation.  This allows us to construct unbiased (in
+instrumental noise) quadratic estimator of the power spectrum, but will allow
+for a foreground bias if residual foregrounds are still in the data at some
+significant level after the application of the delay filter. Concretely, to
+remove the bias in the power spectrum we take 2 approaches that should remove
+any systematics associated with the power spectrum.
+
+Firstly, we use the data from the two LST binned data sets which were created
+by binning every other days into the same LST grid. We refer to these data sets
+as the "even" and "odd" data sets. When constructing our estimate of the power
+spectrum, we use baselines from these two data sets on either side of the
+$\mathbf{Q}$ matrix, being careful not to include the same baseline from the
+same data set on both sides. Using this prescription, we are avoiding a noise
+bias from correlations that occur on a day time scale between all baselines.
+
+
+
 
 We then construct our optimal estimator by applying equation \ref{eqn:quad_est}
 to the baseline data. In the per baseline application, the optimal quadratic
