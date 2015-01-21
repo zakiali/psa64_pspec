@@ -39,32 +39,66 @@
 }
 
 
-\begin{document} \title{PSA-64 Power Spectrum}
+\begin{document}
 
-\author{ Zaki S. Ali\altaffilmark{1}, Aaron R. Parsons\altaffilmark{1,2}, Jeff
-Zheng, Jonathan C. Pober\altaffilmark{4}, James E. Aguirre\altaffilmark{3},
-Richard F. Bradley, Gianni XXX Bernardi, Christopher L. Carilli,
-David R. DeBoer\altaffilmark{2}, Mattew R. Dexter\altaffilmark{2}, 
-Daniel C. Jacobs\altaffilmark{5}, Pat Kilma, Adrian Liu\altaffilmark{1}, 
-David H. E. MacMahon\altaffilmark{2}, David F. Moore\altaffilmark{3}, 
-William Walbrugh\altaffilmark{6}
-%include Andre Walker, Jasper Horrell, Jasper (yasper), Matthys Maree, Carina T. Cheng,
-% XXX if includes paper data, needs full author list
-% XXX add steve?
+\title{PAPER-64 Power Spectrum: XXX a better title}
+
+\author{
+Zaki S. Ali\altaffilmark{1}, 
+Aaron R. Parsons\altaffilmark{1,2}, 
+Jeff XXX Zheng, 
+James E. Aguirre\altaffilmark{4},
+Richard F. Bradley\altaffilmark{5,6,7},
+Gianni XXX Bernardi\altaffilmark{3}, 
+Chris L.  Carilli\altaffilmark{8},
+Carina T. Cheng\altaffilmark{1},
+David R. DeBoer\altaffilmark{2}, 
+Matthew R. Dexter\altaffilmark{2},
+Steve XXX Furlanetto\altaffilmark{XXX},
+Daniel C. Jacobs\altaffilmark{9}, 
+Pat XXX Klima\altaffilmark{6},
+Adrian C. Liu\altaffilmark{1}, 
+David H. E. MacMahon\altaffilmark{2},
+David F. Moore\altaffilmark{3}
+Jonathan C. Pober\altaffilmark{10}, 
+Irina I. Stefan\altaffilmark{11},
+William P. Walbrugh\altaffilmark{3}
+% XXX more on author list
+%include Andre Walker, Jasper Horrell, Jasper (yasper), Matthys Maree
 }
 %\tableofcontents
 
 \altaffiltext{1}{Astronomy Dept., U. California, Berkeley, CA}
 \altaffiltext{2}{Radio Astronomy Lab., U. California, Berkeley, CA}
-\altaffiltext{3}{Dept. of Physics and Astronomy, U. Pennsylvania, Philadelphia,
-PA} 
-\altaffiltext{4}{Physics Dept.  U. Washington, Seattle, WA}
-\altaffiltext{5}{School of Earth and Space Exploration, Arizona State U., Tempe,
-AZ}
-\altaffiltext{6}{Square Kilometer Array, South Africa Project, Cape Town, South Africa}
-\altaffiltext{7}{}
+\altaffiltext{3}{Square Kilometer Array, South Africa Project, Cape Town, South Africa}
+\altaffiltext{4}{Dept. of Physics and Astronomy, U. Pennsylvania, Philadelphia, PA} 
+\altaffiltext{5}{Dept. of Electrical and Computer Engineering, U. Virginia, Charlottesville, VA}
+\altaffiltext{6}{National Radio Astronomy Obs., Charlottesville, VA}
+\altaffiltext{7}{Dept. of Astronomy, U. Virginia, Charlottesville, VA}
+\altaffiltext{8}{National Radio Astronomy Obs., Socorro, NM}
+\altaffiltext{9}{School of Earth and Space Exploration, Arizona State U., Tempe, AZ}
+\altaffiltext{10}{Physics Dept.  U. Washington, Seattle, WA}
+\altaffiltext{11}{Cavendish Lab., Cambridge, UK}
 
-\begin{abstract} \end{abstract}
+\begin{abstract}
+In this paper, we report new limits on 21cm emission from cosmic reionization based on
+a 6-month [XXX] observing campaign with a 64-element deployment of the Donald C. Backer
+Precision Array for Probing the Epoch of Reionization (PAPER) in South Africa.  This
+work extends the work presented in \citet{parsons_et_al2014} with more collecting area,
+improved redundancy-based calibration, optimal fringe-rate filtering, and improved
+power-spectral analysis using optimal quadratic estimators.  The result is a new
+$2\sigma$ upper limit on $\Delta^2(k)$ of $(XXX {\rm mK})^2$ in the range
+$0.1<k<0.5\ h\ {\rm Mpc}^{-1}$ at $z=XXX$.  This represents a three-fold [XXX] improvement
+over the previous best upper limit.  As we discuss in more depth in the companion
+to this paper \citet{pober_et_al2015}, this upper limit supports and extends previous
+evidence for significant heating in the intergalactic medium prior to reionization.  Under the assumption
+that heating comes from X-rays, this result indicates an X-ray background that exceeds
+what would be expected to be produced from the currently observed quasar population at high redshifts.
+This probably indicates significant contributions from quasars at lower luminosities that have not
+yet been observed. [XXX cross-check all of this, see if there are any stronger statements].  We
+conclude with a discussion of implications for future 21cm reionization experiments, including
+the newly funded Hydrogen Epoch of Reionization Array (HERA).
+\end{abstract}
 
 % XXX fringe weighting profile XXX delay spectrum not violated by freq-dependent
 % fringe rate weights
@@ -1853,7 +1887,7 @@ used the PAPER 32 antenna data set and deduced a system temperature of 560K at
 
 \begin{figure}[b!]\centering
 \includegraphics[width=\columnwidth]{plots/tsys.png}
-\caption{System temperature as a function of time.}
+\caption{System temperature as a function of time. XXX this needs to be adjusted for variance lost in lst flagging.}
 \label{fig:tsys}
 \end{figure}
 
@@ -1987,7 +2021,7 @@ investigation of these modes is to be conducted.
 \begin{figure*}[h!]\centering
 \includegraphics[width=1.5\columnwidth,height=1\columnwidth]{plots/pk_k3pk.png}
 \caption{The resulting estimate of the 21 cm power spectrum with 2$\sigma$ error
-bars. Vertical dashed line at $k\approx{.6hMpc^{-1}}$ correspond to the
+bars. Vertical dashed line at $k\approx{.6\ h\ Mpc^{-1}}$ correspond to the
 horizon limit.}
 \label{fig:final_pspec}
 \end{figure*}
