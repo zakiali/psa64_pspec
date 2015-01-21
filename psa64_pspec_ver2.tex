@@ -44,8 +44,11 @@
 \author{ Zaki S. Ali\altaffilmark{1}, Aaron R. Parsons\altaffilmark{1,2}, Jeff
 Zheng, Jonathan C. Pober\altaffilmark{4}, James E. Aguirre\altaffilmark{3},
 Richard F. Bradley, Gianni XXX Bernardi, Christopher L. Carilli,
-David R. DeBoer\altaffilmark{2}, Daniel C. Jacobs\altaffilmark{8}, Adrian
-Liu\altaffilmark{1}, David F. Moore\altaffilmark{3}
+David R. DeBoer\altaffilmark{2}, Mattew R. Dexter\altaffilmark{2}, 
+Daniel C. Jacobs\altaffilmark{5}, Pat Kilma, Adrian Liu\altaffilmark{1}, 
+David H. E. MacMahon\altaffilmark{2}, David F. Moore\altaffilmark{3}, 
+William Walbrugh\altaffilmark{6}
+%include Andre Walker, Jasper Horrell, Jasper (yasper), Matthys Maree, Carina T. Cheng,
 % XXX if includes paper data, needs full author list
 % XXX add steve?
 }
@@ -58,6 +61,8 @@ PA}
 \altaffiltext{4}{Physics Dept.  U. Washington, Seattle, WA}
 \altaffiltext{5}{School of Earth and Space Exploration, Arizona State U., Tempe,
 AZ}
+\altaffiltext{6}{Square Kilometer Array, South Africa Project, Cape Town, South Africa}
+\altaffiltext{7}{}
 
 \begin{abstract} \end{abstract}
 
@@ -1480,6 +1485,7 @@ As noted in the previous section, we use cross correlations between baselines
 and times to construct an unbiased estimator of the power spectrum. This results
 in applying equation \ref{eqn:qalpha_unbiased}, without the bias term, namely, 
 \begin{equation}
+\label{eqn:qalpha_nobias}
     q_{\alpha} =
         \frac{1}{2}\x_{1}^{t}\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\x_{2}.
 \end{equation}
@@ -1494,6 +1500,11 @@ significant level after the application of the delay filter. Concretely, to
 remove the bias in the power spectrum we take 2 approaches that should remove
 any systematics associated with the power spectrum.
 
+
+Firstly, we divide the baselines into five different groups without repeating
+baselines. only use cross correlations between baselines on either side of the
+the $\mathbf{Q}$ matrix. [XXX is this true]
+
 Firstly, we use the data from the two LST binned data sets which were created
 by binning every other days into the same LST grid. We refer to these data sets
 as the "even" and "odd" data sets. When constructing our estimate of the power
@@ -1504,9 +1515,11 @@ bias from correlations that occur on a day time scale between all baselines.
 
 
 
-
-We then construct our optimal estimator by applying equation \ref{eqn:quad_est}
-to the baseline data. In the per baseline application, the optimal quadratic
+Taking the above two caveats in to consideration, we then construct our optimal
+estimator by applying equation \ref{eqn:qalpha_nobias} to the baseline data. In
+order to obtain the final estimate of the power spectrum, we average all of the
+baselines together as a function of time, measuring one power spectrum per LST
+bin. Therefore, because we are using only the auto covariances to  In the per baseline application, the optimal quadratic
 estimator becomes 
 \begin{align}\label{eqn:quad_est_perbl}
     \hat{\mathbf{q}}_{\alpha} &=
@@ -1818,6 +1831,7 @@ slightly correlated with each other.  Figure \ref{fig:stability} shows the
 stability of the instrument as a function of time. 
 
 \subsection{System Temperature}   
+[XXX: need to put in correction factor that accounts for filtering of 3 sigma mediaan. This will remove the discussion below of the redubdant baselinees and discrepencies with old estimates.]
 During the LST binning step, the variance of the visibilities on a frequency and
 time basis, are recorded. Using these variance, we calculate the system
 temperature as a function of LST, averaging over each LST hour. Figure
@@ -1961,19 +1975,25 @@ investigation of these modes is to be conducted.
 %    Jonnies result.
 %   -the wedge - maybe?
 \begin{figure*}[h!]\centering
-\includegraphics[width=1.5\columnwidth, height=1\columnwidth]{plots/pk_k3pk.png}
-\caption{The final power spectrum result.}
+\includegraphics[width=1.5\columnwidth,height=1\columnwidth]{plots/pk_k3pk.png}
+\caption{The resulting estimate of the 21 cm power spectrum with 2$\sigam$ error
+bars. Vertical dashed line at $k\approx{.6\h\Mpc^{-1}}$ correspond to the
+horizon limit.}
 \label{fig:final_pspec}
 \end{figure*}
 
 \begin{figure}[h!]\centering
 \includegraphics[width=\columnwidth]{plots/flat_k3pk_posterior.png}
-\caption{The posteriror distributiom assuming a flat, gaussian spectrum in $\Delta^{2}$.}
+\caption{The posteriror distributiom assuming a flat, gaussian power spectrum in
+$\Delta^{2}$ (blue). The green and red horizontal lines correspond to the 1 and
+2 $\sigma$ upper limits, respectrively, on the power spectrum.}
 \label{fig:final_posterioir}
 \end{figure}
 
 
 \subsection{Comparison with PSA32}
+[XXX need to rerun power spectrum flux scale fix with the non omnical applied
+data and non optimal fringe rate filter]
 %   -We now compare and contrast our result with those without some of the key
 %   components of our analysis pipeline.
 %
@@ -1999,9 +2019,15 @@ investigation of these modes is to be conducted.
 
 \begin{figure*}[t!]\centering
 \includegraphics[width=1.5\columnwidth]{plots/pspec_comparison.png}
-\caption{Power spectrum with no omnical applied. Does have optimal fringe rate
-        filtering. This plot should be a side by side comparison with and
-        without omnical.}
+\caption{The comparison of power spectra with and without various analysis in
+the pipeline applied to it. The blue power spectrum has the full pipeline
+applied to it and is identical to \ref{fig:final_pspec}. The red power spectrum
+does not have omnical applied to it, and hence the error bars are bigger. Note
+that it does have the otimal fringe rate filter applied to it. Finally, the
+green power sepctrum does not have the optimal fringe rate filter applied.
+However, it does have a fringe rate filter applied to that excludes negative
+fringe rates and those greater than the maimum fringe rate for the given
+baseline (east-west 30 m baselines). }
 \label{fig:pspec_comp}
 \end{figure*}
 
