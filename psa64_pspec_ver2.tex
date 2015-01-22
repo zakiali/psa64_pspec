@@ -1257,7 +1257,7 @@ estimator.
 
 Normalizing the $\q_{\alpha}'s$ with a matrix $\mathbf{M}$, we form
 the final estimate of our power spectrum,
-\begin{equation}
+\begin{equation}\label{eqn:pspec_norm}
     \mathbf{\hat{p}} = \mathbf{M}\mathbf{q},
 \end{equation}
 where $\mathbf{\hat{p}}$ is the optimal quadratic estimate of the power spectrum
@@ -1283,7 +1283,7 @@ difference in the quadratic estimator method used by others [XXX is this
 true?].
 
 The normalization matrix above is defined such that
-\begin{equation}
+\begin{equation}\label{eqn:window_def}
     \mathbf{W} = \mathbf{M}\mathbf{F}, 
 \end{equation}
 where $\mathbf{F}$ is the Fisher information matrix, given by
@@ -1292,11 +1292,13 @@ $\mathbf{F}_{\alpha\beta} =
 and $\mathbf{W}$ is the window function matrix. The window functions measure the
 degree to which power from $k$ bins couple into the measurement of the power
 measured in the $\alpha$'th $k$ bin. Specifically, 
-\begin{equation}
+\begin{equation}\label{eqn:true_pspec_2_est_pspec}
     \hat{\mathbf{p}} = \mathbf{W}\mathbf{p}, 
 \end{equation}
 where $\mathbf{p}$ and $\hat{\mathbf{p}}$ are vectors of the true power spectrum and our
-estimate of the power spectrum for every $\alpha$'th bin, respectively.
+estimate of the power spectrum for every $\alpha$'th bin, respectively. Note
+that the window functions are normalized such that the rows of $\mathbf{W}$ sum
+to unity.
 
 %   -Cholesky Decomposition and window functions.
 %       --The optimal window functions (that minimize the vertical error bars of
@@ -1324,35 +1326,16 @@ contains power from only that bin. However, this has the down side that the
 error bars are large and hence the estimate is not very well localized. On the
 other hand, choosing the identity normalization such that the window functions
 are given by the Fisher matrix, leads a minimum error on the error bars, but
-with the consequence that every band power is coupled to every other band
-power. Th choice of $\mathbf{M} = \mathbf{I}$ produces the smallest possible error bars
-[XXX cite result].  
+with the consequence that every band power is coupled to every other band power.
+Th choice of $\mathbf{M} = \mathbf{D}$, where $\mathbf{D}$ is a diagonal matrix,
+produces the smallest possible error bars [XXX cite result]. $\mathbf{D}$ is
+diagonal and not the identity because the window functions are normalized such
+that the rows of the matrix sum to unity.  
 
-Even though this choice of normaliztion gives us the smallest error bars
-possible, we opt for a different choice of window function as follows. We
-first take the Cholesky-decompositon of the Fisher matrix such that $\mathbf{F}
-= \mathbf{L}\mathbf{L}^{\dagger}$, where $\mathbf{L}$ is a lower triangular
-matrix\footnote{This is possible for any positive definite matrix}. Then, we
-choose ${\mathbf{M}} = \mathbf{L}^{-1}$ to be our normalization
-matrix. In this case, the window function matrix becomes,
-$\mathbf{W}=\mathbf{L}^{\dagger}$. Note that we first reorder the rows of the
-Fisher matrix before decomposing into a product of upper and lower triangular
-matrices. The reordering scheme puts higher $k$-modes first and lower ones last
-in the list. After decomposing, this choice of $\mathbf{M}$ matrix has the
-effect of only coupling modes exterior the $\alpha$'th mode only to the
-band power in $\alpha$  for the final estimate of the power spectrum.
-With the ordering described above, this has the
-consequence of not coupling the modes inside the horizon in to measurments of
-band powers outside the horizon. Figure \ref{fig:window_func} shows
-these window functions. [XXX: we need to be much more explicit here. For
-$\mathbf{L}$ to have the behavior we want, we need to order the data in
-$\mathbf{p}$ in a very particular order. We should also be talking about the
-error correlations in addition to the window functions]
-
-In addition to not correlating band powers of modes within the horizon the modes
-outside, the error correlation statistics for this choice of $\mathbf{M}$ has
-some very nice properties. To see the effect of this normalization matrix, we
-first start by looking at the covariance of our band power estimates, 
+In addition to calculating the window functions, we can also calculate the error
+correlations that correspond to a given window fuction. In order to see the
+effect of the normaliztion matrix on the error correlations we start by looking
+at the covariance of the band power estimates, namely, 
 \begin{equation}\label{eqn:err_cov}
     \boldsymbol \Sigma = \text{Cov}(\hat{\mathbf{p}}) = \expval{\hat{\mathbf{p}}\hat{\mathbf{p}^{\dagger}}} -
              \expval{\hat{\mathbf{p}}}\expval{\hat{\mathbf{p}}}^{\dagger}.
@@ -1361,22 +1344,9 @@ Since $\phat = \mathbf{M}\qhat$, it is easily shown that
 \begin{equation}
     \Sigma = \mathbf{M}\mathbf{F}\mathbf{M}^{\dagger},
 \end{equation}
-where $\mathbf{F}$ is the Fisher matrix. Then using our choice of normalization
-matrix, we have that 
-\begin{equation} 
-    \Sigma = \mathbf{L}^{-1}\mathbf{L}\mathbf{L}^{\dagger}\mathbf{L}^{-\dagger}
-           = \mathbf{I}.
-\end{equation}
-Therefore, for this choice of $\mathbf{M}$, the error correlations are
-proportional to the identity matrix. Proportional to the identity matrix because
-our choice of $\mathbf{M} \propto \mathbf{L}^{-1}$ due to the normalization
-criteria. Each row of $\mathbf{M}$ are normalized to sum to 1 and therefore,
-the error correlation, or covariance of the estimate of our band powers, is only
-proportional to the identity matrix, and hence diagonal. This is a very well
-behaved property that implies that the error bars between band powers are not
-correlated and hence the error bar on every measurement is independent from on
-one another. [XXX contrast to the blackmann-harris window function in which
-band powers nd errors were correlated with one another].
+where $\mathbf{F}$ is the Fisher matrix. The error correlation matrix describes
+how correlated the errors between modes are in the final power spectrum result.
+
 
 \begin{figure}[t!]\centering
 \includegraphics[width=\columnwidth, height=\columnwidth]{plots/window.png}
@@ -1560,42 +1530,79 @@ covariances when weighting the data, only the frequency frequency covariances
 between channels. To understand the application of this quadratic estimator
 foramlism to the data, let us begin by defining 
 \begin{equation}\label{eqn:presum_oqe}
-    \mathbf{z}^{r}_{A} = \Sigma_{i\in{A}} \mathbf{C}_{i}^{-1}\mathbf{x}_{i},
+    \mathbf{z}^{r}_{A} = \sum_{i\in{A}} \mathbf{C}_{i}^{-1}\mathbf{x}_{i},
 \end{equation}
-where
+where $r$ denotes either \emph{even} or \emph{odd} depending on the LST data set
+used and $A$ denotes the group of baselines under consideration. Notice that the
+sum occurs over the baselines within a group for a given LST dataset. Using this
+definition, our final estimate of the intermediate quantity, $\mathbf{q}$, is
+given by 
+\begin{equation}\label{eqn:presum_qalpha}
+    \qhat_{\alpha} = \sum_{\substack{A,B,r,s\\r\ne{s},A\ne{B}}}\mathbf{z}^{r\dagger}_{A}\mathbf{Q}_{\alpha}\mathbf{z}^{s}_{B},
+\end{equation}
+where the sum occurs over $A,B,r,s$ where $r\ne{s}$ and $A\ne{B}$. Furthermore,
+since our $\mathbf{Q}_{\alpha}$ simply encodes a delay transform, it becomes
+separable such that, $\Q_{\alpha} =
+\mathbf{m}_{\alpha}^{\dagger}\mathbf{m}_{\alpha}$, where $\mathbf{m}_{\alpha}$ a
+complex sine wave of a specific frequency corresponding to delay mode $\alpha$.
+This is a consequence of approximating delay modes as fourier line of sight
+modes, which is a valid approximation for the short baselines under
+consideration. If this were not the case, $\Q$, would not be as simple as this
+and would be required to take in to account the coupling between delay modes. 
+Under this approximation, equation \ref{eqn:presum_qalpha} becomes
+\begin{equation}
+    \qhat_{\alpha} =
+\sum_{\substack{A,B,r,s\\r\ne{s},A\ne{B}}}\mathbf{z}^{r\dagger}_{A}\mathbf{m}_{\alpha}^{\dagger}\mathbf{m}_{\alpha}\mathbf{z}^{r}_{A}.
+\end{equation}
 
+After forming intermediate quanitities, we must normalize our power spectrum
+estimate to obtain sensible estimates on the power spectrum. As noted above, the
+normalization occurs by the $\mathbf{M}$ matrix in equation
+\ref{eqn:pspec_norm}, and can be any matrix of our desire. 
+Even though the choices of the normaliztion matrices described above have some
+good properties, e.g. small error bars and no leakage, we opt for a different
+choice of window function as follows. We first take the Cholesky-decompositon of
+the Fisher matrix such that $\mathbf{F} = \mathbf{L}\mathbf{L}^{\dagger}$, where
+$\mathbf{L}$ is a lower triangular matrix\footnote{This is possible for any
+positive definite matrix}. Then, we choose ${\mathbf{M}} = \mathbf{L}^{-1}$ to
+be our normalization matrix. In this case, the window function matrix becomes,
+$\mathbf{W}=\mathbf{L}^{\dagger}$. Note that we first reorder the rows of the
+Fisher matrix before decomposing into a product of upper and lower triangular
+matrices. The reordering scheme puts higher $k$-modes first and lower ones last
+in the list. After decomposing, this choice of $\mathbf{M}$ matrix has the
+effect of only coupling modes exterior the $\alpha$'th mode only to the band
+power in $\alpha$  for the final estimate of the power spectrum.  With the
+ordering described above, this has the consequence of not coupling the modes
+inside the horizon in to measurments of band powers outside the horizon. Figure
+\ref{fig:window_func} shows these window functions. 
 
-\begin{align}\label{eqn:quad_est_perbl}
-    \hat{\mathbf{q}}_{\alpha} &=
-\sum_{bli,blj}{\frac{1}{2}\x_{bli}^{t}\C^{-1}_{bli}\mathbf{m}_{\alpha}\mathbf{m}_{\alpha}^{t}\C^{-1}_{blj}\x_{blj}}\\
-&=
-\frac{1}{2}(\sum_{bli}{\x_{bli}^{\dagger}\C_{bli}^{-1}})\mathbf{m}_{\alpha}\mathbf{m}^{\dagger}_{\alpha}(\sum_{blj}{\C_{blj}^{-1}\x_{blj}}),
-\end{align}
-where $bli$ and $blj$ are 2 different baselines. We neccessarily want to use
-baseline cross products in our estimate to avoid incurring a noise bias. The 
-$\mathbf{m}$ matrix is half of the $\Q$ matrix in equation \ref{eqn:quad_est},
-and encompasses the delay transform. Hence, the two halves of equation
-\ref{eqn:quad_est_perbl} are delay transforms.\footnote{This is computationally
-beneficial because it requires delay transforming (fft) every baselines data.
-This leads to $N_{ch}^{2}\log{N_{ch}} $ computations rather than $N_{ch}^{3}$
-computations.} 
+In addition to the nice properties in the estimates ofthe power spectrum given
+by the above normalization and window function matrix, there is another nice
+property about the choice of normalization which corresponds to the error
+correlation. Using the choice of normalization matrix described above, we have
+that \begin{equation} 
+    \Sigma = \mathbf{L}^{-1}\mathbf{L}\mathbf{L}^{\dagger}\mathbf{L}^{-\dagger}
+           = \mathbf{I}.
+\end{equation}
+Therefore, for $\mathbf{M}=\mathbf{L}^{-1}$, the error correlations are
+proportional to the identity matrix. Proportional to the identity matrix because
+our choice of $\mathbf{M} \propto \mathbf{L}^{-1}$ due to the normalization
+criteria. Each row of $\mathbf{M}$ are normalized to sum to 1 and therefore,
+the error correlation, or covariance of the estimate of our band powers, is only
+proportional to the identity matrix, and hence diagonal. This is a very well
+behaved property that implies that the error bars between band powers are not
+correlated and hence the error bar on every measurement is independent from on
+one another. [XXX contrast to the blackmann-harris window function in which
+band powers nd errors were correlated with one another. maybe?].
 
-Finally, we normalize our power spectrum estimate following the normalization
-scheme noted above and choose $\mathbf{M} = \mathbf{L}$, where $\mathbf{L}$ is the lower
-diagonal matrix from the Cholesky decompostion of the Fisher information matrix,
-$\mathbf{F}$. The Fisher matrix, shown in figure \ref{fig:fisher}, presents the amount
-of information there is in every $k_{\parallel}$ mode. The Fisher matrix is
-derived using all of the baselines, not just a baseline pair and consists of all
-of the information contained in the estimate.
+The Fisher matrix is a key component in the above analaysis and contains a
+wealth of information about the amount of information in each $k$-mode. The
+Fisher matrix is shown in figure \ref{fig:fisher}, represents the amount of
+information there is in every $k_{\parallel}$ mode. The Fisher matrix is derived
+using all of the baselines, not just a baseline pair and consists of all of the
+information contained in the estimate.
 %XXX This part needs work. My understanding of the Fisher Matrix is still
 %undeveloped. Noisier modes are upweighted in k-space? 
-
-%Yea...we are not actually doing this. What are we doing?
-We apply this method to the sum and difference of the odd and even data sets. We
-note that the summed lst data contains signal and noise while the differenced
-data set only contains the noise. After computing the power spectrum estimates,
-we take the difference of the signal and noise power spectrum to get our final
-result. 
 
 \begin{figure}[b!]\centering
 \includegraphics[width=\columnwidth, height=\columnwidth]{plots/fisher.png}
