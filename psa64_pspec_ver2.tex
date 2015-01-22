@@ -243,29 +243,67 @@ contraints on EoR. We conclude in \ref{sec:conclusion}.
 
 \begin{figure}[!t]\centering
 \includegraphics[width=\columnwidth]{plots/antenna_positions.png}
-\caption{Antenna layout for the PAPER 64 observation season. We use a subset of
+\caption{
+[XXX need bigger text in figure]
+Antenna layout for the PAPER 64 observation season. We use a subset of
 the total number of baselines for in the power spectrum analysis. We use only
 the East-West single column separation baselines (49-41,41-47,47-19,10-3,3-25,
 etc...), the near East-West baselines with a North-South component equaling
 $+1$ row spacing (10-41,9-3,3-47,58-25, etc...) and the $-1$ spacing
+[XXX don't like ``+1" and ``-1" notation for paper]
 (49-3,10-58,41-25,3-1, etc...). These baselines constitute the bulk of the
 sensitivity of for the power spectrum analysis.}
 \label{fig:antenna_positions}
 \end{figure}
 
 
-PAPER is a driftscan array deployed at the Square Kilometer Array South Africa
-(SKA-SA) reseve in the Karoo desert located at (21:25:41:9,
--30:43:17:15) (\cite{parsons_et_al2010}) . Observations discussed in this paper
-were taken while PAPER consisted of 64 dual polarization antennas deployed in
-the Fall of 2012. The array was configured into a maximally redundant antenna
-layout (see figure \ref{fig:antenna_positions}) where multiple baselines measure
-the same fourier mode on the sky
-(\cite{parsons_et_al2012a},\cite{parsons_et_al2014}). The PAPER antennas are a
-cross-dipole design in which both polarizations (X and Y) are processed
-independently. The PAPER beam is spectrally and spatially smooth down to the
-horizon with a $60^{\circ}$ FWHM (\cite{jacobs_et_al2011},
-\cite{parsons_et_al2010}, \cite{stefan_et_al2013}). 
+[XXX all citations need to be citep, citet, or citealt]
+
+The results in this paper are based on drift-scan observations 
+with 64 dual-polarization PAPER antennas deployed 
+at the Square Kilometer Array South Africa
+(SKA-SA) reserve in the Karoo desert in South Africa
+(30:43:17.5$^\circ$ S, 21:25:41.8$^\circ$ E).
+Each PAPER element features a crossed-dipole design measuring two
+linear (X,Y) polarizations that are orthogonal along boresight but deviate
+from perfect orthogonality off axis.  The design of the PAPER element, 
+which features spectrally and spatially smooth responses 
+down to the horizon with a $60^{\circ}$ FWHM is summarized in \citet{parsons_et_al2010}
+and \citet{pober_et_al2011}.  
+[XXX make sure \cite{jacobs_et_al2011} and \cite{stefan_et_al2013} are cited somewhere].
+For this analysis, we use only the XX and YY polarization cross-products.
+
+As shown in Figure \ref{fig:antenna_positions}, PAPER-64 employs
+a highly redundant antenna layout where multiple baselines measure
+the same Fourier mode on the sky
+\citep{parsons_et_al2012a,parsons_et_al2014}.
+We rely on all 2016 baselines for each (XX,YY) polarization cross-product for calibration,
+but only use a subset of the baselines for the power spectrum
+analysis. This subset encompasses 3 separation types; the shortest 
+east-west baselines (e.g. 41-47 in Figure \ref{fig:antenna_positions}) and those of the same east-west column spacing,
+except slanted up and down one row (e.g. 10-41 and 10-58, respectively).
+[XXX tighten language about "slanted"]
+Baselines in each of the 3 separation types (or redundant groups) are
+instantaneously redundant within the group and therefore measure the same
+Fourier modes on the sky. This allows us to coherently add Fourier modes,
+building sensitivity as $N$ rather than $\sqrt{N}$, where $N$ is the number of identical baselines.
+[XXX make an effort to clearly define a "separation" and use that language throughout paper].
+
+Observations with this 64-antenna dataset spanned a 135 day period 
+from 2012 November 8 (JD62456240) to 2013 March 23 (JD62456375). 
+For the power spectrum analysis, we use observations between 0:00 and 10:00 hours
+local sidereal time (LST). This range corresponds to
+a ``cold patch", in which galactic synchrotron power is minimal (away from
+the center of the galaxy). Due to LST drift of 3:56 minutes every solar day, the interferometer
+unevenly samples LST's in our observation, giving us more samples of certain
+lsts than others. (XXX: Strange to have this be in the active voice, since 
+it's not like you're choosing to get different LST sampling on purpose)
+The lsts with the greatest number of samples are those used in
+the power spectrum analysis (along with those corresponding to the cold patch).
+Figure \ref{fig:coverage} shows our observing field with the contours labeling
+the beam weighted observing time relative to the peak, directly over head the
+array.
+%XXX lst range will change.
 
 The PAPER-64 correlator processes a 100 MHz to 200 MHz bandwidth, first
 channelizing the 100 MHz band into 1024 channels of width 97.6 kHz, and then
@@ -280,31 +318,6 @@ Visibility cross products are integrated for 10.7 seconds on the GPU's before
 being written to disk. We write all stokes parameters to disk; however the
 analysis described here only apply to the XX and YY polariztion products.
 
-We rely on all 2016 (for each polariztion) baselines for the calibration
-procedure, but only use a subset of the baselines for the power spectrum
-analysis. This subset encompasses 3 separation types; the shortest spaceing
-east-west baselines (e.g. 41-47 in Figure \ref{fig:antenna_positions}) and those of the same East-West column spacing,
-except slanted up and down one row (e.g. 10-41 and 10-58, respectively).
-Baselines in each of the 3 separation types (or redundant groups) are
-instantaneously redundant within the group and therefore measure the same
-Fourier modes on the sky. This allows us to coherently add Fourier modes,
-building sensitivity as $N$ rather than $\sqrt{N}$, where $N$ is the number of identical baselines.
-
-The observation of this 64 antenna data set spanned a 135 day period that
-commenced on 2012 November 8 (JD62456240) and ended  2013 March 23 (JD62456375). 
-For the power spectrum analysis, we use data that spanned, in local sidereal
-time (LST), a range of 0:00 to 10:00 hours. This range corresponds to
-the ``EoR cold patch", in which galactic synchrotron power is minimal (away from
-the center of the galaxy). Due to LST drift of 3:56 minutes every solar day, the interferometer
-unevenly samples LST's in our observation, giving us more samples of certain
-lsts than others. (XXX: Strange to have this be in the active voice, since 
-it's not like you're choosing to get different LST sampling on purpose)
-The lsts with the greatest number of samples are those used in
-the power spectrum analysis (along with those corresponding to the cold patch).
-Figure \ref{fig:coverage} shows our observing field with the contours labeling
-the beam weighted observing time relative to the peak, directly over head the
-array.
-%XXX lst range will change.
 
 \begin{figure*}[!t]\centering
 \includegraphics[width=2\columnwidth,height=\columnwidth]{plots/coverage.png}
@@ -353,7 +366,15 @@ observations \citep{nitya}.
 XXX blend transition to actual analysis steps
 
 
-XXX FLOW CHART FIGURE XXX
+\begin{figure*}
+%\includegraphics[]{}
+\caption{
+Flow of data through the power-spectrum analysis steps described in \S\ref{sec:analysis}.
+[XXX finish this].
+}
+\label{fig:flowchart}
+\end{figure*}
+
 We now describe the analysis pipeline leading up to the final power spectrum
 measurement of our data set. To begin, we run a compression algorithm to reduce
 the data volume of our raw data. This step, described in the appendix of
@@ -837,8 +858,9 @@ signal loss descreases for higher $k$'s.
 
 
 Before implementing our foreground removal techniques, we combine the two
-polarizations for a course estimate of stokes I as per \cite{moore_et_al2013}.
-Namely, the Stokes I estimate is estimated as $I = .5(XX+YY)$. This estimate
+polarizations for a coarse estimate of stokes I as per \cite{moore_et_al2013}.
+[ XXX provide the relevant equations and caveats here, careful with "coarse" --- don't imply sloppy]
+Namely, the Stokes I estimate is estimated as $V_{\rm I} = \frac12(V_{\rm XX}+V_{\rm YY})$. This estimate
 neglects the beam mismatch between the beam of the two polarizations, which
 leads to polarization leakage from Stokes Q into Stokes I, contaminating the
 measurement. We offer no correction for this, but in turn put some limits on
