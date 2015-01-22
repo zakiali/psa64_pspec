@@ -1679,24 +1679,29 @@ information contained in the estimate.
 %         Since we don't see signal in the actual data, we can say that we have
 %         not detected the EOR signal yet.
 \subsubsection{Signal Loss}
-We now characterize this signal loss by running simulations through our power
-spectrum pipeline.  In order to understand the degree of signal loss due to our
-empirical estimates of the covariances, we simulate the injection of an eor
-model and measure the signal loss associated with running the full covariance
-analysis. These simulations consist of injecting a model eor signal on top of
-the data and running through our power spectrum estimator. In order to
-quantify this, we subtract the final power spectrum from one that had no model
-injection to measure the final injected signal power spectrum. Comparing this to
-the input data gives us an estimate of the signal loss associated with our
-pipeline.
+The optimal quadratic estimators for the power spectrum described above are a
+lossless operation, in theory. This is only true if we have all the information
+needed to apply this method. However, one of the major unknowns we have in our
+estimate, is the covariance. We are empirically estimating our covariance matrix
+from the data and therefore are potentially going to have signal loss in the
+final estimate of our power spectrum. Here we quantify the amount of signal loss
+associated with the empirical estimates of the covariance matrix and claim that
+it is a monotonic function of input signal level.
 
-%XXX Carina's Text of the eor model goes here.
-The model eor signal used was a simulation of a flat power spectrum, in P($k$),
-from $k$-modes ranging from .1-10 $\text{hMpc}^{-1}$. From this an angular power
-spectrum is computed (\cite{datta_et_al2007, lewis_challinor_2007}), ensuring
-correlation in frequency/redshift for the power spectrum maps. Visibilities are
-then simulated for this power spectrum map by explicitly integrating fringes on
-the sky every 42.8 seconds for an East-West baselin of 30 m.
+In order to understand the degree of signal loss due to our empirical estimates
+of the covariances, we simulate the injection of an EoR model and measure the
+signal loss associated with running the full covariance analysis. These
+simulations consist of injecting a model eor signal on top of the data and
+running through our power spectrum estimator. In order to quantify this, vary
+the input model EoR signal level that gets added onto the data and run through
+the optimal quadratic estimator to measure the signal loss. We compare this to
+the same power spectrum pipeline, except that we forgoe the inverse covariance
+weighting for no weighting. This is our fiducial power spectrum, which contains
+no signal loss. We Monte Carlo to obtain an overall conservative correction
+factor for the final power spectrum. 
+
+Before presenting the results we first discuss our model EoR visibilities. For
+each measurment set, we construct a random gaussian signal that corresponds 
 
 By using these simulations, we vary the amplitude of the eor signal input into
 the oqe by multiplying by a scalar to each simulated visibility. Figure
@@ -1705,6 +1710,20 @@ input signal amplitude. With this we argue that if there was an eor signal at
 any substatial level, a detection would have been made. Because our power
 spectra are still consistent with zero, we conclude that a positive detection of
 EoR has not been made. 
+
+
+
+XXX Need to claim that we ran an end to end test.
+
+XXX need to claim that because the signal is so low, there is no signal loss.
+
+%XXX Carina's Text of the eor model goes here.
+The model eor signal used was a simulation of a flat power spectrum, in P($k$),
+from $k$-modes ranging from .1-10 $\text{hMpc}^{-1}$. From this an angular power
+spectrum is computed (\cite{datta_et_al2007, lewis_challinor_2007}), ensuring
+correlation in frequency/redshift for the power spectrum maps. Visibilities are
+then simulated for this power spectrum map by explicitly integrating fringes on
+the sky every 42.8 seconds for an East-West baselin of 30 m.
 
 [XXX figure about signal loss vs. signal level]
 %In order to effectively characterize signal loss in our analysis pipeline, we
@@ -1931,45 +1950,35 @@ slightly correlated with each other.  Figure \ref{fig:stability} shows the
 stability of the instrument as a function of time. 
 
 \subsection{System Temperature}   
-[XXX: need to put in correction factor that accounts for filtering of 3 sigma mediaan. This will remove the discussion below of the redubdant baselinees and discrepencies with old estimates.]
 During the LST binning step, the variance of the visibilities on a frequency and
-time basis, are recorded. Using these variance, we calculate the system
-temperature as a function of LST, averaging over each LST hour. Figure
-\ref{fig:tsys} shows the results of this calculation. In this observing season,
-the system temperature decreased significantly, coming down to $T_{sys} = 375K$
-at 160 MHz, as compared to \cite{parsons_et_al2014,jacobs_et_al2014a}, which
-used the PAPER 32 antenna data set and deduced a system temperature of 560K at
-160 MHz. 
+time basis, are recorded. Using these variances, we calculate the system
+temperature as a function of LST, averaging over each LST hour. 
+\begin{equation}
+    T_{sys} = \frac{T_{rms}}{\sqrt{\Delta\nu t_{int}}}, 
+\end{equation}
+where $\Delta\nu$ is the bandwidth, $t_{int}$ is the integration time, and
+$T_{rms}$ is the RMS temperature.
+Figure \ref{fig:tsys} shows the results of this calculation. In this observing
+season, the system temperature stays consistent with previous estimates of the
+as in \citet{parsons_et_al2014} and \citet{jacobs_et_al2014a} at $T_{sys} =
+500K$ at 160 MHz.
 
 \begin{figure}[b!]\centering
 \includegraphics[width=\columnwidth]{plots/tsys.png}
-\caption{System temperature as a function of time. XXX this needs to be adjusted for variance lost in lst flagging.}
+\caption{System temperature as a function of frequency plotted for multiple LST
+bands. $T_{sys}$ is calculated for every integration using the variance
+statistic calculated in every LST bin and average on hour time scales to
+estimate the $T_{sys}$ reported here. For a majority of the LST bins, especially
+those bins used in our analysis, the system temperature is about 500K at 160
+MHz, consistent with previous estimates of the system temperature. XXX note that
+this has the correction factor applied to it, assuming gaussian statistics.}
 \label{fig:tsys}
 \end{figure}
-
-The system temperature estimated here is estimated from the variance in a given
-LST bin from all of the visibilities that correspond to that bin. We saw in
-figure \ref{fig:density} that redundant baselines agree at a fine level and the
-fractional spread in the data points is roughly 100 Jy. This variance, but of
-the complex visibility rather than just the real part, is what we are using in
-order to estimate the system temperature via the usual equation, 
-\begin{equation}
-    T_{sys} = \frac{T_{rms}}{\sqrt{\Delta\nu t_{int}}},
-\end{equation}
-where $\Delta\nu$ is the bandwidth, $t_{int}$ is the integration time, and
-$T_{rms}$ is the RMS temperature. Since this is the metric we are using to
-measure the system temperature, the increased precision in omnical has reduced
-the RMS noise in our measurements and therfore we measure a lower, and truer,
-noise temperature for our instrument. The system temperature measured here is
-closer to what was originally expected for the PAPER instrument
-\citep{parsons_et_al2010}.
-
 Previous estimates of the system temperatue
 \citep{parsons_et_al2014,jacobs_et_al2014} relied on differencing and averaging
-baselines, time samples, and/or frequency channels. In addition those datasets
-were not precisely calibrated with the Omnical redundant calibration package.
-They therfore had the possibility of having their RMS noise being dominated by
-variations between baselines, producing a larger system temperature.
+baselines, time samples, and/or frequency channels. The agreement between these
+various methods of estimating the system temperature provides a robust measure
+of the system temperature of the PAPER instrument. 
 
 %move this to discussion section?
 \subsection{The Covariance Matrix}
