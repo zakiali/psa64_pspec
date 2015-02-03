@@ -9,10 +9,9 @@ opts, args = o.parse_args(sys.argv[1:])
 
 CALFILE='psa6240_v003'
 
-
+p.figure(figsize=(6.5,5.4))
 th = n.arange(0, 2*n.pi, .01)
 r = 5.
-
 aa = a.cal.get_aa(CALFILE, .1, .1, 1)
 antpos = [aa.get_baseline(0,i,src='z') for i in range(len(aa.ants))]
 antpos = n.array(antpos) * a.const.len_ns / 100.
@@ -38,11 +37,11 @@ for ant,(xa,ya,za) in enumerate(zip(x,y,z)):
     if za > 0: fmt = '#eeeeee'
     else: fmt = '#a0a0a0'
     #p.fill(hx,hy, fmt)
-    p.text(xa,ya, str(ant))
+    p.text(xa,ya, str(ant),size='large')
 p.grid()
 #p.xlim(-100,100)
-p.xlabel("East-West Antenna Position (m)")
-p.ylabel("North-South Antenna Position (m)")
+p.xlabel("East-West Antenna Position (m)", fontsize='large')
+p.ylabel("North-South Antenna Position (m)", fontsize='large')
 #p.ylim(-100,100)
 a = p.gca()
 #if not opts.aspect_neq: a.set_aspect('equal')
