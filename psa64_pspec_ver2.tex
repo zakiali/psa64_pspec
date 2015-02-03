@@ -45,10 +45,10 @@
 \author{
 Zaki S. Ali\altaffilmark{1}, 
 Aaron R. Parsons\altaffilmark{1,2}, 
-Haoxuan Zheng, 
+Haoxuan Zheng\altaffilmark{12},
 James E. Aguirre\altaffilmark{4},
 Richard F. Bradley\altaffilmark{5,6,7},
-Gianni XXX Bernardi\altaffilmark{3}, 
+Gianni Bernardi\altaffilmark{3}, 
 Chris L.  Carilli\altaffilmark{8},
 Carina T. Cheng\altaffilmark{1},
 David R. DeBoer\altaffilmark{2}, 
@@ -78,6 +78,8 @@ William P. Walbrugh\altaffilmark{3}
 \altaffiltext{9}{School of Earth and Space Exploration, Arizona State U., Tempe, AZ}
 \altaffiltext{10}{Physics Dept.  U. Washington, Seattle, WA}
 \altaffiltext{11}{Cavendish Lab., Cambridge, UK}
+\altaffiltext{12}{Dept. of Physics, Massachusetts Institute of Technology,
+Cambridge, MA}
 
 \begin{abstract}
 In this paper, we report new limits on 21cm emission from cosmic reionization based on
@@ -1988,7 +1990,6 @@ of the system temperature of the PAPER instrument.
 
 
 \section{Results and Discussion}
-
 \subsection{Power Spectrum}
 Figure \ref{fig:final_pspec} shows the spherically averaged power spectrum,
 $P(k)$, we measure at $z=8.4$, as well as the dimensionless power spectrum
@@ -2038,6 +2039,38 @@ are spreading power outside of the horizon and instrumental systematics. In
 addition our $2\sigma$ upper limit is also consistent with zero and therefore we
 are noise dominated and are hence lacking sensitivity.
 
+\subsection{Brightness Temperature Contstraints}
+With the new upper limit from the the 21 cm power spectrum in hand, we can put
+constraints on the mean brightness temperature of the the 21 cm line. This new
+upper limit is pushing the cusp of reionization scenarios, but is still around
+an order of magnitude away from the plausible reionization scenarios. Using
+various reionization scenarios, we can put upper limits on the mean brightness
+temperature of the of the 21 cm transition.
+
+The relative temperature between the cosmic microwave bacground, $T_{\gamma}$,
+and the spin temperature, $T_{s}$, is given by 
+\begin{equation}\label{eqn:tb}
+    \delta{T_{b}}(\nu) = \frac{T_{s} - T_{\gamma}(z)}{1+z}(1-e^{-\tau_{\nu}}).
+\end{equation}
+When considering a low optical depth medium, \ref{eqn:tb} becomes 
+\begin{equation}\label{eqn:tb_approx}
+    \delta{T_{b}}(\nu) \approx \frac{T_{s} - T_{\gamma}}{1+z}\tau_{\nu},
+\end{equation}
+where the optical depth is given by, 
+\begin{align}\label{eqn:tau}
+    \tau_\nu &= \frac{3c^{3}\hbar A_{10} n_{\text{\tiny{HI}}}}{16k\nu_{o}^{2}T_{s}H(z)} \\
+            &\approx 8.6\times10^{-3}(1+\delta)x_{\text{\tiny{HI}}}\Big[\frac{T_{\gamma}(z)}{T_{s}}\Big] \Big(\frac{\Omega_{b}h^{2}}{0.02}\Big)\Big[\Big(\frac{0.15}{\Omega_{m}h^{2}}\Big)\Big(\frac{1+z}{10}\Big)\Big]^{1/2}
+\end{align}
+ignoring effects due to redshift space distortions. $x_{HI}$ is the neutral
+fraction of hydrogen and $\delta$ is the local baryon overdensity. 
+Putting it all together and using the most recent Plack results, 
+\begin{equation}
+    \delta{T_{b}} \approx 25x_{\text{\tiny{HI}}}\Big(\frac{1+z}{10}\Big)^{1/2}(1+\delta)\Big[1 - \frac{T_{\gamma}(z)}{T_{s}}\Big] \,\text{mK}.
+\end{equation}
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   -Tsys, and Tsys vs. time ?
 
@@ -2075,9 +2108,6 @@ are noise dominated and are hence lacking sensitivity.
 %
 %
 %
-
-
-%move this to discussion section?
 
 
 %   -Implications for polarized foregrounds.
