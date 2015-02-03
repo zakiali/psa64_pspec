@@ -10,8 +10,8 @@ o = optparse.OptionParser()
 opts,args = o.parse_args(sys.argv[1:])
 
 #load reference data for signal loss, both xc^-1Qc^-1x, and xQx.
-data_file_pk = n.load('level_0000/pspec.npz')
-data_file_nocov = n.load('level_0000/nocov_pspec.npz')
+data_file_pk = n.load('../plots/data/signalloss/level_0000/pspec.npz')
+data_file_nocov = n.load('../plots/data/signalloss/level_0000/nocov_pspec.npz')
 
 pk_ref = data_file_pk['pk']
 pk_ref_err = data_file_pk['err']
