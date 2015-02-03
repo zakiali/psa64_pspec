@@ -45,7 +45,7 @@
 \author{
 Zaki S. Ali\altaffilmark{1}, 
 Aaron R. Parsons\altaffilmark{1,2}, 
-Haoxuan XXX Zheng\altaffilmark{XXX}, 
+Haoxuan Zheng\altaffilmark{12},
 James E. Aguirre\altaffilmark{4},
 Richard F. Bradley\altaffilmark{5,6,7},
 Gianni Bernardi\altaffilmark{3}, 
@@ -78,6 +78,8 @@ William P. Walbrugh\altaffilmark{3}
 \altaffiltext{9}{School of Earth and Space Exploration, Arizona State U., Tempe, AZ}
 \altaffiltext{10}{Physics Dept.  U. Washington, Seattle, WA}
 \altaffiltext{11}{Cavendish Lab., Cambridge, UK}
+\altaffiltext{12}{Dept. of Physics, Massachusetts Institute of Technology,
+Cambridge, MA}
 
 \begin{abstract}
 In this paper, we report new limits on 21cm emission from cosmic reionization based on
@@ -1664,6 +1666,72 @@ information contained in the estimate.
 \label{fig:pspec_variance}
 \end{figure*}
 
+
+\subsection{The Covariance Matrix}
+%Covariance matrix nuances.
+%   -describe covariance matrix and data vectors.
+%   -How we get the covariance matrix. 
+%   -eigenvalue decomposition.
+%mode counting and nonsingular-ness.
+%   -Count independent modes.
+%   -covaraiance is independent only if we have enough indendent modes.
+%   -inverse covariance is tricky because of this. 
+%   -happy coincidence?
+%
+%XXX need to check lst range. 
+
+We now discuss the issues of empirically estimating the covariance matrix from
+the data. For a single baseline, the data vector $\x$, consists of 10 Mhz
+bandwidth centered at 151.72 MHz, equating to 20 frequency channels.
+All time samples are also kept, ranging from 0 to 10 LST hours. Again, we
+estimate the covariance in the usual way, $\C = \expval{\x\x^{\dagger}}$, taking
+the ensemble average over time. The covariance matrix for this baseline is a
+$N_{ch}\times N_{ch}$ matrix consisting of the covariances of all channels with
+each other. This covariance matrix is invertible only if it nonsingular, which
+requires it to be a rank $N_{ch}$ matrix. This occurs only if there are $N_{ch}$
+independent modes. 
+
+As noted in section \ref{sec:frf} the optimal fringe rate filter corrsponds to
+averageing time samples for 31 minutes. Over the 10 hour LST range used in this
+analysis, this corresponds to approximately 20 statistically independent modes
+on the sky. This is a fundamental limit of the amount of information we have in
+our measurements. Coincidentally, the covariance matrix for a given baseline is
+an $N_{ch} \times N_{ch}$ matrix, where $N_{ch}=20$.  Therefore, the covariance
+matrices for every baseline are infact invertible because they are full rank 
+and contain 20 statistically independent measurements of the sky. The covariance
+matrix is thus invertible and can be applied to the data vectors, $\x$. 
+
+%
+%   -Potential for signal loss.
+%       --In a traditional OQE method, the process is lossless by construction.
+%         Because we are tweaking this method, and the fact that we have non
+%         gaussian systematics in our data, there is a potential for signal
+%         loss. 
+Even though we have encountered a fortuitous event in having full rank
+covariance matrices, we are still estimating our covariance matrix using a
+limited sample size. This limitation leads to an imperfect characterization of
+the covariances between modes and ultimately leads to signal loss in this type
+of analysis. 
+
+The optimal quadratic estimator has an application of the inverse covariance
+matrix to data vector $\x$. Applying an inverse covariance matrix to the data it
+is derived from has the effect of weighting the data by the covariance matrix.
+Therefore strong modes, corresponding to the eigenvectors of the covariance
+matrix, are downweighted in this scheme as seen in figure \ref{fig:inv_cov}.
+For foreground contained data, the strong modes correspond to the smooth
+spectrum foregrounds, and therefore the covaraince matrix is highly covriance
+since all of the frequency channels are correlated with one another. However,
+for foreground filtered data, the strongest modes correspond to modes that
+resemble residual foreground in the data. It is important to note that inverse
+covariance weighting is a powerful tool as seen by looking at the three
+baselines used in figure \ref{fig:inv_cov}. For the baseline data vector with
+the least amount of noise in the delay filtered plot (right half, middle
+column), we can see that weighing by the inverse covariance upweights modes in
+this baseline as compared to the other baselines, which have a slightly higher
+noise in the original data vector. This is even paralleled in the foreground
+contained data.
+
+
 %   -Simulations
 %       --In order to show the degree that there could be signal loss, we run
 %         simulations to show that an EOR -like signal does pop come out in our
@@ -1778,6 +1846,36 @@ above. We use only baselines in the quadratic estimator that are not the same
 as well as data that fall in the different averaged data sets.
 
 
+\subsection{Integrating $k$-modes}
+XXX This shows the efficacy of using the median over the mean.
+The power spectrum shown in figure \ref{fig:final_pspec} is an average of
+multiple baselines together. To show how the modes in each power spectrum
+integrate together and to what degree they integrate down as noise are not, an
+allan variance test, is shown in Figure \ref{fig:pspec_variance}. Color
+represents a different $k$ mode measured in $\Delta^{2}$ along with the
+different bootstraps. Here we are showing the effect of integrating down on
+different $k$ modes as we include a wider range in time, and hence more
+independent modes. From the discussion on optimal fringe rate filtering we know
+we have 2 independent modes on the sky per LST hour. Hence, integrating modes
+upto a thousand modes, where not all are independent we expect to hit up against
+a floor, which we see. These curves are plotted for $P(k)$ and therefore, the
+colors represent both positive and negative $k$'s with green curves haveing the
+highest absolute value for $k$ and blue curves are modes closer to the horizon.
+
+
+We see a slight difference in the mean and median statistic when estimating the
+total value of modes. Modes tend to level off for both the statistcs and the
+amount of independent modes is capped when modes flatten out at roughly ~60
+samples. We find that this is close to the number of independent modes on the
+sky and baselines. In addtion modes close to the horizon (blue) tend to flatten
+out with the mean statictic, however there is an increased spread for the median
+statistic. 
+
+In addtion there is a sharp decline in power when integrating ~1024 modes for
+certain modes when dealing with the mean and median statistic. These modes show
+unexpected behaviour due to the sharp slope of the fall in power. Further
+investigation of these modes is to be conducted.
+%
 
 
 %
@@ -1816,97 +1914,7 @@ as well as data that fall in the different averaged data sets.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-\section{Results}
-
-\subsection{Power Spectrum}
-Figure \ref{fig:final_pspec} shows the spherically averaged power spectrum,
-$P(k)$, we measure at $z=8.4$, as well as the dimensionless power spectrum
-$\Delta^{2} = \frac{k^{3}P(k)}{2\pi^{2}}$. These power spectra are incoherently
-averaging over the 3 different redundant baselines used in this analysis. The
-bootstrapped error bars are derived from the power spectra of all three of the
-separations together, not independently. This is because the thermal noise in
-the measurements between the three separations are drawn from the same
-distribution. The error bars are determined independently for the dimensionless
-power spectrum. We determine an upper limit in $\Delta^{2}$ by using most of the
-data points in the measured power spectrum. We determine the posterior
-distribution of the values in the power spectrum for $.15<k<.5$ to avoid the
-points within the horizon and the clear detections at the two modes outside of
-the horizon which we argue are foreground contaminated. Figure
-\ref{fig:final_posterior} shows the posterior distribution of the power spectrum
-by fitting a flat curve in $\Delta^{2}$ to the power spectrum assuming
-Gaussian error bars. From this distribution, we determine the 2 sigma upper
-limit to be XXX $mk^{2}$, which is consistent with zero.
-
-We also include the power spectrum before foreground filtering for comparison
-and to show the effect of the delay filter within the horizon. In addition we
-plot the theoretical 2 sigma errors expected for a $T_{sys} = 350 K$. These
-error bars were calculated using a full simulation of the sensitivity of the
-instrument, with the appropriate weightings due to uneven sampling of LST bins
-as described in \cite{pober_et_al2014}. These errors agree well with the
-sensitivity calculations done in \cite{parsons_et_al2012a}. 
-%XXX need to get this simulation from Jonnie.
-
-Some key features in the power spectrum require some mention and explanation. We
-first notice that for the first two modes outside of the horizon, there are
-clear detections. These are attributed to residual foreground leakage from
-inside the horizon, which arises from imperfections in the model of the beam and
-bandpass. We also notice that at $k\approx{.35}\ h\ {\rm Mpc}^{-1}$, as in
-\cite{parsons_et_al2014}, that there is a slight excess. This slight excess is
-due to some systematic, and most likely foreground emission. The power in this
-bin has gone down by almost an order of magnitude as compared the
-\cite{parsons_et_al2014}, which we attribute to the optimal fringe rate filter.
-Because we are down weighting fringe rate bins that do not correspond to points
-low in the beam, the decreased power at $k\approx{.35}\ h\ {\rm Mpc}^{-1}$ is
-most likely attributed to this fringe rate filter down weighting sources towards
-the horizon. The foreground emission at this high $k$-mode, is likely attributed
-to polarization leakage from a high rotation measure source near the horizon.
-Finally, we also note that most for most of the $k$-modes, measurements are
-consistent with zero. Thus, we are still thermal noise dominated and are still
-integrating down. The systematics we are facing are most likely foregrounds that
-are spreading power outside of the horizon and instrumental systematics. In
-addition our $2\sigma$ upper limit is also consistent with zero and therefore we
-are noise dominated and are hence lacking sensitivity.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Discussion}
-%   -Tsys, and Tsys vs. time ?
-
-
-%
-%   -Final Pspecs and from various stages 
-%       --before/after omnical: Data in
-%           /data2/home/zakiali/psa_live/forlstbinning for the before data set.
-%           Currently being binned.
-%           Note that this data set has ~271 fewer files ~ 48 hours. Hence, it
-%           is not the same as the omnical data set.
-%           After data set is the one we have always been using : 
-%           /data2/home/zakiali/psa_live/forlstbinning_omnical_2 :
-%           lstbin_even and lstbin_odd.
-%       --before/after frf. Ditto in the above directories.
-%       --before after foregrounds. There is foreground data in there as well.
-%       SHould we make a foreground run with the non omnical set as well.
-
-%   -Future datasets. Things to look forward to.
-%
-%   -HERA
-%
-%   -Relative merrits of foreground avoidance vs fg filtering.
-%
-%   -relative importance of improvements of psa32.
-%
-%   -vamp on consistency with zero.
-%
-%   -Remaining challenges.
-%
-%       --Polarization leakage.
-%       --Sensitivity 
-%       --Seeing foregrounds.
-%
-%
-%
-%
-
+\section{Instrument Discussion}
 \subsection{Instrument Stability}
 
 \begin{figure*}[!t]
@@ -1981,100 +1989,128 @@ baselines, time samples, and/or frequency channels. The agreement between these
 various methods of estimating the system temperature provides a robust measure
 of the system temperature of the PAPER instrument. 
 
-%move this to discussion section?
-\subsection{The Covariance Matrix}
-%Covariance matrix nuances.
-%   -describe covariance matrix and data vectors.
-%   -How we get the covariance matrix. 
-%   -eigenvalue decomposition.
-%mode counting and nonsingular-ness.
-%   -Count independent modes.
-%   -covaraiance is independent only if we have enough indendent modes.
-%   -inverse covariance is tricky because of this. 
-%   -happy coincidence?
+
+\section{Results and Discussion}
+\subsection{Power Spectrum}
+Figure \ref{fig:final_pspec} shows the spherically averaged power spectrum,
+$P(k)$, we measure at $z=8.4$, as well as the dimensionless power spectrum
+$\Delta^{2} = \frac{k^{3}P(k)}{2\pi^{2}}$. These power spectra are incoherently
+averaging over the 3 different redundant baselines used in this analysis. The
+bootstrapped error bars are derived from the power spectra of all three of the
+separations together, not independently. This is because the thermal noise in
+the measurements between the three separations are drawn from the same
+distribution. The error bars are determined independently for the dimensionless
+power spectrum. We determine an upper limit in $\Delta^{2}$ by using most of the
+data points in the measured power spectrum. We determine the posterior
+distribution of the values in the power spectrum for $.15<k<.5$ to avoid the
+points within the horizon and the clear detections at the two modes outside of
+the horizon which we argue are foreground contaminated. Figure
+\ref{fig:final_posterior} shows the posterior distribution of the power spectrum
+by fitting a flat curve in $\Delta^{2}$ to the power spectrum assuming
+Gaussian error bars. From this distribution, we determine the 2 sigma upper
+limit to be XXX $mk^{2}$, which is consistent with zero.
+
+We also include the power spectrum before foreground filtering for comparison
+and to show the effect of the delay filter within the horizon. In addition we
+plot the theoretical 2 sigma errors expected for a $T_{sys} = 350 K$. These
+error bars were calculated using a full simulation of the sensitivity of the
+instrument, with the appropriate weightings due to uneven sampling of LST bins
+as described in \cite{pober_et_al2014}. These errors agree well with the
+sensitivity calculations done in \cite{parsons_et_al2012a}. 
+%XXX need to get this simulation from Jonnie.
+
+Some key features in the power spectrum require some mention and explanation. We
+first notice that for the first two modes outside of the horizon, there are
+clear detections. These are attributed to residual foreground leakage from
+inside the horizon, which arises from imperfections in the model of the beam and
+bandpass. We also notice that at $k\approx{.35}\ h\ {\rm Mpc}^{-1}$, as in
+\cite{parsons_et_al2014}, that there is a slight excess. This slight excess is
+due to some systematic, and most likely foreground emission. The power in this
+bin has gone down by almost an order of magnitude as compared the
+\cite{parsons_et_al2014}, which we attribute to the optimal fringe rate filter.
+Because we are down weighting fringe rate bins that do not correspond to points
+low in the beam, the decreased power at $k\approx{.35}\ h\ {\rm Mpc}^{-1}$ is
+most likely attributed to this fringe rate filter down weighting sources towards
+the horizon. The foreground emission at this high $k$-mode, is likely attributed
+to polarization leakage from a high rotation measure source near the horizon.
+Finally, we also note that most for most of the $k$-modes, measurements are
+consistent with zero. Thus, we are still thermal noise dominated and are still
+integrating down. The systematics we are facing are most likely foregrounds that
+are spreading power outside of the horizon and instrumental systematics. In
+addition our $2\sigma$ upper limit is also consistent with zero and therefore we
+are noise dominated and are hence lacking sensitivity.
+
+\subsection{Brightness Temperature Contstraints}
+With the new upper limit from the the 21 cm power spectrum in hand, we can put
+constraints on the mean brightness temperature of the the 21 cm line. This new
+upper limit is pushing the cusp of reionization scenarios, but is still around
+an order of magnitude away from the plausible reionization scenarios. Using
+various reionization scenarios, we can put upper limits on the mean brightness
+temperature of the of the 21 cm transition.
+
+The relative temperature between the cosmic microwave bacground, $T_{\gamma}$,
+and the spin temperature, $T_{s}$, is given by 
+\begin{equation}\label{eqn:tb}
+    \delta{T_{b}}(\nu) = \frac{T_{s} - T_{\gamma}(z)}{1+z}(1-e^{-\tau_{\nu}}).
+\end{equation}
+When considering a low optical depth medium, \ref{eqn:tb} becomes 
+\begin{equation}\label{eqn:tb_approx}
+    \delta{T_{b}}(\nu) \approx \frac{T_{s} - T_{\gamma}}{1+z}\tau_{\nu},
+\end{equation}
+where the optical depth is given by, 
+\begin{align}\label{eqn:tau}
+    \tau_\nu &= \frac{3c^{3}\hbar A_{10} n_{\text{\tiny{HI}}}}{16k\nu_{o}^{2}T_{s}H(z)} \\
+            &\approx 8.6\times10^{-3}(1+\delta)x_{\text{\tiny{HI}}}\Big[\frac{T_{\gamma}(z)}{T_{s}}\Big] \Big(\frac{\Omega_{b}h^{2}}{0.02}\Big)\Big[\Big(\frac{0.15}{\Omega_{m}h^{2}}\Big)\Big(\frac{1+z}{10}\Big)\Big]^{1/2}
+\end{align}
+ignoring effects due to redshift space distortions. $x_{HI}$ is the neutral
+fraction of hydrogen and $\delta$ is the local baryon overdensity. 
+Putting it all together and using the most recent Plack results, 
+\begin{equation}
+    \delta{T_{b}} \approx 25x_{\text{\tiny{HI}}}\Big(\frac{1+z}{10}\Big)^{1/2}(1+\delta)\Big[1 - \frac{T_{\gamma}(z)}{T_{s}}\Big] \,\text{mK}.
+\end{equation}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   -Tsys, and Tsys vs. time ?
+
+
 %
-%XXX need to check lst range. 
+%   -Final Pspecs and from various stages 
+%       --before/after omnical: Data in
+%           /data2/home/zakiali/psa_live/forlstbinning for the before data set.
+%           Currently being binned.
+%           Note that this data set has ~271 fewer files ~ 48 hours. Hence, it
+%           is not the same as the omnical data set.
+%           After data set is the one we have always been using : 
+%           /data2/home/zakiali/psa_live/forlstbinning_omnical_2 :
+%           lstbin_even and lstbin_odd.
+%       --before/after frf. Ditto in the above directories.
+%       --before after foregrounds. There is foreground data in there as well.
+%       SHould we make a foreground run with the non omnical set as well.
 
-We now discuss the issues of empirically estimating the covariance matrix from
-the data. For a single baseline, the data vector $\x$, consists of 10 Mhz
-bandwidth centered at 151.72 MHz, equating to 20 frequency channels.
-All time samples are also kept, ranging from 0 to 10 LST hours. Again, we
-estimate the covariance in the usual way, $\C = \expval{\x\x^{\dagger}}$, taking
-the ensemble average over time. The covariance matrix for this baseline is a
-$N_{ch}\times N_{ch}$ matrix consisting of the covariances of all channels with
-each other. This covariance matrix is invertible only if it nonsingular, which
-requires it to be a rank $N_{ch}$ matrix. This occurs only if there are $N_{ch}$
-independent modes. 
-
-As noted in section \ref{sec:frf} the optimal fringe rate filter corrsponds to
-averageing time samples for 31 minutes. Over the 10 hour LST range used in this
-analysis, this corresponds to approximately 20 statistically independent modes
-on the sky. This is a fundamental limit of the amount of information we have in
-our measurements. Coincidentally, the covariance matrix for a given baseline is
-an $N_{ch} \times N_{ch}$ matrix, where $N_{ch}=20$.  Therefore, the covariance
-matrices for every baseline are infact invertible because they are full rank 
-and contain 20 statistically independent measurements of the sky. The covariance
-matrix is thus invertible and can be applied to the data vectors, $\x$. 
-
+%   -Future datasets. Things to look forward to.
 %
-%   -Potential for signal loss.
-%       --In a traditional OQE method, the process is lossless by construction.
-%         Because we are tweaking this method, and the fact that we have non
-%         gaussian systematics in our data, there is a potential for signal
-%         loss. 
-Even though we have encountered a fortuitous event in having full rank
-covariance matrices, we are still estimating our covariance matrix using a
-limited sample size. This limitation leads to an imperfect characterization of
-the covariances between modes and ultimately leads to signal loss in this type
-of analysis. 
-
-The optimal quadratic estimator has an application of the inverse covariance
-matrix to data vector $\x$. Applying an inverse covariance matrix to the data it
-is derived from has the effect of weighting the data by the covariance matrix.
-Therefore strong modes, corresponding to the eigenvectors of the covariance
-matrix, are downweighted in this scheme as seen in figure \ref{fig:inv_cov}.
-For foreground contained data, the strong modes correspond to the smooth
-spectrum foregrounds, and therefore the covaraince matrix is highly covriance
-since all of the frequency channels are correlated with one another. However,
-for foreground filtered data, the strongest modes correspond to modes that
-resemble residual foreground in the data. It is important to note that inverse
-covariance weighting is a powerful tool as seen by looking at the three
-baselines used in figure \ref{fig:inv_cov}. For the baseline data vector with
-the least amount of noise in the delay filtered plot (right half, middle
-column), we can see that weighing by the inverse covariance upweights modes in
-this baseline as compared to the other baselines, which have a slightly higher
-noise in the original data vector. This is even paralleled in the foreground
-contained data.
-
-\subsection{Integrating $k$-modes}
-The power spectrum shown in figure \ref{fig:final_pspec} is an average of
-multiple baselines together. To show how the modes in each power spectrum
-integrate together and to what degree they integrate down as noise are not, an
-allan variance test, is shown in Figure \ref{fig:pspec_variance}. Color
-represents a different $k$ mode measured in $\Delta^{2}$ along with the
-different bootstraps. Here we are showing the effect of integrating down on
-different $k$ modes as we include a wider range in time, and hence more
-independent modes. From the discussion on optimal fringe rate filtering we know
-we have 2 independent modes on the sky per LST hour. Hence, integrating modes
-upto a thousand modes, where not all are independent we expect to hit up against
-a floor, which we see. These curves are plotted for $P(k)$ and therefore, the
-colors represent both positive and negative $k$'s with green curves haveing the
-highest absolute value for $k$ and blue curves are modes closer to the horizon.
-
-
-We see a slight difference in the mean and median statistic when estimating the
-total value of modes. Modes tend to level off for both the statistcs and the
-amount of independent modes is capped when modes flatten out at roughly ~60
-samples. We find that this is close to the number of independent modes on the
-sky and baselines. In addtion modes close to the horizon (blue) tend to flatten
-out with the mean statictic, however there is an increased spread for the median
-statistic. 
-
-In addtion there is a sharp decline in power when integrating ~1024 modes for
-certain modes when dealing with the mean and median statistic. These modes show
-unexpected behaviour due to the sharp slope of the fall in power. Further
-investigation of these modes is to be conducted.
+%   -HERA
 %
+%   -Relative merrits of foreground avoidance vs fg filtering.
+%
+%   -relative importance of improvements of psa32.
+%
+%   -vamp on consistency with zero.
+%
+%   -Remaining challenges.
+%
+%       --Polarization leakage.
+%       --Sensitivity 
+%       --Seeing foregrounds.
+%
+%
+%
+%
+
+
 %   -Implications for polarized foregrounds.
 %       --Flip this around on David and James : We don't see anything at this
 %         level, which implies such and such for polarized emission.
@@ -2198,37 +2234,6 @@ foregrounds. Using the delay spectrum technique employed here, precise
 calibration is necessary to mitigate the leakage of foreground power to modes
 outside of the horizon for a given baseline. 
 
-
-\subsection{Future Work}
-As the sensitivity of the first generation 21 cm EoR experiments maxes out, the
-need for bigger arrays with increased collecting area is necessary. Proposed
-experiments such as the Square-Kilometer Array (SKA) and the Hydrogen Epoch of
-Reionization Array (HERA) are set to fill this need. HERA is a collaborative
-experiment dedicated to detect and characterize the 21 cm EoR power spectrum as
-well as eventually image it. The HERA instrument is proposed to be compsed of a
-closely packed 547 element array aranged in a hexagon \citep{pober_et_al2014}.
-Each element is a 14-m diamter reflecting-dish, with a total array area of
-$\sim.1km^{2}$. Sensitivity forcasts derived in \cite{pober_et_al2014}
-showed that HERA has the ability to make a detection of EoR to a significance
-from $\sim32\sigma$ to $\sim133\sigma$ depending on the foreground removal
-scheme used. The lower bound is for the delay spectrum technique used in this
-paper, where modes within the horizon are irrevocably corrupted, whereas the
-higher bound equates to when we can perfectly work within the the wedge. That
-is, it is possible to perfectly subtract sources within the horizon.
-
-PAPER itself, is also looking forward to 2 seasons of maximally redundant 128
-antenna configuration  data set. This data set has to potential to gain a factor
-of $3.5$ in sensitivity as compared to the data set used in this paper. However,
-due to constraints on the PAPER site in South Africa, the shortest baselines for
-this array are $8\lambda$ (16m), instead of the $16\lambda$ (32m) baselines used
-in this analysis. The shorter 8m baselines have not been used in PAPER analysis
-before and may be riddled with systematics due to cross coupling and reflections
-whithin the array. Therefore, only considering the 16 m East-West baselines,
-there will be a total sensitivity benefit of $3$. However, there is the
-potential to use the $48m$ nd $64m$ baselines in this analysis as well, boosting
-the sensitivity to by another factor of 2.
-
-
 \subsection{Remaining Challanges}
 The closer we get to a detection of the 21 cm EoR fluctuations, the more we need
 to know what the systematics can be and at what level they can come in at. One
@@ -2316,7 +2321,7 @@ noise.
 At the acheived levels of the power spectrum, we also put constraints on the
 amount polarization leakage that could possibly corrupt the Stokes I power
 spectrum. We show that polarization leakage is not shown for most $k$-modes at
-the level of $\sim10^{3}\ \text{mK}^{2}$. In addition, 
+the level of $\sim10^{3}\ \text{mK}^{2}$. 
 
 Furthermore, the analysis in this paper is extended in (cite pobers science
 paper) by showing the science implications of this upper limit. They show that
@@ -2325,6 +2330,34 @@ and neutral fraction, $x$, that are not consistent with this result. In
 addition, they compare this result with current X-ray lumiosity functions and
 show that there are not enough X-ray sources to cause heating of the IGM at
 $z=8.4$ that are consistent with these results.
+
+Looking forward, the need for larger arrays with increased collecting area is
+becoming a necessicity. Proposed experiments such as the Square-Kilometer Array
+(SKA) and the Hydrogen Epoch of Reionization Array (HERA) are set to fill this
+need. HERA is a collaborative experiment dedicated to detect and characterize
+the 21 cm EoR power spectrum as well as eventually image the ionizing bubbles
+from the formation of the first stars and galaxies. The HERA instrument
+is proposed to be composed of a closely packed 547 element hexagonal array 
+\citep{pober_et_al2014} with each element being a 14-m diamter
+reflecting-dish, with a total array area of $\sim.1km^{2}$. Sensitivity forcasts
+derived in \citet{pober_et_al2014} showed that HERA has the ability to make a
+detection of EoR to a significance from $\sim32\sigma$ to $\sim133\sigma$
+depending on the foreground removal scheme used. The lower bound is for the
+delay spectrum technique used in this paper, where modes within the horizon are
+irrevocably corrupted, whereas the higher bound equates to when we can perfectly
+work within the the wedge. That is, it is possible to perfectly subtract sources
+within the horizon.
+
+PAPER itself is looking forward to 2 seasons of 128 antenna maximally redundant
+configuration data set. This data set has to potential to increase  sensitivity
+by a factor of $3.5$ as compared to the data set used in this paper. However,
+due to constraints on the PAPER site in South Africa, the shortest baselines for
+this array are $8\lambda$ (16m), instead of the $16\lambda$ (32m) baselines used
+in this analysis, which may be riddled with systematics due to cross coupling
+and reflections whithin the array. Therefore, only considering the 16 m
+East-West baselines, there will be a total sensitivity benefit of $3$. However,
+there is the potential to use the $48m$ nd $64m$ baselines in this analysis as
+well, boosting the sensitivity to by another factor of 2. 
 
 PAPER is continuing to integrate down on the 21 cm EoR signal and gaining ground
 on overcoming challanges in systematics in the instrument as well being able to
@@ -2335,6 +2368,7 @@ data which will increase the sensitivity of measurements by almost an order of
 magnitude from the data used here. Also, construction of HERA is also under way,
 which will have the sensitiviy to make a $n\sigma$ detection of the 21 cm power
 spectrum. We look forward to this.
+
 
 %However, all major 21 cm experiments (LOFAR, MWA, and PAPER) are at the cusp of detection
 %and all have the sensitivity to rule out the optimistic reionization scenarios.
@@ -2351,9 +2385,14 @@ PAPER is supported by grants from the National Science Foundation (NSF; awards 0
 1129258, and 1125558).  ARP, JCP, and DCJ would like to acknowledge NSF support
 (awards 1352519, 1302774, and 1401708, respectively).
 JEA would like to acknowledge a generous grant from the Mount Cuba Astronomical Association for
-computing resources.  We graciously thank SKA-SA for on-site infrastructure, maintenance, and
-observing support.  We would also like to thank Josh Dillon [XXX others] for helpful
-discussions. [XXX ask collaborators for other acknowledgements].
+computing resources.
+We graciously thank SKA-SA for onsite infrastructure and observing support. In
+addition we would like to thank our South African interns Monde Manzini and
+Ruvano Casper from Durban University of Technology (DUT), who helped build out
+the array from 32 antennas to the 64 antennas this analaysis was based on. 
+We would like to thank Josh Dillion for helpful discussions on optimal quadratic
+estimators. 
+[XXX ask collaborators for other acknowledgements].
 
 %\clearpage
 %\nocite{*}
