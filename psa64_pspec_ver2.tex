@@ -45,18 +45,18 @@
 \author{
 Zaki S. Ali\altaffilmark{1}, 
 Aaron R. Parsons\altaffilmark{1,2}, 
-Haoxuan Zheng, 
+Haoxuan XXX Zheng\altaffilmark{XXX}, 
 James E. Aguirre\altaffilmark{4},
 Richard F. Bradley\altaffilmark{5,6,7},
-Gianni XXX Bernardi\altaffilmark{3}, 
+Gianni Bernardi\altaffilmark{3}, 
 Chris L.  Carilli\altaffilmark{8},
 Carina T. Cheng\altaffilmark{1},
 David R. DeBoer\altaffilmark{2}, 
 Matthew R. Dexter\altaffilmark{2},
-Steve XXX Furlanetto\altaffilmark{XXX},
+Steven R. Furlanetto\altaffilmark{XXX},
 Daniel C. Jacobs\altaffilmark{9}, 
-Pat XXX Klima\altaffilmark{6},
-Adrian Liu\altaffilmark{1}, 
+Pat Klima\altaffilmark{6},
+Adrian C. Y. Liu\altaffilmark{1}, 
 David H. E. MacMahon\altaffilmark{2},
 David F. Moore\altaffilmark{3}
 Jonathan C. Pober\altaffilmark{10}, 
@@ -339,14 +339,14 @@ emission from these foregrounds
 drowns out the faint reionization signal by more than 5 orders of magnitude
 \citep{deoliveira2008,jelic_et_al2008,santos_et_al2005}.
 However, the brightest foregrounds are spectrally smooth, and this provides an important hook
-for their isolation and removal \citep{liu_et_al2009,liu_tegmark2012}.  Unfortunately, interferometers, which are inherently chromatic
+for their isolation and removal \citep{liu_tegmark2012,petrovic_oh2011,liu_et_al2009}.  Unfortunately, interferometers, which are inherently chromatic
 instruments, interact with spectrally smooth foregrounds to produce unsmooth features that
-imitate line-of-sight Fourier modes over cosmological volumes \citep{bowman_et_al2009,morales_et_al2006a} [XXX any others?].
-One possible solution to this problem involves an ambitious calibration and modeling approach to spatially localize and
-remove foreground contaminants \citep{harker_et_al2009,liu_et_al2008,juddEarly} [XXX others? LOFAR?].  
-Perhaps the most impressive example of this approach is being undertaken by LOFAR, where dynamic ranges of XXX have
+imitate line-of-sight Fourier modes over cosmological volumes \citep{parsons_et_al2012b,bowman_et_al2009,morales_et_al2006a}.
+One approach to solving this problem involves an ambitious calibration and modeling approach to spatially localize and
+remove foreground contaminants \citep{chapman_et_al2013,sullivan_et_al2012,harker_et_al2009,liu_et_al2008,bowman_et_al2008}.
+Perhaps the most impressive example of this approach is being undertaken by LOFAR, where dynamic ranges of 4.7 have
 been achieved in synthesis images \citep{yatawatta_et_al2013}, although it is expected that additional
-suppression of smooth-spectrum foreground emission will be necessary [XXX cite PCA LOFAR paper].
+suppression of smooth-spectrum foreground emission will be necessary \citep{chapman_et_al2013}.
 
 The analysis for this paper employs a contrasting
 approach based on the fact that the chromaticity of an interferometer
@@ -1716,6 +1716,7 @@ EoR has not been made.
 XXX Need to claim that we ran an end to end test.
 
 XXX need to claim that because the signal is so low, there is no signal loss.
+[ARP: this is not a correct statement.  There is signal loss.  We must quantify it.]
 
 %XXX Carina's Text of the eor model goes here.
 The model eor signal used was a simulation of a flat power spectrum, in P($k$),
@@ -2257,12 +2258,16 @@ instruement is hard and largely unknown for PAPER.
 
 Finally, one of the possibly biggest challenges we face is that of polarization
 leakage due to Faraday rotation of polarized sources from Stokes Q into Stokes
-I. Through simulations, \cite{moore_et_al2013} showed that the expected
+I \citep{jelic_et_al2010,jelic_et_al2014}. 
+Through simulations, \cite{moore_et_al2013} showed that the expected
 polarization leakage at $z=8.5$ in $\Delta^{2}$ is between
-$10^{3}-3\times10^{3} (mk^{2})$ at $k\approx{.15}hMpc^{-1}$. Our measured Stokes
+$10^{3}-3\times10^{3} (mk^{2})$ at $k\approx{.15}hMpc^{-1}$. 
+[XXX careful with this comparison, since it is about to be revised downward in new moore et al paper]
+Our measured Stokes
 I power spectrum in figure \ref{fig:final_pspec} shows that we just on the cusp
 of seeing polarization leakage and possibly even ruling out some of the models
-used. There might even be possible detection of the polarization leakage and
+used. [XXX i don't think this statement is backed up by the data]
+There might even be possible detection of the polarization leakage and
 would require us to move up in frequency to higher redshift where polarization
 is less prominent due to the $\lambda^{2}$ dependence of Faraday rotation.
 However, if we were seeing polarization leakage at $k\approx{.15}hMpc^{-1}$, we
@@ -2341,11 +2346,14 @@ Array (HERA) and the Square Kilometer Array (SKA), which will have more raw
 collecting area and greater sensitivity \citep{pober_et_al2014}.
 
 \section{Acknowledgements} 
-PAPER is supported by grants from the  National Science Foundation (grant
-numbers) and a generous grant from the Mount Cuba Astronomical Association
-for computing resources.  We graciously thank SKA-SA for onsite infrastructure
-and observing support. We would like to thank Josh Dillion, Adrian Liu,
-Johnathan Pober, and Jeff Zheng for helpful discussions.
+
+PAPER is supported by grants from the National Science Foundation (NSF; awards 0804508,
+1129258, and 1125558).  ARP, JCP, and DCJ would like to acknowledge NSF support
+(awards 1352519, 1302774, and 1401708, respectively).
+JEA would like to acknowledge a generous grant from the Mount Cuba Astronomical Association for
+computing resources.  We graciously thank SKA-SA for on-site infrastructure, maintenance, and
+observing support.  We would also like to thank Josh Dillon [XXX others] for helpful
+discussions. [XXX ask collaborators for other acknowledgements].
 
 %\clearpage
 %\nocite{*}
