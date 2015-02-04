@@ -247,15 +247,14 @@ of 21 cm cosmology.
 \begin{figure}[!t]\centering
 \includegraphics[width=\columnwidth]{plots/antenna_positions.png}
 \caption{
-[XXX need bigger text in figure]
 Antenna layout for the PAPER 64 observation season. We use a subset of
-the total number of baselines for in the power spectrum analysis. We use only
-the East-West single column separation baselines (49-41,41-47,47-19,10-3,3-25,
-etc...), the near East-West baselines with a North-South component equaling
-$+1$ row spacing (10-41,9-3,3-47,58-25, etc...) and the $-1$ spacing
-[XXX don't like ``+1" and ``-1" notation for paper]
-(49-3,10-58,41-25,3-1, etc...). These baselines constitute the bulk of the
-sensitivity of for the power spectrum analysis.}
+the total number of baselines in the power spectrum analysis. We use only
+the east-west baselines between adjacent columns(49-41,41-47,47-19,10-3,3-25,
+etc...), and those east-west baselines between adjacent columns with a
+compenent due north equaling row spacing (10-41,9-3,3-47,58-25, etc...) and
+a component due south equaling one row spacing (49-3,10-58,41-25,3-1, etc...).
+These baselines constitute the bulk of the sensitivity of for the power
+spectrum analysis.}
 \label{fig:antenna_positions}
 \end{figure}
 
@@ -283,14 +282,16 @@ the same Fourier mode on the sky
 We rely on all 2016 baselines for each (XX,YY) polarization cross-product for calibration,
 but only use a subset of the baselines for the power spectrum
 analysis. This subset encompasses 3 separation types; the shortest 
-east-west baselines (e.g. 41-47 in Figure \ref{fig:antenna_positions}) and those of the same east-west column spacing,
-except slanted up and down one row (e.g. 10-41 and 10-58, respectively).
-[XXX tighten language about "slanted"]
-Baselines in each of the 3 separation types (or redundant groups) are
-instantaneously redundant within the group and therefore measure the same
-Fourier modes on the sky. This allows us to coherently add Fourier modes,
-building sensitivity as $N$ rather than $\sqrt{N}$, where $N$ is the number of identical baselines.
-[XXX make an effort to clearly define a "separation" and use that language throughout paper].
+strictly east-west baselines between 2 adjacent north-south columns (e.g. 41-47
+in Figure \ref{fig:antenna_positions}) and those of the same east-west column
+spacing, but which are slanted north of east one row upand south of east one
+row down (e.g. 10-41 and 10-58, respectively). We define a redundant group of
+baselines as being a set of baselines that have the same grid spacing as
+defined on the grid of figure \ref{fig:antenna_positions}.  Baselines in each
+of the 3 redundant groups described above are instantaneously redundant and
+therefore measure the same Fourier modes on the sky. This allows us to
+coherently add Fourier modes, building sensitivity as $N$ rather than
+$\sqrt{N}$, where $N$ is the number of identical baselines.  
 
 Observations with this 64-antenna dataset spanned a 135 day period 
 from 2012 November 8 (JD62456240) to 2013 March 23 (JD62456375). 
@@ -299,8 +300,7 @@ local sidereal time (LST). This range corresponds to
 a ``cold patch", in which galactic synchrotron power is minimal (away from
 the center of the galaxy). Due to LST drift of 3:56 minutes every solar day, the interferometer
 unevenly samples LST's in our observation, giving us more samples of certain
-lsts than others. (XXX: Strange to have this be in the active voice, since 
-it's not like you're choosing to get different LST sampling on purpose)
+lsts than others. 
 The lsts with the greatest number of samples are those used in
 the power spectrum analysis (along with those corresponding to the cold patch).
 Figure \ref{fig:coverage} shows our observing field with the contours labeling
@@ -861,13 +861,20 @@ signal loss descreases for higher $k$'s.
 
 
 Before implementing our foreground removal techniques, we combine the two
-polarizations for a coarse estimate of stokes I as per \cite{moore_et_al2013}.
+polarizations for an estimate of stokes I as per \citet{moore_et_al2013}.
 [ XXX provide the relevant equations and caveats here, careful with "coarse" --- don't imply sloppy]
-Namely, the Stokes I estimate is estimated as $V_{\rm I} = \frac12(V_{\rm XX}+V_{\rm YY})$. This estimate
-neglects the beam mismatch between the beam of the two polarizations, which
-leads to polarization leakage from Stokes Q into Stokes I, contaminating the
-measurement. We offer no correction for this, but in turn put some limits on
-polarization leakage discussed later.
+Namely, the Stokes I can be estimated as 
+\begin{equation}\label{eqn:stokesi}
+    V_{\rm I} = \frac12(V_{\rm XX}+V_{\rm YY}).
+\end{equation}
+There are some important caveats to the estimate of stokes I provided by
+equation \ref{eqn:stokesi}. One important caveat is that it 
+neglects the beam asymmetry  between the two linear polarization states. This
+mismatch is the cause polarization leakage from Stokes Q into Stokes I, thus
+contaminating the our measurement of the power spectrum. This effect for PAPER,
+as shown in \citet{moore_et_al2013}, leaks 4\% of Q in to I.  We offer no
+correction for this effect, but in turn put some limits on polarization leakage
+discussed later. 
 
 Amongst the cornucopia of foreground removal techniques (cite papers) at our
 disposal, we opt for the per-baseline approach of delay filtering described in
@@ -1156,23 +1163,23 @@ very high fringe rates.
 %\label{fig:fringe_rate_cut}
 %\end{figure}
 
-\begin{figure*}[t!]\centering
-\includegraphics[width=2\columnwidth]{plots/fr_preserved_signal.png}
+\begin{figure}[t!]\centering
+\includegraphics[width=\columnwidth]{plots/fr_preserved_signal.png}
 \caption{
-[XXX combine 3 panels into 1, simplify real/imag/abs if necessary].
-Slice of a fringe rate filter at a frequency of 159MHz. Shown here is
-the fringe-rate transform of foreground contained data for a 30 m east-west
-baseline. Blue and green are the real and imaginary part, respectively and red
-is the absolute valeu. Note the maximum and minimum fringerates correspond to
-the theoretical minimum and maximum for a baseline of this length at 159 MHz.
-The center panel shows the real (red)  and imaginary (green) parts of the fringe
-rate filter to be applied. Finally, the last panel on the right shows that the
-fringe rate filtered visibilities. The fringe rate filter is just a weighting
-applied in fringe rate space and retains foregrounds.
+Fringe-rate filtering at 159MHz. Shown here is the fringe-rate transform of
+unfiltered foreground contained data for a 30 m east-west baseline (blue). The
+fringe-rate filter in fringe-rate space (green) is scaled to be visibile in the
+plot. This filter is multiplicative in this domain and its fourier transform
+convolves the time domain visibilities from which the unfiltered data in this
+plot is dervied from. The filtered data (red) is the product of the unfiltered
+with the weights of the fringe-rate filter in green. Foreground signal is still
+retained in the final output, but signal low in the beam is downweighted.  Note
+the maximum and minimum fringerates correspond to the theoretical minimum and
+maximum for a 30 m baseline at 159 MHz. 
 [XXX clearer description of what fringe rate means]
 }
 \label{fig:fr_preserved_signal}
-\end{figure*}
+\end{figure}
 
 For the power spectrum baselines in question (30 m East-West baselines), the
 effective integration time is calculated by comparing the variance statistic for
@@ -2043,18 +2050,18 @@ are noise dominated and are hence lacking sensitivity.
 
 \subsection{Brightness Temperature Contstraints}
 With the new upper limit from the the 21 cm power spectrum in hand, we can put
-constraints on the mean brightness temperature of the the 21 cm line. This new
-upper limit is pushing the cusp of reionization scenarios, but is still around
-an order of magnitude away from the plausible models. Using
-various reionization scenarios, we can put upper limits on the mean brightness
+constraints on the mean brightness temperature of the 21 cm line. This new
+upper limit is pushing the cusp of bright reionization scenarios, but is still
+around an order of magnitude away from the most plausible models. Using various
+reionization scenarios, we put upper limits on the mean brightness
 temperature of the of the 21 cm transition under different heating conditions.
 
-The relative temperature between the cosmic microwave bacground, $T_{\gamma}$,
-and the spin temperature, $T_{s}$, is given by 
+The relative temperature, $\delta{T_{b}}$, between the cosmic microwave
+bacground, $T_{\gamma}$, and the spin temperature, $T_{s}$, is given by 
 \begin{equation}\label{eqn:tb}
     \delta{T_{b}}(\nu) = \frac{T_{s} - T_{\gamma}(z)}{1+z}(1-e^{-\tau_{\nu}}).
 \end{equation}
-When considering a low optical depth medium, \ref{eqn:tb} becomes 
+When considering a low optical depth medium, equation \ref{eqn:tb} becomes 
 \begin{equation}\label{eqn:tb_approx}
     \delta{T_{b}}(\nu) \approx \frac{T_{s} - T_{\gamma}}{1+z}\tau_{\nu},
 \end{equation}
@@ -2066,12 +2073,15 @@ where the optical depth is given by,
 ignoring effects due to redshift space distortions. $x_{HI}$ is the neutral
 fraction of hydrogen and $\delta$ is the local baryon overdensity. 
 Putting it all together and using the most recent Plack results, 
-\begin{equation}
+\begin{equation}\label{eqn:final_tb}
     \delta{T_{b}} \approx 25x_{\text{\tiny{HI}}}\Big(\frac{1+z}{10}\Big)^{1/2}(1+\delta)\Big[1 - \frac{T_{\gamma}(z)}{T_{s}}\Big] \,\text{mK}.
 \end{equation}
 
-For much of what we are considering, $T_{s} \gg T_{\gamma}$, and therefore we
-can simplify much of our 
+For many of the reionization models under consideration, $ddT_{s} \gg T_{\gamma}$,
+and therefore $1 - \frac{T_{\gamma}(z)}{T_{s}} \approx 1$.
+
+For much of what we are considering, $T_{s} \gg T_{\gamma}$, and
+hence \ref{eqn:final_tb} becomes...
 
 
 
