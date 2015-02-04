@@ -249,13 +249,13 @@ of 21 cm cosmology.
 \caption{
 [XXX need bigger text in figure]
 Antenna layout for the PAPER 64 observation season. We use a subset of
-the total number of baselines for in the power spectrum analysis. We use only
-the East-West single column separation baselines (49-41,41-47,47-19,10-3,3-25,
-etc...), the near East-West baselines with a North-South component equaling
-$+1$ row spacing (10-41,9-3,3-47,58-25, etc...) and the $-1$ spacing
-[XXX don't like ``+1" and ``-1" notation for paper]
-(49-3,10-58,41-25,3-1, etc...). These baselines constitute the bulk of the
-sensitivity of for the power spectrum analysis.}
+the total number of baselines in the power spectrum analysis. We use only
+the east-west baselines between adjacent columns(49-41,41-47,47-19,10-3,3-25,
+etc...), and those east-west baselines between adjacent columns with a
+compenent due north equaling row spacing (10-41,9-3,3-47,58-25, etc...) and
+a component due south equaling one row spacing (49-3,10-58,41-25,3-1, etc...).
+These baselines constitute the bulk of the sensitivity of for the power
+spectrum analysis.}
 \label{fig:antenna_positions}
 \end{figure}
 
@@ -283,14 +283,18 @@ the same Fourier mode on the sky
 We rely on all 2016 baselines for each (XX,YY) polarization cross-product for calibration,
 but only use a subset of the baselines for the power spectrum
 analysis. This subset encompasses 3 separation types; the shortest 
-east-west baselines (e.g. 41-47 in Figure \ref{fig:antenna_positions}) and those of the same east-west column spacing,
-except slanted up and down one row (e.g. 10-41 and 10-58, respectively).
-[XXX tighten language about "slanted"]
-Baselines in each of the 3 separation types (or redundant groups) are
-instantaneously redundant within the group and therefore measure the same
-Fourier modes on the sky. This allows us to coherently add Fourier modes,
-building sensitivity as $N$ rather than $\sqrt{N}$, where $N$ is the number of identical baselines.
-[XXX make an effort to clearly define a "separation" and use that language throughout paper].
+strictly east-west baselines between 2 adjacent north-south columns (e.g. 41-47
+in Figure \ref{fig:antenna_positions}) and those of the same east-west column
+spacing, but which are slanted north of east one row upand south of east one
+row down (e.g. 10-41 and 10-58, respectively). We define a redundant group of
+baselines as being a set of baselines that have the same grid spacing as
+defined on the grid of figure \ref{fig:antenna_positions}.  Baselines in each
+of the 3 redundant groups described above are instantaneously redundant and
+therefore measure the same Fourier modes on the sky. This allows us to
+coherently add Fourier modes, building sensitivity as $N$ rather than
+$\sqrt{N}$, where $N$ is the number of identical baselines.  [XXX make an
+effort to clearly define a "separation" and use that language throughout
+paper].
 
 Observations with this 64-antenna dataset spanned a 135 day period 
 from 2012 November 8 (JD62456240) to 2013 March 23 (JD62456375). 
@@ -2043,18 +2047,18 @@ are noise dominated and are hence lacking sensitivity.
 
 \subsection{Brightness Temperature Contstraints}
 With the new upper limit from the the 21 cm power spectrum in hand, we can put
-constraints on the mean brightness temperature of the the 21 cm line. This new
-upper limit is pushing the cusp of reionization scenarios, but is still around
-an order of magnitude away from the plausible models. Using
-various reionization scenarios, we can put upper limits on the mean brightness
+constraints on the mean brightness temperature of the 21 cm line. This new
+upper limit is pushing the cusp of bright reionization scenarios, but is still
+around an order of magnitude away from the most plausible models. Using various
+reionization scenarios, we put upper limits on the mean brightness
 temperature of the of the 21 cm transition under different heating conditions.
 
-The relative temperature between the cosmic microwave bacground, $T_{\gamma}$,
-and the spin temperature, $T_{s}$, is given by 
+The relative temperature, $\delta{T_{b}}$, between the cosmic microwave
+bacground, $T_{\gamma}$, and the spin temperature, $T_{s}$, is given by 
 \begin{equation}\label{eqn:tb}
     \delta{T_{b}}(\nu) = \frac{T_{s} - T_{\gamma}(z)}{1+z}(1-e^{-\tau_{\nu}}).
 \end{equation}
-When considering a low optical depth medium, \ref{eqn:tb} becomes 
+When considering a low optical depth medium, equation \ref{eqn:tb} becomes 
 \begin{equation}\label{eqn:tb_approx}
     \delta{T_{b}}(\nu) \approx \frac{T_{s} - T_{\gamma}}{1+z}\tau_{\nu},
 \end{equation}
@@ -2066,12 +2070,15 @@ where the optical depth is given by,
 ignoring effects due to redshift space distortions. $x_{HI}$ is the neutral
 fraction of hydrogen and $\delta$ is the local baryon overdensity. 
 Putting it all together and using the most recent Plack results, 
-\begin{equation}
+\begin{equation}\label{eqn:final_tb}
     \delta{T_{b}} \approx 25x_{\text{\tiny{HI}}}\Big(\frac{1+z}{10}\Big)^{1/2}(1+\delta)\Big[1 - \frac{T_{\gamma}(z)}{T_{s}}\Big] \,\text{mK}.
 \end{equation}
 
-For much of what we are considering, $T_{s} \gg T_{\gamma}$, and therefore we
-can simplify much of our 
+For many of the reionization models under consideration, $ddT_{s} \gg T_{\gamma}$,
+and therefore $1 - \frac{T_{\gamma}(z)}{T_{s}} \approx 1$.
+
+For much of what we are considering, $T_{s} \gg T_{\gamma}$, and
+hence \ref{eqn:final_tb} becomes...
 
 
 
