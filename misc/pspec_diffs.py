@@ -52,7 +52,7 @@ for level in args:
         #pk_errs[level] = {}
         #nocov_errs[level] = {}
     #for sample in glob.glob(level+'/sample_[0-9]')+glob.glob(level+'/sample_[1-7][0-9]'):
-    for sample in glob.glob(level+'/sample_1[0-3][0-9]'):
+    for sample in glob.glob(level+'/sample_1[0-9][0-9]'):
         pkfile = n.load(sample+'/pspec.npz')
         nocovfile = n.load(sample+'/nocov_pspec.npz')
 
@@ -84,21 +84,23 @@ for level in pks.keys():
 #    avg_ratios.append(n.mean(ratios[level], axis=0))
 #    var_ratios.append(n.var(ratios[level], axis=0))
     avg_pks.append(n.mean(pks[level], axis=0))
+    #avg_pks.append(n.median(pks[level], axis=0))
     var_pks.append(n.var(pks[level], axis=0))
     avg_nocov.append(n.mean(nocovs[level], axis=0))
+    #avg_nocov.append(n.median(nocovs[level], axis=0))
     var_nocov.append(n.var(nocovs[level], axis=0))
     lkeys.append(level.split('_')[-1])
 if PLOT:
-    for pk,nocov in zip(avg_pks,avg_nocov):
+    for pk,nocov,level in zip(avg_pks,avg_nocov,lkeys):
         p.figure(1)
-        p.plot(avg_pks[-1], label=level)
+        p.plot(pk, label=level)
         p.figure(2)
-        p.plot(avg_nocov[-1], label=level)
+        p.plot(nocov, label=level)
     p.figure(1)
-    p.plot(pk_ref, '--')
+    p.plot(pk_ref, 'k--')
     p.legend()
     p.figure(2)
-    p.plot(nocov_ref, '--')
+    p.plot(nocov_ref, 'k--')
     p.legend()
     p.show()
 
@@ -106,8 +108,6 @@ avg_pks = n.array(avg_pks)
 avg_nocov= n.array(avg_nocov)
 var_pks = n.array(var_pks)
 var_nocov = n.array(var_nocov)
-#avg_ratios = n.array(avg_ratios)
-#var_ratios = n.array(var_ratios)
 
 print 'Plotting'
 
@@ -119,22 +119,24 @@ print 'Plotting'
 
 
 loss_ratio = []
-#get_k = []
+get_k = []
 for k, level in enumerate(pks.keys()):
     print k, level
     loss_ratio.append( (avg_nocov[k] - nocov_ref)/(avg_pks[k] - pk_ref) )
 #    p.errorbar(loss_ratio[-1][15], label=level)
-#    get_k.append(loss_ratio[-1][15])
+    get_k.append(loss_ratio[-1][6])
 loss_ratio = n.array(loss_ratio)
+single_k_loss = n.array(get_k)
+print kpl[6]
 
 if PLOT:
     for k, level in enumerate(pks.keys()):
         p.figure(1)
-        p.plot( (avg_pks[k] - pk_ref), label=level)
+        p.plot(kpl, (avg_pks[k] - pk_ref), label=lkeys[k])
         p.figure(2)
-        p.plot( (avg_nocov[k] - nocov_ref), label=level)
+        p.plot(kpl, (avg_nocov[k] - nocov_ref), label=lkeys[k])
         p.figure(3)
-        p.plot( loss_ratio[k], label=level)
+        p.plot(kpl, loss_ratio[k], label=lkeys[k])
     p.figure(1)
     p.legend()
     p.figure(2)
@@ -149,13 +151,15 @@ lkeys = n.array([float(k) for k in lkeys])
 argkeys = n.argsort(lkeys)
 print argkeys
 loss_ratio = loss_ratio[argkeys]
+single_k_loss = single_k_loss[argkeys]
 print loss_ratio.shape
 #p.plot(n.arange(avg_ratios.shape[0]), n.mean(avg_ratios,axis=1))#, label=lkeys[i])
 signal_levels = lkeys[argkeys]
 average_these = n.ones(21)
 average_these[10-4:10] = 0
 average_these[10:10+5] = 0
-p.plot(n.log(signal_levels), n.average(loss_ratio,axis=1,weights=average_these))
+#p.plot(n.log10(signal_levels), single_k_loss, 'o-')
+p.plot(n.log10(signal_levels), n.average(loss_ratio,axis=1,weights=average_these), 'o-')
 #p.errorbar(n.log10(signal_levels), n.average(loss_ratio,axis=1,weights=average_these), yerr = n.var(loss_ratio, axis=1))#, label=lkeys[i])
 p.legend()
 p.show()
