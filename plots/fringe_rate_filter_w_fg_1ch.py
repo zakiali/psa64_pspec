@@ -73,8 +73,8 @@ b1 = 1; b2 = 4 #sep24 is the 0,1 spacing.
 beam_w_fr = frf_conv.get_beam_w_fr(aa, (b1,b2)) #returns the beam weighted fringe rates in fr domain.
 
 #using a filter that is 3.5785bar hours long = 301 samples.
-tbins, firs, frbins, frspace = frf_conv.get_fringe_rate_kernels(beam_w_fr, 42.8, 51)
-fr_bins = n.fft.fftshift(n.fft.fftfreq(51, 42.8))
+tbins, firs, frbins, frspace = frf_conv.get_fringe_rate_kernels(beam_w_fr, 42.8, 401)
+fr_bins = n.fft.fftshift(n.fft.fftfreq(401, 42.8))
 
 bwfr10 = beam_w_fr.take(chans, axis=0)[0](fr_bins)
 
@@ -183,6 +183,12 @@ p.ylabel('amplitude')
 p.plot(tbins, firs.real, label='real')
 p.plot(tbins, firs.imag, label='imag')
 p.suptitle('Fringe Rate filter at 159 MHz')
+hm = n.max(n.abs(firs))/2.
+fwhm = n.where(n.abs(firs) - hm > 0)[0]
+print fwhm
+fwhm = n.abs(tbins[fwhm[0]]*2)
+print "HM = ", n.max(n.abs(firs))/2.
+print "FWHM =", fwhm, fwhm/60.
 #p.savefig('fr_filter_slice.png', format='png')
 
 #FFT Method
@@ -277,6 +283,23 @@ p.xlabel('Fringe Rate  (mHz)')
 p.ylabel('amplitude')
 p.title('filtered in fr')
 
+rat =  n.max(n.abs(vis_tft))/n.max(n.abs(filtered_in_fr))
+print rat
+resc_index = n.where( n.abs((n.abs(frspace) - (1/rat))) < .03 )[0][0]
+rescale = n.max(n.abs(vis_tft))/rat
+#frat = n.max(n.abs(vis_tft)) * rat
+print n.abs(frspace[resc_index])
+
+p.figure(10)
+#p.title('Fringe Rate Filtering', size='large')
+p.subplot(111)
+p.plot(frates, n.abs(vis_tft), label='Unfiltered')
+p.plot(frbins, n.abs(frspace)*rescale*rat, label='Filter')
+p.plot(frates, n.abs(filtered_in_fr), label='Filtered')
+p.xlim(-.6,1.5)
+p.xlabel('Fringe Rate (milli Hz)', size='large')
+p.ylabel('Amplitude (Jy)', size='large')
+p.legend(loc=2)
 
 #p.subplot(234)
 #p.plot(lsts, vis.real, ',', label='real')
