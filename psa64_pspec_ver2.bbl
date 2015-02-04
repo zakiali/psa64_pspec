@@ -1,4 +1,4 @@
-\begin{thebibliography}{72}
+\begin{thebibliography}{77}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Bolton} {et~al.}(2011){Bolton}, {Haehnelt}, {Warren}, {Hewett},
@@ -18,7 +18,7 @@
   695, 183
 
 \bibitem[{{Bowman} {et~al.}(2009{\natexlab{b}}){Bowman}, {Morales}, \&
-  {Hewitt}}]{juddEarly}
+  {Hewitt}}]{bowman_et_al2008}
 ---. 2009{\natexlab{b}}, \apj, 695, 183
 
 \bibitem[{{Bowman} \& {Rogers}(2010)}]{bowman_et_al2010}
@@ -27,6 +27,11 @@
 \bibitem[{{Burns} {et~al.}(2012){Burns}, {Lazio}, {Bale}, {Bowman}, {Bradley},
   {Carilli}, {Furlanetto}, {Harker}, {Loeb}, \& {Pritchard}}]{burns_et_al2012}
 {Burns}, J.~O., {et~al.} 2012, Advances in Space Research, 49, 433
+
+\bibitem[{{Chapman} {et~al.}(2013){Chapman}, {Abdalla}, {Bobin}, {Starck},
+  {Harker}, {Jeli{\'c}}, {Labropoulos}, {Zaroubi}, {Brentjens}, {de Bruyn}, \&
+  {Koopmans}}]{chapman_et_al2013}
+{Chapman}, E., {et~al.} 2013, \mnras, 429, 165
 
 \bibitem[{Clark {et~al.}(2013)Clark, Plante, \& Greenhill}]{clark_et_al2013}
 Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
@@ -111,10 +116,35 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   {Walbrugh}}]{jacobs_et_al2014}
 ---. 2014, ArXiv e-prints
 
+\bibitem[{{Jeli{\'c}} {et~al.}(2010){Jeli{\'c}}, {Zaroubi}, {Labropoulos},
+  {Bernardi}, {de Bruyn}, \& {Koopmans}}]{jelic_et_al2010}
+{Jeli{\'c}}, V., {Zaroubi}, S., {Labropoulos}, P., {Bernardi}, G., {de Bruyn},
+  A.~G., \& {Koopmans}, L.~V.~E. 2010, \mnras, 409, 1647
+
 \bibitem[{{Jeli{\'c}} {et~al.}(2008){Jeli{\'c}}, {Zaroubi}, {Labropoulos},
   {Thomas}, {Bernardi}, {Brentjens}, {de Bruyn}, {Ciardi}, {Harker},
   {Koopmans}, {Pandey}, {Schaye}, \& {Yatawatta}}]{jelic_et_al2008}
 {Jeli{\'c}}, V., {et~al.} 2008, \mnras, 389, 1319
+
+\bibitem[{{Jeli{\'c}} {et~al.}(2014){Jeli{\'c}}, {de Bruyn}, {Mevius},
+  {Abdalla}, {Asad}, {Bernardi}, {Brentjens}, {Bus}, {Chapman}, {Ciardi},
+  {Daiboo}, {Fernandez}, {Ghosh}, {Harker}, {Jensen}, {Kazemi}, {Koopmans},
+  {Labropoulos}, {Martinez-Rubi}, {Mellema}, {Offringa}, {Pandey}, {Patil},
+  {Thomas}, {Vedantham}, {Veligatla}, {Yatawatta}, {Zaroubi}, {Alexov},
+  {Anderson}, {Avruch}, {Beck}, {Bell}, {Bentum}, {Best}, {Bonafede},
+  {Bregman}, {Breitling}, {Broderick}, {Brouw}, {Br{\"u}ggen}, {Butcher},
+  {Conway}, {de Gasperin}, {de Geus}, {Deller}, {Dettmar}, {Duscha},
+  {Eisl{\"o}ffel}, {Engels}, {Falcke}, {Fallows}, {Fender}, {Ferrari},
+  {Frieswijk}, {Garrett}, {Grie{\ss}meier}, {Gunst}, {Hamaker}, {Hassall},
+  {Haverkorn}, {Heald}, {Hessels}, {Hoeft}, {H{\"o}randel}, {Horneffer}, {van
+  der Horst}, {Iacobelli}, {Juette}, {Karastergiou}, {Kondratiev}, {Kramer},
+  {Kuniyoshi}, {Kuper}, {van Leeuwen}, {Maat}, {Mann}, {McKay-Bukowski},
+  {McKean}, {Munk}, {Nelles}, {Norden}, {Paas}, {Pandey-Pommier}, {Pietka},
+  {Pizzo}, {Polatidis}, {Reich}, {R{\"o}ttgering}, {Rowlinson}, {Scaife},
+  {Schwarz}, {Serylak}, {Smirnov}, {Steinmetz}, {Stewart}, {Tagger}, {Tang},
+  {Tasse}, {ter Veen}, {Thoudam}, {Toribio}, {Vermeulen}, {Vocks}, {van
+  Weeren}, {Wijers}, {Wijnholds}, {Wucknitz}, \& {Zarka}}]{jelic_et_al2014}
+---. 2014, \aap, 568, A101
 
 \bibitem[{{Lewis} \& {Challinor}(2007)}]{lewis_challinor_2007}
 {Lewis}, A., \& {Challinor}, A. 2007, \prd, 76, 083005
@@ -232,6 +262,9 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
 {Peterson}, J.~B., {Pen}, U.-L., \& {Wu}, X.-P. 2004, Modern Physics Letters A,
   19, 1001
 
+\bibitem[{{Petrovic} \& {Oh}(2011)}]{petrovic_oh2011}
+{Petrovic}, N., \& {Oh}, S.~P. 2011, \mnras, 413, 2103
+
 \bibitem[{{Planck Collaboration} {et~al.}(2014){Planck Collaboration}, {Ade},
   {Aghanim}, {Armitage-Caplan}, {Arnaud}, {Ashdown}, {Atrio-Barandela},
   {Aumont}, {Baccigalupi}, {Banday}, \& et~al.}]{planck_et_al2014}
@@ -286,6 +319,17 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   {Klima}, {MacMahon}, {Manley}, {Moore}, {Parsons}, {Pober}, \&
   {Walbrugh}}]{stefan_et_al2013}
 {Stefan}, I.~I., {et~al.} 2013, \mnras
+
+\bibitem[{{Sullivan} {et~al.}(2012){Sullivan}, {Morales}, {Hazelton}, {Arcus},
+  {Barnes}, {Bernardi}, {Briggs}, {Bowman}, {Bunton}, {Cappallo}, {Corey},
+  {Deshpande}, {deSouza}, {Emrich}, {Gaensler}, {Goeke}, {Greenhill}, {Herne},
+  {Hewitt}, {Johnston-Hollitt}, {Kaplan}, {Kasper}, {Kincaid}, {Koenig},
+  {Kratzenberg}, {Lonsdale}, {Lynch}, {McWhirter}, {Mitchell}, {Morgan},
+  {Oberoi}, {Ord}, {Pathikulangara}, {Prabu}, {Remillard}, {Rogers}, {Roshi},
+  {Salah}, {Sault}, {Udaya Shankar}, {Srivani}, {Stevens}, {Subrahmanyan},
+  {Tingay}, {Wayth}, {Waterson}, {Webster}, {Whitney}, {Williams}, {Williams},
+  \& {Wyithe}}]{sullivan_et_al2012}
+{Sullivan}, I.~S., {et~al.} 2012, \apj, 759, 17
 
 \bibitem[{{Tingay} {et~al.}(2013){Tingay}, {Goeke}, {Bowman}, {Emrich}, {Ord},
   {Mitchell}, {Morales}, {Booler}, {Crosse}, {Wayth}, {Lonsdale}, {Tremblay},
