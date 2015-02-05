@@ -1983,14 +1983,23 @@ investigation of these modes is to be conducted.
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=2.3\columnwidth]{plots/density.png}
-\caption{Visibility density for a redundant baseline group.}
+\caption{Stability of baselines over time. Plotted is the real part of the
+complex visibilities for a set of redundant baselines, those with perfect
+east-west 30 m baselines, at a frequency of XXX for all of the integrations. The
+color scale corresponds to the number of samples that went into that bin. The
+spread in each LST bin is one the order of ~100 Jy, showing great stability and
+efficacy of Omnical by bringing every baseline in a redundant group in to
+agreement with one another.}
 \label{fig:density}
 \end{figure*}
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{plots/stability.png}
-\caption{Time stability of the instrument.}
+\caption{Time stability of the instrument. We take a single channel for the
+entire LST range of data taken, and determine the power spectrum by first
+fourier transforming and taking the absolute value squared to get the power
+spectrum.}
 \label{fig:stability}
 \end{figure}
 
