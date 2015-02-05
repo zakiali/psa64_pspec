@@ -49,8 +49,8 @@ Haoxuan Zheng\altaffilmark{12},
 James E. Aguirre\altaffilmark{4},
 Richard F. Bradley\altaffilmark{5,6,7},
 Gianni Bernardi\altaffilmark{3}, 
-Chris L.  Carilli\altaffilmark{8},
-Carina T. Cheng\altaffilmark{1},
+Chris L. Carilli\altaffilmark{8},
+Carina Cheng\altaffilmark{1},
 David R. DeBoer\altaffilmark{2}, 
 Matthew R. Dexter\altaffilmark{2},
 Steven R. Furlanetto\altaffilmark{XXX},
@@ -61,10 +61,11 @@ David H. E. MacMahon\altaffilmark{2},
 David F. Moore\altaffilmark{3}
 Jonathan C. Pober\altaffilmark{10}, 
 Irina I. Stefan\altaffilmark{11},
-William P. Walbrugh\altaffilmark{3}
-% XXX more on author list
-%include Andre Walker, Jasper Horrell, Jasper (yasper), Matthys Maree
+William P. Walbrugh\altaffilmark{3},
+Andre Walker\altaffilmark{3}
 }
+% XXX more on author list
+%include Jasper Horrell, Jasper Grobbelaar, Matthys Maree
 %\tableofcontents
 
 \altaffiltext{1}{Astronomy Dept., U. California, Berkeley, CA}
@@ -83,11 +84,11 @@ Cambridge, MA}
 
 \begin{abstract}
 In this paper, we report new limits on 21cm emission from cosmic reionization based on
-a 6-month [XXX] observing campaign with a 64-element deployment of the Donald C. Backer
+a 4.5-month observing campaign with a 64-element deployment of the Donald C. Backer
 Precision Array for Probing the Epoch of Reionization (PAPER) in South Africa.  This
 work extends the work presented in \citet{parsons_et_al2014} with more collecting area,
 improved redundancy-based calibration, optimal fringe-rate filtering, and improved
-power-spectral analysis using optimal quadratic estimators.  The result is a new
+power-spectral analysis using optimal quadratic estimators. The result is a new
 $2\sigma$ upper limit on $\Delta^2(k)$ of $(XXX {\rm mK})^2$ in the range
 $0.1<k<0.5\ h\ {\rm Mpc}^{-1}$ at $z=XXX$.  This represents a three-fold [XXX] improvement
 over the previous best upper limit.  As we discuss in more depth in the companion
@@ -100,9 +101,6 @@ yet been observed. [XXX cross-check all of this, see if there are any stronger s
 conclude with a discussion of implications for future 21cm reionization experiments, including
 the newly funded Hydrogen Epoch of Reionization Array (HERA).
 \end{abstract}
-
-% XXX fringe weighting profile XXX delay spectrum not violated by freq-dependent
-% fringe rate weights
 
 \section{Introduction}
 
@@ -241,6 +239,8 @@ section \ref{sec:instrument}. We present our results in seciton
 Finally, we conclude in \ref{sec:conclusion} and offer thoughts on the future
 of 21 cm cosmology.
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Observations}\label{sec:observations}
 
@@ -258,8 +258,16 @@ spectrum analysis.}
 \label{fig:antenna_positions}
 \end{figure}
 
+\begin{figure*}[!t]
+\includegraphics[width=2\columnwidth,height=\columnwidth]{plots/data_flow_chart.png}
+\caption
+{
+Flow of data through the power-spectrum analysis steps described in in the paper. Data flow is indicated b the solid black lines and red lines indicate injected simulated data to measure the signal loss and pipeline efficacy. Yellow boxes are those which do not have signal loss associated with them and are not used in the signal loss measurements.
+This is currently just place holder figure.XXX.
+}
+\label{fig:flowchart}
+\end{figure*}
 
-[XXX all citations need to be citep, citet, or citealt]
 
 The results in this paper are based on drift-scan observations 
 with 64 dual-polarization PAPER antennas deployed 
@@ -281,10 +289,10 @@ the same Fourier mode on the sky
 \citep{parsons_et_al2012a,parsons_et_al2014}.
 We rely on all 2016 baselines for each (XX,YY) polarization cross-product for calibration,
 but only use a subset of the baselines for the power spectrum
-analysis. This subset encompasses 3 separation types; the shortest 
+analysis. This subset encompasses 3 types of baselines; the shortest 
 strictly east-west baselines between 2 adjacent north-south columns (e.g. 41-47
 in Figure \ref{fig:antenna_positions}) and those of the same east-west column
-spacing, but which are slanted north of east one row upand south of east one
+spacing, but which are slanted north of east one row up and south of east one
 row down (e.g. 10-41 and 10-58, respectively). We define a redundant group of
 baselines as being a set of baselines that have the same grid spacing as
 defined on the grid of figure \ref{fig:antenna_positions}.  Baselines in each
@@ -293,9 +301,12 @@ therefore measure the same Fourier modes on the sky. This allows us to
 coherently add Fourier modes, building sensitivity as $N$ rather than
 $\sqrt{N}$, where $N$ is the number of identical baselines.  
 
+
+
+
 Observations with this 64-antenna dataset spanned a 135 day period 
 from 2012 November 8 (JD62456240) to 2013 March 23 (JD62456375). 
-For the power spectrum analysis, we use observations between 0:00 and 10:00 hours
+For the power spectrum analysis, we use observations between 0:00 and 8:30 hours
 local sidereal time (LST). This range corresponds to
 a ``cold patch", in which galactic synchrotron power is minimal (away from
 the center of the galaxy). Due to LST drift of 3:56 minutes every solar day, the interferometer
@@ -306,7 +317,6 @@ the power spectrum analysis (along with those corresponding to the cold patch).
 Figure \ref{fig:coverage} shows our observing field with the contours labeling
 the beam weighted observing time relative to the peak, directly over head the
 array.
-%XXX lst range will change.
 
 The PAPER-64 correlator processes a 100 MHz to 200 MHz bandwidth, first
 channelizing the 100 MHz band into 1024 channels of width 97.6 kHz, and then
@@ -366,36 +376,24 @@ an interferometric baseline.  So far, PAPER has had the most success in exploiti
 \citep{parsons_et_al2014,jacobs_et_al2014}, although it is in the process of being applied to MWA
 observations \citep{nitya}.  
 
-XXX blend transition to actual analysis steps
-
-
-\begin{figure*}
-%\includegraphics[]{}
-\caption{
-Flow of data through the power-spectrum analysis steps described in \S\ref{sec:analysis}.
-[XXX finish this].
-}
-\label{fig:flowchart}
-\end{figure*}
-
-We now describe the analysis pipeline leading up to the final power spectrum
-measurement of our data set. To begin, we run a compression algorithm to reduce
-the data volume of our raw data. This step, described in the appendix of
-\cite{parsons_et_al2014}, reduces data volume by a factor of 40. We then
-calibrate on the basis of redundancy before using self-calibration
-to solve for the absolute phase and gain parameters. After suppressing
-foregrounds with a wide-band delay filter, we average the data in local
-sidereal time and apply a fringe rate filter to optimally combine the
-time domain data. Finally, we use optimal quadratic estimators to make our
-estimate of the 21 cm power spectrum.  Figure \ref{fig:analysis_pipeline} shows
-a block diagram of the analysis pipeline and includes some information on
-simuations and signal loss.
+In our analysis, we exploit both the properties of the spectrally smooth
+foregrounds and the wedge in order to accurately isolate and remove the smooth
+spectrum foregrounds.  Our analysis pipeline begins by running a compression
+algorithm to reduce the data volume of our raw data. This step, described in the
+appendix of \cite{parsons_et_al2014}, reduces data volume by a factor of 40. We
+then calibrate on the basis of redundancy before using self-calibration to solve
+for the absolute phase and gain parameters. After suppressing foregrounds with a
+wide-band delay filter, we average the data in local sidereal time and apply a
+fringe rate filter to optimally combine the time domain data. Finally, we use
+optimal quadratic estimators to make our estimate of the 21 cm power spectrum.
+Figure \ref{fig:flowchart} shows a block diagram of the analysis pipeline and
+includes some information on simuations and signal loss.
 
 \subsection{Calibration}\label{sec:calibration}
 The calibration procedure employed in this analysis is twofold: a relative
 calibration and an absolution calibration. The relative calibration employed
 uses the fact that PAPER contains numerous redundant baselines. As usual, the
-absolute calibration uses the usual self calibration methods employed by radio
+absolute calibration uses self calibration methods employed by radio
 interferometers. Here we describe both procedures.
 
 \subsubsection{Relative Calibration}
@@ -457,9 +455,9 @@ and therefore this type of calibration is necessarily lossless.
 %         we have an overdetermined system of equations and therefore can
 %         uniquely solve for all of the gains and "true" visibilities.
 Practiaclly, redundant calibration takes on two flavors, log calibration (logcal) and
-linear calibration (lincal) (\cite{liu_et_al2010,zheng_et_al2014}). Logcal, takes
+linear calibration (lincal) \citep{liu_et_al2010,zheng_et_al2014}. Logcal, takes
 the logarithm of the visibility measured by an interferometer (equation 4 of
-\cite{zheng_et_al2014}) to give a linearized system which can then be fit to
+\citet{zheng_et_al2014}) to give a linearized system which can then be fit to
 using linear least square. We are fitting to
 \begin{equation}\label{eqn:logcal}
     \log{v_{ij}} = \log{g_{i}^{*}} + \log{g_{j}} + \log{y_{i-j}},
@@ -469,12 +467,12 @@ complex gains of each antenna and $y_{i-j}$ is the visibility of the given
 baseline if it measured the perfect sky. Redundancy gives us an overconstrained
 system of equations and we can thus solve for complex gains from each antenna
 using traditional linear algebra techniques.  In addition we also get a model
-visibility of for a given given baseline.  Averaging these models together for
-redundant baselines gives us a an estimate of our model visibility for a given
-baseline type.
+visibility for a given baseline.  Averaging these models together for
+redundant baselines gives us a an estimate of our model visibility for the
+redundant group of baselines.
 
-Lincal taylor expands the visibility around some initial estimates of the gains
-and model visibilities via the equation 
+Lincal, on the otherhand, taylor expands the visibility around some initial
+estimates of the gains and model visibilities via the equation 
 \begin{equation}\label{eqn:lincal}
 v_{ij} = g_{i}^{0*}g_{j}^{0}y_{i-j}^{0} + g_{i}^{1*}g_{j}^{0}y_{i-j}^{0} +
          g_{i}^{0*}g_{j}^{1}y_{i-j}^{0}+g_{i}^{0*}g_{j}^{0}y_{i-j}^{1},
@@ -483,7 +481,7 @@ where the $0$ indexes are the intial estimates and the $1$ indexes are the
 solutions we fit for. In the implementation, described below, the initial
 estimates of the solutions are taken as the outputs of logcal. The benefit of
 lincal is that it is not a biased estimator as opposed to logcal which takes the
-logarithm of additive noise(\cite{liu_et_al2010}).
+logarithm of additive noise \citep{liu_et_al2010}.
 
 %    -How was this calibration applied to the data. 
 %       --Using omnical package. Give credit jeff and url to omnical. Cite
@@ -500,7 +498,7 @@ logarithm of additive noise(\cite{liu_et_al2010}).
 
 Implementaion of redundant calibration was done with the ${Omnical}$ package, an
 open source redundant calibration package written by Jeff Zheng
-\footnote{https://github.com/jeffzhen/omnical}\cite{zheng_et_al2014}. This
+\footnote{https://github.com/jeffzhen/omnical}\citep{zheng_et_al2014}. This
 package implements both logcal and lincal, solving for a complex gain solution
 per antenna, frequency, and integration. The per integration solutions are then
 applied to visibilities and the results are shown in \ref{fig:omniview}.
@@ -508,20 +506,33 @@ applied to visibilities and the results are shown in \ref{fig:omniview}.
 \begin{figure*}
 \centering
 \includegraphics[width=2\columnwidth]{plots/omniview_64.png}
-\caption{Real-Imaginary plot of the complex visibilities measured by all of the
-baselines with a cursory calibration (left) and after applying solutions
-obtained with Omnical (rigth). Each shape and color combination correspond to
-a set of redundant baselines. }
+\caption{
+Each panel is a scatter plot of complex visibilites, for every baseline in the
+array, in the complex plane at 159 MHz for a single integration. Since
+redundant baselines should measure the same sky we expect that there is
+clustering between visibilities of baselines in a redundant group. Each symbol
+and color combination corresponds to a redundant group of baselines. The left
+pannel shows the the raw data after a rough calibration has been applied to the
+data. There is clustering between redundant baselines, but there is still some
+thermal noise in the measurement that is do to the imprecise nature of the
+rough calibration and cross talk between baselines. The right panel shows the
+same data after using calibration parameters derived from Omnical. The reundant
+baselines come into better alignment after those calibration solutions are
+applied, nodding to the power of using Omnical.}
 \label{fig:omniview}
 \end{figure*}
 
 \begin{figure}[!b]
 \centering
-\includegraphics[width=\columnwidth]{plots/august_chi2.png}
-\caption{chi squared. This plot should be horizontal. ask jeff.}
+\includegraphics[width=\columnwidth]{plots/chi2.png}
+\caption{This is a waterfall plot for a days $\chi^{2}$ distribution from our
+fitting of the visibilities. The $\chi^{2}$ here is calculated for every
+frequency bin and integration in our data set, 49kHz and 42.9 seconds,
+respectively. The $\chi^{2}$ demnstrates the stability of the instrument and is
+a useful tool for flagging bad data, corresponding to very large $\chi^{2}$
+values.}
 \label{fig:chi2}
 \end{figure}
-
 
 In addition to solving for gain solutions, Omnical also characterizes the
 quality of the calibration by calculating the $\chi^{2}$ for every integration.
@@ -641,15 +652,28 @@ the calibrated Pictor A spectrum and the model spectrum from
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{plots/gianni_pic_image.pdf}
-\caption{Image of Pictor.}
+\caption{
+A field image phased to Pictor A and including Fornax A using the maximally
+redundant array configuration data set used in the analaysis presented in this
+paper. The elongated north-south stripes are due to the lack of north-south
+baseline used here. In addition grating lobes due to the antenna configuration
+can be seen (?). The location of Pictor A and Fornax A agree with their catalog
+values of ...}
 \label{fig:field_image}
 \end{figure}
 
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{plots/PicA_normalized_spectrum.pdf}
-\caption{Pictor spectrum.}
+%\includegraphics[width=\columnwidth]{plots/PicA_normalized_spectrum.pdf}
+\includegraphics[width=\columnwidth]{plots/picspec.png}
+\caption{
+The model Pictor A spectrum as given in \citet{jacobs_et_al2013}
+(black) along with the measured Pictor A spectrum (blue), Stokes I, used in
+setting our flux scale. The spectrum was calculated by imaging our maximally
+redundant configuration array to Pictor A for every frequency, and reading off
+the flux. The ripples in the measured spectra are due to beam sidelobes from
+interfereing sources, specfically Fornax A.}
 \label{fig:pic_spec}
 \end{figure}
 
@@ -917,18 +941,18 @@ visibility.
 \centering
 \includegraphics[width=2.3\columnwidth]{plots/waterfalls.png}
 \caption{LST vs. frequency waterfall plots of LST averaged data for the entire
-observing season with log amplitude on the top and phase on the bottom row.
-Foreground averaged data (left) is fringe rate filtered with the optimal fringe
-rate filter (second left) and signal is retained, but signal low in the beam is
-down weighted. Visibilities have a wideband delay filter applied to them to
-suppress foreground signal (middle)i which achieves a 2 orders of magnitude
-signal suppression in Jansky's. After applying the optimal fringe rate filter to
-the foreground filtered data (second right), we achieve 3 orders of magnitude
-suppression of foregrounds, but the fringe rate filter also suppresses the
-cosmological signal as well. However, because the optimal fringe rate filter is
-an time averaging filter, it has the effect of de-noising the data, suppressing
-noise even more than the signal, increasing the SNR. Finally, averaging all of
-the redundant 30 m East-West baseline, effecting 4 orders of magnitude below the
+observing season with log amplitude and phase on the top and bottom rows,
+respectively. LST range is from -2.2 to 17.3 hours and a frequency range from
+100 to 200 MHz. Dashed lines indicate the range of LST used in the power
+spectrum analysis (0 - 8:30 hours). Foreground averaged data (left) is fringe
+rate filtered with the optimal fringe rate filter (second left) and signal is
+retained, but signal low in the beam is down weighted. Visibilities have a
+wideband delay filter applied to them to suppress foreground signal (middle)
+which achieves 2 orders of magnitude signal suppression in Jansky's. After
+applying the optimal fringe rate filter to the foreground filtered data (second
+right), we achieve 3 orders of magnitude suppression of foregrounds, and reach
+the longest possible coherent time integration. Finally, averaging all of the
+redundant 30 m East-West baseline, effecting 4 orders of magnitude below the
 foregrounds in Jansky.} 
 \label{fig:waterfalls}
 \end{figure*}
@@ -1166,17 +1190,23 @@ very high fringe rates.
 \begin{figure}[t!]\centering
 \includegraphics[width=\columnwidth]{plots/fr_preserved_signal.png}
 \caption{
-Fringe-rate filtering at 159MHz. Shown here is the fringe-rate transform of
-unfiltered foreground contained data for a 30 m east-west baseline (blue). The
-fringe-rate filter in fringe-rate space (green) is scaled to be visibile in the
-plot. This filter is multiplicative in this domain and its fourier transform
-convolves the time domain visibilities from which the unfiltered data in this
-plot is dervied from. The filtered data (red) is the product of the unfiltered
-with the weights of the fringe-rate filter in green. Foreground signal is still
-retained in the final output, but signal low in the beam is downweighted.  Note
-the maximum and minimum fringerates correspond to the theoretical minimum and
-maximum for a 30 m baseline at 159 MHz. 
-[XXX clearer description of what fringe rate means]
+Fringe-rate filtering at 159MHz. Fringe-rates of is defined as the rate at which
+the sky moves through the fringe pattern of a baselines fringe pattern. This is
+dependent on the frequency under consideration as well as position on the sky.
+Shown here is the fringe-rate transform (fourier transform along the time axis
+of a visibility) of unfiltered foreground contained data for a 30 m east-west
+baseline (blue). The fringe-rate filter in fringe-rate space (green) is scaled
+to highlight the shape of the filter. In practice, this filter is normalized so
+that its integral is unity.  This filter is multiplicative in this domain and
+its fourier transform convolves the time domain visibilities from which the
+unfiltered data in this plot is dervied from.  The filtered data (red) is the
+product of the unfiltered with the weights of the fringe-rate filter (green).
+Foreground signal is still retained in the final output, but signal low in the
+beam has been downweighted. For the PAPER array in South Africa, these fringe
+rates correspond to small/negative fringe rates and nearly the maximum fringe
+rates of a 30m east-west baseline. Note the maximum and minimum fringerates
+correspond to the theoretical minimum and maximum for a 30 m baseline at 159
+MHz.
 }
 \label{fig:fr_preserved_signal}
 \end{figure}
@@ -1241,7 +1271,7 @@ left with $\sim2$ independent samples per hour.
 %         to describe our data. 
 %       --In addition, because of the highly redundant nature of the array,
 %         the covariance matrix is highly singular and therefore not invertible.
-In this section We first
+In this section we first
 review the quadratic estimator formalism, with an emphasis on our power
 spectrum analysis, followed by a walk through of our application of the OQE
 method to our data, and finally discuss the effects of an empirical estimate of
@@ -1335,9 +1365,7 @@ quadratic estimator of the power spectrum, equation \ref{eqn:qalpha} becomes,
 \end{equation}
 where $x_{1}$ and $x_{2}$ are visibility vecotrs that correspond to two
 different redundant baselines. This cross correlation is the key to obtaining a
-zero bias estimate of the power spectrum. The cross correlation is a crucial
-difference in the quadratic estimator method used by others [XXX is this
-true?].
+zero bias estimate of the power spectrum. 
 
 The normalization matrix above is defined such that
 \begin{equation}\label{eqn:window_def}
@@ -1407,8 +1435,15 @@ how correlated the errors between modes are in the final power spectrum result.
 
 \begin{figure}[t!]\centering
 \includegraphics[width=\columnwidth, height=\columnwidth]{plots/window.png}
-\caption{Window function matrix. The i'th row corresponds to the window function
-used in the estimate of the power spectrum for the i'th $k$-mode.}
+\caption{Window function matrix as defined in equation \ref{eqn:window}. Shown
+is the choice of window functions we made by taking the Cholesky decomposition
+of the Fisher matrix and using the upper triangular matrix. 
+ The i'th row corresponds to the window function
+used in the estimate of the power spectrum for the i'th $k$-mode. The inset
+shows a slice of the window function for $k \approx .2\,hMpc^{-1}$. When
+measuring the bandpower at $k \approx .2\,hMpc^{-1}$, the window functions peak
+at this $k$ value, and suppress power from modes interior to the magnitude of
+$k$, and taper off slow for modes larger than  $k \approx .2\,hMpc^{-1}$.}
 \label{fig:window_func}
 \end{figure}
 
@@ -1535,10 +1570,18 @@ of column 4 to column 5, where column 5 is siligtlhy less noisy than the others.
 
 \begin{figure*}[t!]\centering
 \includegraphics[width=1.5\columnwidth]{plots/eig.png}
-\caption{Eigenvalues of the covariance matrix from foreground contained data
-(blue) and foreground removed data (green), via the wideband delay filter.
-Correspondingly, the strongest four eigenmodes for foreground contained (top
-right), and foreground remved data (bottom right).}
+\caption{Eigenvalues of the covariance matrix (left penel) from foreground
+contained data (blue) and foreground filtered data (green), via the wideband
+delay filter. The eigenspectrum for the foreground contained data has a sharp
+decline for the first few eigen modes and levels of at around 1 K, suggesting
+that most of the variation in the data are only described by a handfull of
+eigenmodes. The four strongest corresponding eigenmodes (top right panel) shows
+that these modes are smooth spectrum modes, suggestive of smooth foregrounds.
+Contrastingly, the eigenspectrum for delay filtered data, in which foregrounds
+are heavily filtered, steadily decreases suggesting that there are not a few
+modes that mostly describe all of the variation in the data. This is paralleled
+in the strongest eigenmodes for this filtered data (bottom right panel) and
+there is no coherent structure to any of these modes. }
 \label{fig:eigs}
 \end{figure*}
 
@@ -1663,14 +1706,32 @@ information contained in the estimate.
 
 \begin{figure}[b!]\centering
 \includegraphics[width=\columnwidth, height=\columnwidth]{plots/fisher.png}
-\caption{The Fisher information matrix for a given baseline.}
+\caption{Shown here is the Fisher information matrix for a given baseline. The
+Fisher matrix captures the covariance of the intermediate $\qhat$'s with one
+another. The diagonal of the Fisher matrix, gives the auto-covariance of the
+$\qhat$ with itself. The first mode in the horizon has a bulk of the signal
+removed via the dleay filter and since the Fisher matrix takes into account
+inverse covariance weigthing of the data, it upweights those modes.
+Contrastingly, the second mode in the horizon and the first mode outside the
+horizon is suppressed because of some possibly residual signal left by the delay
+filter and kicking up of signal to outside of the horizon. The excess covariance
+cross in the Fisher matrix comes from the inverse covariance weighting applied
+to the data in the calculation of $\qhat$, which downweights the signal.}
 \label{fig:fisher}
 \end{figure}
 
 
 \begin{figure*}[t!]\centering
 \includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
-\caption{$k$-modes integrating down.}
+\caption{Plotted is the cumulative mean for band powers at a given $k$-mode,
+where the colors indicate the mode being integrated, with blue being the most
+interior modes and walking out to the exterior modes in green; red being the
+modes in the middle. On the right is the same plot, except using a median
+instead of the mean as the statistic. The behaviour of either of these
+statistics is very similar with modes that bottom out on something and there
+modes that seem to take a dive as more modes are used. Assuming gaussian
+statistics, there is an overall correction factor of 1.4 for using the median
+statistic relative to the mean.}
 \label{fig:pspec_variance}
 \end{figure*}
 
@@ -1839,6 +1900,8 @@ the sky every 42.8 seconds for an East-West baselin of 30 m.
 \subsubsection{Bootstrapped Errors}
 %XXX QUESTION FOR BOOTSTRAPPING, Use the input data to the quad est vs output
 %data? Is this why the error bars were so wacked out before?
+We calculate a power spectrum, averaged over baseline cross multiples, for every
+integration. 
 We measure the error in our final power spectrum estimate by bootstrapping over
 baseline samples from the output of the quadratic estimator. That is, we are
 bootstrapping over power spectra averaged over baselines per LST sample. In order
@@ -1928,14 +1991,33 @@ investigation of these modes is to be conducted.
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=2.3\columnwidth]{plots/density.png}
-\caption{Visibility density for a redundant baseline group.}
+\caption{Plotted is the density of the real part of
+complex visibilities for a set of redundant baselines, those strictly
+east-west 30 m baselines, at a frequency of XXX for all integrations. The
+color scale corresponds to the number of samples that went into a specific
+LST/visibility bin. The bulk of the samples recorded, range from an LST of 5 to
+10 hours, whilst the EoR cold spot ranges from 0 to 4 hours as seen in figure
+\ref{fig:coverage}. For the densest regions, the spread in visibility for a
+given LST sample is $\approx{100} \,\text{Jy}$. The agreement between redundant
+baselines here gives us reassurance that our baselines are actually measuring
+the same fourier modes on the sky.}
 \label{fig:density}
 \end{figure*}
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{plots/stability.png}
-\caption{Time stability of the instrument.}
+\caption{Demonstration of the time stability of the instrument. For a given LST
+bin, we take the day to day samples that go into that bin and determine the
+power spectrum for that time seris. Shown here is the power spectrum of the time
+series over 134 days for baseline 1\_4 at 150 MHz (XXX) averaged over 5 hours in
+LST. Power at 1/134 days$^{-1}$ is the DC bin, accumulating the average of the
+time signal. The power spectrum folows a noise like power spectrum throughout
+with a slight uptic at the temporal frequency corresponding to 2 days. This is
+due to the fact that the integration time does not fully divide out a sidereal
+day, but has a remiainder of $\frac{1}{2}$, piling up power on the everyother day
+time scale. (XXX need to be more clear here, I think)
+}
 \label{fig:stability}
 \end{figure}
 
@@ -1987,8 +2069,7 @@ bands. $T_{sys}$ is calculated for every integration using the variance
 statistic calculated in every LST bin and average on hour time scales to
 estimate the $T_{sys}$ reported here. For a majority of the LST bins, especially
 those bins used in our analysis, the system temperature is about 500K at 160
-MHz, consistent with previous estimates of the system temperature. XXX note that
-this has the correction factor applied to it, assuming gaussian statistics.}
+MHz, consistent with previous estimates of the system temperature.}
 \label{fig:tsys}
 \end{figure}
 Previous estimates of the system temperatue
@@ -2135,9 +2216,19 @@ hence \ref{eqn:final_tb} becomes...
 %   -the wedge - maybe?
 \begin{figure*}[h!]\centering
 \includegraphics[width=1.5\columnwidth,height=1\columnwidth]{plots/pk_k3pk.png}
-\caption{The resulting estimate of the 21 cm power spectrum with 2$\sigma$ error
-bars. Vertical dashed line at $k\approx{.6\ h\ Mpc^{-1}}$ correspond to the
-horizon limit.}
+\caption{
+Power spectrum at $z=8.4$ resulting from a 134 day PAPER observation
+with 64 dual polarization antennas layed out in a maximally redundant grid. The
+black points are the final power spectrum with 2$\sigma$ error bars. The dashed
+vertical lines at $k\approx{.6\ h\ Mpc^{-1}}$ corresponds to the horizon limit
+plus the 15 ns standoff in the delay filter. The left panel shows P($k$) wheras
+the right panel corresponds to the dimensionless power spectra $\Delta^{2}$,
+which has the positive and negative $k_{\parallel}$'s averaged together in
+P($k$). XXX (To be done) The solid cyan curve is the power spectrum of the
+foreground contained data. The dashed cyan curve in $\Delta^{2}$ correspond the
+the theoretical 2 sigma error bars for a noise power spectrum with system
+temperature 550 K.
+}
 \label{fig:final_pspec}
 \end{figure*}
 
