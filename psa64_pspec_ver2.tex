@@ -1271,7 +1271,7 @@ left with $\sim2$ independent samples per hour.
 %         to describe our data. 
 %       --In addition, because of the highly redundant nature of the array,
 %         the covariance matrix is highly singular and therefore not invertible.
-In this section We first
+In this section we first
 review the quadratic estimator formalism, with an emphasis on our power
 spectrum analysis, followed by a walk through of our application of the OQE
 method to our data, and finally discuss the effects of an empirical estimate of
@@ -1723,7 +1723,15 @@ to the data in the calculation of $\qhat$, which downweights the signal.}
 
 \begin{figure*}[t!]\centering
 \includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
-\caption{$k$-modes integrating down.}
+\caption{Plotted is the cumulative mean for band powers at a given $k$-mode,
+where the colors indicate the mode being integrated, with blue being the most
+interior modes and walking out to the exterior modes in green; red being the
+modes in the middle. On the right is the same plot, except using a median
+instead of the mean as the statistic. The behaviour of either of these
+statistics is very similar with modes that bottom out on something and there
+modes that seem to take a dive as more modes are used. Assuming gaussian
+statistics, there is an overall correction factor of 1.4 for using the median
+statistic relative to the mean.}
 \label{fig:pspec_variance}
 \end{figure*}
 
@@ -1983,23 +1991,33 @@ investigation of these modes is to be conducted.
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=2.3\columnwidth]{plots/density.png}
-\caption{Stability of baselines over time. Plotted is the real part of the
-complex visibilities for a set of redundant baselines, those with perfect
-east-west 30 m baselines, at a frequency of XXX for all of the integrations. The
-color scale corresponds to the number of samples that went into that bin. The
-spread in each LST bin is one the order of ~100 Jy, showing great stability and
-efficacy of Omnical by bringing every baseline in a redundant group in to
-agreement with one another.}
+\caption{Plotted is the density of the real part of
+complex visibilities for a set of redundant baselines, those strictly
+east-west 30 m baselines, at a frequency of XXX for all integrations. The
+color scale corresponds to the number of samples that went into a specific
+LST/visibility bin. The bulk of the samples recorded, range from an LST of 5 to
+10 hours, whilst the EoR cold spot ranges from 0 to 4 hours as seen in figure
+\ref{fig:coverage}. For the densest regions, the spread in visibility for a
+given LST sample is $\approx{100} \,\text{Jy}$. The agreement between redundant
+baselines here gives us reassurance that our baselines are actually measuring
+the same fourier modes on the sky.}
 \label{fig:density}
 \end{figure*}
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{plots/stability.png}
-\caption{Time stability of the instrument. We take a single channel for the
-entire LST range of data taken, and determine the power spectrum by first
-fourier transforming and taking the absolute value squared to get the power
-spectrum.}
+\caption{Demonstration of the time stability of the instrument. For a given LST
+bin, we take the day to day samples that go into that bin and determine the
+power spectrum for that time seris. Shown here is the power spectrum of the time
+series over 134 days for baseline 1\_4 at 150 MHz (XXX) averaged over 5 hours in
+LST. Power at 1/134 days$^{-1}$ is the DC bin, accumulating the average of the
+time signal. The power spectrum folows a noise like power spectrum throughout
+with a slight uptic at the temporal frequency corresponding to 2 days. This is
+due to the fact that the integration time does not fully divide out a sidereal
+day, but has a remiainder of $\frac{1}{2}$, piling up power on the everyother day
+time scale. (XXX need to be more clear here, I think)
+}
 \label{fig:stability}
 \end{figure}
 
@@ -2051,8 +2069,7 @@ bands. $T_{sys}$ is calculated for every integration using the variance
 statistic calculated in every LST bin and average on hour time scales to
 estimate the $T_{sys}$ reported here. For a majority of the LST bins, especially
 those bins used in our analysis, the system temperature is about 500K at 160
-MHz, consistent with previous estimates of the system temperature. XXX note that
-this has the correction factor applied to it, assuming gaussian statistics.}
+MHz, consistent with previous estimates of the system temperature.}
 \label{fig:tsys}
 \end{figure}
 Previous estimates of the system temperatue
@@ -2199,9 +2216,19 @@ hence \ref{eqn:final_tb} becomes...
 %   -the wedge - maybe?
 \begin{figure*}[h!]\centering
 \includegraphics[width=1.5\columnwidth,height=1\columnwidth]{plots/pk_k3pk.png}
-\caption{The resulting estimate of the 21 cm power spectrum with 2$\sigma$ error
-bars. Vertical dashed line at $k\approx{.6\ h\ Mpc^{-1}}$ correspond to the
-horizon limit.}
+\caption{
+Power spectrum at $z=8.4$ resulting from a 134 day PAPER observation
+with 64 dual polarization antennas layed out in a maximally redundant grid. The
+black points are the final power spectrum with 2$\sigma$ error bars. The dashed
+vertical lines at $k\approx{.6\ h\ Mpc^{-1}}$ corresponds to the horizon limit
+plus the 15 ns standoff in the delay filter. The left panel shows P($k$) wheras
+the right panel corresponds to the dimensionless power spectra $\Delta^{2}$,
+which has the positive and negative $k_{\parallel}$'s averaged together in
+P($k$). XXX (To be done) The solid cyan curve is the power spectrum of the
+foreground contained data. The dashed cyan curve in $\Delta^{2}$ correspond the
+the theoretical 2 sigma error bars for a noise power spectrum with system
+temperature 550 K.
+}
 \label{fig:final_pspec}
 \end{figure*}
 
