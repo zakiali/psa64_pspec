@@ -524,11 +524,15 @@ using Omnical.}
 
 \begin{figure}[!b]
 \centering
-\includegraphics[width=\columnwidth]{plots/august_chi2.png}
-\caption{chi squared. This plot should be horizontal. ask jeff.}
+\includegraphics[width=\columnwidth]{plots/chi2.png}
+\caption{This is a waterfall plot for a days $\Chi^{2}$ distribution from our
+fitting of the visibilities. The $\Chi^{2}$ here is calculated for every
+frequency bin and integration in our data set, 49kHz and 42.9 seconds,
+respectively. The $\Chi^{2}$ demnstrates the stability of the instrument and is
+a useful tool for flagging bad data, corresponding to very large $Chi^{2}$
+values.}
 \label{fig:chi2}
 \end{figure}
-
 
 In addition to solving for gain solutions, Omnical also characterizes the
 quality of the calibration by calculating the $\chi^{2}$ for every integration.
@@ -648,15 +652,28 @@ the calibrated Pictor A spectrum and the model spectrum from
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{plots/gianni_pic_image.pdf}
-\caption{Image of Pictor.}
+\caption{
+A field image phased to Pictor A and including Fornax A using the maximally
+redundant array configuration data set used in the analaysis presented in this
+paper. The elongated north-south stripes are due to the lack of north-south
+baseline used here. In addition grating lobes due to the antenna configuration
+can be seen (?). The location of Pictor A and Fornax A agree with their catalog
+values of ...}
 \label{fig:field_image}
 \end{figure}
 
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{plots/PicA_normalized_spectrum.pdf}
-\caption{Pictor spectrum.}
+%\includegraphics[width=\columnwidth]{plots/PicA_normalized_spectrum.pdf}
+\includegraphics[width=\columnwidth]{plots/picspec.png}
+\caption{
+The model Pictor A spectrum as given in \citet{jacobs_et_al2013}
+(black) along with the measured Pictor A spectrum (blue), Stokes I, used in
+setting our flux scale. The spectrum was calculated by imaging our maximally
+redundant configuration array to Pictor A for every frequency, and reading off
+the flux. The ripples in the measured spectra are due to beam sidelobes from
+interfereing sources, specfically Fornax A.}
 \label{fig:pic_spec}
 \end{figure}
 
