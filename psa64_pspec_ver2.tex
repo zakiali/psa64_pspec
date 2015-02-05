@@ -508,28 +508,28 @@ applied to visibilities and the results are shown in \ref{fig:omniview}.
 \includegraphics[width=2\columnwidth]{plots/omniview_64.png}
 \caption{
 Each panel is a scatter plot of complex visibilites, for every baseline in the
-array, in the complex plane. Since redundant baselines should measure the same
-sky we expect that there is clustering between visibilities of baselines in a
-redundant group. Each symbol and color combination corresponds to a redundant
-group of baselines. The left pannel shows the the raw data after a rough
-calibration has been applied to the data. There is clustering between redundant
-baselines, but there is still some thermal noise in the measurement that is do
-to the imprecise nature of the rough calibration and cross talk between
-baselines. The right panel shows the same data after using calibration
-parameters derived from Omnical. The reundant baselines come into better
-alignment after those calibration solutions are applied, nodding to the power of
-using Omnical.}
+array, in the complex plane at 159 MHz for a single integration. Since
+redundant baselines should measure the same sky we expect that there is
+clustering between visibilities of baselines in a redundant group. Each symbol
+and color combination corresponds to a redundant group of baselines. The left
+pannel shows the the raw data after a rough calibration has been applied to the
+data. There is clustering between redundant baselines, but there is still some
+thermal noise in the measurement that is do to the imprecise nature of the
+rough calibration and cross talk between baselines. The right panel shows the
+same data after using calibration parameters derived from Omnical. The reundant
+baselines come into better alignment after those calibration solutions are
+applied, nodding to the power of using Omnical.}
 \label{fig:omniview}
 \end{figure*}
 
 \begin{figure}[!b]
 \centering
 \includegraphics[width=\columnwidth]{plots/chi2.png}
-\caption{This is a waterfall plot for a days $\Chi^{2}$ distribution from our
-fitting of the visibilities. The $\Chi^{2}$ here is calculated for every
+\caption{This is a waterfall plot for a days $\chi^{2}$ distribution from our
+fitting of the visibilities. The $\chi^{2}$ here is calculated for every
 frequency bin and integration in our data set, 49kHz and 42.9 seconds,
-respectively. The $\Chi^{2}$ demnstrates the stability of the instrument and is
-a useful tool for flagging bad data, corresponding to very large $Chi^{2}$
+respectively. The $\chi^{2}$ demnstrates the stability of the instrument and is
+a useful tool for flagging bad data, corresponding to very large $\chi^{2}$
 values.}
 \label{fig:chi2}
 \end{figure}
@@ -941,18 +941,18 @@ visibility.
 \centering
 \includegraphics[width=2.3\columnwidth]{plots/waterfalls.png}
 \caption{LST vs. frequency waterfall plots of LST averaged data for the entire
-observing season with log amplitude on the top and phase on the bottom row.
-Foreground averaged data (left) is fringe rate filtered with the optimal fringe
-rate filter (second left) and signal is retained, but signal low in the beam is
-down weighted. Visibilities have a wideband delay filter applied to them to
-suppress foreground signal (middle)i which achieves a 2 orders of magnitude
-signal suppression in Jansky's. After applying the optimal fringe rate filter to
-the foreground filtered data (second right), we achieve 3 orders of magnitude
-suppression of foregrounds, but the fringe rate filter also suppresses the
-cosmological signal as well. However, because the optimal fringe rate filter is
-an time averaging filter, it has the effect of de-noising the data, suppressing
-noise even more than the signal, increasing the SNR. Finally, averaging all of
-the redundant 30 m East-West baseline, effecting 4 orders of magnitude below the
+observing season with log amplitude and phase on the top and bottom rows,
+respectively. LST range is from -2.2 to 17.3 hours and a frequency range from
+100 to 200 MHz. Dashed lines indicate the range of LST used in the power
+spectrum analysis (0 - 8:30 hours). Foreground averaged data (left) is fringe
+rate filtered with the optimal fringe rate filter (second left) and signal is
+retained, but signal low in the beam is down weighted. Visibilities have a
+wideband delay filter applied to them to suppress foreground signal (middle)
+which achieves 2 orders of magnitude signal suppression in Jansky's. After
+applying the optimal fringe rate filter to the foreground filtered data (second
+right), we achieve 3 orders of magnitude suppression of foregrounds, and reach
+the longest possible coherent time integration. Finally, averaging all of the
+redundant 30 m East-West baseline, effecting 4 orders of magnitude below the
 foregrounds in Jansky.} 
 \label{fig:waterfalls}
 \end{figure*}
@@ -1190,17 +1190,23 @@ very high fringe rates.
 \begin{figure}[t!]\centering
 \includegraphics[width=\columnwidth]{plots/fr_preserved_signal.png}
 \caption{
-Fringe-rate filtering at 159MHz. Shown here is the fringe-rate transform of
-unfiltered foreground contained data for a 30 m east-west baseline (blue). The
-fringe-rate filter in fringe-rate space (green) is scaled to be visibile in the
-plot. This filter is multiplicative in this domain and its fourier transform
-convolves the time domain visibilities from which the unfiltered data in this
-plot is dervied from. The filtered data (red) is the product of the unfiltered
-with the weights of the fringe-rate filter in green. Foreground signal is still
-retained in the final output, but signal low in the beam is downweighted.  Note
-the maximum and minimum fringerates correspond to the theoretical minimum and
-maximum for a 30 m baseline at 159 MHz. 
-[XXX clearer description of what fringe rate means]
+Fringe-rate filtering at 159MHz. Fringe-rates of is defined as the rate at which
+the sky moves through the fringe pattern of a baselines fringe pattern. This is
+dependent on the frequency under consideration as well as position on the sky.
+Shown here is the fringe-rate transform (fourier transform along the time axis
+of a visibility) of unfiltered foreground contained data for a 30 m east-west
+baseline (blue). The fringe-rate filter in fringe-rate space (green) is scaled
+to highlight the shape of the filter. In practice, this filter is normalized so
+that its integral is unity.  This filter is multiplicative in this domain and
+its fourier transform convolves the time domain visibilities from which the
+unfiltered data in this plot is dervied from.  The filtered data (red) is the
+product of the unfiltered with the weights of the fringe-rate filter (green).
+Foreground signal is still retained in the final output, but signal low in the
+beam has been downweighted. For the PAPER array in South Africa, these fringe
+rates correspond to small/negative fringe rates and nearly the maximum fringe
+rates of a 30m east-west baseline. Note the maximum and minimum fringerates
+correspond to the theoretical minimum and maximum for a 30 m baseline at 159
+MHz.
 }
 \label{fig:fr_preserved_signal}
 \end{figure}
@@ -1429,8 +1435,15 @@ how correlated the errors between modes are in the final power spectrum result.
 
 \begin{figure}[t!]\centering
 \includegraphics[width=\columnwidth, height=\columnwidth]{plots/window.png}
-\caption{Window function matrix. The i'th row corresponds to the window function
-used in the estimate of the power spectrum for the i'th $k$-mode.}
+\caption{Window function matrix as defined in equation \ref{eqn:window}. Shown
+is the choice of window functions we made by taking the Cholesky decomposition
+of the Fisher matrix and using the upper triangular matrix. 
+ The i'th row corresponds to the window function
+used in the estimate of the power spectrum for the i'th $k$-mode. The inset
+shows a slice of the window function for $k \approx .2\,hMpc^{-1}$. When
+measuring the bandpower at $k \approx .2\,hMpc^{-1}$, the window functions peak
+at this $k$ value, and suppress power from modes interior to the magnitude of
+$k$, and taper off slow for modes larger than  $k \approx .2\,hMpc^{-1}$.}
 \label{fig:window_func}
 \end{figure}
 
@@ -1557,10 +1570,18 @@ of column 4 to column 5, where column 5 is siligtlhy less noisy than the others.
 
 \begin{figure*}[t!]\centering
 \includegraphics[width=1.5\columnwidth]{plots/eig.png}
-\caption{Eigenvalues of the covariance matrix from foreground contained data
-(blue) and foreground removed data (green), via the wideband delay filter.
-Correspondingly, the strongest four eigenmodes for foreground contained (top
-right), and foreground remved data (bottom right).}
+\caption{Eigenvalues of the covariance matrix (left penel) from foreground
+contained data (blue) and foreground filtered data (green), via the wideband
+delay filter. The eigenspectrum for the foreground contained data has a sharp
+decline for the first few eigen modes and levels of at around 1 K, suggesting
+that most of the variation in the data are only described by a handfull of
+eigenmodes. The four strongest corresponding eigenmodes (top right panel) shows
+that these modes are smooth spectrum modes, suggestive of smooth foregrounds.
+Contrastingly, the eigenspectrum for delay filtered data, in which foregrounds
+are heavily filtered, steadily decreases suggesting that there are not a few
+modes that mostly describe all of the variation in the data. This is paralleled
+in the strongest eigenmodes for this filtered data (bottom right panel) and
+there is no coherent structure to any of these modes. }
 \label{fig:eigs}
 \end{figure*}
 
@@ -1685,7 +1706,17 @@ information contained in the estimate.
 
 \begin{figure}[b!]\centering
 \includegraphics[width=\columnwidth, height=\columnwidth]{plots/fisher.png}
-\caption{The Fisher information matrix for a given baseline.}
+\caption{Shown here is the Fisher information matrix for a given baseline. The
+Fisher matrix captures the covariance of the intermediate $\qhat$'s with one
+another. The diagonal of the Fisher matrix, gives the auto-covariance of the
+$\qhat$ with itself. The first mode in the horizon has a bulk of the signal
+removed via the dleay filter and since the Fisher matrix takes into account
+inverse covariance weigthing of the data, it upweights those modes.
+Contrastingly, the second mode in the horizon and the first mode outside the
+horizon is suppressed because of some possibly residual signal left by the delay
+filter and kicking up of signal to outside of the horizon. The excess covariance
+cross in the Fisher matrix comes from the inverse covariance weighting applied
+to the data in the calculation of $\qhat$, which downweights the signal.}
 \label{fig:fisher}
 \end{figure}
 
