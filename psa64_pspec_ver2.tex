@@ -1736,7 +1736,7 @@ statistic relative to the mean.}
 \end{figure*}
 
 
-\subsection{The Covariance Matrix}
+\subsection{The Covariance Matrix and Signal Loss}
 %Covariance matrix nuances.
 %   -describe covariance matrix and data vectors.
 %   -How we get the covariance matrix. 
@@ -1750,37 +1750,34 @@ statistic relative to the mean.}
 %XXX need to check lst range. 
 
 We now discuss the issues of empirically estimating the covariance matrix from
-the data. For a single baseline, the data vector $\x$, consists of 10 Mhz
-bandwidth centered at 151.72 MHz, equating to 20 frequency channels.
-All time samples are also kept, ranging from 0 to 10 LST hours. Again, we
-estimate the covariance in the usual way, $\C = \expval{\x\x^{\dagger}}$, taking
-the ensemble average over time. The covariance matrix for this baseline is a
-$N_{ch}\times N_{ch}$ matrix consisting of the covariances of all channels with
-each other. This covariance matrix is invertible only if it nonsingular, which
-requires it to be a rank $N_{ch}$ matrix. This occurs only if there are $N_{ch}$
-independent modes. 
+the data. The covariance matrix is defined as the ensemble average of the outer
+product of vector with itself. In our case, 
+\begin{equation}
+    \C = \expval{\x\x^{\dagger}}, 
+\end{equation}
+where $\x$ is the data vector used in the analysis. Specficially, this data
+vector consists of visibilities for a single baseline, with 10 MHz of bandwidth
+centered at 151.72 MHz, equating to 20 frequency channels, for all integrations.
+Since we do not have an infinite number of universes to take the ensemble
+average required for the covariance matrix, we instead average  over the time
+axis to derive the covariances between the 20 frequency channels. In our
+analaysis the time average runs from 0 to 8:30 LST hours. Our analysis method
+for calculating the power spectrum requires the inverse of the covariance
+matrix to weight the data. Therefore, the empirically derived covariance matrix
+here, must be invertible, which occurs only if $\C$ is a rank-N matrix, where N
+is the number of rows or columns. In our particular case, N=20.
 
-As noted in section \ref{sec:frf} the optimal fringe rate filter corrsponds to
-averageing time samples for 31 minutes. Over the 10 hour LST range used in this
-analysis, this corresponds to approximately 20 statistically independent modes
-on the sky. This is a fundamental limit of the amount of information we have in
-our measurements. Coincidentally, the covariance matrix for a given baseline is
-an $N_{ch} \times N_{ch}$ matrix, where $N_{ch}=20$.  Therefore, the covariance
-matrices for every baseline are infact invertible because they are full rank 
-and contain 20 statistically independent measurements of the sky. The covariance
-matrix is thus invertible and can be applied to the data vectors, $\x$. 
-
-%
-%   -Potential for signal loss.
-%       --In a traditional OQE method, the process is lossless by construction.
-%         Because we are tweaking this method, and the fact that we have non
-%         gaussian systematics in our data, there is a potential for signal
-%         loss. 
-Even though we have encountered a fortuitous event in having full rank
-covariance matrices, we are still estimating our covariance matrix using a
-limited sample size. This limitation leads to an imperfect characterization of
-the covariances between modes and ultimately leads to signal loss in this type
-of analysis. 
+There are a few fundamental problems that occur when estimating the covariance
+matrix in this way. As noted in section \ref{sec:frf} the optimal fringe rate
+filter corrsponds to averageing time samples for 31 minutes. Over the LST range
+used in this analysis, this corresponds to on the order of 20 statistically
+independent modes in our data after fringe rate filtering. This is a fundamental
+limit of the amount of information we have in our measurements. Coincidentally,
+the covariance matrix for a given baseline is an $N_{ch} \times N_{ch}$ matrix,
+where $N_{ch}=20$.  Therefore, the covariance matrices for every baseline are
+infact invertible, in most cases,  because they are full rank and contain 20
+statistically independent measurements of the sky. The covariance matrix is thus
+invertible and can be used to inverse covariance weight the data.
 
 The optimal quadratic estimator has an application of the inverse covariance
 matrix to data vector $\x$. Applying an inverse covariance matrix to the data it
@@ -1799,6 +1796,19 @@ column), we can see that weighing by the inverse covariance upweights modes in
 this baseline as compared to the other baselines, which have a slightly higher
 noise in the original data vector. This is even paralleled in the foreground
 contained data.
+%
+%   -Potential for signal loss.
+%       --In a traditional OQE method, the process is lossless by construction.
+%         Because we are tweaking this method, and the fact that we have non
+%         gaussian systematics in our data, there is a potential for signal
+%         loss. 
+
+
+Another problem that occurs from empirically estimating covariances is that it
+leads to a imprecise covaraince matrix. Hence, when used in conjuction with the
+data, it doesn't perfectly remove covarainces between channels and baselines and
+has the ability to remove signal from the data. XXX [Need to be more clear on
+this point ]
 
 
 %   -Simulations
@@ -1815,53 +1825,45 @@ contained data.
 %         However, if the signal was bright enough, we would be able to see it.
 %         Since we don't see signal in the actual data, we can say that we have
 %         not detected the EOR signal yet.
-\subsubsection{Signal Loss}
-The optimal quadratic estimators for the power spectrum described above are a
-lossless operation, in theory. This is only true if we have all the information
-needed to apply this method. However, one of the major unknowns we have in our
-estimate, is the covariance. We are empirically estimating our covariance matrix
-from the data and therefore are potentially going to have signal loss in the
-final estimate of our power spectrum. Here we quantify the amount of signal loss
-associated with the empirical estimates of the covariance matrix and claim that
-it is a monotonic function of input signal level.
+In theory, optimal quadratic estimators for the power spectrum described above are a
+lossless operation. This is only true if we have all the information
+needed to apply this method. As discussed, one of the major unknowns we have in our
+estimate, is the covariance matrix that describes the covariances in the data
+due to the instrument and sky signal. As argued above, not knowing the true
+covariances, leads to signal loss in the final estimate of the power spectrum.
+Here, we describe estimate the signal loss associated with the empirical
+estimates of the covariance matrix.
 
-In order to understand the degree of signal loss due to our empirical estimates
-of the covariances, we simulate the injection of an EoR model and measure the
-signal loss associated with running the full covariance analysis. These
-simulations consist of injecting a model eor signal on top of the data and
-running through our power spectrum estimator. In order to quantify this, vary
-the input model EoR signal level that gets added onto the data and run through
-the optimal quadratic estimator to measure the signal loss. We compare this to
-the same power spectrum pipeline, except that we forgoe the inverse covariance
-weighting for no weighting. This is our fiducial power spectrum, which contains
-no signal loss. We Monte Carlo to obtain an overall conservative correction
-factor for the final power spectrum. 
+Jumping ahead, figure \ref{fig:signal_loss} shows the signal loss as a function
+of input signal level to the power spectrum pipeline. In order to characterize
+the signal loss we simulate an EoR like signal and inject it on top of the data,
+measuring the output signal power spectrum and comparing it to the input signal
+power spectrum for various signal amplitudes. The simulated EoR data used were
+generated as a gaussian random signal with $\mu=0$ and $\sigma=1$. For each
+integration and frequency channel, we draw a random sample from this
+distribution and assign it to every baseline used, drawing a new sample for
+every integration only. Therefore, every baseline agrees on the signal for each
+integration and frequency channel. 
 
-Before presenting the results we first discuss our model EoR visibilities. For
-each measurment set, we construct a random gaussian signal that corresponds 
-
-By using these simulations, we vary the amplitude of the eor signal input into
-the oqe by multiplying by a scalar to each simulated visibility. Figure
-\ref{fig:simulate} shows that the signal loss is monatonic with increasing
-input signal amplitude. With this we argue that if there was an eor signal at
-any substatial level, a detection would have been made. Because our power
-spectra are still consistent with zero, we conclude that a positive detection of
-EoR has not been made. 
-
+We add these injected EoR visibilities to the data and propogate it through the
+power spectrum pipeline for varying amplitude of simulated EoR signal. We
+measure the output power spectrum of the signal and
+compare it to the input signal power spectrum. This gives us the signal loss
+due to imprecisely knowing the covariance from the empirical estimation. This
+signal loss is monte carlo'd using a new instantiation of the EoR noise and
+averaged over realizations. The final result is shown in figure
+\ref{fig:signal_loss}
 
 
 XXX Need to claim that we ran an end to end test.
 
-XXX need to claim that because the signal is so low, there is no signal loss.
-[ARP: this is not a correct statement.  There is signal loss.  We must quantify it.]
-
 %XXX Carina's Text of the eor model goes here.
-The model eor signal used was a simulation of a flat power spectrum, in P($k$),
-from $k$-modes ranging from .1-10 $\text{hMpc}^{-1}$. From this an angular power
-spectrum is computed (\cite{datta_et_al2007, lewis_challinor_2007}), ensuring
-correlation in frequency/redshift for the power spectrum maps. Visibilities are
-then simulated for this power spectrum map by explicitly integrating fringes on
-the sky every 42.8 seconds for an East-West baselin of 30 m.
+%The model eor signal used was a simulation of a flat power spectrum, in P($k$),
+%from $k$-modes ranging from .1-10 $\text{hMpc}^{-1}$. From this an angular power
+%spectrum is computed (\cite{datta_et_al2007, lewis_challinor_2007}), ensuring
+%correlation in frequency/redshift for the power spectrum maps. Visibilities are
+%then simulated for this power spectrum map by explicitly integrating fringes on
+%the sky every 42.8 seconds for an East-West baselin of 30 m.
 
 %In order to effectively characterize signal loss in our analysis pipeline, we
 %simulate visibilities that accurately capture the instrumental effects of PAPER
@@ -1896,7 +1898,7 @@ the sky every 42.8 seconds for an East-West baselin of 30 m.
 %       --We use 100 bootstraps to derive our error bars, setting a $2\sigma$
 %         bound on the errors.
 
-\subsubsection{Bootstrapped Errors}
+\subsection{Bootstrapped Errors}
 %XXX QUESTION FOR BOOTSTRAPPING, Use the input data to the quad est vs output
 %data? Is this why the error bars were so wacked out before?
 We calculate a power spectrum, averaged over baseline cross multiples, for every
@@ -1928,7 +1930,7 @@ increasing $\eta$, asymptoting to a factor of XXX for a dominating signal. }
 
 
 
-\subsection{Integrating $k$-modes}
+\subsubsection{Integrating $k$-modes}
 XXX This shows the efficacy of using the median over the mean.
 The power spectrum shown in figure \ref{fig:final_pspec} is an average of
 multiple baselines together. To show how the modes in each power spectrum
