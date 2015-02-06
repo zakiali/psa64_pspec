@@ -651,7 +651,7 @@ the calibrated Pictor A spectrum and the model spectrum from
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{plots/gianni_pic_image.pdf}
+\includegraphics[width=\columnwidth]{plots/picimg.png}
 \caption{
 A field image phased to Pictor A and including Fornax A using the maximally
 redundant array configuration data set used in the analaysis presented in this
@@ -1863,7 +1863,6 @@ correlation in frequency/redshift for the power spectrum maps. Visibilities are
 then simulated for this power spectrum map by explicitly integrating fringes on
 the sky every 42.8 seconds for an East-West baselin of 30 m.
 
-[XXX figure about signal loss vs. signal level]
 %In order to effectively characterize signal loss in our analysis pipeline, we
 %simulate visibilities that accurately capture the instrumental effects of PAPER
 %for the frequency bins used in the analysis. The signal injected into the
@@ -1915,6 +1914,18 @@ bootstrapping and power spectrum estimation. First, we break the baselines into
 five groups and use the two "even" and "odd" LST averaged data sets discussed
 above. We use only baselines in the quadratic estimator that are not the same
 as well as data that fall in the different averaged data sets.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{plots/signal_loss.png}
+\caption{
+Shown is the signal loss correction factor asa a function of injected
+signal amplitude, where large values of $\eta$ correspond to a dominating
+injected signal. The correction factor monotonically increases as a function of
+increasing $\eta$, asymptoting to a factor of XXX for a dominating signal. }
+\label{fig:signal_loss}
+\end{figure}
+
 
 
 \subsection{Integrating $k$-modes}
