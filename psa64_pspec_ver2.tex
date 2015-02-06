@@ -1905,29 +1905,42 @@ When estimating our power spectra via optimal quadratic estimators, we generate
 multiple samples of the power spectrum in order to apply the bootstrap method to
 calculate our error bars. When applying this method of estimating the
 statistical variance in our data, we require that there needs to be a random
-component in our estimates of power spectra. 
+component in our estimates of power spectra.
 
-We use the baseline axis as our random draw axis. For each bootstrap sample  by
-taking our 
+We use the baseline axis as our random draw axis. For each bootstrap we
+calculate the power spectrum of a random draw of $N_{bls}-5$, giving us more
+than $2\times10^6$ possible combinations of baselines for the perfectly east-west 30 m
+baselines used in the analysis and over $1\times10^{6}$ combinations of the two
+redunant groups of baseline corresponding to 30 m east west components and 5 m
+(a row spaceing) in the north and south direction. There is enough variation in
+the data to tease out the underlying statistics of the distribution. 
 
+There are, however, a few issues that must be dealt with in order to not incur a
+noise bias that will. We want to effectivley construct an unbiased estimator.
+There are two ways that our estimate of the power spectrum can incur a noise
+bias as discussed earlier. One way is to have an auto cross multiplication in
+the quadratic estimator. We avoid this by only using cross baseline products
+when estimating the power spectrum as discussed above. And furthermore, we use
+the cross products in both time and baselines, as described above.
 
+In our analysis we use 100 bootstraps, to calculate the error bars as a function
+of $k$-mode in our final power spectrum. In the calculation of the error bars,
+we randomly sample 400 samples from the 100 bootstraps to measure the $1
+\text{and} 2 \sigma$ errors. One key point here is that we use the median
+statistic in order to measure the variance in our power spectrum, rather than
+the mean statistic. This is due to the fact that there are outliers that
+drastically skew the final error bars. 
 
-
-Output from the optimal quadratic estimator power spectrum pipeline, is the
-power spectrum We calculate a power spectrum, averaged over baseline cross
-multiples, for every integration.  We measure the error in our final power
-spectrum estimate by bootstrapping over baseline samples from the output of the
-quadratic estimator. That is, we are bootstrapping over power spectra averaged
-over baselines per LST sample. In order to tease out the variations between
-baselines, each bootstrap is a random pull of the baselines involvled in the
-analysis, choosing $N-5$ out of $N$ baselines. For different baseline types, $N$
-ranges from 46 (up/under one and over one baselines) to 51 (East-West). 
-
-In order to avoid incurring a noise bias, a few restrictions are needed to the
-bootstrapping and power spectrum estimation. First, we break the baselines into
-five groups and use the two "even" and "odd" LST averaged data sets discussed
-above. We use only baselines in the quadratic estimator that are not the same
-as well as data that fall in the different averaged data sets.
+Figure \ref{fig:pspec_variance} shows that the mean and variance statistic used
+in the estimate of the band powers have similar properties. Namely, some modes
+integrate down and bottom out on a signal with the addition of more samples.
+However, there are a few modes that show a bottoming out, but take a dive when
+more modes are added, owning to some peculiar noise properties in the
+measurements. Generally, the two statistics have similar properties. Assuming
+gaussian statistics, there is a correction factor that needs to be applied to
+the measured power spectrum. This is owning to the fact that the mean and median
+are not the same statistic. The correction factor is $\log{2}$ for using the
+median statistic over the mean, for a gaussian distributed signal. 
 
 \begin{figure}[!t]
 \centering
@@ -1942,35 +1955,35 @@ increasing $\eta$, asymptoting to a factor of XXX for a dominating signal. }
 
 
 
-\subsubsection{Integrating $k$-modes}
-XXX This shows the efficacy of using the median over the mean.
-The power spectrum shown in figure \ref{fig:final_pspec} is an average of
-multiple baselines together. To show how the modes in each power spectrum
-integrate together and to what degree they integrate down as noise are not, an
-allan variance test, is shown in Figure \ref{fig:pspec_variance}. Color
-represents a different $k$ mode measured in $\Delta^{2}$ along with the
-different bootstraps. Here we are showing the effect of integrating down on
-different $k$ modes as we include a wider range in time, and hence more
-independent modes. From the discussion on optimal fringe rate filtering we know
-we have 2 independent modes on the sky per LST hour. Hence, integrating modes
-upto a thousand modes, where not all are independent we expect to hit up against
-a floor, which we see. These curves are plotted for $P(k)$ and therefore, the
-colors represent both positive and negative $k$'s with green curves haveing the
-highest absolute value for $k$ and blue curves are modes closer to the horizon.
-
-
-We see a slight difference in the mean and median statistic when estimating the
-total value of modes. Modes tend to level off for both the statistcs and the
-amount of independent modes is capped when modes flatten out at roughly ~60
-samples. We find that this is close to the number of independent modes on the
-sky and baselines. In addtion modes close to the horizon (blue) tend to flatten
-out with the mean statictic, however there is an increased spread for the median
-statistic. 
-
-In addtion there is a sharp decline in power when integrating ~1024 modes for
-certain modes when dealing with the mean and median statistic. These modes show
-unexpected behaviour due to the sharp slope of the fall in power. Further
-investigation of these modes is to be conducted.
+%\subsubsection{Integrating $k$-modes}
+%XXX This shows the efficacy of using the median over the mean.
+%The power spectrum shown in figure \ref{fig:final_pspec} is an average of
+%multiple baselines together. To show how the modes in each power spectrum
+%integrate together and to what degree they integrate down as noise are not, an
+%allan variance test, is shown in Figure \ref{fig:pspec_variance}. Color
+%represents a different $k$ mode measured in $\Delta^{2}$ along with the
+%different bootstraps. Here we are showing the effect of integrating down on
+%different $k$ modes as we include a wider range in time, and hence more
+%independent modes. From the discussion on optimal fringe rate filtering we know
+%we have 2 independent modes on the sky per LST hour. Hence, integrating modes
+%upto a thousand modes, where not all are independent we expect to hit up against
+%a floor, which we see. These curves are plotted for $P(k)$ and therefore, the
+%colors represent both positive and negative $k$'s with green curves haveing the
+%highest absolute value for $k$ and blue curves are modes closer to the horizon.
+%
+%
+%We see a slight difference in the mean and median statistic when estimating the
+%total value of modes. Modes tend to level off for both the statistcs and the
+%amount of independent modes is capped when modes flatten out at roughly ~60
+%samples. We find that this is close to the number of independent modes on the
+%sky and baselines. In addtion modes close to the horizon (blue) tend to flatten
+%out with the mean statictic, however there is an increased spread for the median
+%statistic. 
+%
+%In addtion there is a sharp decline in power when integrating ~1024 modes for
+%certain modes when dealing with the mean and median statistic. These modes show
+%unexpected behaviour due to the sharp slope of the fall in power. Further
+%investigation of these modes is to be conducted.
 %
 
 
@@ -2041,7 +2054,8 @@ time signal. The power spectrum folows a noise like power spectrum throughout
 with a slight uptic at the temporal frequency corresponding to 2 days. This is
 due to the fact that the integration time does not fully divide out a sidereal
 day, but has a remiainder of $\frac{1}{2}$, piling up power on the everyother day
-time scale. (XXX need to be more clear here, I think)
+time scale. (XXX need to be more clear here, I think. a.const.sidereal\_day/42.9
+= 2008.487, a.const.sidereal\_day/42.94 = 2006.616.)
 }
 \label{fig:stability}
 \end{figure}
