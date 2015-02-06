@@ -1901,15 +1901,27 @@ XXX Need to claim that we ran an end to end test.
 \subsection{Bootstrapped Errors}
 %XXX QUESTION FOR BOOTSTRAPPING, Use the input data to the quad est vs output
 %data? Is this why the error bars were so wacked out before?
-We calculate a power spectrum, averaged over baseline cross multiples, for every
-integration. 
-We measure the error in our final power spectrum estimate by bootstrapping over
-baseline samples from the output of the quadratic estimator. That is, we are
-bootstrapping over power spectra averaged over baselines per LST sample. In order
-to tease out the variations between baselines, each bootstrap is a random pull
-of the baselines involvled in the analysis, choosing $N-5$ out of $N$
-baselines. For different baseline types, $N$ ranges from 46 (up/under one and
-over one baselines) to 51 (East-West). 
+When estimating our power spectra via optimal quadratic estimators, we generate
+multiple samples of the power spectrum in order to apply the bootstrap method to
+calculate our error bars. When applying this method of estimating the
+statistical variance in our data, we require that there needs to be a random
+component in our estimates of power spectra. 
+
+We use the baseline axis as our random draw axis. For each bootstrap sample  by
+taking our 
+
+
+
+
+Output from the optimal quadratic estimator power spectrum pipeline, is the
+power spectrum We calculate a power spectrum, averaged over baseline cross
+multiples, for every integration.  We measure the error in our final power
+spectrum estimate by bootstrapping over baseline samples from the output of the
+quadratic estimator. That is, we are bootstrapping over power spectra averaged
+over baselines per LST sample. In order to tease out the variations between
+baselines, each bootstrap is a random pull of the baselines involvled in the
+analysis, choosing $N-5$ out of $N$ baselines. For different baseline types, $N$
+ranges from 46 (up/under one and over one baselines) to 51 (East-West). 
 
 In order to avoid incurring a noise bias, a few restrictions are needed to the
 bootstrapping and power spectrum estimation. First, we break the baselines into
@@ -2228,7 +2240,7 @@ hence \ref{eqn:final_tb} becomes...
 %    Jonnies result.
 %   -the wedge - maybe?
 \begin{figure*}[h!]\centering
-\includegraphics[width=1.5\columnwidth,height=1\columnwidth]{plots/pk_k3pk.png}
+\includegraphics[width=2\columnwidth,height=1.2\columnwidth]{plots/pk_k3pk.png}
 \caption{
 Power spectrum at $z=8.4$ resulting from a 134 day PAPER observation
 with 64 dual polarization antennas layed out in a maximally redundant grid. The
@@ -2240,7 +2252,8 @@ which has the positive and negative $k_{\parallel}$'s averaged together in
 P($k$). XXX (To be done) The solid cyan curve is the power spectrum of the
 foreground contained data. The dashed cyan curve in $\Delta^{2}$ correspond the
 the theoretical 2 sigma error bars for a noise power spectrum with system
-temperature 550 K.
+temperature 550 K. XXX Using 100 bootstraps. Correction factors are fringe rate
+filter (1.9), signal loss (1.15), and median statistic (1.4)
 }
 \label{fig:final_pspec}
 \end{figure*}
@@ -2249,7 +2262,8 @@ temperature 550 K.
 \includegraphics[width=\columnwidth]{plots/flat_k3pk_posterior.png}
 \caption{The posteriror distributiom assuming a flat, gaussian power spectrum in
 $\Delta^{2}$ (blue). The green and red horizontal lines correspond to the 1 and
-2 $\sigma$ upper limits, respectrively, on the power spectrum.}
+2 $\sigma$ upper limits, respectrively, on the power spectrum. XXXfix sigma
+lines to be vertical. Make it look better. Labels.}
 \label{fig:final_posterioir}
 \end{figure}
 
@@ -2281,7 +2295,7 @@ data and non optimal fringe rate filter]
 %
 
 \begin{figure*}[t!]\centering
-\includegraphics[width=1.5\columnwidth]{plots/pspec_comparison.png}
+\includegraphics[width=2\columnwidth]{plots/pspec_comparison.png}
 \caption{The comparison of power spectra with and without various analysis in
 the pipeline applied to it. The blue power spectrum has the full pipeline
 applied to it and is identical to \ref{fig:final_pspec}. The red power spectrum
