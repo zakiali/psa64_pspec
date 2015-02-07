@@ -89,8 +89,8 @@ Precision Array for Probing the Epoch of Reionization (PAPER) in South Africa.  
 work extends the work presented in \citet{parsons_et_al2014} with more collecting area,
 improved redundancy-based calibration, optimal fringe-rate filtering, and improved
 power-spectral analysis using optimal quadratic estimators. The result is a new
-$2\sigma$ upper limit on $\Delta^2(k)$ of $(XXX {\rm mK})^2$ in the range
-$0.1<k<0.5\ h\ {\rm Mpc}^{-1}$ at $z=XXX$.  This represents a three-fold [XXX] improvement
+$2\sigma$ upper limit on $\Delta^2(k)$ of ($20.6{\rm mK})^2$ in the range
+$0.1<k<0.5\ h\ {\rm Mpc}^{-1}$ at $z=8.4$.  This represents a four-fold improvement
 over the previous best upper limit.  As we discuss in more depth in the companion
 to this paper \citet{pober_et_al2015}, this upper limit supports and extends previous
 evidence for significant heating in the intergalactic medium prior to reionization.  Under the assumption
@@ -536,19 +536,19 @@ values.}
 
 In addition to solving for gain solutions, Omnical also characterizes the
 quality of the calibration by calculating the $\chi^{2}$ for every integration.
-Figure \ref{fig:chi2} shows the $\chi^{2}$ squared waterfall for a full
-nights worth of calibrations. From \cite{zheng_et_al2014}, the
-$\chi^{2}/\text{DoF}$, where $\text{DoF} = 2N_{baselines} - 2(N_{antennas} +
-N_{\text{unique basleines}} $ is the number of degrees of freedom. For a good
-fit, the $\chi^{2}/DoF$ is drawn from a mean 1 distribution with variance
+Figure \ref{fig:chi2} shows the $\chi^{2}$ squared waterfall for a full nights
+worth of calibrations. From \cite{zheng_et_al2014}, the $\chi^{2}/\text{DoF}$,
+where $\text{DoF} = 2N_{baselines} - 2(N_{antennas} + N_{\text{unique
+basleines}} $ is the number of degrees of freedom. For a good fit, the
+$\chi^{2}/DoF$ is drawn from a mean 1 distribution with variance
 $\frac{2}{\text{DoF}}$. The distribtuion of the $\xi^{2}$ in figure
 \ref{fig:chi2} has a mean of 2, meaning that the fit was not the best to what
-our noise model is.
-The noise model used was obtained from the variance statistic calculated during
-the binning of days in local sidereal time, which occurs after the
-application of crosstalk removal, combining X and Y polarization, and the
-wideband delay filter. Hence, the noise model may not be well suited for the
-$\chi^{2}$, and is a likely reason that the distribution has a mean of 2.
+our noise model is.  The noise model used was obtained from the variance
+statistic calculated during the binning of days in local sidereal time, which
+occurs after the application of crosstalk removal, combining X and Y
+polarization, and the wideband delay filter. Hence, the noise model may not be
+well suited for the $\chi^{2}$, and is a likely reason that the distribution
+has a mean of 2.
 %XXX This may change and we may get a chi-squared of around one.% 
 
 The calibration parameters solved for in Omnical also have a time independent
@@ -885,22 +885,23 @@ signal loss descreases for higher $k$'s.
 
 
 Before implementing our foreground removal techniques, we combine the two
-polarizations for an estimate of stokes I as per \citet{moore_et_al2013}.
-[ XXX provide the relevant equations and caveats here, careful with "coarse" --- don't imply sloppy]
-Namely, the Stokes I can be estimated as 
+linear polarizations for an estimate of stokes I as per \citet{moore_et_al2013}.
+Namely, Stokes I can be estimated as 
 \begin{equation}\label{eqn:stokesi}
-    V_{\rm I} = \frac12(V_{\rm XX}+V_{\rm YY}).
+    V_{\rm I} = \frac12(V_{\rm XX}+V_{\rm YY}),
 \end{equation}
-There are some important caveats to the estimate of stokes I provided by
-equation \ref{eqn:stokesi}. One important caveat is that it 
-neglects the beam asymmetry  between the two linear polarization states. This
-mismatch is the cause polarization leakage from Stokes Q into Stokes I, thus
-contaminating the our measurement of the power spectrum. This effect for PAPER,
-as shown in \citet{moore_et_al2013}, leaks 4\% of Q in to I.  We offer no
-correction for this effect, but in turn put some limits on polarization leakage
-discussed later. 
+where $V_{\rm XX}$ and $V_{\rm YY}$ are the visibilities of the two linear
+polariztionats measured by the interferometer. There are some important caveats
+to the estimate of stokes I provided by equation \ref{eqn:stokesi}. One
+important caveat is that it neglects the beam asymmetry  between the two linear
+polarization states. This mismatch is the cause polarization leakage from Stokes
+Q into Stokes I, thus contaminating the our measurement of the power spectrum.
+This effect for PAPER, as shown in \citet{moore_et_al2013}, leaks 4\% of Q in to
+I.  We offer no correction for this effect, but in turn put some limits on
+polarization leakage discussed later. 
 
-Amongst the cornucopia of foreground removal techniques (cite papers) at our
+Amongst the cornucopia of foreground removal techniques (cite papers see adrians
+formalism paper) at our
 disposal, we opt for the per-baseline approach of delay filtering described in
 \cite{parsons_et_al2012b}. This technique is well suited for PAPER because it
 doesn't rely on making images and localizing sources for subtraction, which 
@@ -1747,7 +1748,6 @@ statistic relative to the mean.}
 %   -inverse covariance is tricky because of this. 
 %   -happy coincidence?
 %
-%XXX need to check lst range. 
 
 We now discuss the issues of empirically estimating the covariance matrix from
 the data. The covariance matrix is defined as the ensemble average of the outer
@@ -1949,7 +1949,7 @@ median statistic over the mean, for a gaussian distributed signal.
 Shown is the signal loss correction factor asa a function of injected
 signal amplitude, where large values of $\eta$ correspond to a dominating
 injected signal. The correction factor monotonically increases as a function of
-increasing $\eta$, asymptoting to a factor of XXX for a dominating signal. }
+increasing $\eta$, asymptoting to a factor of 10 for a dominating signal. }
 \label{fig:signal_loss}
 \end{figure}
 
@@ -2136,11 +2136,11 @@ the horizon which we argue are foreground contaminated. Figure
 \ref{fig:final_posterior} shows the posterior distribution of the power spectrum
 by fitting a flat curve in $\Delta^{2}$ to the power spectrum assuming
 Gaussian error bars. From this distribution, we determine the 2 sigma upper
-limit to be XXX $mk^{2}$, which is consistent with zero.
+limit to be $(20.6 \rm{mk}^{2}$, which is consistent with zero.
 
 We also include the power spectrum before foreground filtering for comparison
 and to show the effect of the delay filter within the horizon. In addition we
-plot the theoretical 2 sigma errors expected for a $T_{sys} = 350 K$. These
+plot the theoretical 2 sigma errors expected for a $T_{sys} = 500 K$. These
 error bars were calculated using a full simulation of the sensitivity of the
 instrument, with the appropriate weightings due to uneven sampling of LST bins
 as described in \cite{pober_et_al2014}. These errors agree well with the
@@ -2202,7 +2202,6 @@ and therefore $1 - \frac{T_{\gamma}(z)}{T_{s}} \approx 1$.
 
 For much of what we are considering, $T_{s} \gg T_{\gamma}$, and
 hence \ref{eqn:final_tb} becomes...
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2283,8 +2282,6 @@ lines to be vertical. Make it look better. Labels.}
 
 
 \subsection{Comparison with PSA32}
-[XXX need to rerun power spectrum flux scale fix with the non omnical applied
-data and non optimal fringe rate filter]
 %   -We now compare and contrast our result with those without some of the key
 %   components of our analysis pipeline.
 %
@@ -2444,7 +2441,7 @@ is a necessity.
 \section{Conclusions}\label{sec:conclusion}
 We have shown a new upper limit on the 21 cm EoR power spectrum at $z=8.4$,
 showing an almost an order of magnitude of improvement from the previous result
-\cite{parsons_et_al2014}. We found the $2\sigma$ upper limit of XXX by fitting a
+\cite{parsons_et_al2014}. We found the $2\sigma$ upper limit of 425 $mK^{2}$ by fitting a
 flat power spectrum in a $k$ range from $.15<$k$<.5\ h\ {\rm Mpc}^{-1}$ to the
 dimensionless power spectrum, $\Delta^{2}$. Using these limits we have improved
 the limits on the 21 cm mean brightness temperature set in
