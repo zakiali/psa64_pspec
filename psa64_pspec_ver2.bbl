@@ -1,4 +1,4 @@
-\begin{thebibliography}{77}
+\begin{thebibliography}{79}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Bolton} {et~al.}(2011){Bolton}, {Haehnelt}, {Warren}, {Hewett},
@@ -40,10 +40,6 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
 \bibitem[{{Datta} {et~al.}(2010){Datta}, {Bowman}, \&
   {Carilli}}]{datta_et_al2010}
 {Datta}, A., {Bowman}, J.~D., \& {Carilli}, C.~L. 2010, \apj, 724, 526
-
-\bibitem[{{Datta} {et~al.}(2007){Datta}, {Bharadwaj}, \&
-  {Choudhury}}]{datta_et_al2007}
-{Datta}, K.~K., {Bharadwaj}, S., \& {Choudhury}, T.~R. 2007, \mnras, 382, 809
 
 \bibitem[{{de Oliveira-Costa} {et~al.}(2008){de Oliveira-Costa}, {Tegmark},
   {Gaensler}, {Jonas}, {Landecker}, \& {Reich}}]{deoliveira2008}
@@ -146,9 +142,6 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   Weeren}, {Wijers}, {Wijnholds}, {Wucknitz}, \& {Zarka}}]{jelic_et_al2014}
 ---. 2014, \aap, 568, A101
 
-\bibitem[{{Lewis} \& {Challinor}(2007)}]{lewis_challinor_2007}
-{Lewis}, A., \& {Challinor}, A. 2007, \prd, 76, 083005
-
 \bibitem[{{Lidz} {et~al.}(2008){Lidz}, {Zahn}, {McQuinn}, {Zaldarriaga}, \&
   {Hernquist}}]{lidz_et_al2008}
 {Lidz}, A., {Zahn}, O., {McQuinn}, M., {Zaldarriaga}, M., \& {Hernquist}, L.
@@ -178,6 +171,11 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   {Zahn}}]{mao_et_al2008}
 {Mao}, Y., {Tegmark}, M., {McQuinn}, M., {Zaldarriaga}, M., \& {Zahn}, O. 2008,
   \prd, 78, 023529
+
+\bibitem[{{Masui} {et~al.}(2013){Masui}, {Switzer}, {Banavar}, {Bandura},
+  {Blake}, {Calin}, {Chang}, {Chen}, {Li}, {Liao}, {Natarajan}, {Pen},
+  {Peterson}, {Shaw}, \& {Voytek}}]{masui_et_al2013}
+{Masui}, K.~W., {et~al.} 2013, \apjl, 763, L20
 
 \bibitem[{{Mesinger} {et~al.}(2013){Mesinger}, {Ferrara}, \&
   {Spiegel}}]{mesinger_et_al2013}
@@ -215,10 +213,14 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   {Webster}, {Whitney}, {Williams}, \& {Williams}}]{offringa_et_al2014}
 {Offringa}, A.~R., {et~al.} 2014, \mnras, 444, 606
 
+\bibitem[{{Paciga} {et~al.}(2011){Paciga}, {Chang}, {Gupta}, {Nityanada},
+  {Odegova}, {Pen}, {Peterson}, {Roy}, \& {Sigurdson}}]{paciga_et_al2011}
+{Paciga}, G., {et~al.} 2011, \mnras, 413, 1174
+
 \bibitem[{{Paciga} {et~al.}(2013){Paciga}, {Albert}, {Bandura}, {Chang},
   {Gupta}, {Hirata}, {Odegova}, {Pen}, {Peterson}, {Roy}, {Shaw}, {Sigurdson},
   \& {Voytek}}]{paciga_et_al2013}
-{Paciga}, G., {et~al.} 2013, \mnras
+---. 2013, \mnras
 
 \bibitem[{{Page} {et~al.}(2007){Page}, {Hinshaw}, {Komatsu}, {Nolta},
   {Spergel}, {Bennett}, {Barnes}, {Bean}, {Dor{\'e}}, {Dunkley}, {Halpern},
@@ -235,6 +237,9 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   {Werthimer}, {Droz}, {Filiba}, {Manley}, {McMahon}, {Parsa}, {MacMahon}, \&
   {Wright}}]{parsons_et_al2008}
 {Parsons}, A., {et~al.} 2008, \pasp, 120, 1207
+
+\bibitem[{{Parsons} \& {Backer}(2009)}]{parsons_backer2009}
+{Parsons}, A.~R., \& {Backer}, D.~C. 2009, \aj, 138, 219
 
 \bibitem[{{Parsons} {et~al.}(2012{\natexlab{b}}){Parsons}, {Pober}, {Aguirre},
   {Carilli}, {Jacobs}, \& {Moore}}]{parsons_et_al2012b}
@@ -415,6 +420,10 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   Garc{\'{\i}}a}, {Peterson}, \& {L{\'o}pez-Cruz}}]{tabitha_et_al2014}
 {Voytek}, T.~C., {Natarajan}, A., {J{\'a}uregui Garc{\'{\i}}a}, J.~M.,
   {Peterson}, J.~B., \& {L{\'o}pez-Cruz}, O. 2014, \apjl, 782, L9
+
+\bibitem[{{Wang} {et~al.}(2006){Wang}, {Tegmark}, {Santos}, \&
+  {Knox}}]{wang_et_al2006}
+{Wang}, X., {Tegmark}, M., {Santos}, M.~G., \& {Knox}, L. 2006, \apj, 650, 529
 
 \bibitem[{{Wieringa}(1992)}]{wieringa1992}
 {Wieringa}, M.~H. 1992, Experimental Astronomy, 2, 203

@@ -65,6 +65,7 @@ William P. Walbrugh\altaffilmark{3},
 Andre Walker\altaffilmark{3}
 }
 % XXX more on author list
+% XXX ordering of affil marks
 %include Jasper Horrell, Jasper Grobbelaar, Matthys Maree
 %\tableofcontents
 
@@ -118,7 +119,7 @@ and higher-order cosmological effects like the relative velocities of baryons an
 Recent measurements
 have pinned down the bright end of the galaxy luminosity function
 at $z \la 8$ \citep{bouwens_et_al2010,schenker_et_al2013} and have detected a few sources at even greater
-distances \citep{ellis_et_al2013,oesch_et_al2013}. Still, this known population falls well short 
+distances \citep{ellis_et_al2013,oesch_et_al2013}. As stands, this known population falls well short 
 of the requirements to reionize the universe \citep{robertson_et_al2013} [XXX is this the right cite?], 
 driving us to deeper observations with, e.g., JWST and ALMA, to reveal the fainter end of the luminosity function.
 In parallel, a number of indirect techniques have constrained the evolution of the neutral fraction
@@ -195,7 +196,7 @@ and SARAS \citep{patra_et_al2015}
 seek to measure the
 mean brightness temperature of 21 cm relative to the CMB background. These experiments
 typically rely on auto-correlations from a small number of dipole elements to access
-the sky-averaged 21~cm signal, although recent work indicates
+the sky-averaged 21~cm signal, although recent work is showing
 that interferometric cross-correlations may also be used to access the signal
 \citep{presley_et_al2015,vedantham_et_al2015}.
 In contrast, experiments targeting statistical power-spectral measurements of the 21~cm
@@ -205,39 +206,39 @@ the GMRT \citep{paciga_et_al2013},
 LOFAR \citep{van_haarlem_et_al2013},
 the MWA \citep{tingay_et_al2013},
 the 21CMA \citep{peterson_et_al2004,wu2009},
-and the Donald C. Backer Precision Array to Probe the Epoch of Reionization (PAPER;\citealt{parsons_et_al2010}). 
+and the Donald C. Backer Precision Array to Probe the Epoch of Reionization (PAPER; \citealt{parsons_et_al2010}). 
 
 Relative to its competitors, PAPER is unique for being a dedicated instrument with the flexibility
-to explore nontraditional experimental approaches.  PAPER has converged on a unique, self-consistent
-approach to achieving both the level of foreground removal and the sensitivity that are required in principle
+to explore non-traditional experimental approaches.  PAPER is converging on a unique, self-consistent
+approach to achieving both the level of foreground removal and the sensitivity that are required 
 to detect the 21cm reionization signal.  This approach focuses on spectral smoothness as the primary
 descriminant between foreground emission and the 21cm reionization signal  and applies an understanding
 of interferometric responses in the delay domain to identify bounds on instrumental chromaticity 
-\citep{parsons_et_al2012b}.  This type of ``delay-spectrum'' analysis permits data from each 
+(\citealt{parsons_et_al2012b}, hereafter P12b).  This type of ``delay-spectrum'' analysis permits data from each 
 interferometric baseline
 to be analyzed separately without requiring synthesis imaging for foreground removal.  As a result, PAPER has
 been able to adopt new antenna configurations that are densely packed and highly redundant.
 These configurations are poorly suited for synthesis imaging but
-deliver a substantial sensitivity boost for power-spectral measurements that are not limited by
-cosmic variance \citep{parsons_et_al2012a}.  Moreover, these array configurations are particularly suited
+deliver a substantial sensitivity boost for power-spectral measurements that are not yet limited by
+cosmic variance (\citealt{parsons_et_al2012a}, hereafter P12a).  Moreover, they are particularly suited
 for redundancy-based calibration \citep{liu_et_al2010,wieringa1992,zheng_et_al2014}, on which PAPER
-now relies to solve for the majority of the internal instrumental degrees of freedom.
-It remains to be seen how PAPER's experimental approach will bear out in
-practice, although recent results with the 32-antenna version of PAPER, including the previous best upper 
-limit on the 21 cm power spectrum at $\Delta^2 (k) \leq (41\,\textrm{mK})^{2}$ at 
-$k=0.27 h \text{Mpc}^{-1}$ \citep{parsons_et_al2014}, indicate the efficacy of the approach so far.
-
+now relies to solve for the majority of the internal instrumental degrees of freedom.  The efficacy of
+this apporach was demonstrated with 
+data from a 32-antenna deployment of PAPER, which achieved an upper 
+limit on the 21 cm power spectrum of $\Delta^2 (k) \leq (41\,\textrm{mK})^{2}$ at 
+$k=0.27 h\ {\rm Mpc}^{-1}$ (\citealt{parsons_et_al2014}, hereafter P14).  This upper limit improved
+over previous limits by orders of magnitude, and as of this writing, remains the best
+upper limit achieved in the field.
 
 In this paper, we report on the results from a 64-element deployment of PAPER
 that substantially improve on this previous result.
- This paper is outlined as follows. In section
+ This paper is outlined as follows. In Section
 \ref{sec:observations} we describe the observations used in this analysis. In
-\ref{sec:analysis} we discuss the calibration and data analysis of our pipeline.
+Section \ref{sec:analysis} we discuss the calibration and data analysis of our pipeline.
 We then move on to a discussion of the stability of the PAPER instrument in
-section \ref{sec:instrument}. We present our results in seciton
+Section \ref{sec:instrument}. We present our results in Section
 \ref{sec:results} along with new contraints on the 21cm power spectrum.
-Finally, we conclude in \ref{sec:conclusion} and offer thoughts on the future
-of 21 cm cosmology.
+We conclude in Section \ref{sec:conclusion}.
 
 
 
@@ -247,13 +248,14 @@ of 21 cm cosmology.
 \begin{figure}[!t]\centering
 \includegraphics[width=\columnwidth]{plots/antenna_positions.png}
 \caption{
-Antenna layout for the PAPER 64 observation season. We use a subset of
-the total number of baselines in the power spectrum analysis. We use only
-the east-west baselines between adjacent columns(49-41,41-47,47-19,10-3,3-25,
-etc...), and those east-west baselines between adjacent columns with a
-compenent due north equaling row spacing (10-41,9-3,3-47,58-25, etc...) and
-a component due south equaling one row spacing (49-3,10-58,41-25,3-1, etc...).
-These baselines constitute the bulk of the sensitivity of for the power
+Antenna position within the PAPER-64 array.
+This analysis only makes use of
+east-west baselines between adjacent columns that have row
+separations of zero (e.g. 49-41, 41-47, 10-3, \dots)
+one in the northward direction (e.g. 10-41, 3-47, 9-3, \dots) or
+one in the southward direction (e.g. 49-3, 41-25, 10-58, \dots).
+Because of their high levels of redundancy, 
+these baselines constitute the bulk of the array's sensitivity for power
 spectrum analysis.}
 \label{fig:antenna_positions}
 \end{figure}
@@ -268,8 +270,7 @@ This is currently just place holder figure.XXX.
 \label{fig:flowchart}
 \end{figure*}
 
-
-The results in this paper are based on drift-scan observations 
+We base our analysis on drift-scan observations 
 with 64 dual-polarization PAPER antennas deployed 
 at the Square Kilometer Array South Africa
 (SKA-SA) reserve in the Karoo desert in South Africa
@@ -285,8 +286,7 @@ For this analysis, we use only the XX and YY polarization cross-products.
 
 As shown in Figure \ref{fig:antenna_positions}, PAPER-64 employs
 a highly redundant antenna layout where multiple baselines measure
-the same Fourier mode on the sky
-\citep{parsons_et_al2012a,parsons_et_al2014}.
+the same Fourier mode on the sky (P12a; P14).
 We rely on all 2016 baselines for each (XX,YY) polarization cross-product for calibration,
 but only use a subset of the baselines for the power spectrum
 analysis. This subset encompasses 3 types of baselines; the shortest 
@@ -354,7 +354,7 @@ drowns out the faint reionization signal by more than 5 orders of magnitude
 However, the brightest foregrounds are spectrally smooth, and this provides an important hook
 for their isolation and removal \citep{liu_tegmark2012,petrovic_oh2011,liu_et_al2009}.  Unfortunately, interferometers, which are inherently chromatic
 instruments, interact with spectrally smooth foregrounds to produce unsmooth features that
-imitate line-of-sight Fourier modes over cosmological volumes \citep{parsons_et_al2012b,bowman_et_al2009,morales_et_al2006a}.
+imitate line-of-sight Fourier modes over cosmological volumes (P12b; \citealt{bowman_et_al2009,morales_et_al2006a}).
 One approach to solving this problem involves an ambitious calibration and modeling approach to spatially localize and
 remove foreground contaminants \citep{chapman_et_al2013,sullivan_et_al2012,harker_et_al2009,liu_et_al2008,bowman_et_al2008}.
 Perhaps the most impressive example of this approach is being undertaken by LOFAR, where dynamic ranges of 4.7 have
@@ -365,22 +365,22 @@ The analysis for this paper employs a contrasting
 approach based on the fact that the chromaticity of an interferometer
 is fundamentally related to the length of an interferometric baseline.  This relationship, known
 colloquially as ``the wedge", was 
-derived analytically \citep{parsons_et_al2012b,vedantham_et_al2012}, and has been confirmed in 
+derived analytically (P12b; \citealt{vedantham_et_al2012}), and has been confirmed in 
 simulations \citep{datta_et_al2010,hazelton_et_al2013} and observationally
-\citep{pober_et_al2013,dillon_et_al2013b}.  As described in \citep{parsons_et_al2012b}, the wedge is the result of the delay
+\citep{pober_et_al2013,dillon_et_al2013b}.  As described in P12b, the wedge is the result of the delay
 between when a wavefront originating from foreground emission
 arrives at the two antennas in a baseline.  The fact that this delay is bounded by the light-crossing
 time between two antennas (which we call the ``horizon limit'' since such a wavefront would have to have
 been generated from foregrounds sitting on the horizon) places a fundamental bound on the chromaticity of
 an interferometric baseline.  So far, PAPER has had the most success in exploiting this bound
-\citep{parsons_et_al2014,jacobs_et_al2014}, although it is in the process of being applied to MWA
+(P14; \citealt{jacobs_et_al2014}), although it is in the process of being applied to MWA
 observations \citep{nitya}.  
 
 In our analysis, we exploit both the properties of the spectrally smooth
 foregrounds and the wedge in order to accurately isolate and remove the smooth
 spectrum foregrounds.  Our analysis pipeline begins by running a compression
 algorithm to reduce the data volume of our raw data. This step, described in the
-appendix of \cite{parsons_et_al2014}, reduces data volume by a factor of 40. We
+appendix of P14, reduces data volume by a factor of 40. We
 then calibrate on the basis of redundancy before using self-calibration to solve
 for the absolute phase and gain parameters. After suppressing foregrounds with a
 wide-band delay filter, we average the data in local sidereal time and apply a
@@ -910,7 +910,7 @@ covariance weighting
 \citep{dillon_et_al2013b,liu_tegmark2011,dillon_et_al2013a}, to name a few,
 at our
 disposal, we opt for the per-baseline approach of delay filtering described in
-\citep{petrovic_oh2011,parsons_et_al2012b}. This technique is well suited for PAPER because it
+P12b and \citet{petrovic_oh2011}. This technique is well suited for PAPER because it
 doesn't rely on making images and localizing sources for subtraction, which 
 the current maximum redundant configuration of PAPER is not well suited for.
 
@@ -936,7 +936,7 @@ convolved by the spectrum shape, the beam, the bandpass shape, the taper
 function and the sampling function. The source shape, $A(\nu)$, and $B(\nu)$,
 imprint a width onto the delta function and leads to leakage of power outside
 of the horizon limits imposed by the baseline length.  As per
-\cite{parsons_et_al2010} and \cite{parsons_et_al2014}, we deconvolve the kernel
+\cite{parsons_backer2009} and P14, we deconvolve the kernel
 resulting from $W(\tau)S(\tau)$ using an iterative CLEAN procedure
 \citep{hogbom1974} restricting CLEAN components to fall within the horizon plus
 a 15 ns buffer for each baseline that accounts for for shape of the source
@@ -970,7 +970,7 @@ foregrounds are suppressed by $\sim$5 orders of magnitude in power, effectively
 getting -50 dB of foreground suppression, as seen in figure
 \ref{fig:waterfalls}, for any given baseline. There is an associated signal loss
 with the delay filter technique due to the deconvolution used in the CLEAN
-algortithm. This signal loss is the same as in \cite{parsons_et_al2014} because
+algortithm. This signal loss is the same as in P14 because
 we are using same filter with the same 15 ns buffer outside the horizon per
 baseline. We reiterate the results here: there is a 4.8\% signal loss for the
 first mode outside of the horizon, 1.3\% for the next mode out, and less than
@@ -1495,7 +1495,7 @@ This leads to the description of the matrix that takes the data vector,
 $\mathbf{x}$, and transforms it into something that is in the power spectrum
 domain, $\mathbf{Q}_{\alpha}$. Because our data matrix is in frequency domain,
 we need a way of tranforming that data into $k$-space, and specifically into
-the line of sight $k_{\parallel}$-modes. As shown in \cite{parsons_et_al2012b},
+the line of sight $k_{\parallel}$-modes. As shown in P12b,
 line of sight $k$-modes are approximated by delay modes for short baselines and
 therefore the $\mathbf{Q}_{\alpha}$ should encode the delay transform. This is
 the infact the form of this matrix we use; we encode the delay transform in to
@@ -2118,7 +2118,7 @@ where $\Delta\nu$ is the bandwidth, $t_{int}$ is the integration time, and
 $T_{rms}$ is the RMS temperature.
 Figure \ref{fig:tsys} shows the results of this calculation. In this observing
 season, the system temperature stays consistent with previous estimates of the
-as in \citet{parsons_et_al2014} and \citet{jacobs_et_al2014} at $T_{sys} =
+as in P14 and \citet{jacobs_et_al2014} at $T_{sys} =
 500K$ at 160 MHz.
 
 \begin{figure}[b!]\centering
@@ -2131,8 +2131,8 @@ those bins used in our analysis, the system temperature is about 500K at 160
 MHz, consistent with previous estimates of the system temperature.}
 \label{fig:tsys}
 \end{figure}
-Previous estimates of the system temperatue
-\citep{parsons_et_al2014,jacobs_et_al2014} relied on differencing and averaging
+Previous estimates of the system temperature
+(P14; \citealt{jacobs_et_al2014}) relied on differencing and averaging
 baselines, time samples, and/or frequency channels. The agreement between these
 various methods of estimating the system temperature provides a robust measure
 of the system temperature of the PAPER instrument. 
@@ -2164,18 +2164,18 @@ plot the theoretical 2 sigma errors expected for a $T_{sys} = 500 K$. These
 error bars were calculated using a full simulation of the sensitivity of the
 instrument, with the appropriate weightings due to uneven sampling of LST bins
 as described in \cite{pober_et_al2014}. These errors agree well with the
-sensitivity calculations done in \cite{parsons_et_al2012a}. 
+sensitivity calculations done in P12a.
 %XXX need to get this simulation from Jonnie.
 
 Some key features in the power spectrum require some mention and explanation. We
 first notice that for the first two modes outside of the horizon, there are
 clear detections. These are attributed to residual foreground leakage from
 inside the horizon, which arises from imperfections in the model of the beam and
-bandpass. We also notice that at $k\approx{.35}\ h\ {\rm Mpc}^{-1}$, as in
-\cite{parsons_et_al2014}, that there is a slight excess. This slight excess is
+bandpass. We also notice that at $k\approx{.35}\ h\ {\rm Mpc}^{-1}$, as in P14,
+that there is a slight excess. This slight excess is
 due to some systematic, and most likely foreground emission. The power in this
-bin has gone down by almost an order of magnitude as compared the
-\cite{parsons_et_al2014}, which we attribute to the optimal fringe rate filter.
+bin has gone down by almost an order of magnitude as compared with P14,
+which we attribute to the optimal fringe rate filter.
 Because we are down weighting fringe rate bins that do not correspond to points
 low in the beam, the decreased power at $k\approx{.35}\ h\ {\rm Mpc}^{-1}$ is
 most likely attributed to this fringe rate filter down weighting sources towards
@@ -2348,9 +2348,9 @@ The merits of using omnical were described above and it has the effect of
 bringing redundant baselines into better agreement with one another by
 calibrating out the differences between them. With this picture, we expect
 that for the power spectrum, error bars should become tighter. That is the
-noise in the measurement would be reduced. Comparing P($k$) for data that has
+noise in the measurement would be reduced. Comparing $P(k)$ for data that has
 been Omnical calibrated vs data that has not, but does have the redundant
-calibration that was used in \cite{parsons_et_al2014} applied to it, we see that
+calibration that was used in P14 applied to it, we see that
 the error bars have decreased. This is shown in figure \ref{fig:pspec_nomni}.
 Note that the error bars shrink for the higher $k$-modes, the error bars for the
 2 modes outside of the horizon do not have this systematic reduction because of
@@ -2367,8 +2367,8 @@ sensitivity of our measurement. Briefly, the filter does this by up weighting
 parts of the sky that are illuminated by the primary beam and down weighting
 parts of the sky that contain more noise. This has the effect of de noising the
 data. Figure \ref{fig:pspec_comp} shows the effect of minimal fringe rate
-filtering. The filter applied here is the same as described in
-\cite{parsons_et_al2014}. It evenly weights fringe rates from 0 to $f_{max}$,
+filtering. The filter applied here is the same as described in P14.
+It evenly weights fringe rates from 0 to $f_{max}$,
 where $f_{max}$ is the maximum fringe rate possible for a given baseline and
 frequency, discarding negative fringe rates. As can be seen in figure
 \ref{fig:pspec_comp}, the power spectrum in $\Delta^{2}$ comes down by a factor of
@@ -2382,8 +2382,8 @@ wasnt there before. Foregrounds? probably low level systematics we are hitting
 up against. Going to take some convincing...
 
 The new techniques and improvements to calibration used in this analysis are a
-considerable improvement from the PAPER-32 analysis from
-\cite{parsons_et_al2014}. These new techniques bring into light the new ways in
+considerable improvement from the PAPER-32 analysis from P14.
+These new techniques bring into light the new ways in
 which we can gain sensitivity and accurately describe our instrument. The use of
 Omnical to accurately calibrate the relative complex gains of the antennas has
 shown to be a major improvement to the pipeline. The accuracy and improvement of
@@ -2460,12 +2460,11 @@ is a necessity.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}\label{sec:conclusion}
 We have shown a new upper limit on the 21 cm EoR power spectrum at $z=8.4$,
-showing an almost an order of magnitude of improvement from the previous result
-\cite{parsons_et_al2014}. We found the $2\sigma$ upper limit of 425 $mK^{2}$ by fitting a
+showing an almost an order of magnitude of improvement from the previous result (P14).
+We found the $2\sigma$ upper limit of 425 $mK^{2}$ by fitting a
 flat power spectrum in a $k$ range from $.15<$k$<.5\ h\ {\rm Mpc}^{-1}$ to the
 dimensionless power spectrum, $\Delta^{2}$. Using these limits we have improved
-the limits on the 21 cm mean brightness temperature set in
-\cite{parsons_et_al2014}.
+the limits on the 21 cm mean brightness temperature set in P14.
 
 We also continue to demonstrate the efficacy of using delay filters for
 foreground suppression and the foreground avoidance technique in measuring the power
