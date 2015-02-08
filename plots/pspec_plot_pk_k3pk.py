@@ -3,16 +3,39 @@ import aipy as a, numpy as n, pylab as p
 import capo as C
 import sys, optparse, re, os
 
+o=optparse.OptionParser()
+o.add_option('--flux', action='store_true', 
+                help='Scale data due to flux calibration errors from pictor. Scales by factor in f option.')
+o.add_option('-f', dest='flux_factor', action='store', type='float', default=.736,
+            help='scaling factor for flux')
+o.add_option('--beam', action='store_true',
+                help='scale data by beam square instead of beam')
+o.add_option('--afrf', action='store_true',
+                help='scale data by factor from aggresive fringe rate filtering.')
+o.add_option('-a', dest='afrf_factor', action='store', type='float', default=1.9,
+            help='scaling factor for aggressive fring rate filtering.')
+o.add_option('--cov', action='store_true',
+            help='scale factor for signal loss in covariance removal')
+o.add_option('--med', action='store_true',
+            help='correction factor for using median statistics instead of the mean')
+o.add_option('--show', action='store_true',
+            help='Show the plot')
+opts,args = o.parse_args(sys.argv[1:])
+print args
+
+
 ONLY_POS_K = True
 
 def dual_plot(kpl, pk, err, pkfold=None, errfold=None, umag=16., f0=.164, color='', bins=None):
     z = C.pspec.f2z(f0)
     kpr = C.pspec.dk_du(z) * umag
     k = n.sqrt(kpl**2 + kpr**2)
+    print kpl
     k3 = n.abs(k**3 / (2*n.pi**2))
     print 'k [h Mpc^-1], P(k) [K^2], err (2sigma)'
     for _k,_pk,_err in zip(kpl,pk,err):
         print '%6.3f, %9.5f, %9.5f' % (_k, _pk.real/1e6, _err/1e6)
+        #print '%6.3f, %9.5f, %9.5f' % (_k, _pk.imag/1e6, _err/1e6)
     print '-'*20
     #pk = pk.imag
     pk = pk.real
@@ -20,7 +43,7 @@ def dual_plot(kpl, pk, err, pkfold=None, errfold=None, umag=16., f0=.164, color=
     #pk = n.abs(pk)
     #p.errorbar(kpl, pk, yerr=err, fmt=color+'.-')
     #p.errorbar(kpl, n.abs(pk), yerr=err, fmt='mx')
-    p.errorbar(kpl, pk, yerr=err, fmt=color+'.', capsize=0)
+    p.errorbar(kpl, pk, yerr=err, fmt=color+'.', capsize=0, linewidth=1.2)
     #p.errorbar(kpl, pk.imag, yerr=err, fmt=color+'x')
     p.subplot(122)
     k0 = n.abs(kpl).argmin()
@@ -35,9 +58,10 @@ def dual_plot(kpl, pk, err, pkfold=None, errfold=None, umag=16., f0=.164, color=
     else:
         print pkfold.imag
         pkfold = pkfold.real
+        #pkfold = pkfold.imag
 
     #p.errorbar(k, k3*pk, yerr=k3*err, fmt=color+'.', capsize=0)
-    p.errorbar(k[k0:], k3[k0:]*pkfold, yerr=k3[k0:]*errfold, fmt=color+'.', capsize=0)
+    p.errorbar(k[k0:], k3[k0:]*pkfold, yerr=k3[k0:]*errfold, fmt=color+'.', capsize=0,linewidth=1.2)
     if not bins is None:
         _kpls, _k3pks, _k3errs = [], [], []
         for (dn,up) in bins:
@@ -76,12 +100,15 @@ def dual_plot(kpl, pk, err, pkfold=None, errfold=None, umag=16., f0=.164, color=
         k3err = k3*err
     #p.plot(kpl, k3*pk+k3*err, color+'.-')
     #p.plot(kpl, k3pk+k3err, color+'.-')
-    for _k,_k3pk,_k3err in zip(kpl,k3pk,k3err):
+    for _k,_k3pk,_k3err in zip(kpl,pk,err):
         print '%6.3f, %9.5f (%9.5f +/- %9.5f)' % (_k, _k3pk+_k3err,_k3pk,_k3err)
     print '-'*20
     for _k,_k3pk,_k3err in zip(k[k0:],k3[k0:]*pkfold,k3[k0:]*errfold):
         print '%6.3f, %9.5f (%9.5f +/- %9.5f)' % (_k, _k3pk+_k3err,_k3pk,_k3err)
     print '-'*20
+    print "saving pspec_pk_k3pk.npz"
+    print "output @ freq = ",f0
+    n.savez('pspec_pk_k3pk.npz',kpl=kpl,pk=pk,err=err,k=k[k0:], k3pk=k3[k0:]*pkfold, k3err=k3[k0:]*errfold,freq=f0)
     #pos = n.where(kpl >= 0, 1, 0)
     #neg = n.where(kpl <= 0, 1, 0)
     #posneg = 0.5*(k3pk.compress(pos) + k3pk.compress(neg)[::-1])
@@ -100,15 +127,15 @@ def dual_plot(kpl, pk, err, pkfold=None, errfold=None, umag=16., f0=.164, color=
 #o = optparse.OptionParser()
 #opts,args = o.parse_args(sys.argv[1:])
 #args = ['data/pspec_t1_c110-149.npz']
-args = sys.argv[1:]
+#args = sys.argv[1:]
 
 FG_VS_KPL_NOS = 168.74e6
 FG_VS_KPL = { # K^2
-    '-0.054':   5.37262e+13,
-    '-0.027':   7.15304e+14, 
+#    '-0.054':   5.37262e+13,
+#    '-0.027':   7.15304e+14, 
     ' 0.000':   3.50958e+15, 
-    ' 0.027':   4.12396e+14, 
-    ' 0.054':   2.60795e+13,
+#    ' 0.027':   4.12396e+14, 
+#    ' 0.054':   2.60795e+13,
     #-0.0536455587089:   5.37262e+13,
     #-0.0268227793545:   7.15304e+14, 
     #0.0:                3.50958e+15, 
@@ -147,6 +174,7 @@ for filename in args:
             RS_VS_KPL_FOLD[filename][_kpl] = (_pk, _err)
             dsum_fold[_kpl] = dsum_fold.get(_kpl, 0) + _pk / _err**2
             dwgt_fold[_kpl] = dwgt_fold.get(_kpl, 0) + 1 / _err**2
+#freq = f['freq']
 #RS_VS_KPL = {}
 if True:
     RS_VS_KPL['total'] = {}
@@ -166,6 +194,7 @@ BINS = None
 #kpl = RS_VS_KPL.keys(); kpl.sort()
 #d = [RS_VS_KPL[k] for k in kpl]
 colors = 'kbcm' * 10
+fig=p.figure(figsize=(12,7.2))
 for sep in RS_VS_KPL:
     if not sep == 'total': continue
     dsum, dwgt = {}, {}
@@ -193,7 +222,7 @@ for sep in RS_VS_KPL:
     nos_fold = [1./n.sqrt(dwgt_fold[k]) for k in kpl_fold]
     #d = [RS_VS_KPL[k][0] for k in kpl]
     #nos = [RS_VS_KPL[k][1] for k in kpl]
-    if True: #if 'I' in sep: # Add foregrounds
+    if False: #if 'I' in sep: # Add foregrounds
         for cnt,k in enumerate(kpl):
             k = '%6.3f' % k
             if not FG_VS_KPL.has_key(k): continue
@@ -207,40 +236,44 @@ for sep in RS_VS_KPL:
         
     d,kpl,nos = n.array(d, dtype=n.complex), n.array(kpl), n.array(nos)
     d_fold,kpl_fold,nos_fold = n.array(d_fold, dtype=n.complex), n.array(kpl_fold), n.array(nos_fold)
-    if False:
+    if opts.flux:
         # PSA32 was calibrated to Pictor A @ 160 MHz = 424 Jy
         # To recalibrate to new Pic A, must multiply by square of ratio of fluxes
         # Jacobs et al 2013 says Pic A = 382 @ 150 MHz, index=-0.76, so at 160 MHz, Pic A = 364 Jy
         #f = 0.76 # psa747 calibration of Pic A = 370.6 Jy @ 160 MHz (which includes resolution effects)
-        f = 0.736 # rescale by (364/424)**2 to correct flux scale
+        #f = 0.736 # rescale by (364/424)**2 to correct flux scale
+        f = opts.flux_factor
         print 'Scaling data and noise by %f for recalibration to PicA from Jacobs et al. 2013 (PSA32 only)' % f
         d *= f
         nos *= f
         d_fold *= f
         nos_fold *= f
-    if False:
+    if opts.beam:
         f = 2.35 # Use power**2 beam, which is a 1.69/0.72=2.35 penalty factor
         print 'Scaling data and noise by %f for correcting cosmo scalar to use power^2 beam' % f
         d *= f
         nos *= f
         d_fold *= f
         nos_fold *= f
-    if False: # For aggressive fringe-rate filtering, change beam area
+    if opts.afrf: # For aggressive fringe-rate filtering, change beam area
+        f = opts.afrf_factor
         f = 1.90 # ratio of power**2 beams for filtered * unfiltered beams: 0.306 / 0.162
         print 'Scaling data and noise by %f for beam constriction in aggressive fringe-rate filtering' % f
         d *= f
         nos *= f
         d_fold *= f
         nos_fold *= f
-    if False: # Used to think that if lstbin cut out outlying data, need to renormalize noise but now have shown that bootstrapping still accurately recovers the variation from noise
-        #f = 1.305 # for lst_v003_I
-        f = 1.586 # for lst_v00[256]_I
-        print 'Scaling noise by %f for noise attenuation from rejecting outliers in LST binning' % f
-        nos *= f
-        nos_fold *= f
-    if False: # extra penalty for signal loss in covariance diagonalization
-        f = 1.5
+    if opts.cov: # extra penalty for signal loss in covariance diagonalization
+        #f = 1.2
+        f = 1.15 # this is the conservative number, for the biggest modes outside the of the wedge. Get ~1.03 correction at k=.2
         print 'Scaling data and noise by %f for signal loss in covariance diagonalization' % f
+        d *= f
+        nos *= f
+        d_fold *= f
+        nos_fold *= f
+    if opts.med:
+        f = 1.44
+        print 'Scaling data and noise by %f for using median statistics rather than the mean'
         d *= f
         nos *= f
         d_fold *= f
@@ -254,8 +287,8 @@ for sep in RS_VS_KPL:
         nos = n.std(n.concatenate([d[:8], d[-8:]])) * n.ones_like(d)
     '''
     if d_fold.size == 0: d_fold,nos_fold = None, None
-    p.clf()
-    dual_plot(kpl, d, 2*nos, d_fold, 2*nos_fold, color=colors[0], bins=BINS) # 2-sigma error bars
+    #dual_plot(kpl, d, 2*nos, d_fold, 2*nos_fold, color=colors[0], bins=BINS)#,f0=freq) # 2-sigma error bars
+    dual_plot(kpl, d, 2*nos, d_fold, 2*nos_fold, color=colors[0], bins=BINS,f0=.151) # 2-sigma error bars
     #dual_plot(kpl, d, nos, color=colors[0], bins=BINS) # 2-sigma error bars
     colors = colors[1:] + colors[0]
 
@@ -275,43 +308,128 @@ for filename in glob.glob('lidz_mcquinn_k3pk/*7.3*dat'):
     p.subplot(122)
     p.plot(ks, k3pk * mean_temp(z)**2, 'k-')
     
+tau_h = 100 + 15. #in ns
+k_h = C.pspec.dk_deta(C.pspec.f2z(.151)) * tau_h
 p.subplot(121)
-p.gca().set_yscale('log', nonposy='clip')
-p.xlabel(r'$k_\parallel\ [h\ {\rm Mpc}^{-1}]$')
-p.ylabel(r'$P(k)\ [{\rm mK}^2\ (h^{-1}\ {\rm Mpc})^3]$')
-p.ylim(1e5,3e16)
+p.vlines(k_h, -1e7, 1e10, linestyles='--', linewidth=1.5)
+p.vlines(-k_h, -1e7, 1e10, linestyles='--', linewidth=1.5)
+#p.gca().set_yscale('log', nonposy='clip')
+p.xlabel(r'$k_\parallel\ [h\ {\rm Mpc}^{-1}]$', fontsize='large')
+p.ylabel(r'$P(k)[\ {\rm mK}^2\ (h^{-1}\ {\rm Mpc})^3]$',fontsize='large')
+#p.ylim(-1e7,1e8)
+p.ylim(-.6e7,1.75e7)
 p.grid()
 
 
 p.subplot(122)
-if ONLY_POS_K: p.plot([.5], [248**2], 'mv', label='GMRT2013')
-else: p.plot([-.5, .5], [248**2, 248**2], 'mv', label='GMRT2013')
+#if ONLY_POS_K: p.plot([.5], [248**2], 'mv', label='GMRT2013')
+#else: p.plot([-.5, .5], [248**2, 248**2], 'mv', label='GMRT2013')
+p.vlines(k_h, -1e7, 1e10, linestyles='--', linewidth=1.5)
+#theoretical_ks = n.linspace(.058,.5, 100)
+#theor_errs = 1441090 * n.array(theoretical_ks)**3  / (2*n.pi**2)
+#p.plot(theoretical_ks, theor_errs, 'c--')
 
-
+theo_noise = noise_level()
+p.plot(ks, theo_noise, 'c--')
 p.gca().set_yscale('log', nonposy='clip')
-p.xlabel(r'$k\ [h\ {\rm Mpc}^{-1}]$')
-p.ylabel(r'$k^3/2\pi^2\ P(k)\ [{\rm mK}^2]$')
+p.xlabel(r'$k\ [h\ {\rm Mpc}^{-1}]$', fontsize='large')
+p.ylabel(r'$k^3/2\pi^2\ P(k)\ [{\rm mK}^2]$', fontsize='large')
 p.ylim(1e0,1e9)
 p.xlim(0, 0.6)
 p.grid()
+p.savefig('pspec.png')
+
+#p.figure(2)
+#dual_plot(kpl, d, 2*nos, d_fold, 2*nos_fold, color=colors[0], bins=BINS,f0=freq) # 2-sigma error bars
+#p.subplot(121)
+#p.xlabel(r'$k_\parallel\ [h\ {\rm Mpc}^{-1}]$')
+#p.ylabel(r'$P(k)\ [{\rm mK}^2\ (h^{-1}\ {\rm Mpc})^3]$')
+#p.ylim(-1e2,1e5)
+#p.grid()
+#p.subplot(122)
+#p.xlabel(r'$k\ [h\ {\rm Mpc}^{-1}]$')
+#p.ylabel(r'$k^3/2\pi^2\ P(k)\ [{\rm mK}^2]$')
+#p.ylim(-1e3,1e3)
+#p.xlim(0, 0.6)
+#p.grid()
 
 f = n.load(args[0])
-def posterior(kpl, pk, err):
-    ind = n.logical_and(kpl>.2, kpl<.5)
-    print kpl,pk.real,err
+def posterior(kpl, pk, err, pkfold=None, errfold=None):
+    k0 = n.abs(kpl).argmin()
+    kpl = kpl[k0:]
+    if pkfold is None:
+        print 'Folding for posterior'
+        pkfold = pk[k0:].copy()
+        errfold = err[k0:].copy()
+        pkpos,errpos = pk[k0+1:].copy(), err[k0+1:].copy()
+        pkneg,errneg = pk[k0-1:0:-1].copy(), err[k0-1:0:-1].copy()
+        pkfold[1:] = (pkpos/errpos**2 + pkneg/errneg**2) / (1./errpos**2 + 1./errneg**2)
+        errfold[1:] = n.sqrt(1./(1./errpos**2 + 1./errneg**2))
+
+    #ind = n.logical_and(kpl>.2, kpl<.5)
+    ind = n.logical_and(kpl>.15, kpl<.5)
+    #ind = n.logical_and(kpl>.12, kpl<.5)
+    #print kpl,pk.real,err
     kpl = kpl[ind]
-    pk= kpl**3 * pk[ind]/(2*n.pi**2)
-    err = kpl**3 * err[ind]/(2*n.pi**2)
-    s = n.logspace(3,4,100)
+    pk= kpl**3 * pkfold[ind]/(2*n.pi**2)
+    err = kpl**3 * errfold[ind]/(2*n.pi**2)
+    s = n.logspace(1,3.5,100)
     data = []
     for ss in s:
         data.append(n.exp(-.5*n.sum((pk.real - ss)**2 / err**2)))
-        print data[-1]
+    #    print data[-1]
     data = n.array(data)
-    print data
-    print s
-    data/=n.sum(data)
-    p.figure(5)        
+    #print data
+    #print s
+    #data/=n.sum(data)
+    data /= n.max(data)
+    p.figure(5)
     p.plot(s, data)
+    p.plot(s, n.exp(-.5)*n.ones_like(s))
+    p.plot(s, n.exp(-.5*2**2)*n.ones_like(s))
     p.show()
-posterior(f['kpl'], f['pk'], f['err'])
+
+#posterior(f['kpl'], f['pk'], f['err'], f['pk_fold'], f['err_fold'])
+posterior(kpl, d, nos, d_fold, nos_fold)
+
+
+def noise_level():
+    tsys = 500e3 #mK
+    inttime = 1886. #seconds
+    nbls=51
+    ndays = 120 #effectively this many days. days of operation = 135
+    nmodes = (8.5*60*60/inttime)**.5
+    pol = 2
+    real = 2 #??? what is this again?
+    freq = .15117 #GHz
+    z = capo.pspec.f2z(freq)
+    X2Y = capo.pspec.X2Y(z)/1e9 #h^-3 Mpc^3 / str/ Hz
+    sdf = .1/203
+    freqs = n.linspace(.1,.2,203)[95:115]
+    B = sdf*freqs.size
+    bm = n.polyval(capo.pspec.DEFAULT_BEAM_POLY, freq) * 2.35 # correction for beam^2
+    scalar = X2Y * bm * B
+
+    fr_correct = 1.9
+
+
+    print 'scalar', scalar
+    print 'BM', bm
+    print 'tsys', tsys
+    print 
+
+    #error bars minimum width. Consider them flat for P(k)
+    pk = scalar*bm*fr_correct*( (tsys)**2 / (inttime*pol*real*nbls*ndays*nmodes) )
+
+    #
+    etas = n.fft.fftshift(capo.pspec.f2eta(freqs))
+    kpl = etas * capo.pspec.dk_deta(z)
+    kpl_pos = kpl[kpl>=0]
+    print kpl_pos
+
+    d2 = pk*kpl_pos**3 / (2*n.pi**2)
+    return d2
+
+
+if opts.show:
+    p.show()

@@ -89,8 +89,8 @@ Precision Array for Probing the Epoch of Reionization (PAPER) in South Africa.  
 work extends the work presented in \citet{parsons_et_al2014} with more collecting area,
 improved redundancy-based calibration, optimal fringe-rate filtering, and improved
 power-spectral analysis using optimal quadratic estimators. The result is a new
-$2\sigma$ upper limit on $\Delta^2(k)$ of $(XXX {\rm mK})^2$ in the range
-$0.1<k<0.5\ h\ {\rm Mpc}^{-1}$ at $z=XXX$.  This represents a three-fold [XXX] improvement
+$2\sigma$ upper limit on $\Delta^2(k)$ of ($20.6{\rm mK})^2$ in the range
+$0.1<k<0.5\ h\ {\rm Mpc}^{-1}$ at $z=8.4$.  This represents a four-fold improvement
 over the previous best upper limit.  As we discuss in more depth in the companion
 to this paper \citet{pober_et_al2015}, this upper limit supports and extends previous
 evidence for significant heating in the intergalactic medium prior to reionization.  Under the assumption
@@ -536,19 +536,19 @@ values.}
 
 In addition to solving for gain solutions, Omnical also characterizes the
 quality of the calibration by calculating the $\chi^{2}$ for every integration.
-Figure \ref{fig:chi2} shows the $\chi^{2}$ squared waterfall for a full
-nights worth of calibrations. From \cite{zheng_et_al2014}, the
-$\chi^{2}/\text{DoF}$, where $\text{DoF} = 2N_{baselines} - 2(N_{antennas} +
-N_{\text{unique basleines}} $ is the number of degrees of freedom. For a good
-fit, the $\chi^{2}/DoF$ is drawn from a mean 1 distribution with variance
+Figure \ref{fig:chi2} shows the $\chi^{2}$ squared waterfall for a full nights
+worth of calibrations. From \cite{zheng_et_al2014}, the $\chi^{2}/\text{DoF}$,
+where $\text{DoF} = 2N_{baselines} - 2(N_{antennas} + N_{\text{unique
+basleines}} $ is the number of degrees of freedom. For a good fit, the
+$\chi^{2}/DoF$ is drawn from a mean 1 distribution with variance
 $\frac{2}{\text{DoF}}$. The distribtuion of the $\xi^{2}$ in figure
 \ref{fig:chi2} has a mean of 2, meaning that the fit was not the best to what
-our noise model is.
-The noise model used was obtained from the variance statistic calculated during
-the binning of days in local sidereal time, which occurs after the
-application of crosstalk removal, combining X and Y polarization, and the
-wideband delay filter. Hence, the noise model may not be well suited for the
-$\chi^{2}$, and is a likely reason that the distribution has a mean of 2.
+our noise model is.  The noise model used was obtained from the variance
+statistic calculated during the binning of days in local sidereal time, which
+occurs after the application of crosstalk removal, combining X and Y
+polarization, and the wideband delay filter. Hence, the noise model may not be
+well suited for the $\chi^{2}$, and is a likely reason that the distribution
+has a mean of 2.
 %XXX This may change and we may get a chi-squared of around one.% 
 
 The calibration parameters solved for in Omnical also have a time independent
@@ -651,7 +651,7 @@ the calibrated Pictor A spectrum and the model spectrum from
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{plots/gianni_pic_image.pdf}
+\includegraphics[width=\columnwidth]{plots/picimg.png}
 \caption{
 A field image phased to Pictor A and including Fornax A using the maximally
 redundant array configuration data set used in the analaysis presented in this
@@ -885,22 +885,23 @@ signal loss descreases for higher $k$'s.
 
 
 Before implementing our foreground removal techniques, we combine the two
-polarizations for an estimate of stokes I as per \citet{moore_et_al2013}.
-[ XXX provide the relevant equations and caveats here, careful with "coarse" --- don't imply sloppy]
-Namely, the Stokes I can be estimated as 
+linear polarizations for an estimate of stokes I as per \citet{moore_et_al2013}.
+Namely, Stokes I can be estimated as 
 \begin{equation}\label{eqn:stokesi}
-    V_{\rm I} = \frac12(V_{\rm XX}+V_{\rm YY}).
+    V_{\rm I} = \frac12(V_{\rm XX}+V_{\rm YY}),
 \end{equation}
-There are some important caveats to the estimate of stokes I provided by
-equation \ref{eqn:stokesi}. One important caveat is that it 
-neglects the beam asymmetry  between the two linear polarization states. This
-mismatch is the cause polarization leakage from Stokes Q into Stokes I, thus
-contaminating the our measurement of the power spectrum. This effect for PAPER,
-as shown in \citet{moore_et_al2013}, leaks 4\% of Q in to I.  We offer no
-correction for this effect, but in turn put some limits on polarization leakage
-discussed later. 
+where $V_{\rm XX}$ and $V_{\rm YY}$ are the visibilities of the two linear
+polariztionats measured by the interferometer. There are some important caveats
+to the estimate of stokes I provided by equation \ref{eqn:stokesi}. One
+important caveat is that it neglects the beam asymmetry  between the two linear
+polarization states. This mismatch is the cause polarization leakage from Stokes
+Q into Stokes I, thus contaminating the our measurement of the power spectrum.
+This effect for PAPER, as shown in \citet{moore_et_al2013}, leaks 4\% of Q in to
+I.  We offer no correction for this effect, but in turn put some limits on
+polarization leakage discussed later. 
 
-Amongst the cornucopia of foreground removal techniques (cite papers) at our
+Amongst the cornucopia of foreground removal techniques (cite papers see adrians
+formalism paper) at our
 disposal, we opt for the per-baseline approach of delay filtering described in
 \cite{parsons_et_al2012b}. This technique is well suited for PAPER because it
 doesn't rely on making images and localizing sources for subtraction, which 
@@ -1736,7 +1737,7 @@ statistic relative to the mean.}
 \end{figure*}
 
 
-\subsection{The Covariance Matrix}
+\subsection{The Covariance Matrix and Signal Loss}
 %Covariance matrix nuances.
 %   -describe covariance matrix and data vectors.
 %   -How we get the covariance matrix. 
@@ -1747,40 +1748,36 @@ statistic relative to the mean.}
 %   -inverse covariance is tricky because of this. 
 %   -happy coincidence?
 %
-%XXX need to check lst range. 
 
 We now discuss the issues of empirically estimating the covariance matrix from
-the data. For a single baseline, the data vector $\x$, consists of 10 Mhz
-bandwidth centered at 151.72 MHz, equating to 20 frequency channels.
-All time samples are also kept, ranging from 0 to 10 LST hours. Again, we
-estimate the covariance in the usual way, $\C = \expval{\x\x^{\dagger}}$, taking
-the ensemble average over time. The covariance matrix for this baseline is a
-$N_{ch}\times N_{ch}$ matrix consisting of the covariances of all channels with
-each other. This covariance matrix is invertible only if it nonsingular, which
-requires it to be a rank $N_{ch}$ matrix. This occurs only if there are $N_{ch}$
-independent modes. 
+the data. The covariance matrix is defined as the ensemble average of the outer
+product of vector with itself. In our case, 
+\begin{equation}
+    \C = \expval{\x\x^{\dagger}}, 
+\end{equation}
+where $\x$ is the data vector used in the analysis. Specficially, this data
+vector consists of visibilities for a single baseline, with 10 MHz of bandwidth
+centered at 151.72 MHz, equating to 20 frequency channels, for all integrations.
+Since we do not have an infinite number of universes to take the ensemble
+average required for the covariance matrix, we instead average  over the time
+axis to derive the covariances between the 20 frequency channels. In our
+analaysis the time average runs from 0 to 8:30 LST hours. Our analysis method
+for calculating the power spectrum requires the inverse of the covariance
+matrix to weight the data. Therefore, the empirically derived covariance matrix
+here, must be invertible, which occurs only if $\C$ is a rank-N matrix, where N
+is the number of rows or columns. In our particular case, N=20.
 
-As noted in section \ref{sec:frf} the optimal fringe rate filter corrsponds to
-averageing time samples for 31 minutes. Over the 10 hour LST range used in this
-analysis, this corresponds to approximately 20 statistically independent modes
-on the sky. This is a fundamental limit of the amount of information we have in
-our measurements. Coincidentally, the covariance matrix for a given baseline is
-an $N_{ch} \times N_{ch}$ matrix, where $N_{ch}=20$.  Therefore, the covariance
-matrices for every baseline are infact invertible because they are full rank 
-and contain 20 statistically independent measurements of the sky. The covariance
-matrix is thus invertible and can be applied to the data vectors, $\x$. 
-
-%
-%   -Potential for signal loss.
-%       --In a traditional OQE method, the process is lossless by construction.
-%         Because we are tweaking this method, and the fact that we have non
-%         gaussian systematics in our data, there is a potential for signal
-%         loss. 
-Even though we have encountered a fortuitous event in having full rank
-covariance matrices, we are still estimating our covariance matrix using a
-limited sample size. This limitation leads to an imperfect characterization of
-the covariances between modes and ultimately leads to signal loss in this type
-of analysis. 
+There are a few fundamental problems that occur when estimating the covariance
+matrix in this way. As noted in section \ref{sec:frf} the optimal fringe rate
+filter corrsponds to averageing time samples for 31 minutes. Over the LST range
+used in this analysis, this corresponds to on the order of 20 statistically
+independent modes in our data after fringe rate filtering. This is a fundamental
+limit of the amount of information we have in our measurements. Coincidentally,
+the covariance matrix for a given baseline is an $N_{ch} \times N_{ch}$ matrix,
+where $N_{ch}=20$.  Therefore, the covariance matrices for every baseline are
+infact invertible, in most cases,  because they are full rank and contain 20
+statistically independent measurements of the sky. The covariance matrix is thus
+invertible and can be used to inverse covariance weight the data.
 
 The optimal quadratic estimator has an application of the inverse covariance
 matrix to data vector $\x$. Applying an inverse covariance matrix to the data it
@@ -1799,6 +1796,19 @@ column), we can see that weighing by the inverse covariance upweights modes in
 this baseline as compared to the other baselines, which have a slightly higher
 noise in the original data vector. This is even paralleled in the foreground
 contained data.
+%
+%   -Potential for signal loss.
+%       --In a traditional OQE method, the process is lossless by construction.
+%         Because we are tweaking this method, and the fact that we have non
+%         gaussian systematics in our data, there is a potential for signal
+%         loss. 
+
+
+Another problem that occurs from empirically estimating covariances is that it
+leads to a imprecise covaraince matrix. Hence, when used in conjuction with the
+data, it doesn't perfectly remove covarainces between channels and baselines and
+has the ability to remove signal from the data. XXX [Need to be more clear on
+this point ]
 
 
 %   -Simulations
@@ -1815,68 +1825,59 @@ contained data.
 %         However, if the signal was bright enough, we would be able to see it.
 %         Since we don't see signal in the actual data, we can say that we have
 %         not detected the EOR signal yet.
-\subsubsection{Signal Loss}
 
-\begin{figure}[!t]
-\centering
-\includegraphics[width=\columnwidth]{plots/sigloss.png}
-\caption{
-Recovered power spectrum signal as a function of injected signal amplitude.  Red lines
-indicate the measured amplitude of power spectrum modes in Figure \ref{fig:XXX}.  Because
-the recovered signal amplitude is an invertible function of the injected signal amplitude,
-it is possible to invert the effects of signal loss in the measured power spectrum values
-to infer the true signal amplitude on the sky. [XXX add some more here, cite in text]
-}\label{fig:sigloss}
-\end{figure}
+In theory, optimal quadratic estimators for the power spectrum described above are a
+lossless operation. This is only true if we have all the information
+needed to apply this method. As discussed, one of the major unknowns we have in our
+estimate, is the covariance matrix that describes the covariances in the data
+due to the instrument and sky signal. As argued above, not knowing the true
+covariances, leads to signal loss in the final estimate of the power spectrum.
+Here, we describe estimate the signal loss associated with the empirical
+estimates of the covariance matrix.
 
-The optimal quadratic estimators for the power spectrum described above are a
-lossless operation, in theory. This is only true if we have all the information
-needed to apply this method. However, one of the major unknowns we have in our
-estimate, is the covariance. We are empirically estimating our covariance matrix
-from the data and therefore are potentially going to have signal loss in the
-final estimate of our power spectrum. Here we quantify the amount of signal loss
-associated with the empirical estimates of the covariance matrix and claim that
-it is a monotonic function of input signal level.
+Jumping ahead, figure \ref{fig:signal_loss} shows the signal loss as a function
+of input signal level to the power spectrum pipeline. In order to characterize
+the signal loss we simulate an EoR like signal and inject it on top of the data,
+measuring the output signal power spectrum and comparing it to the input signal
+power spectrum for various signal amplitudes. The simulated EoR data used were
+generated as a gaussian random signal with $\mu=0$ and $\sigma=1$. For each
+integration and frequency channel, we draw a random sample from this
+distribution and assign it to every baseline used, drawing a new sample for
+every integration only. Therefore, every baseline agrees on the signal for each
+integration and frequency channel. 
 
-In order to understand the degree of signal loss due to our empirical estimates
-of the covariances, we simulate the injection of an EoR model and measure the
-signal loss associated with running the full covariance analysis. These
-simulations consist of injecting a model eor signal on top of the data and
-running through our power spectrum estimator. In order to quantify this, vary
-the input model EoR signal level that gets added onto the data and run through
-the optimal quadratic estimator to measure the signal loss. We compare this to
-the same power spectrum pipeline, except that we forgoe the inverse covariance
-weighting for no weighting. This is our fiducial power spectrum, which contains
-no signal loss. We Monte Carlo to obtain an overall conservative correction
-factor for the final power spectrum. 
+We add these injected EoR visibilities to the data and propogate it through the
+power spectrum pipeline for varying amplitude of simulated EoR signal. We
+measure the output power spectrum of the signal and
+compare it to the input signal power spectrum. This gives us the signal loss
+due to imprecisely knowing the covariance from the empirical estimation. This
+signal loss is monte carlo'd using a new instantiation of the EoR noise and
+averaged over realizations. The final result is shown in figure
+\ref{fig:signal_loss}
 
-Before presenting the results we first discuss our model EoR visibilities. For
-each measurment set, we construct a random gaussian signal that corresponds 
-
-By using these simulations, we vary the amplitude of the eor signal input into
-the oqe by multiplying by a scalar to each simulated visibility. Figure
-\ref{fig:simulate} shows that the signal loss is monatonic with increasing
-input signal amplitude. With this we argue that if there was an eor signal at
-any substatial level, a detection would have been made. Because our power
-spectra are still consistent with zero, we conclude that a positive detection of
-EoR has not been made. 
-
-
+\begin{table}[htdp]
+\caption{TABULATED SIGNAL LOSS THROUGH VARIOUS ANALYSES.}
+\begin{center}
+\begin{tabular}{|c|c|c|}\hline
+Analysis Step & Typical Loss & Maximum Signal Loss \\ \hline \hline
+Flux Scale Calibration &  $\ll 2 \times 10^{-7}$ \% & 3\% \\\hline
+Delay Filtering & 4.8\% & .0015\% \\\hline
+Quadratic Estimator & XXX & 100\% \\\hline
+\end{tabular}
+\end{center}
+\label{tbl:sigloss}
+\end{table}%
 
 XXX Need to claim that we ran an end to end test.
 
-XXX need to claim that because the signal is so low, there is no signal loss.
-[ARP: this is not a correct statement.  There is signal loss.  We must quantify it.]
-
 %XXX Carina's Text of the eor model goes here.
-The model eor signal used was a simulation of a flat power spectrum, in P($k$),
-from $k$-modes ranging from .1-10 $\text{hMpc}^{-1}$. From this an angular power
-spectrum is computed (\cite{datta_et_al2007, lewis_challinor_2007}), ensuring
-correlation in frequency/redshift for the power spectrum maps. Visibilities are
-then simulated for this power spectrum map by explicitly integrating fringes on
-the sky every 42.8 seconds for an East-West baselin of 30 m.
+%The model eor signal used was a simulation of a flat power spectrum, in P($k$),
+%from $k$-modes ranging from .1-10 $\text{hMpc}^{-1}$. From this an angular power
+%spectrum is computed (\cite{datta_et_al2007, lewis_challinor_2007}), ensuring
+%correlation in frequency/redshift for the power spectrum maps. Visibilities are
+%then simulated for this power spectrum map by explicitly integrating fringes on
+%the sky every 42.8 seconds for an East-West baselin of 30 m.
 
-[XXX figure about signal loss vs. signal level]
 %In order to effectively characterize signal loss in our analysis pipeline, we
 %simulate visibilities that accurately capture the instrumental effects of PAPER
 %for the frequency bins used in the analysis. The signal injected into the
@@ -1910,55 +1911,92 @@ the sky every 42.8 seconds for an East-West baselin of 30 m.
 %       --We use 100 bootstraps to derive our error bars, setting a $2\sigma$
 %         bound on the errors.
 
-\subsubsection{Bootstrapped Errors}
+\subsection{Bootstrapped Errors}
 %XXX QUESTION FOR BOOTSTRAPPING, Use the input data to the quad est vs output
 %data? Is this why the error bars were so wacked out before?
-We calculate a power spectrum, averaged over baseline cross multiples, for every
-integration. 
-We measure the error in our final power spectrum estimate by bootstrapping over
-baseline samples from the output of the quadratic estimator. That is, we are
-bootstrapping over power spectra averaged over baselines per LST sample. In order
-to tease out the variations between baselines, each bootstrap is a random pull
-of the baselines involvled in the analysis, choosing $N-5$ out of $N$
-baselines. For different baseline types, $N$ ranges from 46 (up/under one and
-over one baselines) to 51 (East-West). 
+When estimating our power spectra via optimal quadratic estimators, we generate
+multiple samples of the power spectrum in order to apply the bootstrap method to
+calculate our error bars. When applying this method of estimating the
+statistical variance in our data, we require that there needs to be a random
+component in our estimates of power spectra.
 
-In order to avoid incurring a noise bias, a few restrictions are needed to the
-bootstrapping and power spectrum estimation. First, we break the baselines into
-five groups and use the two "even" and "odd" LST averaged data sets discussed
-above. We use only baselines in the quadratic estimator that are not the same
-as well as data that fall in the different averaged data sets.
+We use the baseline axis as our random draw axis. For each bootstrap we
+calculate the power spectrum of a random draw of $N_{bls}-5$, giving us more
+than $2\times10^6$ possible combinations of baselines for the perfectly east-west 30 m
+baselines used in the analysis and over $1\times10^{6}$ combinations of the two
+redunant groups of baseline corresponding to 30 m east west components and 5 m
+(a row spaceing) in the north and south direction. There is enough variation in
+the data to tease out the underlying statistics of the distribution. 
+
+There are, however, a few issues that must be dealt with in order to not incur a
+noise bias that will. We want to effectivley construct an unbiased estimator.
+There are two ways that our estimate of the power spectrum can incur a noise
+bias as discussed earlier. One way is to have an auto cross multiplication in
+the quadratic estimator. We avoid this by only using cross baseline products
+when estimating the power spectrum as discussed above. And furthermore, we use
+the cross products in both time and baselines, as described above.
+
+In our analysis we use 100 bootstraps, to calculate the error bars as a function
+of $k$-mode in our final power spectrum. In the calculation of the error bars,
+we randomly sample 400 samples from the 100 bootstraps to measure the $1
+\text{and} 2 \sigma$ errors. One key point here is that we use the median
+statistic in order to measure the variance in our power spectrum, rather than
+the mean statistic. This is due to the fact that there are outliers that
+drastically skew the final error bars. 
+
+Figure \ref{fig:pspec_variance} shows that the mean and variance statistic used
+in the estimate of the band powers have similar properties. Namely, some modes
+integrate down and bottom out on a signal with the addition of more samples.
+However, there are a few modes that show a bottoming out, but take a dive when
+more modes are added, owning to some peculiar noise properties in the
+measurements. Generally, the two statistics have similar properties. Assuming
+gaussian statistics, there is a correction factor that needs to be applied to
+the measured power spectrum. This is owning to the fact that the mean and median
+are not the same statistic. The correction factor is $\log{2}$ for using the
+median statistic over the mean, for a gaussian distributed signal. 
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{plots/sigloss.png}
+\caption{
+Recovered power spectrum signal as a function of injected signal amplitude.  Red lines
+indicate the measured amplitude of power spectrum modes in Figure \ref{fig:XXX}.  Because
+the recovered signal amplitude is an invertible function of the injected signal amplitude,
+it is possible to invert the effects of signal loss in the measured power spectrum values
+to infer the true signal amplitude on the sky. [XXX add some more here]
+}\label{fig:signal_loss}
+\end{figure}
 
 
-\subsection{Integrating $k$-modes}
-XXX This shows the efficacy of using the median over the mean.
-The power spectrum shown in figure \ref{fig:final_pspec} is an average of
-multiple baselines together. To show how the modes in each power spectrum
-integrate together and to what degree they integrate down as noise are not, an
-allan variance test, is shown in Figure \ref{fig:pspec_variance}. Color
-represents a different $k$ mode measured in $\Delta^{2}$ along with the
-different bootstraps. Here we are showing the effect of integrating down on
-different $k$ modes as we include a wider range in time, and hence more
-independent modes. From the discussion on optimal fringe rate filtering we know
-we have 2 independent modes on the sky per LST hour. Hence, integrating modes
-upto a thousand modes, where not all are independent we expect to hit up against
-a floor, which we see. These curves are plotted for $P(k)$ and therefore, the
-colors represent both positive and negative $k$'s with green curves haveing the
-highest absolute value for $k$ and blue curves are modes closer to the horizon.
-
-
-We see a slight difference in the mean and median statistic when estimating the
-total value of modes. Modes tend to level off for both the statistcs and the
-amount of independent modes is capped when modes flatten out at roughly ~60
-samples. We find that this is close to the number of independent modes on the
-sky and baselines. In addtion modes close to the horizon (blue) tend to flatten
-out with the mean statictic, however there is an increased spread for the median
-statistic. 
-
-In addtion there is a sharp decline in power when integrating ~1024 modes for
-certain modes when dealing with the mean and median statistic. These modes show
-unexpected behaviour due to the sharp slope of the fall in power. Further
-investigation of these modes is to be conducted.
+%\subsubsection{Integrating $k$-modes}
+%XXX This shows the efficacy of using the median over the mean.
+%The power spectrum shown in figure \ref{fig:final_pspec} is an average of
+%multiple baselines together. To show how the modes in each power spectrum
+%integrate together and to what degree they integrate down as noise are not, an
+%allan variance test, is shown in Figure \ref{fig:pspec_variance}. Color
+%represents a different $k$ mode measured in $\Delta^{2}$ along with the
+%different bootstraps. Here we are showing the effect of integrating down on
+%different $k$ modes as we include a wider range in time, and hence more
+%independent modes. From the discussion on optimal fringe rate filtering we know
+%we have 2 independent modes on the sky per LST hour. Hence, integrating modes
+%upto a thousand modes, where not all are independent we expect to hit up against
+%a floor, which we see. These curves are plotted for $P(k)$ and therefore, the
+%colors represent both positive and negative $k$'s with green curves haveing the
+%highest absolute value for $k$ and blue curves are modes closer to the horizon.
+%
+%
+%We see a slight difference in the mean and median statistic when estimating the
+%total value of modes. Modes tend to level off for both the statistcs and the
+%amount of independent modes is capped when modes flatten out at roughly ~60
+%samples. We find that this is close to the number of independent modes on the
+%sky and baselines. In addtion modes close to the horizon (blue) tend to flatten
+%out with the mean statictic, however there is an increased spread for the median
+%statistic. 
+%
+%In addtion there is a sharp decline in power when integrating ~1024 modes for
+%certain modes when dealing with the mean and median statistic. These modes show
+%unexpected behaviour due to the sharp slope of the fall in power. Further
+%investigation of these modes is to be conducted.
 %
 
 
@@ -2029,7 +2067,8 @@ time signal. The power spectrum folows a noise like power spectrum throughout
 with a slight uptic at the temporal frequency corresponding to 2 days. This is
 due to the fact that the integration time does not fully divide out a sidereal
 day, but has a remiainder of $\frac{1}{2}$, piling up power on the everyother day
-time scale. (XXX need to be more clear here, I think)
+time scale. (XXX need to be more clear here, I think. a.const.sidereal\_day/42.9
+= 2008.487, a.const.sidereal\_day/42.94 = 2006.616.)
 }
 \label{fig:stability}
 \end{figure}
@@ -2110,11 +2149,11 @@ the horizon which we argue are foreground contaminated. Figure
 \ref{fig:final_posterior} shows the posterior distribution of the power spectrum
 by fitting a flat curve in $\Delta^{2}$ to the power spectrum assuming
 Gaussian error bars. From this distribution, we determine the 2 sigma upper
-limit to be XXX $mk^{2}$, which is consistent with zero.
+limit to be $(20.6 \rm{mk}^{2}$, which is consistent with zero.
 
 We also include the power spectrum before foreground filtering for comparison
 and to show the effect of the delay filter within the horizon. In addition we
-plot the theoretical 2 sigma errors expected for a $T_{sys} = 350 K$. These
+plot the theoretical 2 sigma errors expected for a $T_{sys} = 500 K$. These
 error bars were calculated using a full simulation of the sensitivity of the
 instrument, with the appropriate weightings due to uneven sampling of LST bins
 as described in \cite{pober_et_al2014}. These errors agree well with the
@@ -2178,7 +2217,6 @@ For much of what we are considering, $T_{s} \gg T_{\gamma}$, and
 hence \ref{eqn:final_tb} becomes...
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   -Tsys, and Tsys vs. time ?
 
@@ -2228,7 +2266,7 @@ hence \ref{eqn:final_tb} becomes...
 %    Jonnies result.
 %   -the wedge - maybe?
 \begin{figure*}[h!]\centering
-\includegraphics[width=1.5\columnwidth,height=1\columnwidth]{plots/pk_k3pk.png}
+\includegraphics[width=2\columnwidth,height=1.2\columnwidth]{plots/pk_k3pk.png}
 \caption{
 Power spectrum at $z=8.4$ resulting from a 134 day PAPER observation
 with 64 dual polarization antennas layed out in a maximally redundant grid. The
@@ -2240,7 +2278,8 @@ which has the positive and negative $k_{\parallel}$'s averaged together in
 P($k$). XXX (To be done) The solid cyan curve is the power spectrum of the
 foreground contained data. The dashed cyan curve in $\Delta^{2}$ correspond the
 the theoretical 2 sigma error bars for a noise power spectrum with system
-temperature 550 K.
+temperature 550 K. XXX Using 100 bootstraps. Correction factors are fringe rate
+filter (1.9), signal loss (1.15), and median statistic (1.4)
 }
 \label{fig:final_pspec}
 \end{figure*}
@@ -2249,14 +2288,13 @@ temperature 550 K.
 \includegraphics[width=\columnwidth]{plots/flat_k3pk_posterior.png}
 \caption{The posteriror distributiom assuming a flat, gaussian power spectrum in
 $\Delta^{2}$ (blue). The green and red horizontal lines correspond to the 1 and
-2 $\sigma$ upper limits, respectrively, on the power spectrum.}
+2 $\sigma$ upper limits, respectrively, on the power spectrum. XXXfix sigma
+lines to be vertical. Make it look better. Labels.}
 \label{fig:final_posterioir}
 \end{figure}
 
 
 \subsection{Comparison with PSA32}
-[XXX need to rerun power spectrum flux scale fix with the non omnical applied
-data and non optimal fringe rate filter]
 %   -We now compare and contrast our result with those without some of the key
 %   components of our analysis pipeline.
 %
@@ -2281,7 +2319,7 @@ data and non optimal fringe rate filter]
 %
 
 \begin{figure*}[t!]\centering
-\includegraphics[width=1.5\columnwidth]{plots/pspec_comparison.png}
+\includegraphics[width=2\columnwidth]{plots/pspec_comparison.png}
 \caption{The comparison of power spectra with and without various analysis in
 the pipeline applied to it. The blue power spectrum has the full pipeline
 applied to it and is identical to \ref{fig:final_pspec}. The red power spectrum
@@ -2416,7 +2454,7 @@ is a necessity.
 \section{Conclusions}\label{sec:conclusion}
 We have shown a new upper limit on the 21 cm EoR power spectrum at $z=8.4$,
 showing an almost an order of magnitude of improvement from the previous result
-\cite{parsons_et_al2014}. We found the $2\sigma$ upper limit of XXX by fitting a
+\cite{parsons_et_al2014}. We found the $2\sigma$ upper limit of 425 $mK^{2}$ by fitting a
 flat power spectrum in a $k$ range from $.15<$k$<.5\ h\ {\rm Mpc}^{-1}$ to the
 dimensionless power spectrum, $\Delta^{2}$. Using these limits we have improved
 the limits on the 21 cm mean brightness temperature set in

@@ -1,0 +1,5 @@
+-Normal pspec pipeline using median statistics on 
+nonomnicaled data. 
+-Still optimally fringe rate filtering.
+-data in /Users/sherlock/projects/paper/analysis/psa64/lstbin_{even,odd}_nomni/*
+
