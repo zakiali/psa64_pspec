@@ -1832,6 +1832,7 @@ this point ]
 %         However, if the signal was bright enough, we would be able to see it.
 %         Since we don't see signal in the actual data, we can say that we have
 %         not detected the EOR signal yet.
+
 In theory, optimal quadratic estimators for the power spectrum described above are a
 lossless operation. This is only true if we have all the information
 needed to apply this method. As discussed, one of the major unknowns we have in our
@@ -1873,6 +1874,7 @@ Quadratic Estimator & XXX & 100\% \\\hline
 \end{center}
 \label{tbl:sigloss}
 \end{table}%
+
 XXX Need to claim that we ran an end to end test.
 
 %XXX Carina's Text of the eor model goes here.
@@ -1962,15 +1964,15 @@ median statistic over the mean, for a gaussian distributed signal.
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{plots/signal_loss.png}
+\includegraphics[width=\columnwidth]{plots/sigloss.png}
 \caption{
-Shown is the signal loss correction factor asa a function of injected
-signal amplitude, where large values of $\eta$ correspond to a dominating
-injected signal. The correction factor monotonically increases as a function of
-increasing $\eta$, asymptoting to a factor of 10 for a dominating signal. }
-\label{fig:signal_loss}
+Recovered power spectrum signal as a function of injected signal amplitude.  Red lines
+indicate the measured amplitude of power spectrum modes in Figure \ref{fig:XXX}.  Because
+the recovered signal amplitude is an invertible function of the injected signal amplitude,
+it is possible to invert the effects of signal loss in the measured power spectrum values
+to infer the true signal amplitude on the sky. [XXX add some more here]
+}\label{fig:signal_loss}
 \end{figure}
-
 
 
 %\subsubsection{Integrating $k$-modes}

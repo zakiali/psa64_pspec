@@ -91,17 +91,17 @@ for level in pks.keys():
     var_nocov.append(n.var(nocovs[level], axis=0))
     lkeys.append(level.split('_')[-1])
 if PLOT:
+    for level in pks.keys():
+        for pk,nocov_pk in zip(pks[level], nocovs[level]):
+            p.plot(pk, 'r')
+            p.plot(nocov_pk, 'r')
     for pk,nocov,level in zip(avg_pks,avg_nocov,lkeys):
-        p.figure(1)
-        p.plot(pk, label=level)
-        p.figure(2)
-        p.plot(nocov, label=level)
-    p.figure(1)
+        p.plot(pk, 'k', label=level)
+        p.plot(nocov, 'k', label=level)
     p.plot(pk_ref, 'k--')
-    p.legend()
-    p.figure(2)
     p.plot(nocov_ref, 'k--')
-    p.legend()
+    p.plot(pk - pk_ref, 'b--')
+    p.plot(nocov - nocov_ref, 'b--')
     p.show()
 
 avg_pks = n.array(avg_pks)
