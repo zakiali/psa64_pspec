@@ -1816,6 +1816,19 @@ contained data.
 %         Since we don't see signal in the actual data, we can say that we have
 %         not detected the EOR signal yet.
 \subsubsection{Signal Loss}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{plots/sigloss.png}
+\caption{
+Recovered power spectrum signal as a function of injected signal amplitude.  Red lines
+indicate the measured amplitude of power spectrum modes in Figure \ref{fig:XXX}.  Because
+the recovered signal amplitude is an invertible function of the injected signal amplitude,
+it is possible to invert the effects of signal loss in the measured power spectrum values
+to infer the true signal amplitude on the sky. [XXX add some more here, cite in text]
+}\label{fig:sigloss}
+\end{figure}
+
 The optimal quadratic estimators for the power spectrum described above are a
 lossless operation, in theory. This is only true if we have all the information
 needed to apply this method. However, one of the major unknowns we have in our
