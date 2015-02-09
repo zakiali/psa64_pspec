@@ -1178,7 +1178,7 @@ Since the PAPER beam is ~45 degrees, and the array is located at a declination
 of $-30^{\circ}$ the fringe rates associated with the low signal to noise (down
 in the beam) correspond to very high and very low/negative fringe rates. Figure
 \ref{fig:fringe_rate_cut} shows a cut of the optimal fringe rate at 159 MHz for
-a 30 m east west baseline. Therefore, the implemented fringe rate filter removes
+a 30-m east west baseline. Therefore, the implemented fringe rate filter removes
 some sky signal, signal associated with fringe rates outside of the ranges shown
 in Figure \ref{fig:fringe_rate_cut}. Figure \ref{fig:fr_preserved_signal} shows
 that the applied filter removes sky associated with negative fringe rates and
@@ -1200,10 +1200,9 @@ very high fringe rates.
 \begin{figure}[t!]\centering
 \includegraphics[width=\columnwidth]{plots/fr_preserved_signal.png}
 \caption{
-Fringe rate transform of a 30 m east-west baseline at 159 MHz before (blue) and
-after optimal fringe rate filtering (red). The fringe rate filter (green) is
-scaled so that that the ratio of the maximum amplitude in the pre and post
-fringe rate filtered data is preserved.
+Fringe-rate transform of visibilities measured on a 30-m east-west baseline at 159 MHz before (blue) and
+after (red) optimal fringe-rate filtering. The fringe-rate filter (green) is normalized
+to peak at unity gain, but has been scaled here for legibility.
 %Fringe-rate filtering at 159MHz. Fringe-rates of is defined as the rate at which
 %the sky moves through the fringe pattern of a baselines fringe pattern. This is
 %dependent on the frequency under consideration as well as position on the sky.
@@ -1447,22 +1446,8 @@ where $\mathbf{F}$ is the Fisher matrix. The error correlation matrix describes
 how correlated the errors between modes are in the final power spectrum result.
 
 
-\begin{figure}[t!]\centering
-\includegraphics[width=\columnwidth, height=\columnwidth]{plots/window.png}
-\caption{Window function matrix as defined in equation \ref{eqn:window}. Shown
-is the choice of window functions we made by taking the Cholesky decomposition
-of the Fisher matrix and using the upper triangular matrix. 
- The i'th row corresponds to the window function
-used in the estimate of the power spectrum for the i'th $k$-mode. The inset
-shows a slice of the window function for $k \approx .2\,hMpc^{-1}$. When
-measuring the bandpower at $k \approx .2\,hMpc^{-1}$, the window functions peak
-at this $k$ value, and suppress power from modes interior to the magnitude of
-$k$, and taper off slow for modes larger than  $k \approx .2\,hMpc^{-1}$.}
-\label{fig:window_func}
-\end{figure}
-
-
 \subsubsection{Application}
+\label{sec:oqe_app}
 % A walk through of the application to the data.
 
 Here we describe the specifics of our application of the optimal quadrtic
@@ -1567,28 +1552,22 @@ structure to them and can be considered noise like.
 
 
 \begin{figure*}[h!]\centering
-\includegraphics[width=2\columnwidth, height=5.5in]{plots/inv_cov.png}
+\includegraphics[width=2\columnwidth]{plots/inv_cov.png}
 \caption{
-Application of inverse covariance weighting to visibilities from 30 m east-west
-baselines over 146-156 MHz frequecy range and a LST range of 0h00 -- 8h30 used
-in the quadratic estimator of the power spectrum. From top to bottom, each row
-represents (1) the measured visibilities, (2) the covariance matrix derived from
-the visibility, and (3) visibilities after the application of inverse covariance
-weighting.  The left three columns correspond to 3 different baselines of the
-same redundant group prior to delay filtering and the right three columns
-correspond to the same three baselines after the application of the delay
-filter.}
-\label{fig:inv_cov}
+Visibilities before (top row) and after (bottom row) inverse covariance weighting.
+Signal covariance (middle row) is estimated empirically, averaging over LST.
+The three left/right columns show visibilities from
+instantaneously redundant baselines before/after delay filtering, respectively.
+} \label{fig:inv_cov}
 \end{figure*}
 
 \begin{figure*}[t!]\centering
 \includegraphics[width=1.5\columnwidth]{plots/eig.png}
-\caption{Eigenspectrum of empirically estimated covariance matrices (left panel)
-from visibilities prior to foreground filtering (blue) and after the application
-of the delay filter(green). The right panel shows the the four strongest
-eigenmodes of the covariance matrix estimated prior to foreground filtering
-(top) and after foreground filtering (bottom).}
-
+\caption{
+Eigenspectrum of covariance matrices (left) empirically estimated 
+from visibilities before (blue) and after (green) delay filtering.
+The four strongest eigenmodes of the filtered/unfiltered data are plotted
+on the top/bottom panels on the right, respectively.
 %The eigenspectrum for the foreground contained data
 %has a sharp decline for the first few eigen modes and levels of at around 1 K,
 %suggesting that most of the variation in the data are only described by a
@@ -1598,8 +1577,8 @@ eigenmodes of the covariance matrix estimated prior to foreground filtering
 %foregrounds are heavily filtered, steadily decreases suggesting that there are
 %not a few modes that mostly describe all of the variation in the data. This is
 %paralleled in the strongest eigenmodes for this filtered data (bottom right
-%panel) and there is no coherent structure to any of these modes. }
-\label{fig:eigs}
+%panel) and there is no coherent structure to any of these modes. 
+} \label{fig:eigs}
 \end{figure*}
 
 As noted in the previous section, we use cross correlations between baselines
@@ -1693,6 +1672,22 @@ ordering described above, this has the consequence of not coupling the modes
 inside the horizon in to measurments of band powers outside the horizon. Figure
 \ref{fig:window_func} shows these window functions. 
 
+\begin{figure}[t!]\centering
+\includegraphics[width=\columnwidth]{plots/window.png}
+\caption{
+The window function matrix $\mathbf{W}$, as defined in equation \ref{eqn:true_pspec_2_est_pspec}.
+The $i^{\rm th}$ row corresponds to the window function
+used in the estimate of the power spectrum for the $i^{\rm th}$ $k$-mode.
+Color scale indicates $\log_{10}\mathbf{W}$.
+The inset plot illustrates the window function along the dashed line in the upper panel.
+As described in Section \ref{sec:oqe_app}, $\mathbf{M}$ in equation \ref{eqn:window_def} has been chosen so that
+each window function peaks at the waveband while achieving a high degree of isolation from
+at lower $k$-modes that are likely to be biased by foregrounds.
+}\label{fig:window_func}
+\end{figure}
+
+
+
 In addition to the nice properties in the estimates ofthe power spectrum given
 by the above normalization and window function matrix, there is another nice
 property about the choice of normalization which corresponds to the error
@@ -1718,15 +1713,20 @@ Fisher matrix is shown in figure \ref{fig:fisher}, represents the amount of
 information there is in every $k_{\parallel}$ mode. The Fisher matrix is derived
 using all of the baselines, not just a baseline pair and consists of all of the
 information contained in the estimate.
-%XXX This part needs work. My understanding of the Fisher Matrix is still
-%undeveloped. Noisier modes are upweighted in k-space? 
 
 \begin{figure}[b!]\centering
-\includegraphics[width=\columnwidth, height=\columnwidth]{plots/fisher.png}
-\caption{The Fisher information matrix for the quadratic estimator described in
-equation \ref{eqn:presum_qalpha}, as a function of $k_{\parallel}$. The
-color scale represents strength (from blue to red) of the covariance between
-$k_{\parallel}$ modes.}
+\includegraphics[width=\columnwidth]{plots/fisher.png}
+\caption{
+[XXX add color bar].
+Fisher information matrix, $\mathbf{F}=\langle\qhat\qhat^\dagger\rangle$, for the quadratic estimator described in
+equation \ref{eqn:presum_qalpha}, applied to delay-filtered data. 
+Color scale indicates $\log_{10}\mathbf{F}$.
+$\mathbf{F}$ is artificially high for the center three $k$-modes whose amplitudes have been heavily
+suppressed by the delay filter.
+}
+
+%XXX This part needs work. My understanding of the Fisher Matrix is still
+%undeveloped. Noisier modes are upweighted in k-space? 
 
 %Fisher matrix captures the covariance of the intermediate $\qhat$'s with one
 %another. The diagonal of the Fisher matrix, gives the auto-covariance of the
@@ -1744,11 +1744,14 @@ $k_{\parallel}$ modes.}
 
 \begin{figure*}[t!]\centering
 \includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
-\caption{Cumulative mean (left) and median (right) of band powers for a
-given $k$-mode in the power spectrum shown in figure \ref{fig:final_pspec}.
-Color represents the absolute value of $k$-mode being integrated, from small to
-large modes represented from blue to green, respectively.}
-
+\caption{
+Cumulative mean (left) and median (right), as a function of number of modes,
+of power spectrum band power for
+$k_\parallel$ modes ranging from $-0.49$ (red) to $0.44h\ {\rm Mpc}^{-1}$ (violet).
+This Allen variance plot shows modes averaging down as the square root of
+number of modes combined until a signal floor is reached.  The difference in
+behavior between the mean and median for several modes indicates non-gaussianity
+in the distribution of values, likely as a result of foreground contamination.
 %Plotted is the cumulative mean for band powers at a given $k$-mode,
 %where the colors indicate the mode being integrated, with blue being the most
 %interior modes and walking out to the exterior modes in green; red being the
@@ -1758,7 +1761,7 @@ large modes represented from blue to green, respectively.}
 %modes that seem to take a dive as more modes are used. Assuming gaussian
 %statistics, there is an overall correction factor of 1.4 for using the median
 %statistic relative to the mean.}
-\label{fig:pspec_variance}
+}\label{fig:pspec_variance}
 \end{figure*}
 
 
@@ -1881,13 +1884,13 @@ averaged over realizations. The final result is shown in figure
 \ref{fig:signal_loss}
 
 \begin{table}[htdp]
-\caption{TABULATED SIGNAL LOSS THROUGH VARIOUS ANALYSIS STAGES}
+\caption{SIGNAL LOSS ANALYSIS STAGES}
 \begin{center}
-\begin{tabular}{|c|c|c|}\hline
-Analysis Step & Typical Loss & Maximum Signal Loss \\ \hline \hline
-Flux Scale Calibration &  $\ll 2 \times 10^{-7}$ \% & 3\% \\\hline
-Delay Filtering & 4.8\% & .0015\% \\\hline
-Quadratic Estimator & XXX & 100\% \\\hline
+\begin{tabular}{rll}
+Analysis Step & Typical Loss & Maximum Signal Loss \\ \hline
+Flux Scale Calibration &  $\ll 2 \times 10^{-7}$ \% & 3\% \\
+Delay Filtering & 4.8\% & .0015\% \\
+Quadratic Estimator & XXX & 100\% \\
 \end{tabular}
 \end{center}
 \label{tbl:sigloss}
