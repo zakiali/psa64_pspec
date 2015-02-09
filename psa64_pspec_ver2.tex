@@ -2190,15 +2190,22 @@ addition our $2\sigma$ upper limit is also consistent with zero and therefore we
 are noise dominated and are hence lacking sensitivity.
 
 \subsection{Brightness Temperature Contstraints}
-With the new upper limit from the the 21 cm power spectrum in hand, we can put
-constraints on the mean brightness temperature of the 21 cm line. This new
-upper limit is pushing the cusp of bright reionization scenarios, but is still
-around an order of magnitude away from the most plausible models. Using various
-reionization scenarios, we put upper limits on the mean brightness
-temperature of the of the 21 cm transition under different heating conditions.
+With the new upper limits presented in figure \ref{fig:final_pspec} of the 21 cm
+power spectrum,  we can begin to put constraints on the mean brightness
+temperature of the 21 cm line. We can begin to provide contstraints on the
+neutral fraction and heating of the IGM at a redshift of 8.4. In a companion
+paper \citep{pober_et_al2015a}, we conduct a thorough analysis of the
+constraints we can put on the IGM using reionation simulations with 21cmFAST
+[XXXcite], a 21 cm simulation code. As a compliment to the more thourough
+analysis, we focus on a simpler model, as discussed in P14 and P12a that can put
+some constrains on the mean brightness temperature for the limits presented in
+figure \ref{fig:final_pspec}.
 
-The relative temperature, $\delta{T_{b}}$, between the cosmic microwave
-bacground, $T_{\gamma}$, and the spin temperature, $T_{s}$, is given by 
+We first review the relation between the spin temperature, $T_{s}$, and the
+background cosmic microwave background temperature, $T_{\gamma}$, in this
+context.  The relative temperature, $\delta{T_{b}}$, between the cosmic
+microwave bacground, $T_{\gamma}$, and the spin temperature, $T_{s}$, is given
+by 
 \begin{equation}\label{eqn:tb}
     \delta{T_{b}}(\nu) = \frac{T_{s} - T_{\gamma}(z)}{1+z}(1-e^{-\tau_{\nu}}).
 \end{equation}
@@ -2208,21 +2215,74 @@ When considering a low optical depth medium, equation \ref{eqn:tb} becomes
 \end{equation}
 where the optical depth is given by, 
 \begin{align}\label{eqn:tau}
+    \begin{split}
     \tau_\nu &= \frac{3c^{3}\hbar A_{10} n_{\text{\tiny{HI}}}}{16k\nu_{o}^{2}T_{s}H(z)} \\
             &\approx 8.6\times10^{-3}(1+\delta)x_{\text{\tiny{HI}}}\Big[\frac{T_{\gamma}(z)}{T_{s}}\Big] \Big(\frac{\Omega_{b}h^{2}}{0.02}\Big)\Big[\Big(\frac{0.15}{\Omega_{m}h^{2}}\Big)\Big(\frac{1+z}{10}\Big)\Big]^{1/2}
+    \end{split}
 \end{align}
 ignoring effects due to redshift space distortions. $x_{HI}$ is the neutral
 fraction of hydrogen and $\delta$ is the local baryon overdensity. 
 Putting it all together and using the most recent Plack results, 
 \begin{equation}\label{eqn:final_tb}
-    \delta{T_{b}} \approx 25x_{\text{\tiny{HI}}}\Big(\frac{1+z}{10}\Big)^{1/2}(1+\delta)\Big[1 - \frac{T_{\gamma}(z)}{T_{s}}\Big] \,\text{mK}.
+    \delta{T_{b}} \approx
+25x_{\text{\tiny{HI}}}\Big(\frac{1+z}{10}\Big)^{1/2}(1+\delta) \xi \,\text{mK},
+\end{equation}
+where $\xi =  \Big[1 - \frac{T_{\gamma}(z)}{T_{s}}\Big]$. 
+
+If the $T_{s}$ is greater than $T_{\gamma}$, we get the the 21 cm signal is in
+emission with respect to the CMB. However, if $T_{s}$ is less than $T_{\gamma}$,
+equation \ref{eqn:final_tb} is negative and hence the 21 cm is in absorption.
+The thermal history of the 21 cm line follows a very predictable and well
+established path through cosmic time starting with being coupled to the
+$T_{\gamma}$ via compton scattering, and hence there is no detectable 21 cm
+signal. As the universe cools adiabatically, the gas temperature decreases as
+$(1+z)^{2}$ and colissional coupling puts the spin temperature below the CMB
+temperature and the 21 cm line is in absorption. Just before the first sources
+turn on to couple the spin temperature back to the spin temperature back to the
+gas temperature  via the Wouthuysen-Field effect, collsional coupling becomes
+inefficient and there is no detectable 21 cm signal due to radiative coupling
+between the gas and the CMB. Once the first sources turn on, the gas temperature
+becomes coupled to the spin temperature and the signal turns up in emission,
+after the heating of the gas by X-rays and blackhole accretion. 
+
+We consider a scenario in which $T_{s}$ is coupled to the gas temperature via
+the Wouthuysen-Field effect, but that there is no signicifcant source of heating
+from the usual suspects. In this case, the 21 cm  signal will be in absorption.
+In this scenario we can take a reasonable rescaling of power spectra to get a
+sense of the mean brightness temperature for a simple flat power spectrum model
+varying with the neutral fraction, $x_{\text{HI}}$, as presented in P14. Namely,
+because we have assumed no heating, we can take the combination
+$T_{0}^{2}\xi^{2}$ as a multiplicative scalar of the 21 cm power spectrum
+defined as 
+\begin{equation}\label{eqn:d2pspec_model}
+    \Delta^{2}_{21}(k) = T_{0}^{2}(z)\xi^{2}(z)\Delta_{i}^{2}(k)\equiv
+\expval{T_{b}^{2}}\Delta_{i}^{2}(k),
+\end{equation}
+where $T_{0} = 25 \big(\frac{1+z}{10}\big)^{1/2}$ and $\Delta_{i}^{2}(k)$ is a
+model power spectra of the ionization fluctuations. The maximum value of the
+prefactor in equation \ref{eqn:d2pspec_model} is given by considering the fact
+that in the no heating scenario we are considering, the spin temperature and the
+CMB must be in equilibrium until about a redshift of 150
+\citep{furlanetto_et_al2006} and hence the maximum value of $\xi$ is $\xi = 1 -
+\frac{1+z_{dec}}{1+z} \approx -\frac{150}{1+z}$ for the redshifts under
+consideration. Therfore, combining equations \ref{} and \ref{} we get that the
+the maximum value of the prefactor in \ref{d2pspec_model} is given by 
+\begin{equation}
+    \text{max}[T_{0}(z)\xi(z)] \approx 370\big(\frac{10}{1+z}\big)^{1/2}.
 \end{equation}
 
-For many of the reionization models under consideration, $ddT_{s} \gg T_{\gamma}$,
-and therefore $1 - \frac{T_{\gamma}(z)}{T_{s}} \approx 1$.
-
-For much of what we are considering, $T_{s} \gg T_{\gamma}$, and
-hence \ref{eqn:final_tb} becomes...
+We now consider the "patchy" reionization model described in P14 and P12a which
+approximates the 21 cm power spectrum as being flat between some $k_{\text{min}}$ and
+$k_{\text{max}}$ cutoff values in $k$, 
+\begin{equation}\label{eqn:patchy_bounds}
+    \Delta^{2}_{i}(k) = (x_{\text{HI}} -
+x_{\text{HI}}^{2})/\ln{i(k_{\text{max}}/k_{\text{min}})}.
+\end{equation}
+For this reionzation model, we tune $k_{\text{min}}$ and $k_{\text{max}}$ and
+determine the maximum mean brightness temperature above which equation
+\ref{eqn:d2pspec_model} becomes inconsisitent with our 21 cm power spectrum
+measurements. Figure \ref{fig:patchy_bound} shows the results of these bounds
+for the three different neutral fractions $x_{\text{HI}}=\text{.1, .3, and .5}$
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2292,7 +2352,8 @@ filter (1.9), signal loss (1.15), and median statistic (1.4)
 \label{fig:final_pspec}
 \end{figure*}
 
-\begin{figure}[h!]\centering
+
+\begin{figure}[t!]\centering
 \includegraphics[width=\columnwidth]{plots/flat_k3pk_posterior.png}
 \caption{The posteriror distributiom assuming a flat, gaussian power spectrum in
 $\Delta^{2}$ (blue). The green and red horizontal lines correspond to the 1 and
@@ -2300,6 +2361,13 @@ $\Delta^{2}$ (blue). The green and red horizontal lines correspond to the 1 and
 lines to be vertical. Make it look better. Labels.}
 \label{fig:final_posterioir}
 \end{figure}
+
+\begin{figure*}[b!]\centering
+\includegraphics[width=2\columnwidth]{plots/patchy_bound.png}
+\caption{}
+\label{fig:patchy_bound}
+\end{figure*}
+
 
 
 \subsection{Comparison with PSA32}
@@ -2397,6 +2465,8 @@ foregrounds. Using the delay spectrum technique employed here, precise
 calibration is necessary to mitigate the leakage of foreground power to modes
 outside of the horizon for a given baseline. 
 
+
+
 \subsection{Remaining Challanges}
 The closer we get to a detection of the 21 cm EoR fluctuations, the more we need
 to know what the systematics can be and at what level they can come in at. One
@@ -2459,6 +2529,9 @@ effects, which may be up to 2 orders of magnitude brighter than the EoR signal,
 is a necessity.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 \section{Conclusions}\label{sec:conclusion}
 We have shown a new upper limit on the 21 cm EoR power spectrum at $z=8.4$,
 showing an almost an order of magnitude of improvement from the previous result (P14).
