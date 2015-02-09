@@ -24,6 +24,45 @@ opts,args = o.parse_args(sys.argv[1:])
 print args
 
 
+def noise_level():
+    tsys = 500e3 #mK
+    inttime = 1886. #seconds
+    nbls=51
+    ndays = 120 #effectively this many days. days of operation = 135
+    nmodes = (8.5*60*60/inttime)**.5
+    pol = 2
+    real = 2 #??? what is this again?
+    freq = .15117 #GHz
+    z = C.pspec.f2z(freq)
+    X2Y = C.pspec.X2Y(z)/1e9 #h^-3 Mpc^3 / str/ Hz
+    sdf = .1/203
+    freqs = n.linspace(.1,.2,203)[95:115]
+    B = sdf*freqs.size
+    bm = n.polyval(C.pspec.DEFAULT_BEAM_POLY, freq) * 2.35 # correction for beam^2
+    scalar = X2Y * bm * B
+
+    fr_correct = 1.9
+
+
+    print 'scalar', scalar
+    print 'BM', bm
+    print 'tsys', tsys
+    print 
+
+    #error bars minimum width. Consider them flat for P(k)
+    pk = scalar*bm*fr_correct*( (tsys)**2 / (inttime*pol*real*nbls*ndays*nmodes) )
+
+    #
+    etas = n.fft.fftshift(C.pspec.f2eta(freqs))
+    kpl = etas * C.pspec.dk_deta(z)
+    kpl_pos = kpl[kpl>=0]
+    print kpl_pos
+
+    d2 = pk*kpl_pos**3 / (2*n.pi**2)
+    return d2
+
+
+
 ONLY_POS_K = True
 
 def dual_plot(kpl, pk, err, pkfold=None, errfold=None, umag=16., f0=.164, color='', bins=None):
@@ -297,16 +336,16 @@ def mean_temp(z):
 
 import glob
 re_z = re.compile(r'power_21cm_z(\d+\.\d+)\.dat')
-
+kpl_pos = ks[k0+1:]
 for filename in glob.glob('lidz_mcquinn_k3pk/*7.3*dat'):
     print 'Reading', filename
     d = n.array([map(float, L.split()) for L in open(filename).readlines()])
     ks, pk = d[:,0], d[:,1]
     z_file = float(re_z.match(os.path.basename(filename)).groups()[0])
-    z = C.pspec.f2z(.160)
+    z = C.pspec.f2z(.151)
     k3pk = ks**3 / (2*n.pi**2) * pk
     p.subplot(122)
-    p.plot(ks, k3pk * mean_temp(z)**2, 'k-')
+    p.plot(ks, k3pk * mean_temp(z)**2, 'm-')
     
 tau_h = 100 + 15. #in ns
 k_h = C.pspec.dk_deta(C.pspec.f2z(.151)) * tau_h
@@ -330,11 +369,13 @@ p.vlines(k_h, -1e7, 1e10, linestyles='--', linewidth=1.5)
 #p.plot(theoretical_ks, theor_errs, 'c--')
 
 theo_noise = noise_level()
-p.plot(ks, theo_noise, 'c--')
+#print k0
+print kpl_pos[0], theo_noise[0]
+p.plot(kpl_pos, theo_noise, 'c--')
 p.gca().set_yscale('log', nonposy='clip')
 p.xlabel(r'$k\ [h\ {\rm Mpc}^{-1}]$', fontsize='large')
 p.ylabel(r'$k^3/2\pi^2\ P(k)\ [{\rm mK}^2]$', fontsize='large')
-p.ylim(1e0,1e9)
+p.ylim(1e0,1e5)
 p.xlim(0, 0.6)
 p.grid()
 p.savefig('pspec.png')
@@ -355,6 +396,7 @@ p.savefig('pspec.png')
 
 f = n.load(args[0])
 def posterior(kpl, pk, err, pkfold=None, errfold=None):
+    import scipy.interpolate as interp
     k0 = n.abs(kpl).argmin()
     kpl = kpl[k0:]
     if pkfold is None:
@@ -384,7 +426,13 @@ def posterior(kpl, pk, err, pkfold=None, errfold=None):
     #data/=n.sum(data)
     data /= n.max(data)
     p.figure(5)
-    p.plot(s, data)
+#    p.plot(s, data)
+    #use a spline interpolator to get the 1 and 2 sigma limits.
+    spline = interp.interp1d(data,s)
+    print spline
+    print max(data), min(data)
+    print spline(.68), spline(.95)
+    #p.plot(spline(n.linspace(.0,1,100)),'o')
     p.plot(s, n.exp(-.5)*n.ones_like(s))
     p.plot(s, n.exp(-.5*2**2)*n.ones_like(s))
     p.show()
@@ -392,43 +440,6 @@ def posterior(kpl, pk, err, pkfold=None, errfold=None):
 #posterior(f['kpl'], f['pk'], f['err'], f['pk_fold'], f['err_fold'])
 posterior(kpl, d, nos, d_fold, nos_fold)
 
-
-def noise_level():
-    tsys = 500e3 #mK
-    inttime = 1886. #seconds
-    nbls=51
-    ndays = 120 #effectively this many days. days of operation = 135
-    nmodes = (8.5*60*60/inttime)**.5
-    pol = 2
-    real = 2 #??? what is this again?
-    freq = .15117 #GHz
-    z = capo.pspec.f2z(freq)
-    X2Y = capo.pspec.X2Y(z)/1e9 #h^-3 Mpc^3 / str/ Hz
-    sdf = .1/203
-    freqs = n.linspace(.1,.2,203)[95:115]
-    B = sdf*freqs.size
-    bm = n.polyval(capo.pspec.DEFAULT_BEAM_POLY, freq) * 2.35 # correction for beam^2
-    scalar = X2Y * bm * B
-
-    fr_correct = 1.9
-
-
-    print 'scalar', scalar
-    print 'BM', bm
-    print 'tsys', tsys
-    print 
-
-    #error bars minimum width. Consider them flat for P(k)
-    pk = scalar*bm*fr_correct*( (tsys)**2 / (inttime*pol*real*nbls*ndays*nmodes) )
-
-    #
-    etas = n.fft.fftshift(capo.pspec.f2eta(freqs))
-    kpl = etas * capo.pspec.dk_deta(z)
-    kpl_pos = kpl[kpl>=0]
-    print kpl_pos
-
-    d2 = pk*kpl_pos**3 / (2*n.pi**2)
-    return d2
 
 
 if opts.show:

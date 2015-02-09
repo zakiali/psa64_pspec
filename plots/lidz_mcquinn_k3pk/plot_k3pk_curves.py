@@ -2,69 +2,55 @@
 import numpy as n, pylab as p
 import capo as C
 import sys, re
+import scipy.interpolate
 
 def mean_temp(z):
     return 28. * ((1.+z)/10.)**.5 # mK
 
 re_z = re.compile(r'power_21cm_z(\d+\.\d+)\.dat')
-npz = n.load('../fg_vs_umag_vs_fq.npz')
+#(0:02; 11:46), (0.15, 8.76 ), (0.21, 8.34), (0.54, 7.32), (0.71, 7.03), (0.82, 6.90), and (0.96, 6.77)
+
+limits = {}
+#limits['.05-.1'] = (n.arange(.05, .1, .001), 6100.,'c')
+limits['.1-.2'] = (n.arange(.1, .2, .001), 3700.,'m')
+limits['.2-.4'] = (n.arange(.2, .4, .001), 5680.,'b')
 
 dat = {}
 for filename in sys.argv[1:]:
     print 'Reading', filename
     d = n.array([map(float, L.split()) for L in open(filename).readlines()])
     ks, pk = d[:,0], d[:,1]
-    z = float(re_z.match(filename).groups()[0])
+    z_file = float(re_z.match(filename).groups()[0])
+    z = C.pspec.f2z(.160)
     k3pk = ks**3 / (2*n.pi**2) * pk# * mean_temp(z)**2
-    dat[filename] = (ks, k3pk)
+    #dat[filename] = (ks, k3pk)
+    #dat[filename] = (ks, pk)
+    #dat['%5.3f'%z_file] = scipy.interpolate.interp1d(ks, pk, kind='linear')
+    dat[z_file] = scipy.interpolate.interp1d(ks, pk, kind='linear')
+    #p.loglog(ks, k3pk * mean_temp(z)**2, label='%s,%f'%(filename,z))
+    p.loglog(ks, k3pk * mean_temp(z)**2, label='%5.3f->%5.3f'%(z_file,z))
+p.legend(loc='best')
+p.show()
 
 #zs = dat.keys(); zs.sort()
 colors = 'kbgrcmy'
 #fqs = n.arange(.150, .190, .01)
-fqs = [.170]
-for i,fq in enumerate(fqs):
-    color = colors[i%len(colors)]
-    for f in dat:
-        p.loglog(dat[f][0], dat[f][1] * mean_temp(z)**2, color, label='%s,%f'%(f,z))
-
-    # For 11x12 configuration
-    #fq = .150
-    B = .006
-    NPOL = 2
-    Trx = 150e3
-    Tsky = 350e3 * (fq/.150)**-2.5
-    Tsys = Trx + Tsky
-    z = C.pspec.f2z(fq)
-    print z, fq
-    NDAYS = 120
-    N_2HR_LSTBINS = 3.
-
-    # Break up k modes sampled into parallel and perp components
-    kpl_6MHz = C.pspec.dk_deta(C.pspec.f2z(fq)) * (1./B)
-    kpl = 10**n.concatenate([n.arange(-20,-3,1), n.arange(-3, 1, .05)])
-    kpr = C.pspec.dk_du(z) * 20 # assume 20-wavelength separation
-    print 'k_pr', kpr
-    ks = n.sqrt(kpl**2 + kpr**2)
-
-    N_2HR_LSTBINS = 3.
-    sense = 14.4551903993
-    sense = sense * (ks / .1)**3 * (kpl / kpl_6MHz)**-0.5/ n.sqrt(N_2HR_LSTBINS) * (Tsys / 500e3)**2 * (120. / NDAYS) * (1. / NPOL)
-
-    p.loglog(ks, sense, color+':')
-#p.legend()
 fq = .160
-for ks, fqs, specs in zip(npz['ks'], npz['fqs'], npz['spec']):
-    valid = n.where(n.abs(fqs - fq) < .002, 1, 0)
-    valid *= n.where(specs == 1e6, 0, 1)
-    print valid.shape, ks.shape, fqs.shape, specs.shape, valid.sum()
-    valid = valid.flatten()
-    ks = ks.flatten().compress(valid)
-    specs = specs.flatten().compress(valid)
-    print ks
-    print specs
-    p.loglog(n.abs(ks), n.abs(specs))
-    p.xlabel(r'$k\ [h\ {\rm Mpc}^{-1}]$', size=16)
-    p.ylabel(r'$\Delta^2(k)\ [{\rm mK}^{2}]$', size=16)
-    p.xlim(.06,4)
-    p.ylim(1e-2, 1e5)
+#color = colors[i%len(colors)]
+Tbs = {}
+flist = dat.keys(); flist.sort()
+for f in flist:
+    print f
+    for L in limits:
+        ks, lim, clr = limits[L]
+        pk = n.average(dat[f](ks))
+        k = n.average(ks)
+        k3pk = k**3 / (2*n.pi**2) * pk
+        Tb = n.sqrt(lim / k3pk)
+        Tbs[L] = Tbs.get(L,[]) + [Tb]
+    #p.loglog(dat[f][0], dat[f][1] * mean_temp(z)**2, color, label='%s,%f'%(f,z))
+
+for L in Tbs:
+    print Tbs[L]
+    p.plot(Tbs[L])
 p.show()
