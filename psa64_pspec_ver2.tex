@@ -231,8 +231,7 @@ over previous limits by orders of magnitude, and as of this writing, remains the
 upper limit achieved in the field.
 
 In this paper, we report on the results from a 64-element deployment of PAPER
-that substantially improve on this previous result.
- This paper is outlined as follows. In Section
+that improve on this previous result.  In Section
 \ref{sec:observations} we describe the observations used in this analysis. In
 Section \ref{sec:analysis} we discuss the calibration and data analysis of our pipeline.
 We then move on to a discussion of the stability of the PAPER instrument in
@@ -264,8 +263,10 @@ spectrum analysis.}
 \includegraphics[width=2\columnwidth,height=\columnwidth]{plots/data_flow_chart.png}
 \caption
 {
-Flow of data through the power-spectrum analysis steps described in in the paper. Data flow is indicated b the solid black lines and red lines indicate injected simulated data to measure the signal loss and pipeline efficacy. Yellow boxes are those which do not have signal loss associated with them and are not used in the signal loss measurements.
-This is currently just place holder figure.XXX.
+The stages of power-spectrum analysis. Black lines indicate data flow; red lines indicate
+Monte Carlo simulations used to 
+measure signal loss. Yellow boxes indicate stages without associated signal loss.
+[XXX update figure].
 }
 \label{fig:flowchart}
 \end{figure*}
@@ -334,10 +335,11 @@ analysis described here only apply to the XX and YY polariztion products.
 
 \begin{figure*}[!t]\centering
 \includegraphics[width=2\columnwidth,height=\columnwidth]{plots/coverage.png}
-\caption{The Global Sky Model (GSM) with the PAPER field overlayed during this
-observing season. The contours shown here are the beam weighted obsering times
-relative to the peak observing time.}
-\label{fig:coverage}
+\caption{The Global Sky Model \citep{deoliveira2008}, illustrating foregrounds to the 21cm
+cosmological signal, with 
+contours indicating beam-weighted observing time (relative to peak) for the PAPER observations
+described in Section \ref{sec:observations}.
+}\label{fig:coverage}
 \end{figure*}
 
 
@@ -505,33 +507,28 @@ applied to visibilities and the results are shown in \ref{fig:omniview}.
 
 \begin{figure*}
 \centering
-\includegraphics[width=2\columnwidth]{plots/omniview_64.png}
+\includegraphics[width=1.5\columnwidth]{plots/omniview_64.png}
 \caption{
-Each panel is a scatter plot of complex visibilites, for every baseline in the
-array, in the complex plane at 159 MHz for a single integration. Since
-redundant baselines should measure the same sky we expect that there is
-clustering between visibilities of baselines in a redundant group. Each symbol
-and color combination corresponds to a redundant group of baselines. The left
-pannel shows the the raw data after a rough calibration has been applied to the
-data. There is clustering between redundant baselines, but there is still some
-thermal noise in the measurement that is do to the imprecise nature of the
-rough calibration and cross talk between baselines. The right panel shows the
-same data after using calibration parameters derived from Omnical. The reundant
-baselines come into better alignment after those calibration solutions are
-applied, nodding to the power of using Omnical.}
-\label{fig:omniview}
+[XXX what are units of color scale?]
+PAPER visibilities plotted in the complex plane before (left) and after (right)
+the application of redundancy-based calibration with Omnical \citep{zheng_et_al2014}.
+All baselines in the array measured at 159 MHz for a single time integration are plotted.
+Instantaneously redundant baselines are assigned the same symbol/color.
+The tighter clustering of redundant measurements with Omnical indicates improved
+calibration.  Residuals are consistent with thermal noise.
+} \label{fig:omniview}
 \end{figure*}
 
 \begin{figure}[!b]
 \centering
 \includegraphics[width=\columnwidth]{plots/chi2.png}
-\caption{This is a waterfall plot for a days $\chi^{2}$ distribution from our
-fitting of the visibilities. The $\chi^{2}$ here is calculated for every
-frequency bin and integration in our data set, 49kHz and 42.9 seconds,
-respectively. The $\chi^{2}$ demnstrates the stability of the instrument and is
-a useful tool for flagging bad data, corresponding to very large $\chi^{2}$
-values.}
-\label{fig:chi2}
+\caption{
+[XXX trim out band edges]
+$\chi^{2}$ of all baseline residuals after the application of Omnical.
+The plot comprises a observations over one day, with a frequency resolution of
+49 kHz and a time resolution of 42.9 s.
+[XXX is this before or after compression?  df and dt are one of each.]
+} \label{fig:chi2}
 \end{figure}
 
 In addition to solving for gain solutions, Omnical also characterizes the
@@ -653,13 +650,15 @@ the calibrated Pictor A spectrum and the model spectrum from
 \centering
 \includegraphics[width=\columnwidth]{plots/picimg.png}
 \caption{
-A field image phased to Pictor A and including Fornax A using the maximally
-redundant array configuration data set used in the analaysis presented in this
-paper. The elongated north-south stripes are due to the lack of north-south
-baseline used here. In addition grating lobes due to the antenna configuration
-can be seen (?). The location of Pictor A and Fornax A agree with their catalog
-values of ...}
-\label{fig:field_image}
+[XXX need image coordinates, add circles for catalog positions of For, Pic]
+PAPER-64 image of a field including Pictor A and Fornax A, with black circles
+indicating catalog positions \citep{XXX}.
+[XXX report bandwidth, time range used in imaging].
+Image quality is limited by the redundant configuration of the array (e.g. grating lobes
+as a result of periodic antenna spacing, elongated lobes
+arising from poor uv-coverage in the north-south direction).  Nonetheless, this image
+demonstrates accurate phase calibration over a wide field of view.
+} \label{fig:field_image}
 \end{figure}
 
 
@@ -668,13 +667,16 @@ values of ...}
 %\includegraphics[width=\columnwidth]{plots/PicA_normalized_spectrum.pdf}
 \includegraphics[width=\columnwidth]{plots/picspec.png}
 \caption{
-The model Pictor A spectrum as given in \citet{jacobs_et_al2013}
-(black) along with the measured Pictor A spectrum (blue), Stokes I, used in
-setting our flux scale. The spectrum was calculated by imaging our maximally
-redundant configuration array to Pictor A for every frequency, and reading off
-the flux. The ripples in the measured spectra are due to beam sidelobes from
-interfereing sources, specfically Fornax A.}
-\label{fig:pic_spec}
+Measured spectrum of Pictor A in Stokes I (blue) relative to its catalog
+value (black; \citealt{jacobs_et_al2013}).  Flux measurements were
+extracted from images of Pictor A, made independently for each frequency channel in
+XXX s snapshots as Pictor transitted between hour angles of XXX and XXX.  
+Each measurement was then divided by the PAPER beam model and averaged to
+obtain the measured spectrum, which serves to characterize the flux scale
+of the PAPER-64 observations.  Error bars indicate 95\% confidence intervals,
+derived from the distribution of measurements used in the average.
+[XXX check this last statement].
+}\label{fig:pic_spec}
 \end{figure}
 
 Fitting a polynomial to the bandpass has the potential for signal loss which
@@ -947,22 +949,21 @@ visibility.
 
 \begin{figure*}[!t]
 \centering
-\includegraphics[width=2.3\columnwidth]{plots/waterfalls.png}
-\caption{LST vs. frequency waterfall plots of LST averaged data for the entire
-observing season with log amplitude and phase on the top and bottom rows,
-respectively. LST range is from -2.2 to 17.3 hours and a frequency range from
-100 to 200 MHz. Dashed lines indicate the range of LST used in the power
-spectrum analysis (0 - 8:30 hours). Foreground averaged data (left) is fringe
-rate filtered with the optimal fringe rate filter (second left) and signal is
-retained, but signal low in the beam is down weighted. Visibilities have a
-wideband delay filter applied to them to suppress foreground signal (middle)
-which achieves 2 orders of magnitude signal suppression in Jansky's. After
-applying the optimal fringe rate filter to the foreground filtered data (second
-right), we achieve 3 orders of magnitude suppression of foregrounds, and reach
-the longest possible coherent time integration. Finally, averaging all of the
-redundant 30 m East-West baseline, effecting 4 orders of magnitude below the
-foregrounds in Jansky.} 
-\label{fig:waterfalls}
+\includegraphics[width=2\columnwidth]{plots/waterfalls.png}
+\caption{
+Visibilities measured by a 30-m east-west baseline in the PAPER-64 array, 
+averaged over XXX days of observation.  From left to right, columns represent
+data that: (1) contain foregrounds prior to the application of a wideband
+delay filter or optimal fringe-rate filtering, (2) are fringe-rate filtered but
+not delay filtered, (3) are delay filtered at 15 ns beyond the horizon limit but
+are not fringe-rate filtered, (4) are both delay and fringe-rate filtered,
+and (5) are delay and fringe-rate filtered and have been averaged over all
+redundant measurements of this visibility.  The top row shows signal amplitude
+on a logrithmic scale; the bottom row illustrates signal phase.
+Dashed lines indicate the 0h00 -- 8h30 range in local sidereal time (LST) used for power
+spectrum analysis.  Away from the edges of the observing band, over four orders 
+of magnitude of foreground suppression is evident.
+} \label{fig:waterfalls}
 \end{figure*}
 
 For the 30 m East-West baselines used in the power spectrum analysis,
