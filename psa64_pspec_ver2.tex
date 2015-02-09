@@ -19,6 +19,7 @@
 \newcommand{\rhat}{\hat{\mathbf{r}}}
 \newcommand{\phat}{\hat{\mathbf{p}}}
 \newcommand{\qhat}{\hat{\mathbf{q}}}
+\newcommand\abs[1]{\left|#1\right|}
 
 \newcount\colveccount
 \newcommand*\colvec[1]{
@@ -1199,23 +1200,27 @@ very high fringe rates.
 \begin{figure}[t!]\centering
 \includegraphics[width=\columnwidth]{plots/fr_preserved_signal.png}
 \caption{
-Fringe-rate filtering at 159MHz. Fringe-rates of is defined as the rate at which
-the sky moves through the fringe pattern of a baselines fringe pattern. This is
-dependent on the frequency under consideration as well as position on the sky.
-Shown here is the fringe-rate transform (fourier transform along the time axis
-of a visibility) of unfiltered foreground contained data for a 30 m east-west
-baseline (blue). The fringe-rate filter in fringe-rate space (green) is scaled
-to highlight the shape of the filter. In practice, this filter is normalized so
-that its integral is unity.  This filter is multiplicative in this domain and
-its fourier transform convolves the time domain visibilities from which the
-unfiltered data in this plot is dervied from.  The filtered data (red) is the
-product of the unfiltered with the weights of the fringe-rate filter (green).
-Foreground signal is still retained in the final output, but signal low in the
-beam has been downweighted. For the PAPER array in South Africa, these fringe
-rates correspond to small/negative fringe rates and nearly the maximum fringe
-rates of a 30m east-west baseline. Note the maximum and minimum fringerates
-correspond to the theoretical minimum and maximum for a 30 m baseline at 159
-MHz.
+Fringe rate transform of a 30 m east-west baseline at 159 MHz before (blue) and
+after optimal fringe rate filtering (red). The fringe rate filter (green) is
+scaled so that that the ratio of the maximum amplitude in the pre and post
+fringe rate filtered data is preserved.
+%Fringe-rate filtering at 159MHz. Fringe-rates of is defined as the rate at which
+%the sky moves through the fringe pattern of a baselines fringe pattern. This is
+%dependent on the frequency under consideration as well as position on the sky.
+%Shown here is the fringe-rate transform (fourier transform along the time axis
+%of a visibility) of unfiltered foreground contained data for a 30 m east-west
+%baseline (blue). The fringe-rate filter in fringe-rate space (green) is scaled
+%to highlight the shape of the filter. In practice, this filter is normalized so
+%that its integral is unity.  This filter is multiplicative in this domain and
+%its fourier transform convolves the time domain visibilities from which the
+%unfiltered data in this plot is dervied from.  The filtered data (red) is the
+%product of the unfiltered with the weights of the fringe-rate filter (green).
+%Foreground signal is still retained in the final output, but signal low in the
+%beam has been downweighted. For the PAPER array in South Africa, these fringe
+%rates correspond to small/negative fringe rates and nearly the maximum fringe
+%rates of a 30m east-west baseline. Note the maximum and minimum fringerates
+%correspond to the theoretical minimum and maximum for a 30 m baseline at 159
+%MHz.
 }
 \label{fig:fr_preserved_signal}
 \end{figure}
@@ -1563,34 +1568,37 @@ structure to them and can be considered noise like.
 
 \begin{figure*}[h!]\centering
 \includegraphics[width=2\columnwidth, height=5.5in]{plots/inv_cov.png}
-\caption{Application of inverse covariance weighting to three different
-baselines for foreground contained (left 3 columns) and foreground removed
-data(right three columns). Each baselines waterfall (top row) covers a LST range
-from 0-8:20 hours and frequencies 146-156 MHz. The covariance matrix (middle
-row) are constructed by taking the inner product of the data vector and itself,
-summing over the LST axis. The final application of the inverse covaraince to
-the data vector, $\x$, is shown in the last row, constituting one half of the
-quadratic estimator in the formalism shown here. Weighting the data by the
-inverse covariance down weights the strongest modes of the covariance matrix in
-the data, nominally upweighting the noise in the data as seen in the comparison
-of column 4 to column 5, where column 5 is siligtlhy less noisy than the others.} 
+\caption{
+Application of inverse covariance weighting to visibilities from 30 m east-west
+baselines over 146-156 MHz frequecy range and a LST range of 0h00 -- 8h30 used
+in the quadratic estimator of the power spectrum. From top to bottom, each row
+represents (1) the measured visibilities, (2) the covariance matrix derived from
+the visibility, and (3) visibilities after the application of inverse covariance
+weighting.  The left three columns correspond to 3 different baselines of the
+same redundant group prior to delay filtering and the right three columns
+correspond to the same three baselines after the application of the delay
+filter.}
 \label{fig:inv_cov}
 \end{figure*}
 
 \begin{figure*}[t!]\centering
 \includegraphics[width=1.5\columnwidth]{plots/eig.png}
-\caption{Eigenvalues of the covariance matrix (left penel) from foreground
-contained data (blue) and foreground filtered data (green), via the wideband
-delay filter. The eigenspectrum for the foreground contained data has a sharp
-decline for the first few eigen modes and levels of at around 1 K, suggesting
-that most of the variation in the data are only described by a handfull of
-eigenmodes. The four strongest corresponding eigenmodes (top right panel) shows
-that these modes are smooth spectrum modes, suggestive of smooth foregrounds.
-Contrastingly, the eigenspectrum for delay filtered data, in which foregrounds
-are heavily filtered, steadily decreases suggesting that there are not a few
-modes that mostly describe all of the variation in the data. This is paralleled
-in the strongest eigenmodes for this filtered data (bottom right panel) and
-there is no coherent structure to any of these modes. }
+\caption{Eigenspectrum of empirically estimated covariance matrices (left panel)
+from visibilities prior to foreground filtering (blue) and after the application
+of the delay filter(green). The right panel shows the the four strongest
+eigenmodes of the covariance matrix estimated prior to foreground filtering
+(top) and after foreground filtering (bottom).}
+
+%The eigenspectrum for the foreground contained data
+%has a sharp decline for the first few eigen modes and levels of at around 1 K,
+%suggesting that most of the variation in the data are only described by a
+%handfull of eigenmodes. The four strongest corresponding eigenmodes (top right
+%panel) shows that these modes are smooth spectrum modes, suggestive of smooth
+%foregrounds.  Contrastingly, the eigenspectrum for delay filtered data, in which
+%foregrounds are heavily filtered, steadily decreases suggesting that there are
+%not a few modes that mostly describe all of the variation in the data. This is
+%paralleled in the strongest eigenmodes for this filtered data (bottom right
+%panel) and there is no coherent structure to any of these modes. }
 \label{fig:eigs}
 \end{figure*}
 
@@ -1715,32 +1723,41 @@ information contained in the estimate.
 
 \begin{figure}[b!]\centering
 \includegraphics[width=\columnwidth, height=\columnwidth]{plots/fisher.png}
-\caption{Shown here is the Fisher information matrix for a given baseline. The
-Fisher matrix captures the covariance of the intermediate $\qhat$'s with one
-another. The diagonal of the Fisher matrix, gives the auto-covariance of the
-$\qhat$ with itself. The first mode in the horizon has a bulk of the signal
-removed via the dleay filter and since the Fisher matrix takes into account
-inverse covariance weigthing of the data, it upweights those modes.
-Contrastingly, the second mode in the horizon and the first mode outside the
-horizon is suppressed because of some possibly residual signal left by the delay
-filter and kicking up of signal to outside of the horizon. The excess covariance
-cross in the Fisher matrix comes from the inverse covariance weighting applied
-to the data in the calculation of $\qhat$, which downweights the signal.}
+\caption{The Fisher information matrix for the quadratic estimator described in
+equation \ref{eqn:presum_qalpha}, as a function of $k_{\parallel}$. The
+color scale represents strength (from blue to red) of the covariance between
+$k_{\parallel}$ modes.}
+
+%Fisher matrix captures the covariance of the intermediate $\qhat$'s with one
+%another. The diagonal of the Fisher matrix, gives the auto-covariance of the
+%$\qhat$ with itself. The first mode in the horizon has a bulk of the signal
+%removed via the dleay filter and since the Fisher matrix takes into account
+%inverse covariance weigthing of the data, it upweights those modes.
+%Contrastingly, the second mode in the horizon and the first mode outside the
+%horizon is suppressed because of some possibly residual signal left by the delay
+%filter and kicking up of signal to outside of the horizon. The excess covariance
+%cross in the Fisher matrix comes from the inverse covariance weighting applied
+%to the data in the calculation of $\qhat$, which downweights the signal.}
 \label{fig:fisher}
 \end{figure}
 
 
 \begin{figure*}[t!]\centering
 \includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
-\caption{Plotted is the cumulative mean for band powers at a given $k$-mode,
-where the colors indicate the mode being integrated, with blue being the most
-interior modes and walking out to the exterior modes in green; red being the
-modes in the middle. On the right is the same plot, except using a median
-instead of the mean as the statistic. The behaviour of either of these
-statistics is very similar with modes that bottom out on something and there
-modes that seem to take a dive as more modes are used. Assuming gaussian
-statistics, there is an overall correction factor of 1.4 for using the median
-statistic relative to the mean.}
+\caption{Cumulative mean (left) and median (right) of band powers for a
+given $k$-mode in the power spectrum shown in figure \ref{fig:final_pspec}.
+Color represents the absolute value of $k$-mode being integrated, from small to
+large modes represented from blue to green, respectively.}
+
+%Plotted is the cumulative mean for band powers at a given $k$-mode,
+%where the colors indicate the mode being integrated, with blue being the most
+%interior modes and walking out to the exterior modes in green; red being the
+%modes in the middle. On the right is the same plot, except using a median
+%instead of the mean as the statistic. The behaviour of either of these
+%statistics is very similar with modes that bottom out on something and there
+%modes that seem to take a dive as more modes are used. Assuming gaussian
+%statistics, there is an overall correction factor of 1.4 for using the median
+%statistic relative to the mean.}
 \label{fig:pspec_variance}
 \end{figure*}
 
@@ -1864,7 +1881,7 @@ averaged over realizations. The final result is shown in figure
 \ref{fig:signal_loss}
 
 \begin{table}[htdp]
-\caption{TABULATED SIGNAL LOSS THROUGH VARIOUS ANALYSES.}
+\caption{TABULATED SIGNAL LOSS THROUGH VARIOUS ANALYSIS STAGES}
 \begin{center}
 \begin{tabular}{|c|c|c|}\hline
 Analysis Step & Typical Loss & Maximum Signal Loss \\ \hline \hline
@@ -2050,34 +2067,42 @@ to infer the true signal amplitude on the sky. [XXX add some more here]
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=2.3\columnwidth]{plots/density.png}
-\caption{Plotted is the density of the real part of
-complex visibilities for a set of redundant baselines, those strictly
-east-west 30 m baselines, at a frequency of XXX for all integrations. The
-color scale corresponds to the number of samples that went into a specific
-LST/visibility bin. The bulk of the samples recorded, range from an LST of 5 to
-10 hours, whilst the EoR cold spot ranges from 0 to 4 hours as seen in figure
-\ref{fig:coverage}. For the densest regions, the spread in visibility for a
-given LST sample is $\approx{100} \,\text{Jy}$. The agreement between redundant
-baselines here gives us reassurance that our baselines are actually measuring
-the same fourier modes on the sky.}
+\caption{Real part of 
+complex visibilities for the strictly east-west 30 m redundant group of
+baselines at XXX MHz, for all integrations. The
+color scale corresponds to the number of samples that went into the specific
+LST/visibility bin. For the densest regions, the spread in visiblities is
+approximately 100 Jy.}
+
+%The bulk of the samples recorded, range from an LST of 5 to
+%10 hours, whilst the EoR cold spot ranges from 0 to 4 hours as seen in figure
+%\ref{fig:coverage}. For the densest regions, the spread in visibility for a
+%given LST sample is $\approx{100} \,\text{Jy}$. The agreement between redundant
+%baselines here gives us reassurance that our baselines are actually measuring
+%the same fourier modes on the sky.}
 \label{fig:density}
 \end{figure*}
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{plots/stability.png}
-\caption{Demonstration of the time stability of the instrument. For a given LST
-bin, we take the day to day samples that go into that bin and determine the
-power spectrum for that time seris. Shown here is the power spectrum of the time
-series over 134 days for baseline 1\_4 at 150 MHz (XXX) averaged over 5 hours in
-LST. Power at 1/134 days$^{-1}$ is the DC bin, accumulating the average of the
-time signal. The power spectrum folows a noise like power spectrum throughout
-with a slight uptic at the temporal frequency corresponding to 2 days. This is
-due to the fact that the integration time does not fully divide out a sidereal
-day, but has a remiainder of $\frac{1}{2}$, piling up power on the everyother day
-time scale. (XXX need to be more clear here, I think. a.const.sidereal\_day/42.9
-= 2008.487, a.const.sidereal\_day/42.94 = 2006.616.)
-}
+\caption{The power spectrum of the time series that went into LST averaging at
+150 MHz for the full 135 day observation described in section
+\ref{sec:observations} using a single 30 m east-west baseline. The power
+spectrum was averaged of a 5 hour LST range to beat down noise.}
+
+%Demonstration of the time stability of the instrument. For a given LST
+%bin, we take the day to day samples that go into that bin and determine the
+%power spectrum for that time seris. Shown here is the power spectrum of the time
+%series over 134 days for baseline 1\_4 at 150 MHz (XXX) averaged over 5 hours in
+%LST. Power at 1/134 days$^{-1}$ is the DC bin, accumulating the average of the
+%time signal. The power spectrum folows a noise like power spectrum throughout
+%with a slight uptic at the temporal frequency corresponding to 2 days. This is
+%due to the fact that the integration time does not fully divide out a sidereal
+%day, but has a remiainder of $\frac{1}{2}$, piling up power on the everyother day
+%time scale. (XXX need to be more clear here, I think. a.const.sidereal\_day/42.9
+%= 2008.487, a.const.sidereal\_day/42.94 = 2006.616.)
+%}
 \label{fig:stability}
 \end{figure}
 
@@ -2124,12 +2149,14 @@ as in P14 and \citet{jacobs_et_al2014} at $T_{sys} =
 
 \begin{figure}[b!]\centering
 \includegraphics[width=\columnwidth]{plots/tsys.png}
-\caption{System temperature as a function of frequency plotted for multiple LST
-bands. $T_{sys}$ is calculated for every integration using the variance
-statistic calculated in every LST bin and average on hour time scales to
-estimate the $T_{sys}$ reported here. For a majority of the LST bins, especially
-those bins used in our analysis, the system temperature is about 500K at 160
-MHz, consistent with previous estimates of the system temperature.}
+\caption{System temperature as a function of frequency plotted for multiple 1
+hour LST ranges. For the majority of the LST range used in the analaysis, we
+find that $T_{sys}=500K$ at 160 MHz.}
+
+%statistic calculated in every LST bin and average on hour time scales to
+%estimate the $T_{sys}$ reported here. For a majority of the LST bins, especially
+%those bins used in our analysis, the system temperature is about 500K at 160
+%MHz, consistent with previous estimates of the system temperature.}
 \label{fig:tsys}
 \end{figure}
 Previous estimates of the system temperature
@@ -2274,7 +2301,7 @@ the maximum value of the prefactor in \ref{d2pspec_model} is given by
 We now consider the "patchy" reionization model described in P14 and P12a which
 approximates the 21 cm power spectrum as being flat between some $k_{\text{min}}$ and
 $k_{\text{max}}$ cutoff values in $k$, 
-\begin{equation}\label{eqn:patchy_bounds}
+\begin{equation}\label{eqn:patchy_bound}
     \Delta^{2}_{i}(k) = (x_{\text{HI}} -
 x_{\text{HI}}^{2})/\ln{i(k_{\text{max}}/k_{\text{min}})}.
 \end{equation}
@@ -2336,35 +2363,40 @@ for the three different neutral fractions $x_{\text{HI}}=\text{.1, .3, and .5}$
 \begin{figure*}[h!]\centering
 \includegraphics[width=2\columnwidth,height=1.2\columnwidth]{plots/pk_k3pk.png}
 \caption{
-Power spectrum at $z=8.4$ resulting from a 134 day PAPER observation
+Power spectrum, shown as P($k$) (left) and $\Delta^{2}$ (right), at $z=8.4$ resulting from a 134 day PAPER observation
 with 64 dual polarization antennas layed out in a maximally redundant grid. The
 black points are the final power spectrum with 2$\sigma$ error bars. The dashed
-vertical lines at $k\approx{.6\ h\ Mpc^{-1}}$ corresponds to the horizon limit
-plus the 15 ns standoff in the delay filter. The left panel shows P($k$) wheras
-the right panel corresponds to the dimensionless power spectra $\Delta^{2}$,
-which has the positive and negative $k_{\parallel}$'s averaged together in
-P($k$). XXX (To be done) The solid cyan curve is the power spectrum of the
-foreground contained data. The dashed cyan curve in $\Delta^{2}$ correspond the
-the theoretical 2 sigma error bars for a noise power spectrum with system
-temperature 550 K. XXX Using 100 bootstraps. Correction factors are fringe rate
-filter (1.9), signal loss (1.15), and median statistic (1.4)
-}
+vertical lines at $k\approx{.6\ h\ Mpc^{-1}}$ corresponds to the bounds of the
+delay filter described in section \ref{sec:delay_filter}. The theoretical
+$2\sigma$ thermal noise power spectrum (dashed cyan) corresponds to the
+theoretical minimum error bars consistent $T_{sys}=500K$.
+XXX (To be done) The solid cyan curve is the power spectrum of the
+foreground contained data. 
+XXX Using 100 bootstraps. Correction factors are fringe rate
+filter (1.9), signal loss (1.15), and median statistic (1.4)}
 \label{fig:final_pspec}
 \end{figure*}
 
 
 \begin{figure}[t!]\centering
 \includegraphics[width=\columnwidth]{plots/flat_k3pk_posterior.png}
-\caption{The posteriror distributiom assuming a flat, gaussian power spectrum in
-$\Delta^{2}$ (blue). The green and red horizontal lines correspond to the 1 and
-2 $\sigma$ upper limits, respectrively, on the power spectrum. XXXfix sigma
-lines to be vertical. Make it look better. Labels.}
+\caption{The posteriror distribution of power spectrum values in $\Delta^{2}$
+assuming a flat power spectrum and gaussian error bars. The green and red
+horizontal lines correspond to the 1 and 2 $\sigma$ upper limits, respectrively,
+on the power spectrum. XXXfix sigma lines to be vertical. Make it look better.
+Labels.}
 \label{fig:final_posterioir}
 \end{figure}
 
 \begin{figure*}[b!]\centering
 \includegraphics[width=2\columnwidth]{plots/patchy_bound.png}
-\caption{}
+\caption{The constraints imposed on the absolute value of the brightness
+temperature by the $2\sigma$ upper limits shown in figure \ref{fig:final_pspec}
+for 5 different neutral fractions using the patchy reionization scenario given
+by equation \ref{eqn:patchy_bound} The color scale maxes out at the largest
+possible brightness temperature (380 mK) imposed by the no heating scenario at
+$z=8.4$. The horizontal and vertical axis correspond to the minimum and maximum
+scales included in the patchy reionization model.}
 \label{fig:patchy_bound}
 \end{figure*}
 
@@ -2396,15 +2428,20 @@ lines to be vertical. Make it look better. Labels.}
 
 \begin{figure*}[t!]\centering
 \includegraphics[width=2\columnwidth]{plots/pspec_comparison.png}
-\caption{The comparison of power spectra with and without various analysis in
-the pipeline applied to it. The blue power spectrum has the full pipeline
-applied to it and is identical to \ref{fig:final_pspec}. The red power spectrum
-does not have omnical applied to it, and hence the error bars are bigger. Note
-that it does have the otimal fringe rate filter applied to it. Finally, the
-green power sepctrum does not have the optimal fringe rate filter applied.
-However, it does have a fringe rate filter applied to that excludes negative
-fringe rates and those greater than the maimum fringe rate for the given
-baseline (east-west 30 m baselines). }
+\caption{Power spectra with and without various analysis stages applied to data.
+Power spectra without optimal fringe rate filtering (dot-dashed) and without
+omnical calibration (dashed) are shown along with the final power spectrum
+(solid) as shown in figure \ref{fig:final_pspec}. This veritcal dashed line
+corresponds to the bounds of the wideband delay filter. }
+
+
+%The blue power spectrum has the full pipeline applied to it and is identical to
+%\ref{fig:final_pspec}. The red power spectrum does not have omnical applied to
+%it, and hence the error bars are bigger. Note that it does have the otimal
+%fringe rate filter applied to it. Finally, the green power sepctrum does not
+%have the optimal fringe rate filter applied.  However, it does have a fringe
+%rate filter applied to that excludes negative fringe rates and those greater
+%than the maimum fringe rate for the given baseline (east-west 30 m baselines). }
 \label{fig:pspec_comp}
 \end{figure*}
 
