@@ -1,4 +1,4 @@
-\begin{thebibliography}{79}
+\begin{thebibliography}{83}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Bolton} {et~al.}(2011){Bolton}, {Haehnelt}, {Warren}, {Hewett},
@@ -233,6 +233,13 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
 {Parsons}, A., {Pober}, J., {McQuinn}, M., {Jacobs}, D., \& {Aguirre}, J.
   2012{\natexlab{a}}, \apj, 753, 81
 
+\bibitem[{{Parsons} {et~al.}(2006){Parsons}, {Backer}, {Chang}, {Chapman},
+  {Chen}, {Crescini}, {de Jesus}, {Dick}, {Droz}, {MacMahon}, {Meder}, {Mock},
+  {Nagpal}, {Nikolic}, {Parsa}, {Richards}, {Siemion}, {Wawrzynek},
+  {Werthimer}, \& {Wright}}]{parsons_et_al2006}
+{Parsons}, A., {et~al.} 2006, in Asilomar Conference on Signals and Systems,
+  Pacific Grove, CA, 2031--2035
+
 \bibitem[{{Parsons} {et~al.}(2008){Parsons}, {Backer}, {Siemion}, {Chen},
   {Werthimer}, {Droz}, {Filiba}, {Manley}, {McMahon}, {Parsa}, {MacMahon}, \&
   {Wright}}]{parsons_et_al2008}
@@ -275,6 +282,11 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   {Aumont}, {Baccigalupi}, {Banday}, \& et~al.}]{planck_et_al2014}
 {Planck Collaboration} {et~al.} 2014, \aap, 571, A16
 
+\bibitem[{{Planck Collaboration} {et~al.}(2015){Planck Collaboration}, {Ade},
+  {Aghanim}, {Arnaud}, {Ashdown}, {Aumont}, {Baccigalupi}, {Banday},
+  {Barreiro}, {Bartlett}, \& et~al.}]{planck_2015}
+---. 2015, ArXiv e-prints
+
 \bibitem[{{Pober} {et~al.}(2012){Pober}, {Parsons}, {Jacobs}, {Aguirre},
   {Bradley}, {Carilli}, {Gugliucci}, {Moore}, \& {Parashare}}]{pober_et_al2012}
 {Pober}, J.~C., {et~al.} 2012, \aj, 143, 53
@@ -288,6 +300,12 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   {Bradley}, {Carilli}, {DeBoer}, {Hewitt}, {Jacobs}, {McQuinn}, {Morales},
   {Parsons}, {Tegmark}, \& {Werthimer}}]{pober_et_al2014}
 ---. 2014, \apj, 782, 66
+
+\bibitem[{{Pober} {et~al.}(2015){Pober}, {Ali}, {Parsons}, {Aguirre},
+  {Bernardi}, {Bradley}, {Carilli}, {Cheng}, {DeBoer}, {Dexter}, {Jacobs},
+  {Klima}, {Liu}, {MacMahon}, {Moore}, {Stefan}, {Walbrugh}, {Walker}, \&
+  {Zheng}}]{pober_et_al2015}
+---. 2015, ArXiv e-prints
 
 \bibitem[{{Presley} {et~al.}(2015){Presley}, {Liu}, \&
   {Parsons}}]{presley_et_al2015}
@@ -427,6 +445,9 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
 
 \bibitem[{{Wieringa}(1992)}]{wieringa1992}
 {Wieringa}, M.~H. 1992, Experimental Astronomy, 2, 203
+
+\bibitem[{{Wouthuysen}(1952)}]{wouthuysen1952}
+{Wouthuysen}, S.~A. 1952, \aj, 57, 31
 
 \bibitem[{{Wu}(2009)}]{wu2009}
 {Wu}, X. 2009, in Bulletin of the American Astronomical Society, Vol.~41,
