@@ -2226,7 +2226,7 @@ are spreading power outside of the horizon and instrumental systematics. In
 addition our $2\sigma$ upper limit is also consistent with zero and therefore we
 are noise dominated and are hence lacking sensitivity.
 
-\subsection{Brightness Temperature Contstraints}
+\subsection{Spin Temperature Contstraints}
 With the new upper limits presented in figure \ref{fig:final_pspec} of the 21 cm
 power spectrum,  we can put constraints on the mean brightness
 temperature of the 21 cm line at $z=8.4$, as done in P14.
@@ -2320,6 +2320,16 @@ and \ref{eqn:maxxi} we get that the the maximum value of the prefactor in
     \text{max}[T_{0}(z)\xi(z)] \approx 370\big(\frac{10}{1+z}\big)^{1/2}.
 \end{equation}
 
+By rearranging equation \ref{d2pspec_model}, we get that 
+\begin{equation}
+    T_{b} = T_{0}(z)\xi(z) = T_{0}(z)(1 - \frac{T_{\gamma}}{T_{spin}},
+\end{equation}
+noting the fact that in our no heating scenario, the brightness temperature is
+negative. Solving for the spin temperature, we have that 
+\begin{equation}
+    T_{s}(z) = T_{\gamma}(z)\Big[1 - \frac{T_{b}}{T_{0}(z)}\Big]^{-1}.
+\end{equation}
+
 We now consider the "patchy" reionization model described in P14 and P12a which
 approximates the 21 cm power spectrum as flat between some minimum and maximum
 scales, $k_{\text{min}}$ and $k_{\text{max}}$, respectively,
@@ -2329,23 +2339,14 @@ x_{\text{HI}}^{2})/\ln{i(k_{\text{max}}/k_{\text{min}})}.
 \end{equation}
 Under this model, for every pair of $k_{\text{min}}$ and $k_{\text{max}}$ in a
 grid, we 
-determine the maximum mean brightness temperature above which equation
+determine the minimum  spin temperature below which equation
 \ref{eqn:d2pspec_model} becomes inconsisitent with our $2\sigma$ 21 cm power
 spectrum upper limits shown in figure \ref{fig:final_pspec}.
 Figure \ref{fig:patchy_bound} shows the results of these bounds
-for neutral fractions of $x_{\text{HI}}=\text{.1, .3, .5, .7, and .9}$. 
-
-Using the results in figure \ref{fig:patchy_bound}, we can put a limit on the
-spin temperature. We first consider the the limit of the mean value of $T_{b}$,
-which by equation \ref{eqn:d2pspec_model} we get that 
-\begin{equation}
-    T_{b} = T_{0}(z)\xi(z), 
-\end{equation}
-noting the fact that in our no heating scenario, the brightness temperature is
-negative. 
-
-
-
+for neutral fractions of $x_{\text{HI}}=\text{.1, .3, .5, .7, and .9}$.
+Throughout all neutral fractions, we find that $T_{s} \gtrsim 3\,\text{K}$ for all
+$k$-modes in question. Furthermore, the kinetic temperature at $z=8.4$ is
+$T_{k}(8.4) = 1.6\, \text{K} \, < \,T_{s}(8.4)$. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   -Tsys, and Tsys vs. time ?
@@ -2430,16 +2431,20 @@ XXX flat over what range of k?  how influenced by first 2 points outside horizon
 \end{figure}
 
 \begin{figure*}[b!]\centering
-\includegraphics[width=2\columnwidth]{plots/patchy_bound.png}
-\caption{The constraints imposed on the absolute value of the brightness
-temperature by the $2\sigma$ upper limits shown in figure \ref{fig:final_pspec}
-for 5 different neutral fractions using the patchy reionization scenario given
-by equation \ref{eqn:patchy_bound} The color scale maxes out at the largest
-possible brightness temperature (380 mK) imposed by the no heating scenario at
-$z=8.4$. The horizontal and vertical axis correspond to the minimum and maximum
-scales included in the patchy reionization model.
-XXX convert to Tspin, not Tb
-}
+\includegraphics[width=2\columnwidth]{plots/ts_patchy_bound.png}
+\caption{The constraints imposed on the spin temperature of the 21 cm
+transition by the $2\sigma$ upper limits shown in figure \ref{fig:final_pspec}
+for 5 different neutral fractions}
+
+%on the absolute value of the brightness
+%temperature by the $2\sigma$ upper limits shown in figure \ref{fig:final_pspec}
+%for 5 different neutral fractions using the patchy reionization scenario given
+%by equation \ref{eqn:patchy_bound} The color scale maxes out at the largest
+%possible brightness temperature (380 mK) imposed by the no heating scenario at
+%$z=8.4$. The horizontal and vertical axis correspond to the minimum and maximum
+%scales included in the patchy reionization model.
+%XXX convert to Tspin, not Tb
+%}
 \label{fig:patchy_bound}
 \end{figure*}
 
