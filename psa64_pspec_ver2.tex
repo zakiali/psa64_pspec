@@ -633,8 +633,8 @@ where $S_{150} = 382 \text{Jy} \pm 5.4$ and $\alpha = -.76 \pm .01$, with
 %Pictor A spectrum and the model spectrum derived from \cite{jacobs_et_al2013}.
 
 
-To derive the source spectrum from our measurements, we use LST-averaged data
-(see section \ref{sec:lstbin}) prior the wide-band delay filter, for the hour
+To derive the source spectrum from our measurements, we use data that have been LST-averaged
+prior the wide-band delay filter described in Section \ref{sec:wbd_filtering}, for the hour
 before and after the transit of Pictor A. We image a $30^\circ \times 30^\circ$
 field of view for every frequency channel for each 10 minute snapshot and apply
 uniform weights to the gridded visibilities. We account for the required three
@@ -1170,22 +1170,24 @@ in SNR depends on where the array is located.
 We implement the optimal fringe-rate filter by calculating the fringe rates at
 every point on the sky, for a given frequency, and weighting each bin by the
 beam of a given baseline. It is worth noting that fringe-rate filtering is
-baseline dependent and hence is implemented on a per baseline basis. We weight
+baseline dependent and hence is implemented on a per-baseline basis. We weight
 the fringe-rate bins on the sky by the beam pattern at the same point on the
-sky. In order to obtain a smoothe filter in the fringe-rate domain, we fit a
-gaussian with a tanh tail to this filter as shown in figure
-\ref{fig:fringe_rate_cut}. We then fourier transform this to obtain the time
+sky. In order to obtain a smooth filter in the fringe-rate domain, we fit a
+gaussian with a hyperbolic tangent tail to this filter. %as shown in figure \ref{fig:fringe_rate_cut}. 
+% XXX too much detail
+We then fourier transform this to obtain the time
 domain filter, multiply by a blackman-harris window function to damp the tails
 of the filter, and finally convolve with the visibilites to effect time domain
 integration.
 
 Since the PAPER beam is ~45 degrees, and the array is located at a declination
 of $-30^{\circ}$ the fringe rates associated with the low signal to noise (down
-in the beam) correspond to very high and very low/negative fringe rates. Figure
-\ref{fig:fringe_rate_cut} shows a cut of the optimal fringe-rate filter at 159 MHz for
-a 30-m east west baseline. Therefore, the implemented fringe-rate filter removes
+in the beam) correspond to very high and very low/negative fringe rates.
+%Figure \ref{fig:fringe_rate_cut} shows a cut of the optimal fringe-rate filter at 159 MHz for
+%a 30-m east west baseline. 
+Therefore, the implemented fringe-rate filter removes
 some sky signal, signal associated with fringe rates outside of the ranges shown
-in Figure \ref{fig:fringe_rate_cut}. Figure \ref{fig:fr_preserved_signal} shows
+in Figure \ref{fig:fr_preserved_signal}. Figure \ref{fig:fr_preserved_signal} shows
 that the applied filter removes sky associated with negative fringe rates and
 very high fringe rates. 
 
