@@ -397,14 +397,13 @@ wide-band delay filter, we average the data in local sidereal time and apply a
 fringe-rate filter to optimally combine the time domain data. Finally, we use
 optimal quadratic estimators to make our estimate of the 21 cm power spectrum.
 
-\subsection{Calibration}\label{sec:calibration}
 The calibration procedure employed in this analysis is twofold: a relative
 calibration and an absolution calibration. The relative calibration employed
 uses the fact that PAPER contains numerous redundant baselines. As usual, the
 absolute calibration uses self calibration methods employed by radio
 interferometers. Here we describe both procedures.
 
-\subsubsection{Relative Calibration}
+\subsection{Relative Calibration}
 %    -Principles of redundant calibration. Fact that there is no signal loss in
 %       this kind of measurement.
 %       --PAPER has a redundant configuration. Therefore the number of baselines
@@ -562,7 +561,7 @@ additive offset that it subtracts from each visibility before running fitting
 for solutions once again. This additive offset is in effect averaging deviations
 from the $chi^{2}$ over 10 minutes and subtracting that deviation off.
 
-\subsubsection{Absolute Calibration} 
+\subsection{Absolute Calibration} 
 %    -Selfcal to pictor, fornax, and crab (to get the north-south components).
 %       --Reiterate that redundant cal does not solve for the overall flux and
 %         phase parameters. 
@@ -1421,7 +1420,7 @@ covariance matrices.
 %   -Counting of independent modes.
 %       --Number of independent modes = 2*#of lst hours used in analysis. This
 %         is because 1900 seconds ~ 30 minutes.
-\subsubsection{Review of Optimal Quadratic Estimators}
+\subsection{Review of Optimal Quadratic Estimators}
 We use the optimal quadratic estimator method to estimate our power spectrum as
 done in \cite{dillon_et_al2013a} and \cite{liu_tegmark2011}.  Here we briefly review the
 optimal quadratic esitimator (OQE) formalism with an emphasis on our application
@@ -1555,7 +1554,7 @@ where $\mathbf{F}$ is the Fisher matrix. The error correlation matrix describes
 how correlated the errors between modes are in the final power spectrum result.
 
 
-\subsubsection{Application of Optimal Quadratic Estimators}
+\subsection{Application of Optimal Quadratic Estimators}
 \label{sec:oqe_app}
 % A walk through of the application to the data.
 
@@ -2326,7 +2325,7 @@ equation \ref{eqn:d2pspec_model} is given by
     \text{max}[T_{0}(z)\xi(z)] \approx 370\big(\frac{10}{1+z}\big)^{1/2}.
 \end{equation}
 
-By rearranging equation \ref{d2pspec_model}, we get that 
+By rearranging equation \ref{eqn:d2pspec_model}, we get that 
 \begin{equation}
     T_{b} = T_{0}(z)\xi(z) = T_{0}(z)(1 - \frac{T_{\gamma}}{T_{spin}},
 \end{equation}
