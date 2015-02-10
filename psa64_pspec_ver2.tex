@@ -1767,6 +1767,7 @@ in the distribution of values, likely as a result of foreground contamination.
 
 
 \subsection{The Covariance Matrix and Signal Loss}
+\label{sec:sigloss}
 %Covariance matrix nuances.
 %   -describe covariance matrix and data vectors.
 %   -How we get the covariance matrix. 
@@ -1885,13 +1886,13 @@ averaged over realizations. The final result is shown in figure
 \ref{fig:signal_loss}
 
 \begin{table}[htdp]
-\caption{SIGNAL LOSS ANALYSIS STAGES}
+\caption{SIGNAL LOSS VERSUS ANALYSIS STAGE}
 \begin{center}
 \begin{tabular}{rll}
-Analysis Step & Typical Loss & Maximum Signal Loss \\ \hline
-Flux Scale Calibration &  $\ll 2 \times 10^{-7}$ \% & 3\% \\
-Delay Filtering & 4.8\% & .0015\% \\
-Quadratic Estimator & XXX & 100\% \\
+Analysis Stage & Typical Loss & Maximum Loss \\ \hline
+Flux Scale Calibration &  $< 2 \times 10^{-9}$ & 0.03 \\
+Delay Filtering & $1.5\times10^{-5}$ & 0.048 \\
+Quadratic Estimator & $<0.02$ & 0.89 \\
 \end{tabular}
 \end{center}
 \label{tbl:sigloss}
@@ -1988,11 +1989,18 @@ median statistic over the mean, for a gaussian distributed signal.
 \centering
 \includegraphics[width=\columnwidth]{plots/sigloss.png}
 \caption{
-Recovered power spectrum signal as a function of injected signal amplitude.  Red lines
-indicate the measured amplitude of power spectrum modes in Figure \ref{fig:XXX}.  Because
-the recovered signal amplitude is an invertible function of the injected signal amplitude,
+Recovered power spectrum signal as a function of injected signal amplitude.  Shaded regions
+indicate the range in measured amplitude of power spectrum modes in Figure \ref{fig:final_pspec}.  
+Error bars indicate 95\% confidence intervals as determined from the Monte Carlo simulations
+described in Section \ref{sec:sigloss}.
+Because
+the recovered signal amplitude is a monotonic function of the injected signal amplitude,
 it is possible to invert the effects of signal loss in the measured power spectrum values
-to infer the true signal amplitude on the sky. [XXX add some more here]
+to infer the true signal amplitude on the sky. Over the range of powers measured, the 
+maximum correction factor $P_{\rm in}/P_{\rm out}$ is less than 1.02 at 97.5\% confidence.
+The transition to significantly higher correction factors at larger signal amplitudes
+occurs as the injected signal
+dominates over the foreground modes present in estimates of the data covariance.
 }\label{fig:signal_loss}
 \end{figure}
 
@@ -2071,30 +2079,28 @@ to infer the true signal amplitude on the sky. [XXX add some more here]
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=2.3\columnwidth]{plots/density.png}
-\caption{Real part of 
-complex visibilities for the strictly east-west 30 m redundant group of
-baselines at 149.5 MHz, for all integrations. The
-color scale corresponds to the number of samples that went into the specific
-LST/visibility bin. For the densest regions, the spread in visiblities is
-approximately 100 Jy.}
-
+\caption{Histogram of the real component of 
+all calibrated visibilities measured over XXX days with all redundant east-west 30-m 
+baselines at 149.5 MHz. 
+Color scale indicates the number of samples falling in an LST/flux-density bin.
+This plot serves to illustrate the stability of the PAPER instrument and the precision
+of calibration.
 %The bulk of the samples recorded, range from an LST of 5 to
 %10 hours, whilst the EoR cold spot ranges from 0 to 4 hours as seen in figure
 %\ref{fig:coverage}. For the densest regions, the spread in visibility for a
 %given LST sample is $\approx{100} \,\text{Jy}$. The agreement between redundant
 %baselines here gives us reassurance that our baselines are actually measuring
 %the same fourier modes on the sky.}
-\label{fig:density}
+}\label{fig:density}
 \end{figure*}
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{plots/stability.png}
-\caption{The power spectrum of the time series that went into LST averaging at
-150 MHz for the full 135 day observation described in section
-\ref{sec:observations} using a single 30 m east-west baseline. The power
-spectrum was averaged of a 5 hour LST range to beat down noise.}
-
+\caption{Power spectrum of 135 days of time-series data contributing to a single LST bin,
+illustrating the stability of measurements over the observing campaign.  The excess at
+2-day timescales is a beat frequency associated with the changing alignment of 
+integration windows in the correlator with respect to sidereal time.  
 %Demonstration of the time stability of the instrument. For a given LST
 %bin, we take the day to day samples that go into that bin and determine the
 %power spectrum for that time seris. Shown here is the power spectrum of the time
@@ -2107,7 +2113,7 @@ spectrum was averaged of a 5 hour LST range to beat down noise.}
 %time scale. (XXX need to be more clear here, I think. a.const.sidereal\_day/42.9
 %= 2008.487, a.const.sidereal\_day/42.94 = 2006.616.)
 %}
-\label{fig:stability}
+}\label{fig:stability}
 \end{figure}
 
 
@@ -2153,15 +2159,15 @@ as in P14 and \citet{jacobs_et_al2014} at $T_{sys} =
 
 \begin{figure}[b!]\centering
 \includegraphics[width=\columnwidth]{plots/tsys.png}
-\caption{System temperature as a function of frequency plotted for multiple 1
-hour LST ranges. For the majority of the LST range used in the analaysis, we
-find that $T_{sys}=500K$ at 160 MHz.}
-
+\caption{System temperature, inferred from the variance of samples falling 
+in an LST bin, averaged over one-hour intervals in LST.  The measured value
+in the 150--160 MHz range is consistent with previous determinations of
+system temperature (P14; \citealt{jacobs_et_al2014}).
 %statistic calculated in every LST bin and average on hour time scales to
 %estimate the $T_{sys}$ reported here. For a majority of the LST bins, especially
 %those bins used in our analysis, the system temperature is about 500K at 160
 %MHz, consistent with previous estimates of the system temperature.}
-\label{fig:tsys}
+}\label{fig:tsys}
 \end{figure}
 Previous estimates of the system temperature
 (P14; \citealt{jacobs_et_al2014}) relied on differencing and averaging
@@ -2367,13 +2373,15 @@ for the three different neutral fractions $x_{\text{HI}}=\text{.1, .3, and .5}$
 \begin{figure*}[h!]\centering
 \includegraphics[width=2\columnwidth,height=1.2\columnwidth]{plots/pk_k3pk.png}
 \caption{
-Power spectrum, shown as P($k$) (left) and $\Delta^{2}$ (right), at $z=8.4$ resulting from a 134 day PAPER observation
-with 64 dual polarization antennas layed out in a maximally redundant grid. The
-black points are the final power spectrum with 2$\sigma$ error bars. The dashed
-vertical lines at $k\approx{.6\ h\ Mpc^{-1}}$ corresponds to the bounds of the
-delay filter described in section \ref{sec:delay_filter}. The theoretical
-$2\sigma$ thermal noise power spectrum (dashed cyan) corresponds to the
-theoretical minimum error bars consistent $T_{sys}=500K$.
+Measured power spectrum (black dots with 2$\sigma$ error bars)
+at $z=8.4$ resulting from a 134-day observation with PAPER-64.
+The dashed
+vertical lines at $.6\ h\ Mpc^{-1}$ show the bounds of the
+delay filter described in Section \ref{sec:delay_filter}. The theoretical
+$2\sigma$ thermal noise power spectrum is shown in dashed cyan, assuming
+$T_{sys}=500K$.
+XXX signal prediction in magenta.
+XXX other measurements: P14, dillon, gmrt.
 XXX (To be done) The solid cyan curve is the power spectrum of the
 foreground contained data. make foreground pspec.
 XXX Need to fix noise curve. It is completely wrong.
@@ -2385,12 +2393,15 @@ filter (1.9), signal loss (1.15), and median statistic (1.4)}
 
 \begin{figure}[t!]\centering
 \includegraphics[width=\columnwidth]{plots/flat_k3pk_posterior.png}
-\caption{The posteriror distribution of power spectrum values in $\Delta^{2}$
-assuming a flat power spectrum and gaussian error bars. The green and red
+\caption{Posterior distribution of power spectrum amplitude for a flat $\Delta^{2}$
+power spectrum,
+assuming Gaussian error bars. The green and red
 horizontal lines correspond to the 1 and 2 $\sigma$ upper limits, respectrively,
 on the power spectrum. XXXfix sigma lines to be vertical. Make it look better.
-Labels.}
-\label{fig:final_posterioir}
+Labels.
+XXX flat over what range of k?  how influenced by first 2 points outside horizon?
+}
+\label{fig:final_posterior}
 \end{figure}
 
 \begin{figure*}[b!]\centering
@@ -2401,7 +2412,9 @@ for 5 different neutral fractions using the patchy reionization scenario given
 by equation \ref{eqn:patchy_bound} The color scale maxes out at the largest
 possible brightness temperature (380 mK) imposed by the no heating scenario at
 $z=8.4$. The horizontal and vertical axis correspond to the minimum and maximum
-scales included in the patchy reionization model.}
+scales included in the patchy reionization model.
+XXX convert to Tspin, not Tb
+}
 \label{fig:patchy_bound}
 \end{figure*}
 
@@ -2433,13 +2446,13 @@ scales included in the patchy reionization model.}
 
 \begin{figure*}[t!]\centering
 \includegraphics[width=2\columnwidth]{plots/pspec_comparison.png}
-\caption{Power spectra with and without various analysis stages applied to data.
-Power spectra without optimal fringe rate filtering (dot-dashed) and without
-omnical calibration (dashed) are shown along with the final power spectrum
-(solid) as shown in figure \ref{fig:final_pspec}. This veritcal dashed line
-corresponds to the bounds of the wideband delay filter. }
-
-
+\caption{Diagnostic power spectra in the style of Figure \ref{fig:final_pspec}
+illustrating the impact of various analysis stages.
+Power spectra omitting the stages of fringe-rate filtering (dot-dashed) and 
+Omnical calibration (dashed) show higher residuals than the the final power spectrum
+(solid) that includes both stages.
+[XXX update this with same pspec as final figure]
+[XXX put the power spectra even closer together]
 %The blue power spectrum has the full pipeline applied to it and is identical to
 %\ref{fig:final_pspec}. The red power spectrum does not have omnical applied to
 %it, and hence the error bars are bigger. Note that it does have the otimal
@@ -2447,7 +2460,7 @@ corresponds to the bounds of the wideband delay filter. }
 %have the optimal fringe rate filter applied.  However, it does have a fringe
 %rate filter applied to that excludes negative fringe rates and those greater
 %than the maimum fringe rate for the given baseline (east-west 30 m baselines). }
-\label{fig:pspec_comp}
+}\label{fig:pspec_comp}
 \end{figure*}
 
 Here, we discuss the effect to the power spectrum if various stages of the
