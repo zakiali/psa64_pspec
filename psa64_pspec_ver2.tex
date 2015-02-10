@@ -2222,98 +2222,123 @@ are noise dominated and are hence lacking sensitivity.
 
 \subsection{Brightness Temperature Contstraints}
 With the new upper limits presented in figure \ref{fig:final_pspec} of the 21 cm
-power spectrum,  we can begin to put constraints on the mean brightness
-temperature of the 21 cm line. We can begin to provide contstraints on the
-neutral fraction and heating of the IGM at a redshift of 8.4. In a companion
+power spectrum,  we can put constraints on the mean brightness
+temperature of the 21 cm line at $z=8.4$, as done in P14.
+In a companion
 paper \citep{pober_et_al2015a}, we conduct a thorough analysis of the
-constraints we can put on the IGM using reionation simulations with 21cmFAST
-[XXXcite], a 21 cm simulation code. As a compliment to the more thourough
-analysis, we focus on a simpler model, as discussed in P14 and P12a that can put
-some constrains on the mean brightness temperature for the limits presented in
-figure \ref{fig:final_pspec}.
+constraints that can be put on the IGM using a simulation-based framework with 21cmFAST
+[XXXcite], a cosmic 21 cm simulation code. As a compliment to the more thourough
+analysis, we focus on a simpler model, as discussed in P14 and P12a that can effectively
+constrain the mean brightness temperature for the limits presented in
+figure \ref{fig:final_pspec}, and further put a constraint on the spin temperature.
 
 We first review the relation between the spin temperature, $T_{s}$, and the
 background cosmic microwave background temperature, $T_{\gamma}$, in this
 context.  The relative temperature, $\delta{T_{b}}$, between the cosmic
 microwave bacground, $T_{\gamma}$, and the spin temperature, $T_{s}$, is given
 by 
-\begin{equation}\label{eqn:tb}
-    \delta{T_{b}}(\nu) = \frac{T_{s} - T_{\gamma}(z)}{1+z}(1-e^{-\tau_{\nu}}).
-\end{equation}
-When considering a low optical depth medium, equation \ref{eqn:tb} becomes 
-\begin{equation}\label{eqn:tb_approx}
-    \delta{T_{b}}(\nu) \approx \frac{T_{s} - T_{\gamma}}{1+z}\tau_{\nu},
-\end{equation}
-where the optical depth is given by, 
+\begin{align}\label{eqn:tb}
+    \begin{split}
+    \delta{T_{b}}(\nu) &= \frac{T_{s} - T_{\gamma}(z)}{1+z}(1-e^{-\tau_{\nu}})\\
+                       &\approx \frac{T_{s} - T_{\gamma}}{1+z}\tau_{\nu},
+    \end{split}
+\end{align}
+where the approximation holds for low optical depth.
+The optical depth of the 21 cm line is given by 
 \begin{align}\label{eqn:tau}
     \begin{split}
     \tau_\nu &= \frac{3c^{3}\hbar A_{10} n_{\text{\tiny{HI}}}}{16k\nu_{o}^{2}T_{s}H(z)} \\
             &\approx 8.6\times10^{-3}(1+\delta)x_{\text{\tiny{HI}}}\Big[\frac{T_{\gamma}(z)}{T_{s}}\Big] \Big(\frac{\Omega_{b}h^{2}}{0.02}\Big)\Big[\Big(\frac{0.15}{\Omega_{m}h^{2}}\Big)\Big(\frac{1+z}{10}\Big)\Big]^{1/2}
     \end{split}
 \end{align}
-ignoring effects due to redshift space distortions. $x_{HI}$ is the neutral
-fraction of hydrogen and $\delta$ is the local baryon overdensity. 
-Putting it all together and using the most recent Plack results, 
+where $A_{10}$ is the einstein coefficient for spontaneous emission,
+$n_{\text{HI}}$ is the density of the neutral hydrogen, $H(z)$ is the hubble
+constant, $x_{HI}$ is the neutral fraction of hydrogen, $\delta$ is the local
+baryon overdensity, and the other parameters are the usual constants. nd
+cosmological parameters. We ignore the effect of redshift space distortions.
+Putting it all together and using the most recent Plack results
+\citep{planck_2015} 
 \begin{equation}\label{eqn:final_tb}
-    \delta{T_{b}} \approx
-25x_{\text{\tiny{HI}}}\Big(\frac{1+z}{10}\Big)^{1/2}(1+\delta) \xi \,\text{mK},
+    \delta{T_{b}} \approx T_{0}\,x_{\text{\tiny{HI}}}\,(1+\delta)\, \xi ,
 \end{equation}
-where $\xi =  \Big[1 - \frac{T_{\gamma}(z)}{T_{s}}\Big]$. 
+where $\xi =  \Big[1 - \frac{T_{\gamma}(z)}{T_{s}}\Big]$ and $T_{0} = 26.7 \,
+\text{mK} \Big(\frac{1+z}{10}\Big)^{1/2}$.
 
-If the $T_{s}$ is greater than $T_{\gamma}$, we get the the 21 cm signal is in
+If the spin temperature is larger than $T_{\gamma}$, we get the the 21 cm signal is in
 emission with respect to the CMB. However, if $T_{s}$ is less than $T_{\gamma}$,
-equation \ref{eqn:final_tb} is negative and hence the 21 cm is in absorption.
-The thermal history of the 21 cm line follows a very predictable and well
-established path through cosmic time starting with being coupled to the
-$T_{\gamma}$ via compton scattering, and hence there is no detectable 21 cm
-signal. As the universe cools adiabatically, the gas temperature decreases as
+equation \ref{eqn:final_tb} is negative and the 21 cm will be in absorption with
+respect ot he CMB.
+The thermal history of the 21 cm line follows a very predictable theoretical
+model through cosmic time starting its journey by being coupled to the
+CMB temperature via compton scattering, There is no detectable 21 cm
+signal during this regime. As the universe cools adiabatically, the gas temperature decreases as
 $(1+z)^{2}$ and colissional coupling puts the spin temperature below the CMB
-temperature and the 21 cm line is in absorption. Just before the first sources
-turn on to couple the spin temperature back to the spin temperature back to the
-gas temperature  via the Wouthuysen-Field effect, collsional coupling becomes
-inefficient and there is no detectable 21 cm signal due to radiative coupling
-between the gas and the CMB. Once the first sources turn on, the gas temperature
+temperature and the 21 cm line reveals itself as an absorption feuture agains
+the CMB backdrop. Just before the first sources
+turn on to couple the spin temperature back to the
+gas temperature via the Wouthuysen-Field effect \citep{wouthuysen1952}, collsional coupling becomes
+inefficient and radiative coupling dominates, bringing the spin temperature in
+equilibrium with the CMB and there is no detectable 21 cm signal.
+Once the first sources turn on, the gas temperature
 becomes coupled to the spin temperature and the signal turns up in emission,
 after the heating of the gas by X-rays and blackhole accretion. 
 
 We consider a scenario in which $T_{s}$ is coupled to the gas temperature via
 the Wouthuysen-Field effect, but that there is no signicifcant source of heating
-from the usual suspects. In this case, the 21 cm  signal will be in absorption.
+from the usual suspects (X-ray binaries, blackhole accretion, etc...). In this
+case the 21 cm  signal will be in absorption, since $T_{s} < T_{\gamma}$.
 In this scenario we can take a reasonable rescaling of power spectra to get a
-sense of the mean brightness temperature for a simple flat power spectrum model
-varying with the neutral fraction, $x_{\text{HI}}$, as presented in P14. Namely,
-because we have assumed no heating, we can take the combination
+constraint on the mean brightness temperature for a simple flat power spectrum model
+as a function of the neutral fraction, $x_{\text{HI}}$, as presented in P14. Namely,
+because we have assumed no heating, and thus $\xi$ has negligible spatial
+dependence, we can take the combination
 $T_{0}^{2}\xi^{2}$ as a multiplicative scalar of the 21 cm power spectrum
 defined as 
 \begin{equation}\label{eqn:d2pspec_model}
     \Delta^{2}_{21}(k) = T_{0}^{2}(z)\xi^{2}(z)\Delta_{i}^{2}(k)\equiv
 \expval{T_{b}^{2}}\Delta_{i}^{2}(k),
 \end{equation}
-where $T_{0} = 25 \big(\frac{1+z}{10}\big)^{1/2}$ and $\Delta_{i}^{2}(k)$ is a
-model power spectra of the ionization fluctuations. The maximum value of the
+where $\Delta_{i}^{2}(k)$ is a
+dimensionless ionization power spectrum. The maximum value of the
 prefactor in equation \ref{eqn:d2pspec_model} is given by considering the fact
 that in the no heating scenario we are considering, the spin temperature and the
-CMB must be in equilibrium until about a redshift of 150
-\citep{furlanetto_et_al2006} and hence the maximum value of $\xi$ is $\xi = 1 -
-\frac{1+z_{dec}}{1+z} \approx -\frac{150}{1+z}$ for the redshifts under
-consideration. Therfore, combining equations \ref{} and \ref{} we get that the
-the maximum value of the prefactor in \ref{d2pspec_model} is given by 
+CMB must be in equilibrium via compton scattering until about a redshift of 150
+\citep{furlanetto_et_al2006} and hence the maximum value of $\xi$ is given by
+\begin{equation}\label{eqn:maxxi}
+\xi = 1 -\frac{1+z_{dec}}{1+z} \approx -\frac{150}{1+z} 
+\end{equation}
+for the redshifts under consideration. Therfore, combining equations for $T_{0}$
+and \ref{eqn:maxxi} we get that the the maximum value of the prefactor in
+\ref{d2pspec_model} is given by 
 \begin{equation}
     \text{max}[T_{0}(z)\xi(z)] \approx 370\big(\frac{10}{1+z}\big)^{1/2}.
 \end{equation}
 
 We now consider the "patchy" reionization model described in P14 and P12a which
-approximates the 21 cm power spectrum as being flat between some $k_{\text{min}}$ and
-$k_{\text{max}}$ cutoff values in $k$, 
+approximates the 21 cm power spectrum as flat between some minimum and maximum
+scales, $k_{\text{min}}$ and $k_{\text{max}}$, respectively,
 \begin{equation}\label{eqn:patchy_bound}
     \Delta^{2}_{i}(k) = (x_{\text{HI}} -
 x_{\text{HI}}^{2})/\ln{i(k_{\text{max}}/k_{\text{min}})}.
 \end{equation}
-For this reionzation model, we tune $k_{\text{min}}$ and $k_{\text{max}}$ and
+Under this model, for every pair of $k_{\text{min}}$ and $k_{\text{max}}$ in a
+grid, we 
 determine the maximum mean brightness temperature above which equation
-\ref{eqn:d2pspec_model} becomes inconsisitent with our 21 cm power spectrum
-measurements. Figure \ref{fig:patchy_bound} shows the results of these bounds
-for the three different neutral fractions $x_{\text{HI}}=\text{.1, .3, and .5}$
+\ref{eqn:d2pspec_model} becomes inconsisitent with our $2\sigma$ 21 cm power
+spectrum upper limits shown in figure \ref{fig:final_pspec}.
+Figure \ref{fig:patchy_bound} shows the results of these bounds
+for neutral fractions of $x_{\text{HI}}=\text{.1, .3, .5, .7, and .9}$. 
+
+Using the results in figure \ref{fig:patchy_bound}, we can put a limit on the
+spin temperature. We first consider the the limit of the mean value of $T_{b}$,
+which by equation \ref{eqn:d2pspec_model} we get that 
+\begin{equation}
+    T_{b} = T_{0}(z)\xi(z), 
+\end{equation}
+noting the fact that in our no heating scenario, the brightness temperature is
+negative. 
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
