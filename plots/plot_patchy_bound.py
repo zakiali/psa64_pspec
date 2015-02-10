@@ -7,9 +7,15 @@ def Tcmb(z):
 def Tgas(z):
     return Tcmb(z) * ((1+z)/150.)
 
+def T0(z):
+    return 26.7*((1+z)/10)**.5
+
 def k3pk_patchy(T_b, x_i=0.5, kmax_kmin=2):
     x_H = 1-x_i
     return (x_H - x_H**2) * T_b**2 / n.log(kmax_kmin)
+
+def Ts(z,tb):
+    return Tcmb(z)*(1-(tb/T0(z)))**-1
 
 limits = {}
 #limits['.05-.1'] = (n.arange(.05, .1, .001), 3100.,'c')
@@ -86,7 +92,7 @@ if True:
     limits['.492'] = (0.492, 2341.18, 2712.26, 'k')
 
 axes = []
-fig = p.figure(figsize=(10,5))
+fig = p.figure(figsize=(10,4))
 #kwids = n.arange(1.1,3000.,.1)
 #kwids = 10**n.arange(0.1, 6, .1)
 #kcens = 10**n.arange(-2, 2, .1)
@@ -116,12 +122,15 @@ for cnt,(xi,sty) in enumerate([(.1,'-'), (.3,'--'), (.5,'-.')]):
             T_b_lim_kwid.append(min(tmp+[400]))
         T_b_lim.append(T_b_lim_kwid)
     T_b_lim = n.array(T_b_lim)
+    T_s_lim = Ts(8.4, -1*T_b_lim)
     print T_b_lim.shape
+    print T_s_lim.shape
     #p.plot(Rs, T_b_lim, 'k'+sty)
     #p.fill_between(kwids, T_b_lim, 1000*n.ones_like(kwids), facecolor='k', alpha=0.2)
 #    p.subplot(1,3,cnt+1)
     axes.append(p.subplot(1,3,cnt+1))
-    image = axes[cnt].imshow(T_b_lim, vmax=380, vmin=0, interpolation='nearest', aspect='auto', origin='lower',
+    #image = axes[cnt].imshow(T_b_lim, vmax=150, vmin=0, interpolation='nearest', aspect='auto', origin='lower',
+    image = axes[cnt].imshow(T_s_lim/1000., vmax=10, vmin=0, interpolation='nearest', aspect='auto', origin='lower',
         #extent=(-3,2,-3,2))
         extent=(1e-3,1e2,1e-3,1e2))
     p.xscale('log')
@@ -146,9 +155,12 @@ for cnt,(xi,sty) in enumerate([(.1,'-'), (.3,'--'), (.5,'-.')]):
     #if cnt == 2: p.colorbar()
     
 #p.colorbar()
-cbar_axis=fig.add_axes([.92,.15,.03,.7])
+cbar_axis=fig.add_axes([.92,.15,.03,.75])
 fig.colorbar(image, cax=cbar_axis)
+p.subplots_adjust(left=.1,bottom=.15,top=.90,right=.90)
 p.show()
+
+exit()#XXX
 #p.semilogx([1., 1000], [400, 400], 'k--')
 p.fill_between([1., 1e8], [400, 400], [1000,1000], facecolor='m', alpha=.5)
 p.semilogx([1., 1e8], [30, 30], 'k--')
