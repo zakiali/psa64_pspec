@@ -235,9 +235,12 @@ upper limit achieved in the field.
 In this paper, we report on the results from a 64-element deployment of PAPER
 that improve on this previous result.  In Section
 \ref{sec:observations} we describe the observations used in this analysis. In
-Section \ref{sec:analysis} we discuss the calibration and data analysis of our pipeline.
-We then move on to a discussion of the stability of the PAPER instrument in
-Section \ref{sec:instrument}. We present our results in Section
+Sections \ref{sec:calib} and \ref{sec:instrument}, 
+we discuss the calibration and 
+the stability of the PAPER instrument.
+We then move on to a discussion of our power-spectrum analysis pipeline in Section
+\ref{sec:oqe}. 
+We present our results in Section
 \ref{sec:results} along with new contraints on the 21cm power spectrum.
 We conclude in Section \ref{sec:conclusion}.
 
@@ -274,7 +277,7 @@ measure signal loss. Yellow boxes indicate stages without associated signal loss
 \end{figure*}
 
 We base our analysis on drift-scan observations 
-with 64 dual-polarization PAPER antennas deployed 
+with 64 dual-polarization PAPER antennas (hereafter, ``PAPER-64") deployed 
 at the Square Kilometer Array South Africa
 (SKA-SA) reserve in the Karoo desert in South Africa
 (30:43:17.5$^\circ$ S, 21:25:41.8$^\circ$ E).
@@ -290,63 +293,64 @@ For this analysis, we use only the XX and YY polarization cross-products.
 As shown in Figure \ref{fig:antenna_positions}, PAPER-64 employs
 a highly redundant antenna layout where multiple baselines measure
 the same Fourier mode on the sky (P12a; P14).
-We rely on all 2016 baselines for each (XX,YY) polarization cross-product for calibration,
+For calibration, we rely on all 2016 baselines for each (XX,YY) polarization cross-product,
 but only use a subset of the baselines for the power spectrum
-analysis. This subset encompasses 3 types of baselines; the shortest 
-strictly east-west baselines between 2 adjacent north-south columns (e.g. 41-47
-in Figure \ref{fig:antenna_positions}) and those of the same east-west column
-spacing, but which are slanted north of east one row up and south of east one
-row down (e.g. 10-41 and 10-58, respectively). We define a redundant group of
-baselines as being a set of baselines that have the same grid spacing as
-defined on the grid of figure \ref{fig:antenna_positions}.  Baselines in each
-of the 3 redundant groups described above are instantaneously redundant and
-therefore measure the same Fourier modes on the sky. This allows us to
-coherently add Fourier modes, building sensitivity as $N$ rather than
-$\sqrt{N}$, where $N$ is the number of identical baselines.  
+analysis. This subset consists of three types of baselines: the 30-m
+strictly east-west baselines between adjacent columns (e.g. 41-47
+in Figure \ref{fig:antenna_positions}; hereafter refered to 
+as {\it fiducial baselines}), 30-m east-west baselines
+whose eastern element is staggered one row up (e.g. 10-41), and
+those whose easter element is one row down (e.g. 10-58).
+We define a redundant group of
+baselines as being the set of baselines that have the same grid spacing;
+baselines in each
+of the three redundant groups described above are instantaneously redundant and
+therefore measure the same Fourier modes on the sky. Thus, within a redundant group,
+measurements from baselines may be 
+coherently added to build sensitivity as $N$ rather than
+$\sqrt{N}$, where $N$ is the number of baselines added.  
 
-
-
-
-Observations with this 64-antenna dataset spanned a 135 day period 
+PAPER-64 conducted nighttime observations over a 135 day period 
 from 2012 November 8 (JD62456240) to 2013 March 23 (JD62456375). 
+Since solar time drifts with respect to sidereal time, this observing campaign
+yielded more samples of certain LSTs (and hence, sky positions) than others. 
 For the power spectrum analysis, we use observations between 0:00 and 8:30 hours
-local sidereal time (LST). This range corresponds to
-a ``cold patch", in which galactic synchrotron power is minimal (away from
-the center of the galaxy). Due to LST drift of 3:56 minutes every solar day, the interferometer
-unevenly samples LST's in our observation, giving us more samples of certain
-lsts than others. 
-The lsts with the greatest number of samples are those used in
-the power spectrum analysis (along with those corresponding to the cold patch).
+local sidereal time (LST).  This range corresponds to
+a ``cold patch" of sky away from the galactic center where galactic synchrotron power is minimal,
+but also accounts for the weighting of coverage in LST.
 Figure \ref{fig:coverage} shows our observing field with the contours labeling
 the beam weighted observing time relative to the peak, directly over head the
 array.
 
-The PAPER-64 correlator processes a 100 MHz to 200 MHz bandwidth, first
-channelizing the 100 MHz band into 1024 channels of width 97.6 kHz, and then
+The PAPER-64 correlator processes a 100--200 MHz bandwidth, first
+channelizing the band into 1024 channels of width 97.6 kHz, and then
 cross multiplying every antenna and polarization with one another for a total of
-8256 cross products, including auto correlations. The architecture of this
-correlator is based on CASPER open source, reconfigurable hardware
-(\cite{parsons_et_al2008}). The channelizer, which includes the PFB-FFT and
-corner turn, consisted of 16 ROACH boards with eight 8 bit analog to digital
-converters. The cross multiplication engine (X engine) was moved to GPUs based
-on the X-GPU, a general purpose X engine for GPU's \citep{clark_et_al2013}. 
-Visibility cross products are integrated for 10.7 seconds on the GPU's before
-being written to disk. We write all stokes parameters to disk; however the
-analysis described here only apply to the XX and YY polariztion products.
-
+8256 cross products, including auto correlations.  Following the architecture 
+in \citet{parsons_et_al2008}, this
+correlator is based on CASPER\footnote{\url{http://casper.berkeley.edu}} open-source
+FPGA hardware and signal processing libraries \citep{parsons_et_al2006}.  
+Sixteen ROACH boards each hosting eight 8-bit analog-to-digital
+converters digitize and channelize antenna inputs. New to this correlator,
+the cross multiplication engine is implemented on eight servers each receiving
+channelized data over two 10-Gb Ethernet links.  Each server hosts
+two NVIDIA GeForce 580 GPUs running the open-source cross-correlation code developed
+by \citet{clark_et_al2013}.
+Visibilities are integrated for 10.7 s on the GPUs before
+being written to disk.  All polarization cross-products are saved, although the
+work presented here only made use of the XX and YY polariztion products.
 
 \begin{figure*}[!t]\centering
 \includegraphics[width=2\columnwidth,height=\columnwidth]{plots/coverage.png}
 \caption{The Global Sky Model \citep{deoliveira2008}, illustrating foregrounds to the 21cm
 cosmological signal, with 
 contours indicating beam-weighted observing time (relative to peak) for the PAPER observations
-described in Section \ref{sec:observations}.
+described in Section \ref{sec:observations}.  The map is centered at 6 hours in right ascension.
 }\label{fig:coverage}
 \end{figure*}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Calibration and Analysis}\label{sec:analysis}
+\section{Calibration}\label{sec:calib}
 
 Foreground contamination and signal sensitivity represent the two major concerns for 21~cm
 experiments targeting power-spectral measurements. Sources of foregrounds include
@@ -374,24 +378,24 @@ simulations \citep{datta_et_al2010,hazelton_et_al2013} and observationally
 \citep{pober_et_al2013,dillon_et_al2013b}.  As described in P12b, the wedge is the result of the delay
 between when a wavefront originating from foreground emission
 arrives at the two antennas in a baseline.  The fact that this delay is bounded by the light-crossing
-time between two antennas (which we call the ``horizon limit'' since such a wavefront would have to have
-been generated from foregrounds sitting on the horizon) places a fundamental bound on the chromaticity of
+time between two antennas (which we call the ``horizon limit'' since such a wavefront would have to 
+originate from the horizon) places a fundamental bound on the chromaticity of
 an interferometric baseline.  So far, PAPER has had the most success in exploiting this bound
 (P14; \citealt{jacobs_et_al2014}), although it is in the process of being applied to MWA
 observations \citep{nitya}.  
+In this analysis, we continue to use the properties of the 
+wedge in order to isolate and remove smooth
+spectrum foregrounds.
 
-In our analysis, we exploit both the properties of the spectrally smooth
-foregrounds and the wedge in order to accurately isolate and remove the smooth
-spectrum foregrounds.  Our analysis pipeline begins by running a compression
-algorithm to reduce the data volume of our raw data. This step, described in the
-appendix of P14, reduces data volume by a factor of 40. We
-then calibrate on the basis of redundancy before using self-calibration to solve
-for the absolute phase and gain parameters. After suppressing foregrounds with a
+As illustrated in Figure \ref{fig:flowchart},
+our analysis pipeline begins by running a compression
+algorithm to reduce the volume of our raw data by a factor of 40
+(see Appendix A of P14). 
+We then calibrate on the basis of redundancy before using self-calibration to solve
+for absolute phase and gain parameters. After suppressing foregrounds with a
 wide-band delay filter, we average the data in local sidereal time and apply a
-fringe rate filter to optimally combine the time domain data. Finally, we use
+fringe-rate filter to optimally combine the time domain data. Finally, we use
 optimal quadratic estimators to make our estimate of the 21 cm power spectrum.
-Figure \ref{fig:flowchart} shows a block diagram of the analysis pipeline and
-includes some information on simuations and signal loss.
 
 \subsection{Calibration}\label{sec:calibration}
 The calibration procedure employed in this analysis is twofold: a relative
@@ -954,7 +958,7 @@ visibility.
 \includegraphics[width=2\columnwidth]{plots/waterfalls.png}
 \caption{
 Visibilities measured by a 30-m east-west baseline in the PAPER-64 array, 
-averaged over XXX days of observation.  From left to right, columns represent
+averaged over 135 days of observation.  From left to right, columns represent
 data that: (1) contain foregrounds prior to the application of a wideband
 delay filter or optimal fringe-rate filtering, (2) are fringe-rate filtered but
 not delay filtered, (3) are delay filtered at 15 ns beyond the horizon limit but
@@ -995,7 +999,7 @@ able to remove the offset by subtracting shorter sums.
 
 Once smooth sources have been removed and a final pass of RFI excision and
 crosstalk removal have been performed, the data is averaged in local sidereal
-time (LST) with bins of width 43 seconds to match the fringe rate filter applied
+time (LST) with bins of width 43 seconds to match the fringe-rate filter applied
 in the compression. The averaged data set consisted of 135 unevenly sampled
 days with the effective number of total days being 123.57. 
 
@@ -1007,7 +1011,7 @@ the effects of non gaussianity in time, which is most likely due to spurious
 RFI events. The median statistics used here necessitate that there is no signal
 loss due to this filter.
 
-We make two separate lst binned data sets, averaging every other julian day
+We make two separate LST-binned data sets, averaging every other julian day
 together to obtain an "even" and "odd" dataset. The use of these two data sets
 allows us to conststruct an unbiased power spectrum estimate, as well as running
 jackknife tests on our observations. 
@@ -1135,21 +1139,21 @@ through your baelines fringe pattern. We can use this fact to pick out certain
 points on the sky, but because this mapping of fringe-rate to sky is not one to
 one, we can only pick out stripes of constant fringe rate.
 
-As motivation, we discuss the use of fringe rate filters in cross talk removal.
+As motivation, we discuss the use of fringe-rate filters in cross talk removal.
 Crosstalk is modeled as a time independent coupling of signal between two
 different signal paths, be it at the antenna or to to input our the analog to
 digital converters. Since crosstalk does not vary as a function of time, in
-fringe rate space, cross talk piles up at the poles which correspond to zero
+fringe-rate space, cross talk piles up at the poles which correspond to zero
 fringe rates. In this view crosstalk is a DC bias. To remove crosstalk, we can
-apply a notch filter to the fringe rate transform of the time series visibility
+apply a notch filter to the fringe-rate transform of the time series visibility
 (per frequency) and inverse transform to go back into time domain. This
 interpretation of crosstalk being a DC offset jives with our method of crosstalk
 removal discussed above. In order to remove a DC offset from a time series, we
 subtract the average.
 
-Now, to optimally combine the time data we can cater our fringe rate filter to
+Now, to optimally combine the time data we can cater our fringe-rate filter to
 upweight points of the sky that contain more signal to our instrument and down
-weight those points that do not. That is, if we weight fringe rate
+weight those points that do not. That is, if we weight fringe-rate
 bins by the beam, we can get a net increase in sensitivity. Roughly, all fringe
 rate bins contain the same amount of noise in them, but the amount of signal
 varies and is determined by how the primary beam illuminates the sky.
@@ -1157,18 +1161,18 @@ Upweighting the bins with higher signal relative to those with less signal
 gives us a net increase in signal-to-noise, even though we are removing 
 signal by applying signal from this filter. 
 
-The effective beam area from applying an optimal fringe rate filter decreases,
+The effective beam area from applying an optimal fringe-rate filter decreases,
 which implies that the signal has been attenuated, as noted above. But because
-the noise is attenuated more, because of beam weigting fringe rate bins, the SNR
+the noise is attenuated more, because of beam weigting fringe-rate bins, the SNR
 increases. For the PAPER array, the boost in SNR is a factor of 2. The net boost
 in SNR depends on where the array is located. 
 
-We implement the optimal fringe rate filter by calculating the fringe rates at
+We implement the optimal fringe-rate filter by calculating the fringe rates at
 every point on the sky, for a given frequency, and weighting each bin by the
 beam of a given baseline. It is worth noting that fringe-rate filtering is
 baseline dependent and hence is implemented on a per baseline basis. We weight
-the fringe rate bins on the sky by the beam pattern at the same point on the
-sky. In order to obtain a smoothe filter in the fringe rate domain, we fit a
+the fringe-rate bins on the sky by the beam pattern at the same point on the
+sky. In order to obtain a smoothe filter in the fringe-rate domain, we fit a
 gaussian with a tanh tail to this filter as shown in figure
 \ref{fig:fringe_rate_cut}. We then fourier transform this to obtain the time
 domain filter, multiply by a blackman-harris window function to damp the tails
@@ -1178,8 +1182,8 @@ integration.
 Since the PAPER beam is ~45 degrees, and the array is located at a declination
 of $-30^{\circ}$ the fringe rates associated with the low signal to noise (down
 in the beam) correspond to very high and very low/negative fringe rates. Figure
-\ref{fig:fringe_rate_cut} shows a cut of the optimal fringe rate at 159 MHz for
-a 30-m east west baseline. Therefore, the implemented fringe rate filter removes
+\ref{fig:fringe_rate_cut} shows a cut of the optimal fringe-rate filter at 159 MHz for
+a 30-m east west baseline. Therefore, the implemented fringe-rate filter removes
 some sky signal, signal associated with fringe rates outside of the ranges shown
 in Figure \ref{fig:fringe_rate_cut}. Figure \ref{fig:fr_preserved_signal} shows
 that the applied filter removes sky associated with negative fringe rates and
@@ -1227,17 +1231,16 @@ to peak at unity gain, but has been scaled here for legibility.
 
 For the power spectrum baselines in question (30 m East-West baselines), the
 effective integration time is calculated by comparing the variance statistic for
-a fringe rate filter that is a flat weighting vs that with an optimal filter
+a fringe-rate filter that is a flat weighting vs that with an optimal filter
 weighting as described. We apply these filters to random noise with variance 1,
 without loss of generality. We can conclde that 
-\begin{align}
-    t_{int} &= \frac{\int{\sigma^{2}dt}}{\int{\sigma^{2}fr^{2}dt}}\\
-            &= 1886 \text{seconds},
-\end{align}
-for an optimal fringe rate filter on a 30 m East-West baseline at 149.5 MHz.
+\begin{equation}
+    t_{int} = \frac{\int{\sigma^{2}dt}}{\int{\sigma^{2}fr^{2}dt}},
+\end{equation}
+which evaluates to 1886 s for an optimal fringe-rate filter on a 30 m East-West baseline at 149.5 MHz.
 Over the range of frequencies used in our power spectrum estimate, the
 integration times range from 1936 s to 1790 s, correspinding to an average of 31
-minutes. Because the fringe rate filter in effect integrates in time, the number
+minutes. Because the fringe-rate filter in effect integrates in time, the number
 of statistically independent samples of the sky drastically decreases. We are
 left with $\sim2$ independent samples per hour.
 
@@ -1260,8 +1263,111 @@ left with $\sim2$ independent samples per hour.
 %\label{fig:noise_omni_uv}
 %\end{figure}
 
+\section{Instrumental Performance}\label{sec:instrument}
+\subsection{Instrument Stability}
 
-\subsection{Optimal Quadratic Estimator and Covariance}\label{sec:oqe}
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=2.3\columnwidth]{plots/density.png}
+\caption{Histogram of the real component of 
+all calibrated visibilities measured over 135 days with every redundant east-west 30-m 
+baseline at 149.5 MHz. 
+Color scale indicates the number of samples falling in an LST/flux-density bin.
+This plot serves to illustrate the stability of the PAPER instrument and the precision
+of calibration.
+%The bulk of the samples recorded, range from an LST of 5 to
+%10 hours, whilst the EoR cold spot ranges from 0 to 4 hours as seen in figure
+%\ref{fig:coverage}. For the densest regions, the spread in visibility for a
+%given LST sample is $\approx{100} \,\text{Jy}$. The agreement between redundant
+%baselines here gives us reassurance that our baselines are actually measuring
+%the same fourier modes on the sky.}
+}\label{fig:density}
+\end{figure*}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{plots/stability.png}
+\caption{Power spectrum of 135 days of time-series data contributing to a single LST bin,
+illustrating the stability of measurements over the observing campaign.  The excess at
+2-day timescales is a beat frequency associated with the changing alignment of 
+integration windows in the correlator with respect to sidereal time.  
+%Demonstration of the time stability of the instrument. For a given LST
+%bin, we take the day to day samples that go into that bin and determine the
+%power spectrum for that time seris. Shown here is the power spectrum of the time
+%series over 134 days for baseline 1\_4 at 150 MHz (XXX) averaged over 5 hours in
+%LST. Power at 1/134 days$^{-1}$ is the DC bin, accumulating the average of the
+%time signal. The power spectrum folows a noise like power spectrum throughout
+%with a slight uptic at the temporal frequency corresponding to 2 days. This is
+%due to the fact that the integration time does not fully divide out a sidereal
+%day, but has a remiainder of $\frac{1}{2}$, piling up power on the everyother day
+%time scale. (XXX need to be more clear here, I think. a.const.sidereal\_day/42.9
+%= 2008.487, a.const.sidereal\_day/42.94 = 2006.616.)
+%}
+}\label{fig:stability}
+\end{figure}
+
+
+One of the key aspects of PAPER is the stability of the instrument between
+baselines and in time. Figure \ref{fig:density} shows for a given redundant
+group of baselines, the spread in the visibilites for all of the baselines in
+that group as a function of LST's. Specifically, we histogram the real part of
+the visibilities for all baselines belonging to the East-West 30 m redundant
+baseline in a given LST bin for foreground contained data. We see that for a
+given LST bin the, spread in the value for all the baselines is ~100 Jy.  We get
+more samples per LST bin in the range of 2--10 hours due to our observing
+season, therefore the density of points in this LST region is greater, set by
+the color scale. This density plot shows that redundant baselines, especially
+the EoR baselines we are using the power spectrum analyisis, agree very well
+with one another. This is another nod to the use of Omnical for redundant
+calibration. 
+
+In addition to stability between redundant baselines, we also consider the
+stability in time for the PAPER instrument. In order to quantify the stability
+in time we extract one channel for a given baseline for every observation day
+and bin in LST. We then Fourier transform along the time direction for every LST
+bin and compute the power spectrum. The DC bin is the average of all of the days
+and clearly there is excess power there. However, for time modes greater than 1
+day, we see that there is little correlation between days, showing that there
+are no systematics in time. However, we do note that on the 2 day time scale,
+there is a slight increase power owning the fact that neighboring days are
+slightly correlated with each other.  Figure \ref{fig:stability} shows the
+stability of the instrument as a function of time. 
+
+\subsection{System Temperature}   
+During the LST binning step, the variance of the visibilities on a frequency and
+time basis, are recorded. Using these variances, we calculate the system
+temperature as a function of LST, averaging over each LST hour. 
+\begin{equation}
+    T_{sys} = \frac{T_{rms}}{\sqrt{\Delta\nu t_{int}}}, 
+\end{equation}
+where $\Delta\nu$ is the bandwidth, $t_{int}$ is the integration time, and
+$T_{rms}$ is the RMS temperature.
+Figure \ref{fig:tsys} shows the results of this calculation. In this observing
+season, the system temperature stays consistent with previous estimates of the
+as in P14 and \citet{jacobs_et_al2014} at $T_{sys} =
+500K$ at 160 MHz.
+
+\begin{figure}[b!]\centering
+\includegraphics[width=\columnwidth]{plots/tsys.png}
+\caption{System temperature, inferred from the variance of samples falling 
+in an LST bin, averaged over one-hour intervals in LST.  The measured value
+in the 150--160 MHz range is consistent with previous determinations of
+system temperature (P14; \citealt{jacobs_et_al2014}).
+%statistic calculated in every LST bin and average on hour time scales to
+%estimate the $T_{sys}$ reported here. For a majority of the LST bins, especially
+%those bins used in our analysis, the system temperature is about 500K at 160
+%MHz, consistent with previous estimates of the system temperature.}
+}\label{fig:tsys}
+\end{figure}
+Previous estimates of the system temperature
+(P14; \citealt{jacobs_et_al2014}) relied on differencing and averaging
+baselines, time samples, and/or frequency channels. The agreement between these
+various methods of estimating the system temperature provides a robust measure
+of the system temperature of the PAPER instrument. 
+
+
+
+\section{Power Spectrum Analysis}\label{sec:oqe}
 %   -Motivate method with discussion of empirical estimate of covariances and
 %    problem of limited modes.
 %       --Because we dont know the true covariances between baselines and
@@ -1313,7 +1419,7 @@ covariance matrices.
 %   -Counting of independent modes.
 %       --Number of independent modes = 2*#of lst hours used in analysis. This
 %         is because 1900 seconds ~ 30 minutes.
-\subsubsection{Review}
+\subsubsection{Review of Optimal Quadratic Estimators}
 We use the optimal quadratic estimator method to estimate our power spectrum as
 done in \cite{dillon_et_al2013a} and \cite{liu_tegmark2011}.  Here we briefly review the
 optimal quadratic esitimator (OQE) formalism with an emphasis on our application
@@ -1447,7 +1553,7 @@ where $\mathbf{F}$ is the Fisher matrix. The error correlation matrix describes
 how correlated the errors between modes are in the final power spectrum result.
 
 
-\subsubsection{Application}
+\subsubsection{Application of Optimal Quadratic Estimators}
 \label{sec:oqe_app}
 % A walk through of the application to the data.
 
@@ -1592,7 +1698,7 @@ in applying equation \ref{eqn:qalpha_unbiased}, without the bias term, namely,
 \end{equation}
 Here, $\x_{1}$ and $\x_{2}$ are data vectors which have uncorrelated noise
 properties leading to the removal of the bias term. As mentioned in section
-\ref{sec:wbd}, we have constructed two LST binned data sets, which are identical
+\ref{sec:wbd_filtering}, we have constructed two LST binned data sets, which are identical
 in sky signal, but have varying noise properties, owning to being created with
 every other day of observation.  This allows us to construct unbiased (in
 instrumental noise) quadratic estimator of the power spectrum, but will allow
@@ -1766,7 +1872,7 @@ in the distribution of values, likely as a result of foreground contamination.
 \end{figure*}
 
 
-\subsection{The Covariance Matrix and Signal Loss}
+\subsection{Covariance Matrix and Signal Loss}
 \label{sec:sigloss}
 %Covariance matrix nuances.
 %   -describe covariance matrix and data vectors.
@@ -1798,10 +1904,10 @@ here, must be invertible, which occurs only if $\C$ is a rank-N matrix, where N
 is the number of rows or columns. In our particular case, N=20.
 
 There are a few fundamental problems that occur when estimating the covariance
-matrix in this way. As noted in section \ref{sec:frf} the optimal fringe rate
+matrix in this way. As noted in section \ref{sec:frf} the optimal fringe-rate
 filter corrsponds to averageing time samples for 31 minutes. Over the LST range
 used in this analysis, this corresponds to on the order of 20 statistically
-independent modes in our data after fringe rate filtering. This is a fundamental
+independent modes in our data after fringe-rate filtering. This is a fundamental
 limit of the amount of information we have in our measurements. Coincidentally,
 the covariance matrix for a given baseline is an $N_{ch} \times N_{ch}$ matrix,
 where $N_{ch}=20$.  Therefore, the covariance matrices for every baseline are
@@ -2064,7 +2170,7 @@ dominates over the foreground modes present in estimates of the data covariance.
 %new, refined redundant calibration method (Zheng 2014), increasing the width of
 %the wideband delay filter that removes smooth spectrum foregrounds, weighting
 %the lst binned data sets, and optimal fringe rate filtering. In section
-%\ref{sec:analysis}, we dicuss each of the improvements in more detail.
+%\ref{sec:calib}, we dicuss each of the improvements in more detail.
 %
 %Figure \ref{fig:step_through_pspec} (TBD) shows the power spectra when each of
 %the steps mentioned above are turned off and for the one where all of them are
@@ -2072,108 +2178,6 @@ dominates over the foreground modes present in estimates of the data covariance.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Instrument Discussion}\label{sec:instrument}
-\subsection{Instrument Stability}
-
-\begin{figure*}[!t]
-\centering
-\includegraphics[width=2.3\columnwidth]{plots/density.png}
-\caption{Histogram of the real component of 
-all calibrated visibilities measured over XXX days with all redundant east-west 30-m 
-baselines at 149.5 MHz. 
-Color scale indicates the number of samples falling in an LST/flux-density bin.
-This plot serves to illustrate the stability of the PAPER instrument and the precision
-of calibration.
-%The bulk of the samples recorded, range from an LST of 5 to
-%10 hours, whilst the EoR cold spot ranges from 0 to 4 hours as seen in figure
-%\ref{fig:coverage}. For the densest regions, the spread in visibility for a
-%given LST sample is $\approx{100} \,\text{Jy}$. The agreement between redundant
-%baselines here gives us reassurance that our baselines are actually measuring
-%the same fourier modes on the sky.}
-}\label{fig:density}
-\end{figure*}
-
-\begin{figure}[!t]
-\centering
-\includegraphics[width=\columnwidth]{plots/stability.png}
-\caption{Power spectrum of 135 days of time-series data contributing to a single LST bin,
-illustrating the stability of measurements over the observing campaign.  The excess at
-2-day timescales is a beat frequency associated with the changing alignment of 
-integration windows in the correlator with respect to sidereal time.  
-%Demonstration of the time stability of the instrument. For a given LST
-%bin, we take the day to day samples that go into that bin and determine the
-%power spectrum for that time seris. Shown here is the power spectrum of the time
-%series over 134 days for baseline 1\_4 at 150 MHz (XXX) averaged over 5 hours in
-%LST. Power at 1/134 days$^{-1}$ is the DC bin, accumulating the average of the
-%time signal. The power spectrum folows a noise like power spectrum throughout
-%with a slight uptic at the temporal frequency corresponding to 2 days. This is
-%due to the fact that the integration time does not fully divide out a sidereal
-%day, but has a remiainder of $\frac{1}{2}$, piling up power on the everyother day
-%time scale. (XXX need to be more clear here, I think. a.const.sidereal\_day/42.9
-%= 2008.487, a.const.sidereal\_day/42.94 = 2006.616.)
-%}
-}\label{fig:stability}
-\end{figure}
-
-
-One of the key aspects of PAPER is the stability of the instrument between
-baselines and in time. Figure \ref{fig:density} shows for a given redundant
-group of baselines, the spread in the visibilites for all of the baselines in
-that group as a function of LST's. Specifically, we histogram the real part of
-the visibilities for all baselines belonging to the East-West 30 m redundant
-baseline in a given LST bin for foreground contained data. We see that for a
-given LST bin the, spread in the value for all the baselines is ~100 Jy.  We get
-more samples per LST bin during the lst range of 2-10 hours due to our observing
-season, therefore the density of points in this LST region is greater, set by
-the color scale. This density plot shows that redundant baselines, especially
-the EoR baselines we are using the power spectrum analyisis, agree very well
-with one another. This is another nod to the use of Omnical for redundant
-calibration. 
-
-In addition to stability between redundant baselines, we also consider the
-stability in time for the PAPER instrument. In order to quantify the stability
-in time we extract one channel for a given baseline for every observation day
-and bin in LST. We then Fourier transform along the time direction for every LST
-bin and compute the power spectrum. The DC bin is the average of all of the days
-and clearly there is excess power there. However, for time modes greater than 1
-day, we see that there is little correlation between days, showing that there
-are no systematics in time. However, we do note that on the 2 day time scale,
-there is a slight increase power owning the fact that neighboring days are
-slightly correlated with each other.  Figure \ref{fig:stability} shows the
-stability of the instrument as a function of time. 
-
-\subsection{System Temperature}   
-During the LST binning step, the variance of the visibilities on a frequency and
-time basis, are recorded. Using these variances, we calculate the system
-temperature as a function of LST, averaging over each LST hour. 
-\begin{equation}
-    T_{sys} = \frac{T_{rms}}{\sqrt{\Delta\nu t_{int}}}, 
-\end{equation}
-where $\Delta\nu$ is the bandwidth, $t_{int}$ is the integration time, and
-$T_{rms}$ is the RMS temperature.
-Figure \ref{fig:tsys} shows the results of this calculation. In this observing
-season, the system temperature stays consistent with previous estimates of the
-as in P14 and \citet{jacobs_et_al2014} at $T_{sys} =
-500K$ at 160 MHz.
-
-\begin{figure}[b!]\centering
-\includegraphics[width=\columnwidth]{plots/tsys.png}
-\caption{System temperature, inferred from the variance of samples falling 
-in an LST bin, averaged over one-hour intervals in LST.  The measured value
-in the 150--160 MHz range is consistent with previous determinations of
-system temperature (P14; \citealt{jacobs_et_al2014}).
-%statistic calculated in every LST bin and average on hour time scales to
-%estimate the $T_{sys}$ reported here. For a majority of the LST bins, especially
-%those bins used in our analysis, the system temperature is about 500K at 160
-%MHz, consistent with previous estimates of the system temperature.}
-}\label{fig:tsys}
-\end{figure}
-Previous estimates of the system temperature
-(P14; \citealt{jacobs_et_al2014}) relied on differencing and averaging
-baselines, time samples, and/or frequency channels. The agreement between these
-various methods of estimating the system temperature provides a robust measure
-of the system temperature of the PAPER instrument. 
 
 
 \section{Results and Discussion}\label{sec:results}
@@ -2213,10 +2217,10 @@ bandpass. We also notice that at $k\approx{.35}\ h\ {\rm Mpc}^{-1}$, as in P14,
 that there is a slight excess. This slight excess is
 due to some systematic, and most likely foreground emission. The power in this
 bin has gone down by almost an order of magnitude as compared with P14,
-which we attribute to the optimal fringe rate filter.
-Because we are down weighting fringe rate bins that do not correspond to points
+which we attribute to the optimal fringe-rate filter.
+Because we are down weighting fringe-rate bins that do not correspond to points
 low in the beam, the decreased power at $k\approx{.35}\ h\ {\rm Mpc}^{-1}$ is
-most likely attributed to this fringe rate filter down weighting sources towards
+most likely attributed to this fringe-rate filter down weighting sources towards
 the horizon. The foreground emission at this high $k$-mode, is likely attributed
 to polarization leakage from a high rotation measure source near the horizon.
 Finally, we also note that most for most of the $k$-modes, measurements are
@@ -2302,8 +2306,8 @@ that in the no heating scenario we are considering, the spin temperature and the
 CMB must be in equilibrium until about a redshift of 150
 \citep{furlanetto_et_al2006} and hence the maximum value of $\xi$ is $\xi = 1 -
 \frac{1+z_{dec}}{1+z} \approx -\frac{150}{1+z}$ for the redshifts under
-consideration. Therfore, combining equations \ref{} and \ref{} we get that the
-the maximum value of the prefactor in \ref{d2pspec_model} is given by 
+consideration. Therfore, combining equations \ref{XXX} and \ref{XXX} we get that the
+the maximum value of the prefactor in \ref{eqn:d2pspec_model} is given by 
 \begin{equation}
     \text{max}[T_{0}(z)\xi(z)] \approx 370\big(\frac{10}{1+z}\big)^{1/2}.
 \end{equation}
@@ -2377,7 +2381,7 @@ Measured power spectrum (black dots with 2$\sigma$ error bars)
 at $z=8.4$ resulting from a 134-day observation with PAPER-64.
 The dashed
 vertical lines at $.6\ h\ Mpc^{-1}$ show the bounds of the
-delay filter described in Section \ref{sec:delay_filter}. The theoretical
+delay filter described in Section \ref{sec:wbd_filtering}. The theoretical
 $2\sigma$ thermal noise power spectrum is shown in dashed cyan, assuming
 $T_{sys}=500K$.
 XXX signal prediction in magenta.
@@ -2385,7 +2389,7 @@ XXX other measurements: P14, dillon, gmrt.
 XXX (To be done) The solid cyan curve is the power spectrum of the
 foreground contained data. make foreground pspec.
 XXX Need to fix noise curve. It is completely wrong.
-XXX Using 100 bootstraps. Correction factors are fringe rate
+XXX Using 100 bootstraps. Correction factors are fringe-rate
 filter (1.9), signal loss (1.15), and median statistic (1.4)}
 \label{fig:final_pspec}
 \end{figure*}
@@ -2465,7 +2469,7 @@ Omnical calibration (dashed) show higher residuals than the the final power spec
 
 Here, we discuss the effect to the power spectrum if various stages of the
 analysis were kept out. Specifically, we will discuss the effects of using
-Omnical and optimal fringe rate filtering vs. not using them. This will give a
+Omnical and optimal fringe-rate filtering vs. not using them. This will give a
 sense of how different analyses effect the power spectrum.
 
 The merits of using omnical were described above and it has the effect of
@@ -2475,7 +2479,7 @@ that for the power spectrum, error bars should become tighter. That is the
 noise in the measurement would be reduced. Comparing $P(k)$ for data that has
 been Omnical calibrated vs data that has not, but does have the redundant
 calibration that was used in P14 applied to it, we see that
-the error bars have decreased. This is shown in figure \ref{fig:pspec_nomni}.
+the error bars have decreased. This is shown in figure \ref{fig:pspec_comp}.
 Note that the error bars shrink for the higher $k$-modes, the error bars for the
 2 modes outside of the horizon do not have this systematic reduction because of
 the wideband delay filter. The wideband delay filter is applied after the
@@ -2483,14 +2487,14 @@ calibration solutions have been applied to the visibilities and the 2 modes
 outside of the horizon are artifacts of the foregrounds leaking outside of the
 horizon. 
 
-Optimal fringe rate filtering is a new technique that we have employed in our
+Optimal fringe-rate filtering is a new technique that we have employed in our
 analysis and the effect it has on the power spectrum is crucial, considering it
-has a sensitivity benefit of a factor of 2. First of all, this fringe rate
+has a sensitivity benefit of a factor of 2. First of all, this fringe-rate
 filter improves the SNR by a factor of 2 for PAPER, increasing the total
 sensitivity of our measurement. Briefly, the filter does this by up weighting
 parts of the sky that are illuminated by the primary beam and down weighting
 parts of the sky that contain more noise. This has the effect of de noising the
-data. Figure \ref{fig:pspec_comp} shows the effect of minimal fringe rate
+data. Figure \ref{fig:pspec_comp} shows the effect of minimal fringe-rate
 filtering. The filter applied here is the same as described in P14.
 It evenly weights fringe rates from 0 to $f_{max}$,
 where $f_{max}$ is the maximum fringe rate possible for a given baseline and
@@ -2499,7 +2503,7 @@ frequency, discarding negative fringe rates. As can be seen in figure
 2-3. The two modes outside of the horizon, which are dominated by foregrounds
 and are clear detections, also come down. The fact that these come down, implies
 that the foregrounds are down in the beam possibly near the horizon. Therefore,
-the signal there is attenuated by the use of this fringe rate filter. 
+the signal there is attenuated by the use of this fringe-rate filter. 
 
 It is interesting that at $k\approx.25$, we get a detection of something that
 wasnt there before. Foregrounds? probably low level systematics we are hitting
@@ -2539,7 +2543,7 @@ characterize the 21 cm power spectrum at high redshifts.
 In addition to sensitivity limitations, foregrounds are also a challange that
 needs to be met. The delay spectrum approach requires that foregrounds need to
 be spectrally smooth so that they are localized to inside the horizon. As seen
-from equation \ref{eqn:delay_filter}, this approach also requires the need to
+from equation \ref{eqn:delay_transform}, this approach also requires the need to
 know your beam and bandpass very well to mitigate the effect of spreading power
 outside the horizon. The PAPER beam is both spaitially and spectrally smooth
 \cite{pober_et_al2012}, but even small variations have the effect of
@@ -2600,7 +2604,7 @@ foreground suppression and the foreground avoidance technique in measuring the p
 spectrum. In addition, we employ novel techniques in this analysis and show that
 the necessity of precise calibration is needed to make accurate and believable
 measurements of the 21 cm EoR power spectrum. We also show that the use of beam
-weighted measurements in the optimal fringe rate filter is critical to
+weighted measurements in the optimal fringe-rate filter is critical to
 increasing sensitivity for instruments with natively low sensitivity due to
 collecting area, increasing the SNR on the measurement by a factor of atleast 2.
 We have also demonstrated the stability of the PAPER instrument both in time and
