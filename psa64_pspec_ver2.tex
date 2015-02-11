@@ -235,7 +235,7 @@ We conclude in Section \ref{sec:conclusion}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Observations}\label{sec:observations}
 
-\begin{figure}[!t]\centering
+\begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/antenna_positions.png}
 \caption{
 Antenna position within the PAPER-64 array.
@@ -250,8 +250,8 @@ spectrum analysis.}
 \label{fig:antenna_positions}
 \end{figure}
 
-\begin{figure*}[!t]
-\includegraphics[width=2\columnwidth,height=\columnwidth]{plots/data_flow_chart.png}
+\begin{figure*}
+\includegraphics[width=2\columnwidth]{plots/data_flow_chart.png}
 \caption
 {
 The stages of power-spectrum analysis. Black lines indicate data flow; red lines indicate
@@ -325,8 +325,8 @@ Visibilities are integrated for 10.7 s on the GPUs before
 being written to disk.  All polarization cross-products are saved, although the
 work presented here only made use of the XX and YY polarization products.
 
-\begin{figure*}[!t]\centering
-\includegraphics[width=2\columnwidth,height=\columnwidth]{plots/coverage.png}
+\begin{figure*}\centering
+\includegraphics[width=2\columnwidth]{plots/coverage.png}
 \caption{The Global Sky Model \citep{deoliveira2008}, illustrating foregrounds to the 21cm
 cosmological signal, with 
 contours indicating beam-weighted observing time (relative to peak) for the PAPER observations
@@ -511,7 +511,7 @@ calibration.  Residuals are consistent with thermal noise.
 } \label{fig:omniview}
 \end{figure*}
 
-\begin{figure}[!b]
+\begin{figure}
 \centering
 \includegraphics[width=\columnwidth]{plots/chi2.png}
 \caption{
@@ -640,7 +640,7 @@ polynomial over the 120-170 MHz frequency range. Figure \ref{fig:pic_spec} shows
 the calibrated Pictor A spectrum and the model spectrum from
 \cite{jacobs_et_al2013}.
 
-\begin{figure}[!t]
+\begin{figure}
 \centering
 \includegraphics[width=\columnwidth]{plots/picimg_cs.png}
 \caption{
@@ -657,7 +657,7 @@ demonstrates accurate phase calibration over a wide field of view.
 \end{figure}
 
 
-\begin{figure}[!t]
+\begin{figure}
 \centering
 %\includegraphics[width=\columnwidth]{plots/PicA_normalized_spectrum.pdf}
 \includegraphics[width=\columnwidth]{plots/picspec.png}
@@ -942,7 +942,7 @@ which is limited by $1/B \approx 10 ns$. To remove the smooth spectrum
 foreground emission we subtract the clean components from the original
 visibility.
 
-\begin{figure*}[!t]
+\begin{figure*}
 \centering
 \includegraphics[width=2\columnwidth]{plots/waterfalls.png}
 \caption{
@@ -1193,7 +1193,7 @@ very high fringe rates.
 %\label{fig:fringe_rate_cut}
 %\end{figure}
 
-\begin{figure}[t!]\centering
+\begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/fr_preserved_signal.png}
 \caption{
 Fringe-rate transform of visibilities measured on a 30-m east-west baseline at 159 MHz before (blue) and
@@ -1257,7 +1257,7 @@ left with $\sim2$ independent samples per hour.
 \section{Instrumental Performance}\label{sec:instrument}
 \subsection{Instrument Stability}
 
-\begin{figure*}[!t]
+\begin{figure*}
 \centering
 \includegraphics[width=2.3\columnwidth]{plots/density.png}
 \caption{Histogram of the real component of 
@@ -1275,7 +1275,7 @@ of calibration.
 }\label{fig:density}
 \end{figure*}
 
-\begin{figure}[!t]
+\begin{figure}
 \centering
 \includegraphics[width=\columnwidth]{plots/stability.png}
 \caption{Power spectrum of 135 days of time-series data contributing to a single LST bin,
@@ -1338,7 +1338,7 @@ season, the system temperature stays consistent with previous estimates of the
 as in P14 and \citet{jacobs_et_al2014} at $T_{sys} =
 500K$ at 160 MHz.
 
-\begin{figure}[b!]\centering
+\begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/tsys.png}
 \caption{System temperature, inferred from the variance of samples falling 
 in an LST bin, averaged over one-hour intervals in LST.  The measured value
@@ -1649,7 +1649,7 @@ covariance matrix in which the strongest modes do not have any coherent
 structure to them and can be considered noise like.
 
 
-\begin{figure*}[h!]\centering
+\begin{figure*}\centering
 \includegraphics[width=2\columnwidth]{plots/inv_cov.png}
 \caption{
 Visibilities before (top row) and after (bottom row) inverse covariance weighting.
@@ -1659,7 +1659,7 @@ instantaneously redundant baselines before/after delay filtering, respectively.
 } \label{fig:inv_cov}
 \end{figure*}
 
-\begin{figure*}[t!]\centering
+\begin{figure*}\centering
 \includegraphics[width=1.5\columnwidth]{plots/eig.png}
 \caption{
 Eigenspectrum of covariance matrices (left) empirically estimated 
@@ -1770,7 +1770,7 @@ ordering described above, this has the consequence of not coupling the modes
 inside the horizon in to measurments of band powers outside the horizon. Figure
 \ref{fig:window_func} shows these window functions. 
 
-\begin{figure}[t!]\centering
+\begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/window.png}
 \caption{
 The window function matrix $\mathbf{W}$, as defined in equation \ref{eqn:true_pspec_2_est_pspec}.
@@ -1812,7 +1812,7 @@ information there is in every $k_{\parallel}$ mode. The Fisher matrix is derived
 using all of the baselines, not just a baseline pair and consists of all of the
 information contained in the estimate.
 
-\begin{figure}[b!]\centering
+\begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/fisher.png}
 \caption{
 Fisher information matrix, $\mathbf{F}=\langle\qhat\qhat^\dagger\rangle$, for the quadratic estimator described in
@@ -1839,7 +1839,7 @@ suppressed by the delay filter.
 \end{figure}
 
 
-\begin{figure*}[t!]\centering
+\begin{figure*}\centering
 \includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
 \caption{
 Cumulative mean (left) and median (right), as a function of number of modes,
@@ -2081,7 +2081,7 @@ the measured power spectrum. This is owning to the fact that the mean and median
 are not the same statistic. The correction factor is $\log{2}$ for using the
 median statistic over the mean, for a gaussian distributed signal. 
 
-\begin{figure}[!t]
+\begin{figure}
 \centering
 \includegraphics[width=\columnwidth]{plots/sigloss.png}
 \caption{
@@ -2390,8 +2390,8 @@ $T_{k}(8.4) = 1.6\, \text{K} \, < \,T_{s}(8.4)$.
 %   -Repeat the science measurement in Parsons 2014. This will compliment the
 %    Jonnies result.
 %   -the wedge - maybe?
-\begin{figure*}[h!]\centering
-\includegraphics[width=2\columnwidth,height=1.2\columnwidth]{plots/pk_k3pk.png}
+\begin{figure*}\centering
+\includegraphics[width=2\columnwidth]{plots/pk_k3pk.png}
 \caption{
 Measured power spectrum (black dots with 2$\sigma$ error bars)
 at $z=8.4$ resulting from a 134-day observation with PAPER-64.
@@ -2411,7 +2411,7 @@ filter (1.9), signal loss (1.15), and median statistic (1.4)}
 \end{figure*}
 
 
-\begin{figure}[t!]\centering
+\begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/flat_k3pk_posterior.png}
 \caption{Posterior distribution of power spectrum amplitude for a flat $\Delta^{2}$
 power spectrum over $k=.15 - .5 \rm \,hMpc^{-1}$,
@@ -2423,7 +2423,7 @@ Labels.
 \label{fig:final_posterior}
 \end{figure}
 
-\begin{figure*}[b!]\centering
+\begin{figure*}\centering
 \includegraphics[width=2\columnwidth]{plots/ts_patchy_bound.png}
 \caption{The constraints imposed on the spin temperature of the 21 cm
 transition by the $2\sigma$ upper limits shown in figure \ref{fig:final_pspec} at a redshift of 8.4. The color scale is is in Kelvin.}
@@ -2456,7 +2456,7 @@ transition by the $2\sigma$ upper limits shown in figure \ref{fig:final_pspec} a
 %       in the figure. Note that this data does have omnical applied to it.
 %
 
-\begin{figure*}[t!]\centering
+\begin{figure*}\centering
 \includegraphics[width=2\columnwidth]{plots/pspec_comparison.png}
 \caption{Diagnostic power spectra in the style of Figure \ref{fig:final_pspec}
 illustrating the impact of various analysis stages.
