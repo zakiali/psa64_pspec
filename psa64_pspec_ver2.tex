@@ -397,13 +397,14 @@ wide-band delay filter, we average the data in local sidereal time and apply a
 fringe-rate filter to optimally combine the time domain data. Finally, we use
 optimal quadratic estimators to make our estimate of the 21 cm power spectrum.
 
+\subsection{Calibration}\label{sec:calibration}
 The calibration procedure employed in this analysis is twofold: a relative
 calibration and an absolution calibration. The relative calibration employed
 uses the fact that PAPER contains numerous redundant baselines. As usual, the
 absolute calibration uses self calibration methods employed by radio
 interferometers. Here we describe both procedures.
 
-\subsection{Relative Calibration}
+\subsubsection{Relative Calibration}
 %    -Principles of redundant calibration. Fact that there is no signal loss in
 %       this kind of measurement.
 %       --PAPER has a redundant configuration. Therefore the number of baselines
@@ -561,7 +562,7 @@ additive offset that it subtracts from each visibility before running fitting
 for solutions once again. This additive offset is in effect averaging deviations
 from the $chi^{2}$ over 10 minutes and subtracting that deviation off.
 
-\subsection{Absolute Calibration} 
+\subsubsection{Absolute Calibration} 
 %    -Selfcal to pictor, fornax, and crab (to get the north-south components).
 %       --Reiterate that redundant cal does not solve for the overall flux and
 %         phase parameters. 
@@ -1420,7 +1421,7 @@ covariance matrices.
 %   -Counting of independent modes.
 %       --Number of independent modes = 2*#of lst hours used in analysis. This
 %         is because 1900 seconds ~ 30 minutes.
-\subsection{Review of Optimal Quadratic Estimators}
+\subsubsection{Review of Optimal Quadratic Estimators}
 We use the optimal quadratic estimator method to estimate our power spectrum as
 done in \cite{dillon_et_al2013a} and \cite{liu_tegmark2011}.  Here we briefly review the
 optimal quadratic esitimator (OQE) formalism with an emphasis on our application
@@ -1554,7 +1555,7 @@ where $\mathbf{F}$ is the Fisher matrix. The error correlation matrix describes
 how correlated the errors between modes are in the final power spectrum result.
 
 
-\subsection{Application of Optimal Quadratic Estimators}
+\subsubsection{Application of Optimal Quadratic Estimators}
 \label{sec:oqe_app}
 % A walk through of the application to the data.
 
@@ -1825,7 +1826,6 @@ information contained in the estimate.
 \begin{figure}[b!]\centering
 \includegraphics[width=\columnwidth]{plots/fisher.png}
 \caption{
-[XXX add color bar].
 Fisher information matrix, $\mathbf{F}=\langle\qhat\qhat^\dagger\rangle$, for the quadratic estimator described in
 equation \ref{eqn:presum_qalpha}, applied to delay-filtered data. 
 Color scale indicates $\log_{10}\mathbf{F}$.
@@ -2325,7 +2325,7 @@ equation \ref{eqn:d2pspec_model} is given by
     \text{max}[T_{0}(z)\xi(z)] \approx 370\big(\frac{10}{1+z}\big)^{1/2}.
 \end{equation}
 
-By rearranging equation \ref{eqn:d2pspec_model}, we get that 
+By rearranging equation \ref{d2pspec_model}, we get that 
 \begin{equation}
     T_{b} = T_{0}(z)\xi(z) = T_{0}(z)(1 - \frac{T_{\gamma}}{T_{spin}},
 \end{equation}
@@ -2425,12 +2425,11 @@ filter (1.9), signal loss (1.15), and median statistic (1.4)}
 \begin{figure}[t!]\centering
 \includegraphics[width=\columnwidth]{plots/flat_k3pk_posterior.png}
 \caption{Posterior distribution of power spectrum amplitude for a flat $\Delta^{2}$
-power spectrum,
-assuming Gaussian error bars. The green and red
+power spectrum over $k=.15 - .5 \rm \,hMpc^{-1}$,
+assuming Gaussian error bars. The calculation is not influenced by the first 2 points outside of the horizon. The green and red
 horizontal lines correspond to the 1 and 2 $\sigma$ upper limits, respectrively,
 on the power spectrum. XXXfix sigma lines to be vertical. Make it look better.
 Labels.
-XXX flat over what range of k?  how influenced by first 2 points outside horizon?
 }
 \label{fig:final_posterior}
 \end{figure}
@@ -2438,18 +2437,7 @@ XXX flat over what range of k?  how influenced by first 2 points outside horizon
 \begin{figure*}[b!]\centering
 \includegraphics[width=2\columnwidth]{plots/ts_patchy_bound.png}
 \caption{The constraints imposed on the spin temperature of the 21 cm
-transition by the $2\sigma$ upper limits shown in figure \ref{fig:final_pspec}
-for 5 different neutral fractions}
-
-%on the absolute value of the brightness
-%temperature by the $2\sigma$ upper limits shown in figure \ref{fig:final_pspec}
-%for 5 different neutral fractions using the patchy reionization scenario given
-%by equation \ref{eqn:patchy_bound} The color scale maxes out at the largest
-%possible brightness temperature (380 mK) imposed by the no heating scenario at
-%$z=8.4$. The horizontal and vertical axis correspond to the minimum and maximum
-%scales included in the patchy reionization model.
-%XXX convert to Tspin, not Tb
-%}
+transition by the $2\sigma$ upper limits shown in figure \ref{fig:final_pspec} at a redshift of 8.4. The color scale is is in Kelvin.}
 \label{fig:patchy_bound}
 \end{figure*}
 
@@ -2483,11 +2471,10 @@ for 5 different neutral fractions}
 \includegraphics[width=2\columnwidth]{plots/pspec_comparison.png}
 \caption{Diagnostic power spectra in the style of Figure \ref{fig:final_pspec}
 illustrating the impact of various analysis stages.
-Power spectra omitting the stages of fringe-rate filtering (dot-dashed) and 
-Omnical calibration (dashed) show higher residuals than the the final power spectrum
-(solid) that includes both stages.
+Power spectra omitting the stages of fringe-rate filtering (magenta) and 
+Omnical calibration (cyan) show higher residuals than the the final power spectrum
+(black) that includes both stages.
 [XXX update this with same pspec as final figure]
-[XXX put the power spectra even closer together]
 %The blue power spectrum has the full pipeline applied to it and is identical to
 %\ref{fig:final_pspec}. The red power spectrum does not have omnical applied to
 %it, and hence the error bars are bigger. Note that it does have the otimal
