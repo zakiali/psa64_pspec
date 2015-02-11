@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 import aipy as a, numpy as n, pylab as p
 import capo as C
-import sys, optparse, re, os
+import sys, optparse, re, os, glob
 
 o=optparse.OptionParser()
 o.add_option('--flux', action='store_true', 
@@ -21,8 +21,12 @@ o.add_option('--show', action='store_true',
 opts,args = o.parse_args(sys.argv[1:])
 print args
 
+args = glob.glob('data/final_pspecs/v03*/pspec.npz')
+
 ERRORS = {}
 
+
+fig = p.figure(figsize=(12,7.2))
 def dual_plot(kpl, pk, err, pkfold=None, errfold=None, umag=16, f0=.164, color='', ls='.', bins=None, verbose=True, offset=0):
     z = C.pspec.f2z(f0)
     kperp = C.pspec.dk_du(z) * umag #k_perp, from baseline length in wavelengths.
@@ -124,8 +128,9 @@ RS_VS_KPL_FOLD = {} #K^2
 powerspec, powerspecwgt = {}, {}
 powerspec_fold, powerspecwgt_fold = {}, {}
 
-colors = 'kkk'
-lss = ['-','--','-.',':']
+colors = 'cmk'
+#lss = ['-','--','-.',':']
+lss = ['-','-','-',':']
 for filename in args:
     print 'Reading', filename
     f = n.load(filename)
@@ -167,7 +172,7 @@ for cnt,filename in enumerate(args):
     d,kpl,nos = n.array(d, dtype=n.complex), n.array(ks), n.array(nos)
     d_fold,kpl_fold,nos_fold = n.array(d_fold, dtype=n.complex), n.array(ks_fold), n.array(nos_fold)
     
-    if opts.flux:
+    if False:
         # PSA32 was calibrated to Pictor A @ 160 MHz = 424 Jy
         # To recalibrate to new Pic A, must multiply by square of ratio of fluxes
         # Jacobs et al 2013 says Pic A = 382 @ 150 MHz, index=-0.76, so at 160 MHz, Pic A = 364 Jy
@@ -179,7 +184,7 @@ for cnt,filename in enumerate(args):
         nos *= f
         d_fold *= f
         nos_fold *= f
-    if opts.beam:
+    if False:
         f = 2.35 # Use power**2 beam, which is a 1.69/0.72=2.35 penalty factor
         print 'Scaling data and noise by %f for correcting cosmo scalar to use power^2 beam' % f
         d *= f
@@ -187,24 +192,34 @@ for cnt,filename in enumerate(args):
         d_fold *= f
         nos_fold *= f
     #if True: # For aggressive fringe-rate filtering, change beam area
-    if opts.afrf: # For aggressive fringe-rate filtering, change beam area
-        f = opts.afrf_factor
+    if True: # For aggressive fringe-rate filtering, change beam area
+        if 'v031' in filename: pass
+        #f = opts.afrf_factor
         f = 1.90 # ratio of power**2 beams for filtered * unfiltered beams: 0.306 / 0.162
         print 'Scaling data and noise by %f for beam constriction in aggressive fringe-rate filtering' % f
         d *= f
         nos *= f
         d_fold *= f
         nos_fold *= f         
-    if opts.cov: # extra penalty for signal loss in covariance diagonalization
-        f = 1.5
+    if True: # extra penalty for signal loss in covariance diagonalization
+        f = 1.15#updated value
         print 'Scaling data and noise by %f for signal loss in covariance diagonalization' % f
         d *= f
         nos *= f
         d_fold *= f
         nos_fold *= f
+
+    if True: # penalty for using median statistic
+        f = 1/n.log(2)#updated value
+        print 'Scaling data and noise by %f for signal loss in covariance diagonalization' % f
+        d *= f
+        nos *= f
+        d_fold *= f
+        nos_fold *= f
+ 
     
     if d_fold.size==0: d_fold,nos_fold=None,None
-    dual_plot(kpl, d, 2*nos, d_fold, 2*nos_fold, color=colors[0], ls=lss[0], bins=None, f0=freq, offset=.01*cnt)
+    dual_plot(kpl, d, 2*nos, d_fold, 2*nos_fold, color=colors[0], ls=lss[0], bins=None, f0=freq, offset=.005*cnt)
     colors = colors[1:] + colors[0]
     lss = lss[1:] + lss[:1]
 
@@ -220,10 +235,10 @@ k_h = C.pspec.dk_deta(C.pspec.f2z(.151)) * tau_h
 p.subplot(121)
 p.vlines(k_h, -1e7, 1e10, linestyles='--', linewidth=1.5)
 p.vlines(-k_h, -1e7, 1e10, linestyles='--', linewidth=1.5)
-#p.gca().set_yscale('log', nonposy='clip')
-p.xlabel(r'$k_\parallel\ [h\ {\rm Mpc}^{-1}]$')
-p.ylabel(r'$P(k)\ [{\rm mK}^2\ (h^{-1}\ {\rm Mpc})^3]$')
-p.ylim(-.6e7,1.75e7)
+p.gca().set_yscale('log', nonposy='clip')
+p.xlabel(r'$k_\parallel\ [h\ {\rm Mpc}^{-1}]$', fontsize='large')
+p.ylabel(r'$P(k)\ [{\rm mK}^2\ (h^{-1}\ {\rm Mpc})^3]$', fontsize='large')
+p.ylim(1e5,1e9)
 p.grid()
 
 
@@ -250,8 +265,8 @@ except:
 #
 #
 p.gca().set_yscale('log', nonposy='clip')
-p.xlabel(r'$k\ [h\ {\rm Mpc}^{-1}]$')
-p.ylabel(r'$k^3/2\pi^2\ P(k)\ [{\rm mK}^2]$')
+p.xlabel(r'$k\ [h\ {\rm Mpc}^{-1}]$', fontsize='large')
+p.ylabel(r'$k^3/2\pi^2\ P(k)\ [{\rm mK}^2]$', fontsize='large')
 p.ylim(1e0,1e9)
 p.xlim(0, 0.6)
 #p.suptitle(colors)

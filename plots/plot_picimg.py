@@ -24,6 +24,11 @@ o.add_option('-f', '--fft', dest='fft', action='store_true',
     help='Perform 2D FFT of image.')
 opts, args = o.parse_args(sys.argv[1:])
 
+opts.drng = 4
+opts.max = 2
+
+args = ['data/gianni/all_psa64-image.fits']
+
 cmap = p.get_cmap(opts.cmap)
 if opts.batch: m1,m2 = 1,1
 else:
@@ -87,22 +92,32 @@ for cnt, filename in enumerate(args):
     if not opts.drng is None: min = max - opts.drng
     else: min = d.min()
 
-    fig = p.figure(figsize=(4.5,4.5))
+#    fig = p.figure(figsize=(4.5,4.5))
     fig = p.figure()
     p.subplot(m2, m1, cnt+1)
     if not opts.nogrid:
         from mpl_toolkits.basemap import Basemap
+        from matplotlib.patches import Circle
         xpx,ypx = d.shape
         dx1 = -(xpx/2 + .5) * kwds['d_ra'] * a.img.deg2rad
         dx2 = (xpx/2 - .5) * kwds['d_ra'] * a.img.deg2rad
         dy1 = -(ypx/2 + .5) * kwds['d_dec'] * a.img.deg2rad
         dy2 = (ypx/2 - .5) * kwds['d_dec'] * a.img.deg2rad
-        map = Basemap(projection='ortho', lon_0=180, lat_0=kwds['dec'],
-            rsphere=1, llcrnrx=dx1, llcrnry=dy1, urcrnrx=dx2,urcrnry=dy2)
-        map.drawmeridians(n.arange(kwds['ra']-180,kwds['ra']+180,30))
-        map.drawparallels(n.arange(-90,120,30))
+        map = Basemap(projection='ortho', lon_0=kwds['ra'], lat_0=kwds['dec'],
+            rsphere=1, llcrnrx=dx1, llcrnry=dy1, urcrnrx=dx2,urcrnry=dy2, celestial=True)
+        map.drawmeridians(n.arange(kwds['ra']-180,kwds['ra']+180,15), labels=[False,False,False,True])
+        map.drawparallels(n.arange(-90,120,15), labels=[False,True,True,False])
         map.drawmapboundary()
         im1 = map.imshow(d, vmin=min, vmax=max, cmap=cmap, interpolation='nearest')
+
+        picdec = -45.78
+        picra = -80.09
+        picdec = -37.2083
+        picra = -50.6708
+        x,y = map(picra, picdec)
+        circ = Circle((x,y), radius=.01, facecolor='none',edgecolor='black' )
+        p.gca().add_patch(circ)
+
     else: im1 = p.imshow(d, vmin=min, vmax=max, origin='lower', cmap=cmap, interpolation='nearest')
 
     fig.subplots_adjust(left=.08, top=.95, bottom=.08, wspace=.3, hspace=.1, right=.85)
