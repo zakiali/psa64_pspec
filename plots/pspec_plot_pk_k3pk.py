@@ -30,7 +30,8 @@ def noise_level():
     tsys = 500e3 #mK
     inttime = 1886. #seconds
     nbls=51
-    ndays = 120 #effectively this many days. days of operation = 135
+    #ndays = 120 #effectively this many days. days of operation = 135
+    ndays = 60 #effectively this many days. days of operation = 135
     nmodes = (8.5*60*60/inttime)**.5
     pol = 2
     real = 2 #??? what is this again?
@@ -95,7 +96,7 @@ def dual_plot(kpl, pk, err, pkfold=None, errfold=None, umag=16., f0=.164, color=
         errfold = err[k0:].copy()
         pkpos,errpos = pk[k0+1:].copy(), err[k0+1:].copy()
         pkneg,errneg = pk[k0-1::-1].copy(), err[k0-1::-1].copy()
-        print pkneg.shape, pkpos.shape
+#        print pkneg, pkpos
         pkfold[1:] = (pkpos/errpos**2 + pkneg/errneg**2) / (1./errpos**2 + 1./errneg**2)
         errfold[1:] = n.sqrt(1./(1./errpos**2 + 1./errneg**2))
     else:
@@ -104,8 +105,9 @@ def dual_plot(kpl, pk, err, pkfold=None, errfold=None, umag=16., f0=.164, color=
         #pkfold = pkfold.imag
 
     #p.errorbar(k, k3*pk, yerr=k3*err, fmt=color+'.', capsize=0)
+    print color
     if not upperlimit: p.errorbar(k[k0:], k3[k0:]*pkfold, yerr=k3[k0:]*errfold, fmt=color+'.', capsize=0,linewidth=1.2)
-    else: p.plot(k[k0:], k3[k0:]*pkfold+k3[k0:]*errfold)
+    else: p.plot(k[k0:], k3[k0:]*pkfold+k3[k0:]*errfold, color+'-')
     if not bins is None:
         _kpls, _k3pks, _k3errs = [], [], []
         for (dn,up) in bins:
@@ -179,6 +181,7 @@ FG_VS_KPL = { # K^2
     '-0.049':   1.06015e+15,
     ' 0.000':   8.44e+15, 
     ' 0.049':   1.22195e+15, 
+
 #    ' 0.054':   2.60795e+13,
     #-0.0536455587089:   5.37262e+13,
     #-0.0268227793545:   7.15304e+14, 
@@ -228,6 +231,7 @@ if True:
     for _kpl in dsum_fold:
         RS_VS_KPL_FOLD['total'][_kpl] = (dsum_fold[_kpl] / dwgt_fold[_kpl], 1./n.sqrt(dwgt_fold[_kpl]))
 
+fig=p.figure(figsize=(12,7.2))
 #if False: # put in raw delay spec
 if True: # put in raw delay spec
     f = n.load(dspec)
@@ -241,14 +245,17 @@ if True: # put in raw delay spec
             err[cnt] = 2*n.sqrt(FG_VS_KPL_NOS*FG_VS_KPL[k])
 #    pk *= .76 # psa747 calibration of Pic A = 370.6 Jy @ 160 MHz (which includes resolution effects)
 #    err *= .76
-    pk *= 2.35 # Use power**2 beam, which is a 1.69/0.72=2.35 penalty factor
-    err *= 2.35
-    pk *= 1.46 # fix scale to reflect new corrected bandwidth normalization
-    err *= 1.46
-    if False: # For aggressive fringe-rate filtering, change beam area
+    #pk *= 2.35 # Use power**2 beam, which is a 1.69/0.72=2.35 penalty factor
+    #err *= 2.35
+#    pk *= 1.46 # fix scale to reflect new corrected bandwidth normalization
+#    err *= 1.46
+    pk *= 1.4
+    err *= 1.4
+    if True: # For aggressive fringe-rate filtering, change beam area
         pk *= 1.90 # ratio of power**2 beams for filtered * unfiltered beams: 0.306 / 0.162
         err *= 1.90
     print pk.shape, err.shape
+    print pk + 2*err
     dual_plot(kpl, pk, 2*err, color='c', upperlimit=True) # 2-sigma error bars
 
 
@@ -263,7 +270,6 @@ BINS = None
 #kpl = RS_VS_KPL.keys(); kpl.sort()
 #d = [RS_VS_KPL[k] for k in kpl]
 colors = 'kbcm' * 10
-fig=p.figure(figsize=(12,7.2))
 for sep in RS_VS_KPL:
     if not sep == 'total': continue
     dsum, dwgt = {}, {}
@@ -399,6 +405,13 @@ p.vlines(k_h, -1e7, 1e10, linestyles='--', linewidth=1.5)
 #theor_errs = 1441090 * n.array(theoretical_ks)**3  / (2*n.pi**2)
 #p.plot(theoretical_ks, theor_errs, 'c--')
 
+#GMRT RESULTS
+p.plot([.1,.13,.17,.19,.27,.31,.4,.5,.6][:-1], [2e5,4e5,1e5,2e5,2e5,4e5,5e5,248**2,3e5][:-1], 'yv', label='GMRT2013')
+#Dillon upper limit 9.82e7 mK^2 at k=0.2
+p.plot([.2], 9.82e7 * .2**3/(2*n.pi**2), 'mv', label='Dillon2013')
+#Parsons2014 upper lmit 41mk at .27
+p.plot([.27], 41**2, 'gv', label='Parsons2014')
+
 theo_noise = noise_level()
 #print k0
 print kpl_pos[0], theo_noise[0]
@@ -406,7 +419,7 @@ p.plot(kpl_pos, theo_noise, 'c--')
 p.gca().set_yscale('log', nonposy='clip')
 p.xlabel(r'$k\ [h\ {\rm Mpc}^{-1}]$', fontsize='large')
 p.ylabel(r'$k^3/2\pi^2\ P(k)\ [{\rm mK}^2]$', fontsize='large')
-p.ylim(1e0,1e5)
+p.ylim(1e0,1e6)
 p.xlim(0, 0.6)
 p.grid()
 p.savefig('pspec.png')
