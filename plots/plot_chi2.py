@@ -16,9 +16,12 @@ ax1 = p.subplot(1,1,1)
 #ax.imshow(n.transpose(f['arr_0']), vmin = 0, vmax = 3, extent=[lsts[0], lsts[1],100,200], interpolation = 'none')
 print n.max(n.where(f['arr_0'])), n.min(n.where(f['arr_0']))
 print n.mean(n.where(f['arr_0']))
+wfall = f['arr_0']
+print wfall.shape
+wfall = f['arr_0'][:,15:-16]
 #capo.arp.waterfall(n.transpose(f['arr_0']), mx=300, drng=100,  extent=[lsts[0], lsts[1], 100, 200], mode='lin'); p.colorbar(shrink=.5)
 #im1 = capo.arp.waterfall(n.transpose(f['arr_0']), mx=.5, drng=.5, extent=[startlst,endlst, 100, 200], mode='log'); p.colorbar(shrink=.5)
-im1 = p.imshow(n.log10(n.abs(n.transpose(f['arr_0']))), vmax=.5, vmin=0, extent=[startlst,endlst, 100, 200], interpolation='nearest', aspect='auto')
+im1 = p.imshow(n.log10(n.abs(n.transpose(wfall))), vmax=.5, vmin=0, extent=[startlst,endlst, 107, 192.5], interpolation='nearest', aspect='auto')
 p.xlabel('LST [ Hours ]')
 p.ylabel('Frequency [ MHz ]')
 

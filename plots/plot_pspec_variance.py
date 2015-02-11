@@ -58,7 +58,7 @@ med_var /= SHUFFLES
 p.figure(figsize=(7.5,4))
 
 #cmap = p.get_cmap('jet')
-cmap = p.get_cmap('brg')
+cmap = p.get_cmap('rainbow')
 #for cnt, kpl in enumerate(xrange(1,pk_2d.shape[-1])):
 for cnt in xrange(0,pk_2d.shape[-1]):
     k = n.abs(kpl[cnt])
@@ -84,5 +84,5 @@ p.title('Median')
 p.xlabel('Modes integrated')
 p.setp(p.gca().get_yticklabels(), visible=False)
 
-p.subplots_adjust(left=.12,bottom=.10,top=.90,right=.95)
+p.subplots_adjust(left=.12,bottom=.15,top=.90,right=.95)
 p.show()

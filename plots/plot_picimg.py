@@ -2,6 +2,7 @@
 """
 This is a general-purpose script for plotting simple FITS images.
 """
+#Make plot and add labels in photoshop
 
 import aipy as a, sys, optparse, os
 import numpy as n, pylab as p, ephem, math
@@ -26,6 +27,7 @@ opts, args = o.parse_args(sys.argv[1:])
 
 opts.drng = 4
 opts.max = 2
+#opts.nogrid=True
 
 args = ['data/gianni/all_psa64-image.fits']
 
@@ -93,7 +95,7 @@ for cnt, filename in enumerate(args):
     else: min = d.min()
 
 #    fig = p.figure(figsize=(4.5,4.5))
-    fig = p.figure()
+    fig = p.figure(figsize=(7,6))
     p.subplot(m2, m1, cnt+1)
     if not opts.nogrid:
         from mpl_toolkits.basemap import Basemap
@@ -103,25 +105,31 @@ for cnt, filename in enumerate(args):
         dx2 = (xpx/2 - .5) * kwds['d_ra'] * a.img.deg2rad
         dy1 = -(ypx/2 + .5) * kwds['d_dec'] * a.img.deg2rad
         dy2 = (ypx/2 - .5) * kwds['d_dec'] * a.img.deg2rad
-        map = Basemap(projection='ortho', lon_0=kwds['ra'], lat_0=kwds['dec'],
+        kwds['ra']= 80 # overwriting keyword which is 79.95708. Difference is < 1''
+        map = Basemap(projection='ortho', lon_0=kwds['ra']-100, lat_0=kwds['dec'],
             rsphere=1, llcrnrx=dx1, llcrnry=dy1, urcrnrx=dx2,urcrnry=dy2, celestial=True)
-        map.drawmeridians(n.arange(kwds['ra']-180,kwds['ra']+180,15), labels=[False,False,False,True])
-        map.drawparallels(n.arange(-90,120,15), labels=[False,True,True,False])
+        map.drawmeridians(n.arange(kwds['ra']-180,kwds['ra']+180,15), labels=[False,False,False,False])
+        map.drawparallels(n.arange(-90,120,15), labels=[False,False,False,False])
         map.drawmapboundary()
         im1 = map.imshow(d, vmin=min, vmax=max, cmap=cmap, interpolation='nearest')
 
         picdec = -45.78
-        picra = -80.09
-        picdec = -37.2083
-        picra = -50.6708
-        x,y = map(picra, picdec)
-        circ = Circle((x,y), radius=.01, facecolor='none',edgecolor='black' )
-        p.gca().add_patch(circ)
+        picra = -80.09 + 100
+        fordec = -37.2083
+        forra = -50.6708 + 100
+        picx,picy = map(picra, picdec)
+        forx,fory = map(forra, fordec)
+        pic_circ = Circle((picx,picy), radius=.02, facecolor='none',edgecolor='black' )
+        for_circ = Circle((forx,fory), radius=.02, facecolor='none',edgecolor='black' )
+        p.gca().add_patch(pic_circ)
+        p.gca().add_patch(for_circ)
 
     else: im1 = p.imshow(d, vmin=min, vmax=max, origin='lower', cmap=cmap, interpolation='nearest')
 
+#    p.xlabel('Right ascension [deg]')
+#    p.ylabel('Declination [deg]')
     fig.subplots_adjust(left=.08, top=.95, bottom=.08, wspace=.3, hspace=.1, right=.85)
-    cbar_ax1 = fig.add_axes([0.85, 0.20, 0.05, 0.6])
+    cbar_ax1 = fig.add_axes([0.87, 0.20, 0.05, 0.6])
     fig.colorbar(im1, cax=cbar_ax1)
 #    p.colorbar(shrink=.5, fraction=.05)
     #p.title(filename)
@@ -139,6 +147,7 @@ def click(event):
     if not event.button in [2,3]: return
     if not opts.nogrid:
         lon,lat = map(event.xdata, event.ydata, inverse=True)
+        print lon, lat
         lon = (180 + kwds['ra'] - lon) % 360
         lon *= a.img.deg2rad; lat *= a.img.deg2rad
         ra,dec = ephem.hours(lon), ephem.degrees(lat)

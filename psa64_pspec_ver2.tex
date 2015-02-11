@@ -514,7 +514,8 @@ applied to visibilities and the results are shown in \ref{fig:omniview}.
 \centering
 \includegraphics[width=1.5\columnwidth]{plots/omniview_64.png}
 \caption{
-[XXX what are units of color scale?]
+%[XXX what are units of color scale?] There are none. It represents different
+%redundant baselines.
 PAPER visibilities plotted in the complex plane before (left) and after (right)
 the application of redundancy-based calibration with Omnical \citep{zheng_et_al2014}.
 All baselines in the array measured at 159 MHz for a single time integration are plotted.
@@ -528,11 +529,11 @@ calibration.  Residuals are consistent with thermal noise.
 \centering
 \includegraphics[width=\columnwidth]{plots/chi2.png}
 \caption{
-[XXX trim out band edges]
 $\chi^{2}$ of all baseline residuals after the application of Omnical.
 The plot comprises a observations over one day, with a frequency resolution of
 49 kHz and a time resolution of 42.9 s.
-[XXX is this before or after compression?  df and dt are one of each.]
+%[XXX is this before or after compression?  df and dt are one of each.] After. I
+%dont understand this.
 } \label{fig:chi2}
 \end{figure}
 
@@ -653,12 +654,13 @@ the calibrated Pictor A spectrum and the model spectrum from
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{plots/picimg.png}
+\includegraphics[width=\columnwidth]{plots/picimg_cs.png}
 \caption{
 [XXX need image coordinates, add circles for catalog positions of For, Pic]
 PAPER-64 image of a field including Pictor A and Fornax A, with black circles
-indicating catalog positions \citep{XXX}.
-[XXX report bandwidth, time range used in imaging].
+indicating catalog positions \citep{XXX}. Two hours of data used while Pictor A
+in transit.
+[XXX report bandwidth].
 Image quality is limited by the redundant configuration of the array (e.g. grating lobes
 as a result of periodic antenna spacing, elongated lobes
 arising from poor uv-coverage in the north-south direction).  Nonetheless, this image
@@ -675,12 +677,12 @@ demonstrates accurate phase calibration over a wide field of view.
 Measured spectrum of Pictor A in Stokes I (blue) relative to its catalog
 value (black; \citealt{jacobs_et_al2013}).  Flux measurements were
 extracted from images of Pictor A, made independently for each frequency channel in
-XXX s snapshots as Pictor transitted between hour angles of XXX and XXX.  
-Each measurement was then divided by the PAPER beam model and averaged to
-obtain the measured spectrum, which serves to characterize the flux scale
-of the PAPER-64 observations.  Error bars indicate 95\% confidence intervals,
-derived from the distribution of measurements used in the average.
-[XXX check this last statement].
+10 minutes snapshots as Pictor transitted between hour angles of -1:49:35.18
+and 1:10:34.47.  Each measurement was then divided by the PAPER beam model and
+averaged to obtain the measured spectrum, which serves to characterize the flux
+scale of the PAPER-64 observations. Error bars indicate the 95\% confidence
+intervals, derived from the gaussian fits in the source extractor used in
+measure the flux in PyBDSM.
 }\label{fig:pic_spec}
 \end{figure}
 
@@ -1420,7 +1422,7 @@ covariance matrices.
 %   -Counting of independent modes.
 %       --Number of independent modes = 2*#of lst hours used in analysis. This
 %         is because 1900 seconds ~ 30 minutes.
-\subsubsection{Review of Optimal Quadratic Estimators}
+\subsection{Review of Optimal Quadratic Estimators}
 We use the optimal quadratic estimator method to estimate our power spectrum as
 done in \cite{dillon_et_al2013a} and \cite{liu_tegmark2011}.  Here we briefly review the
 optimal quadratic esitimator (OQE) formalism with an emphasis on our application
@@ -1554,7 +1556,7 @@ where $\mathbf{F}$ is the Fisher matrix. The error correlation matrix describes
 how correlated the errors between modes are in the final power spectrum result.
 
 
-\subsubsection{Application of Optimal Quadratic Estimators}
+\subsection{Application of Optimal Quadratic Estimators}
 \label{sec:oqe_app}
 % A walk through of the application to the data.
 
