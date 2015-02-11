@@ -391,17 +391,17 @@ As illustrated in Figure \ref{fig:flowchart},
 our analysis pipeline begins by running a compression
 algorithm to reduce the volume of our raw data by a factor of 40
 (see Appendix A of P14). 
-We then calibrate on the basis of redundancy before using self-calibration to solve
-for absolute phase and gain parameters. After suppressing foregrounds with a
-wide-band delay filter, we average the data in local sidereal time and apply a
-fringe-rate filter to optimally combine the time domain data. Finally, we use
-optimal quadratic estimators to make our estimate of the 21 cm power spectrum.
-
-The calibration procedure employed in this analysis is twofold: a relative
-calibration and an absolution calibration. The relative calibration employed
-uses the fact that PAPER contains numerous redundant baselines. As usual, the
-absolute calibration uses self calibration methods employed by radio
-interferometers. Here we describe both procedures.
+We then calibrate in two stages, which we describe in more detail below.  
+The first step uses instantaneous redundancy is used to solve for the majority of the 
+per-antenna internal degrees of freedom in the array.  Second, standard self-calibration is used 
+to solve for a smaller number of
+absolute phase and gain parameters that cannot be solved by redundancy alone. 
+% XXX check if these statements are needed
+%After suppressing foregrounds with a
+%wide-band delay filter, we average the data in local sidereal time and apply a
+%fringe-rate filter to optimally combine the time domain data. 
+%These calibratedFinally, we use
+%optimal quadratic estimators to make our estimate of the 21 cm power spectrum.
 
 \subsection{Relative Calibration}
 %    -Principles of redundant calibration. Fact that there is no signal loss in
@@ -433,19 +433,19 @@ interferometers. Here we describe both procedures.
 %       --Absoulte phase and gain calibration are addressed in later sections.
 %
 
-The highly redundant configuration of PAPER lends itself to
-use the redunancy in baselines for a relative calibration between anteannas.
+The grid-based configuration of PAPER antennas allows a large number of 
+antenna calibration parameters to 
+solved for on the basis of redundancy \citep{wieringa1992,liu_et_al2012,parsons_et_al2012a}.
 Multiple baselines of the same length and orientation measure the same sky
-signal. On this basis, all of the differences between redundant baselines are
-attributed to differences in the signal chain, including effects from variations
-in antennas, cables lengths, and receivers. These are the variations that are
+signal. Differences between redundant baselines result from
+differences in the signal chain, including amplitude and phase effects attributable to
+antennas, cables, and receivers. These are the variations that are
 calibrated out and leads to relative calibration solutions between all the
 antennas within the array.  Note that this relative calibration using redundancy
 (i.e. redundat calibration) only constrains the relative complex gain solutions
 between antennas and has no information about the sky. Furthermore, redundant
 calibration inherently preserves common mode signal between redundant baselines,
 and therefore this type of calibration is necessarily lossless. 
-
 
 %    -Summary of the procedure of redundant calibration. This should be mixed in
 %     with the equations from Zheng et. al.
@@ -461,33 +461,37 @@ and therefore this type of calibration is necessarily lossless.
 %       --Because there are more baselines than the number of unique baselines, 
 %         we have an overdetermined system of equations and therefore can
 %         uniquely solve for all of the gains and "true" visibilities.
-Practiaclly, redundant calibration takes on two flavors, log calibration (logcal) and
-linear calibration (lincal) \citep{liu_et_al2010,zheng_et_al2014}. Logcal, takes
-the logarithm of the visibility measured by an interferometer (equation 4 of
-\citet{zheng_et_al2014}) to give a linearized system which can then be fit to
-using linear least square. We are fitting to
+
+In practice, redundant calibration often takes on two flavors: log calibration (LOGCAL) and
+linear calibration (LINCAL) \citep{liu_et_al2010,zheng_et_al2014}. LOGCAL uses 
+logarithms applied to visibilities (equation 4 of
+\citealt{zheng_et_al2014}) to give a linearized system of equations
 \begin{equation}\label{eqn:logcal}
     \log{v_{ij}} = \log{g_{i}^{*}} + \log{g_{j}} + \log{y_{i-j}},
 \end{equation}
-where the $g_{i}$'s are the
-complex gains of each antenna and $y_{i-j}$ is the visibility of the given
-baseline if it measured the perfect sky. Redundancy gives us an overconstrained
-system of equations and we can thus solve for complex gains from each antenna
-using traditional linear algebra techniques.  In addition we also get a model
-visibility for a given baseline.  Averaging these models together for
-redundant baselines gives us a an estimate of our model visibility for the
-redundant group of baselines.
+where $g$ denotes the 
+complex gain of antennas indexed by $i$ and $j$, and $y$ represents the ``true" visibility 
+measured by all redundant baselines.  In solving for per-antenna gain parameters with
+a number of measurements that scales quadratically with antenna number, redundancy sets up 
+an overconstrained
+system of equations that can be solved
+using traditional linear algebra techniques.
+% XXX is this point important?
+%In addition we also get a model
+%visibility for a given baseline.  Averaging these models together for
+%redundant baselines gives us a an estimate of our model visibility for the
+%redundant group of baselines.
 
-Lincal, on the otherhand, taylor expands the visibility around some initial
-estimates of the gains and model visibilities via the equation 
+LINCAL, on the otherhand, uses a Taylor expansion of the visibility around initial
+estimates of the gains and visibilities, 
 \begin{equation}\label{eqn:lincal}
 v_{ij} = g_{i}^{0*}g_{j}^{0}y_{i-j}^{0} + g_{i}^{1*}g_{j}^{0}y_{i-j}^{0} +
          g_{i}^{0*}g_{j}^{1}y_{i-j}^{0}+g_{i}^{0*}g_{j}^{0}y_{i-j}^{1},
 \end{equation}
-where the $0$ indexes are the intial estimates and the $1$ indexes are the
+where $0$ denotes intial estimates and $1$ denotes 
 solutions we fit for. In the implementation, described below, the initial
-estimates of the solutions are taken as the outputs of logcal. The benefit of
-lincal is that it is not a biased estimator as opposed to logcal which takes the
+estimates for LINCAL are taken from LOGCAL. The benefit of
+LINCAL is that it is not a biased estimator as opposed to LOGCAL which takes the
 logarithm of additive noise \citep{liu_et_al2010}.
 
 %    -How was this calibration applied to the data. 
@@ -503,10 +507,10 @@ logarithm of additive noise \citep{liu_et_al2010}.
 %    -Diagnostic figures : Chi-squared, complex plane, stability vs. time and
 %                          frequency.
 
-Implementaion of redundant calibration was done with the ${Omnical}$ package, an
-open source redundant calibration package written by Jeff Zheng
+Implementaion of redundant calibration was done with the OMNICAL package, an
+open-source redundant calibration package
 \footnote{https://github.com/jeffzhen/omnical}\citep{zheng_et_al2014}. This
-package implements both logcal and lincal, solving for a complex gain solution
+package implements both LOGCAL and LINCAL, solving for a complex gain solution
 per antenna, frequency, and integration. The per integration solutions are then
 applied to visibilities and the results are shown in \ref{fig:omniview}.
 
@@ -516,10 +520,10 @@ applied to visibilities and the results are shown in \ref{fig:omniview}.
 \caption{
 [XXX what are units of color scale?]
 PAPER visibilities plotted in the complex plane before (left) and after (right)
-the application of redundancy-based calibration with Omnical \citep{zheng_et_al2014}.
+the application of redundancy-based calibration with OMNICAL \citep{zheng_et_al2014}.
 All baselines in the array measured at 159 MHz for a single time integration are plotted.
 Instantaneously redundant baselines are assigned the same symbol/color.
-The tighter clustering of redundant measurements with Omnical indicates improved
+The tighter clustering of redundant measurements with OMNICAL indicates improved
 calibration.  Residuals are consistent with thermal noise.
 } \label{fig:omniview}
 \end{figure*}
@@ -529,14 +533,14 @@ calibration.  Residuals are consistent with thermal noise.
 \includegraphics[width=\columnwidth]{plots/chi2.png}
 \caption{
 [XXX trim out band edges]
-$\chi^{2}$ of all baseline residuals after the application of Omnical.
+$\chi^{2}$ of all baseline residuals after the application of OMNICAL.
 The plot comprises a observations over one day, with a frequency resolution of
 49 kHz and a time resolution of 42.9 s.
 [XXX is this before or after compression?  df and dt are one of each.]
 } \label{fig:chi2}
 \end{figure}
 
-In addition to solving for gain solutions, Omnical also characterizes the
+In addition to solving for gain solutions, OMNICAL also characterizes the
 quality of the calibration by calculating the $\chi^{2}$ for every integration.
 Figure \ref{fig:chi2} shows the $\chi^{2}$ squared waterfall for a full nights
 worth of calibrations. From \cite{zheng_et_al2014}, the $\chi^{2}/\text{DoF}$,
@@ -553,10 +557,10 @@ well suited for the $\chi^{2}$, and is a likely reason that the distribution
 has a mean of 2.
 %XXX This may change and we may get a chi-squared of around one.% 
 
-The calibration parameters solved for in Omnical also have a time independent
+The calibration parameters solved for in OMNICAL also have a time independent
 additive offset associated with them, This additive offset is associated with
 crosstalk between antennas, especially the shorter north south baselines.
-To remove this crosstalk, Omnical calculates an averaged (over ten minutes)
+To remove this crosstalk, OMNICAL calculates an averaged (over ten minutes)
 additive offset that it subtracts from each visibility before running fitting
 for solutions once again. This additive offset is in effect averaging deviations
 from the $chi^{2}$ over 10 minutes and subtracting that deviation off.
@@ -1319,7 +1323,7 @@ more samples per LST bin in the range of 2--10 hours due to our observing
 season, therefore the density of points in this LST region is greater, set by
 the color scale. This density plot shows that redundant baselines, especially
 the EoR baselines we are using the power spectrum analyisis, agree very well
-with one another. This is another nod to the use of Omnical for redundant
+with one another. This is another nod to the use of OMNICAL for redundant
 calibration. 
 
 In addition to stability between redundant baselines, we also consider the
@@ -2471,7 +2475,7 @@ transition by the $2\sigma$ upper limits shown in figure \ref{fig:final_pspec} a
 \caption{Diagnostic power spectra in the style of Figure \ref{fig:final_pspec}
 illustrating the impact of various analysis stages.
 Power spectra omitting the stages of fringe-rate filtering (magenta) and 
-Omnical calibration (cyan) show higher residuals than the the final power spectrum
+OMNICAL calibration (cyan) show higher residuals than the the final power spectrum
 (black) that includes both stages.
 [XXX update this with same pspec as final figure]
 %The blue power spectrum has the full pipeline applied to it and is identical to
@@ -2486,15 +2490,15 @@ Omnical calibration (cyan) show higher residuals than the the final power spectr
 
 Here, we discuss the effect to the power spectrum if various stages of the
 analysis were kept out. Specifically, we will discuss the effects of using
-Omnical and optimal fringe-rate filtering vs. not using them. This will give a
+OMNICAL and optimal fringe-rate filtering vs. not using them. This will give a
 sense of how different analyses effect the power spectrum.
 
-The merits of using omnical were described above and it has the effect of
+The merits of using OMNICAL were described above and it has the effect of
 bringing redundant baselines into better agreement with one another by
 calibrating out the differences between them. With this picture, we expect
 that for the power spectrum, error bars should become tighter. That is the
 noise in the measurement would be reduced. Comparing $P(k)$ for data that has
-been Omnical calibrated vs data that has not, but does have the redundant
+been OMNICAL calibrated vs data that has not, but does have the redundant
 calibration that was used in P14 applied to it, we see that
 the error bars have decreased. This is shown in figure \ref{fig:pspec_comp}.
 Note that the error bars shrink for the higher $k$-modes, the error bars for the
@@ -2530,11 +2534,11 @@ The new techniques and improvements to calibration used in this analysis are a
 considerable improvement from the PAPER-32 analysis from P14.
 These new techniques bring into light the new ways in
 which we can gain sensitivity and accurately describe our instrument. The use of
-Omnical to accurately calibrate the relative complex gains of the antennas has
+OMNICAL to accurately calibrate the relative complex gains of the antennas has
 shown to be a major improvement to the pipeline. The accuracy and improvement of
 this calibration brings redundant baselines more into agreement with one another
 and provides and axis for us to check the status of the array. The output 
-chi-squared from Omnical provides a metric for us to monitor the health of the
+chi-squared from OMNICAL provides a metric for us to monitor the health of the
 array and another axis for us to flag off bad RFI events. Furthermore, the
 precise calbration of antennas is imperative to accurately model and remove
 foregrounds. Using the delay spectrum technique employed here, precise
