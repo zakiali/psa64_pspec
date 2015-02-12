@@ -1,4 +1,4 @@
-\begin{thebibliography}{83}
+\begin{thebibliography}{85}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Bolton} {et~al.}(2011){Bolton}, {Haehnelt}, {Warren}, {Hewett},
@@ -79,6 +79,16 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
 \bibitem[{{Furlanetto} {et~al.}(2006){Furlanetto}, {Oh}, \&
   {Briggs}}]{furlanetto_et_al2006}
 {Furlanetto}, S.~R., {Oh}, S.~P., \& {Briggs}, F.~H. 2006, \physrep, 433, 181
+
+\bibitem[{{George} {et~al.}(2014){George}, {Reichardt}, {Aird}, {Benson},
+  {Bleem}, {Carlstrom}, {Chang}, {Cho}, {Crawford}, {Crites}, {de Haan},
+  {Dobbs}, {Dudley}, {Halverson}, {Harrington}, {Holder}, {Holzapfel}, {Hou},
+  {Hrubes}, {Keisler}, {Knox}, {Lee}, {Leitch}, {Lueker}, {Luong-Van},
+  {McMahon}, {Mehl}, {Meyer}, {Millea}, {Mocanu}, {Mohr}, {Montroy}, {Padin},
+  {Plagge}, {Pryke}, {Ruhl}, {Schaffer}, {Shaw}, {Shirokoff}, {Spieler},
+  {Staniszewski}, {Stark}, {Story}, {van Engelen}, {Vanderlinde}, {Vieira},
+  {Williamson}, \& {Zahn}}]{george_et_al2014}
+{George}, E.~M., {et~al.} 2014, ArXiv e-prints
 
 \bibitem[{{Greenhill} \& {Bernardi}(2012)}]{greenhill_bernardi2012}
 {Greenhill}, L.~J., \& {Bernardi}, G. 2012, ArXiv e-prints
@@ -282,10 +292,16 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   {Aumont}, {Baccigalupi}, {Banday}, \& et~al.}]{planck_et_al2014}
 {Planck Collaboration} {et~al.} 2014, \aap, 571, A16
 
-\bibitem[{{Planck Collaboration} {et~al.}(2015){Planck Collaboration}, {Ade},
-  {Aghanim}, {Arnaud}, {Ashdown}, {Aumont}, {Baccigalupi}, {Banday},
-  {Barreiro}, {Bartlett}, \& et~al.}]{planck_2015}
----. 2015, ArXiv e-prints
+\bibitem[{{Planck Collaboration} {et~al.}(2015{\natexlab{a}}){Planck
+  Collaboration}, {Ade}, {Aghanim}, {Arnaud}, {Ashdown}, {Aumont},
+  {Baccigalupi}, {Banday}, {Barreiro}, {Bartlett}, \&
+  et~al.}]{planck_et_al2015}
+---. 2015{\natexlab{a}}, ArXiv e-prints
+
+\bibitem[{{Planck Collaboration} {et~al.}(2015{\natexlab{b}}){Planck
+  Collaboration}, {Ade}, {Aghanim}, {Arnaud}, {Ashdown}, {Aumont},
+  {Baccigalupi}, {Banday}, {Barreiro}, {Bartlett}, \& et~al.}]{planck_2015}
+---. 2015{\natexlab{b}}, ArXiv e-prints
 
 \bibitem[{{Pober} {et~al.}(2012){Pober}, {Parsons}, {Jacobs}, {Aguirre},
   {Bradley}, {Carilli}, {Gugliucci}, {Moore}, \& {Parashare}}]{pober_et_al2012}

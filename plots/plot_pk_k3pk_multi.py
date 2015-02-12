@@ -116,11 +116,9 @@ def dual_plot(kpl, pk, err, pkfold=None, errfold=None, umag=16, f0=.164, color='
 
 FG_VS_KPL_NOS = 168.74e6
 FG_VS_KPL = { #K^2
-    '-0.054':   5.37262e+13,
-    '-0.027':   7.15304e+14, 
-    ' 0.000':   3.50958e+15, 
-    ' 0.027':   4.12396e+14, 
-    ' 0.054':   2.60795e+13
+    '-0.049':   1.06015e+15,
+    ' 0.000':   8.44e+15, 
+    ' 0.049':   1.22195e+15, 
     }
 
 RS_VS_KPL = {} #K^2
@@ -168,7 +166,22 @@ for cnt,filename in enumerate(args):
     ks_fold = RS_VS_KPL_FOLD[filename].keys(); ks_fold.sort() 
     d_fold = [powerspec_fold[filename][k]/powerspecwgt_fold[filename][k] for k in ks_fold]
     nos_fold = [1/n.sqrt(powerspecwgt_fold[filename][k]) for k in ks_fold]
+    kpl = ks
+    kpl_fold = ks_fold
     
+    if True:
+        print 'Adding Foreground'
+        for en, k in enumerate(kpl):
+            k = '%6.3f' % k
+            if not FG_VS_KPL.has_key(k): continue
+            d[en] += FG_VS_KPL[k]
+            nos[en] = 2*n.sqrt(FG_VS_KPL_NOS*FG_VS_KPL[k])
+        for en,k in enumerate(kpl_fold):
+            k = '%6.3f'%k
+            if not FG_VS_KPL.has_key(k): continue        
+            d_fold[en] += FG_VS_KPL[k]
+            nos_fold[en] = 2*n.sqrt(FG_VS_KPL_NOS*FG_VS_KPL[k])
+
     d,kpl,nos = n.array(d, dtype=n.complex), n.array(ks), n.array(nos)
     d_fold,kpl_fold,nos_fold = n.array(d_fold, dtype=n.complex), n.array(ks_fold), n.array(nos_fold)
     
@@ -202,7 +215,7 @@ for cnt,filename in enumerate(args):
         d_fold *= f
         nos_fold *= f         
     if True: # extra penalty for signal loss in covariance diagonalization
-        f = 1.15#updated value
+        f = 1.02#updated value
         print 'Scaling data and noise by %f for signal loss in covariance diagonalization' % f
         d *= f
         nos *= f
@@ -212,6 +225,29 @@ for cnt,filename in enumerate(args):
     if True: # penalty for using median statistic
         f = 1/n.log(2)#updated value
         print 'Scaling data and noise by %f for signal loss in covariance diagonalization' % f
+        d *= f
+        nos *= f
+        d_fold *= f
+        nos_fold *= f
+    if True:
+        f1 = 1.048
+        f2 = 1.013
+        f  = 1.0015
+        print 'Scaling data and noise by %f(first mode outside horizon), %f(second mode outside horizon), and %f(all modes greater)  for using delay filter.'%(f1,f2,f)
+        k0 = n.argmin(n.abs(kpl))
+        d[k0+2] *= f1; d[k0-2] *= f1
+        d[k0+3] *= f2; d[k0-3] *= f2
+        d[k0+4:] *= f; d[:k0-3] *= f
+        nos[k0+2] *= f1; nos[k0-2] *= f1
+        nos[k0+3] *= f2; nos[k0-3] *= f2
+        nos[k0+4:] *= f; nos[:k0-3] *= f
+
+        d_fold[2] *= f1; nos_fold *= f1
+        d_fold[3] *= f2; nos_fold *= f2
+        d_fold[4:] *= f; nos_fold *= f
+    if True:
+        f=1 + 2e-9 
+        print 'Scaling data and noise by %f for signal loss from flux scale calibration.'%f
         d *= f
         nos *= f
         d_fold *= f
@@ -235,10 +271,10 @@ k_h = C.pspec.dk_deta(C.pspec.f2z(.151)) * tau_h
 p.subplot(121)
 p.vlines(k_h, -1e7, 1e10, linestyles='--', linewidth=1.5)
 p.vlines(-k_h, -1e7, 1e10, linestyles='--', linewidth=1.5)
-p.gca().set_yscale('log', nonposy='clip')
+#p.gca().set_yscale('log', nonposy='clip')
 p.xlabel(r'$k_\parallel\ [h\ {\rm Mpc}^{-1}]$', fontsize='large')
 p.ylabel(r'$P(k)\ [{\rm mK}^2\ (h^{-1}\ {\rm Mpc})^3]$', fontsize='large')
-p.ylim(1e5,1e9)
+p.ylim(-.6e7,2e7)
 p.grid()
 
 
@@ -267,7 +303,7 @@ except:
 p.gca().set_yscale('log', nonposy='clip')
 p.xlabel(r'$k\ [h\ {\rm Mpc}^{-1}]$', fontsize='large')
 p.ylabel(r'$k^3/2\pi^2\ P(k)\ [{\rm mK}^2]$', fontsize='large')
-p.ylim(1e0,1e9)
+p.ylim(1e0,1e5)
 p.xlim(0, 0.6)
 #p.suptitle(colors)
 p.grid()
