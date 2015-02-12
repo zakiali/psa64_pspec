@@ -500,16 +500,17 @@ def posterior(kpl, pk, err, pkfold=None, errfold=None, f0=.151, umag=16.):
         k = k[w]
         pkfold=pkfold[w]
         errfold = errfold[w]
-        print k
-        print pkfold
-        print errfold
     pk= k**3 * pkfold/(2*n.pi**2)
     err = k**3 * errfold/(2*n.pi**2)
     #s = n.logspace(1,3.5,100)
     s = n.linspace(-5000,5000,10000)
 #    print s
     data = []
-    print 'real pk used in posterior:\n\t', pk.real
+    print 'real pk used in posterior:\n\t'
+    print '[k]       delta^2         err'
+    for _k, _pk, _err in zip(k, pk, err):
+        print '%6.3f  9.5f     9.5f'%(_k, _pk.real, _err)
+
     for ss in s:
         data.append(n.exp(-.5*n.sum((pk.real - ss)**2 / err**2)))
     #    print data[-1]
