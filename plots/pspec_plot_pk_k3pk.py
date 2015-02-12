@@ -470,10 +470,13 @@ p.savefig('pspec.png')
 #p.grid()
 
 f = n.load(args[0])
-def posterior(kpl, pk, err, pkfold=None, errfold=None):
+def posterior(kpl, pk, err, pkfold=None, errfold=None, f0=.151, umag=16.):
     import scipy.interpolate as interp
     k0 = n.abs(kpl).argmin()
     kpl = kpl[k0:]
+    z = C.pspec.f2z(f0)
+    kpr = C.pspec.dk_du(z) * umag
+    k = n.sqrt(kpl**2 + kpr**2)
     if pkfold is None:
         print 'Folding for posterior'
         pkfold = pk[k0:].copy()
@@ -484,12 +487,24 @@ def posterior(kpl, pk, err, pkfold=None, errfold=None):
         errfold[1:] = n.sqrt(1./(1./errpos**2 + 1./errneg**2))
 
     #ind = n.logical_and(kpl>.2, kpl<.5)
-    ind = n.logical_and(kpl>.15, kpl<.5)
+    ind = n.logical_and(k>.15, k<.5)
     #ind = n.logical_and(kpl>.12, kpl<.5)
     #print kpl,pk.real,err
-    kpl = kpl[ind]
-    pk= kpl**3 * pkfold[ind]/(2*n.pi**2)
-    err = kpl**3 * errfold[ind]/(2*n.pi**2)
+    k = k[ind]
+    pkfold = pkfold[ind]
+    errfold = errfold[ind]
+#    if True:
+    if False:
+        #remove k=.345 point
+        w = n.floor(k*100)!=34
+        k = k[w]
+        pkfold=pkfold[w]
+        errfold = errfold[w]
+        print k
+        print pkfold
+        print errfold
+    pk= k**3 * pkfold/(2*n.pi**2)
+    err = k**3 * errfold/(2*n.pi**2)
     #s = n.logspace(1,3.5,100)
     s = n.linspace(-5000,5000,10000)
 #    print s
