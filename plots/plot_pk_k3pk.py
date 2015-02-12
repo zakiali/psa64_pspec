@@ -512,10 +512,9 @@ def posterior(kpl, pk, err, pkfold=None, errfold=None, f0=.151, umag=16.):
 #    print s
     data = []
     data_omit = []
-    print 'real pk used in posterior:\n\t'
-    print '[k]       delta^2         err'
     for _k, _pk, _err in zip(k, pk, err):
-        print '%6.3f  9.5f     9.5f'%(_k, _pk.real, _err)
+        print _k, _pk.real, _err
+    #    print '%6.3f    %9.5f     9.5f'%(_k, _pk.real, _err)
     for ss in s:
         data.append(n.exp(-.5*n.sum((pk.real - ss)**2 / err**2)))
         data_omit.append(n.exp(-.5*n.sum((pk.real - ss)**2 / err_omit**2)))
