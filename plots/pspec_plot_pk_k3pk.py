@@ -30,19 +30,20 @@ def noise_level():
     tsys = 500e3 #mK
     inttime = 1886. #seconds
     nbls=51
-    #ndays = 120 #effectively this many days. days of operation = 135
-    ndays = 60 #effectively this many days. days of operation = 135
-    nmodes = (8.5*60*60/inttime)**.5
+    ndays = 120 #effectively this many days. days of operation = 135
+    #ndays = 60 #effectively this many days. days of operation = 135
+    nmodes = (3*8.5*60*60/inttime)**.5 # 3 for baseline types, 8.5=total lst time used.
     pol = 2
     real = 2 #??? what is this again?
     freq = .15117 #GHz
     z = C.pspec.f2z(freq)
     X2Y = C.pspec.X2Y(z)/1e9 #h^-3 Mpc^3 / str/ Hz
+    print X2Y
     sdf = .1/203
     freqs = n.linspace(.1,.2,203)[95:115]
     B = sdf*freqs.size
     bm = n.polyval(C.pspec.DEFAULT_BEAM_POLY, freq) * 2.35 # correction for beam^2
-    scalar = X2Y * bm * B
+    scalar = X2Y * bm 
 
     fr_correct = 1.9
 
@@ -52,17 +53,19 @@ def noise_level():
     print 'tsys', tsys
     print 
 
-    #error bars minimum width. Consider them flat for P(k)
-    pk = scalar*bm*fr_correct*( (tsys)**2 / (inttime*pol*real*nbls*ndays*nmodes) )
+    #error bars minimum width. Consider them flat for P(k). Factor of 2 at the end is due to folding of kpl (root(2)) and root(2) in radiometer equation.
+    pk = scalar*fr_correct*( (tsys)**2 / (inttime*pol*real*nbls*ndays*nmodes) )/2
 
+    print 'pk = ', pk
     #
-    etas = n.fft.fftshift(C.pspec.f2eta(freqs))
-    kpl = etas * C.pspec.dk_deta(z)
-    kpl_pos = kpl[kpl>=0]
-    print kpl_pos
+#    etas = n.fft.fftshift(C.pspec.f2eta(freqs))
+#    kpl = etas * C.pspec.dk_deta(z)
+#    kpl_pos = kpl[kpl>=0]
+    ks = n.linspace(.05837,.6,100)
 
-    d2 = pk*kpl_pos**3 / (2*n.pi**2)
-    return d2
+    d2 = pk*ks**3 / (2*n.pi**2)
+    #return ks, d2
+    return pk
 
 
 
@@ -232,8 +235,8 @@ if True:
         RS_VS_KPL_FOLD['total'][_kpl] = (dsum_fold[_kpl] / dwgt_fold[_kpl], 1./n.sqrt(dwgt_fold[_kpl]))
 
 fig=p.figure(figsize=(12,7.2))
-#if False: # put in raw delay spec
-if True: # put in raw delay spec
+if False: # put in raw delay spec
+#if True: # put in raw delay spec
     f = n.load(dspec)
     kpl,pk,err = f['kpl'], f['pk'], f['err']
     print kpl
@@ -334,26 +337,51 @@ for sep in RS_VS_KPL:
     if True: # For aggressive fringe-rate filtering, change beam area
         f = opts.afrf_factor
         f = 1.90 # ratio of power**2 beams for filtered * unfiltered beams: 0.306 / 0.162
-        print 'Scaling data and noise by %f for beam constriction in aggressive fringe-rate filtering' % f
+        print 'Scaling data and noise by %f for beam constriction in aggressive fringe-rate filtering.' % f
         d *= f
         nos *= f
         d_fold *= f
         nos_fold *= f
     if True: # extra penalty for signal loss in covariance diagonalization
         #f = 1.2
-        f = 1.15 # this is the conservative number, for the biggest modes outside the of the wedge. Get ~1.03 correction at k=.2
-        print 'Scaling data and noise by %f for signal loss in covariance diagonalization' % f
+#        f = 1.15 # this is the conservative number, for the biggest modes outside the of the wedge. Get ~1.03 correction at k=.2
+        f = 1.02 # this is the conservative number, for the biggest modes outside the of the wedge. Get ~1.03 correction at k=.2
+        print 'Scaling data and noise by %f for signal loss from empirically estimating covariances.' % f
         d *= f
         nos *= f
         d_fold *= f
         nos_fold *= f
     if True:
         f = 1/n.log(2)
-        print 'Scaling data and noise by %f for using the median statistic'%f
+        print 'Scaling data and noise by %f for using the median statistic.'%f
         d *= f
         nos *= f
         d_fold *= f
         nos_fold *= f
+    if True:
+        f1 = 1.048
+        f2 = 1.013
+        f  = 1.0015
+        print 'Scaling data and noise by %f(first mode outside horizon), %f(second mode outside horizon), and %f(all modes greater)  for using delay filter.'%(f1,f2,f)
+        k0 = n.argmin(n.abs(kpl))
+        d[k0+2] *= f1; d[k0-2] *= f1
+        d[k0+3] *= f2; d[k0-3] *= f2
+        d[k0+4:] *= f; d[:k0-3] *= f
+        nos[k0+2] *= f1; nos[k0-2] *= f1
+        nos[k0+3] *= f2; nos[k0-3] *= f2
+        nos[k0+4:] *= f; nos[:k0-3] *= f
+
+        d_fold[2] *= f1; nos_fold *= f1
+        d_fold[3] *= f2; nos_fold *= f2
+        d_fold[4:] *= f; nos_fold *= f
+    if True:
+        f=1 + 2e-9 
+        print 'Scaling data and noise by %f for signal loss from flux scale calibration.'%f
+        d *= f
+        nos *= f
+        d_fold *= f
+        nos_fold *= f
+
     #for _kpl,_pk,_nos in zip(kpl,d,nos): print _kpl, _pk, _nos
     print sep, colors[0]
     '''
@@ -364,6 +392,7 @@ for sep in RS_VS_KPL:
     '''
     if d_fold.size == 0: d_fold,nos_fold = None, None
     #dual_plot(kpl, d, 2*nos, d_fold, 2*nos_fold, color=colors[0], bins=BINS)#,f0=freq) # 2-sigma error bars
+    print kpl
     dual_plot(kpl, d, 2*nos, d_fold, 2*nos_fold, color=colors[0], bins=BINS,f0=.151) # 2-sigma error bars
     #dual_plot(kpl, d, nos, color=colors[0], bins=BINS) # 2-sigma error bars
     colors = colors[1:] + colors[0]
@@ -387,26 +416,27 @@ for filename in glob.glob('lidz_mcquinn_k3pk/*7.3*dat'):
 tau_h = 100 + 15. #in ns
 k_h = C.pspec.dk_deta(C.pspec.f2z(.151)) * tau_h
 p.subplot(121)
-p.vlines(k_h, -1e7, 1e20, linestyles='--', linewidth=1.5)
-p.vlines(-k_h, -1e7, 1e20, linestyles='--', linewidth=1.5)
-p.gca().set_yscale('log', nonposy='clip')
+p.vlines(k_h, -1e7, 1e8, linestyles='--', linewidth=1.5)
+p.vlines(-k_h, -1e7, 1e8, linestyles='--', linewidth=1.5)
+#p.gca().set_yscale('log', nonposy='clip')
 p.xlabel(r'$k_\parallel\ [h\ {\rm Mpc}^{-1}]$', fontsize='large')
 p.ylabel(r'$P(k)[\ {\rm mK}^2\ (h^{-1}\ {\rm Mpc})^3]$',fontsize='large')
-#p.ylim(-1e7,1e8)
-p.ylim(1e5,5e16)
+p.ylim(-.6e7,1.75e7)
+#p.ylim(1e5,5e16)
 p.grid()
 
 
 p.subplot(122)
 #if ONLY_POS_K: p.plot([.5], [248**2], 'mv', label='GMRT2013')
 #else: p.plot([-.5, .5], [248**2, 248**2], 'mv', label='GMRT2013')
-p.vlines(k_h, -1e7, 1e10, linestyles='--', linewidth=1.5)
+p.vlines(k_h, -1e7, 1e7, linestyles='--', linewidth=1.5)
 #theoretical_ks = n.linspace(.058,.5, 100)
 #theor_errs = 1441090 * n.array(theoretical_ks)**3  / (2*n.pi**2)
 #p.plot(theoretical_ks, theor_errs, 'c--')
 
 #GMRT RESULTS
-p.plot([.1,.13,.17,.19,.27,.31,.4,.5,.6][:-1], [2e5,4e5,1e5,2e5,2e5,4e5,5e5,248**2,3e5][:-1], 'yv', label='GMRT2013')
+#p.plot([.1,.13,.17,.19,.27,.31,.4,.5,.6][:-1], [2e5,4e5,1e5,2e5,2e5,4e5,5e5,248**2,3e5][:-1], 'yv', label='GMRT2013')
+p.plot([.5], 248**2, 'yv', label='GMRT2013')
 #Dillon upper limit 9.82e7 mK^2 at k=0.2
 p.plot([.2], 9.82e7 * .2**3/(2*n.pi**2), 'mv', label='Dillon2013')
 #Parsons2014 upper lmit 41mk at .27
@@ -414,12 +444,13 @@ p.plot([.27], 41**2, 'gv', label='Parsons2014')
 
 theo_noise = noise_level()
 #print k0
-print kpl_pos[0], theo_noise[0]
-p.plot(kpl_pos, theo_noise, 'c--')
+#print kpl_pos[0], theo_noise[0]
+#2 for the 2 sigma
+p.plot(n.array(kpl_pos), 2*n.array(kpl_pos)**3*theo_noise/(2*n.pi**2), 'c--')
 p.gca().set_yscale('log', nonposy='clip')
 p.xlabel(r'$k\ [h\ {\rm Mpc}^{-1}]$', fontsize='large')
 p.ylabel(r'$k^3/2\pi^2\ P(k)\ [{\rm mK}^2]$', fontsize='large')
-p.ylim(1e0,1e6)
+p.ylim(1e0,1e5)
 p.xlim(0, 0.6)
 p.grid()
 p.savefig('pspec.png')
@@ -459,8 +490,11 @@ def posterior(kpl, pk, err, pkfold=None, errfold=None):
     kpl = kpl[ind]
     pk= kpl**3 * pkfold[ind]/(2*n.pi**2)
     err = kpl**3 * errfold[ind]/(2*n.pi**2)
-    s = n.logspace(1,3.5,100)
+    #s = n.logspace(1,3.5,100)
+    s = n.linspace(-5000,5000,10000)
+#    print s
     data = []
+    print 'real pk used in posterior:\n\t', pk.real
     for ss in s:
         data.append(n.exp(-.5*n.sum((pk.real - ss)**2 / err**2)))
     #    print data[-1]
@@ -469,31 +503,44 @@ def posterior(kpl, pk, err, pkfold=None, errfold=None):
     #print s
     #data/=n.sum(data)
     data /= n.max(data)
-    p.figure(5)
-    p.plot(s, data)
+    p.figure(5, figsize=(6.5,5.5))
+    p.plot(s, data, 'k', linewidth=2)
     #use a spline interpolator to get the 1 and 2 sigma limits.
     #spline = interp.interp1d(data,s)
     #print spline
     #print max(data), min(data)
     #print spline(.68), spline(.95)
     #p.plot(spline(n.linspace(.0,1,100)),'o')
-    p.plot(s, n.exp(-.5)*n.ones_like(s))
-    p.plot(s, n.exp(-.5*2**2)*n.ones_like(s))
-#    p.plot(s, ndata)
-    std = n.std(data)
-    mean = n.mean(data) 
-    sig1 = mean+std
-    sig2 = mean+(2*std)
-    print sig1, sig2
-    print n.where(data-sig1 < .01)
-    print mean, std
+#    p.plot(s, n.exp(-.5)*n.ones_like(s))
+#    p.plot(s, n.exp(-.5*2**2)*n.ones_like(s))
+    sig1 = []
+    sig2 = []
+    maxarg = n.argmax(data)
+    s1 = data[maxarg:] - n.exp(-.5)
+    sig1.append(n.floor(n.median(n.where(n.abs(s1)<.01)))+maxarg)
+    s1 = data[:maxarg] - n.exp(-.5)
+    sig1.append(n.floor(n.median(n.where(n.abs(s1)<.01))))
+
+    s2 = data[maxarg:] - n.exp(-.5*2**2)
+    sig2.append(n.floor(n.median(n.where(n.abs(s2)<.01)))+maxarg)
+    s2 = data[:maxarg] - n.exp(-.5*2**2)
+    sig2.append(n.floor(n.median(n.where(n.abs(s2)<.01))))
+    
+    #p.vlines(s[sig1[-1]],0,1,color=(0,107/255.,164/255.), linewidth=2)
+    p.vlines(s[sig1[0]],0,1,color=(0,107/255.,164/255.), linewidth=2)
+
+    #p.vlines(s[sig2[-1]],0,1,color=(0,107/255.,164/255.), linewidth=2)
+    p.vlines(s[sig2[0]],0,1,color=(1,128/255.,14/255.), linewidth=2)
+    print 'where', sig1
+    print 'where', sig2
     p.xlabel(r'$k^3/2\pi^2\ P(k)\ [{\rm mK}^2]$', fontsize='large')
-    p.ylabel('Posterior Probability Density', fontsize='large')
-    p.xlim(0,600)
+    p.ylabel('Posterior Distribution', fontsize='large')
+    p.xlim(0,550)
+    p.grid(1)
     p.show()
 
 #posterior(f['kpl'], f['pk'], f['err'], f['pk_fold'], f['err_fold'])
-posterior(kpl, d, nos, d_fold, nos_fold)
+posterior(kpl, d, 2*nos, d_fold, nos_fold)
 
 
 
