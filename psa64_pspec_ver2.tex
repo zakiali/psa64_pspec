@@ -258,7 +258,6 @@ spectrum analysis.}
 The stages of power-spectrum analysis. Black lines indicate data flow; red lines indicate
 Monte Carlo simulations used to 
 measure signal loss. Yellow boxes indicate stages without associated signal loss.
-[XXX update figure].
 }
 \label{fig:flowchart}
 \end{figure*}
@@ -516,7 +515,7 @@ calibration.  Residuals are consistent with thermal noise.
 \centering
 \includegraphics[width=\columnwidth]{plots/chi2.png}
 \caption{
-$\chi^{2}$ of all baseline residuals after the application of OMNICAL.
+Log of $\chi^{2}$ of all baseline residuals after the application of OMNICAL.
 The plot comprises a observations over one day, with a frequency resolution of
 49 kHz and a time resolution of 42.9 s.
 %[XXX is this before or after compression?  df and dt are one of each.] After. I
@@ -668,7 +667,7 @@ extracted from images of Pictor A, made independently for each frequency channel
 10 minutes snapshots as Pictor transitted between hour angles of -1:49:35.18
 and 1:10:34.47.  Each measurement was then divided by the PAPER beam model and
 averaged to obtain the measured spectrum, which serves to characterize the flux
-scale of the PAPER-64 observations. Error bars indicate the 95\% confidence
+scale of the PAPER-64 observations. Error bars indicate the 68\% confidence
 intervals, derived from the gaussian fits in the source extractor used in
 measure the flux in PyBDSM.
 }\label{fig:pic_spec}
@@ -1199,7 +1198,7 @@ very high fringe rates.
 \caption{
 Fringe-rate transform of visibilities measured on a 30-m east-west baseline at 159 MHz before (blue) and
 after (red) optimal fringe-rate filtering. The fringe-rate filter (green) is normalized
-to peak at unity gain, but has been scaled here for legibility.
+to integrate to unity, but has been scaled here for legibility.
 %Fringe-rate filtering at 159MHz. Fringe-rates of is defined as the rate at which
 %the sky moves through the fringe pattern of a baselines fringe pattern. This is
 %dependent on the frequency under consideration as well as position on the sky.
@@ -2184,17 +2183,12 @@ The dashed
 vertical lines at $0.6\hMpci$ show the bounds of the
 delay filter described in Section \ref{sec:wbd_filtering}. The theoretical
 $2\sigma$ thermal noise power spectrum is shown in dashed cyan, assuming
-$T_{sys}=500K$.
-XXX signal prediction in magenta.
-XXX other measurements: P14, dillon, gmrt.
-XXX (To be done) The solid cyan curve is the power spectrum of the
-foreground contained data. make foreground pspec.
-XXX Need to fix noise curve. It is completely wrong.
+$T_{\rm sys}=500K$.
+XXX describe triangles and cite
 XXX Using 100 bootstraps. Correction factors are fringe-rate
-filter (1.9), signal loss (1.15), and median statistic (1.4)}
+filter (1.9), signal loss (1.02), and median statistic (1.4), delay filter signal loss, bandpass signal loss.}
 \label{fig:final_pspec}
 \end{figure*}
-
 
 Following the power spectrum analysis procedure outlined in Section \ref{sec:oqe_app},
 we incoherently combine independent power spectrum measurements made at different
@@ -2261,14 +2255,13 @@ this faint feature decorrelates without the precision of redundant calibration.
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/flat_k3pk_posterior.png}
 \caption{Posterior distribution of power spectrum amplitude for a flat $\Delta^{2}$
-power spectrum over $0.15<k<0.5\hMpci$,
-assuming Gaussian error bars. The calculation is not influenced by the first 2 points outside of the horizon. The blue and orange
-vertical lines correspond to the 1 and 2 $\sigma$ upper limits, respectively,
-on the power spectrum. 
+power spectrum over $0.15<k<0.5\hMpci$ (solid black),
+assuming Gaussian error bars. The blue and orange
+vertical lines correspond to the 1$\sigma$ and 2$\sigma$ bounds, respectively.
+The poseterior distribution excluding the the detection at $k=.35\rm \,hMpc^{-1}$ (dashed black) is shown for comparison.
 }
 \label{fig:final_posterior}
 \end{figure}
-
 
 In order to aggregate the information presented in the power spectrum into
 a single upper limit, we fit a flat $\Delta^2(k)$ model to measurements
@@ -2413,7 +2406,7 @@ approximates the 21 cm power spectrum as flat between some minimum and maximum
 scales, $k_{\text{min}}$ and $k_{\text{max}}$, respectively,
 \begin{equation}\label{eqn:patchy_bound}
     \Delta^{2}_{i}(k) = (x_{\text{HI}} -
-x_{\text{HI}}^{2})/\ln{i(k_{\text{max}}/k_{\text{min}})}.
+x_{\text{HI}}^{2})/\ln{(k_{\text{max}}/k_{\text{min}})}.
 \end{equation}
 Under this model, for every pair of $k_{\text{min}}$ and $k_{\text{max}}$ in a
 grid, we 
@@ -2478,7 +2471,9 @@ $T_{k}(8.4) = 1.6\, \text{K} \, < \,T_{s}(8.4)$.
 \begin{figure*}\centering
 \includegraphics[width=2\columnwidth]{plots/ts_patchy_bound.png}
 \caption{The constraints imposed on the spin temperature of the 21 cm
-transition by the $2\sigma$ upper limits shown in figure \ref{fig:final_pspec} at a redshift of 8.4. The color scale is is in Kelvin.}
+transition by the $2\sigma$ upper limits shown in figure \ref{fig:final_pspec}
+at a redshift of 8.4 assuming the pathchy reionization model given by equation
+\ref{eqn:d2pspec_model} and \ref{eqn:patchy_bound}. Color indicates $T_{s}$ (in K) for a combination of $k_{min}$ and $k_{max}$.} 
 \label{fig:patchy_bound}
 \end{figure*}
 
