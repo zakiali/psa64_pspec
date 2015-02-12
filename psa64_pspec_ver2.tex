@@ -642,7 +642,7 @@ dimensional Fourier transform in wide field imaging by using the w-stacking
 algorithm implemented in WSclean \citep{offringa_et_al2014} – although we note that
 the standard w-projection algorithm implemented in
 CASA\footnote{http://casa.nrao.edu} gives similar performances as the PAPER
-array is essentially instantaneously coplanar.  A source spectra is derived for
+array is essentially instantaneously coplanar.  A source spectrum is derived for
 each snapshot by fitting a two dimensional Gaussian to Pictor A by using the
 PyBDSM\footnote{http://www.lofar.org/wiki/doku.php?id=public:user\_software:pybdsm}
 source extractor. Spectra are optimally averaged together by weighting them with
@@ -683,24 +683,26 @@ averaged to obtain the measured spectrum, which serves to characterize the flux
 scale of the PAPER-64 observations. Error bars indicate the 95\% confidence
 intervals, derived from the gaussian fits in the source extractor used in
 measure the flux in PyBDSM.
+[XXX How are these errors averaged? Did you use the same beam weighting?]
 }\label{fig:pic_spec}
 \end{figure}
-
+[XXX ZSA take a look at this paragraph]
 Fitting a polynomial to the bandpass has the potential for signal loss which
 would include fitting out some modes of the EoR fluctuations. In order to
 quantify the signal loss associated with fitting a ninth degree polynomial to
 the bandpass, we run a Monte Carlo simulation of the effect the bandpass has on
 an EoR signal. We construct a bandpass resulting from the fitted
 polynomial and add a low level EoR signal on top of that bandpass, modeled as a
-white noise with a unformly varying phase, for each baseline and independent
-time mode due for the beamforming to Pictor A. The total number of independent
+white noise with a uniformly varying phase, for each baseline and independent
+time mode. The total number of independent
 modes we average over before fitting a 9th degree polynomial to the simulated
-signal is 1017, which inlcued number of unique baselines and the number of
+signal is 1017, which includes the number of unique baselines and the number of
 independent modes over the 2 hours we used to measure the spectrum source. We
 finally compare the output amplitude of the EoR signal to the input amplitude in
 power spectrum domain and find that between $-.06 < k < .06$, the signal loss is
 less than $3\%$ and at the mode right outside the horizon is $.0000002\%$. The
 signal loss descreases for higher $k$'s.
+
 
 %These lists were My bullet points.
 %\begin{itemize}
@@ -901,31 +903,23 @@ Namely, Stokes I can be estimated as
 \end{equation}
 where $V_{\rm XX}$ and $V_{\rm YY}$ are the visibilities of the two linear
 polariztionats measured by the interferometer. There are some important caveats
-to the estimate of stokes I provided by equation \ref{eqn:stokesi}. One
+to the estimate of Stokes I provided by equation \ref{eqn:stokesi}. One
 important caveat is that it neglects the beam asymmetry  between the two linear
-polarization states. This mismatch is the cause polarization leakage from Stokes
-Q into Stokes I, thus contaminating the our measurement of the power spectrum.
+polarization states. This mismatch can cause polarization leakage from Stokes
+Q into Stokes I, thus contaminating  our measurement of the power spectrum with any polarized emission from the sky.
 This effect for PAPER, as shown in \citet{moore_et_al2013}, leaks 4\% of Q in to
 I.  We offer no correction for this effect, but in turn put some limits on
 polarization leakage discussed later. 
 
-Amongst the cornucopia of foreground removal techniques, which include spectral
+Foreground removal techniques discussed in the literature include spectral
 polynomial fitting \citep{wang_et_al2006,liu_et_al2009,bowman_et_al2009},
 principle component analysis
 \citep{paciga_et_al2013,paciga_et_al2011,liu_tegmark2011,masui_et_al2013},
 non-parametric subtractions
 \citep{harker_et_al2009,chapman_et_al2013}, and inverse
 covariance weighting
-\citep{dillon_et_al2013b,liu_tegmark2011,dillon_et_al2013a}, to name a few,
-at our
-disposal, we opt for the per-baseline approach of delay filtering described in
-P12b and \citet{petrovic_oh2011}. This technique is well suited for PAPER because it
-doesn't rely on making images and localizing sources for subtraction, which 
-the current maximum redundant configuration of PAPER is not well suited for.
-
-The delay transform method for localizing sources relies on the fact that
-foregrounds are spectrally smooth. For a given visibility, the delay transform
-is defined as the Fourier transform of a visibility with respect to frequency, 
+\citep{dillon_et_al2013b,liu_tegmark2011,dillon_et_al2013a}, and per-baseline delay filtering described in
+P12b and \citet{petrovic_oh2011}. The delay spectrum filtering technique is well suited to the maximum redundancy PAPER configuration which is not optimized for the other approaches where high fidelity imaging is a pre-requisite.   The delay spectrum foreground clean method is described in detail by P14; its application is unchanged here.  In summary; we fourier transform each baseline spectrum into the delay domain  
 
 \begin{align}\label{eqn:delay_transform}
 \tilde{V}(\tau) &= \int{W(\nu)S(\nu)A(\nu)B(\nu)I(\nu)
@@ -939,7 +933,8 @@ is defined as the Fourier transform of a visibility with respect to frequency,
 where $A(\nu)$ is the frequency dependent beam, $B(\nu)$ is the bandpass,
 $W(\nu)$ is a Blackman-Harris taper function to minimize band edge effects,
 $S(\nu)$ is the frequency sampling function due to RFI flagging  and $I(\nu)$ is
-the source spectrum. In delay domain, a smooth spectrum source is a delta
+the source spectrum. 
+In delay domain, a smooth spectrum source is a delta
 function at delay $\tau_{g}$ (a flat spectrum source's delay spectrum)
 convolved by the spectrum shape, the beam, the bandpass shape, the taper
 function and the sampling function. The source shape, $A(\nu)$, and $B(\nu)$,
@@ -973,49 +968,38 @@ of magnitude of foreground suppression is evident.
 } \label{fig:waterfalls}
 \end{figure*}
 
-For the 30 m East-West baselines used in the power spectrum analysis,
-foregrounds are suppressed by $\sim$5 orders of magnitude in power, effectively
-getting -50 dB of foreground suppression, as seen in figure
-\ref{fig:waterfalls}, for any given baseline. There is an associated signal loss
-with the delay filter technique due to the deconvolution used in the CLEAN
-algortithm. This signal loss is the same as in P14 because
-we are using same filter with the same 15 ns buffer outside the horizon per
-baseline. We reiterate the results here: there is a 4.8\% signal loss for the
+Applying the delay filter to the 30 m East-West baselines used in the power spectrum analysis,
+foregrounds are suppressed by $\sim$5 orders of magnitude in power, or
+ -50 dB of foreground suppression, as seen in Figure
+\ref{fig:waterfalls}. As discussed in P14, there is a small amount of signal loss
+associated with this foreground filter, for the baselines and filter parameters the loss was found to be 4.8\% for the
 first mode outside of the horizon, 1.3\% for the next mode out, and less than
-.0015\% for the higher modes.
+.0015\% for the higher modes.  [XXX are we applying these numbers to the pspec or just calling it negligible?]  
 
-After the wideband delay filter, we conduct another round of RFI and crosstalk
-removal which was overshadowed by the foregroun signal. For RFI excision we
-apply a median filter which flags above $3\sigma$. Foregrounds kept us using the
-traditional method of removing cross talk which consisted of subtracting hour
-long averages from each visibility. This was due to the fact that some days in
-the observation had gaps in time owning to some technical difficulties during
-observations. However, with foregrounds removed we were able to remove 10 minute
-averages from every visibility within a file (files have a cadence of ten
-minutes). Normally, hour long averages are needed for foreground contained data
-to wash out the fringes from the said foregrounds to detect the static phase
-bias that is crosstalk. For foreground removed data, we do not have this
+After the wideband delay filter, we conduct another remove a second layer of RFI and crosstalk
+ which was overshadowed by the foreground signal. RFI are excised with 
+ a filter which flags values $3\sigma$ above the median using a variance calculated in a localized time and frequency window.  Cross-talk, which is an overall complex offset to the visibility, due to small couplings between independent analog signal chains, is removed by subtracting a ten minute long average from each baseline. Normally, hour long averages are needed for foreground contained data
+to wash out the fringes from the said foregrounds to detect the static 
+bias that is crosstalk. With foregrounds removed, we do not have this
 complication since bright foregrounds are not dominating the average and are
 able to remove the offset by subtracting shorter sums.
 
-Once smooth sources have been removed and a final pass of RFI excision and
-crosstalk removal have been performed, the data is averaged in local sidereal
-time (LST) with bins of width 43 seconds to match the fringe-rate filter applied
-in the compression. The averaged data set consisted of 135 unevenly sampled
-days with the effective number of total days being 123.57. 
+The final step is to average the entire season into local sidereal
+time (LST) with bins of width 43 seconds, a bin size that matches the fringe-rate filter applied
+in the compression step. The full season was 135 days long; of these 124 days were included in the average. 
 
-Sporadic RFI events can skew individual LST bins away from the median value of
+Sporadic RFI events (i.e. occurring rarely in an entire season) can skew individual LST bins away from the median value of
 the sky at a given LST, deviating from gaussian statistics. To catch these
-events, we compute the median of a LST bin for each frequency and flag off 3
-sigma outliers of the median before averaging. This filter mitigates
+events, we compute the median of a LST bin for each frequency and flag points  3
+$\sigma$ above the median, before averaging. This filter mitigates
 the effects of non gaussianity in time, which is most likely due to spurious
-RFI events. The median statistics used here necessitate that there is no signal
-loss due to this filter.
+RFI events. The median statistic used here ensures that there is no signal
+loss due to this filter. [XXX why is this?]
 
 We make two separate LST-binned data sets, averaging every other julian day
 together to obtain an "even" and "odd" dataset. The use of these two data sets
-allows us to conststruct an unbiased power spectrum estimate, as well as running
-jackknife tests on our observations. 
+allows us to construct an unbiased power spectrum estimate, as well as running
+jackknife tests. 
 
 
 
