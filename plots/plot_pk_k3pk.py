@@ -40,7 +40,6 @@ def noise_level():
     freq = .15117 #GHz
     z = C.pspec.f2z(freq)
     X2Y = C.pspec.X2Y(z)/1e9 #h^-3 Mpc^3 / str/ Hz
-    print X2Y
     sdf = .1/203
     freqs = n.linspace(.1,.2,203)[95:115]
     B = sdf*freqs.size
@@ -50,15 +49,15 @@ def noise_level():
     fr_correct = 1.9
 
 
-    print 'scalar', scalar
-    print 'BM', bm
-    print 'tsys', tsys
+    print 'scalar:', scalar
+    print 'BM:', bm
+    print 'Tsys:', tsys
     print 
 
     #error bars minimum width. Consider them flat for P(k). Factor of 2 at the end is due to folding of kpl (root(2)) and root(2) in radiometer equation.
     pk = scalar*fr_correct*( (tsys)**2 / (2*inttime*pol*real*nbls*ndays*nmodes) )
 
-    print 'pk = ', pk
+    print 'Pk noise (1 sigma):', pk
     #
 #    etas = n.fft.fftshift(C.pspec.f2eta(freqs))
 #    kpl = etas * C.pspec.dk_deta(z)
@@ -77,7 +76,6 @@ def dual_plot(kpl, pk, err, pkfold=None, errfold=None, umag=16., f0=.164, color=
     z = C.pspec.f2z(f0)
     kpr = C.pspec.dk_du(z) * umag
     k = n.sqrt(kpl**2 + kpr**2)
-    print kpl
     k3 = n.abs(k**3 / (2*n.pi**2))
     print 'k [h Mpc^-1], P(k) [K^2], err (2sigma)'
     for _k,_pk,_err in zip(kpl,pk,err):
@@ -105,12 +103,12 @@ def dual_plot(kpl, pk, err, pkfold=None, errfold=None, umag=16., f0=.164, color=
         pkfold[1:] = (pkpos/errpos**2 + pkneg/errneg**2) / (1./errpos**2 + 1./errneg**2)
         errfold[1:] = n.sqrt(1./(1./errpos**2 + 1./errneg**2))
     else:
-        print pkfold.imag
+        #print pkfold.imag
         pkfold = pkfold.real
         #pkfold = pkfold.imag
 
     #p.errorbar(k, k3*pk, yerr=k3*err, fmt=color+'.', capsize=0)
-    print color
+    #print color
     if not upperlimit: p.errorbar(k[k0:], k3[k0:]*pkfold, yerr=k3[k0:]*errfold, fmt=color+'.', capsize=0,linewidth=1.2)
     else: p.plot(k[k0:], k3[k0:]*pkfold+k3[k0:]*errfold, color+'-')
     if not bins is None:
@@ -238,10 +236,8 @@ if True:
 
 fig=p.figure(figsize=(12,7.2))
 if False: # put in raw delay spec
-#if True: # put in raw delay spec
     f = n.load(dspec)
     kpl,pk,err = f['kpl'], f['pk'], f['err']
-    print kpl
     if True: #if 'I' in sep: # Add foregrounds
         for cnt,k in enumerate(kpl):
             k = '%6.3f' % k
@@ -378,7 +374,7 @@ for sep in RS_VS_KPL:
         d_fold[4:] *= f; nos_fold *= f
     if True:
         f=1 + 2e-9 
-        print 'Scaling data and noise by %f for signal loss from flux scale calibration.'%f
+        print 'Scaling data and noise by %f for signal loss from bandpass calibration.'%f
         d *= f
         nos *= f
         d_fold *= f
@@ -394,7 +390,6 @@ for sep in RS_VS_KPL:
     '''
     if d_fold.size == 0: d_fold,nos_fold = None, None
     #dual_plot(kpl, d, 2*nos, d_fold, 2*nos_fold, color=colors[0], bins=BINS)#,f0=freq) # 2-sigma error bars
-    print kpl
     dual_plot(kpl, d, 2*nos, d_fold, 2*nos_fold, color=colors[0], bins=BINS,f0=.151) # 2-sigma error bars
     #dual_plot(kpl, d, nos, color=colors[0], bins=BINS) # 2-sigma error bars
     colors = colors[1:] + colors[0]
@@ -506,7 +501,6 @@ def posterior(kpl, pk, err, pkfold=None, errfold=None, f0=.151, umag=16.):
     err = k**3 * errfold/(2*n.pi**2)
     err_omit = err.copy()
     err_omit[3] = 1e10 # give no weight to this point
-    print err_omit
     #s = n.logspace(1,3.5,100)
     s = n.linspace(-5000,5000,10000)
 #    print s
@@ -537,30 +531,48 @@ def posterior(kpl, pk, err, pkfold=None, errfold=None, f0=.151, umag=16.):
     #p.plot(spline(n.linspace(.0,1,100)),'o')
 #    p.plot(s, n.exp(-.5)*n.ones_like(s))
 #    p.plot(s, n.exp(-.5*2**2)*n.ones_like(s))
-    sig1 = []
-    sig2 = []
-    maxarg = n.argmax(data)
-    s1 = data[maxarg:] - n.exp(-.5)
-    sig1.append(n.floor(n.median(n.where(n.abs(s1)<.01)))+maxarg)
-    s1 = data[:maxarg] - n.exp(-.5)
-    sig1.append(n.floor(n.median(n.where(n.abs(s1)<.01))))
+    data_c = n.cumsum(data)
+    data_omit_c = n.cumsum(data_omit)
+    data_c /= data_c[-1]
+    data_omit_c /= data_omit_c[-1]
+    mean = s[n.argmax(data)]
+    s1lo,s1hi = s[data_c<0.1586][-1], s[data_c>1-0.1586][0]
+    s2lo,s2hi = s[data_c<0.0227][-1], s[data_c>1-0.0227][0]
+    print 'Posterior: Mean, (1siglo,1sighi), (2siglo,2sighi)'
+    print 'Posterior:', mean, (s1lo,s1hi), (s2lo,s2hi)
+    mean_o = s[n.argmax(data_omit)]
+    s1lo_o,s1hi_o = s[data_omit_c<0.1586][-1], s[data_omit_c>1-0.1586][0]
+    s2lo_o,s2hi_o = s[data_omit_c<0.0227][-1], s[data_omit_c>1-0.0227][0]
+    print 'Posterior (omit):', mean_o, (s1lo_o,s1hi_o), (s2lo_o,s2hi_o)
+    #sig1 = []
+    #sig2 = []
+    #s1 = data[maxarg:] - n.exp(-.5)
+    #sig1.append(n.floor(n.median(n.where(n.abs(s1)<.01)))+maxarg)
+    #s1 = data[:maxarg] - n.exp(-.5)
+    #sig1.append(n.floor(n.median(n.where(n.abs(s1)<.01))))
 
-    s2 = data[maxarg:] - n.exp(-.5*2**2)
-    sig2.append(n.floor(n.median(n.where(n.abs(s2)<.01)))+maxarg)
-    s2 = data[:maxarg] - n.exp(-.5*2**2)
-    sig2.append(n.floor(n.median(n.where(n.abs(s2)<.01))))
+    #s2 = data[maxarg:] - n.exp(-.5*2**2)
+    #sig2.append(n.floor(n.median(n.where(n.abs(s2)<.01)))+maxarg)
+    #s2 = data[:maxarg] - n.exp(-.5*2**2)
+    #sig2.append(n.floor(n.median(n.where(n.abs(s2)<.01))))
     
     #p.vlines(s[sig1[-1]],0,1,color=(0,107/255.,164/255.), linewidth=2)
-    p.vlines(s[sig1[0]],0,1,color=(0,107/255.,164/255.), linewidth=2)
+    p.vlines(s1lo,0,1,color=(0,107/255.,164/255.), linewidth=2)
+    p.vlines(s1hi,0,1,color=(0,107/255.,164/255.), linewidth=2)
+    #p.vlines(s1lo_o,0,1,color=(0,107/255.,164/255.), linestyle='--', linewidth=2)
+    #p.vlines(s1hi_o,0,1,color=(0,107/255.,164/255.), linestyle='--', linewidth=2)
 
     #p.vlines(s[sig2[-1]],0,1,color=(0,107/255.,164/255.), linewidth=2)
-    p.vlines(s[sig2[0]],0,1,color=(1,128/255.,14/255.), linewidth=2)
-    print 'where', sig1
-    print 'where', sig2
+    p.vlines(s2lo,0,1,color=(1,128/255.,14/255.), linewidth=2)
+    p.vlines(s2hi,0,1,color=(1,128/255.,14/255.), linewidth=2)
+    #p.vlines(s2lo_o,0,1,color=(1,128/255.,14/255.), linestyle='--', linewidth=2)
+    #p.vlines(s2hi_o,0,1,color=(1,128/255.,14/255.), linestyle='--', linewidth=2)
+
     p.xlabel(r'$k^3/2\pi^2\ P(k)\ [{\rm mK}^2]$', fontsize='large')
     p.ylabel('Posterior Distribution', fontsize='large')
     p.xlim(0,550)
     p.grid(1)
+    p.subplots_adjust(left=.15, top=.95, bottom=.15, right=.95)
     p.show()
 
 #posterior(f['kpl'], f['pk'], f['err'], f['pk_fold'], f['err_fold'])
