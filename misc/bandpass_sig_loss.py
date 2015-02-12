@@ -9,14 +9,21 @@ ubls = bls.keys()
 for i in dont_use: ubls.remove(i)
 print len(ubls)
 
+Gianni=True
+
 POLY = [-551229901929.10315, 685757303983.00293, -370738356723.81897, 113784843213.44109, -21686535302.711388, 2628544446.213274, -197867884.08778715, 8457793.3780113906, -157170.17280964542]
+#Gianni's bandpass
+if Gianni:
+    POLY = [5.65900306e-14,  -7.20008736e-11,   4.05864355e-08, -1.33028779e-05,   2.79385101e-03,  -3.89867874e-01, 3.61453028e+01,  -2.14668637e+03,   7.40998469e+04, -1.13249078e+06]
 NCHAN = 203
-CNT=1000
+CNT=3000
 window = a.dsp.gen_window(NCHAN, 'blackman-harris')
 fq = aa.get_afreqs()
 delays = n.fft.fftfreq(NCHAN, fq[1]-fq[0])
 dk_deta = C.pspec.dk_deta(C.pspec.f2z(.1515))
 BP = n.polyval(POLY, fq)
+if Gianni:
+    BP = 1/BP
 offset = 1e5
 nmodes = 1017
 
