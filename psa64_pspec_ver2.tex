@@ -907,7 +907,7 @@ covariance weighting
 \citep{dillon_et_al2013b,liu_tegmark2011,dillon_et_al2013a}, to name a few,
 at our
 disposal, we opt for the per-baseline approach of delay filtering described in
-P12b and \citet{petrovic_oh2011}. This technique is well suited for PAPER because it
+P12b and \citet{petrovic_oh2011}. This technique is well-suited for PAPER because it
 doesn't rely on making images and localizing sources for subtraction, which 
 the current maximum redundant configuration of PAPER is not well suited for.
 
@@ -924,6 +924,7 @@ is defined as the Fourier transform of a visibility with respect to frequency,
                    \tilde{B}(\tau) \ast \tilde{I}(\tau) \ast
                    \delta(\tau_{g} - \tau),
 \end{align}
+[XXX too many variables here.  S goes in W, B goes in A, lose numbers except last one]
 where $A(\nu)$ is the frequency dependent beam, $B(\nu)$ is the bandpass,
 $W(\nu)$ is a Blackman-Harris taper function to minimize band edge effects,
 $S(\nu)$ is the frequency sampling function due to RFI flagging  and $I(\nu)$ is
@@ -1985,16 +1986,18 @@ averaged over realizations. The final result is shown in figure
 \caption{SIGNAL LOSS VERSUS ANALYSIS STAGE}
 \begin{center}
 \begin{tabular}{rll}
-Analysis Stage & Typical Loss & Maximum Loss \\ \hline
-Flux Scale Calibration &  $< 2 \times 10^{-9}$ & 0.03 \\
+Analysis Stage & Typical Loss & Maximum Loss \\
+\hline
+Bandpass Calibration &  $< 2 \times 10^{-9}$ & 0.03 \\
 Delay Filtering & $1.5\times10^{-5}$ & 0.048 \\
 Quadratic Estimator & $<0.02$ & 0.89 \\
+Median of Modes & 1.4 & 1.4 \\
 \end{tabular}
 \end{center}
 \label{tbl:sigloss}
 \end{table}%
 
-XXX Need to claim that we ran an end to end test.
+%XXX Need to claim that we ran an end to end test.
 
 %XXX Carina's Text of the eor model goes here.
 %The model eor signal used was a simulation of a flat power spectrum, in P($k$),
@@ -2037,7 +2040,7 @@ XXX Need to claim that we ran an end to end test.
 %       --We use 100 bootstraps to derive our error bars, setting a $2\sigma$
 %         bound on the errors.
 
-\subsection{Bootstrapped Errors}
+\subsection{Bootstrapped Errors}\label{sec:bootstrap}
 %XXX QUESTION FOR BOOTSTRAPPING, Use the input data to the quad est vs output
 %data? Is this why the error bars were so wacked out before?
 When estimating our power spectra via optimal quadratic estimators, we generate
@@ -2172,23 +2175,52 @@ dominates over the foreground modes present in estimates of the data covariance.
 
 \section{Results and Discussion}\label{sec:results}
 \subsection{Power Spectrum}
-Figure \ref{fig:final_pspec} shows the spherically averaged power spectrum,
-$P(k)$, we measure at $z=8.4$, as well as the dimensionless power spectrum
-$\Delta^{2} = \frac{k^{3}P(k)}{2\pi^{2}}$. These power spectra are incoherently
-averaging over the 3 different redundant baselines used in this analysis. The
-bootstrapped error bars are derived from the power spectra of all three of the
-separations together, not independently. This is because the thermal noise in
-the measurements between the three separations are drawn from the same
-distribution. The error bars are determined independently for the dimensionless
-power spectrum. We determine an upper limit in $\Delta^{2}$ by using most of the
-data points in the measured power spectrum. We determine the posterior
-distribution of the values in the power spectrum for $.15<k<.5$ to avoid the
-points within the horizon and the clear detections at the two modes outside of
-the horizon which we argue are foreground contaminated. Figure
-\ref{fig:final_posterior} shows the posterior distribution of the power spectrum
-by fitting a flat curve in $\Delta^{2}$ to the power spectrum assuming
-Gaussian error bars. From this distribution, we determine the 2 sigma upper
-limit to be $(20.6 \rm{mk}^{2}$, which is consistent with zero.
+
+Following the power spectrum analysis procedure outlined in Section \ref{sec:oqe_app},
+we incoherently combine independent power spectrum measurements made at different
+times and with different baseline groups using the median statistic.  As described
+in Section \ref{sec:bootstrap}, we use bootstrap over all of these independent measurements,
+as well as over the selection of baselines included in the power spectrum analysis for
+each baseline group, in order to estimate the error bars on the spherically averaged
+power spectrum $P(k)$, where positive and negative $k_\parallel$ measurements
+are kept separate for diagnostic purposes.  In the estimation of the 
+dimensionless power spectrum
+$\Delta^{2}\equiv{k^{3}P(k)}/{2\pi^{2}}$, the folding of $\pm k_\parallel$ is
+handled along with the rest of the bootstrapping over independent modes.
+Finally, the measured values for $P(k)$ and $\Delta^2(k)$ are corrected for signal
+loss through all stages of analysis, as summarized in Table \ref{tbl:sigloss}.
+
+The final results are plotted in Figure \ref{fig:final_pspec}.
+For the first two modes outside of the horizon, we have
+clear detections. We attribute these to foreground leakage from
+inside the horizon related to the convolution kernels in equation \ref{eqn:delay_transform} (either
+from the chromaticity of the antenna response, or from the inherent spectrum of the
+foregrounds themselves).  Somewhat more difficult to interpret is the 
+$3.0\sigma$ excess at $k\approx{.35}\ h\ {\rm Mpc}^{-1}$, and to a lesser
+degree, the $2.1\sigma$ deficit at $k\approx{.39}\ h\ {\rm Mpc}^{-1}$.  The
+latter may simply be a statistical fluctuation; we estimate a 19\% chance of 
+a negative outlier at this significance occurring in the measurement of 11 modes, assuming
+Gaussian statistics.  However, the outlier at $k\approx{.35}\ h\ {\rm Mpc}^{-1}$ is
+unlikely to be chance.
+
+We note that an excess centered at this wavemode was also
+measured in P14, approximately an order of magnitude higher in amplitude.  This
+suggests to us that the excess may be a result of foreground emission that is attenuated
+(but not eliminated) in the current analysis.  In examining the effects on the power
+spectrum of omitting various stages of analysis (see Figure \ref{fig:pspec_comp}), we
+see that the magenta curve corresponding to the omission of fringe-rate filtering
+shows the excess perhaps even more clearly. 
+This supports the foreground emission theory.  The signal could perhaps be associated with
+polarization leakage from a high rotation measure source near the horizon that
+is attenuated by the spatial filtering achieved by the fringe-rate filter.
+
+In order to aggregate the information presented in the power spectrum into
+a single upper limit, we fit a flat $\Delta^(k)$ model to measurements
+in the range $0.15<k<0.5h\ {\rm Mpc}^{-1}$.  
+Figure \ref{fig:final_posterior} shows the posterior distribution of the fit,
+assuming Gaussian errors. From this distribution, we determine a $2\sigma$ upper
+limit to be $(20.6 {\rm mK})^{2}$. 
+which is consistent with zero. [XXX is this still true?]
 
 We also include the power spectrum before foreground filtering for comparison
 and to show the effect of the delay filter within the horizon. In addition we
@@ -2198,27 +2230,6 @@ instrument, with the appropriate weightings due to uneven sampling of LST bins
 as described in \cite{pober_et_al2014}. These errors agree well with the
 sensitivity calculations done in P12a.
 %XXX need to get this simulation from Jonnie.
-
-Some key features in the power spectrum require some mention and explanation. We
-first notice that for the first two modes outside of the horizon, there are
-clear detections. These are attributed to residual foreground leakage from
-inside the horizon, which arises from imperfections in the model of the beam and
-bandpass. We also notice that at $k\approx{.35}\ h\ {\rm Mpc}^{-1}$, as in P14,
-that there is a slight excess. This slight excess is
-due to some systematic, and most likely foreground emission. The power in this
-bin has gone down by almost an order of magnitude as compared with P14,
-which we attribute to the optimal fringe-rate filter.
-Because we are down weighting fringe-rate bins that do not correspond to points
-low in the beam, the decreased power at $k\approx{.35}\ h\ {\rm Mpc}^{-1}$ is
-most likely attributed to this fringe-rate filter down weighting sources towards
-the horizon. The foreground emission at this high $k$-mode, is likely attributed
-to polarization leakage from a high rotation measure source near the horizon.
-Finally, we also note that most for most of the $k$-modes, measurements are
-consistent with zero. Thus, we are still thermal noise dominated and are still
-integrating down. The systematics we are facing are most likely foregrounds that
-are spreading power outside of the horizon and instrumental systematics. In
-addition our $2\sigma$ upper limit is also consistent with zero and therefore we
-are noise dominated and are hence lacking sensitivity.
 
 \subsection{Spin Temperature Contstraints}
 With the new upper limits presented in figure \ref{fig:final_pspec} of the 21 cm
