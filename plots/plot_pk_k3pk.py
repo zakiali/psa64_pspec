@@ -31,8 +31,10 @@ def noise_level():
     inttime = 1886. #seconds
     nbls=51
     ndays = 120 #effectively this many days. days of operation = 135
+    nseps = 3
+    folding = 2
     #ndays = 60 #effectively this many days. days of operation = 135
-    nmodes = (3*8.5*60*60/inttime)**.5 # 3 for baseline types, 8.5=total lst time used.
+    nmodes = (nseps*folding*8.5*60*60/inttime)**.5 # 3 for baseline types, 8.5=total lst time used.
     pol = 2
     real = 2 #??? what is this again?
     freq = .15117 #GHz
@@ -54,7 +56,7 @@ def noise_level():
     print 
 
     #error bars minimum width. Consider them flat for P(k). Factor of 2 at the end is due to folding of kpl (root(2)) and root(2) in radiometer equation.
-    pk = scalar*fr_correct*( (tsys)**2 / (inttime*pol*real*nbls*ndays*nmodes) )/2
+    pk = scalar*fr_correct*( (tsys)**2 / (2*inttime*pol*real*nbls*ndays*nmodes) )
 
     print 'pk = ', pk
     #
@@ -502,25 +504,32 @@ def posterior(kpl, pk, err, pkfold=None, errfold=None, f0=.151, umag=16.):
         errfold = errfold[w]
     pk= k**3 * pkfold/(2*n.pi**2)
     err = k**3 * errfold/(2*n.pi**2)
+    err_omit = err.copy()
+    err_omit[3] = 1e10 # give no weight to this point
+    print err_omit
     #s = n.logspace(1,3.5,100)
     s = n.linspace(-5000,5000,10000)
 #    print s
     data = []
+    data_omit = []
     print 'real pk used in posterior:\n\t'
     print '[k]       delta^2         err'
     for _k, _pk, _err in zip(k, pk, err):
         print '%6.3f  9.5f     9.5f'%(_k, _pk.real, _err)
-
     for ss in s:
         data.append(n.exp(-.5*n.sum((pk.real - ss)**2 / err**2)))
+        data_omit.append(n.exp(-.5*n.sum((pk.real - ss)**2 / err_omit**2)))
     #    print data[-1]
     data = n.array(data)
+    data_omit = n.array(data_omit)
     #print data
     #print s
     #data/=n.sum(data)
     data /= n.max(data)
+    data_omit /= n.max(data_omit)
     p.figure(5, figsize=(6.5,5.5))
     p.plot(s, data, 'k', linewidth=2)
+    p.plot(s, data_omit, 'k--', linewidth=1)
     #use a spline interpolator to get the 1 and 2 sigma limits.
     #spline = interp.interp1d(data,s)
     #print spline
