@@ -31,8 +31,10 @@ def noise_level():
     inttime = 1886. #seconds
     nbls=51
     ndays = 120 #effectively this many days. days of operation = 135
+    nseps = 3
+    folding = 2
     #ndays = 60 #effectively this many days. days of operation = 135
-    nmodes = (3*8.5*60*60/inttime)**.5 # 3 for baseline types, 8.5=total lst time used.
+    nmodes = (nseps*folding*8.5*60*60/inttime)**.5 # 3 for baseline types, 8.5=total lst time used.
     pol = 2
     real = 2 #??? what is this again?
     freq = .15117 #GHz
@@ -54,7 +56,7 @@ def noise_level():
     print 
 
     #error bars minimum width. Consider them flat for P(k). Factor of 2 at the end is due to folding of kpl (root(2)) and root(2) in radiometer equation.
-    pk = scalar*fr_correct*( (tsys)**2 / (inttime*pol*real*nbls*ndays*nmodes) )/2
+    pk = scalar*fr_correct*( (tsys)**2 / (2*inttime*pol*real*nbls*ndays*nmodes) )
 
     print 'pk = ', pk
     #
