@@ -1369,6 +1369,7 @@ of the system temperature of the PAPER instrument.
 %         to describe our data. 
 %       --In addition, because of the highly redundant nature of the array,
 %         the covariance matrix is highly singular and therefore not invertible.
+
 In this section we first
 review the quadratic estimator formalism, with an emphasis on our power
 spectrum analysis, followed by a walk through of our application of the OQE
@@ -1411,6 +1412,7 @@ power spectrum, $P_{21}(\k)$, defined such that
 where $\tilde{T}_{b}(\k)$ is the fourier transform of the brightness temperature
 distribution on the sky, $\expval{}$ denote the ensemble average, and
 $\delta^{D}$ is the Dirac-Delta function. 
+
 
 In order to make an estimate of the power spectrum, we first begin with a data
 vector $\x$ which includes all of the measured  visibilities (both in time and
@@ -1536,18 +1538,37 @@ how correlated the errors between modes are in the final power spectrum result.
 % A walk through of the application to the data.
 
 Here we describe the specifics of our application of the optimal quadrtic
-estimatore formalism to measure the power spectrum. First, we describe our data
-set used in the application. Our data set consists of visibilities as a function
-of frequency and time for each baseline in the array. In estimating the power
-spectrum we use specific redundant baseline, applying the analysis to
-different redundant baselines separtately. In the description what follows we
-use the the east-west 30 meter redundant baselines ( baselines $49\_41$,
-$41\_47$, $10\_3$, etc. in figure \ref{fig:antenna_positions}), but we apply the
-same anaysis to the 30 m baselines with one row spaceings (10-41,9-3,3-47,...
-and 49-3,10-58,41-25,... antennas in figure \ref{fig:antenna_positions}), combining
-the final power spectra in the bootstrapping after estimating power spectra.
-Focusing on the 30 m east-west redundant baselines, our data vector becomes a
-list of visibilities such that, 
+estimatore formalism to measure the power spectrum. The form of our estimator is
+based on the delay spectrum technique described in P12a. The estimate of the
+power spectrum using this approach can be written as 
+\begin{equation}\label{eqn:delay_pspec}
+    \hat{P}(\mathbf{k}_{t\tau}) =
+\Big(\frac{\lambda^{2}}{2k_{B}}\Big)^{2}\frac{X^{2}Y}{\Omega
+B}\expval{\tilde{V}_{i}(t,\tau)\tilde{V}_{j}^{*}(t,\tau)},
+\end{equation}
+where $V_{i}(t,\tau)$'s are the delay spectra of baseline visibilities, $X$ and
+$Y$ are the constants that convert from angles and frequency to the comoving
+coordinate, respectively, $\Omega$ is the power squared beam (see Appendix B of
+P14), and $B$ is the bandwidth. The expectation value represents the ensemble
+average over instantaneously redundant baselines, and hence over a single
+fourier mode. One of the important assumptions in the estimation of the power
+spectrum in this was is that delay modes are a very good approximation to line
+of sight fourier modes, which holds for the short 30 m baselines used in this
+analysis (P12b). Due to the chromaticity of an interferometer, this is in
+general not valid assumption and depends on the lenght of the baseline.
+
+First, we describe our data set used in the application. Our data set consists
+of visibilities as a function of frequency and time for each baseline in the
+array. In estimating the power spectrum we use specific redundant baseline,
+applying the analysis to different redundant baselines separtately. In the
+description what follows we use the the east-west 30 meter redundant baselines (
+baselines $49\_41$, $41\_47$, $10\_3$, etc. in figure
+\ref{fig:antenna_positions}), but we apply the same anaysis to the 30 m
+baselines with one row spaceings (10-41,9-3,3-47,...  and 49-3,10-58,41-25,...
+antennas in figure \ref{fig:antenna_positions}), combining the final power
+spectra in the bootstrapping after estimating power spectra.  Focusing on the 30
+m east-west redundant baselines, our data vector becomes a list of visibilities
+such that, 
 
 \begin{equation}
 \label{eqn:xvectdef}
