@@ -19,7 +19,8 @@ def Ts(z,tb):
 
 def Ts_post_2s(deli,pks,errs,z):
     #given a range of ts, find the posterior dist and return 2 sigma upper limit.   
-    tss = n.linspace(1000, 20000, 5000) #range of ts
+    #tss = n.linspace(1000, 20000, 5000) #range of ts
+    tss = n.linspace(1000, 20000, 500) #range of ts
     #assuming tbs are positive
     tbs = -1*T0(z)*(1 - (Tcmb(z)/tss))
     s = tbs**2 * deli
@@ -31,10 +32,12 @@ def Ts_post_2s(deli,pks,errs,z):
     data = n.array(data)
 #    p.plot(s,data)
 #    p.show()
-    data /= n.max(data)
+    #data /= n.max(data)
     data_c  = n.cumsum(data)
     data_c /= data_c[-1]
-    s2hi = s[data_c>1-.0227][0]
+    #s2hi = s[data_c>1-.0227][0]
+    #p.plot(tss,data_c); p.show()
+    return tss[data_c<.0227][-1]
 
     tbs_f = n.sqrt(s2hi/deli)
     #print tbs_f
@@ -112,8 +115,9 @@ limits = {}
 
 #PSA64 limits. 
 if True:
-    limits['.100'] = (0.100, 435.60, 102.88, 'k')
-    limits['.148'] = (0.148, 863.10, 195.78, 'k')
+    print 'PUTTING IN PSPEC POINTS MANUALLY'
+    #limits['.100'] = (0.100, 435.60, 102.88, 'k')
+    #limits['.148'] = (0.148, 863.10, 195.78, 'k')
     limits['.197'] = (0.197, 178.14, 203.66, 'k')
     limits['.246'] = (0.246, 266.52, 376.30, 'k')
     limits['.295'] = (0.295, 303.51, 551.55, 'k')
@@ -138,8 +142,10 @@ fig = p.figure(figsize=(10,4))
 #kwids = n.arange(1.1,3000.,.1)
 #kwids = 10**n.arange(0.1, 6, .1)
 #kcens = 10**n.arange(-2, 2, .1)
-kmins = 10**n.arange(-3, 2.1, .03)
-kmaxs = 10**n.arange(-3, 2.1, .03)
+#kmins = 10**n.arange(-3, 2.1, .03)
+#kmaxs = 10**n.arange(-3, 2.1, .03)
+kmins = 10**n.arange(-3, 2.1, .1)
+kmaxs = 10**n.arange(-3, 2.1, .1)
 #for xi,sty in [(.5,'-'), (.3,'--'), (.1,'-.'), (.03,':')]:
 for cnt,(xi,sty) in enumerate([(.1,'-'), (.3,'--'), (.5,'-.')]):
     T_b_lim = []
@@ -147,6 +153,7 @@ for cnt,(xi,sty) in enumerate([(.1,'-'), (.3,'--'), (.5,'-.')]):
     ys = [kmaxs] * len(kmins); ys = n.array(ys)
 #    print xs.shape, ys.shape
     for kmax in kmaxs:
+        #print kmax
         T_b_lim_kwid = []
         for kmin in kmins:
             tmp = []
@@ -161,6 +168,7 @@ for cnt,(xi,sty) in enumerate([(.1,'-'), (.3,'--'), (.5,'-.')]):
             err = d2errs[include]
             avg = n.average(k3pk_patchy(1., xi, kmax/kmin))
             sig2 = Ts_post_2s(avg, lim, err,8.4) 
+            #print sig2
             T_b_lim_kwid.append(sig2)
             
                    
