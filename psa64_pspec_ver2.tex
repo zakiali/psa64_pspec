@@ -19,6 +19,7 @@
 \newcommand{\rhat}{\hat{\mathbf{r}}}
 \newcommand{\phat}{\hat{\mathbf{p}}}
 \newcommand{\qhat}{\hat{\mathbf{q}}}
+\newcommand{\hMpci}{h\ {\rm Mpc}^{-1}}
 \newcommand\abs[1]{\left|#1\right|}
 
 \newcount\colveccount
@@ -93,7 +94,7 @@ work extends the work presented in \citet{parsons_et_al2014} with more collectin
 improved redundancy-based calibration, optimal fringe-rate filtering, and improved
 power-spectral analysis using optimal quadratic estimators. The result is a new
 $2\sigma$ upper limit on $\Delta^2(k)$ of ($20.6{\rm mK})^2$ in the range
-$0.1<k<0.5\ h\ {\rm Mpc}^{-1}$ at $z=8.4$.  This represents a four-fold improvement
+$0.1<k<0.5\hMpci$ at $z=8.4$.  This represents a four-fold improvement
 over the previous best upper limit.  As we discuss in more depth in the companion
 to this paper \citet{pober_et_al2015}, this upper limit supports and extends previous
 evidence for significant heating in the intergalactic medium prior to reionization.  Under the assumption
@@ -213,7 +214,7 @@ now relies to solve for the majority of the internal instrumental degrees of fre
 this apporach was demonstrated with 
 data from a 32-antenna deployment of PAPER, which achieved an upper 
 limit on the 21 cm power spectrum of $\Delta^2 (k) \leq (41\,\textrm{mK})^{2}$ at 
-$k=0.27 h\ {\rm Mpc}^{-1}$ (\citealt{parsons_et_al2014}, hereafter P14).  This upper limit improved
+$k=0.27\hMpci$ (\citealt{parsons_et_al2014}, hereafter P14).  This upper limit improved
 over previous limits by orders of magnitude, and as of this writing, remains the best
 upper limit achieved in the field.
 [XXX Some overview of the science constraints provided by PSA32 and how we will extend the method to PSA64, direct mention to the companion paper on the impact of the measurements should be here.]
@@ -629,7 +630,7 @@ dimensional Fourier transform in wide field imaging by using the w-stacking
 algorithm implemented in WSclean \citep{offringa_et_al2014} – although we note that
 the standard w-projection algorithm implemented in
 CASA\footnote{http://casa.nrao.edu} gives similar performances as the PAPER
-array is essentially instantaneously coplanar.  A source spectra is derived for
+array is essentially instantaneously coplanar.  A source spectrum is derived for
 each snapshot by fitting a two dimensional Gaussian to Pictor A by using the
 PyBDSM\footnote{http://www.lofar.org/wiki/doku.php?id=public:user\_software:pybdsm}
 source extractor. Spectra are optimally averaged together by weighting them with
@@ -669,24 +670,26 @@ averaged to obtain the measured spectrum, which serves to characterize the flux
 scale of the PAPER-64 observations. Error bars indicate the 68\% confidence
 intervals, derived from the gaussian fits in the source extractor used in
 measure the flux in PyBDSM.
+[XXX How are these errors averaged? Did you use the same beam weighting?]
 }\label{fig:pic_spec}
 \end{figure}
-
+[XXX ZSA take a look at this paragraph]
 Fitting a polynomial to the bandpass has the potential for signal loss which
 would include fitting out some modes of the EoR fluctuations. In order to
 quantify the signal loss associated with fitting a ninth degree polynomial to
 the bandpass, we run a Monte Carlo simulation of the effect the bandpass has on
 an EoR signal. We construct a bandpass resulting from the fitted
 polynomial and add a low level EoR signal on top of that bandpass, modeled as a
-white noise with a unformly varying phase, for each baseline and independent
-time mode due for the beamforming to Pictor A. The total number of independent
+white noise with a uniformly varying phase, for each baseline and independent
+time mode. The total number of independent
 modes we average over before fitting a 9th degree polynomial to the simulated
-signal is 1017, which inlcued number of unique baselines and the number of
+signal is 1017, which includes the number of unique baselines and the number of
 independent modes over the 2 hours we used to measure the spectrum source. We
 finally compare the output amplitude of the EoR signal to the input amplitude in
 power spectrum domain and find that between $-.06 < k < .06$, the signal loss is
 less than $3\%$ and at the mode right outside the horizon is $.0000002\%$. The
 signal loss descreases for higher $k$'s.
+
 
 %These lists were My bullet points.
 %\begin{itemize}
@@ -887,31 +890,24 @@ Namely, Stokes I can be estimated as
 \end{equation}
 where $V_{\rm XX}$ and $V_{\rm YY}$ are the visibilities of the two linear
 polariztionats measured by the interferometer. There are some important caveats
-to the estimate of stokes I provided by equation \ref{eqn:stokesi}. One
+to the estimate of Stokes I provided by equation \ref{eqn:stokesi}. One
 important caveat is that it neglects the beam asymmetry  between the two linear
-polarization states. This mismatch is the cause polarization leakage from Stokes
-Q into Stokes I, thus contaminating the our measurement of the power spectrum.
+polarization states. This mismatch can cause polarization leakage from Stokes
+Q into Stokes I, thus contaminating  our measurement of the power spectrum with any polarized emission from the sky.
 This effect for PAPER, as shown in \citet{moore_et_al2013}, leaks 4\% of Q in to
 I.  We offer no correction for this effect, but in turn put some limits on
 polarization leakage discussed later. 
 
-Amongst the cornucopia of foreground removal techniques, which include spectral
+Foreground removal techniques discussed in the literature include spectral
 polynomial fitting \citep{wang_et_al2006,liu_et_al2009,bowman_et_al2009},
 principle component analysis
 \citep{paciga_et_al2013,paciga_et_al2011,liu_tegmark2011,masui_et_al2013},
 non-parametric subtractions
 \citep{harker_et_al2009,chapman_et_al2013}, and inverse
 covariance weighting
-\citep{dillon_et_al2013b,liu_tegmark2011,dillon_et_al2013a}, to name a few,
-at our
-disposal, we opt for the per-baseline approach of delay filtering described in
-P12b and \citet{petrovic_oh2011}. This technique is well-suited for PAPER because it
-doesn't rely on making images and localizing sources for subtraction, which 
-the current maximum redundant configuration of PAPER is not well suited for.
+\citep{dillon_et_al2013b,liu_tegmark2011,dillon_et_al2013a}, and per-baseline delay filtering described in
+P12b and \citet{petrovic_oh2011}. The delay spectrum filtering technique is well suited to the maximum redundancy PAPER configuration which is not optimized for the other approaches where high fidelity imaging is a pre-requisite.   The delay spectrum foreground clean method is described in detail by P14; its application is unchanged here.  In summary; we fourier transform each baseline spectrum into the delay domain  
 
-The delay transform method for localizing sources relies on the fact that
-foregrounds are spectrally smooth. For a given visibility, the delay transform
-is defined as the Fourier transform of a visibility with respect to frequency, 
 
 \begin{align}\label{eqn:delay_transform}
 \tilde{V}(\tau) &= \int{W(\nu)S(\nu)A(\nu)B(\nu)I(\nu)
@@ -926,7 +922,8 @@ is defined as the Fourier transform of a visibility with respect to frequency,
 where $A(\nu)$ is the frequency dependent beam, $B(\nu)$ is the bandpass,
 $W(\nu)$ is a Blackman-Harris taper function to minimize band edge effects,
 $S(\nu)$ is the frequency sampling function due to RFI flagging  and $I(\nu)$ is
-the source spectrum. In delay domain, a smooth spectrum source is a delta
+the source spectrum. 
+In delay domain, a smooth spectrum source is a delta
 function at delay $\tau_{g}$ (a flat spectrum source's delay spectrum)
 convolved by the spectrum shape, the beam, the bandpass shape, the taper
 function and the sampling function. The source shape, $A(\nu)$, and $B(\nu)$,
@@ -960,49 +957,38 @@ of magnitude of foreground suppression is evident.
 } \label{fig:waterfalls}
 \end{figure*}
 
-For the 30 m East-West baselines used in the power spectrum analysis,
-foregrounds are suppressed by $\sim$5 orders of magnitude in power, effectively
-getting -50 dB of foreground suppression, as seen in figure
-\ref{fig:waterfalls}, for any given baseline. There is an associated signal loss
-with the delay filter technique due to the deconvolution used in the CLEAN
-algortithm. This signal loss is the same as in P14 because
-we are using same filter with the same 15 ns buffer outside the horizon per
-baseline. We reiterate the results here: there is a 4.8\% signal loss for the
+Applying the delay filter to the 30 m East-West baselines used in the power spectrum analysis,
+foregrounds are suppressed by $\sim$5 orders of magnitude in power, or
+ -50 dB of foreground suppression, as seen in Figure
+\ref{fig:waterfalls}. As discussed in P14, there is a small amount of signal loss
+associated with this foreground filter, for the baselines and filter parameters the loss was found to be 4.8\% for the
 first mode outside of the horizon, 1.3\% for the next mode out, and less than
-.0015\% for the higher modes.
+.0015\% for the higher modes.  [XXX are we applying these numbers to the pspec or just calling it negligible?]  
 
-After the wideband delay filter, we conduct another round of RFI and crosstalk
-removal which was overshadowed by the foregroun signal. For RFI excision we
-apply a median filter which flags above $3\sigma$. Foregrounds kept us using the
-traditional method of removing cross talk which consisted of subtracting hour
-long averages from each visibility. This was due to the fact that some days in
-the observation had gaps in time owning to some technical difficulties during
-observations. However, with foregrounds removed we were able to remove 10 minute
-averages from every visibility within a file (files have a cadence of ten
-minutes). Normally, hour long averages are needed for foreground contained data
-to wash out the fringes from the said foregrounds to detect the static phase
-bias that is crosstalk. For foreground removed data, we do not have this
+After the wideband delay filter, we conduct another remove a second layer of RFI and crosstalk
+ which was overshadowed by the foreground signal. RFI are excised with 
+ a filter which flags values $3\sigma$ above the median using a variance calculated in a localized time and frequency window.  Cross-talk, which is an overall complex offset to the visibility, due to small couplings between independent analog signal chains, is removed by subtracting a ten minute long average from each baseline. Normally, hour long averages are needed for foreground contained data
+to wash out the fringes from the said foregrounds to detect the static 
+bias that is crosstalk. With foregrounds removed, we do not have this
 complication since bright foregrounds are not dominating the average and are
 able to remove the offset by subtracting shorter sums.
 
-Once smooth sources have been removed and a final pass of RFI excision and
-crosstalk removal have been performed, the data is averaged in local sidereal
-time (LST) with bins of width 43 seconds to match the fringe-rate filter applied
-in the compression. The averaged data set consisted of 135 unevenly sampled
-days with the effective number of total days being 123.57. 
+The final step is to average the entire season into local sidereal
+time (LST) with bins of width 43 seconds, a bin size that matches the fringe-rate filter applied
+in the compression step. The full season was 135 days long; of these 124 days were included in the average. 
 
-Sporadic RFI events can skew individual LST bins away from the median value of
+Sporadic RFI events (i.e. occurring rarely in an entire season) can skew individual LST bins away from the median value of
 the sky at a given LST, deviating from gaussian statistics. To catch these
-events, we compute the median of a LST bin for each frequency and flag off 3
-sigma outliers of the median before averaging. This filter mitigates
+events, we compute the median of a LST bin for each frequency and flag points  3
+$\sigma$ above the median, before averaging. This filter mitigates
 the effects of non gaussianity in time, which is most likely due to spurious
-RFI events. The median statistics used here necessitate that there is no signal
-loss due to this filter.
+RFI events. The median statistic used here ensures that there is no signal
+loss due to this filter. [XXX why is this?]
 
 We make two separate LST-binned data sets, averaging every other julian day
 together to obtain an "even" and "odd" dataset. The use of these two data sets
-allows us to conststruct an unbiased power spectrum estimate, as well as running
-jackknife tests on our observations. 
+allows us to construct an unbiased power spectrum estimate, as well as running
+jackknife tests. 
 
 
 
@@ -1864,7 +1850,7 @@ suppressed by the delay filter.
 \caption{
 Cumulative mean (left) and median (right), as a function of number of modes,
 of power spectrum band power for
-$k_\parallel$ modes ranging from $-0.49$ (red) to $0.44h\ {\rm Mpc}^{-1}$ (violet).
+$k_\parallel$ modes ranging from $-0.49$ (red) to $0.44\hMpci$ (violet).
 This Allen variance plot shows modes averaging down as the square root of
 number of modes combined until a signal floor is reached.  The difference in
 behavior between the mean and median for several modes indicates non-gaussianity
@@ -2193,7 +2179,22 @@ dominates over the foreground modes present in estimates of the data covariance.
 
 
 \section{Results and Discussion}\label{sec:results}
-\subsection{Power Spectrum}
+
+\begin{figure*}\centering
+\includegraphics[width=2\columnwidth]{plots/pk_k3pk.png}
+\caption{
+Measured power spectrum (black dots with 2$\sigma$ error bars)
+at $z=8.4$ resulting from a 134-day observation with PAPER-64.
+The dashed
+vertical lines at $0.6\hMpci$ show the bounds of the
+delay filter described in Section \ref{sec:wbd_filtering}. The theoretical
+$2\sigma$ thermal noise power spectrum is shown in dashed cyan, assuming
+$T_{\rm sys}=500K$.
+XXX describe triangles and cite
+XXX Using 100 bootstraps. Correction factors are fringe-rate
+filter (1.9), signal loss (1.02), and median statistic (1.4), delay filter signal loss, bandpass signal loss.}
+\label{fig:final_pspec}
+\end{figure*}
 
 Following the power spectrum analysis procedure outlined in Section \ref{sec:oqe_app},
 we incoherently combine independent power spectrum measurements made at different
@@ -2215,42 +2216,94 @@ clear detections. We attribute these to foreground leakage from
 inside the horizon related to the convolution kernels in equation \ref{eqn:delay_transform} (either
 from the chromaticity of the antenna response, or from the inherent spectrum of the
 foregrounds themselves).  Somewhat more difficult to interpret is the 
-$3.0\sigma$ excess at $k\approx{.35}\ h\ {\rm Mpc}^{-1}$, and to a lesser
-degree, the $2.1\sigma$ deficit at $k\approx{.39}\ h\ {\rm Mpc}^{-1}$.  The
+$3.0\sigma$ excess at $k\approx0.35\hMpci$, and to a lesser
+degree, the $2.1\sigma$ deficit at $k\approx0.39\hMpci$.  The
 latter may simply be a statistical fluctuation; we estimate a 19\% chance of 
 a negative outlier at this significance occurring in the measurement of 11 modes, assuming
-Gaussian statistics.  However, the outlier at $k\approx{.35}\ h\ {\rm Mpc}^{-1}$ is
+Gaussian statistics.  However, the outlier at $k\approx0.35\hMpci$ is
 unlikely to be chance.
 
+\begin{figure*}\centering
+\includegraphics[width=2\columnwidth]{plots/pspec_comparison.png}
+\caption{Diagnostic power spectra in the style of Figure \ref{fig:final_pspec}
+illustrating the impact of various analysis stages.
+Power spectra omitting the stages of fringe-rate filtering (magenta) and 
+OMNICAL calibration (cyan) show higher residuals than the the final power spectrum
+(black) that includes both stages.
+%The blue power spectrum has the full pipeline applied to it and is identical to
+%\ref{fig:final_pspec}. The red power spectrum does not have omnical applied to
+%it, and hence the error bars are bigger. Note that it does have the otimal
+%fringe rate filter applied to it. Finally, the green power sepctrum does not
+%have the optimal fringe rate filter applied.  However, it does have a fringe
+%rate filter applied to that excludes negative fringe rates and those greater
+%than the maimum fringe rate for the given baseline (east-west 30 m baselines). }
+}\label{fig:pspec_comp}
+\end{figure*}
+
+
 We note that an excess centered at this wavemode was also
-measured in P14, approximately an order of magnitude higher in amplitude.  This
-suggests to us that the excess may be a result of foreground emission that is attenuated
-(but not eliminated) in the current analysis.  In examining the effects on the power
+measured in P14 with an amplitude an order of magnitude higher.
+In examining the effects on the power
 spectrum of omitting various stages of analysis (see Figure \ref{fig:pspec_comp}), we
-see that the magenta curve corresponding to the omission of fringe-rate filtering
-shows the excess perhaps even more clearly. 
-This supports the foreground emission theory.  The signal could perhaps be associated with
+see that the excess is more pronounced in the magenta curve corresponding 
+to the omission of fringe-rate filtering.
+This suggests to us that the excess may be a result of foreground emission that is attenuated,
+but not eliminated, in the current analysis.  
+For example, the signal might be associated with
 polarization leakage from a high rotation measure source near the horizon that
 is attenuated by the spatial filtering achieved by the fringe-rate filter.
+The absence of the excess in data without redundant calibration
+(cyan) could be interpreted as indicating the excess is a modulation induced by frequency structure
+in the calibration solution.  However, OMNICAL is constrained
+to prohibit structure common to all baselines, so a more likely interpretation is that 
+this faint feature decorrelates without the precision of redundant calibration.
+
+\begin{figure}\centering
+\includegraphics[width=\columnwidth]{plots/flat_k3pk_posterior.png}
+\caption{Posterior distribution of power spectrum amplitude for a flat $\Delta^{2}$
+power spectrum over $0.15<k<0.5\hMpci$ (solid black),
+assuming Gaussian error bars. The blue and orange
+vertical lines correspond to the 1$\sigma$ and 2$\sigma$ bounds, respectively.
+The poseterior distribution excluding the the detection at $k=.35\rm \,hMpc^{-1}$ (dashed black) is shown for comparison.
+}
+\label{fig:final_posterior}
+\end{figure}
 
 In order to aggregate the information presented in the power spectrum into
-a single upper limit, we fit a flat $\Delta^(k)$ model to measurements
-in the range $0.15<k<0.5h\ {\rm Mpc}^{-1}$.  
-Figure \ref{fig:final_posterior} shows the posterior distribution of the fit,
-assuming Gaussian errors. From this distribution, we determine a $2\sigma$ upper
-limit to be $(20.6 {\rm mK})^{2}$. 
-which is consistent with zero. [XXX is this still true?]
+a single upper limit, we fit a flat $\Delta^2(k)$ model to measurements
+in the range $0.15<k<0.5\hMpci$.  We use a uniform prior of amplitudes between
+-5000 and 5000 ${\rm mK}^2$, and assume measurement errors are Gaussian.
+Figure \ref{fig:final_posterior} shows the posterior distribution of the fit.
+From this distribution, we determine a mean of
+$(15.0 {\rm mK})^2$ and a $2\sigma$ upper limit of $(19.7 {\rm mK})^2$. 
+The measured mean is inconsistent with zero at the 2.7$\sigma$ level.
+Even with the exclusion of the point at $k\approx0.35\hMpci$
+(Figure \ref{fig:final_posterior}, dashed) the mean is inconsistent with
+zero at $2.2\sigma$.
 
-We also include the power spectrum before foreground filtering for comparison
-and to show the effect of the delay filter within the horizon. In addition we
-plot the theoretical 2 sigma errors expected for a $T_{sys} = 500 K$. These
-error bars were calculated using a full simulation of the sensitivity of the
-instrument, with the appropriate weightings due to uneven sampling of LST bins
-as described in \cite{pober_et_al2014}. These errors agree well with the
-sensitivity calculations done in P12a.
-%XXX need to get this simulation from Jonnie.
+We conclude that we are likely beginning to 
+detect a power spectrum excess at $k>0.15\hMpci$.  However, as illustrated
+in Figure \ref{fig:pspec_comp}, the level of this excess appears to be
+strongly dependent on fringe-rate filtering.  As discussed in \citet{parsons_et_al2015},
+the normalization applied to $\Omega_{\rm eff}$ for fringe-rate filtering correctly
+compensates for the effect of this filtering on power-spectral measurements
+of an isotropic Gaussian sky signal.  We can surmise from the significant change in amplitude of the excess
+under fringe-rate filtering that it arises from emission that violates these assumptions.
+We conclude, therefore, that this excess is unlikely to be cosmic reionization, and is more
+likely the result of non-Gaussian foregrounds.  As discussed earlier, one possible
+culprit is polarization leakage \citep{moore_et_al2014,jelic_et_al2010,jelic_et_al2014}, although further
+work will be necessary to confirm this.
+
+To summarize, we believe the excess in our measured power spectrum is likely caused
+by foregrounds.  Hence, we suggest ignoring the lower bound on the power spectrum amplitude
+as not being of relevance for the cosmological signal.  Instead, we emphasize the 
+2$\sigma$ upper limit of $(19.7 {\rm mK})^2$ at $z=8.4$, which significantly improves over the previous
+best upper limit of $(41 {\rm mK})^2$ at $z=7.7$ reported in P14.  As we show below and in
+greater detail in \citet{pober_et_al2015}, this limit begins to have significant ramifications
+for the heating of the intergalactic medium prior to the completion of reionization.
 
 \subsection{Spin Temperature Contstraints}
+
 With the new upper limits presented in figure \ref{fig:final_pspec} of the 21 cm
 power spectrum,  we can put constraints on the mean brightness
 temperature of the 21 cm line at $z=8.4$, as done in P14.
@@ -2420,40 +2473,17 @@ $T_{k}(8.4) = 1.6\, \text{K} \, < \,T_{s}(8.4)$.
 %   -Repeat the science measurement in Parsons 2014. This will compliment the
 %    Jonnies result.
 %   -the wedge - maybe?
-\begin{figure*}\centering
-\includegraphics[width=2\columnwidth]{plots/pk_k3pk.png}
-\caption{
-Measured power spectrum (black dots with 2$\sigma$ error bars)
-at $z=8.4$ resulting from a 134-day observation with PAPER-64.
-The dashed
-vertical lines at $.6\ h\ Mpc^{-1}$ show the bounds of the
-delay filter described in Section \ref{sec:wbd_filtering}. The theoretical
-$2\sigma$ thermal noise power spectrum is shown in dashed cyan, assuming
-$T_{sys}=500K$.
-XXX Using 100 bootstraps. Correction factors are fringe-rate
-filter (1.9), signal loss (1.02), and median statistic (1.4), delay filter signal loss, bandpass signal loss.}
-\label{fig:final_pspec}
-\end{figure*}
-
-
-\begin{figure}\centering
-\includegraphics[width=\columnwidth]{plots/flat_k3pk_posterior.png}
-\caption{Posterior distribution of power spectrum amplitude for a flat $\Delta^{2}$
-power spectrum over $k=.15 - .5 \rm \,hMpc^{-1}$ (solid black),
-assuming Gaussian error bars. The blue and orange
-vertical lines correspond to the 1 and 2 $\sigma$ upper limits, respectively,
-on the power spectrum. The poseterior distribution excluding the the detection at $k=.35\rm \,hMpc^{-1}$ (dashed black) is shown for comparison.
-}
-\label{fig:final_posterior}
-\end{figure}
 
 \begin{figure*}\centering
 \includegraphics[width=2\columnwidth]{plots/ts_patchy_bound.png}
-\caption{The constraints imposed on the spin temperature of the 21 cm
-transition by the $2\sigma$ upper limits shown in figure \ref{fig:final_pspec}
-at a redshift of 8.4 assuming the pathchy reionization model given by equation
-\ref{eqn:d2pspec_model} and \ref{eqn:patchy_bound}. Color indicates $T_{s}$ (in K) for a combination of $k_{min}$ and $k_{max}$.} 
-\label{fig:patchy_bound}
+\caption{Constraints on the 21cm spin temperature at $z=8.4$, 
+assuming 
+the patchy reionization model in equations
+\ref{eqn:d2pspec_model} and \ref{eqn:patchy_bound} in the limit
+that $T_{\rm s}<T_{\rm CMB}$.
+Color indicates $T_{s}$ (in K).
+[XXX put K units in plot next to colorbar]
+} \label{fig:patchy_bound}
 \end{figure*}
 
 
@@ -2481,23 +2511,6 @@ at a redshift of 8.4 assuming the pathchy reionization model given by equation
 %       -This gives us a sensitivity benefit of a factor of 3(XXX), as seen
 %       in the figure. Note that this data does have omnical applied to it.
 %
-
-\begin{figure*}\centering
-\includegraphics[width=2\columnwidth]{plots/pspec_comparison.png}
-\caption{Diagnostic power spectra in the style of Figure \ref{fig:final_pspec}
-illustrating the impact of various analysis stages.
-Power spectra omitting the stages of fringe-rate filtering (magenta) and 
-OMNICAL calibration (cyan) show higher residuals than the the final power spectrum
-(black) that includes both stages.
-%The blue power spectrum has the full pipeline applied to it and is identical to
-%\ref{fig:final_pspec}. The red power spectrum does not have omnical applied to
-%it, and hence the error bars are bigger. Note that it does have the otimal
-%fringe rate filter applied to it. Finally, the green power sepctrum does not
-%have the optimal fringe rate filter applied.  However, it does have a fringe
-%rate filter applied to that excludes negative fringe rates and those greater
-%than the maimum fringe rate for the given baseline (east-west 30 m baselines). }
-}\label{fig:pspec_comp}
-\end{figure*}
 
 Here, we discuss the effect to the power spectrum if various stages of the
 analysis were kept out. Specifically, we will discuss the effects of using
@@ -2590,7 +2603,7 @@ leakage due to Faraday rotation of polarized sources from Stokes Q into Stokes
 I \citep{jelic_et_al2010,jelic_et_al2014}. 
 Through simulations, \cite{moore_et_al2013} showed that the expected
 polarization leakage at $z=8.5$ in $\Delta^{2}$ is between
-$10^{3}-3\times10^{3} (mk^{2})$ at $k\approx{.15}hMpc^{-1}$. 
+$10^{3}-3\times10^{3} (mk^{2})$ at $k\approx0.15\hMpci$. 
 [XXX careful with this comparison, since it is about to be revised downward in new moore et al paper]
 Our measured Stokes
 I power spectrum in figure \ref{fig:final_pspec} shows that we just on the cusp
@@ -2599,7 +2612,7 @@ used. [XXX i don't think this statement is backed up by the data]
 There might even be possible detection of the polarization leakage and
 would require us to move up in frequency to higher redshift where polarization
 is less prominent due to the $\lambda^{2}$ dependence of Faraday rotation.
-However, if we were seeing polarization leakage at $k\approx{.15}hMpc^{-1}$, we
+However, if we were seeing polarization leakage at $k\approx0.15\hMpci$, we
 would expect to see leakage at the higher $k_{\parallel}$ in our power spectrum
 since polarization leakage grows monotonically in $k$, for the modes we measure.
 We can conclude the this detection at $k=.15$ is just foreground leakage from
@@ -2627,7 +2640,7 @@ is a necessity.
 We have shown a new upper limit on the 21 cm EoR power spectrum at $z=8.4$,
 showing an almost an order of magnitude of improvement from the previous result (P14).
 We found the $2\sigma$ upper limit of 425 $mK^{2}$ by fitting a
-flat power spectrum in a $k$ range from $.15<$k$<.5\ h\ {\rm Mpc}^{-1}$ to the
+flat power spectrum in a $k$ range from $.15<$k$<0.5\hMpci$ to the
 dimensionless power spectrum, $\Delta^{2}$. Using these limits we have improved
 the limits on the 21 cm mean brightness temperature set in P14.
 

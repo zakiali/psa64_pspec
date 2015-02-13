@@ -1,4 +1,4 @@
-\begin{thebibliography}{85}
+\begin{thebibliography}{86}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Bolton} {et~al.}(2011){Bolton}, {Haehnelt}, {Warren}, {Hewett},
@@ -237,6 +237,10 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   {Hill}, {Jarosik}, {Kogut}, {Limon}, {Meyer}, {Odegard}, {Peiris}, {Tucker},
   {Verde}, {Weiland}, {Wollack}, \& {Wright}}]{page_et_al2007}
 {Page}, L., {et~al.} 2007, \apjs, 170, 335
+
+\bibitem[{{Parsons} {et~al.}(2015){Parsons}, {Ali}, \&
+  {Liu}}]{parsons_et_al2015}
+{Parsons}, A., {Ali}, Z., \& {Liu}, A. 2015, ArXiv e-prints
 
 \bibitem[{{Parsons} {et~al.}(2012{\natexlab{a}}){Parsons}, {Pober}, {McQuinn},
   {Jacobs}, \& {Aguirre}}]{parsons_et_al2012a}
