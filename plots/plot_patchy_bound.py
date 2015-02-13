@@ -135,7 +135,7 @@ for cnt,(xi,sty) in enumerate([(.1,'-'), (.3,'--'), (.5,'-.')]):
         extent=(1e-3,1e2,1e-3,1e2))
     p.xscale('log')
     p.yscale('log')
-    p.xlim(1e-3,1e0)
+    p.xlim(1e-3,0.45)
     p.ylim(1e-1,1e2)
     #p.fill_between([-3,3],[-3,3],[-3,-3], facecolor='w', alpha=1)
     if xi == 0.5: p.title('$x_i=%3.1f$'%xi)
