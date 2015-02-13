@@ -17,6 +17,37 @@ def k3pk_patchy(T_b, x_i=0.5, kmax_kmin=2):
 def Ts(z,tb):
     return Tcmb(z)*(1-(tb/T0(z)))**-1
 
+def Ts_post_2s(deli,pks,errs,z):
+    #given a range of ts, find the posterior dist and return 2 sigma upper limit.   
+    tss = n.linspace(10, 20000, 1000) #range of ts
+    #assuming tbs are positive
+    tbs = -1*T0(z)*(1 - (Tcmb(z)/tss))
+    s = tbs**2 * deli
+    #get posterior for del2 and compare to tbs to map back to tss 2 sigma upper limit. 
+    data = []
+#    s = n.linspace(-50, 1000, 1000)
+    for ss in s:
+        data.append(n.exp(-.5*n.sum((pks.real-ss)**2 / errs**2)))
+    data = n.array(data)
+#    p.plot(s,data)
+#    p.show()
+    data /= n.max(data)
+    data_c  = n.cumsum(data)
+    data_c /= data_c[-1]
+    s2hi = s[data_c>1-.0227][0]
+
+    tbs_f = n.sqrt(s2hi/deli)
+    #print tbs_f
+    #print tbs
+    ts_2sig = tss[tbs<tbs_f][0]
+    print 'tspin', ts_2sig #tss is a decreasing function
+    
+#    print tbs 
+#    print 'tbs_f ', tbs_f 
+    
+    return ts_2sig
+        
+
 limits = {}
 #limits['.05-.1'] = (n.arange(.05, .1, .001), 3100.,'c')
 #limits['.1-.2'] = (n.arange(.1, .2, .001), 1450.,'m')
@@ -91,6 +122,17 @@ if True:
     limits['.443'] = (0.443, -2.53, 1574.44, 'k')
     limits['.492'] = (0.492, 2341.18, 2712.26, 'k')
 
+d2points = []
+d2errs = []
+ks = []
+for L in limits:
+    ks.append(limits[L][0])
+    d2points.append(limits[L][1])
+    d2errs.append(limits[L][2])
+ks = n.array(ks)
+d2points = n.array(d2points)
+d2errs = n.array(d2errs)
+
 axes = []
 fig = p.figure(figsize=(10,4))
 #kwids = n.arange(1.1,3000.,.1)
@@ -103,34 +145,49 @@ for cnt,(xi,sty) in enumerate([(.1,'-'), (.3,'--'), (.5,'-.')]):
     T_b_lim = []
     xs = [kmins] * len(kmaxs); xs = n.array(xs).transpose()
     ys = [kmaxs] * len(kmins); ys = n.array(ys)
-    print xs.shape, ys.shape
+#    print xs.shape, ys.shape
     for kmax in kmaxs:
         T_b_lim_kwid = []
         for kmin in kmins:
             tmp = []
-            for L in limits:
-                ks, k3pk, err, clr = limits[L]
-                #if ks < kcen - kwid or ks > kcen + kwid:
-                if ks < kmin or ks > kmax:
-                    tmp.append(400)
-                    continue
-                lim = k3pk + err
-                ks = n.linspace(ks-.014, ks+.14, 100)
-                #avg = n.average(k3pk_patchy(ks, 1., xi, kwid))
-                avg = n.average(k3pk_patchy(1., xi, kmax/kmin))
-                tmp.append(n.sqrt(lim / avg))
-            T_b_lim_kwid.append(min(tmp+[400]))
+            include = n.logical_and(ks>kmin, ks<kmax)
+            if n.all(n.logical_not(include)): 
+                T_b_lim_kwid.append(1.576) #K
+                continue
+#            print kmin, kmax, ks
+#            print include
+            lim = d2points[include]
+#            print lim
+            err = d2errs[include]
+            avg = n.average(k3pk_patchy(1., xi, kmax/kmin))
+            sig2 = Ts_post_2s(avg, lim, err,8.4) 
+            T_b_lim_kwid.append(sig2)
+            
+                   
+ 
+#            for L in limits:
+#                ks, k3pk, err, clr = limits[L]
+#                #if ks < kcen - kwid or ks > kcen + kwid:
+#                if ks < kmin or ks > kmax:
+#                    tmp.append(391)
+#                    continue
+#                lim = k3pk + err
+#                ks = n.linspace(ks-.014, ks+.14, 100)
+#                #avg = n.average(k3pk_patchy(ks, 1., xi, kwid))
+#                avg = n.average(k3pk_patchy(1., xi, kmax/kmin))
+#                tmp.append(n.sqrt(lim / avg))
+#            T_b_lim_kwid.append(min(tmp+[391]))
         T_b_lim.append(T_b_lim_kwid)
     T_b_lim = n.array(T_b_lim)
-    T_s_lim = Ts(8.4, -1*T_b_lim)
+#    T_s_lim = Ts(8.4, -1*T_b_lim)
     print T_b_lim.shape
-    print T_s_lim.shape
+#    print T_s_lim.shape
     #p.plot(Rs, T_b_lim, 'k'+sty)
     #p.fill_between(kwids, T_b_lim, 1000*n.ones_like(kwids), facecolor='k', alpha=0.2)
 #    p.subplot(1,3,cnt+1)
     axes.append(p.subplot(1,3,cnt+1))
     #image = axes[cnt].imshow(T_b_lim, vmax=150, vmin=0, interpolation='nearest', aspect='auto', origin='lower',
-    image = axes[cnt].imshow(T_s_lim/1000., vmax=10, vmin=0, interpolation='nearest', aspect='auto', origin='lower',
+    image = axes[cnt].imshow(T_b_lim/1000., vmax=10, vmin=0, interpolation='nearest', aspect='auto', origin='lower',
         #extent=(-3,2,-3,2))
         extent=(1e-3,1e2,1e-3,1e2))
     p.xscale('log')
