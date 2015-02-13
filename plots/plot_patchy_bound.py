@@ -170,9 +170,6 @@ for cnt,(xi,sty) in enumerate([(.1,'-'), (.3,'--'), (.5,'-.')]):
             sig2 = Ts_post_2s(avg, lim, err,8.4) 
             #print sig2
             T_b_lim_kwid.append(sig2)
-            
-                   
- 
 #            for L in limits:
 #                ks, k3pk, err, clr = limits[L]
 #                #if ks < kcen - kwid or ks > kcen + kwid:
@@ -201,7 +198,7 @@ for cnt,(xi,sty) in enumerate([(.1,'-'), (.3,'--'), (.5,'-.')]):
     p.xscale('log')
     p.yscale('log')
     p.xlim(1e-3,0.45)
-    p.ylim(1e-1,1e2)
+    p.ylim(1.8e-1,1e2)
     #p.fill_between([-3,3],[-3,3],[-3,-3], facecolor='w', alpha=1)
     if xi == 0.5: p.title('$x_i=%3.1f$'%xi)
     else: p.title('$x_i=%3.1f,%3.1f$' % (xi,1-xi))
@@ -221,7 +218,8 @@ for cnt,(xi,sty) in enumerate([(.1,'-'), (.3,'--'), (.5,'-.')]):
     
 #p.colorbar()
 cbar_axis=fig.add_axes([.92,.15,.03,.75])
-fig.colorbar(image, cax=cbar_axis)
+cb = fig.colorbar(image, cax=cbar_axis)
+cbar_axis.set_xlabel(r'$T_{\rm s}$', size=15, labelpad=10)
 p.subplots_adjust(left=.1,bottom=.15,top=.90,right=.90)
 p.show()
 

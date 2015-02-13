@@ -181,7 +181,7 @@ There are two complementary experimental approaches to accessing 21~cm emission 
 our cosmic dawn.  So-called ``global" experiments such as 
 EDGES \citep{bowman_et_al2010}, 
 the LWA \citep{ellingson_et_al2013},
-LEDA \citep{greenhill_bernardi2012}), 
+LEDA \citep{greenhill_bernardi2012,bernardi_et_al2015}, 
 DARE \citep{burns_et_al2012}, 
 SciHi \cite{tabitha_et_al2014}, 
 BigHorns \citep{sokolowski_et_al2015},
@@ -966,7 +966,7 @@ foregrounds are suppressed by $\sim$5 orders of magnitude in power, or
 \ref{fig:waterfalls}. As discussed in P14, there is a small amount of signal loss
 associated with this foreground filter, for the baselines and filter parameters the loss was found to be 4.8\% for the
 first mode outside of the horizon, 1.3\% for the next mode out, and less than
-.0015\% for the higher modes.  [XXX are we applying these numbers to the pspec or just calling it negligible?]  
+.0015\% for the higher modes.  [XXX are we applying these numbers to the pspec or just calling it negligible? The are applied to their corresponding modes.]  
 
 After the wideband delay filter, we conduct another remove a second layer of RFI and crosstalk
  which was overshadowed by the foreground signal. RFI are excised with 
@@ -1098,17 +1098,23 @@ jackknife tests.
 %   t_int = 42.8/n.mean(fr100)
 %   
 
-Prior to forming power spectra we need to time average visibilities that measure
-the same $k$ mode on the sky. The motivation for this is that we want to combine
-coherent $k$-modes on the sky before squaring to get the maximum sensitivity and is mathematically similar to the more traditional process of gridding in the $uv$ plane, but just for a single baseline.  However, rather appealing a box-car average, we can apply a kernel --a so-called 'fringe-rate' filter-- that
-weights different temporal rates by the antenna beam corresponding to the parts of the sky moving at the same rate.
+Prior to forming power spectra we need to time average visibilities that
+measure the same $k$ mode on the sky. The motivation for this is that we want
+to combine coherent $k$-modes on the sky before squaring to get the maximum
+sensitivity. This is mathematically similar to the more traditional process of
+gridding in the $uv$ plane, but for a single baseline.  However, rather
+than applying a box-car average, we can apply a kernel --a so-called
+'fringe-rate' filter-- that weights different temporal rates by the antenna
+beam corresponding to the parts of the sky moving at the same rate.
 
 Broadly, for a given baseline and frequency, different parts of the sky
 correspond to different fringe-rates.
 Maximum fringe rates are found along the equatorial plane, where the rotation
 rate of the earth is highest, and zero fringe rates are found at the poles,
 where the rotation rate of the earth is zero and hence sources do not move
-and have static fringe patterns \cite{parsons_backer2009}. We then compute the average beam response for each contour of constant fringe rate to construct our time average kernel or "fringe rate filter".
+and have static fringe patterns \citep{parsons_backer2009}. We then compute the
+average beam response for each contour of constant fringe rate to construct our
+time average kernel or "fringe rate filter".
 
 %[XXX this paragraph could probably go -dcj]
 %As motivation, we discuss the use of fringe-rate filters in cross talk removal.
@@ -1130,33 +1136,28 @@ and have static fringe patterns \cite{parsons_backer2009}. We then compute the a
 %gives us a net increase in signal-to-noise, even though we are removing 
 %signal by applying signal from this filter. 
 
-Applying this filter effectively weights the data by another factor of the beam area. By utilizing prior knowledge about the beam area we are selectively down weighting areas on the sky contributing little signal. This results in an SNR boost of about 2.  The net boost
-in SNR depends on the shape of the beam and array declination and is functionally equivalent to the beam$^2$ weighting used in wide-field mosaicing. It is also worth noting that, like the delay spectrum filtering, fringe-rate filtering is
- implemented on a per-baseline basis.
+Applying this filter effectively weights the data by another factor of the beam
+area, changing the primary beam response, $\Omega$\footnote{The angular area in
+equation \ref{eqn:delay_pspec} will reflect the new angular area corresponding
+to the change in beam area.}
+\citep{parsons_et_al2015}. By utilizing prior knowledge about the beam area we
+are selectively down weighting areas on the sky contributing little signal. This
+results in an SNR boost of about 2.  The net boost in SNR depends on the shape
+of the beam and array declination and is functionally equivalent to the beam$^2$
+weighting used in wide-field mosaicing. It is also worth noting that, like the
+delay spectrum filtering, fringe-rate filtering is implemented on a per-baseline
+basis.
 
 %We implement the optimal fringe-rate filter by calculating the fringe rates at
 %every point on the sky, for a given frequency, and weighting each bin by the
 %beam of a given baseline. 
  We weight
-the fringe-rate bins on the sky by the beam pattern at the same point on the
-sky. In order to obtain a smooth filter in the fringe-rate domain, we fit a
-gaussian with a hyperbolic tangent tail to this filter. %as shown in figure \ref{fig:fringe_rate_cut}. 
-% XXX too much detail
-We then Fourier transform this to obtain the time
-domain filter, multiply by a Blackman-Harris window function to damp the tails
-of the filter, and finally convolve with the visibilites to effect time domain
-integration.  The before/after effect on the data can be seen in Figure \ref{fig:waterfalls}.
-
-The PAPER beam is ~45 degrees FWHM, and the array is located at a declination
-of $-30^{\circ}$ the fringe rates associated with the low signal to noise (down
-in the beam) correspond to very high and very low/negative fringe rates.
-%Figure \ref{fig:fringe_rate_cut} shows a cut of the optimal fringe-rate filter at 159 MHz for
-%a 30-m east west baseline. 
-Therefore, the implemented fringe-rate filter removes
-some sky signal, signal associated with fringe rates outside of the ranges shown
-in Figure \ref{fig:fr_preserved_signal}. Figure \ref{fig:fr_preserved_signal} shows
-that the applied filter removes sky associated with negative fringe rates and
-very high fringe rates. [XXX how does this loss compare with the delay spectrum loss?  Can't just leave this statement dangling...]
+the fringe-rate bins on the sky by the beam pattern at that location.
+In order to obtain a smooth filter in the fringe-rate domain, we fit a
+gaussian with a hyperbolic tangent tail to this filter. We convolve the time
+domain visibilities with the fourier transform of this fringe-rate filter to
+produce an averaged visibility.  The before/after effect on the data can be seen
+in Figure \ref{fig:waterfalls}.
 
 %\begin{figure}[!t]
 %\centering
@@ -1207,11 +1208,30 @@ without loss of generality. We can conclude that
 \begin{equation}
     t_{int} = \frac{\int{\sigma^{2}dt}}{\int{\sigma^{2}fr^{2}dt}},
 \end{equation}
-which evaluates to 1886 s for an optimal fringe-rate filter on a 30 m East-West baseline at 149.5 MHz.
-Over the range of frequencies used in our power spectrum estimate, the
-integration times range from 1936 s to 1790 s, corresponding to an average of 31
-minutes. As a rough check, note that this is roughly how long a single 30m fringe at 150MHz takes to make one oscillation on the sky.  Because the fringe-rate filter integrates in time, the number
-of statistically independent samples of the sky drastically decreases from 83 to $\sim2$ independent samples per hour.
+which evaluates to 1886 s for an optimal fringe-rate filter on a 30 m East-West
+baseline at 149.5 MHz.  Over the range of frequencies used in our power spectrum
+estimate, the integration times range from 1936 s to 1790 s, corresponding to an
+average of 31 minutes. As a rough check, note that this is roughly how long a
+single 30m fringe at 150MHz takes to make one oscillation on the sky.  Because
+the fringe-rate filter integrates in time, the number of statistically
+independent samples of the sky drastically decreases from 83 to $\sim2$
+independent samples per hour.
+
+%It is important to note that the fringe rate filter is removing some sky signa
+%as is seen in figure \ref{fig:waterfalls}, but it is removing 
+%The PAPER beam is ~60 degrees FWHM \citep{jacobs_et_al2011}, and the array is
+%located at a declination of $-30^{\circ}$ the fringe rates associated with the
+%low signal to noise (down in the beam) correspond to very high and very
+%low/negative fringe rates.
+%%Figure \ref{fig:fringe_rate_cut} shows a cut of the optimal fringe-rate filter
+%%at 159 MHz for
+%%a 30-m east west baseline. 
+%Therefore, the implemented fringe-rate filter removes
+%some sky signal, signal associated with fringe rates outside of the ranges shown
+%in Figure \ref{fig:fr_preserved_signal}. Figure \ref{fig:fr_preserved_signal} shows
+%that the applied filter removes sky associated with negative fringe rates and
+%very high fringe rates. [XXX how does this loss compare with the delay spectrum loss?  Can't just leave this statement dangling...]
+%
 
 %\begin{figure}[h!]\centering
 %\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/noise_t_35.png}
