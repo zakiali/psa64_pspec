@@ -915,27 +915,25 @@ P12b and \citet{petrovic_oh2011}. The delay spectrum filtering technique is well
 
 
 \begin{align}\label{eqn:delay_transform}
-\tilde{V}(\tau) &= \int{W(\nu)S(\nu)A(\nu)B(\nu)I(\nu)
-                   e^{-2\pi{i}\tau_{g}}e^{2\pi{i}\tau\nu}d\nu} \\
-                &= \int{W(\nu)S(\nu)A(\nu)B(\nu)I(\nu)
-                   e^{-2\pi{i}\nu(\tau_{g}-\tau)}d\nu} \\
-                &= \tilde{W}(\tau) \ast\tilde{S}(\tau) \ast \tilde{A}(\tau) \ast
-                   \tilde{B}(\tau) \ast \tilde{I}(\tau) \ast
+\tilde{V}(\tau) &= \int{W(\nu)A(\nu)B(\nu)I(\nu)
+                   e^{-2\pi{i}\tau_{g}}e^{2\pi{i}\tau\nu}d\nu} \\\notag
+                &= \int{W(\nu)A(\nu)
+                   e^{-2\pi{i}\nu(\tau_{g}-\tau)}d\nu} \\\notag
+                &= \tilde{W}(\tau) \ast \tilde{A}(\tau) \ast
+                   \tilde{I}(\tau) \ast
                    \delta(\tau_{g} - \tau),
 \end{align}
-[XXX too many variables here.  S goes in W, B goes in A, lose numbers except last one]
-where $A(\nu)$ is the frequency dependent beam, $B(\nu)$ is the bandpass,
-$W(\nu)$ is a Blackman-Harris taper function to minimize band edge effects,
-$S(\nu)$ is the frequency sampling function due to RFI flagging  and $I(\nu)$ is
-the source spectrum. 
-In delay domain, a smooth spectrum source is a delta
-function at delay $\tau_{g}$ (a flat spectrum source's delay spectrum)
-convolved by the spectrum shape, the beam, the bandpass shape, the taper
-function and the sampling function. The source shape, $A(\nu)$, and $B(\nu)$,
-imprint a width onto the delta function and leads to leakage of power outside
+last one] where $A(\nu)$ is the frequency dependent beam, $W(\nu)$ is a
+Blackman-Harris taper function to minimize band edge effects along with the
+frequency sampling function due to RFI flagging, and $I(\nu)$ is the source
+spectrum.  In delay domain, a smooth spectrum source is a delta function at
+delay $\tau_{g}$ (a flat spectrum source's delay spectrum) convolved by the
+spectrum shape, the beam, the bandpass shape, the taper function and the
+sampling function. The source shape, $A(\nu)$, which includes the bandpass,
+imprints a width onto the delta function and leads to leakage of power outside
 of the horizon limits imposed by the baseline length.  As per
 \cite{parsons_backer2009} and P14, we deconvolve the kernel
-resulting from $W(\tau)S(\tau)$ using an iterative CLEAN procedure
+resulting from $W(\tau)$ using an iterative CLEAN procedure
 \citep{hogbom1974} restricting CLEAN components to fall within the horizon plus
 a 15 ns buffer for each baseline that accounts for for shape of the source
 spectrum and the use of the limited bandwidth used in the delay transform,
@@ -1293,7 +1291,7 @@ with one another, omnical has leveled the antenna gains to within the noise.
 In addition to stability between redundant baselines, we also consider the
 stability in time for the PAPER instrument. In order to quantify the stability
 in time we extract one channel for a given baseline for every observation day
-and bin in LST. We then Fourier transform along the time direction for every LST
+and LST bin. We then Fourier transform along the time direction for every LST
 bin and compute the power spectrum. The DC bin is the average of all of the days
 and clearly there is excess power there. However, for time modes greater than 1
 day, we see that there is little correlation between days, showing that there
@@ -1318,7 +1316,12 @@ $T_{\rm rms}$ is the RMS temperature.
 Figure \ref{fig:tsys} shows the results of this calculation. In this observing
 season, the system temperature stays consistent with previous estimates of the
 as in P14 and \citet{jacobs_et_al2014} at $\Tsys=500K$ at 160 MHz.
-[XXX Zaki, how exactly did you get 500?  the number from P14 and J15 was 550K @ 160MHz]
+[XXX Zaki, how exactly did you get 500?  the number from P14 and J15 was 550K @ 160MHz
+ This is using the variance statistic from the lst binner. The usual way to
+calculate Tsys, except that there is a correction factor because we are flagging
+3 sigma outside of the median. For gaussian noise, that correction factor is
+1.34 which is what I'm applying to the calculated tsys. Prior to that we were
+getting a much lower tsys (350 or so). ]
 
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/tsys.png}
@@ -2180,16 +2183,18 @@ dominates over the foreground modes present in estimates of the data covariance.
 \begin{figure*}\centering
 \includegraphics[width=2\columnwidth]{plots/pk_k3pk.png}
 \caption{
-Measured power spectrum (black dots with 2$\sigma$ error bars)
-at $z=8.4$ resulting from a 134-day observation with PAPER-64.
-The dashed
-vertical lines at $0.6\hMpci$ show the bounds of the
-delay filter described in Section \ref{sec:wbd_filtering}. The theoretical
-$2\sigma$ thermal noise power spectrum is shown in dashed cyan, assuming
-$\Tsys=500K$.
-XXX describe triangles and cite
-XXX Using 100 bootstraps. Correction factors are fringe-rate
-filter (1.9), signal loss (1.02), and median statistic (1.4), delay filter signal loss, bandpass signal loss.}
+Measured power spectrum (black dots with 2$\sigma$ error bars) at $z=8.4$
+resulting from a 134-day observation with PAPER-64.  The dashed vertical lines
+at $0.6\hMpci$ show the bounds of the delay filter described in Section
+\ref{sec:wbd_filtering}. The theoretical $2\sigma$ thermal noise power spectrum
+is shown in dashed cyan, assuming $\Tsys=500K$. The triangles indicate 2
+$\sigma$ upper limits from GMRT \citep{paciga_et_al2011} (yellow) at $z=8.6$,
+MWA \citep{dillon_et_al2013b} at $z=9.5$ (magenta), and the previous PAPER upper
+limit (P14) at $z=7.7$. The magenta curve shows a predicted model 21 cm power
+spectrum at 50\% ionization \citep{lidz_et_al2008}.
+XXX Using 100 bootstraps. Correction factors are
+fringe-rate filter (1.9), signal loss (1.02), and median statistic (1.4), delay
+filter signal loss, bandpass signal loss.}
 \label{fig:final_pspec}
 \end{figure*}
 
@@ -2336,7 +2341,7 @@ by
 \end{equation}
 where temperatures are implicitly a function of redshift $z$, and
 the approximation holds for low optical depth, $\tau$. 
-The optical depth is given by \citep{zaldariagga_et_al2004}
+The optical depth is given by \citep{zaldarriaga_et_al2004}
 \begin{equation}\label{eqn:tau}
     \tau = \frac{3c^3\hbar A_{10} n_{\text{\tiny{HI}}}}{16k\nu_0^2\Tspin H(z)}
 \end{equation}

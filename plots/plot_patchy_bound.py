@@ -19,7 +19,7 @@ def Ts(z,tb):
 
 def Ts_post_2s(deli,pks,errs,z):
     #given a range of ts, find the posterior dist and return 2 sigma upper limit.   
-    tss = n.linspace(10, 20000, 1000) #range of ts
+    tss = n.linspace(1000, 20000, 5000) #range of ts
     #assuming tbs are positive
     tbs = -1*T0(z)*(1 - (Tcmb(z)/tss))
     s = tbs**2 * deli
@@ -112,15 +112,15 @@ limits = {}
 
 #PSA64 limits. 
 if True:
-    limits['.100'] = (0.100, 467.75, 108.89, 'k')
-    limits['.148'] = (0.148, 958.82, 207.21, 'k')
-    limits['.197'] = (0.197, 200.17, 215.56, 'k')
-    limits['.246'] = (0.246, 299.47, 398.28, 'k')
-    limits['.295'] = (0.295, 341.04, 583.77, 'k')
-    limits['.345'] = (0.345, 1323.04, 880.47, 'k')
-    limits['.394'] = (0.394, -1448.11, 1339.34, 'k')
-    limits['.443'] = (0.443, -2.53, 1574.44, 'k')
-    limits['.492'] = (0.492, 2341.18, 2712.26, 'k')
+    limits['.100'] = (0.100, 435.60, 102.88, 'k')
+    limits['.148'] = (0.148, 863.10, 195.78, 'k')
+    limits['.197'] = (0.197, 178.14, 203.66, 'k')
+    limits['.246'] = (0.246, 266.52, 376.30, 'k')
+    limits['.295'] = (0.295, 303.51, 551.55, 'k')
+    limits['.345'] = (0.345, 1177.44, 831.86, 'k')
+    limits['.394'] = (0.394, -1288.74, 1265.40, 'k')
+    limits['.443'] = (0.443, -2.25, 1487.52, 'k')
+    limits['.492'] = (0.492, 2083.53, 2562.52, 'k')
 
 d2points = []
 d2errs = []
