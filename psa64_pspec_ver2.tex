@@ -691,7 +691,7 @@ independent modes over the 2 hours we used to measure the spectrum source. We
 finally compare the output amplitude of the EoR signal to the input amplitude in
 power spectrum domain and find that between $-.06 < k < .06$, the signal loss is
 less than $3\%$ and at the mode right outside the horizon is $.0000002\%$. The
-signal loss descreases for higher $k$'s.
+signal loss decreases for higher $k$'s.
 
 
 %These lists were My bullet points.
@@ -943,7 +943,7 @@ visibility.
 
 \begin{figure*}
 \centering
-\includegraphics[width=2\columnwidth]{plots/waterfalls.png}
+\includegraphics[width=2\columnwidth]{plots/waterfalls_labeled.png}
 \caption{
 Visibilities measured by a 30-m east-west baseline in the PAPER-64 array, 
 averaged over 135 days of observation.  From left to right, columns represent
@@ -1100,64 +1100,54 @@ jackknife tests.
 
 Prior to forming power spectra we need to time average visibilities that measure
 the same $k$ mode on the sky. The motivation for this is that we want to combine
-coherent $k$-modes on the sky before squaring to get the maximum sensitivity. We
-therefore get a $\frac{1}{N}$ sensitivity boost, rather than averaging in $P(k)$
-which would only give us a $\sqrt{N}$ sensitivity benefit. However, rather than
-a straight average, we can apply a carefully crafted fringe-rate filter that
-weights higher sensitivity portions of the sky higher than those lower in the
-sky.
+coherent $k$-modes on the sky before squaring to get the maximum sensitivity and is mathematically similar to the more traditional process of gridding in the $uv$ plane, but just for a single baseline.  However, rather appealing a box-car average, we can apply a kernel --a so-called 'fringe-rate' filter-- that
+weights different temporal rates by the antenna beam corresponding to the parts of the sky moving at the same rate.
 
 Broadly, for a given baseline and frequency, different parts of the sky
-correspond to different fringe-rates, albeit not a one-to-one correspondense.
+correspond to different fringe-rates.
 Maximum fringe rates are found along the equatorial plane, where the rotation
 rate of the earth is highest, and zero fringe rates are found at the poles,
 where the rotation rate of the earth is zero and hence sources do not move
-through your baelines fringe pattern. We can use this fact to pick out certain
-points on the sky, but because this mapping of fringe-rate to sky is not one to
-one, we can only pick out stripes of constant fringe rate.
+and have static fringe patterns \cite{parsons_backer2009}. We then compute the average beam response for each contour of constant fringe rate to construct our time average kernel or "fringe rate filter".
 
-As motivation, we discuss the use of fringe-rate filters in cross talk removal.
-Crosstalk is modeled as a time independent coupling of signal between two
-different signal paths, be it at the antenna or to to input our the analog to
-digital converters. Since crosstalk does not vary as a function of time, in
-fringe-rate space, cross talk piles up at the poles which correspond to zero
-fringe rates. In this view crosstalk is a DC bias. To remove crosstalk, we can
-apply a notch filter to the fringe-rate transform of the time series visibility
-(per frequency) and inverse transform to go back into time domain. This
-interpretation of crosstalk being a DC offset jives with our method of crosstalk
-removal discussed above. In order to remove a DC offset from a time series, we
-subtract the average.
+%[XXX this paragraph could probably go -dcj]
+%As motivation, we discuss the use of fringe-rate filters in cross talk removal.
+%Crosstalk is modeled as a time independent coupling of signal between two
+%different signal paths. Since crosstalk does not vary as a function of time and shows up at zero fringe rate.  In this view crosstalk is a DC bias. To remove crosstalk, we can
+%apply a notch filter to the fringe-rate transform of the time series visibility
+%(per frequency) and inverse transform to go back into time domain. This
+%interpretation of crosstalk being a DC offset jives with our method of crosstalk
+%removal discussed above. In order to remove a DC offset from a time series, we
+%subtract the average.
+%
+%Now, to optimally combine the time data we can cater our fringe-rate filter to
+%upweight points of the sky that contain more signal to our instrument and down
+%weight those points that do not. That is, if we weight fringe-rate
+%bins by the beam, we can get a net increase in sensitivity. Roughly, all fringe
+%rate bins contain the same amount of noise in them, but the amount of signal
+%varies and is determined by how the primary beam illuminates the sky.
+%Upweighting the bins with higher signal relative to those with less signal
+%gives us a net increase in signal-to-noise, even though we are removing 
+%signal by applying signal from this filter. 
 
-Now, to optimally combine the time data we can cater our fringe-rate filter to
-upweight points of the sky that contain more signal to our instrument and down
-weight those points that do not. That is, if we weight fringe-rate
-bins by the beam, we can get a net increase in sensitivity. Roughly, all fringe
-rate bins contain the same amount of noise in them, but the amount of signal
-varies and is determined by how the primary beam illuminates the sky.
-Upweighting the bins with higher signal relative to those with less signal
-gives us a net increase in signal-to-noise, even though we are removing 
-signal by applying signal from this filter. 
+Applying this filter effectively weights the data by another factor of the beam area. By utilizing prior knowledge about the beam area we are selectively down weighting areas on the sky contributing little signal. This results in an SNR boost of about 2.  The net boost
+in SNR depends on the shape of the beam and array declination and is functionally equivalent to the beam$^2$ weighting used in wide-field mosaicing. It is also worth noting that, like the delay spectrum filtering, fringe-rate filtering is
+ implemented on a per-baseline basis.
 
-The effective beam area from applying an optimal fringe-rate filter decreases,
-which implies that the signal has been attenuated, as noted above. But because
-the noise is attenuated more, because of beam weigting fringe-rate bins, the SNR
-increases. For the PAPER array, the boost in SNR is a factor of 2. The net boost
-in SNR depends on where the array is located. 
-
-We implement the optimal fringe-rate filter by calculating the fringe rates at
-every point on the sky, for a given frequency, and weighting each bin by the
-beam of a given baseline. It is worth noting that fringe-rate filtering is
-baseline dependent and hence is implemented on a per-baseline basis. We weight
+%We implement the optimal fringe-rate filter by calculating the fringe rates at
+%every point on the sky, for a given frequency, and weighting each bin by the
+%beam of a given baseline. 
+ We weight
 the fringe-rate bins on the sky by the beam pattern at the same point on the
 sky. In order to obtain a smooth filter in the fringe-rate domain, we fit a
 gaussian with a hyperbolic tangent tail to this filter. %as shown in figure \ref{fig:fringe_rate_cut}. 
 % XXX too much detail
-We then fourier transform this to obtain the time
-domain filter, multiply by a blackman-harris window function to damp the tails
+We then Fourier transform this to obtain the time
+domain filter, multiply by a Blackman-Harris window function to damp the tails
 of the filter, and finally convolve with the visibilites to effect time domain
-integration.
+integration.  The before/after effect on the data can be seen in Figure \ref{fig:waterfalls}.
 
-Since the PAPER beam is ~45 degrees, and the array is located at a declination
+The PAPER beam is ~45 degrees FWHM, and the array is located at a declination
 of $-30^{\circ}$ the fringe rates associated with the low signal to noise (down
 in the beam) correspond to very high and very low/negative fringe rates.
 %Figure \ref{fig:fringe_rate_cut} shows a cut of the optimal fringe-rate filter at 159 MHz for
@@ -1166,7 +1156,7 @@ Therefore, the implemented fringe-rate filter removes
 some sky signal, signal associated with fringe rates outside of the ranges shown
 in Figure \ref{fig:fr_preserved_signal}. Figure \ref{fig:fr_preserved_signal} shows
 that the applied filter removes sky associated with negative fringe rates and
-very high fringe rates. 
+very high fringe rates. [XXX how does this loss compare with the delay spectrum loss?  Can't just leave this statement dangling...]
 
 %\begin{figure}[!t]
 %\centering
@@ -1207,21 +1197,21 @@ to integrate to unity, but has been scaled here for legibility.
 }
 \label{fig:fr_preserved_signal}
 \end{figure}
-
+The action of the fringe rate filter is to get a nearly optimally weighted sample, averaged at the longest 
+physically possible integration time.
 For the power spectrum baselines in question (30 m East-West baselines), the
 effective integration time is calculated by comparing the variance statistic for
 a fringe-rate filter that is a flat weighting vs that with an optimal filter
 weighting as described. We apply these filters to random noise with variance 1,
-without loss of generality. We can conclde that 
+without loss of generality. We can conclude that 
 \begin{equation}
     t_{int} = \frac{\int{\sigma^{2}dt}}{\int{\sigma^{2}fr^{2}dt}},
 \end{equation}
 which evaluates to 1886 s for an optimal fringe-rate filter on a 30 m East-West baseline at 149.5 MHz.
 Over the range of frequencies used in our power spectrum estimate, the
-integration times range from 1936 s to 1790 s, correspinding to an average of 31
-minutes. Because the fringe-rate filter in effect integrates in time, the number
-of statistically independent samples of the sky drastically decreases. We are
-left with $\sim2$ independent samples per hour.
+integration times range from 1936 s to 1790 s, corresponding to an average of 31
+minutes. As a rough check, note that this is roughly how long a single 30m fringe at 150MHz takes to make one oscillation on the sky.  Because the fringe-rate filter integrates in time, the number
+of statistically independent samples of the sky drastically decreases from 83 to $\sim2$ independent samples per hour.
 
 %\begin{figure}[h!]\centering
 %\includegraphics[width=\columnwidth, height=.8\columnwidth]{plots/noise_t_35.png}
@@ -1286,19 +1276,17 @@ integration windows in the correlator with respect to sidereal time.
 \end{figure}
 
 
-One of the key aspects of PAPER is the stability of the instrument between
-baselines and in time. Figure \ref{fig:density} shows for a given redundant
-group of baselines, the spread in the visibilites for all of the baselines in
-that group as a function of LST's. Specifically, we histogram the real part of
+One PAPER design goal is the stability of the instrument between
+baselines and in time. Figure \ref{fig:density} shows the visibility repeatability between 
+baselines and nights as a function of LST. Specifically, we histogram the real part of
 the visibilities for all baselines belonging to the East-West 30 m redundant
 baseline in a given LST bin for foreground contained data. We see that for a
-given LST bin the, spread in the value for all the baselines is ~100 Jy.  We get
+given LST bin the, spread in the value for all the baselines is $\sim$50 Jy which corresponds with our observed
+$T_{sys}$ of $\sim$500K .  We get
 more samples per LST bin in the range of 2--10 hours due to our observing
 season, therefore the density of points in this LST region is greater, set by
-the color scale. This density plot shows that redundant baselines, especially
-the EoR baselines we are using the power spectrum analyisis, agree very well
-with one another. This is another nod to the use of OMNICAL for redundant
-calibration. 
+the color scale. This density plot shows that redundant baselines agree very well
+with one another, omnical has leveled the antenna gains to within the noise.
 
 In addition to stability between redundant baselines, we also consider the
 stability in time for the PAPER instrument. In order to quantify the stability
@@ -1307,9 +1295,13 @@ and bin in LST. We then Fourier transform along the time direction for every LST
 bin and compute the power spectrum. The DC bin is the average of all of the days
 and clearly there is excess power there. However, for time modes greater than 1
 day, we see that there is little correlation between days, showing that there
-are no systematics in time. However, we do note that on the 2 day time scale,
+are no systematics in time. 
+[XXX fix this known issue.]
+However, we do note that on the 2 day time scale,
 there is a slight increase power owning the fact that neighboring days are
-slightly correlated with each other.  Figure \ref{fig:stability} shows the
+slightly correlated with each other.  
+
+Figure \ref{fig:stability} shows the
 stability of the instrument as a function of time. 
 
 \subsection{System Temperature}   
@@ -1324,6 +1316,7 @@ $T_{\rm rms}$ is the RMS temperature.
 Figure \ref{fig:tsys} shows the results of this calculation. In this observing
 season, the system temperature stays consistent with previous estimates of the
 as in P14 and \citet{jacobs_et_al2014} at $\Tsys=500K$ at 160 MHz.
+[XXX Zaki, how exactly did you get 500?  the number from P14 and J15 was 550K @ 160MHz]
 
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/tsys.png}
@@ -1341,7 +1334,7 @@ Previous estimates of the system temperature
 (P14; \citealt{jacobs_et_al2014}) relied on differencing and averaging
 baselines, time samples, and/or frequency channels. The agreement between these
 various methods of estimating the system temperature provides a robust measure
-of the system temperature of the PAPER instrument. 
+of the system temperature of the PAPER instrument. Agreement between the instantaneous measurements of the system temperature, the LST repetition variance, and the predicted power spectrum noise level (see below) indicates a robustly stable system with no significant long term instability contributing appreciable noise.
 
 
 
