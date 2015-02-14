@@ -344,14 +344,16 @@ described in Section \ref{sec:observations}.  The map is centered at 6 hours in 
 \section{Calibration}\label{sec:calib}
 
 Foreground contamination and signal sensitivity represent the two major concerns for 21~cm
-experiments targeting power-spectral measurements. Sources of foregrounds include
+experiments targeting power spectrum measurements. Sources of foregrounds include
 galactic synchrotron radiation, supernova remnants, and extragalactic radio sources.
-In the low-frequency radio band (50--200 MHz) where 21~cm reionization experiments operate,
-emission from these foregrounds is brighter than the predicted
-reionization signal by more than 5 orders of magnitude
-\citep{deoliveira2008,jelic_et_al2008,santos_et_al2005}.
-However, the brightest foregrounds are spectrally smooth, and this provides an important hook
-for their isolation and removal \citep{liu_tegmark2012,petrovic_oh2011,liu_et_al2009}.  Unfortunately, interferometers, which are inherently chromatic
+In the low-frequency radio band (50--200 MHz) where 21~cm reionization
+experiments operate, emission from these foregrounds is brighter than the
+predicted reionization signal by several orders of magnitude
+\citep{ghosh_et_al2011,bernardi_et_al2010,bernardi_et_al2009,ali_et_al2008,deoliveira2008,jelic_et_al2008,santos_et_al2005}.
+However, the brightest foregrounds are spectrally smooth, and this provides an
+important hook for their isolation and removal
+\citep{liu_tegmark2012,petrovic_oh2011,liu_et_al2009}.  Unfortunately,
+interferometers, which are inherently chromatic
 instruments, interact with spectrally smooth foregrounds to produce unsmooth features that
 imitate line-of-sight Fourier modes over cosmological volumes (P12b; \citealt{bowman_et_al2009,morales_et_al2006a}).
 One approach to solving this problem involves an ambitious calibration and modeling approach to spatially localize and
@@ -384,7 +386,7 @@ our analysis pipeline begins by running a compression
 algorithm to reduce the volume of our raw data by a factor of 70
 (see Appendix A of P14). 
 We then calibrate in two stages, which we describe in more detail below.  
-The first step uses instantaneous redundancy is used to solve for the majority of the 
+The first step uses instantaneous redundancy to solve for the majority of the 
 per-antenna internal degrees of freedom in the array.  Second, standard self-calibration is used 
 to solve for a smaller number of
 absolute phase and gain parameters that cannot be solved by redundancy alone. 
@@ -425,17 +427,15 @@ absolute phase and gain parameters that cannot be solved by redundancy alone.
 %       --Absoulte phase and gain calibration are addressed in later sections.
 %
 
-The grid-based configuration of PAPER antennas allows a large number of 
-antenna calibration parameters to 
-be solved for on the basis of redundancy (P14;P12a;\citealt{zheng_et_al2014}).
-Multiple baselines of the same length and orientation measure the same sky
-signal. Differences between redundant baselines result from
-differences in the signal chain, including amplitude and phase effects attributable to
-antennas, cables, and receivers. 
-Note that redundant calibration only constrains the relative complex gain solutions
-between antennas and is independent of the sky. Since redundant
-calibration preserves signals common to all redundant baselines,
-this type of calibration is lossless. 
+The grid-based configuration of PAPER antennas allows a large number of antenna
+calibration parameters to be solved for on the basis of redundancy (P14; P12a;
+\citealt{zheng_et_al2014}).  Multiple baselines of the same length and
+orientation measure the same sky signal. Differences between redundant
+baselines result from differences in the signal chain, including amplitude and
+phase effects attributable to antennas, cables, and receivers.  Redundant
+calibration only constrains the relative complex gains between antennas and is
+independent of the sky. Since redundant calibration preserves signals common to
+all redundant baselines, this type of calibration is lossless. 
 
 %    -Summary of the procedure of redundant calibration. This should be mixed in
 %     with the equations from Zheng et. al.
@@ -462,21 +462,21 @@ logarithms applied to visibilities (equation 4 of
 where $g$ denotes the 
 complex gain of antennas indexed by $i$ and $j$, and $y$ represents the ``true" visibility 
 measured by all redundant baselines.  In solving for per-antenna gain parameters with
-a number of measurements that scales quadratically with antenna number, redundancy sets up 
+a number of measurements that scales quadratically with antenna number, redundancy gives 
 an overconstrained
 system of equations that can be solved
 using traditional linear algebra techniques.
 While LOGCAL is useful for arriving at a coarse solution from initial estimates that are far
-from the true value, LOGCAL has the shortcoming of being a biased by the assymetric behavior
+from the true value, LOGCAL has the shortcoming of being a biased by the asymmetric behavior
 of additive noise in the logrithm \citep{liu_et_al2010}.
 
-LINCAL, on the otherhand, uses a Taylor expansion of the visibility around initial
+LINCAL, on the other hand, uses a Taylor expansion of the visibility around initial
 estimates of the gains and visibilities, 
 \begin{equation}\label{eqn:lincal}
 v_{ij} = g_{i}^{0*}g_{j}^{0}y_{i-j}^{0} + g_{i}^{1*}g_{j}^{0}y_{i-j}^{0} +
          g_{i}^{0*}g_{j}^{1}y_{i-j}^{0}+g_{i}^{0*}g_{j}^{0}y_{i-j}^{1},
 \end{equation}
-where $0$ denotes intial estimates and $1$ denotes 
+where $0$ denotes initial estimates and $1$ denotes 
 solutions we fit for.  Using initial
 estimates taken from LOGCAL, LINCAL constructs an unbiased estimator.
 
@@ -493,7 +493,7 @@ estimates taken from LOGCAL, LINCAL constructs an unbiased estimator.
 %    -Diagnostic figures : Chi-squared, complex plane, stability vs. time and
 %                          frequency.
 
-Implementaion of redundant calibration was done with the 
+Implementation of redundant calibration was done with the 
 OMNICAL\footnote{https://github.com/jeffzhen/omnical}
 package, an open-source redundant calibration package
 \citep{zheng_et_al2014}. This
@@ -528,32 +528,26 @@ The plot comprises a observations over one day, with a frequency resolution of
 } \label{fig:chi2}
 \end{figure}
 
-[XXX from here to the end of section is too hard to follow; don't understand].
 In addition to solving for gain solutions, OMNICAL also characterizes the
-quality of the calibration by calculating the $\chi^{2}$ for every integration,
-as illustrate in 
-Figure \ref{fig:chi2} for one day of observation.
-worth of calibrations. From \cite{zheng_et_al2014}, the $\chi^{2}/\text{DoF}$,
-where $\text{DoF} = 2N_{baselines} - 2(N_{antennas} + N_{\text{unique
-basleines}}) $ is the number of degrees of freedom. For a good fit, the
-$\chi^{2}/DoF$ is drawn from a mean 1 distribution with variance
-$\frac{2}{\text{DoF}}$. The distribtuion of the $\chi^{2}$ in figure
-\ref{fig:chi2} has a mean of 2, meaning that the fit was not the best to what
-our noise model is.  The noise model used was obtained from the variance
-statistic calculated during the binning of days in local sidereal time, which
-occurs after the application of crosstalk removal, combining X and Y
-polarization, and the wideband delay filter. Hence, the noise model may not be
-well suited for the $\chi^{2}$, and is a likely reason that the distribution
-has a mean of 2.
-%XXX This may change and we may get a chi-squared of around one.% 
+quality of the calibration parameters by calculating the $\chi^{2}$ for every
+integration. As defined in \cite{zheng_et_al2014}, 
+\begin{equation}\label{eqn:chi2}
+    \chi^{2} = \sum_{ij}\frac{|v_{ij} - y_{i-j}g^{\ast}_{i}g_{j}|^{2}}{\sigma^{2}_{ij}},
+\end{equation}
+where $\sigma^{2}$ is the noise in the variance of the visibility. The $\chi^{2}$
+measures the deviation of measured visibilities to that of the best fit model
+derived from the LINCAL, and gives us a tool to use in order to check the
+quality of our data, with large $\chi^{2}$ corresponding to a bad fit. Figure
+\ref{fig:chi2} shows the $\chi^{2}$ for all frequencies for and entire day. The
+noise model used was the variance of the visibilities for a given frequency and
+LST bin. The $\chi^{2}$ can be a metric used for RFI flagging and removal because
+when RFI dominates, at a given frequency or time, the measured visibility would
+be considered a poor fit to the model. This data set did not use the $\chi^{2}$
+as a metric but preliminary studies have shown it's efficacy on PAPER-128
+observations.
 
-The calibration parameters solved for in OMNICAL also have a time independent
-additive offset associated with them, This additive offset is associated with
-crosstalk between antennas, especially the shorter north south baselines.
-To remove this crosstalk, OMNICAL calculates an averaged (over ten minutes)
-additive offset that it subtracts from each visibility before running fitting
-for solutions once again. This additive offset is in effect averaging deviations
-from the $chi^{2}$ over 10 minutes and subtracting that deviation off.
+[XXX need to talk about the additive offset removal from visibilities and
+solutions.]
 
 \subsection{Absolute Calibration} 
 %    -Selfcal to pictor, fornax, and crab (to get the north-south components).
@@ -570,16 +564,14 @@ from the $chi^{2}$ over 10 minutes and subtracting that deviation off.
 %    -Diagnostic Plots: Show Field image from Bernardi. This will give
 %     confidence in a good absolute phase calibration.
 
-After solving for the relative complex gains of the antennas using redundant calibration, an
-overall phase and gain calibration remains unknown. We use the standard self
-calibration method for radio interferometers to solve for the absolute
-phase calibration. We used Pictor A, Fornax A, and the Crab Nebula to
+After solving for the relative complex gains of the antennas using redundant
+calibration, an overall phase and gain calibration remains unknown. We use the
+standard self calibration method for radio interferometers to solve for the
+absolute phase calibration. We used Pictor A, Fornax A, and the Crab Nebula to
 fit for the overall phase solutions. Figure \ref{fig:field_image} shows an image
 of the field with Pictor A (5:19:49.70, -45:46:45.0)  and Fornax A
 (3:22:41.70,-37:12:30.0). The measured source positions are the same as the the
 catalogue positions for these sources.
-
-
 
 %    -Calibrated to Pictor A. 
 %       --As before, redundant calibration cannot set a global flux scale. For
@@ -607,7 +599,7 @@ catalogue positions for these sources.
 %        --A comparison to the PSA32 Flux CAL.
 
 We then set our over all flux scale by using Pictor A as our calibrator source
-with source spectra as derived in \cite{jacobs_et_al2013}, 
+with source spectra derived in \cite{jacobs_et_al2013}, 
 \begin{equation}
     S_{\nu} = S_{150}\times\left(\frac{\nu}{150MHz}\right)^{\alpha},
 \end{equation}
@@ -625,18 +617,18 @@ where $S_{150} = 382 \text{Jy} \pm 5.4$ and $\alpha = -.76 \pm .01$, with
 %frequency range from 120-170MHz. Figure \ref{fig:pic_spec} shows the derived
 %Pictor A spectrum and the model spectrum derived from \cite{jacobs_et_al2013}.
 
-
-To derive the source spectrum from our measurements, we use data that have been LST-averaged
-prior the wide-band delay filter described in Section \ref{sec:wbd_filtering}, for the hour
-before and after the transit of Pictor A. We image a $30^\circ \times 30^\circ$
-field of view for every frequency channel for each 10 minute snapshot and apply
-uniform weights to the gridded visibilities. We account for the required three
-dimensional Fourier transform in wide field imaging by using the w-stacking
-algorithm implemented in WSclean \citep{offringa_et_al2014} – although we note that
-the standard w-projection algorithm implemented in
-CASA\footnote{http://casa.nrao.edu} gives similar performances as the PAPER
-array is essentially instantaneously coplanar.  A source spectrum is derived for
-each snapshot by fitting a two dimensional Gaussian to Pictor A by using the
+To derive the source spectrum from our measurements, we use data that have been
+LST-averaged prior to the wide-band delay filter described in Section
+\ref{sec:wbd_filtering}, for the hour before and after the transit of Pictor A.
+We image a $30^\circ \times 30^\circ$ field of view for every frequency channel
+for each 10 minute snapshot and apply uniform weights to the gridded
+visibilities. We account for the required three dimensional Fourier transform in
+wide field imaging by using the w-stacking algorithm implemented in WSclean
+\citep{offringa_et_al2014} – although we note that the standard w-projection
+algorithm implemented in CASA\footnote{http://casa.nrao.edu} gives similar
+performances as the PAPER array is essentially instantaneously coplanar.  A
+source spectrum is derived for each snapshot by fitting a two dimensional
+Gaussian to Pictor A by using the
 PyBDSM\footnote{http://www.lofar.org/wiki/doku.php?id=public:user\_software:pybdsm}
 source extractor. Spectra are optimally averaged together by weighting them with
 the primary beam model evaluated in the direction of Pictor A. To fit our
@@ -678,22 +670,24 @@ measure the flux in PyBDSM.
 [XXX How are these errors averaged? Did you use the same beam weighting?]
 }\label{fig:pic_spec}
 \end{figure}
+
 [XXX ZSA take a look at this paragraph]
 Fitting a polynomial to the bandpass has the potential for signal loss which
-would include fitting out some modes of the EoR fluctuations. In order to
+would include suppressing mode due to the cosmological signal. In order to
 quantify the signal loss associated with fitting a ninth degree polynomial to
 the bandpass, we run a Monte Carlo simulation of the effect the bandpass has on
-an EoR signal. We construct a bandpass resulting from the fitted
-polynomial and add a low level EoR signal on top of that bandpass, modeled as a
-white noise with a uniformly varying phase, for each baseline and independent
-time mode. The total number of independent
-modes we average over before fitting a 9th degree polynomial to the simulated
-signal is 1017, which includes the number of unique baselines and the number of
-independent modes over the 2 hours we used to measure the spectrum source. We
-finally compare the output amplitude of the EoR signal to the input amplitude in
-power spectrum domain and find that between $-.06 < k < .06$, the signal loss is
-less than $3\%$ and at the mode right outside the horizon is $.0000002\%$. The
-signal loss decreases for higher $k$'s.
+a model EoR signal. We construct a model baseline visibility as a Gaussian
+random signal with $\mu=0$ and $\sigma=1$ offset by 5 orders of magnitude
+multiplied by the derived bandpass for every independent mode measured.  We
+calculate the total number of independent modes by counting the number of
+independent uv modes sampled for the different baseline types and the two hour
+time interval used to measure the bandpass. We average each mode together and
+fit a 9th degree polynomial and using that as our measured bandpass in this
+simulation.  Finally, to measure the lost power as function of
+$k$-mode, we compare the power spectra from the output of the simulated EoR
+signal to the input amplitude in and find that between $-.06 < k < .06$, the
+signal loss is less than $3\%$ and at the mode right outside the horizon is
+$.0000002\%$. The signal loss decreases for higher $k$'s.
 
 
 %These lists were My bullet points.
@@ -1452,9 +1446,9 @@ for a power spectrum analysis). It is important to note that
 $\mathbf{Q}_{\alpha}$ can take on any form and be completely arbitrary. It is
 the data analysts choice. However, if one is looking for the best possible
 estimate of the power spectrum,  $\mathbf{Q_{\alpha}}$ generally
-takes a form that is proportionl to  $\mathbf{C}_{,\alpha} \equiv
+takes a form that is proportional to  $\mathbf{C}_{,\alpha} \equiv
 \frac{\partial{\mathbf{C}}}{\partial p_{\alpha}}$, which is the derivative of
-the the covariance matrix with respect to the band power $p_{\alpha}$, defined
+the covariance matrix with respect to the band power $p_{\alpha}$, defined
 below.  Therefore, $\mathbf{Q}_{\alpha}$ encodes the response of the data
 covariance matrix to the $\alpha^{th}$ bandpower. We describe our choice of this
 matrix in the next section, where we describe the application of the quadratic
