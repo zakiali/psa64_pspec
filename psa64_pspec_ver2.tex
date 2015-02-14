@@ -65,7 +65,7 @@ Daniel C. Jacobs\altaffilmark{9},
 Pat Klima\altaffilmark{6},
 Adrian Liu\altaffilmark{1}, 
 David H. E. MacMahon\altaffilmark{2},
-David F. Moore\altaffilmark{3}
+David F. Moore\altaffilmark{3},
 Jonathan C. Pober\altaffilmark{10}, 
 Nima Razavi\altaffilmark{11},
 Irina I. Stefan\altaffilmark{11},
@@ -92,23 +92,21 @@ Andre Walker\altaffilmark{3}
 Cambridge, MA}
 
 \begin{abstract}
-In this paper, we report new limits on 21cm emission from cosmic reionization based on
-a 4.5-month observing campaign with a 64-element deployment of the Donald C. Backer
-Precision Array for Probing the Epoch of Reionization (PAPER) in South Africa.  This
-work extends the work presented in \citet{parsons_et_al2014} with more collecting area,
-improved redundancy-based calibration, optimal fringe-rate filtering, and improved
-power-spectral analysis using optimal quadratic estimators. The result is a new
-$2\sigma$ upper limit on $\Delta^2(k)$ of ($20.6~{\rm mK})^2$ in the range
-$0.1<k<0.5\hMpci$ at $z=8.4$.  This represents a four-fold improvement
-over the previous best upper limit.  As we discuss in more depth in the companion
-to this paper \citet{pober_et_al2015}, this upper limit supports and extends previous
-evidence for significant heating in the intergalactic medium prior to reionization.  Under the assumption
-that heating comes from X-rays, this result indicates an X-ray background that exceeds
-what would be expected to be produced from the currently observed quasar population at high redshifts.
-This probably indicates significant contributions from quasars at lower luminosities that have not
-yet been observed. [XXX cross-check all of this, see if there are any stronger statements].  We
-conclude with a discussion of implications for future 21cm reionization experiments, including
-the newly funded Hydrogen Epoch of Reionization Array (HERA).
+In this paper, we report new limits on 21cm emission from cosmic reionization
+based on a 4.5-month observing campaign with a 64-element deployment of the
+Donald C. Backer Precision Array for Probing the Epoch of Reionization (PAPER)
+in South Africa.  This work extends the work presented in
+\citet{parsons_et_al2014} with more collecting area, improved redundancy-based
+calibration, optimal fringe-rate filtering, and improved power-spectral
+analysis using optimal quadratic estimators. The result is a new $2\sigma$
+upper limit on $\Delta^2(k)$ of ($20.6~{\rm mK})^2$ in the range
+$0.1<k<0.5\hMpci$ at $z=8.4$.  This represents a four-fold improvement over the
+previous best upper limit.  As we discuss in more depth in the companion to
+this paper \citet{pober_et_al2015}, this upper limit supports and extends
+previous evidence for significant heating in the intergalactic medium prior to
+reionization. We conclude with a discussion of implications for future 21cm
+reionization experiments, including the newly funded Hydrogen Epoch of
+Reionization Array (HERA).  
 \end{abstract}
 
 \section{Introduction}
@@ -199,7 +197,7 @@ the GMRT \citep{paciga_et_al2013},
 LOFAR \citep{van_haarlem_et_al2013},
 the MWA \citep{tingay_et_al2013},
 the 21CMA \citep{peterson_et_al2004,wu2009},
-and the Donald C. Backer Precision Array to Probe the Epoch of Reionization (PAPER; \citealt{parsons_et_al2010}). 
+and the Donald C. Backer Precision Array for Probe the Epoch of Reionization (PAPER; \citealt{parsons_et_al2010}). 
 
 PAPER is unique for being a dedicated instrument with the flexibility
 to explore non-traditional experimental approaches, and is converging on a self-consistent
@@ -512,7 +510,7 @@ the application of redundancy-based calibration with OMNICAL \citep{zheng_et_al2
 All baselines in the array measured at 159 MHz for a single time integration are plotted.
 Instantaneously redundant baselines are assigned the same symbol/color.
 The tighter clustering of redundant measurements with OMNICAL indicates improved
-calibration.  Residuals are consistent with thermal noise.
+calibration.
 } \label{fig:omniview}
 \end{figure*}
 
@@ -888,7 +886,7 @@ Namely, Stokes I can be estimated as
     V_{\rm I} = \frac12(V_{\rm XX}+V_{\rm YY}),
 \end{equation}
 where $V_{\rm XX}$ and $V_{\rm YY}$ are the visibilities of the two linear
-polariztionats measured by the interferometer. There are some important caveats
+polarizations measured by the interferometer. There are some important caveats
 to the estimate of Stokes I provided by equation \ref{eqn:stokesi}. One
 important caveat is that it neglects the beam asymmetry  between the two linear
 polarization states. This mismatch can cause polarization leakage from Stokes
@@ -955,14 +953,14 @@ of magnitude of foreground suppression is evident.
 \end{figure*}
 
 Applying the delay filter to the 30 m East-West baselines used in the power spectrum analysis,
-foregrounds are suppressed by $\sim$5 orders of magnitude in power, or
- -50 dB of foreground suppression, as seen in Figure
+foregrounds are suppressed by $\sim$4 orders of magnitude in power, or
+ -40 dB of foreground suppression, as seen in Figure
 \ref{fig:waterfalls}. As discussed in P14, there is a small amount of signal loss
 associated with this foreground filter, for the baselines and filter parameters the loss was found to be 4.8\% for the
 first mode outside of the horizon, 1.3\% for the next mode out, and less than
 .0015\% for the higher modes.  [XXX are we applying these numbers to the pspec or just calling it negligible? The are applied to their corresponding modes.]  
 
-After the wideband delay filter, we conduct another remove a second layer of RFI and crosstalk
+After the wideband delay filter, we remove a second layer of RFI and crosstalk
  which was overshadowed by the foreground signal. RFI are excised with 
  a filter which flags values $3\sigma$ above the median using a variance calculated in a localized time and frequency window.  Cross-talk, which is an overall complex offset to the visibility, due to small couplings between independent analog signal chains, is removed by subtracting a ten minute long average from each baseline. Normally, hour long averages are needed for foreground contained data
 to wash out the fringes from the said foregrounds to detect the static 
@@ -1102,13 +1100,12 @@ than applying a box-car average, we can apply a kernel --a so-called
 beam corresponding to the parts of the sky moving at the same rate.
 
 Broadly, for a given baseline and frequency, different parts of the sky
-correspond to different fringe-rates.
-Maximum fringe rates are found along the equatorial plane, where the rotation
-rate of the earth is highest, and zero fringe rates are found at the poles,
-where the rotation rate of the earth is zero and hence sources do not move
-and have static fringe patterns \citep{parsons_backer2009}. We then compute the
-average beam response for each contour of constant fringe rate to construct our
-time average kernel or "fringe rate filter".
+correspond to different fringe-rates.  Maximum fringe rates are found along the
+equatorial plane, where the rotation rate of the sky is highest, and zero
+fringe rates are found at the poles, where the sky does not rotate and hence
+sources do not move and have static fringe rates \citep{parsons_backer2009}. We
+then compute the average beam response for each contour of constant fringe rate
+to construct our time average kernel or "fringe rate filter".
 
 %[XXX this paragraph could probably go -dcj]
 %As motivation, we discuss the use of fringe-rate filters in cross talk removal.
@@ -1192,11 +1189,11 @@ to integrate to unity, but has been scaled here for legibility.
 }
 \label{fig:fr_preserved_signal}
 \end{figure}
-The action of the fringe rate filter is to get a nearly optimally weighted sample, averaged at the longest 
-physically possible integration time.
-For the power spectrum baselines in question (30 m East-West baselines), the
-effective integration time is calculated by comparing the variance statistic for
-a fringe-rate filter that is a flat weighting vs that with an optimal filter
+The action of the fringe rate filter is to get an optimally weighted
+sample, averaged at the longest physically possible integration time.  For the
+power spectrum baselines in question (30 m East-West baselines), the effective
+integration time is calculated by comparing the variance statistic for a
+fringe-rate filter that is a flat weighting vs that with an optimal filter
 weighting as described. We apply these filters to random noise with variance 1,
 without loss of generality. We can conclude that 
 \begin{equation}
@@ -1252,12 +1249,11 @@ independent samples per hour.
 \begin{figure*}
 \centering
 \includegraphics[width=2.3\columnwidth]{plots/density.png}
-\caption{Histogram of the real component of 
-all calibrated visibilities measured over 135 days with every redundant east-west 30-m 
-baseline at 149.5 MHz. 
-Color scale indicates the number of samples falling in an LST/flux-density bin.
-This plot serves to illustrate the stability of the PAPER instrument and the precision
-of calibration.
+\caption{Histogram of the real component of all calibrated visibilities
+measured over 135 days with every redundant east-west 30-m baseline at 149.5
+MHz.  Color scale indicates the number of samples falling in an
+LST/flux-density bin.  This plot serves to illustrate the stability of the
+PAPER instrument and the precision of calibration.
 %The bulk of the samples recorded, range from an LST of 5 to
 %10 hours, whilst the EoR cold spot ranges from 0 to 4 hours as seen in figure
 %\ref{fig:coverage}. For the densest regions, the spread in visibility for a
@@ -1306,29 +1302,26 @@ In addition to stability between redundant baselines, we also consider the
 stability in time for the PAPER instrument. In order to quantify the stability
 in time we extract one channel for a given baseline for every observation day
 and LST bin. We then Fourier transform along the time direction for every LST
-bin and compute the power spectrum. The DC bin is the average of all of the days
-and clearly there is excess power there. However, for time modes greater than 1
-day, we see that there is little correlation between days, showing that there
-are no systematics in time. 
-[XXX fix this known issue.]
-However, we do note that on the 2 day time scale,
-there is a slight increase power owning the fact that neighboring days are
-slightly correlated with each other.  
-
-Figure \ref{fig:stability} shows the
-stability of the instrument as a function of time. 
+bin and compute the power spectrum. As shown in figure \ref{fig:stability}, the
+DC bin is the average of all of the days and clearly there is excess power
+there. However, for time scales greater than 1 day, we see that there is little
+correlation between days, showing that there are no systematics in time. The
+excess on the two day timescale is caused by the changing alignment of the 42.9
+second integration time scale of a visibility with that of a sidereal day. This
+presents itself as a beat frequency on the two day timescale.
 
 \subsection{System Temperature}   
-During the LST binning step, the variance of the visibilities on a frequency and
-time basis, are recorded. Using these variances, we calculate the system
-temperature as a function of LST, averaging over each LST hour. 
+During the LST binning step, the variance of the visibilities that are averaged
+together for a given frequency and LST bin are recorded. Using these variances,
+we calculate the system temperature as a function of LST, averaging over each
+LST hour. 
 \begin{equation}
     \Tsys = \frac{T_{\rm rms}}{\sqrt{\Delta\nu t}}, 
 \end{equation}
 where $\Delta\nu$ is the bandwidth, $t$ is the integration time, and
-$T_{\rm rms}$ is the RMS temperature.
+$T_{\rm rms}$ is the RMS temperature, or the variance statistic described above.
 Figure \ref{fig:tsys} shows the results of this calculation. In this observing
-season, the system temperature stays consistent with previous estimates of the
+season, the system temperature drops just below previous estimates of the
 as in P14 and \citet{jacobs_et_al2014} at $\Tsys=500K$ at 160 MHz.
 [XXX Zaki, how exactly did you get 500?  the number from P14 and J15 was 550K @ 160MHz
  This is using the variance statistic from the lst binner. The usual way to
@@ -1349,11 +1342,24 @@ system temperature (P14; \citealt{jacobs_et_al2014}).
 %MHz, consistent with previous estimates of the system temperature.}
 }\label{fig:tsys}
 \end{figure}
-Previous estimates of the system temperature
+
+When calculating the system temperature using the variance in the visibilities
+for a given LST and frequency, we take into account the fact that we flag
+3$\sigma$ outliers from the median. To calculate an effective correction factor
+to account for the filtering, we assume the visibilities follow a gaussian
+distribution which would require a correction factor of 1.34 for the removal of
+data points that are 3$\sigma$ above the median.
+
+Previous estimates
+of the system temperature
 (P14; \citealt{jacobs_et_al2014}) relied on differencing and averaging
-baselines, time samples, and/or frequency channels. The agreement between these
-various methods of estimating the system temperature provides a robust measure
-of the system temperature of the PAPER instrument. Agreement between the instantaneous measurements of the system temperature, the LST repetition variance, and the predicted power spectrum noise level (see below) indicates a robustly stable system with no significant long term instability contributing appreciable noise.
+baselines, time samples, and/or frequency channels. The relative agreement
+between these various methods of estimating the system temperature provides a
+robust measure of the system temperature of the PAPER instrument. Agreement
+between the instantaneous measurements of the system temperature, the LST
+repetition variance, and the predicted power spectrum noise level (see below)
+indicates a robustly stable system with no significant long term instability
+contributing appreciable noise.
 
 
 
@@ -1466,10 +1472,9 @@ quantities in equation \ref{eqn:qalpha} for every $\alpha'th$ bin.
 The bias term $b_{\alpha}$ in equation \ref{eqn:qalpha} is the the instrumental
 noise bias that needs to be subtracted off. However, in our analysis we are
 constructing an unbiased estimator by using cross correlations between different
-redundant baselines. This eliminates the need to remove the noise bias. On the
-other hand the foreground bias is also somewhat accounted for by using cross
-correlations. We try to remove this bias by cross correlating between different
-days and baselines. Due to the fact that we are using cross correlations in our
+redundant baselines. This eliminates the need to subtract the noise bias in
+equation \ref{eqn:qalpha}. However, we do not try to remove the 
+foreground bias.  Due to the fact that we are using cross correlations in our
 quadratic estimator of the power spectrum, equation \ref{eqn:qalpha} becomes, 
 \begin{equation}\label{eqn:qalpha_unbiased}
     q_{\alpha} =
@@ -1515,19 +1520,21 @@ to unity.
 %
 The normalization matrix is the analysts choice, and is the last chance to
 weight the measurements in the estimates of the power spectrum; it is
-essentially a rebinning of the data. One choice that can be made is to pick
+essentially a re-binning of the data. One choice that can be made is to pick
 $\mathbf{M} = \mathbf{F}^{-1}$ implying that $\mathbf{W} = \mathbf{I}$. This
 window function is a delta function window such that every band power does not
-contain leakage from other band powers. Therefore, each band power estimate
-contains power from only that bin. However, this has the down side that the
-error bars are large and hence the estimate is not very well localized. On the
-other hand, choosing the identity normalization such that the window functions
-are given by the Fisher matrix, leads a minimum error on the error bars, but
-with the consequence that every band power is coupled to every other band power.
-Th choice of $\mathbf{M} = \mathbf{D}$, where $\mathbf{D}$ is a diagonal matrix,
-produces the smallest possible error bars [XXX cite result]. $\mathbf{D}$ is
-diagonal and not the identity because the window functions are normalized such
-that the rows of the matrix sum to unity.  
+contain leakage from other band powers, and therefore the estimates are well
+localized and contain power from only that bin. However, this has the down side
+that the error bars are large.  On the other hand, choosing the identity
+normalization such that the window functions are given by the Fisher matrix,
+leads to the smallest possible error bars, with the consequence that every
+band power is coupled to every other band power.  
+[XXXthis bit needs work.. what was I trying to say with this?]
+The choice of $\mathbf{M} =
+\mathbf{D}$, where $\mathbf{D}$ is a diagonal matrix, produces the smallest
+possible error bars [XXX cite result]. $\mathbf{D}$ is diagonal and not the
+identity because the window functions are normalized such that the rows of the
+matrix sum to unity.  
 
 In addition to calculating the window functions, we can also calculate the error
 correlations that correspond to a given window fuction. In order to see the
@@ -1740,9 +1747,11 @@ order to obtain the final estimate of the power spectrum, we average all of the
 baselines together as a function of time, measuring one power spectrum per LST
 bin. Therefore, because we are using only the auto covariances to weight the
 data vecotrs, that is we are not taking into account the baseline-baseline
-covariances when weighting the data, only the frequency frequency covariances
-between channels. To understand the application of this quadratic estimator
-foramlism to the data, let us begin by defining 
+covariances when weighting the data, only the frequency-frequency covariances
+between channels. This is a major difference between the analysis described in
+P14, where baseline-baseline covariances were being taken into account. To
+understand the application of this quadratic estimator foramlism to the data,
+let us begin by defining 
 \begin{equation}\label{eqn:presum_oqe}
     \mathbf{z}^{r}_{A} = \sum_{i\in{A}} \mathbf{C}_{i}^{-1}\mathbf{x}_{i},
 \end{equation}
@@ -2098,10 +2107,16 @@ integrate down and bottom out on a signal with the addition of more samples.
 However, there are a few modes that show a bottoming out, but take a dive when
 more modes are added, owning to some peculiar noise properties in the
 measurements. Generally, the two statistics have similar properties. Assuming
-gaussian statistics, there is a correction factor that needs to be applied to
-the measured power spectrum. This is owning to the fact that the mean and median
-are not the same statistic. The correction factor is $\log{2}$ for using the
-median statistic over the mean, for a gaussian distributed signal. 
+gaussian statistics; they should be the same. However, there is a correction factor that needs to be applied to
+the measured power spectrum because we are not in the completely noise dominated
+regime, due to the fact that there are clear detections. Therefore, for these
+modes we are in a Rayleigh distributed regime, in which the mean and median are
+not equal. The correction factor is $\log{(2)}$ for using the
+median statistic over the mean, for a Rayleigh distributed signal. Noting that
+we are somewhere in-between these two distributions, as implied by the fact that 
+some of our error bars are consistent with zero and some are clear detections.
+We therefore apply this correction factor as an upper bound on the discrepancy
+of using these two statistical metrics.
 
 \begin{figure}
 \centering
@@ -2461,22 +2476,22 @@ that our measurements are inconsistent with the spin temperature
 being coupled to a kinetic temperature governed strictly by
 adiabatic expansion.
 
-Our results become more interesting in the range of $\kmin\sim0.1$ and $\kmax\sim30$
-representative of fiducial simulations \citep{lidz_et_al2008,zahn_et_al2007}.
-For neutral fractions of 0.3, 0.5, and 0.7, we find
-we find that $\Tspin\gtrsim 5\,\text{K}$.  As discussed in \citet{pober_et_al2015}
-in the context of simulations that do not rely on the approximations
-we have made, these limits push the bounds of the amount of heating possible
-given the currently observed star formation rates in high-redshift galaxy populations 
-\citep{bouwens_et_al2014,mcleod_et_al2014}
-and assumptions about the relationship between star formation rates and
-X-ray luminosities \citep{furlanetto_et_al2006,pritchard_loeb2008,fialkov_et_al2014}.
-Assuming the midpoint of reionization lies close to $z=8.4$ (a
-reasonable assumption given that \citealt{planck_2015} suggests
-a midpoint of $z=8.8$), these bounds provide evidence
-for additional sources of heating beyond the observed
-galaxy population.  We refer the reader to \citet{pober_et_al2015} for a
-detailed examination of these results.
+Our results become more interesting in the range of $\kmin\sim0.1$ and
+$\kmax\sim30$ representative of fiducial simulations
+\citep{lidz_et_al2008,zahn_et_al2007}.  For neutral fractions of 0.3, 0.5, and
+0.7, we find that $\Tspin\gtrsim 5\,\text{K}$. \citet{pober_et_al2015} improves
+on these results by using a simulation based framework, rather than relying on
+the approximations used here. They show that the improved limits they find push
+the bounds of the amount of heating possible given the currently observed star
+formation rates in high-redshift galaxy populations
+\citep{bouwens_et_al2014,mcleod_et_al2014} and assumptions about the
+relationship between star formation rates and X-ray luminosities
+\citep{furlanetto_et_al2006,pritchard_loeb2008,fialkov_et_al2014}.  Assuming the
+midpoint of reionization lies close to $z=8.4$ (a reasonable assumption given
+that \citealt{planck_2015} suggests a midpoint of $z=8.8$), both the bounds
+found in this paper and \cite{pober_et_al2015}, show evidence for additional
+sources of heating beyond the observed galaxy population.  We refer the reader
+to \citet{pober_et_al2015} for a detailed examination of these results.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2731,9 +2746,10 @@ amount polarization leakage that could possibly corrupt the Stokes I power
 spectrum. We show that polarization leakage is not shown for most $k$-modes at
 the level of $\sim10^{3}\ \text{mK}^{2}$. 
 
-Furthermore, the analysis in this paper is extended in (cite pobers science
-paper) by showing the science implications of this upper limit. They show that
-given this upper limit, we can rule out regions of spin temperature, $T_{s}$,
+Furthermore, the analysis in this paper is extended in \citep{pober_et_al2015}
+by showing the science implications of this upper limit. Given our measured
+upper limit, They show that
+we can rule out regions of spin temperature, $T_{s}$,
 and neutral fraction, $x$, that are not consistent with this result. In
 addition, they compare this result with current X-ray lumiosity functions and
 show that there are not enough X-ray sources to cause heating of the IGM at
@@ -2774,7 +2790,7 @@ spectrum over a range of redshifts and to measure directly the polarized power
 spectrum. We also look forward to two seasons of 128 dual polarization PAPER
 data which will increase the sensitivity of measurements by almost an order of
 magnitude from the data used here. Also, construction of HERA is also under way,
-which will have the sensitiviy to make a $n\sigma$ detection of the 21 cm power
+which will have the sensitiviy to make a $30\sigma$ detection of the 21 cm power
 spectrum. We look forward to this.
 
 
