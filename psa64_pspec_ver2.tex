@@ -2198,7 +2198,9 @@ dominates over the foreground modes present in estimates of the data covariance.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{Results and Discussion}\label{sec:results}
+\section{Results}\label{sec:results}
+
+\subsection{Power Spectrum Contstraints}
 
 \begin{figure*}\centering
 \includegraphics[width=2\columnwidth]{plots/pk_k3pk.png}
@@ -2221,7 +2223,7 @@ filter signal loss, bandpass signal loss.}
 Following the power spectrum analysis procedure outlined in Section \ref{sec:oqe_app},
 we incoherently combine independent power spectrum measurements made at different
 times and with different baseline groups using the median statistic.  As described
-in Section \ref{sec:bootstrap}, we use bootstrap over all of these independent measurements,
+in Section \ref{sec:bootstrap}, we bootstrap over all of these independent measurements,
 as well as over the selection of baselines included in the power spectrum analysis for
 each baseline group, in order to estimate the error bars on the spherically averaged
 power spectrum $P(k)$, where positive and negative $k_\parallel$ measurements
@@ -2534,7 +2536,7 @@ detailed examination of these results.
 
 
 
-\subsection{Comparison with PSA32}
+\section{Discussion}
 %   -We now compare and contrast our result with those without some of the key
 %   components of our analysis pipeline.
 %
@@ -2558,66 +2560,93 @@ detailed examination of these results.
 %       in the figure. Note that this data does have omnical applied to it.
 %
 
-Here, we discuss the effect to the power spectrum if various stages of the
-analysis were kept out. Specifically, we will discuss the effects of using
-OMNICAL and optimal fringe-rate filtering vs. not using them. This will give a
-sense of how different analyses effect the power spectrum.
+The improvement in our results over those in P14 are the result of four
+major advances:
+\begin{itemize}
+\item the expansion of the PAPER array to 64 antennas doubled our instrument's power spectrum sensitivity,
+\item using OMNICAL for redundant calibration significantly improved the clustering of measurements
+over the previous implimentation of LOGCAL used in P14,
+\item fringe-rate filtering further improved power spectrum sensitivity by $\sim$50\% and suppressed
+systematics associated with foregrounds low in the primary beam, and
+\item moving from a lossless quadratic estimator targeting difference modes
+in redundant measurements to an optimal quadtratic estimator (with carefully calibrated signal
+loss) significantly reduced contamination from non-Gaussian foregrounds.
+\end{itemize}
+Figure \ref{fig:pspec_comp} illustrates the effect of some of these advances on the final
+power spectrum.
+Other important advances include the use of the median statistic to reduce the impact
+of non-Gaussian outliers in power-spectral measurements, and the use of a Cholesky
+decomposition of the Fisher information matrix to help reduce leakage 
+from highly contaminated modes within the wedge.
 
-The merits of using OMNICAL were described above and it has the effect of
-bringing redundant baselines into better agreement with one another by
-calibrating out the differences between them. With this picture, we expect
-that for the power spectrum, error bars should become tighter. That is the
-noise in the measurement would be reduced. Comparing $P(k)$ for data that has
-been OMNICAL calibrated vs data that has not, but does have the redundant
-calibration that was used in P14 applied to it, we see that
-the error bars have decreased. This is shown in figure \ref{fig:pspec_comp}.
-Note that the error bars shrink for the higher $k$-modes, the error bars for the
-2 modes outside of the horizon do not have this systematic reduction because of
-the wideband delay filter. The wideband delay filter is applied after the
-calibration solutions have been applied to the visibilities and the 2 modes
-outside of the horizon are artifacts of the foregrounds leaking outside of the
-horizon. 
-
-Optimal fringe-rate filtering is a new technique that we have employed in our
-analysis and the effect it has on the power spectrum is crucial, considering it
-has a sensitivity benefit of a factor of 2. First of all, this fringe-rate
-filter improves the SNR by a factor of 2 for PAPER, increasing the total
-sensitivity of our measurement. Briefly, the filter does this by up weighting
-parts of the sky that are illuminated by the primary beam and down weighting
-parts of the sky that contain more noise. This has the effect of de noising the
-data. Figure \ref{fig:pspec_comp} shows the effect of minimal fringe-rate
-filtering. The filter applied here is the same as described in P14.
-It evenly weights fringe rates from 0 to $f_{max}$,
-where $f_{max}$ is the maximum fringe rate possible for a given baseline and
-frequency, discarding negative fringe rates. As can be seen in figure
-\ref{fig:pspec_comp}, the power spectrum in $\Delta^{2}$ comes down by a factor of
-2-3. The two modes outside of the horizon, which are dominated by foregrounds
-and are clear detections, also come down. The fact that these come down, implies
-that the foregrounds are down in the beam possibly near the horizon. Therefore,
-the signal there is attenuated by the use of this fringe-rate filter. 
-
-It is interesting that at $k\approx.25$, we get a detection of something that
-wasnt there before. Foregrounds? probably low level systematics we are hitting
-up against. Going to take some convincing...
-
-The new techniques and improvements to calibration used in this analysis are a
-considerable improvement from the PAPER-32 analysis from P14.
-These new techniques bring into light the new ways in
-which we can gain sensitivity and accurately describe our instrument. The use of
+These new techniques and improvements to calibration have reduced the measured
+bias in nearly all wavebands by an order of magnitude or more. 
+The use of
 OMNICAL to accurately calibrate the relative complex gains of the antennas has
-shown to be a major improvement to the pipeline. The accuracy and improvement of
-this calibration brings redundant baselines more into agreement with one another
-and provides and axis for us to check the status of the array. The output 
-chi-squared from OMNICAL provides a metric for us to monitor the health of the
-array and another axis for us to flag off bad RFI events. Furthermore, the
-precise calbration of antennas is imperative to accurately model and remove
-foregrounds. Using the delay spectrum technique employed here, precise
-calibration is necessary to mitigate the leakage of foreground power to modes
-outside of the horizon for a given baseline. 
+shown to be a major improvement to the data-reduction pipeline. The accuracy and improvement of
+this calibration brings redundant baselines into impressive agreement with one another
+(see Figures \ref{fig:omnical} and \ref{fig:density}),
+and provides important diagnostic information for
+monitoring the health of the
+array, flagging RFI events, and otherwise assessing data quality.
+Fringe-rate filtering, which is described in greater depth in \citep{parsons_et_al2015}, is also
+proving to be a flexible and powerful tool for controlling direction-dependent gains and
+improving sensitivity.  If indeed the low-significance excess in the measured power spectrum
+is coming as a result of polarization leakage, independent filtering of the XX and YY polarizations
+prior to summation has the potential to better match these polarization beams and further suppress 
+the leakage signal implied by \citet{moore_et_al2015}.
+
+The end result is a major step forward, both for PAPER and for the field of 21cm cosmology.
+While we have not yet made a detection of the 21cm cosmological signal, our limits are
+now within the range of some of the brighter models.  As discussed in \citet{pober_et_al2015},
+another order of magnitude improvement in sensitivity will make 21cm measurements highly constraining.
 
 
+
+%Here, we discuss the effect to the power spectrum if various stages of the
+%analysis were kept out. Specifically, we will discuss the effects of using
+%OMNICAL and optimal fringe-rate filtering vs. not using them. This will give a
+%sense of how different analyses effect the power spectrum.
+%
+%The merits of using OMNICAL were described above and it has the effect of
+%bringing redundant baselines into better agreement with one another by
+%calibrating out the differences between them. With this picture, we expect
+%that for the power spectrum, error bars should become tighter. That is the
+%noise in the measurement would be reduced. Comparing $P(k)$ for data that has
+%been OMNICAL calibrated vs data that has not, but does have the redundant
+%calibration that was used in P14 applied to it, we see that
+%the error bars have decreased. This is shown in figure \ref{fig:pspec_comp}.
+%Note that the error bars shrink for the higher $k$-modes, the error bars for the
+%2 modes outside of the horizon do not have this systematic reduction because of
+%the wideband delay filter. The wideband delay filter is applied after the
+%calibration solutions have been applied to the visibilities and the 2 modes
+%outside of the horizon are artifacts of the foregrounds leaking outside of the
+%horizon. 
+%
+%Optimal fringe-rate filtering is a new technique that we have employed in our
+%analysis and the effect it has on the power spectrum is crucial, considering it
+%has a sensitivity benefit of a factor of 2. First of all, this fringe-rate
+%filter improves the SNR by a factor of 2 for PAPER, increasing the total
+%sensitivity of our measurement. Briefly, the filter does this by up weighting
+%parts of the sky that are illuminated by the primary beam and down weighting
+%parts of the sky that contain more noise. This has the effect of de noising the
+%data. Figure \ref{fig:pspec_comp} shows the effect of minimal fringe-rate
+%filtering. The filter applied here is the same as described in P14.
+%It evenly weights fringe rates from 0 to $f_{max}$,
+%where $f_{max}$ is the maximum fringe rate possible for a given baseline and
+%frequency, discarding negative fringe rates. As can be seen in figure
+%\ref{fig:pspec_comp}, the power spectrum in $\Delta^{2}$ comes down by a factor of
+%2-3. The two modes outside of the horizon, which are dominated by foregrounds
+%and are clear detections, also come down. The fact that these come down, implies
+%that the foregrounds are down in the beam possibly near the horizon. Therefore,
+%the signal there is attenuated by the use of this fringe-rate filter. 
+%
+%It is interesting that at $k\approx.25$, we get a detection of something that
+%wasnt there before. Foregrounds? probably low level systematics we are hitting
+%up against. Going to take some convincing...
 
 \subsection{Remaining Challanges}
+
 The closer we get to a detection of the 21 cm EoR fluctuations, the more we need
 to know what the systematics can be and at what level they can come in at. One
 of the biggest challanges remaining, as metioned above, is the limited
