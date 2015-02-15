@@ -219,8 +219,8 @@ for cnt,(xi,sty) in enumerate([(.1,'-'), (.3,'--'), (.5,'-.')]):
 #p.colorbar()
 cbar_axis=fig.add_axes([.92,.15,.03,.75])
 cb = fig.colorbar(image, cax=cbar_axis)
-cbar_axis.set_xlabel(r'$T_{\rm s}$', size=15, labelpad=10)
-p.subplots_adjust(left=.1,bottom=.15,top=.90,right=.90)
+cbar_axis.set_xlabel(r'$T_{\rm s}$ [${\rm K}$]', size=15, labelpad=10)
+p.subplots_adjust(left=.1,bottom=.2,top=.90,right=.90)
 p.show()
 
 exit()#XXX

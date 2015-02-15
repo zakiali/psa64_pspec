@@ -276,7 +276,6 @@ The design of the PAPER element,
 which features spectrally and spatially smooth responses 
 down to the horizon with a $60^{\circ}$ FWHM is summarized in \citet{parsons_et_al2010}
 and \citet{pober_et_al2012}.  
-[XXX make sure \cite{jacobs_et_al2011} and \cite{stefan_et_al2013} are cited somewhere].
 For this analysis, we use only the XX and YY polarization cross-products.
 
 As shown in Figure \ref{fig:antenna_positions}, PAPER-64 employs
@@ -503,8 +502,6 @@ applied to visibilities and the results are shown in \ref{fig:omniview}.
 \centering
 \includegraphics[width=1.5\columnwidth]{plots/omniview_64.png}
 \caption{
-%[XXX what are units of color scale?] There are none. It represents different
-%redundant baselines.
 PAPER visibilities plotted in the complex plane before (left) and after (right)
 the application of redundancy-based calibration with OMNICAL \citep{zheng_et_al2014}.
 All baselines in the array measured at 159 MHz for a single time integration are plotted.
@@ -520,9 +517,7 @@ calibration.
 \caption{
 Log of $\chi^{2}$ of all baseline residuals after the application of OMNICAL.
 The plot comprises a observations over one day, with a frequency resolution of
-49 kHz and a time resolution of 42.9 s.
-%[XXX is this before or after compression?  df and dt are one of each.] After. I
-%dont understand this.
+492 kHz and a time resolution of 42.9 s.
 } \label{fig:chi2}
 \end{figure}
 
@@ -640,7 +635,7 @@ the calibrated Pictor A spectrum and the model spectrum from
 \includegraphics[width=\columnwidth]{plots/picimg_cs.png}
 \caption{
 PAPER-64 image of a field including Pictor A and Fornax A, with black circles
-indicating catalog positions \citep{XXX}. Image was synthesized with two hours
+indicating catalog positions \citep{jacobs_et_al2011}. Image was synthesized with two hours
 of visibilities while Pictor A was in transit and 53 MHz of instantaneous
 bandwidth from 120 to 173 MHz.  Image quality is limited by the redundant
 configuration of the array (e.g. grating lobes as a result of periodic antenna
@@ -663,7 +658,7 @@ extracted from images of Pictor A, made independently for each frequency channel
 and 1:10:34.47.  Each measurement was then divided by the PAPER beam model and
 averaged to obtain the measured spectrum, which serves to characterize the flux
 scale of the PAPER-64 observations. Error bars indicate the 68\% confidence
-intervals, derived from the gaussian fits in the source extractor used in
+intervals, derived from the Gaussian fits in the source extractor used in
 measure the flux in PyBDSM.
 [XXX How are these errors averaged? Did you use the same beam weighting?]
 }\label{fig:pic_spec}
@@ -674,7 +669,7 @@ Fitting a polynomial to the bandpass has the potential for signal loss which
 would include suppressing mode due to the cosmological signal. In order to
 quantify the signal loss associated with fitting a ninth degree polynomial to
 the bandpass, we run a Monte Carlo simulation of the effect the bandpass has on
-a model EoR signal. We construct a model baseline visibility as a Gaussian
+a model 21-cm reionization signal. We construct a model baseline visibility as a Gaussian
 random signal with $\mu=0$ and $\sigma=1$ offset by 5 orders of magnitude
 multiplied by the derived bandpass for every independent mode measured.  We
 calculate the total number of independent modes by counting the number of
@@ -682,8 +677,8 @@ independent uv modes sampled for the different baseline types and the two hour
 time interval used to measure the bandpass. We average each mode together and
 fit a 9th degree polynomial and using that as our measured bandpass in this
 simulation.  Finally, to measure the lost power as function of
-$k$-mode, we compare the power spectra from the output of the simulated EoR
-signal to the input amplitude in and find that between $-.06 < k < .06$, the
+$k$-mode, we compare the power spectra from the output of the simulated
+signal to the input amplitude in and find that between $-0.06 < k < 0.06$, the
 signal loss is less than $3\%$ and at the mode right outside the horizon is
 $.0000002\%$. The signal loss decreases for higher $k$'s.
 
@@ -959,7 +954,7 @@ of magnitude of foreground suppression is evident.
 } \label{fig:waterfalls}
 \end{figure*}
 
-Applying the delay filter to the 30 m East-West baselines used in the power spectrum analysis,
+Applying the delay filter to the 30-m East-West baselines used in the power spectrum analysis,
 foregrounds are suppressed by $\sim$4 orders of magnitude in power, or
  -40 dB of foreground suppression, as seen in Figure
 \ref{fig:waterfalls}. As discussed in P14, there is a small amount of signal loss
@@ -980,10 +975,10 @@ time (LST) with bins of width 43 seconds, a bin size that matches the fringe-rat
 in the compression step. The full season was 135 days long; of these 124 days were included in the average. 
 
 Sporadic RFI events (i.e. occurring rarely in an entire season) can skew individual LST bins away from the median value of
-the sky at a given LST, deviating from gaussian statistics. To catch these
+the sky at a given LST, deviating from Gaussian statistics. To catch these
 events, we compute the median of a LST bin for each frequency and flag points  3
 $\sigma$ above the median, before averaging. This filter mitigates
-the effects of non gaussianity in time, which is most likely due to spurious
+the effects of non Gaussianity in time, which is most likely due to spurious
 RFI events. The median statistic used here ensures that there is no signal
 loss due to this filter. [XXX why is this?]
 
@@ -1007,7 +1002,7 @@ jackknife tests.
 %    find their way into the data 
 %       --While lst binning, we apply a median filter which for a given lst and
 %       frequency bin, removes data which falls outside 3 sigma of the median of
-%       the dataset. This filtering is necessary, because of the non gaussian
+%       the dataset. This filtering is necessary, because of the non Gaussian
 %       events that crept their way into the data set, such as RFI, etc...
 %       --There is no signal loss associated with this because we are using
 %       median statistics. 
@@ -1156,7 +1151,7 @@ filtering, fringe-rate filtering is implemented on a per-baseline basis.
  We weight
 the fringe-rate bins on the sky by the beam pattern at that location.
 In order to obtain a smooth filter in the fringe-rate domain, we fit a
-gaussian with a hyperbolic tangent tail to this filter. We convolve the time
+Gaussian with a hyperbolic tangent tail to this filter. We convolve the time
 domain visibilities with the fourier transform of this fringe-rate filter to
 produce an averaged visibility.  The before/after effect on the data can be seen
 in Figure \ref{fig:waterfalls}.
@@ -1337,7 +1332,7 @@ as in P14 and \citet{jacobs_et_al2014} at $\Tsys=500K$ at 160 MHz.
 [XXX Zaki, how exactly did you get 500?  the number from P14 and J15 was 550K @ 160MHz
  This is using the variance statistic from the lst binner. The usual way to
 calculate Tsys, except that there is a correction factor because we are flagging
-3 sigma outside of the median. For gaussian noise, that correction factor is
+3 sigma outside of the median. For Gaussian noise, that correction factor is
 1.34 which is what I'm applying to the calculated tsys. Prior to that we were
 getting a much lower tsys (350 or so). ]
 
@@ -1357,7 +1352,7 @@ system temperature (P14; \citealt{jacobs_et_al2014}).
 When calculating the system temperature using the variance in the visibilities
 for a given LST and frequency, we take into account the fact that we flag
 3$\sigma$ outliers from the median. To calculate an effective correction factor
-to account for the filtering, we assume the visibilities follow a gaussian
+to account for the filtering, we assume the visibilities follow a Gaussian
 distribution which would require a correction factor of 1.34 for the removal of
 data points that are 3$\sigma$ above the median.
 
@@ -1887,7 +1882,7 @@ of power spectrum band power for
 $k_\parallel$ modes ranging from $-0.49$ (red) to $0.44\hMpci$ (violet).
 This Allen variance plot shows modes averaging down as the square root of
 number of modes combined until a signal floor is reached.  The difference in
-behavior between the mean and median for several modes indicates non-gaussianity
+behavior between the mean and median for several modes indicates non-Gaussianity
 in the distribution of values, likely as a result of foreground contamination.
 %Plotted is the cumulative mean for band powers at a given $k$-mode,
 %where the colors indicate the mode being integrated, with blue being the most
@@ -1895,7 +1890,7 @@ in the distribution of values, likely as a result of foreground contamination.
 %modes in the middle. On the right is the same plot, except using a median
 %instead of the mean as the statistic. The behaviour of either of these
 %statistics is very similar with modes that bottom out on something and there
-%modes that seem to take a dive as more modes are used. Assuming gaussian
+%modes that seem to take a dive as more modes are used. Assuming Gaussian
 %statistics, there is an overall correction factor of 1.4 for using the median
 %statistic relative to the mean.}
 }\label{fig:pspec_variance}
@@ -1966,14 +1961,14 @@ contained data.
 %   -Potential for signal loss.
 %       --In a traditional OQE method, the process is lossless by construction.
 %         Because we are tweaking this method, and the fact that we have non
-%         gaussian systematics in our data, there is a potential for signal
+%         Gaussian systematics in our data, there is a potential for signal
 %         loss. 
 
 
 Another problem that occurs from empirically estimating covariances is that it
-leads to a imprecise covaraince matrix. Hence, when used in conjuction with the
+leads to models of the covaraince matrix that overfit to the noise. Hence, when used in conjuction with the
 data, it doesn't perfectly remove covarainces between channels and baselines and
-has the ability to remove signal from the data. XXX [Need to be more clear on
+has the ability to remove signal from the data. [XXX Need to be more clear on
 this point ]
 
 
@@ -1993,33 +1988,25 @@ this point ]
 %         not detected the EOR signal yet.
 
 In theory, optimal quadratic estimators for the power spectrum described above are a
-lossless operation. This is only true if we have all the information
-needed to apply this method. As discussed, one of the major unknowns we have in our
-estimate, is the covariance matrix that describes the covariances in the data
-due to the instrument and sky signal. As argued above, not knowing the true
-covariances, leads to signal loss in the final estimate of the power spectrum.
+lossless operation. However, this is only true if we have all the information
+needed to apply this method. As discussed [XXX where?], one of the major unknowns we have in our
+estimate is the covariance matrix that describes the covariances in the data
+due to the instrument and sky signal. Not knowing the true
+covariances leads to signal loss in the final estimate of the power spectrum.
 Here, we describe estimate the signal loss associated with the empirical
 estimates of the covariance matrix.
 
-Jumping ahead, figure \ref{fig:signal_loss} shows the signal loss as a function
-of input signal level to the power spectrum pipeline. In order to characterize
-the signal loss we simulate an EoR like signal and inject it on top of the data,
+In order to characterize
+the signal loss, we simulate visibilities for spatially Guassian signal with a
+flat amplitude in $P(k)$ that rotates with the sky, and is fringe-rate filtered in
+the same way as the data.  This signal is injected on top of the data,
 measuring the output signal power spectrum and comparing it to the input signal
-power spectrum for various signal amplitudes. The simulated EoR data used were
-generated as a gaussian random signal with $\mu=0$ and $\sigma=1$. For each
-integration and frequency channel, we draw a random sample from this
-distribution and assign it to every baseline used, drawing a new sample for
-every integration only. Therefore, every baseline agrees on the signal for each
-integration and frequency channel. 
-
-We add these injected EoR visibilities to the data and propogate it through the
-power spectrum pipeline for varying amplitude of simulated EoR signal. We
-measure the output power spectrum of the signal and
-compare it to the input signal power spectrum. This gives us the signal loss
-due to imprecisely knowing the covariance from the empirical estimation. This
-signal loss is monte carlo'd using a new instantiation of the EoR noise and
-averaged over realizations. The final result is shown in figure
-\ref{fig:signal_loss}
+power spectrum for various signal amplitudes.  We perform this injection
+for 40 draws at each signal level.
+Figure \ref{fig:signal_loss} shows the resultant signal loss associated
+with estimating the covariance matrix from the data.  Error bars were
+obtained through boostrapping.  
+[XXX need more discussion of what the plot means]
 
 \begin{table}[htdp]
 \caption{SIGNAL LOSS VERSUS ANALYSIS STAGE}
@@ -2059,7 +2046,7 @@ Median of Modes & 1.4 & 1.4 \\
 %the sky every 42.8s for an East-West baseline of 30m.
 
 
-%Need to argue that the detections are not gaussian and therefore are not eor
+%Need to argue that the detections are not Gaussian and therefore are not eor
 %detections.
 
 
@@ -2118,7 +2105,7 @@ integrate down and bottom out on a signal with the addition of more samples.
 However, there are a few modes that show a bottoming out, but take a dive when
 more modes are added, owning to some peculiar noise properties in the
 measurements. Generally, the two statistics have similar properties. Assuming
-gaussian statistics; they should be the same. However, there is a correction factor that needs to be applied to
+Gaussian statistics; they should be the same. However, there is a correction factor that needs to be applied to
 the measured power spectrum because we are not in the completely noise dominated
 regime, due to the fact that there are clear detections. Therefore, for these
 modes we are in a Rayleigh distributed regime, in which the mean and median are
@@ -2201,7 +2188,7 @@ dominates over the foreground modes present in estimates of the data covariance.
 
 
 %\section{Summary of Improvements from PSA32}
-%XXX Should this section be here XXX
+% Should this section be here? [ARP: no, it is now in discussion]
 %In comparison to the previous PAPER pipeline (see \cite{parsons_et_al2014a}),
 %this analysis took a slightly different approach which included some critical
 %steps to improve our upper limit. In short, the improvements included using a
@@ -2356,11 +2343,8 @@ for the heating of the intergalactic medium prior to the completion of reionizat
 \caption{Constraints on the 21cm spin temperature at $z=8.4$, 
 assuming 
 the patchy reionization model in equations
-\ref{eqn:d2pspec_model} and \ref{eqn:patchy_bound} in the limit
+\ref{eqn:d2pspec_model} and \ref{eqn:patchy_bound}, which hold in the limit
 that $T_{\rm s}<T_{\rm CMB}$.
-Color indicates $T_{s}$ (in K).
-[XXX put K units in plot next to colorbar]
-[XXX remove kmin > 0.5 where we have no constraints].
 } \label{fig:patchy_bound}
 \end{figure*}
 
@@ -2808,8 +2792,8 @@ spectrum. We look forward to this.
 %However, all major 21 cm experiments (LOFAR, MWA, and PAPER) are at the cusp of detection
 %and all have the sensitivity to rule out the optimistic reionization scenarios.
 % XXX don't put speculative stuff in intro
-XXX Might mention impact of wedge on predicted sensitivities.
-However, even with a detection from one of these experiments, a high signal-to-noise characterization of the 21 cm power spectrum and imaging of EoR will have to
+[XXX Might mention impact of wedge on predicted sensitivities.]
+However, even with a detection from one of these experiments, a high signal-to-noise characterization of the 21 cm power spectrum and imaging of reionization will have to
 wait until future 21 cm experiments such as the Hydrogen Epoch of Reionization
 Array (HERA) and the Square Kilometer Array (SKA), which will have more raw
 collecting area and greater sensitivity \citep{pober_et_al2014}.
