@@ -1103,9 +1103,14 @@ Broadly, for a given baseline and frequency, different parts of the sky
 correspond to different fringe-rates.  Maximum fringe rates are found along the
 equatorial plane, where the rotation rate of the sky is highest, and zero
 fringe rates are found at the poles, where the sky does not rotate and hence
-sources do not move and have static fringe rates \citep{parsons_backer2009}. We
-then compute the average beam response for each contour of constant fringe rate
-to construct our time average kernel or "fringe rate filter".
+sources do not move and have static fringe rates \citep{parsons_backer2009}.
+However, fringe rates are not constant as a function of lattitude. Bins of
+constant fringe rate correspond to rings in RA and DEC, corresponding to where
+the east-west projection of a baseline projected toward a patch of the sky is
+constant.We use this fact in conjuction with the average beam response for each
+contour of constant fringe rate to construct our time average kernel or
+``fringe-rate filter".
+
 
 %[XXX this paragraph could probably go -dcj]
 %As motivation, we discuss the use of fringe-rate filters in cross talk removal.
@@ -1128,16 +1133,15 @@ to construct our time average kernel or "fringe rate filter".
 %signal by applying signal from this filter. 
 
 Applying this filter effectively weights the data by another factor of the beam
-area, changing the primary beam response, $\Omega$\footnote{The angular area in
-equation \ref{eqn:delay_pspec} will reflect the new angular area corresponding
-to the change in beam area.}
-\citep{parsons_et_al2015}. By utilizing prior knowledge about the beam area we
-are selectively down weighting areas on the sky contributing little signal. This
-results in an SNR boost of about 2.  The net boost in SNR depends on the shape
-of the beam and array declination and is functionally equivalent to the beam$^2$
-weighting used in wide-field mosaicing. It is also worth noting that, like the
-delay spectrum filtering, fringe-rate filtering is implemented on a per-baseline
-basis.
+area, changing the effective primary beam response, $A(l,m)$ .\footnote{The
+angular area in equation \ref{eqn:delay_pspec} will reflect the new angular area
+corresponding to the change in beam area.} \citep{parsons_et_al2015}. By
+utilizing prior knowledge about the beam area we are selectively down weighting
+areas on the sky contributing little signal. This results in an SNR boost of
+about 2.  The net boost in SNR depends on the shape of the beam and array
+declination and is functionally equivalent to the beam$^2$ weighting used in
+wide-field mosaicing. It is also worth noting that, like the delay spectrum
+filtering, fringe-rate filtering is implemented on a per-baseline basis.
 
 %We implement the optimal fringe-rate filter by calculating the fringe rates at
 %every point on the sky, for a given frequency, and weighting each bin by the
