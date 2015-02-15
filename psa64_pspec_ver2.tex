@@ -203,7 +203,7 @@ PAPER is unique for being a dedicated instrument with the flexibility
 to explore non-traditional experimental approaches, and is converging on a self-consistent
 approach to achieving both the level of foreground removal and the sensitivity that are required 
 to detect the 21cm reionization signal.  This approach focuses on spectral smoothness as the primary
-descriminant between foreground emission and the 21cm reionization signal  and applies an understanding
+discriminant between foreground emission and the 21cm reionization signal  and applies an understanding
 of interferometric responses in the delay domain to identify bounds on instrumental chromaticity 
 (\citealt{parsons_et_al2012b}, hereafter P12b).  This type of ``delay-spectrum'' analysis permits data from each 
 interferometric baseline
@@ -214,7 +214,7 @@ deliver a substantial sensitivity boost for power-spectral measurements that are
 cosmic variance (\citealt{parsons_et_al2012a}, hereafter P12a).  Moreover, they are particularly suited
 for redundancy-based calibration \citep{liu_et_al2010,wieringa1992,zheng_et_al2014}, on which PAPER
 now relies to solve for the majority of the internal instrumental degrees of freedom.  The efficacy of
-this apporach was demonstrated with 
+this approach was demonstrated with 
 data from a 32-antenna deployment of PAPER, which achieved an upper 
 limit on the 21 cm power spectrum of $\Delta^2 (k) \leq (41\,\textrm{mK})^{2}$ at 
 $k=0.27\hMpci$ (\citealt{parsons_et_al2014}, hereafter P14).  This upper limit improved
@@ -231,7 +231,7 @@ the stability of the PAPER instrument.
 We then move on to a discussion of our power-spectrum analysis pipeline in Section
 \ref{sec:oqe}. 
 We present our results in Section
-\ref{sec:results} along with new contraints on the 21cm power spectrum.
+\ref{sec:results} along with new constraints on the 21cm power spectrum.
 We conclude in Section \ref{sec:conclusion}.
 
 
@@ -274,7 +274,7 @@ Each PAPER element features a crossed-dipole design measuring two
 linear (X,Y) polarizations.
 The design of the PAPER element, 
 which features spectrally and spatially smooth responses 
-down to the horizon with a $60^{\circ}$ FWHM is summarized in \citet{parsons_et_al2010}
+down to the horizon with a full-width half-maximum of $60^{\circ}$, is summarized in \citet{parsons_et_al2010}
 and \citet{pober_et_al2012}.  
 For this analysis, we use only the XX and YY polarization cross-products.
 
@@ -285,7 +285,7 @@ We rely on all 2016 baselines for calibration,
 but only use a subset of the baselines for the power spectrum
 analysis. This subset consists of three types of baselines: the 30-m
 strictly east-west baselines between adjacent columns (e.g. 41-47
-in Figure \ref{fig:antenna_positions}; hereafter refered to 
+in Figure \ref{fig:antenna_positions}; hereafter referred to 
 as {\it fiducial baselines}), 30-m east-west baselines
 whose eastern element is staggered one row up (e.g. 10-41), and
 those whose easter element is one row down (e.g. 10-58).
@@ -299,7 +299,7 @@ coherently added to build power-spectrum sensitivity as $N$ rather than
 $\sqrt{N}$, where $N$ is the number of baselines added.  
 
 PAPER-64 conducted nighttime observations over a 135 day period 
-from 2012 November 8 (JD62456240) to 2013 March 23 (JD62456375). 
+from 2012 November 8 (JD 2456240) to 2013 March 23 (JD 2456375). 
 Since solar time drifts with respect to sidereal time, this observing campaign
 yielded more samples of certain LSTs (and hence, sky positions) than others. 
 For the power spectrum analysis, we use observations between 0:00 and 8:30 hours
@@ -316,7 +316,7 @@ cross multiplying every antenna and polarization with one another for a total of
 8256 cross products, including auto correlations.  Following the architecture 
 in \citet{parsons_et_al2008}, this
 correlator is based on CASPER\footnote{\url{http://casper.berkeley.edu}} open-source
-FPGA hardware and signal processing libraries \citep{parsons_et_al2006}.  
+hardware and signal processing libraries \citep{parsons_et_al2006}.  
 Sixteen ROACH boards each hosting eight 8-bit analog-to-digital
 converters digitize and channelize antenna inputs. New to this correlator,
 the cross multiplication engine is implemented on eight servers each receiving
@@ -460,12 +460,12 @@ where $g$ denotes the
 complex gain of antennas indexed by $i$ and $j$, and $y$ represents the ``true" visibility 
 measured by all redundant baselines.  In solving for per-antenna gain parameters with
 a number of measurements that scales quadratically with antenna number, redundancy gives 
-an overconstrained
+an over-constrained
 system of equations that can be solved
 using traditional linear algebra techniques.
 While LOGCAL is useful for arriving at a coarse solution from initial estimates that are far
 from the true value, LOGCAL has the shortcoming of being a biased by the asymmetric behavior
-of additive noise in the logrithm \citep{liu_et_al2010}.
+of additive noise in the logarithm \citep{liu_et_al2010}.
 
 LINCAL, on the other hand, uses a Taylor expansion of the visibility around initial
 estimates of the gains and visibilities, 
@@ -563,8 +563,8 @@ standard self calibration method for radio interferometers to solve for the
 absolute phase calibration. We used Pictor A, Fornax A, and the Crab Nebula to
 fit for the overall phase solutions. Figure \ref{fig:field_image} shows an image
 of the field with Pictor A (5:19:49.70, -45:46:45.0)  and Fornax A
-(3:22:41.70,-37:12:30.0). The measured source positions are the same as the the
-catalogue positions for these sources.
+(3:22:41.70,-37:12:30.0).
+%The measured source positions are the same as the catalogue positions for these sources.
 
 %    -Calibrated to Pictor A. 
 %       --As before, redundant calibration cannot set a global flux scale. For
@@ -652,12 +652,12 @@ over a wide field of view.
 \includegraphics[width=\columnwidth]{plots/picspec.png}
 \caption{
 Measured spectrum of Pictor A in Stokes I (blue) relative to its catalog
-value (black; \citealt{jacobs_et_al2013}).  Flux measurements were
+value (black; \citealt{jacobs_et_al2013}).  Flux measurements are
 extracted from images of Pictor A, made independently for each frequency channel in
-10 minutes snapshots as Pictor transitted between hour angles of -1:49:35.18
-and 1:10:34.47.  Each measurement was then divided by the PAPER beam model and
+10 minutes snapshots as Pictor transits between hour angles of -1:49
+and 1:10.  Each measurement is then divided by the PAPER beam model and
 averaged to obtain the measured spectrum, which serves to characterize the flux
-scale of the PAPER-64 observations. Error bars indicate the 68\% confidence
+scale of the PAPER-64 observations. Error bars indicate 68\% confidence
 intervals, derived from the Gaussian fits in the source extractor used in
 measure the flux in PyBDSM.
 [XXX How are these errors averaged? Did you use the same beam weighting?]
@@ -673,7 +673,7 @@ a model 21-cm reionization signal. We construct a model baseline visibility as a
 random signal with $\mu=0$ and $\sigma=1$ offset by 5 orders of magnitude
 multiplied by the derived bandpass for every independent mode measured.  We
 calculate the total number of independent modes by counting the number of
-independent uv modes sampled for the different baseline types and the two hour
+independent uv-modes sampled for the different baseline types and the two hour
 time interval used to measure the bandpass. We average each mode together and
 fit a 9th degree polynomial and using that as our measured bandpass in this
 simulation.  Finally, to measure the lost power as function of
@@ -921,10 +921,10 @@ Blackman-Harris tapering function that minimizes delay-domain scattering
 from RFI flagging, and $I_\nu$ is the source
 spectrum.  In delay domain, a point source appears as a $\delta$-function at
 delay $\tau_{g}$, convolved by the Fourier transforms of the
-source spectrum, the antenna reponse, and the
+source spectrum, the antenna response, and the
 sampling function. We note that the antenna response effectively determines a finite bandpass,
 which imposes a lower bound 
-of $1/B \approx 10 ns$ on the width of any delay-domain convolinving kernel.
+of $1/B \approx 10 ns$ on the width of any delay-domain convolving kernel.
 As per
 \cite{parsons_backer2009} and P14, we deconvolve the kernel
 resulting from $W(\tau)$ using an iterative CLEAN procedure
@@ -947,8 +947,8 @@ not delay filtered, (3) are delay filtered at 15 ns beyond the horizon limit but
 are not fringe-rate filtered, (4) are both delay and fringe-rate filtered,
 and (5) are delay and fringe-rate filtered and have been averaged over all
 redundant measurements of this visibility.  The top row shows signal amplitude
-on a logrithmic scale; the bottom row illustrates signal phase.
-Dashed lines indicate the 0h00 -- 8h30 range in local sidereal time (LST) used for power
+on a logarithmic scale; the bottom row illustrates signal phase.
+Dashed lines indicate the 0:00 -- 8:30 range in local sidereal time (LST) used for power
 spectrum analysis.  Away from the edges of the observing band, over four orders 
 of magnitude of foreground suppression is evident.
 } \label{fig:waterfalls}
@@ -1106,10 +1106,10 @@ correspond to different fringe-rates.  Maximum fringe rates are found along the
 equatorial plane, where the rotation rate of the sky is highest, and zero
 fringe rates are found at the poles, where the sky does not rotate and hence
 sources do not move and have static fringe rates \citep{parsons_backer2009}.
-However, fringe rates are not constant as a function of lattitude. Bins of
+However, fringe rates are not constant as a function of latitude. Bins of
 constant fringe rate correspond to rings in RA and DEC, corresponding to where
 the east-west projection of a baseline projected toward a patch of the sky is
-constant.We use this fact in conjuction with the average beam response for each
+constant.  We use this fact in conjunction with the average beam response for each
 contour of constant fringe rate to construct our time average kernel or
 ``fringe-rate filter".
 
@@ -1142,7 +1142,7 @@ utilizing prior knowledge about the beam area we are selectively down weighting
 areas on the sky contributing little signal. This results in an SNR boost of
 about 2.  The net boost in SNR depends on the shape of the beam and array
 declination and is functionally equivalent to the beam$^2$ weighting used in
-wide-field mosaicing. It is also worth noting that, like the delay spectrum
+wide-field mosaicking. It is also worth noting that, like the delay spectrum
 filtering, fringe-rate filtering is implemented on a per-baseline basis.
 
 %We implement the optimal fringe-rate filter by calculating the fringe rates at
@@ -1152,8 +1152,8 @@ filtering, fringe-rate filtering is implemented on a per-baseline basis.
 the fringe-rate bins on the sky by the beam pattern at that location.
 In order to obtain a smooth filter in the fringe-rate domain, we fit a
 Gaussian with a hyperbolic tangent tail to this filter. We convolve the time
-domain visibilities with the fourier transform of this fringe-rate filter to
-produce an averaged visibility.  The before/after effect on the data can be seen
+domain visibilities with the Fourier transform of this fringe-rate filter to
+produce an averaged visibility.  The effect on the data can be seen
 in Figure \ref{fig:waterfalls}.
 
 %\begin{figure}[!t]
@@ -1208,8 +1208,9 @@ without loss of generality. We can conclude that
 which evaluates to 1886 s for an optimal fringe-rate filter on a 30 m East-West
 baseline at 149.5 MHz.  Over the range of frequencies used in our power spectrum
 estimate, the integration times range from 1936 s to 1790 s, corresponding to an
-average of 31 minutes. As a rough check, note that this is roughly how long a
-single 30m fringe at 150MHz takes to make one oscillation on the sky.  Because
+average of 31 minutes. As a rough check, we note that this is roughly the time
+it takes a source to transit through one period of a fringe 
+from a 30-m baseline at 150 MHz.  Because
 the fringe-rate filter integrates in time, the number of statistically
 independent samples of the sky drastically decreases from 83 to $\sim2$
 independent samples per hour.
@@ -1302,7 +1303,7 @@ $T_{sys}$ of $\sim$500K .  We get
 more samples per LST bin in the range of 2--10 hours due to our observing
 season, therefore the density of points in this LST region is greater, set by
 the color scale. This density plot shows that redundant baselines agree very well
-with one another, omnical has leveled the antenna gains to within the noise.
+with one another, OMNICAL has leveled the antenna gains to within the noise.
 
 In addition to stability between redundant baselines, we also consider the
 stability in time for the PAPER instrument. In order to quantify the stability
@@ -1425,8 +1426,8 @@ covariance matrices.
 \subsection{Review of Optimal Quadratic Estimators}
 We use the optimal quadratic estimator method to estimate our power spectrum as
 done in \cite{dillon_et_al2013a} and \cite{liu_tegmark2011}.  Here we briefly review the
-optimal quadratic esitimator (OQE) formalism with an emphasis on our application
-to data. The end goal of this analaysis technique is to estimate the 21 cm
+optimal quadratic estimator (OQE) formalism with an emphasis on our application
+to data. The end goal of this analysis technique is to estimate the 21 cm
 power spectrum, $P_{21}(\k)$, defined such that 
 \begin{equation}
 \label{eqn:pspec_def}
@@ -1475,7 +1476,7 @@ where $\mathbf{\hat{p}}$ is the optimal quadratic estimate of the power spectrum
 for every band power $p_{\alpha}$ in $k$-space, and $\mathbf{q}$ is a vector of the
 quantities in equation \ref{eqn:qalpha} for every $\alpha'th$ bin.
 
-The bias term $b_{\alpha}$ in equation \ref{eqn:qalpha} is the the instrumental
+The bias term $b_{\alpha}$ in equation \ref{eqn:qalpha} is the instrumental
 noise bias that needs to be subtracted off. However, in our analysis we are
 constructing an unbiased estimator by using cross correlations between different
 redundant baselines. This eliminates the need to subtract the noise bias in
@@ -1486,7 +1487,7 @@ quadratic estimator of the power spectrum, equation \ref{eqn:qalpha} becomes,
     q_{\alpha} =
 \frac{1}{2}\x_{1}^{t}\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\x_{2} - b_{\alpha},
 \end{equation}
-where $x_{1}$ and $x_{2}$ are visibility vecotrs that correspond to two
+where $x_{1}$ and $x_{2}$ are visibility vectors that correspond to two
 different redundant baselines. This cross correlation is the key to obtaining a
 zero bias estimate of the power spectrum. 
 
@@ -1535,7 +1536,7 @@ that the error bars are large.  On the other hand, choosing the identity
 normalization such that the window functions are given by the Fisher matrix,
 leads to the smallest possible error bars, with the consequence that every
 band power is coupled to every other band power.  
-[XXXthis bit needs work.. what was I trying to say with this?]
+[XXX this bit needs work.. what was I trying to say with this?]
 The choice of $\mathbf{M} =
 \mathbf{D}$, where $\mathbf{D}$ is a diagonal matrix, produces the smallest
 possible error bars [XXX cite result]. $\mathbf{D}$ is diagonal and not the
@@ -1543,8 +1544,8 @@ identity because the window functions are normalized such that the rows of the
 matrix sum to unity.  
 
 In addition to calculating the window functions, we can also calculate the error
-correlations that correspond to a given window fuction. In order to see the
-effect of the normaliztion matrix on the error correlations we start by looking
+correlations that correspond to a given window function. In order to see the
+effect of the normalization matrix on the error correlations we start by looking
 at the covariance of the band power estimates, namely, 
 \begin{equation}\label{eqn:err_cov}
     \boldsymbol \Sigma = \text{Cov}(\hat{\mathbf{p}}) = \expval{\hat{\mathbf{p}}\hat{\mathbf{p}^{\dagger}}} -
@@ -1562,8 +1563,8 @@ how correlated the errors between modes are in the final power spectrum result.
 \label{sec:oqe_app}
 % A walk through of the application to the data.
 
-Here we describe the specifics of our application of the optimal quadrtic
-estimatore formalism to measure the power spectrum. The form of our estimator is
+Here we describe the specifics of our application of the optimal quadratic
+estimator formalism to measure the power spectrum. The form of our estimator is
 based on the delay spectrum technique described in P12a. The estimate of the
 power spectrum using this approach can be written as 
 \begin{equation}\label{eqn:delay_pspec}
@@ -1572,29 +1573,28 @@ power spectrum using this approach can be written as
 B}\expval{\tilde{V}_{i}(t,\tau)\tilde{V}_{j}^{*}(t,\tau)},
 \end{equation}
 where $V_{i}(t,\tau)$'s are the delay spectra of baseline visibilities, $X$ and
-$Y$ are the constants that convert from angles and frequency to the comoving
+$Y$ are the constants that convert from angles and frequency to the co-moving
 coordinate, respectively, $\Omega$ is the power squared beam (see Appendix B of
 P14), and $B$ is the bandwidth. The expectation value represents the ensemble
 average over instantaneously redundant baselines, and hence over a single
-fourier mode. One of the important assumptions in the estimation of the power
-spectrum in this was is that delay modes are a very good approximation to line
-of sight fourier modes, which holds for the short 30 m baselines used in this
+Fourier mode. One of the important assumptions in the estimation of the power
+spectrum in this was is that delay modes are a very good approximation to
+line-of-sight Fourier modes, which holds for the short 30 m baselines used in this
 analysis (P12b). Due to the chromaticity of an interferometer, this is in
-general not valid assumption and depends on the lenght of the baseline.
+general not valid assumption and depends on the length of the baseline.
 
 First, we describe our data set used in the application. Our data set consists
 of visibilities as a function of frequency and time for each baseline in the
 array. In estimating the power spectrum we use specific redundant baseline,
-applying the analysis to different redundant baselines separtately. In the
-description what follows we use the the east-west 30 meter redundant baselines (
+applying the analysis to different redundant baselines separately. In the
+description what follows we use the east-west 30 meter redundant baselines (
 baselines $49\_41$, $41\_47$, $10\_3$, etc. in figure
-\ref{fig:antenna_positions}), but we apply the same anaysis to the 30 m
-baselines with one row spaceings (10-41,9-3,3-47,...  and 49-3,10-58,41-25,...
+\ref{fig:antenna_positions}), but we apply the same analysis to each of the 30-m
+baselines with one row spacings (10-41,9-3,3-47,\dots  and 49-3,10-58,41-25,\dots
 antennas in figure \ref{fig:antenna_positions}), combining the final power
-spectra in the bootstrapping after estimating power spectra.  Focusing on the 30
-m east-west redundant baselines, our data vector becomes a list of visibilities
-such that, 
-
+spectra in the bootstrapping after estimating power spectra.  Focusing on the 30-m
+east-west redundant baselines, our data vector becomes a list of visibilities
+such that
 \begin{equation}
 \label{eqn:xvectdef}
 \mathbf{x} = \left( \begin{array}{c}
@@ -1611,28 +1611,29 @@ Notice that we have only included data from one baseline, which is looking ahead
 to the application of the method our data. We in effect apply the quadratic
 estimator on a per baseline basis and sum the baselines together to get our
 final estimate. The important point is that the data vector is in frequency
-space, where our final power spectrum estimate is in fourier space. 
+space, where our final power spectrum estimate is in Fourier space. 
 
 This leads to the description of the matrix that takes the data vector,
 $\mathbf{x}$, and transforms it into something that is in the power spectrum
 domain, $\mathbf{Q}_{\alpha}$. Because our data matrix is in frequency domain,
-we need a way of tranforming that data into $k$-space, and specifically into
+we need a way of transforming that data into $k$-space, and specifically into
 the line of sight $k_{\parallel}$-modes. As shown in P12b,
 line of sight $k$-modes are approximated by delay modes for short baselines and
-therefore the $\mathbf{Q}_{\alpha}$ should encode the delay transform. This is
-the infact the form of this matrix we use; we encode the delay transform in to
+therefore the $\mathbf{Q}_{\alpha}$ should encode the delay transform. This is,
+in fact, the form of this matrix we use; we encode the delay transform in to
 the $\mathbf{Q}_{\alpha}$ by taking the outer product of a sine wave with a
 given delay mode, $\alpha$,  with itself.  Therefore, we construct a family of
 $\mathbf{Q}$ matrices, each with a specific delay transform measuring a single
-delay mode. [XXX include plots of application of Q to data?]
+delay mode. 
+%[ include plots of application of Q to data?] ARP: don't think so: too many plots
 
 According to equation \ref{eqn:qalpha}, there is one more fundamental piece of
 information we require, the covariance matrix, $\mathbf{C}$. The covariance
 matrix of the data vector $\x$, by definition, is the ensemble average of
 $\x\x^{t}$, namely $\mathbf{C} = \expval{\x\x^{t}}$. However, due to our limited
 universe, we empirically estimate the covariance matrix by taking the time average of the
-quantity $\x\x^{t}$ over a range of LST's. We discuss the implications of
-emprically estimating the covarinace matrix in a later section, due to the fact
+quantity $\x\x^{t}$ over a range of LSTs. We discuss the implications of
+empirically estimating the covariance matrix in a later section, due to the fact
 that the cusp of the problems with signal loss are attributed to this estimate.
 
 The covariance matrix plays an important role in the optimal quadratic estimate
@@ -1641,45 +1642,47 @@ of power spectra. For ease of notation, let us define
     \mathbf{z} =  \mathbf{C}^{-1}\mathbf{x},
 \end{equation}
 which is the weighting of the data by the inverse covariance. This is a crucial
-step in the analysis since it supresses covariant signal between $k$-modes by
+step in the analysis since it suppresses covariant signal between $k$-modes by
 down weighting that signal. The application of the covariance matrix to data has
 the same general suppression, however, different data sets have different
 covariances. Figure  \ref{fig:inv_cov} shows what happens when one applies the
 inverse covariance to a data vector that contains foregrounds, and therefore
 highly covariant,  and one which has the foregrounds removed via that wideband
-delay filter described in section \ref{sec:wbd_filtering}.  In the figure, the
-top row corresponds to the the data vector $\mathbf{x}$, which is a waterfall of
+delay filter described in Section \ref{sec:wbd_filtering}.  In the figure, the
+top row corresponds to the data vector $\mathbf{x}$, which is a waterfall of
 the visibilities with frequency on the $x$-axis and time on the $y$-axis. The
-middle section shows the empirical estimate of the covaraince by taking the
+middle section shows the empirical estimate of the covariance by taking the
 outer product of $\x$ with itself and collapsing over the time axis. Finally,
 the last row is the application of inverse covariance weighting to the data,
-namely $\mathbf{z}$.  Applying the invsere covariance to $\x$ down weights the
-strongest eigen modes of the covaraince matrix, $\mathbf{C}$, and upweights the
-weakest eigen modes. In comparison, for random white noise, the optimal
+namely $\mathbf{z}$.
+
+Applying the inverse covariance to $\x$ down weights the
+strongest eigenmodes of the covariance matrix, $\mathbf{C}$, and up-weights the
+weakest eigenmodes. In comparison, for random white noise, the optimal
 weighting scheme is inverse variance weighting, which leads to the smallest
 error bars. For an infinite sample of random white noise, the covariance matrix
-would be diagoanl and applying the inverse covariance would be identical to
+would be diagonal and applying the inverse covariance would be identical to
 inverse variance weighting. The diagonal of this inverse covariance matrix are
-the eigenvalues and correspond to the the eigenmodes. Therefore, the most
-downweighted modes correspond to the largest eigenvalues of $\C$, and hence the
-strongest modes.  Similarily, applying the inverse covariance to the baseline
+the eigenvalues and correspond to the eigenmodes. Therefore, the most
+down-weighted modes correspond to the largest eigenvalues of $\C$, and hence the
+strongest modes.  Similarity, applying the inverse covariance to the baseline
 data vector, $\x$, the strongest modes get down weighted. 
 
 Looking at $\mathbf{z}$ in figure \ref{fig:inv_cov} for the visibilities that
 still contain foreground signal (left half) shows the down weighting of
 the strongest modes which correspond to foregrounds. The strongest modes here,
-are the strongest eigen modes of the the covariance matrix. Figure
-\ref{fig:eigs} shows the eigen spectrum and the four strongest eigen modes of a
-covaraiance matrix derived from a data vector with foregrounds. As seen four
-strongest eigen modes are highly suggestive of smooth spectrum sources. In
+are the strongest eigenmodes of the covariance matrix. Figure
+\ref{fig:eigs} shows the eigenspectrum and the four strongest eigenmodes of a
+covariance matrix derived from a data vector with foregrounds. As seen four
+strongest eigenmodes are highly suggestive of smooth spectrum sources. In
 contrast, the right half of figure \ref{fig:inv_cov} shows the application of
 inverse covariance weighting to data which has the wideband delay filter applied
-to remove smooth spectrum foregrounds. Applying the covariance, is upweighting
+to remove smooth spectrum foregrounds. Applying the covariance, is up-weighting
 the weakest modes in the data and since the strongest, foreground, modes have
-been removed we are seeing the upweighting of the noise. This is paralleled by
+been removed we are seeing the up-weighting of the noise. This is paralleled by
 looking at the eigenspectrum and strongest eigenmodes of the foreground-less
 covariance matrix in which the strongest modes do not have any coherent
-structure to them and can be considered noise like.
+structure to them and can be considered noise-like.
 
 
 \begin{figure*}\centering
@@ -1727,20 +1730,18 @@ in sky signal, but have varying noise properties, owning to being created with
 every other day of observation.  This allows us to construct unbiased (in
 instrumental noise) quadratic estimator of the power spectrum, but will allow
 for a foreground bias if residual foregrounds are still in the data at some
-significant level after the application of the delay filter. Concretely, to
-remove the bias in the power spectrum we take 2 approaches that should remove
-any systematics associated with the power spectrum.
+significant level after the application of the delay filter.
 
 
 Firstly, we divide the baselines into five different groups without repeating
 baselines. For each bootstrap, as discussed below, we randomly sample with
 replacement baselines from each group. When computing the estimate of the power
-spectrum, we only cross multiply the baselines between groups and never comput
+spectrum, we only cross multiply the baselines between groups and never compute
 the auto power, minimizing the bias.
 
 Secondly, we use the data from the two LST binned data sets which were created
 by binning every other days into the same LST grid. We refer to these data sets
-as the "even" and "odd" data sets. When constructing our estimate of the power
+as the ``even" and ``odd" data sets. When constructing our estimate of the power
 spectrum, we use baselines from these two data sets on either side of the
 $\mathbf{Q}$ matrix, being careful not to include the same baseline from the
 same data set on both sides. This is another axis on which we are trying the
@@ -1752,11 +1753,11 @@ estimator by applying equation \ref{eqn:qalpha_nobias} to the baseline data. In
 order to obtain the final estimate of the power spectrum, we average all of the
 baselines together as a function of time, measuring one power spectrum per LST
 bin. Therefore, because we are using only the auto covariances to weight the
-data vecotrs, that is we are not taking into account the baseline-baseline
+data vector, that is we are not taking into account the baseline-baseline
 covariances when weighting the data, only the frequency-frequency covariances
 between channels. This is a major difference between the analysis described in
 P14, where baseline-baseline covariances were being taken into account. To
-understand the application of this quadratic estimator foramlism to the data,
+understand the application of this quadratic estimator formalism to the data,
 let us begin by defining 
 \begin{equation}\label{eqn:presum_oqe}
     \mathbf{z}^{r}_{A} = \sum_{i\in{A}} \mathbf{C}_{i}^{-1}\mathbf{x}_{i},
@@ -1774,7 +1775,7 @@ since our $\mathbf{Q}_{\alpha}$ simply encodes a delay transform, it becomes
 separable such that, $\Q_{\alpha} =
 \mathbf{m}_{\alpha}^{\dagger}\mathbf{m}_{\alpha}$, where $\mathbf{m}_{\alpha}$ a
 complex sine wave of a specific frequency corresponding to delay mode $\alpha$.
-This is a consequence of approximating delay modes as fourier line of sight
+This is a consequence of approximating delay modes as Fourier line of sight
 modes, which is a valid approximation for the short baselines under
 consideration. If this were not the case, $\Q$, would not be as simple as this
 and would be required to take in to account the coupling between delay modes. 
@@ -1784,13 +1785,13 @@ Under this approximation, equation \ref{eqn:presum_qalpha} becomes
 \sum_{\substack{A,B,r,s\\r\ne{s},A\ne{B}}}\mathbf{z}^{r\dagger}_{A}\mathbf{m}_{\alpha}^{\dagger}\mathbf{m}_{\alpha}\mathbf{z}^{r}_{A}.
 \end{equation}
 
-After forming intermediate quanitities, we must normalize our power spectrum
+After forming intermediate quantities, we must normalize our power spectrum
 estimate to obtain sensible estimates on the power spectrum. As noted above, the
 normalization occurs by the $\mathbf{M}$ matrix in equation
 \ref{eqn:pspec_norm}, and can be any matrix of our desire. 
-Even though the choices of the normaliztion matrices described above have some
+Even though the choices of the normalization matrices described above have some
 good properties, e.g. small error bars and no leakage, we opt for a different
-choice of window function as follows. We first take the Cholesky-decompositon of
+choice of window function as follows. We first take the Cholesky decomposition of
 the Fisher matrix such that $\mathbf{F} = \mathbf{L}\mathbf{L}^{\dagger}$, where
 $\mathbf{L}$ is a lower triangular matrix\footnote{This is possible for any
 positive definite matrix}. Then, we choose ${\mathbf{M}} = \mathbf{L}^{-1}$ to
@@ -1802,7 +1803,7 @@ in the list. After decomposing, this choice of $\mathbf{M}$ matrix has the
 effect of only coupling modes exterior the $\alpha$'th mode only to the band
 power in $\alpha$  for the final estimate of the power spectrum.  With the
 ordering described above, this has the consequence of not coupling the modes
-inside the horizon in to measurments of band powers outside the horizon. Figure
+inside the horizon in to measurements of band powers outside the horizon. Figure
 \ref{fig:window_func} shows these window functions. 
 
 \begin{figure}\centering
@@ -1821,7 +1822,7 @@ at lower $k$-modes that are likely to be biased by foregrounds.
 
 
 
-In addition to the nice properties in the estimates ofthe power spectrum given
+In addition to the nice properties in the estimates of the power spectrum given
 by the above normalization and window function matrix, there is another nice
 property about the choice of normalization which corresponds to the error
 correlation. Using the choice of normalization matrix described above, we have
@@ -1840,7 +1841,7 @@ correlated and hence the error bar on every measurement is independent from on
 one another. [XXX contrast to the blackmann-harris window function in which
 band powers nd errors were correlated with one another. maybe?].
 
-The Fisher matrix is a key component in the above analaysis and contains a
+The Fisher matrix is a key component in the above analysis and contains a
 wealth of information about the amount of information in each $k$-mode. The
 Fisher matrix is shown in figure \ref{fig:fisher}, represents the amount of
 information there is in every $k_{\parallel}$ mode. The Fisher matrix is derived
@@ -1916,13 +1917,14 @@ product of vector with itself. In our case,
 \begin{equation}
     \C = \expval{\x\x^{\dagger}}, 
 \end{equation}
-where $\x$ is the data vector used in the analysis. Specficially, this data
-vector consists of visibilities for a single baseline, with 10 MHz of bandwidth
-centered at 151.72 MHz, equating to 20 frequency channels, for all integrations.
-Since we do not have an infinite number of universes to take the ensemble
-average required for the covariance matrix, we instead average  over the time
-axis to derive the covariances between the 20 frequency channels. In our
-analaysis the time average runs from 0 to 8:30 LST hours. Our analysis method
+where $\x$ is the data vector used in the analysis. Specifically, this data
+vector consists of visibilities for a single baseline type, with 20 frequency
+channels spanning 10 MHz of bandwidth
+centered at 151.72 MHz, for all integrations.
+Since we do not have a priori knowledge of the covariance matrix, 
+we instead estimate it empirically from the data, averaging over the time
+axis to derive the estimated covariances among the 20 frequency channels. In our
+analysis the time average runs from 0 to 8:30 LST hours. Our analysis method
 for calculating the power spectrum requires the inverse of the covariance
 matrix to weight the data. Therefore, the empirically derived covariance matrix
 here, must be invertible, which occurs only if $\C$ is a rank-N matrix, where N
@@ -1930,13 +1932,13 @@ is the number of rows or columns. In our particular case, N=20.
 
 There are a few fundamental problems that occur when estimating the covariance
 matrix in this way. As noted in section \ref{sec:frf} the optimal fringe-rate
-filter corrsponds to averageing time samples for 31 minutes. Over the LST range
+filter corresponds to averaging time samples for 31 minutes. Over the LST range
 used in this analysis, this corresponds to on the order of 20 statistically
 independent modes in our data after fringe-rate filtering. This is a fundamental
 limit of the amount of information we have in our measurements. Coincidentally,
 the covariance matrix for a given baseline is an $N_{ch} \times N_{ch}$ matrix,
-where $N_{ch}=20$.  Therefore, the covariance matrices for every baseline are
-infact invertible, in most cases,  because they are full rank and contain 20
+where $N_{ch}=20$.  Therefore, the covariance matrices for every baseline are,
+in fact, invertible in most cases,  because they are full rank and contain 20
 statistically independent measurements of the sky. The covariance matrix is thus
 invertible and can be used to inverse covariance weight the data.
 
@@ -1944,16 +1946,16 @@ The optimal quadratic estimator has an application of the inverse covariance
 matrix to data vector $\x$. Applying an inverse covariance matrix to the data it
 is derived from has the effect of weighting the data by the covariance matrix.
 Therefore strong modes, corresponding to the eigenvectors of the covariance
-matrix, are downweighted in this scheme as seen in figure \ref{fig:inv_cov}.
+matrix, are down-weighted in this scheme as seen in figure \ref{fig:inv_cov}.
 For foreground contained data, the strong modes correspond to the smooth
-spectrum foregrounds, and therefore the covaraince matrix is highly covriance
+spectrum foregrounds, and therefore the covariance matrix is highly covariance
 since all of the frequency channels are correlated with one another. However,
 for foreground filtered data, the strongest modes correspond to modes that
 resemble residual foreground in the data. It is important to note that inverse
 covariance weighting is a powerful tool as seen by looking at the three
 baselines used in figure \ref{fig:inv_cov}. For the baseline data vector with
 the least amount of noise in the delay filtered plot (right half, middle
-column), we can see that weighing by the inverse covariance upweights modes in
+column), we can see that weighing by the inverse covariance up-weights modes in
 this baseline as compared to the other baselines, which have a slightly higher
 noise in the original data vector. This is even paralleled in the foreground
 contained data.
@@ -1966,8 +1968,8 @@ contained data.
 
 
 Another problem that occurs from empirically estimating covariances is that it
-leads to models of the covaraince matrix that overfit to the noise. Hence, when used in conjuction with the
-data, it doesn't perfectly remove covarainces between channels and baselines and
+leads to models of the covariance matrix that over-fit the noise. Hence, when used in conjunction with the
+data, it doesn't perfectly remove covariances between channels and baselines and
 has the ability to remove signal from the data. [XXX Need to be more clear on
 this point ]
 
@@ -1997,7 +1999,7 @@ Here, we describe estimate the signal loss associated with the empirical
 estimates of the covariance matrix.
 
 In order to characterize
-the signal loss, we simulate visibilities for spatially Guassian signal with a
+the signal loss, we simulate visibilities for spatially Gaussian signal with a
 flat amplitude in $P(k)$ that rotates with the sky, and is fringe-rate filtered in
 the same way as the data.  This signal is injected on top of the data,
 measuring the output signal power spectrum and comparing it to the input signal
@@ -2005,7 +2007,7 @@ power spectrum for various signal amplitudes.  We perform this injection
 for 40 draws at each signal level.
 Figure \ref{fig:signal_loss} shows the resultant signal loss associated
 with estimating the covariance matrix from the data.  Error bars were
-obtained through boostrapping.  
+obtained through bootstrapping.  
 [XXX need more discussion of what the plot means]
 
 \begin{table}[htdp]
@@ -2079,12 +2081,12 @@ We use the baseline axis as our random draw axis. For each bootstrap we
 calculate the power spectrum of a random draw of $N_{bls}-5$, giving us more
 than $2\times10^6$ possible combinations of baselines for the perfectly east-west 30 m
 baselines used in the analysis and over $1\times10^{6}$ combinations of the two
-redunant groups of baseline corresponding to 30 m east west components and 5 m
-(a row spaceing) in the north and south direction. There is enough variation in
+redundant groups of baseline corresponding to 30-m east west components and 5 m
+(a row spacing) in the north and south direction. There is enough variation in
 the data to tease out the underlying statistics of the distribution. 
 
 There are, however, a few issues that must be dealt with in order to not incur a
-noise bias that will. We want to effectivley construct an unbiased estimator.
+noise bias that will. We want to effectively construct an unbiased estimator.
 There are two ways that our estimate of the power spectrum can incur a noise
 bias as discussed earlier. One way is to have an auto cross multiplication in
 the quadratic estimator. We avoid this by only using cross baseline products
@@ -2259,7 +2261,7 @@ unlikely to be chance.
 \caption{Diagnostic power spectra in the style of Figure \ref{fig:final_pspec}
 illustrating the impact of various analysis stages.
 Power spectra omitting the stages of fringe-rate filtering (magenta) and 
-OMNICAL calibration (cyan) show higher residuals than the the final power spectrum
+OMNICAL calibration (cyan) show higher residuals than the final power spectrum
 (black) that includes both stages.
 %The blue power spectrum has the full pipeline applied to it and is identical to
 %\ref{fig:final_pspec}. The red power spectrum does not have omnical applied to
@@ -2336,7 +2338,7 @@ best upper limit of $(41~{\rm mK})^2$ at $z=7.7$ reported in P14.  As we show be
 greater detail in \citet{pober_et_al2015}, this limit begins to have significant ramifications
 for the heating of the intergalactic medium prior to the completion of reionization.
 
-\subsection{Spin Temperature Contstraints}
+\subsection{Spin Temperature Constraints}
 
 \begin{figure*}\centering
 \includegraphics[width=2\columnwidth]{plots/ts_patchy_bound.png}
@@ -2569,11 +2571,11 @@ major advances:
 \begin{itemize}
 \item the expansion of the PAPER array to 64 antennas doubled our instrument's power spectrum sensitivity,
 \item using OMNICAL for redundant calibration significantly improved the clustering of measurements
-over the previous implimentation of LOGCAL used in P14,
+over the previous implementation of LOGCAL used in P14,
 \item fringe-rate filtering further improved power spectrum sensitivity by $\sim$50\% and suppressed
 systematics associated with foregrounds low in the primary beam, and
 \item moving from a lossless quadratic estimator targeting difference modes
-in redundant measurements to an optimal quadtratic estimator (with carefully calibrated signal
+in redundant measurements to an optimal quadratic estimator (with carefully calibrated signal
 loss) significantly reduced contamination from non-Gaussian foregrounds.
 \end{itemize}
 Figure \ref{fig:pspec_comp} illustrates the effect of some of these advances on the final
@@ -2653,10 +2655,10 @@ another order of magnitude improvement in sensitivity will make 21cm measurement
 %
 %The closer we get to a detection of the 21 cm EoR fluctuations, the more we need
 %to know what the systematics can be and at what level they can come in at. One
-%of the biggest challanges remaining, as metioned above, is the limited
+%of the biggest challenges remaining, as mentioned above, is the limited
 %sensitivity of current EoR experiments. Even with the full sensitivity of the
 %PAPER array at full build out, there will only be a $1.65\sigma$ EoR detection
-%with the current method of foreground avoidence to detect the power spectrum.
+%with the current method of foreground avoidance to detect the power spectrum.
 %With the complete optimist approach of working withing the wedge, there will be
 %a $8.86\sigma$ detection of the 21 cm power spectrum \citep{pober_et_al2014}.
 %However, the configuration of PAPER makes it difficult to localize sources for
@@ -2664,18 +2666,18 @@ another order of magnitude improvement in sensitivity will make 21cm measurement
 %are being addressed by second generation EoR experiments, whose goal is to
 %characterize the 21 cm power spectrum at high redshifts.
 %
-%In addition to sensitivity limitations, foregrounds are also a challange that
+%In addition to sensitivity limitations, foregrounds are also a challenge that
 %needs to be met. The delay spectrum approach requires that foregrounds need to
 %be spectrally smooth so that they are localized to inside the horizon. As seen
 %from equation \ref{eqn:delay_transform}, this approach also requires the need to
 %know your beam and bandpass very well to mitigate the effect of spreading power
-%outside the horizon. The PAPER beam is both spaitially and spectrally smooth
+%outside the horizon. The PAPER beam is both spatially and spectrally smooth
 %\cite{pober_et_al2012}, but even small variations have the effect of
-%making sppilling power outside of the horizon. In addition to the beam, the
+%making spilling power outside of the horizon. In addition to the beam, the
 %major source of error is in the bandpass. The 9th order polynomial fit to the
 %bandpass is strictly not just the bandpass but contains ripples imprinted by
 %sources other than Pictor A. Therefore characterizing the true bandpass of the
-%instruement is hard and largely unknown for PAPER.
+%instrument is hard and largely unknown for PAPER.
 %
 %Finally, one of the possibly biggest challenges we face is that of polarization
 %leakage due to Faraday rotation of polarized sources from Stokes Q into Stokes
@@ -2727,16 +2729,16 @@ We also continue to demonstrate the efficacy of using delay filters for
 foreground suppression and the foreground avoidance technique in measuring the power
 spectrum. In addition, we employ novel techniques in this analysis and show that
 the necessity of precise calibration is needed to make accurate and believable
-measurements of the 21 cm EoR power spectrum. We also show that the use of beam
+measurements of the 21 cm reionization power spectrum. We also show that the use of beam
 weighted measurements in the optimal fringe-rate filter is critical to
 increasing sensitivity for instruments with natively low sensitivity due to
-collecting area, increasing the SNR on the measurement by a factor of atleast 2.
+collecting area, increasing the SNR on the measurement by a factor of at least 2.
 We have also demonstrated the stability of the PAPER instrument both in time and
 between redundant baselines, showing that baselines agree on the same sky up to
 systematical errors and that the time correlation between days is low in the
 noise.
 
-At the acheived levels of the power spectrum, we also put constraints on the
+At the achieved levels of the power spectrum, we also put constraints on the
 amount polarization leakage that could possibly corrupt the Stokes I power
 spectrum. We show that polarization leakage is not shown for most $k$-modes at
 the level of $\sim10^{3}\ \text{mK}^{2}$. 
@@ -2746,25 +2748,25 @@ by showing the science implications of this upper limit. Given our measured
 upper limit, They show that
 we can rule out regions of spin temperature, $T_{s}$,
 and neutral fraction, $x$, that are not consistent with this result. In
-addition, they compare this result with current X-ray lumiosity functions and
+addition, they compare this result with current X-ray luminosity functions and
 show that there are not enough X-ray sources to cause heating of the IGM at
 $z=8.4$ that are consistent with these results.
 
 Looking forward, the need for larger arrays with increased collecting area is
-becoming a necessicity. Proposed experiments such as the Square-Kilometer Array
+becoming a necessity. Proposed experiments such as the Square-Kilometer Array
 (SKA) and the Hydrogen Epoch of Reionization Array (HERA) are set to fill this
 need. HERA is a collaborative experiment dedicated to detect and characterize
 the 21 cm EoR power spectrum as well as eventually image the ionizing bubbles
 from the formation of the first stars and galaxies. The HERA instrument
 is proposed to be composed of a closely packed 547 element hexagonal array 
-\citep{pober_et_al2014} with each element being a 14-m diamter
-reflecting-dish, with a total array area of $\sim.1km^{2}$. Sensitivity forcasts
+\citep{pober_et_al2014} with each element being a 14-m diameter
+reflecting-dish, with a total array area of $\sim.1km^{2}$. Sensitivity forecasts
 derived in \citet{pober_et_al2014} showed that HERA has the ability to make a
 detection of EoR to a significance from $\sim32\sigma$ to $\sim133\sigma$
 depending on the foreground removal scheme used. The lower bound is for the
 delay spectrum technique used in this paper, where modes within the horizon are
 irrevocably corrupted, whereas the higher bound equates to when we can perfectly
-work within the the wedge. That is, it is possible to perfectly subtract sources
+work within the wedge. That is, it is possible to perfectly subtract sources
 within the horizon.
 
 PAPER itself is looking forward to 2 seasons of 128 antenna maximally redundant
@@ -2773,19 +2775,19 @@ by a factor of $3.5$ as compared to the data set used in this paper. However,
 due to constraints on the PAPER site in South Africa, the shortest baselines for
 this array are $8\lambda$ (16m), instead of the $16\lambda$ (32m) baselines used
 in this analysis, which may be riddled with systematics due to cross coupling
-and reflections whithin the array. Therefore, only considering the 16 m
+and reflections within the array. Therefore, only considering the 16 m
 East-West baselines, there will be a total sensitivity benefit of $3$. However,
 there is the potential to use the $48m$ nd $64m$ baselines in this analysis as
 well, boosting the sensitivity to by another factor of 2. 
 
 PAPER is continuing to integrate down on the 21 cm EoR signal and gaining ground
-on overcoming challanges in systematics in the instrument as well being able to
+on overcoming challenges in systematics in the instrument as well being able to
 look past foregrounds. Future work will again characterize the EoR power
 spectrum over a range of redshifts and to measure directly the polarized power
 spectrum. We also look forward to two seasons of 128 dual polarization PAPER
 data which will increase the sensitivity of measurements by almost an order of
 magnitude from the data used here. Also, construction of HERA is also under way,
-which will have the sensitiviy to make a $30\sigma$ detection of the 21 cm power
+which will have the sensitivity to make a $30\sigma$ detection of the 21 cm power
 spectrum. We look forward to this.
 
 
@@ -2805,13 +2807,12 @@ PAPER is supported by grants from the National Science Foundation (NSF; awards 0
 (awards 1352519, 1302774, and 1401708, respectively).
 JEA would like to acknowledge a generous grant from the Mount Cuba Astronomical Association for
 computing resources.
-We graciously thank SKA-SA for onsite infrastructure and observing support. In
+We graciously thank SKA-SA for site infrastructure and observing support. In
 addition we would like to thank our South African interns Monde Manzini and
 Ruvano Casper from Durban University of Technology (DUT), who helped build out
-the array from 32 antennas to the 64 antennas this analaysis was based on. 
+the array from 32 antennas to the 64 antennas this analysis was based on. 
 We would like to thank Josh Dillon for helpful discussions on optimal quadratic
 estimators. 
-[XXX ask collaborators for other acknowledgements].
 
 %\clearpage
 %\nocite{*}
