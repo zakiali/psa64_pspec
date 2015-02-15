@@ -596,7 +596,7 @@ with source spectra derived in \cite{jacobs_et_al2013},
 \begin{equation}
     S_{\nu} = S_{150}\times\left(\frac{\nu}{150MHz}\right)^{\alpha},
 \end{equation}
-where $S_{150} = 382 \text{Jy} \pm 5.4$ and $\alpha = -.76 \pm .01$, with
+where $S_{150} = 382~\text{Jy} \pm 5.4$ and $\alpha = -.76 \pm .01$, with
 1$\sigma$ error bars.
 
 
@@ -930,7 +930,7 @@ As per
 resulting from $W(\tau)$ using an iterative CLEAN procedure
 \citep{hogbom1974} restricting CLEAN components to fall within the horizon plus
 a 15-ns buffer that includes the bulk of the kernels convolving the $\delta$-function
-in equation \ref{eqn_delay_transform}.
+in equation \ref{eqn:delay_transform}.
 To remove the smooth spectrum
 foreground emission we subtract the CLEAN components from the original
 visibility.
@@ -939,7 +939,7 @@ visibility.
 \centering
 \includegraphics[width=2\columnwidth]{plots/waterfalls_labeled.png}
 \caption{
-Visibilities measured by a 30-m east-west baseline in the PAPER-64 array, 
+Visibilities measured by a fiducial baseline in the PAPER-64 array, 
 averaged over 135 days of observation.  From left to right, columns represent
 data that: (1) contain foregrounds prior to the application of a wideband
 delay filter or optimal fringe-rate filtering, (2) are fringe-rate filtered but
@@ -954,7 +954,7 @@ of magnitude of foreground suppression is evident.
 } \label{fig:waterfalls}
 \end{figure*}
 
-Applying the delay filter to the 30-m East-West baselines used in the power spectrum analysis,
+Applying the delay filter to fiducial baselines used in the power spectrum analysis,
 foregrounds are suppressed by $\sim$4 orders of magnitude in power, or
  -40 dB of foreground suppression, as seen in Figure
 \ref{fig:waterfalls}. As discussed in P14, there is a small amount of signal loss
@@ -1172,7 +1172,7 @@ in Figure \ref{fig:waterfalls}.
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/fr_preserved_signal.png}
 \caption{
-Fringe-rate transform of visibilities measured on a 30-m east-west baseline at 159 MHz before (blue) and
+Fringe-rate transform of visibilities measured on the fiducial baseline at 159 MHz before (blue) and
 after (red) optimal fringe-rate filtering. The fringe-rate filter (green) is normalized
 to integrate to unity, but has been scaled here for legibility.
 %Fringe-rate filtering at 159MHz. Fringe-rates of is defined as the rate at which
@@ -1197,7 +1197,7 @@ to integrate to unity, but has been scaled here for legibility.
 \end{figure}
 The action of the fringe rate filter is to get an optimally weighted
 sample, averaged at the longest physically possible integration time.  For the
-power spectrum baselines in question (30 m East-West baselines), the effective
+fiducial baselines, the effective
 integration time is calculated by comparing the variance statistic for a
 fringe-rate filter that is a flat weighting vs that with an optimal filter
 weighting as described. We apply these filters to random noise with variance 1,
@@ -1205,12 +1205,12 @@ without loss of generality. We can conclude that
 \begin{equation}
     t_{int} = \frac{\int{\sigma^{2}dt}}{\int{\sigma^{2}fr^{2}dt}},
 \end{equation}
-which evaluates to 1886 s for an optimal fringe-rate filter on a 30 m East-West
-baseline at 149.5 MHz.  Over the range of frequencies used in our power spectrum
+which evaluates to 1886 s for an optimal fringe-rate filter on the fiducial 
+baseline at 150 MHz.  Over the range of frequencies used in our power spectrum
 estimate, the integration times range from 1936 s to 1790 s, corresponding to an
 average of 31 minutes. As a rough check, we note that this is roughly the time
-it takes a source to transit through one period of a fringe 
-from a 30-m baseline at 150 MHz.  Because
+it takes a source to transit through one fringe period.
+Because
 the fringe-rate filter integrates in time, the number of statistically
 independent samples of the sky drastically decreases from 83 to $\sim2$
 independent samples per hour.
@@ -1257,7 +1257,7 @@ independent samples per hour.
 \centering
 \includegraphics[width=2.3\columnwidth]{plots/density.png}
 \caption{Histogram of the real component of all calibrated visibilities
-measured over 135 days with every redundant east-west 30-m baseline at 149.5
+measured over 135 days with every redundant instance of the fiducial baseline at 150
 MHz.  Color scale indicates the number of samples falling in an
 LST/flux-density bin.  This plot serves to illustrate the stability of the
 PAPER instrument and the precision of calibration.
@@ -1296,8 +1296,8 @@ integration windows in the correlator with respect to sidereal time.
 One PAPER design goal is the stability of the instrument between
 baselines and in time. Figure \ref{fig:density} shows the visibility repeatability between 
 baselines and nights as a function of LST. Specifically, we histogram the real part of
-the visibilities for all baselines belonging to the East-West 30 m redundant
-baseline in a given LST bin for foreground contained data. We see that for a
+the visibilities for all redundant fiducial baselines 
+in a given LST bin for foreground contained data. We see that for a
 given LST bin the, spread in the value for all the baselines is $\sim$50 Jy which corresponds with our observed
 $T_{sys}$ of $\sim$500K .  We get
 more samples per LST bin in the range of 2--10 hours due to our observing
@@ -1579,21 +1579,19 @@ P14), and $B$ is the bandwidth. The expectation value represents the ensemble
 average over instantaneously redundant baselines, and hence over a single
 Fourier mode. One of the important assumptions in the estimation of the power
 spectrum in this was is that delay modes are a very good approximation to
-line-of-sight Fourier modes, which holds for the short 30 m baselines used in this
+line-of-sight Fourier modes, which holds for the fiducial baselines used in this
 analysis (P12b). Due to the chromaticity of an interferometer, this is in
 general not valid assumption and depends on the length of the baseline.
 
 First, we describe our data set used in the application. Our data set consists
 of visibilities as a function of frequency and time for each baseline in the
-array. In estimating the power spectrum we use specific redundant baseline,
-applying the analysis to different redundant baselines separately. In the
-description what follows we use the east-west 30 meter redundant baselines (
-baselines $49\_41$, $41\_47$, $10\_3$, etc. in figure
-\ref{fig:antenna_positions}), but we apply the same analysis to each of the 30-m
-baselines with one row spacings (10-41,9-3,3-47,\dots  and 49-3,10-58,41-25,\dots
-antennas in figure \ref{fig:antenna_positions}), combining the final power
-spectra in the bootstrapping after estimating power spectra.  Focusing on the 30-m
-east-west redundant baselines, our data vector becomes a list of visibilities
+array. In estimating the power spectrum we use specific redundant groups baselines,
+applying the analysis to different groups separately. In the
+description what follows we use the fiducial baselines,
+but we apply the same analysis to each of the redundant groups described in Section \ref{sec:observations}.
+Measurements obtained with the different redundant groups are combined in the averaging and
+bootstrapping over modes in the estimate of the final power spectrum.  Focusing on the fiducial
+baselines, our data vector becomes a list of visibilities
 such that
 \begin{equation}
 \label{eqn:xvectdef}
@@ -2079,10 +2077,10 @@ component in our estimates of power spectra.
 
 We use the baseline axis as our random draw axis. For each bootstrap we
 calculate the power spectrum of a random draw of $N_{bls}-5$, giving us more
-than $2\times10^6$ possible combinations of baselines for the perfectly east-west 30 m
-baselines used in the analysis and over $1\times10^{6}$ combinations of the two
-redundant groups of baseline corresponding to 30-m east west components and 5 m
-(a row spacing) in the north and south direction. There is enough variation in
+than $2\times10^6$ possible combinations of baselines for the fiducial
+baselines used in the analysis and over $1\times10^{6}$ combinations of the 
+redundant baseline groups used in the analysis.
+There is enough variation in
 the data to tease out the underlying statistics of the distribution. 
 
 There are, however, a few issues that must be dealt with in order to not incur a
@@ -2591,7 +2589,7 @@ The use of
 OMNICAL to accurately calibrate the relative complex gains of the antennas has
 shown to be a major improvement to the data-reduction pipeline. The accuracy and improvement of
 this calibration brings redundant baselines into impressive agreement with one another
-(see Figures \ref{fig:omnical} and \ref{fig:density}),
+(see Figures \ref{fig:omniview} and \ref{fig:density}),
 and provides important diagnostic information for
 monitoring the health of the
 array, flagging RFI events, and otherwise assessing data quality.
