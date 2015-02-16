@@ -1313,7 +1313,7 @@ in a given LST bin for foreground contained data. We see that for a
 given LST bin the, spread in the value for all the baselines is $\sim$50 Jy which corresponds with our observed
 $T_{sys}$ of $\sim$500K .  We get
 more samples per LST bin in the range of 2--10 hours due to our observing
-season, therefore the density of points in this LST region is greater, set by
+season, therefore the density of points in this LST region is greater, as shown by
 the color scale. This density plot shows that redundant baselines agree very well
 with one another, OMNICAL has leveled the antenna gains to within the noise.
 
@@ -1326,7 +1326,7 @@ DC bin is the average of all of the days and clearly there is excess power
 there. However, for time scales greater than 1 day, we see that there is little
 correlation between days, showing that there are no systematics in time. The
 excess on the two day timescale is caused by the changing alignment of the 42.9
-second integration time scale of a visibility with that of a sidereal day. This
+second integration timescale of a visibility with that of a sidereal day. This
 presents itself as a beat frequency on the two day timescale.
 
 \subsection{System Temperature}   
@@ -1335,12 +1335,12 @@ together for a given frequency and LST bin are recorded. Using these variances,
 we calculate the system temperature as a function of LST, averaging over each
 LST hour. 
 \begin{equation}
-    \Tsys = \frac{T_{\rm rms}}{\sqrt{\Delta\nu t}}, 
+    \Tsys = T_{\rm rms}\sqrt{\Delta\nu t}, 
 \end{equation}
 where $\Delta\nu$ is the bandwidth, $t$ is the integration time, and
 $T_{\rm rms}$ is the RMS temperature, or the variance statistic described above.
 Figure \ref{fig:tsys} shows the results of this calculation. In this observing
-season, the system temperature drops just below previous estimates of the
+season, the system temperature drops just below previous estimates 
 as in P14 and \citet{jacobs_et_al2014} at $\Tsys=500K$ at 160 MHz.
 [XXX Zaki, how exactly did you get 500?  the number from P14 and J15 was 550K @ 160MHz
  This is using the variance statistic from the lst binner. The usual way to
@@ -1367,7 +1367,9 @@ for a given LST and frequency, we take into account the fact that we flag
 3$\sigma$ outliers from the median. To calculate an effective correction factor
 to account for the filtering, we assume the visibilities follow a Gaussian
 distribution which would require a correction factor of 1.34 for the removal of
-data points that are 3$\sigma$ above the median.
+data points that are 3$\sigma$ above the median. In other words, we are
+accounting for the wings of the gaussian that would contribute to the variance
+in the visibility.
 
 Previous estimates
 of the system temperature
@@ -1923,11 +1925,11 @@ in the distribution of values, likely as a result of foreground contamination.
 
 We now discuss the issues of empirically estimating the covariance matrix from
 the data. The covariance matrix is defined as the ensemble average of the outer
-product of vector with itself. In our case, 
+product of a vector with itself. In our case, 
 \begin{equation}
     \C = \expval{\x\x^{\dagger}}, 
 \end{equation}
-where $\x$ is the data vector used in the analysis. Specifically, this data
+where $\x$ is the data (column) vector used in the analysis. Specifically, this data
 vector consists of visibilities for a single baseline type, with 20 frequency
 channels spanning 10 MHz of bandwidth
 centered at 151.72 MHz, for all integrations.
@@ -1938,12 +1940,12 @@ analysis the time average runs from 0 to 8:30 LST hours. Our analysis method
 for calculating the power spectrum requires the inverse of the covariance
 matrix to weight the data. Therefore, the empirically derived covariance matrix
 here, must be invertible, which occurs only if $\C$ is a rank-N matrix, where N
-is the number of rows or columns. In our particular case, N=20.
+is the number of rows or columns. In our particular case, N=20, for the number of frequency channels.
 
 There are a few fundamental problems that occur when estimating the covariance
 matrix in this way. As noted in section \ref{sec:frf} the optimal fringe-rate
 filter corresponds to averaging time samples for 31 minutes. Over the LST range
-used in this analysis, this corresponds to on the order of 20 statistically
+used in this analysis, this corresponds to an order of 20 statistically
 independent modes in our data after fringe-rate filtering. This is a fundamental
 limit of the amount of information we have in our measurements. Coincidentally,
 the covariance matrix for a given baseline is an $N_{ch} \times N_{ch}$ matrix,
@@ -1966,7 +1968,7 @@ covariance weighting is a powerful tool as seen by looking at the three
 baselines used in figure \ref{fig:inv_cov}. For the baseline data vector with
 the least amount of noise in the delay filtered plot (right half, middle
 column), we can see that weighing by the inverse covariance up-weights modes in
-this baseline as compared to the other baselines, which have a slightly higher
+this baseline, as compared to the other baselines, which have a slightly higher
 noise in the original data vector. This is even paralleled in the foreground
 contained data.
 %
@@ -1978,10 +1980,15 @@ contained data.
 
 
 Another problem that occurs from empirically estimating covariances is that it
-leads to models of the covariance matrix that over-fit the noise. Hence, when used in conjunction with the
-data, it doesn't perfectly remove covariances between channels and baselines and
-has the ability to remove signal from the data. [XXX Need to be more clear on
-this point ]
+leads to models of the covariance matrix that over-fit the noise. In this
+scenario, the covariance matrix tells us that there may be modes in the data
+that should be downweighted, for example, but if the covariances are dominated
+by noise, this may just be a random fluctualtion and that mode may not need to
+be downweighted. Said differently, the weighting of the data by the inverse
+covariance is heavily influenced by the noise in the estimate of the covariance
+matrix and thus has the ability to remove or add  covariances between channels
+and baselines and a strong possibility to remove signal from the data. In order to accurately describe the covariance matrix of the instrument, we would require complete knowledge of the sky signal and the instrument and the interaction of the two due to the chromaticity of the interferomter.
+
 
 
 %   -Simulations
@@ -2000,25 +2007,32 @@ this point ]
 %         not detected the EOR signal yet.
 
 In theory, optimal quadratic estimators for the power spectrum described above are a
-lossless operation. However, this is only true if we have all the information
-needed to apply this method. As discussed [XXX where?], one of the major unknowns we have in our
-estimate is the covariance matrix that describes the covariances in the data
-due to the instrument and sky signal. Not knowing the true
-covariances leads to signal loss in the final estimate of the power spectrum.
-Here, we describe estimate the signal loss associated with the empirical
-estimates of the covariance matrix.
+lossless operation. However, this requires that we have all the information
+needed to accurately estimate the power spectrum. One of the biggest
+uncertainties, as noted above, is the lack of a perfect covariance matrix that
+describes all of the covariances of the sky and instrument, which can lead to
+signal loss in the final estimate of the power spectrum.  In order to quantify the amount of signal loss we can get by empirically estimating the covariances, we describe the simulations and report on the signal loss we expect with our estimates.
 
-In order to characterize
-the signal loss, we simulate visibilities for spatially Gaussian signal with a
-flat amplitude in $P(k)$ that rotates with the sky, and is fringe-rate filtered in
-the same way as the data.  This signal is injected on top of the data,
-measuring the output signal power spectrum and comparing it to the input signal
-power spectrum for various signal amplitudes.  We perform this injection
-for 40 draws at each signal level.
-Figure \ref{fig:signal_loss} shows the resultant signal loss associated
-with estimating the covariance matrix from the data.  Error bars were
-obtained through bootstrapping.  
-[XXX need more discussion of what the plot means]
+In order to characterize the signal loss, we simulate visibilities for
+spatially Gaussian signal with a flat amplitude in $P(k)$ that rotates with the
+sky, and is optimally fringe-rate filtered in the same way as the data for our fiducial baselines. This signal is
+injected on top of the data, measuring the output signal power spectrum and
+comparing it to the input signal power spectrum for various signal amplitudes.
+We perform this injection for 40 draws at each signal level.  Figure
+\ref{fig:signal_loss} shows the resultant signal loss associated with
+estimating the covariance matrix from the data.  Error bars were obtained
+through bootstrapping.  
+
+
+As a function of the increasing input amplitude of the simulated power spectra,
+we find that there is a decrease in the output amplitude of the measured power
+spectrum of the simulated visibilites, interpreted as signal loss through the
+quadratic estimator of the power spectrum. Deviations from equality begin as
+power spectrum amplitudes of $10^{7} \text{mK}^{2} (h^{-1}\rm
+\,\text{Mpc})^{3}$. For the range of output power spectrum amplitudes in our
+final estimate of the 21 cm power spectrum (figure \ref{fig:final_pspec}), we
+show that signal loss is $<2\%$ at $95\%$ confidence. 
+[XXX need more discussion of what the plot means. Still more?]
 
 \begin{table}[htdp]
 \caption{SIGNAL LOSS VERSUS ANALYSIS STAGE}
