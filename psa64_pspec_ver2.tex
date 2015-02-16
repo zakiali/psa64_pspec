@@ -47,12 +47,14 @@
 
 \begin{document}
 
-\title{PAPER-64 Power Spectrum: XXX a better title}
+\title{PAPER-64 Constraints on Reionization I: the 21cm Power Spectrum at z = 8.4}
 
 \author{
 Zaki S. Ali\altaffilmark{1}, 
 Aaron R. Parsons\altaffilmark{1,2}, 
 Haoxuan Zheng\altaffilmark{12},
+Jonathan C. Pober\altaffilmark{10}, 
+Adrian Liu\altaffilmark{1}, 
 James E. Aguirre\altaffilmark{4},
 Richard F. Bradley\altaffilmark{5,6,7},
 Gianni Bernardi\altaffilmark{3}, 
@@ -60,13 +62,10 @@ Chris L. Carilli\altaffilmark{8,11},
 Carina Cheng\altaffilmark{1},
 David R. DeBoer\altaffilmark{2}, 
 Matthew R. Dexter\altaffilmark{2},
-%Steven R. Furlanetto\altaffilmark{XXX},
 Daniel C. Jacobs\altaffilmark{9}, 
 Pat Klima\altaffilmark{6},
-Adrian Liu\altaffilmark{1}, 
 David H. E. MacMahon\altaffilmark{2},
 David F. Moore\altaffilmark{3},
-Jonathan C. Pober\altaffilmark{10}, 
 Nima Razavi\altaffilmark{11},
 Irina I. Stefan\altaffilmark{11},
 William P. Walbrugh\altaffilmark{3},
@@ -93,7 +92,7 @@ Cambridge, MA}
 
 \begin{abstract}
 In this paper, we report new limits on 21cm emission from cosmic reionization
-based on a 4.5-month observing campaign with a 64-element deployment of the
+based on a 135-day observing campaign with a 64-element deployment of the
 Donald C. Backer Precision Array for Probing the Epoch of Reionization (PAPER)
 in South Africa.  This work extends the work presented in
 \citet{parsons_et_al2014} with more collecting area, improved redundancy-based
@@ -2322,7 +2321,7 @@ of an isotropic Gaussian sky signal.  We can surmise from the significant change
 under fringe-rate filtering that it arises from emission that violates these assumptions.
 We conclude, therefore, that this excess is unlikely to be cosmic reionization, and is more
 likely the result of non-Gaussian foregrounds.  As discussed earlier, one possible
-culprit is polarization leakage \citep{moore_et_al2014,jelic_et_al2010,jelic_et_al2014}, although further
+culprit is polarization leakage \citep{moore_et_al2013,jelic_et_al2010,jelic_et_al2014}, although further
 work will be necessary to confirm this.  It is worth noting that the interpretation of
 the signal as polarization leakage is consistent with recent measurements in Stokes Q presented
 in \citet{moore_et_al2015}.
@@ -2378,7 +2377,7 @@ constant, $x_{HI}$ is the neutral fraction of hydrogen, $\delta$ is the local
 baryon overdensity, $\nu_0$ is the rest frequency of the 21cm transition, and 
 the remainder are the usual constants.
 %We ignore the effect of redshift space distortions.
-Plugging in the cosmological parameters from \citet{planck_2015}, 
+Plugging in the cosmological parameters from \citet{planck_et_al2015}, 
 we get 
 \begin{equation}\label{eqn:final_tb}
     \delta{T_{b}} \approx T_{0}\,x_{\text{\tiny{HI}}}\,(1+\delta)\, \xi ,
@@ -2483,7 +2482,7 @@ formation rates in high-redshift galaxy populations
 relationship between star formation rates and X-ray luminosities
 \citep{furlanetto_et_al2006,pritchard_loeb2008,fialkov_et_al2014}.  Assuming the
 midpoint of reionization lies close to $z=8.4$ (a reasonable assumption given
-that \citealt{planck_2015} suggests a midpoint of $z=8.8$), both the bounds
+that \citealt{planck_et_al2015} suggests a midpoint of $z=8.8$), both the bounds
 found in this paper and \cite{pober_et_al2015}, show evidence for additional
 sources of heating beyond the observed galaxy population.  We refer the reader
 to \citet{pober_et_al2015} for a detailed examination of these results.
@@ -2603,7 +2602,7 @@ the leakage signal implied by \citet{moore_et_al2015}.
 The end result is a major step forward, both for PAPER and for the field of 21cm cosmology.
 While we have not yet made a detection of the 21cm cosmological signal, our limits are
 now within the range of some of the brighter models.  As discussed in \citet{pober_et_al2015},
-another order of magnitude improvement in sensitivity will make 21cm measurements highly constraining.
+another order-of-magnitude improvement in sensitivity will make 21cm measurements highly constraining.
 
 
 
@@ -2756,11 +2755,11 @@ noise limit is beginning to enter the realm of constraining realistic models of 
 
 Forthcoming from PAPER will be two seasons of observation with a 128-element array.
 Following the same analysis as presented here, that data set is expected to improve 
-over the PAPER-64 sensitivity by a factor of $3.5$ (in mK$^2$), with the potential for another boost to sensitivity
+over the PAPER-64 sensitivity by a factor of $\sim$4 (in mK$^2$), with the potential for another boost to sensitivity
 should the new 16-m baselines provided in the PAPER-128 array configuration prove to be
 usable.  There also remains the potential for further improvements to sensitivity through the
 use of longer baselines, if foregrounds can be managed effectively.
-As has been done recently for PAPER-32 \citep{jacobs_et_al2015,moore_et_al2015}, 
+As has been done recently for PAPER-32 \citep{jacobs_et_al2014,moore_et_al2015}, 
 future work will also extend PAPER-64 analysis
 to a range of redshifts and examine the power spectrum of polarized emission.
 
@@ -2788,7 +2787,7 @@ dishes designed to minimize the width of the delay-space kernel
 $\tilde{A}_\tau$ in equation \ref{eqn:delay_transform}.
 Sensitivity forecasts for a 547-element HERA array
 show that HERA can deliver detections of the 21cm reionization signal
-at a significance of $\sim32\sigma$ using the same the conservative 
+at a significance of 32$\sigma$ using the same the conservative 
 foreground avoidance strategy employed in this paper
 \citet{pober_et_al2014}.  HERA is the natural successor
 to PAPER, combining a proven experimental strategy with the 
@@ -2802,11 +2801,11 @@ PAPER is supported by grants from the National Science Foundation (NSF; awards 0
 (awards 1352519, 1302774, and 1401708, respectively).
 JEA would like to acknowledge a generous grant from the Mount Cuba Astronomical Association for
 computing resources.
-We graciously thank SKA-SA for site infrastructure and observing support. In
-addition we would like to thank our South African interns Monde Manzini and
-Ruvano Casper from Durban University of Technology (DUT), who helped build out
-the array from 32 antennas to the 64 antennas this analysis was based on. 
-We would like to thank Josh Dillon for helpful discussions on optimal quadratic
+We graciously thank SKA-SA for site infrastructure and observing support. 
+We also thank interns Monde Manzini and
+Ruvano Casper from Durban University of Technology, who helped expand
+the array from 32 to 64 antennas.
+Thanks also to Josh Dillon for helpful discussions on optimal quadratic
 estimators. 
 
 %\clearpage
