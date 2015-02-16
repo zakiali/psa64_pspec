@@ -47,12 +47,14 @@
 
 \begin{document}
 
-\title{PAPER-64 Power Spectrum: XXX a better title}
+\title{PAPER-64 Constraints on Reionization I: the 21cm Power Spectrum at z = 8.4}
 
 \author{
 Zaki S. Ali\altaffilmark{1}, 
 Aaron R. Parsons\altaffilmark{1,2}, 
 Haoxuan Zheng\altaffilmark{12},
+Jonathan C. Pober\altaffilmark{10}, 
+Adrian Liu\altaffilmark{1}, 
 James E. Aguirre\altaffilmark{4},
 Richard F. Bradley\altaffilmark{5,6,7},
 Gianni Bernardi\altaffilmark{3}, 
@@ -60,13 +62,10 @@ Chris L. Carilli\altaffilmark{8,11},
 Carina Cheng\altaffilmark{1},
 David R. DeBoer\altaffilmark{2}, 
 Matthew R. Dexter\altaffilmark{2},
-%Steven R. Furlanetto\altaffilmark{XXX},
 Daniel C. Jacobs\altaffilmark{9}, 
 Pat Klima\altaffilmark{6},
-Adrian Liu\altaffilmark{1}, 
 David H. E. MacMahon\altaffilmark{2},
 David F. Moore\altaffilmark{3},
-Jonathan C. Pober\altaffilmark{10}, 
 Nima Razavi\altaffilmark{11},
 Irina I. Stefan\altaffilmark{11},
 William P. Walbrugh\altaffilmark{3},
@@ -93,7 +92,7 @@ Cambridge, MA}
 
 \begin{abstract}
 In this paper, we report new limits on 21cm emission from cosmic reionization
-based on a 4.5-month observing campaign with a 64-element deployment of the
+based on a 135-day observing campaign with a 64-element deployment of the
 Donald C. Backer Precision Array for Probing the Epoch of Reionization (PAPER)
 in South Africa.  This work extends the work presented in
 \citet{parsons_et_al2014} with more collecting area, improved redundancy-based
@@ -118,9 +117,9 @@ unexplored phases in cosmic history.
 Studying the formation of the first galaxies and their influence on the primordial IGM during this
 period is among the highest priorities in modern astronomy.
 During our cosmic dawn, IGM characteristics depend on the matter density field, the mass and clustering of 
-the first galaxies \citep{lidz_et_al2008} [XXX check], their ultraviolet luminosities [XXX],
-the abundance of X-ray sources and other sources of heating \citep{mesinger_et_al2013} [XXX check],
-and higher-order cosmological effects like the relative velocities of baryons and dark matter \citep{visbal_et_al2012}.
+the first galaxies \citep{lidz_et_al2008}, their ultraviolet luminosities [XXX need a cite],
+the abundance of X-ray sources and other sources of heating \citep{pritchard_loeb2008,mesinger_et_al2013},
+and higher-order cosmological effects like the relative velocities of baryons and dark matter \citep{visbal_et_al2012,mcquinn_oleary2012}.
 
 Recent measurements
 have pinned down the bright end of the galaxy luminosity function
@@ -158,7 +157,7 @@ in the near term, 21~cm cosmology experiments are focusing on statistical or glo
 of the signal.
 
 %The hyperfine transition in the ground state of hydrogen
-%leads to the emission of the infamous [XXX: infamous?!] 21 cm wavelength photon. The 21 cm
+%leads to the emission of the infamous [infamous?!] 21 cm wavelength photon. The 21 cm
 %transition is thought to be one the most promising probes of the early universe
 %due to the fact that the frequency of observed radiation maps to a specific
 %redshift. It has the potential to map the never before seen dark ages
@@ -167,13 +166,13 @@ of the signal.
 %completely ionized by the photons emitted by the first luminous galaxies. The wealth of
 %information that can be obtained from the use of this optically thin transition
 %include the formation of the first stars and galaxies, neutrino masses, and
-%initial inflation power spectrum, amongst other science (XXX: list and cite
+%initial inflation power spectrum, amongst other science (list and cite
 %exhaustively). Using 21 cm to map the universe has the ability to surpass the
 %Cosmic Microwave Background (CMB) in terms of the wealth of science it can
 %deliver (see, e.g., \cite{furlanetto_et_al2006}, \cite{morales_wyithe2010}, and
 %\cite{pritchard_loeb2012} for reviews on using the 21 cm transition as a
 %cosmological probe).
-%XXX Should ideally separate out cosmological applications from astrophysical ones.
+% Should ideally separate out cosmological applications from astrophysical ones.
 
 There are two complementary experimental approaches to accessing 21~cm emission from
 our cosmic dawn.  So-called ``global" experiments such as 
@@ -216,22 +215,22 @@ for redundancy-based calibration \citep{liu_et_al2010,wieringa1992,zheng_et_al20
 now relies to solve for the majority of the internal instrumental degrees of freedom.  The efficacy of
 this approach was demonstrated with 
 data from a 32-antenna deployment of PAPER, which achieved an upper 
-limit on the 21 cm power spectrum of $\Delta^2 (k) \leq (41\,\textrm{mK})^{2}$ at 
-$k=0.27\hMpci$ (\citealt{parsons_et_al2014}, hereafter P14).  This upper limit improved
-over previous limits by orders of magnitude, and as of this writing, remains the best
-upper limit achieved in the field.
+limit on the 21 cm power spectrum $\Delta^2 (k) \leq (41\,\textrm{mK})^{2}$ at 
+$k=0.27\hMpci$ (\citealt{parsons_et_al2014}, hereafter P14).  That upper limit improved
+over previous limits by orders of magnitude, showing that the early universe was heated
+from adiabatic cooling, presumably by emission from high-mass X-ray binaries or mini-quasars.
 
-P14 showed that their upper limits were inconsistent with a cold reionization
-model and that there needed to be sources  heating the IGM, most likely from
-high energy X-ray's from high mass xray binaries. 
-We further the results by
-putting a limit on the spin temperature at $z=8.4$ using the upper limits presented here,
-under the assumptions of the simple reionization scenarios presented in P14. 
-A more thourough analysis using a simulation based framework with 21 cm FAST and the
-results derived in this work is presented in \citep{pober_et_al2015}, where they present limits in the brightness temperature of the IGM. In addition, they provide evidence that there should be additional sources of heating other than the ones observed in current galaxy surveys.
-
-In this paper, we report on the results from a 64-element deployment of PAPER
-that improve on this previous result.  In Section
+In this paper, we improve on this previous result using
+a larger 64-element deployment of PAPER, along with better redundant calibration, a new
+aggressive fringe-rate filtering technique, and an improved power-spectrum estimation pipeline.
+The result is an
+upper limit on $\Delta^2(k)$ of ($20.6~{\rm mK})^2$ in the range
+$0.1<k<0.5\hMpci$ at $z=8.4$.  This result places significant constraints on the 
+spin temperature of the IGM, and as is shown in a companion to this paper,
+\citet{pober_et_al2015}, this supports and extends
+previous evidence for significant heating prior to
+reionization.
+In Section
 \ref{sec:observations} we describe the observations used in this analysis. In
 Sections \ref{sec:calib} and \ref{sec:instrument}, 
 we discuss the calibration and 
@@ -391,8 +390,8 @@ our analysis pipeline begins by running a compression
 algorithm to reduce the volume of our raw data by a factor of 70
 (see Appendix A of P14). 
 We then calibrate in two stages, which we describe in more detail below.  
-The first step uses instantaneous redundancy to solve for the majority of the 
-per-antenna internal degrees of freedom in the array.  Second, standard self-calibration is used 
+The first stage uses instantaneous redundancy to solve for the majority of the 
+per-antenna internal degrees of freedom in the array.  In the second stage, standard self-calibration is used 
 to solve for a smaller number of
 absolute phase and gain parameters that cannot be solved by redundancy alone. 
 % XXX check if these statements are needed
@@ -994,7 +993,7 @@ RFI events. The median statistic used here ensures that there is no signal
 loss due to this filter. [XXX why is this?]
 
 We make two separate LST-binned data sets, averaging every other julian day
-together to obtain an "even" and "odd" dataset. The use of these two data sets
+together to obtain an ``even" and ``odd" dataset. The use of these two data sets
 allows us to construct an unbiased power spectrum estimate, as well as running
 jackknife tests. 
 
@@ -1126,7 +1125,7 @@ contour of constant fringe rate to construct our time average kernel or
 ``fringe-rate filter".
 
 
-%[XXX this paragraph could probably go -dcj]
+%[this paragraph could probably go -dcj]
 %As motivation, we discuss the use of fringe-rate filters in cross talk removal.
 %Crosstalk is modeled as a time independent coupling of signal between two
 %different signal paths. Since crosstalk does not vary as a function of time and shows up at zero fringe rate.  In this view crosstalk is a DC bias. To remove crosstalk, we can
@@ -1176,7 +1175,7 @@ in Figure \ref{fig:waterfalls}.
 %filter in fringe rate domain. The bottom consists of the corresponding time
 %domain filter gotten by fourier transforming and windowing with a
 %blackman-harris window to damp the tails.
-%[XXX move this figure into fringe-rate filter paper]
+%[ move this figure into fringe-rate filter paper]
 %}
 %\label{fig:fringe_rate_cut}
 %\end{figure}
@@ -1240,7 +1239,7 @@ independent samples per hour.
 %some sky signal, signal associated with fringe rates outside of the ranges shown
 %in Figure \ref{fig:fr_preserved_signal}. Figure \ref{fig:fr_preserved_signal} shows
 %that the applied filter removes sky associated with negative fringe rates and
-%very high fringe rates. [XXX how does this loss compare with the delay spectrum loss?  Can't just leave this statement dangling...]
+%very high fringe rates. [how does this loss compare with the delay spectrum loss?  Can't just leave this statement dangling...]
 %
 
 %\begin{figure}[h!]\centering
@@ -1292,13 +1291,13 @@ integration windows in the correlator with respect to sidereal time.
 %Demonstration of the time stability of the instrument. For a given LST
 %bin, we take the day to day samples that go into that bin and determine the
 %power spectrum for that time seris. Shown here is the power spectrum of the time
-%series over 134 days for baseline 1\_4 at 150 MHz (XXX) averaged over 5 hours in
+%series over 134 days for baseline 1\_4 at 150 MHz () averaged over 5 hours in
 %LST. Power at 1/134 days$^{-1}$ is the DC bin, accumulating the average of the
 %time signal. The power spectrum folows a noise like power spectrum throughout
 %with a slight uptic at the temporal frequency corresponding to 2 days. This is
 %due to the fact that the integration time does not fully divide out a sidereal
 %day, but has a remiainder of $\frac{1}{2}$, piling up power on the everyother day
-%time scale. (XXX need to be more clear here, I think. a.const.sidereal\_day/42.9
+%time scale. ( need to be more clear here, I think. a.const.sidereal\_day/42.9
 %= 2008.487, a.const.sidereal\_day/42.94 = 2006.616.)
 %}
 }\label{fig:stability}
@@ -1751,9 +1750,9 @@ replacement baselines from each group. When computing the estimate of the power
 spectrum, we only cross multiply the baselines between groups and never compute
 the auto power, minimizing the bias.
 
-Secondly, we use the data from the two LST binned data sets which were created
-by binning every other days into the same LST grid. We refer to these data sets
-as the ``even" and ``odd" data sets. When constructing our estimate of the power
+Secondly, we use the data from the even and odd LST binned data sets which were created
+by binning alternate days onto the same LST grid. 
+When constructing our estimate of the power
 spectrum, we use baselines from these two data sets on either side of the
 $\mathbf{Q}$ matrix, being careful not to include the same baseline from the
 same data set on both sides. This is another axis on which we are trying the
@@ -1850,8 +1849,10 @@ the error correlation, or covariance of the estimate of our band powers, is only
 proportional to the identity matrix, and hence diagonal. This is a very well
 behaved property that implies that the error bars between band powers are not
 correlated and hence the error bar on every measurement is independent from on
-one another. [XXX contrast to the blackmann-harris window function in which
-band powers nd errors were correlated with one another. maybe?].
+one another.  This contrasts with the power-spectrum estimator in P14, which
+used a Blackmann-Harris taper function that reduced leakage between band powers,
+but resulted in overlapping window functions that meant neighboring 
+band powers contained correlated errors.
 
 The Fisher matrix is a key component in the above analysis and contains a
 wealth of information about the amount of information in each $k$-mode. The
@@ -1885,29 +1886,6 @@ suppressed by the delay filter.
 %to the data in the calculation of $\qhat$, which downweights the signal.}
 \label{fig:fisher}
 \end{figure}
-
-
-\begin{figure*}\centering
-\includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
-\caption{
-Cumulative mean (left) and median (right), as a function of number of modes,
-of power spectrum band power for
-$k_\parallel$ modes ranging from $-0.49$ (red) to $0.44\hMpci$ (violet).
-This Allen variance plot shows modes averaging down as the square root of
-number of modes combined until a signal floor is reached.  The difference in
-behavior between the mean and median for several modes indicates non-Gaussianity
-in the distribution of values, likely as a result of foreground contamination.
-%Plotted is the cumulative mean for band powers at a given $k$-mode,
-%where the colors indicate the mode being integrated, with blue being the most
-%interior modes and walking out to the exterior modes in green; red being the
-%modes in the middle. On the right is the same plot, except using a median
-%instead of the mean as the statistic. The behaviour of either of these
-%statistics is very similar with modes that bottom out on something and there
-%modes that seem to take a dive as more modes are used. Assuming Gaussian
-%statistics, there is an overall correction factor of 1.4 for using the median
-%statistic relative to the mean.}
-}\label{fig:pspec_variance}
-\end{figure*}
 
 
 \subsection{Covariance Matrix and Signal Loss}
@@ -2034,6 +2012,25 @@ final estimate of the 21 cm power spectrum (figure \ref{fig:final_pspec}), we
 show that signal loss is $<2\%$ at $95\%$ confidence. 
 [XXX need more discussion of what the plot means. Still more?]
 
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth]{plots/sigloss.png}
+\caption{
+Recovered power spectrum signal as a function of injected signal amplitude.  Shaded regions
+indicate the range in measured amplitude of power spectrum modes in Figure \ref{fig:final_pspec}.  
+Error bars indicate 95\% confidence intervals as determined from the Monte Carlo simulations
+described in Section \ref{sec:sigloss}.
+Because
+the recovered signal amplitude is a monotonic function of the injected signal amplitude,
+it is possible to invert the effects of signal loss in the measured power spectrum values
+to infer the true signal amplitude on the sky. Over the range of powers measured, the 
+maximum correction factor $P_{\rm in}/P_{\rm out}$ is less than 1.02 at 97.5\% confidence.
+The transition to significantly higher correction factors at larger signal amplitudes
+occurs as the injected signal
+dominates over the foreground modes present in estimates of the data covariance.
+}\label{fig:signal_loss}
+\end{figure}
+
 \begin{table}[htdp]
 \caption{SIGNAL LOSS VERSUS ANALYSIS STAGE}
 \begin{center}
@@ -2049,9 +2046,16 @@ Median of Modes & 1.4 & 1.4 \\
 \label{tbl:sigloss}
 \end{table}%
 
-%XXX Need to claim that we ran an end to end test.
+As shown in Table \ref{tbl:sigloss}, the signal loss we characterize for quadratic
+estimation of the power spectrum band powers is tabulated along with the signal
+loss associated with each other potentially lossy analysis stage (see Figure \ref{fig:flowchart}).
+We correct for the signal loss in each stage by multiplying the final power spectrum results
+by the typical loss for each stage, except for specific modes the maximum
+signal loss applies. These modes are uniformly within the horizon limits or (in the case of
+delay filtering) immediately adjacent to the horizon limit.
+%XXX LST binning is one stage labeled as lossy in figure that isn't addressed in this table
 
-%XXX Carina's Text of the eor model goes here.
+% Carina's Text of the eor model goes here.  Will put in on revision
 %The model eor signal used was a simulation of a flat power spectrum, in P($k$),
 %from $k$-modes ranging from .1-10 $\text{hMpc}^{-1}$. From this an angular power
 %spectrum is computed (\cite{datta_et_al2007, lewis_challinor_2007}), ensuring
@@ -2125,6 +2129,30 @@ statistic in order to measure the variance in our power spectrum, rather than
 the mean statistic. This is due to the fact that there are outliers that
 drastically skew the final error bars. 
 
+\begin{figure*}\centering
+\includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
+\caption{
+Cumulative mean (left) and median (right), as a function of number of modes,
+of power spectrum band power for
+$k_\parallel$ modes ranging from $-0.49$ (red) to $0.44\hMpci$ (violet).
+This Allen variance plot shows modes averaging down as the square root of
+number of modes combined until a signal floor is reached.  The difference in
+behavior between the mean and median for several modes indicates non-Gaussianity
+in the distribution of values, likely as a result of foreground contamination.
+%Plotted is the cumulative mean for band powers at a given $k$-mode,
+%where the colors indicate the mode being integrated, with blue being the most
+%interior modes and walking out to the exterior modes in green; red being the
+%modes in the middle. On the right is the same plot, except using a median
+%instead of the mean as the statistic. The behaviour of either of these
+%statistics is very similar with modes that bottom out on something and there
+%modes that seem to take a dive as more modes are used. Assuming Gaussian
+%statistics, there is an overall correction factor of 1.4 for using the median
+%statistic relative to the mean.}
+}\label{fig:pspec_variance}
+\end{figure*}
+
+
+
 Figure \ref{fig:pspec_variance} shows that the mean and variance statistic used
 in the estimate of the band powers have similar properties. Namely, some modes
 integrate down and bottom out on a signal with the addition of more samples.
@@ -2141,25 +2169,6 @@ we are somewhere in-between these two distributions, as implied by the fact that
 some of our error bars are consistent with zero and some are clear detections.
 We therefore apply this correction factor as an upper bound on the discrepancy
 of using these two statistical metrics.
-
-\begin{figure}
-\centering
-\includegraphics[width=\columnwidth]{plots/sigloss.png}
-\caption{
-Recovered power spectrum signal as a function of injected signal amplitude.  Shaded regions
-indicate the range in measured amplitude of power spectrum modes in Figure \ref{fig:final_pspec}.  
-Error bars indicate 95\% confidence intervals as determined from the Monte Carlo simulations
-described in Section \ref{sec:sigloss}.
-Because
-the recovered signal amplitude is a monotonic function of the injected signal amplitude,
-it is possible to invert the effects of signal loss in the measured power spectrum values
-to infer the true signal amplitude on the sky. Over the range of powers measured, the 
-maximum correction factor $P_{\rm in}/P_{\rm out}$ is less than 1.02 at 97.5\% confidence.
-The transition to significantly higher correction factors at larger signal amplitudes
-occurs as the injected signal
-dominates over the foreground modes present in estimates of the data covariance.
-}\label{fig:signal_loss}
-\end{figure}
 
 
 %\subsubsection{Integrating $k$-modes}
@@ -2247,10 +2256,10 @@ $\sigma$ upper limits from GMRT \citep{paciga_et_al2011} (yellow) at $z=8.6$,
 MWA \citep{dillon_et_al2013b} at $z=9.5$ (magenta), and the previous PAPER upper
 limit (P14) at $z=7.7$. The magenta curve shows a predicted model 21 cm power
 spectrum at 50\% ionization \citep{lidz_et_al2008}.
-XXX Using 100 bootstraps. Correction factors are
-fringe-rate filter (1.9), signal loss (1.02), and median statistic (1.4), delay
-filter signal loss, bandpass signal loss.}
-\label{fig:final_pspec}
+%Using 100 bootstraps. Correction factors are
+%fringe-rate filter (1.9), signal loss (1.02), and median statistic (1.4), delay
+%filter signal loss, bandpass signal loss.
+} \label{fig:final_pspec}
 \end{figure*}
 
 Following the power spectrum analysis procedure outlined in Section \ref{sec:oqe_app},
@@ -2348,7 +2357,7 @@ of an isotropic Gaussian sky signal.  We can surmise from the significant change
 under fringe-rate filtering that it arises from emission that violates these assumptions.
 We conclude, therefore, that this excess is unlikely to be cosmic reionization, and is more
 likely the result of non-Gaussian foregrounds.  As discussed earlier, one possible
-culprit is polarization leakage \citep{moore_et_al2014,jelic_et_al2010,jelic_et_al2014}, although further
+culprit is polarization leakage \citep{moore_et_al2013,jelic_et_al2010,jelic_et_al2014}, although further
 work will be necessary to confirm this.  It is worth noting that the interpretation of
 the signal as polarization leakage is consistent with recent measurements in Stokes Q presented
 in \citet{moore_et_al2015}.
@@ -2404,7 +2413,7 @@ constant, $x_{HI}$ is the neutral fraction of hydrogen, $\delta$ is the local
 baryon overdensity, $\nu_0$ is the rest frequency of the 21cm transition, and 
 the remainder are the usual constants.
 %We ignore the effect of redshift space distortions.
-Plugging in the cosmological parameters from \citet{planck_2015}, 
+Plugging in the cosmological parameters from \citet{planck_et_al2015}, 
 we get 
 \begin{equation}\label{eqn:final_tb}
     \delta{T_{b}} \approx T_{0}\,x_{\text{\tiny{HI}}}\,(1+\delta)\, \xi ,
@@ -2509,7 +2518,7 @@ formation rates in high-redshift galaxy populations
 relationship between star formation rates and X-ray luminosities
 \citep{furlanetto_et_al2006,pritchard_loeb2008,fialkov_et_al2014}.  Assuming the
 midpoint of reionization lies close to $z=8.4$ (a reasonable assumption given
-that \citealt{planck_2015} suggests a midpoint of $z=8.8$), both the bounds
+that \citealt{planck_et_al2015} suggests a midpoint of $z=8.8$), both the bounds
 found in this paper and \cite{pober_et_al2015}, show evidence for additional
 sources of heating beyond the observed galaxy population.  We refer the reader
 to \citet{pober_et_al2015} for a detailed examination of these results.
@@ -2586,7 +2595,7 @@ to \citet{pober_et_al2015} for a detailed examination of these results.
 %       rate filer, which is a flat filter and throws out the the fringe rates
 %       outside of those possible for a baseline of the eor baselines used in
 %       this analysis. 
-%       -This gives us a sensitivity benefit of a factor of 3(XXX), as seen
+%       -This gives us a sensitivity benefit of a factor of 3(), as seen
 %       in the figure. Note that this data does have omnical applied to it.
 %
 
@@ -2629,7 +2638,7 @@ the leakage signal implied by \citet{moore_et_al2015}.
 The end result is a major step forward, both for PAPER and for the field of 21cm cosmology.
 While we have not yet made a detection of the 21cm cosmological signal, our limits are
 now within the range of some of the brighter models.  As discussed in \citet{pober_et_al2015},
-another order of magnitude improvement in sensitivity will make 21cm measurements highly constraining.
+another order-of-magnitude improvement in sensitivity will make 21cm measurements highly constraining.
 
 
 
@@ -2709,11 +2718,11 @@ another order of magnitude improvement in sensitivity will make 21cm measurement
 %Through simulations, \cite{moore_et_al2013} showed that the expected
 %polarization leakage at $z=8.5$ in $\Delta^{2}$ is between
 %$10^{3}-3\times10^{3} (mk^{2})$ at $k\approx0.15\hMpci$. 
-%[XXX careful with this comparison, since it is about to be revised downward in new moore et al paper]
+%[ careful with this comparison, since it is about to be revised downward in new moore et al paper]
 %Our measured Stokes
 %I power spectrum in figure \ref{fig:final_pspec} shows that we just on the cusp
 %of seeing polarization leakage and possibly even ruling out some of the models
-%used. [XXX i don't think this statement is backed up by the data]
+%used. [ i don't think this statement is backed up by the data]
 %There might even be possible detection of the polarization leakage and
 %would require us to move up in frequency to higher redshift where polarization
 %is less prominent due to the $\lambda^{2}$ dependence of Faraday rotation.
@@ -2755,7 +2764,7 @@ to show that limits of $T_s>5$ K are fairly generic for models with
 ionization fractions between 0.3 and 0.7.
 A more detailed analysis of the implied constraints on spin temperature using
 a self-consistent simulation of the physics of reionization is
-presented in a companion paper \citep{pober_et_al2015}.  This that paper,
+presented in a companion paper \citep{pober_et_al2015}.  In that paper,
 it is shown that the excluded combinations of spin temperature
 and neutral fraction implied by our measurements
 suggest a source of X-ray luminosity beyond what can be 
@@ -2763,72 +2772,63 @@ accounted for given currently observed galaxies.  The most likely interpretation
 of these results is a significant contribution to X-ray heating from lower-mass
 galaxies that are currently below the detection threshold of optical surveys.
 
+The power spectrum results that we present continue to be based on
+the delay-spectrum approach to foreground avoidance presented in 
+P12b and first applied in P14.  The application of a delay filter over
+a wide bandwidth continues to one of the most powerful techniques yet
+demonstrated for managing bright smooth-spectrum foregrounds.  In this
+paper, we extend the analysis in P14 with aggressive fringe-rate filtering,
+improved redundant calibration with OMNICAL, and with an optimal quadratic
+estimator that, while lossy, is more adept at down-weighting non-Gaussian foregrounds.
+The combined effect of these improvements leaves a power-spectral measurement that,
+while not consistent with zero at the 2.7$\sigma$-level, is not far from thermal
+noise limit.  With the expansion of the PAPER array to 64 antennas, the extended 135-day
+observing campaign,
+and the added sensitivity benefits of aggressive fringe-rate filtering, combined with
+the optimization of antenna position in the PAPER array for highly redundant
+measurements, this thermal
+noise limit is beginning to enter the realm of constraining realistic models of reionization.
 
-We also continue to demonstrate the efficacy of using delay filters for
-foreground suppression and the foreground avoidance technique in measuring the power
-spectrum. In addition, we employ novel techniques in this analysis and show that
-the necessity of precise calibration is needed to make accurate and believable
-measurements of the 21 cm reionization power spectrum. We also show that the use of beam
-weighted measurements in the optimal fringe-rate filter is critical to
-increasing sensitivity for instruments with natively low sensitivity due to
-collecting area, increasing the SNR on the measurement by a factor of at least 2.
-We have also demonstrated the stability of the PAPER instrument both in time and
-between redundant baselines, showing that baselines agree on the same sky up to
-systematical errors and that the time correlation between days is low in the
-noise.
-
-At the achieved levels of the power spectrum, we also put constraints on the
-amount polarization leakage that could possibly corrupt the Stokes I power
-spectrum. We show that polarization leakage is not shown for most $k$-modes at
-the level of $\sim10^{3}\ \text{mK}^{2}$. 
-
-Looking forward, the need for larger arrays with increased collecting area is
-becoming a necessity. Proposed experiments such as the Square-Kilometer Array
-(SKA) and the Hydrogen Epoch of Reionization Array (HERA) are set to fill this
-need. HERA is a collaborative experiment dedicated to detect and characterize
-the 21 cm reionization power spectrum as well as eventually image the ionizing bubbles
-from the formation of the first stars and galaxies. The HERA instrument
-is proposed to be composed of a closely packed 547 element hexagonal array 
-\citep{pober_et_al2014} with each element being a 14-m diameter
-reflecting-dish, with a total array area of $\sim.1km^{2}$. Sensitivity forecasts
-derived in \citet{pober_et_al2014} showed that HERA has the ability to
-detect reionization at a significance between $\sim32\sigma$ to $\sim133\sigma$
-depending on the foreground removal scheme used. The lower bound is for the
-delay spectrum technique used in this paper, where modes within the horizon are
-irrevocably corrupted, whereas the higher bound equates to when we can perfectly
-work within the wedge. That is, it is possible to perfectly subtract sources
-within the horizon.
-
-PAPER itself is looking forward to 2 seasons of 128 antenna maximally redundant
-configuration data set. This data set has to potential to increase  sensitivity
-by a factor of $3.5$ as compared to the data set used in this paper. However,
-due to constraints on the PAPER site in South Africa, the shortest baselines for
-this array are $8\lambda$ (16m), instead of the $16\lambda$ (32m) baselines used
-in this analysis, which may be riddled with systematics due to cross coupling
-and reflections within the array. Therefore, only considering the 16 m
-East-West baselines, there will be a total sensitivity benefit of $3$. However,
-there is the potential to use the $48m$ nd $64m$ baselines in this analysis as
-well, boosting the sensitivity to by another factor of 2. 
-
-PAPER is continuing to integrate down toward the 21 cm signal and gaining ground
-on overcoming challenges in systematics in the instrument as well being able to
-look past foregrounds. Future work will again characterize the reionization power
-spectrum over a range of redshifts and to measure directly the polarized power
-spectrum. We also look forward to two seasons of 128 dual polarization PAPER
-data which will increase the sensitivity of measurements by almost an order of
-magnitude from the data used here. Also, construction of HERA is also under way,
-which will have the sensitivity to make a $30\sigma$ detection of the 21 cm power
-spectrum. We look forward to this.
+Forthcoming from PAPER will be two seasons of observation with a 128-element array.
+Following the same analysis as presented here, that data set is expected to improve 
+over the PAPER-64 sensitivity by a factor of $\sim$4 (in mK$^2$), with the potential for another boost to sensitivity
+should the new 16-m baselines provided in the PAPER-128 array configuration prove to be
+usable.  There also remains the potential for further improvements to sensitivity through the
+use of longer baselines, if foregrounds can be managed effectively.
+As has been done recently for PAPER-32 \citep{jacobs_et_al2014,moore_et_al2015}, 
+future work will also extend PAPER-64 analysis
+to a range of redshifts and examine the power spectrum of polarized emission.
 
 
-%However, all major 21 cm experiments (LOFAR, MWA, and PAPER) are at the cusp of detection
-%and all have the sensitivity to rule out the optimistic reionization scenarios.
-% XXX don't put speculative stuff in intro
-[XXX Might mention impact of wedge on predicted sensitivities.]
-However, even with a detection from one of these experiments, a high signal-to-noise characterization of the 21 cm power spectrum and imaging of reionization will have to
-wait until future 21 cm experiments such as the Hydrogen Epoch of Reionization
-Array (HERA) and the Square Kilometer Array (SKA), which will have more raw
-collecting area and greater sensitivity \citep{pober_et_al2014}.
+% [ARP: this wasn't shown in the main body]
+%At the achieved levels of the power spectrum, we also put constraints on the
+%amount polarization leakage that could possibly corrupt the Stokes I power
+%spectrum. We show that polarization leakage is not shown for most $k$-modes at
+%the level of $\sim10^{3}\ \text{mK}^{2}$. 
+
+With recent breakthroughs in foreground management, the sensitivity 
+limitations of current experiments are becoming clear.  Although collecting area is vital,
+as discussed in \citet{pober_et_al2014}, the impact of collecting area
+depends critically on the interplay of array configuration with foregrounds.
+Despite a large spread in collecting areas between PAPER, the MWA, and LOFAR,
+in the limit that foreground avoidance is the only viable strategy, these
+arrays all deliver, at best, comparable low-significance detections of fiducial models
+of reionization.  To move beyond simple detection, next-generation instruments must
+deliver much more collecting area with very compact arrays.
+
+The Hydrogen Epoch of Reionization Array (HERA), whose first phase was recently granted funding
+under the National Science Foundation's {\it Mid-Scale Innovations Program}, has been
+designed to this specification. HERA uses a close packing of 14-m diameter 
+dishes designed to minimize the width of the delay-space kernel
+$\tilde{A}_\tau$ in equation \ref{eqn:delay_transform}.
+Sensitivity forecasts for a 547-element HERA array
+show that HERA can deliver detections of the 21cm reionization signal
+at a significance of 32$\sigma$ using the same the conservative 
+foreground avoidance strategy employed in this paper
+\citet{pober_et_al2014}.  HERA is the natural successor
+to PAPER, combining a proven experimental strategy with the 
+sensitivity to deliver results that will be truly transformative for
+understanding of our cosmic dawn.
 
 \section{Acknowledgements} 
 
@@ -2837,11 +2837,11 @@ PAPER is supported by grants from the National Science Foundation (NSF; awards 0
 (awards 1352519, 1302774, and 1401708, respectively).
 JEA would like to acknowledge a generous grant from the Mount Cuba Astronomical Association for
 computing resources.
-We graciously thank SKA-SA for site infrastructure and observing support. In
-addition we would like to thank our South African interns Monde Manzini and
-Ruvano Casper from Durban University of Technology (DUT), who helped build out
-the array from 32 antennas to the 64 antennas this analysis was based on. 
-We would like to thank Josh Dillon for helpful discussions on optimal quadratic
+We graciously thank SKA-SA for site infrastructure and observing support. 
+We also thank interns Monde Manzini and
+Ruvano Casper from Durban University of Technology, who helped expand
+the array from 32 to 64 antennas.
+Thanks also to Josh Dillon for helpful discussions on optimal quadratic
 estimators. 
 
 %\clearpage
