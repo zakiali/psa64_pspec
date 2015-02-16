@@ -1,4 +1,4 @@
-\begin{thebibliography}{99}
+\begin{thebibliography}{100}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Ali} {et~al.}(2008){Ali}, {Bharadwaj}, \&
@@ -233,6 +233,9 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   {Ellis}, \& {Targett}}]{mcleod_et_al2014}
 {McLeod}, D.~J., {McLure}, R.~J., {Dunlop}, J.~S., {Robertson}, B.~E., {Ellis},
   R.~S., \& {Targett}, T.~T. 2014, ArXiv e-prints
+
+\bibitem[{{McQuinn} \& {O'Leary}(2012)}]{mcquinn_oleary2012}
+{McQuinn}, M., \& {O'Leary}, R.~M. 2012, \apj, 760, 3
 
 \bibitem[{{Mesinger} {et~al.}(2013){Mesinger}, {Ferrara}, \&
   {Spiegel}}]{mesinger_et_al2013}

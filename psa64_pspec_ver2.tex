@@ -117,9 +117,9 @@ unexplored phases in cosmic history.
 Studying the formation of the first galaxies and their influence on the primordial IGM during this
 period is among the highest priorities in modern astronomy.
 During our cosmic dawn, IGM characteristics depend on the matter density field, the mass and clustering of 
-the first galaxies \citep{lidz_et_al2008} [XXX check], their ultraviolet luminosities [XXX],
-the abundance of X-ray sources and other sources of heating \citep{mesinger_et_al2013} [XXX check],
-and higher-order cosmological effects like the relative velocities of baryons and dark matter \citep{visbal_et_al2012}.
+the first galaxies \citep{lidz_et_al2008}, their ultraviolet luminosities [XXX need a cite],
+the abundance of X-ray sources and other sources of heating \citep{pritchard_loeb2008,mesinger_et_al2013},
+and higher-order cosmological effects like the relative velocities of baryons and dark matter \citep{visbal_et_al2012,mcquinn_oleary2012}.
 
 Recent measurements
 have pinned down the bright end of the galaxy luminosity function
@@ -157,7 +157,7 @@ in the near term, 21~cm cosmology experiments are focusing on statistical or glo
 of the signal.
 
 %The hyperfine transition in the ground state of hydrogen
-%leads to the emission of the infamous [XXX: infamous?!] 21 cm wavelength photon. The 21 cm
+%leads to the emission of the infamous [infamous?!] 21 cm wavelength photon. The 21 cm
 %transition is thought to be one the most promising probes of the early universe
 %due to the fact that the frequency of observed radiation maps to a specific
 %redshift. It has the potential to map the never before seen dark ages
@@ -166,13 +166,13 @@ of the signal.
 %completely ionized by the photons emitted by the first luminous galaxies. The wealth of
 %information that can be obtained from the use of this optically thin transition
 %include the formation of the first stars and galaxies, neutrino masses, and
-%initial inflation power spectrum, amongst other science (XXX: list and cite
+%initial inflation power spectrum, amongst other science (list and cite
 %exhaustively). Using 21 cm to map the universe has the ability to surpass the
 %Cosmic Microwave Background (CMB) in terms of the wealth of science it can
 %deliver (see, e.g., \cite{furlanetto_et_al2006}, \cite{morales_wyithe2010}, and
 %\cite{pritchard_loeb2012} for reviews on using the 21 cm transition as a
 %cosmological probe).
-%XXX Should ideally separate out cosmological applications from astrophysical ones.
+% Should ideally separate out cosmological applications from astrophysical ones.
 
 There are two complementary experimental approaches to accessing 21~cm emission from
 our cosmic dawn.  So-called ``global" experiments such as 
@@ -215,14 +215,22 @@ for redundancy-based calibration \citep{liu_et_al2010,wieringa1992,zheng_et_al20
 now relies to solve for the majority of the internal instrumental degrees of freedom.  The efficacy of
 this approach was demonstrated with 
 data from a 32-antenna deployment of PAPER, which achieved an upper 
-limit on the 21 cm power spectrum of $\Delta^2 (k) \leq (41\,\textrm{mK})^{2}$ at 
-$k=0.27\hMpci$ (\citealt{parsons_et_al2014}, hereafter P14).  This upper limit improved
-over previous limits by orders of magnitude, and as of this writing, remains the best
-upper limit achieved in the field.
-[XXX Some overview of the science constraints provided by PSA32 and how we will extend the method to PSA64, direct mention to the companion paper on the impact of the measurements should be here.]
+limit on the 21 cm power spectrum $\Delta^2 (k) \leq (41\,\textrm{mK})^{2}$ at 
+$k=0.27\hMpci$ (\citealt{parsons_et_al2014}, hereafter P14).  That upper limit improved
+over previous limits by orders of magnitude, showing that the early universe was heated
+from adiabatic cooling, presumably by emission from high-mass X-ray binaries or mini-quasars.
 
-In this paper, we report on the results from a 64-element deployment of PAPER
-that improve on this previous result.  In Section
+In this paper, we improve on this previous result using
+a larger 64-element deployment of PAPER, along with better redundant calibration, a new
+aggressive fringe-rate filtering technique, and an improved power-spectrum estimation pipeline.
+The result is an
+upper limit on $\Delta^2(k)$ of ($20.6~{\rm mK})^2$ in the range
+$0.1<k<0.5\hMpci$ at $z=8.4$.  This result places significant constraints on the 
+spin temperature of the IGM, and as is shown in a companion to this paper,
+\citet{pober_et_al2015}, this supports and extends
+previous evidence for significant heating prior to
+reionization.
+In Section
 \ref{sec:observations} we describe the observations used in this analysis. In
 Sections \ref{sec:calib} and \ref{sec:instrument}, 
 we discuss the calibration and 
@@ -382,8 +390,8 @@ our analysis pipeline begins by running a compression
 algorithm to reduce the volume of our raw data by a factor of 70
 (see Appendix A of P14). 
 We then calibrate in two stages, which we describe in more detail below.  
-The first step uses instantaneous redundancy to solve for the majority of the 
-per-antenna internal degrees of freedom in the array.  Second, standard self-calibration is used 
+The first stage uses instantaneous redundancy to solve for the majority of the 
+per-antenna internal degrees of freedom in the array.  In the second stage, standard self-calibration is used 
 to solve for a smaller number of
 absolute phase and gain parameters that cannot be solved by redundancy alone. 
 % XXX check if these statements are needed
@@ -982,7 +990,7 @@ RFI events. The median statistic used here ensures that there is no signal
 loss due to this filter. [XXX why is this?]
 
 We make two separate LST-binned data sets, averaging every other julian day
-together to obtain an "even" and "odd" dataset. The use of these two data sets
+together to obtain an ``even" and ``odd" dataset. The use of these two data sets
 allows us to construct an unbiased power spectrum estimate, as well as running
 jackknife tests. 
 
@@ -1113,7 +1121,7 @@ contour of constant fringe rate to construct our time average kernel or
 ``fringe-rate filter".
 
 
-%[XXX this paragraph could probably go -dcj]
+%[this paragraph could probably go -dcj]
 %As motivation, we discuss the use of fringe-rate filters in cross talk removal.
 %Crosstalk is modeled as a time independent coupling of signal between two
 %different signal paths. Since crosstalk does not vary as a function of time and shows up at zero fringe rate.  In this view crosstalk is a DC bias. To remove crosstalk, we can
@@ -1163,7 +1171,7 @@ in Figure \ref{fig:waterfalls}.
 %filter in fringe rate domain. The bottom consists of the corresponding time
 %domain filter gotten by fourier transforming and windowing with a
 %blackman-harris window to damp the tails.
-%[XXX move this figure into fringe-rate filter paper]
+%[ move this figure into fringe-rate filter paper]
 %}
 %\label{fig:fringe_rate_cut}
 %\end{figure}
@@ -1227,7 +1235,7 @@ independent samples per hour.
 %some sky signal, signal associated with fringe rates outside of the ranges shown
 %in Figure \ref{fig:fr_preserved_signal}. Figure \ref{fig:fr_preserved_signal} shows
 %that the applied filter removes sky associated with negative fringe rates and
-%very high fringe rates. [XXX how does this loss compare with the delay spectrum loss?  Can't just leave this statement dangling...]
+%very high fringe rates. [how does this loss compare with the delay spectrum loss?  Can't just leave this statement dangling...]
 %
 
 %\begin{figure}[h!]\centering
@@ -1279,13 +1287,13 @@ integration windows in the correlator with respect to sidereal time.
 %Demonstration of the time stability of the instrument. For a given LST
 %bin, we take the day to day samples that go into that bin and determine the
 %power spectrum for that time seris. Shown here is the power spectrum of the time
-%series over 134 days for baseline 1\_4 at 150 MHz (XXX) averaged over 5 hours in
+%series over 134 days for baseline 1\_4 at 150 MHz () averaged over 5 hours in
 %LST. Power at 1/134 days$^{-1}$ is the DC bin, accumulating the average of the
 %time signal. The power spectrum folows a noise like power spectrum throughout
 %with a slight uptic at the temporal frequency corresponding to 2 days. This is
 %due to the fact that the integration time does not fully divide out a sidereal
 %day, but has a remiainder of $\frac{1}{2}$, piling up power on the everyother day
-%time scale. (XXX need to be more clear here, I think. a.const.sidereal\_day/42.9
+%time scale. ( need to be more clear here, I think. a.const.sidereal\_day/42.9
 %= 2008.487, a.const.sidereal\_day/42.94 = 2006.616.)
 %}
 }\label{fig:stability}
@@ -1736,9 +1744,9 @@ replacement baselines from each group. When computing the estimate of the power
 spectrum, we only cross multiply the baselines between groups and never compute
 the auto power, minimizing the bias.
 
-Secondly, we use the data from the two LST binned data sets which were created
-by binning every other days into the same LST grid. We refer to these data sets
-as the ``even" and ``odd" data sets. When constructing our estimate of the power
+Secondly, we use the data from the even and odd LST binned data sets which were created
+by binning alternate days onto the same LST grid. 
+When constructing our estimate of the power
 spectrum, we use baselines from these two data sets on either side of the
 $\mathbf{Q}$ matrix, being careful not to include the same baseline from the
 same data set on both sides. This is another axis on which we are trying the
@@ -1835,8 +1843,10 @@ the error correlation, or covariance of the estimate of our band powers, is only
 proportional to the identity matrix, and hence diagonal. This is a very well
 behaved property that implies that the error bars between band powers are not
 correlated and hence the error bar on every measurement is independent from on
-one another. [XXX contrast to the blackmann-harris window function in which
-band powers nd errors were correlated with one another. maybe?].
+one another.  This contrasts with the power-spectrum estimator in P14, which
+used a Blackmann-Harris taper function that reduced leakage between band powers,
+but resulted in overlapping window functions that meant neighboring 
+band powers contained correlated errors.
 
 The Fisher matrix is a key component in the above analysis and contains a
 wealth of information about the amount of information in each $k$-mode. The
@@ -1870,29 +1880,6 @@ suppressed by the delay filter.
 %to the data in the calculation of $\qhat$, which downweights the signal.}
 \label{fig:fisher}
 \end{figure}
-
-
-\begin{figure*}\centering
-\includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
-\caption{
-Cumulative mean (left) and median (right), as a function of number of modes,
-of power spectrum band power for
-$k_\parallel$ modes ranging from $-0.49$ (red) to $0.44\hMpci$ (violet).
-This Allen variance plot shows modes averaging down as the square root of
-number of modes combined until a signal floor is reached.  The difference in
-behavior between the mean and median for several modes indicates non-Gaussianity
-in the distribution of values, likely as a result of foreground contamination.
-%Plotted is the cumulative mean for band powers at a given $k$-mode,
-%where the colors indicate the mode being integrated, with blue being the most
-%interior modes and walking out to the exterior modes in green; red being the
-%modes in the middle. On the right is the same plot, except using a median
-%instead of the mean as the statistic. The behaviour of either of these
-%statistics is very similar with modes that bottom out on something and there
-%modes that seem to take a dive as more modes are used. Assuming Gaussian
-%statistics, there is an overall correction factor of 1.4 for using the median
-%statistic relative to the mean.}
-}\label{fig:pspec_variance}
-\end{figure*}
 
 
 \subsection{Covariance Matrix and Signal Loss}
@@ -1995,6 +1982,25 @@ covariances leads to signal loss in the final estimate of the power spectrum.
 Here, we describe estimate the signal loss associated with the empirical
 estimates of the covariance matrix.
 
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth]{plots/sigloss.png}
+\caption{
+Recovered power spectrum signal as a function of injected signal amplitude.  Shaded regions
+indicate the range in measured amplitude of power spectrum modes in Figure \ref{fig:final_pspec}.  
+Error bars indicate 95\% confidence intervals as determined from the Monte Carlo simulations
+described in Section \ref{sec:sigloss}.
+Because
+the recovered signal amplitude is a monotonic function of the injected signal amplitude,
+it is possible to invert the effects of signal loss in the measured power spectrum values
+to infer the true signal amplitude on the sky. Over the range of powers measured, the 
+maximum correction factor $P_{\rm in}/P_{\rm out}$ is less than 1.02 at 97.5\% confidence.
+The transition to significantly higher correction factors at larger signal amplitudes
+occurs as the injected signal
+dominates over the foreground modes present in estimates of the data covariance.
+}\label{fig:signal_loss}
+\end{figure}
+
 In order to characterize
 the signal loss, we simulate visibilities for spatially Gaussian signal with a
 flat amplitude in $P(k)$ that rotates with the sky, and is fringe-rate filtered in
@@ -2022,9 +2028,16 @@ Median of Modes & 1.4 & 1.4 \\
 \label{tbl:sigloss}
 \end{table}%
 
-%XXX Need to claim that we ran an end to end test.
+As shown in Table \ref{tbl:sigloss}, the signal loss we characterize for quadratic
+estimation of the power spectrum band powers is tabulated along with the signal
+loss associated with each other potentially lossy analysis stage (see Figure \ref{fig:flowchart}).
+We correct for the signal loss in each stage by multiplying the final power spectrum results
+by the typical loss for each stage, except for specific modes the maximum
+signal loss applies. These modes are uniformly within the horizon limits or (in the case of
+delay filtering) immediately adjacent to the horizon limit.
+%XXX LST binning is one stage labeled as lossy in figure that isn't addressed in this table
 
-%XXX Carina's Text of the eor model goes here.
+% Carina's Text of the eor model goes here.  Will put in on revision
 %The model eor signal used was a simulation of a flat power spectrum, in P($k$),
 %from $k$-modes ranging from .1-10 $\text{hMpc}^{-1}$. From this an angular power
 %spectrum is computed (\cite{datta_et_al2007, lewis_challinor_2007}), ensuring
@@ -2098,6 +2111,30 @@ statistic in order to measure the variance in our power spectrum, rather than
 the mean statistic. This is due to the fact that there are outliers that
 drastically skew the final error bars. 
 
+\begin{figure*}\centering
+\includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
+\caption{
+Cumulative mean (left) and median (right), as a function of number of modes,
+of power spectrum band power for
+$k_\parallel$ modes ranging from $-0.49$ (red) to $0.44\hMpci$ (violet).
+This Allen variance plot shows modes averaging down as the square root of
+number of modes combined until a signal floor is reached.  The difference in
+behavior between the mean and median for several modes indicates non-Gaussianity
+in the distribution of values, likely as a result of foreground contamination.
+%Plotted is the cumulative mean for band powers at a given $k$-mode,
+%where the colors indicate the mode being integrated, with blue being the most
+%interior modes and walking out to the exterior modes in green; red being the
+%modes in the middle. On the right is the same plot, except using a median
+%instead of the mean as the statistic. The behaviour of either of these
+%statistics is very similar with modes that bottom out on something and there
+%modes that seem to take a dive as more modes are used. Assuming Gaussian
+%statistics, there is an overall correction factor of 1.4 for using the median
+%statistic relative to the mean.}
+}\label{fig:pspec_variance}
+\end{figure*}
+
+
+
 Figure \ref{fig:pspec_variance} shows that the mean and variance statistic used
 in the estimate of the band powers have similar properties. Namely, some modes
 integrate down and bottom out on a signal with the addition of more samples.
@@ -2114,25 +2151,6 @@ we are somewhere in-between these two distributions, as implied by the fact that
 some of our error bars are consistent with zero and some are clear detections.
 We therefore apply this correction factor as an upper bound on the discrepancy
 of using these two statistical metrics.
-
-\begin{figure}
-\centering
-\includegraphics[width=\columnwidth]{plots/sigloss.png}
-\caption{
-Recovered power spectrum signal as a function of injected signal amplitude.  Shaded regions
-indicate the range in measured amplitude of power spectrum modes in Figure \ref{fig:final_pspec}.  
-Error bars indicate 95\% confidence intervals as determined from the Monte Carlo simulations
-described in Section \ref{sec:sigloss}.
-Because
-the recovered signal amplitude is a monotonic function of the injected signal amplitude,
-it is possible to invert the effects of signal loss in the measured power spectrum values
-to infer the true signal amplitude on the sky. Over the range of powers measured, the 
-maximum correction factor $P_{\rm in}/P_{\rm out}$ is less than 1.02 at 97.5\% confidence.
-The transition to significantly higher correction factors at larger signal amplitudes
-occurs as the injected signal
-dominates over the foreground modes present in estimates of the data covariance.
-}\label{fig:signal_loss}
-\end{figure}
 
 
 %\subsubsection{Integrating $k$-modes}
@@ -2220,10 +2238,10 @@ $\sigma$ upper limits from GMRT \citep{paciga_et_al2011} (yellow) at $z=8.6$,
 MWA \citep{dillon_et_al2013b} at $z=9.5$ (magenta), and the previous PAPER upper
 limit (P14) at $z=7.7$. The magenta curve shows a predicted model 21 cm power
 spectrum at 50\% ionization \citep{lidz_et_al2008}.
-XXX Using 100 bootstraps. Correction factors are
-fringe-rate filter (1.9), signal loss (1.02), and median statistic (1.4), delay
-filter signal loss, bandpass signal loss.}
-\label{fig:final_pspec}
+%Using 100 bootstraps. Correction factors are
+%fringe-rate filter (1.9), signal loss (1.02), and median statistic (1.4), delay
+%filter signal loss, bandpass signal loss.
+} \label{fig:final_pspec}
 \end{figure*}
 
 Following the power spectrum analysis procedure outlined in Section \ref{sec:oqe_app},
@@ -2559,7 +2577,7 @@ to \citet{pober_et_al2015} for a detailed examination of these results.
 %       rate filer, which is a flat filter and throws out the the fringe rates
 %       outside of those possible for a baseline of the eor baselines used in
 %       this analysis. 
-%       -This gives us a sensitivity benefit of a factor of 3(XXX), as seen
+%       -This gives us a sensitivity benefit of a factor of 3(), as seen
 %       in the figure. Note that this data does have omnical applied to it.
 %
 
@@ -2682,11 +2700,11 @@ another order-of-magnitude improvement in sensitivity will make 21cm measurement
 %Through simulations, \cite{moore_et_al2013} showed that the expected
 %polarization leakage at $z=8.5$ in $\Delta^{2}$ is between
 %$10^{3}-3\times10^{3} (mk^{2})$ at $k\approx0.15\hMpci$. 
-%[XXX careful with this comparison, since it is about to be revised downward in new moore et al paper]
+%[ careful with this comparison, since it is about to be revised downward in new moore et al paper]
 %Our measured Stokes
 %I power spectrum in figure \ref{fig:final_pspec} shows that we just on the cusp
 %of seeing polarization leakage and possibly even ruling out some of the models
-%used. [XXX i don't think this statement is backed up by the data]
+%used. [ i don't think this statement is backed up by the data]
 %There might even be possible detection of the polarization leakage and
 %would require us to move up in frequency to higher redshift where polarization
 %is less prominent due to the $\lambda^{2}$ dependence of Faraday rotation.
