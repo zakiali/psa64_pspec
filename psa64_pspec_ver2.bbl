@@ -1,5 +1,23 @@
-\begin{thebibliography}{86}
+\begin{thebibliography}{95}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{{Ali} {et~al.}(2008){Ali}, {Bharadwaj}, \&
+  {Chengalur}}]{ali_et_al2008}
+{Ali}, S.~S., {Bharadwaj}, S., \& {Chengalur}, J.~N. 2008, \mnras, 385, 2166
+
+\bibitem[{{Bernardi} {et~al.}(2015){Bernardi}, {McQuinn}, \&
+  {Greenhill}}]{bernardi_et_al2015}
+{Bernardi}, G., {McQuinn}, M., \& {Greenhill}, L.~J. 2015, \apj, 799, 90
+
+\bibitem[{{Bernardi} {et~al.}(2009){Bernardi}, {de Bruyn}, {Brentjens},
+  {Ciardi}, {Harker}, {Jeli{\'c}}, {Koopmans}, {Labropoulos}, {Offringa},
+  {Pandey}, {Schaye}, {Thomas}, {Yatawatta}, \& {Zaroubi}}]{bernardi_et_al2009}
+{Bernardi}, G., {et~al.} 2009, \aap, 500, 965
+
+\bibitem[{{Bernardi} {et~al.}(2010){Bernardi}, {de Bruyn}, {Harker},
+  {Brentjens}, {Ciardi}, {Jeli{\'c}}, {Koopmans}, {Labropoulos}, {Offringa},
+  {Pandey}, {Schaye}, {Thomas}, {Yatawatta}, \& {Zaroubi}}]{bernardi_et_al2010}
+---. 2010, \aap, 522, A67+
 
 \bibitem[{{Bolton} {et~al.}(2011){Bolton}, {Haehnelt}, {Warren}, {Hewett},
   {Mortlock}, {Venemans}, {McMahon}, \& {Simpson}}]{bolton_et_al2011}
@@ -76,6 +94,9 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
 \bibitem[{{Fan} {et~al.}(2006){Fan}, {Carilli}, \& {Keating}}]{fan_et_al2006}
 {Fan}, X., {Carilli}, C.~L., \& {Keating}, B. 2006, \araa, 44, 415
 
+\bibitem[{{Field}(1958)}]{field1958}
+{Field}, G.~B. 1958, Proc. IRE, 46, 240
+
 \bibitem[{{Furlanetto} {et~al.}(2006){Furlanetto}, {Oh}, \&
   {Briggs}}]{furlanetto_et_al2006}
 {Furlanetto}, S.~R., {Oh}, S.~P., \& {Briggs}, F.~H. 2006, \physrep, 433, 181
@@ -90,6 +111,11 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   {Williamson}, \& {Zahn}}]{george_et_al2014}
 {George}, E.~M., {et~al.} 2014, ArXiv e-prints
 
+\bibitem[{{Ghosh} {et~al.}(2011){Ghosh}, {Bharadwaj}, {Ali}, \&
+  {Chengalur}}]{ghosh_et_al2011}
+{Ghosh}, A., {Bharadwaj}, S., {Ali}, S.~S., \& {Chengalur}, J.~N. 2011, \mnras,
+  418, 2584
+
 \bibitem[{{Greenhill} \& {Bernardi}(2012)}]{greenhill_bernardi2012}
 {Greenhill}, L.~J., \& {Bernardi}, G. 2012, ArXiv e-prints
 
@@ -101,6 +127,9 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
 \bibitem[{{Hazelton} {et~al.}(2013){Hazelton}, {Morales}, \&
   {Sullivan}}]{hazelton_et_al2013}
 {Hazelton}, B.~J., {Morales}, M.~F., \& {Sullivan}, I.~S. 2013, \apj, 770, 156
+
+\bibitem[{{Hirata}(2006)}]{hirata2006}
+{Hirata}, C.~M. 2006, \mnras, 367, 259
 
 \bibitem[{{H{\"o}gbom}(1974)}]{hogbom1974}
 {H{\"o}gbom}, J.~A. 1974, \aaps, 15, 417
@@ -490,6 +519,11 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   \& {Zarka}}]{yatawatta_et_al2013}
 {Yatawatta}, S., {et~al.} 2013, \aap, 550, A136
 
+\bibitem[{{Zahn} {et~al.}(2007){Zahn}, {Lidz}, {McQuinn}, {Dutta}, {Hernquist},
+  {Zaldarriaga}, \& {Furlanetto}}]{zahn_et_al2007}
+{Zahn}, O., {Lidz}, A., {McQuinn}, M., {Dutta}, S., {Hernquist}, L.,
+  {Zaldarriaga}, M., \& {Furlanetto}, S.~R. 2007, \apj, 654, 12
+
 \bibitem[{{Zahn} {et~al.}(2012){Zahn}, {Reichardt}, {Shaw}, {Lidz}, {Aird},
   {Benson}, {Bleem}, {Carlstrom}, {Chang}, {Cho}, {Crawford}, {Crites}, {de
   Haan}, {Dobbs}, {Dor{\'e}}, {Dudley}, {George}, {Halverson}, {Holder},
@@ -499,6 +533,10 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   {Shirokoff}, {Spieler}, {Staniszewski}, {Stark}, {Story}, {van Engelen},
   {Vanderlinde}, {Vieira}, \& {Williamson}}]{zahn_et_al2012}
 {Zahn}, O., {et~al.} 2012, \apj, 756, 65
+
+\bibitem[{{Zaldarriaga} {et~al.}(2004){Zaldarriaga}, {Furlanetto}, \&
+  {Hernquist}}]{zaldarriaga_et_al2004}
+{Zaldarriaga}, M., {Furlanetto}, S.~R., \& {Hernquist}, L. 2004, \apj, 608, 622
 
 \bibitem[{{Zheng} {et~al.}(2014){Zheng}, {Tegmark}, {Buza}, {Dillon},
   {Gharibyan}, {Hickish}, {Kunz}, {Liu}, {Losh}, {Lutomirski}, {Morrison},
