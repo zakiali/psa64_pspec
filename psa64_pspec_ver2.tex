@@ -2729,7 +2729,7 @@ to show that limits of $T_s>5$ K are fairly generic for models with
 ionization fractions between 0.3 and 0.7.
 A more detailed analysis of the implied constraints on spin temperature using
 a self-consistent simulation of the physics of reionization is
-presented in a companion paper \citep{pober_et_al2015}.  This that paper,
+presented in a companion paper \citep{pober_et_al2015}.  In that paper,
 it is shown that the excluded combinations of spin temperature
 and neutral fraction implied by our measurements
 suggest a source of X-ray luminosity beyond what can be 
@@ -2737,72 +2737,63 @@ accounted for given currently observed galaxies.  The most likely interpretation
 of these results is a significant contribution to X-ray heating from lower-mass
 galaxies that are currently below the detection threshold of optical surveys.
 
+The power spectrum results that we present continue to be based on
+the delay-spectrum approach to foreground avoidance presented in 
+P12b and first applied in P14.  The application of a delay filter over
+a wide bandwidth continues to one of the most powerful techniques yet
+demonstrated for managing bright smooth-spectrum foregrounds.  In this
+paper, we extend the analysis in P14 with aggressive fringe-rate filtering,
+improved redundant calibration with OMNICAL, and with an optimal quadratic
+estimator that, while lossy, is more adept at down-weighting non-Gaussian foregrounds.
+The combined effect of these improvements leaves a power-spectral measurement that,
+while not consistent with zero at the 2.7$\sigma$-level, is not far from thermal
+noise limit.  With the expansion of the PAPER array to 64 antennas, the extended 135-day
+observing campaign,
+and the added sensitivity benefits of aggressive fringe-rate filtering, combined with
+the optimization of antenna position in the PAPER array for highly redundant
+measurements, this thermal
+noise limit is beginning to enter the realm of constraining realistic models of reionization.
 
-We also continue to demonstrate the efficacy of using delay filters for
-foreground suppression and the foreground avoidance technique in measuring the power
-spectrum. In addition, we employ novel techniques in this analysis and show that
-the necessity of precise calibration is needed to make accurate and believable
-measurements of the 21 cm reionization power spectrum. We also show that the use of beam
-weighted measurements in the optimal fringe-rate filter is critical to
-increasing sensitivity for instruments with natively low sensitivity due to
-collecting area, increasing the SNR on the measurement by a factor of at least 2.
-We have also demonstrated the stability of the PAPER instrument both in time and
-between redundant baselines, showing that baselines agree on the same sky up to
-systematical errors and that the time correlation between days is low in the
-noise.
-
-At the achieved levels of the power spectrum, we also put constraints on the
-amount polarization leakage that could possibly corrupt the Stokes I power
-spectrum. We show that polarization leakage is not shown for most $k$-modes at
-the level of $\sim10^{3}\ \text{mK}^{2}$. 
-
-Looking forward, the need for larger arrays with increased collecting area is
-becoming a necessity. Proposed experiments such as the Square-Kilometer Array
-(SKA) and the Hydrogen Epoch of Reionization Array (HERA) are set to fill this
-need. HERA is a collaborative experiment dedicated to detect and characterize
-the 21 cm reionization power spectrum as well as eventually image the ionizing bubbles
-from the formation of the first stars and galaxies. The HERA instrument
-is proposed to be composed of a closely packed 547 element hexagonal array 
-\citep{pober_et_al2014} with each element being a 14-m diameter
-reflecting-dish, with a total array area of $\sim.1km^{2}$. Sensitivity forecasts
-derived in \citet{pober_et_al2014} showed that HERA has the ability to
-detect reionization at a significance between $\sim32\sigma$ to $\sim133\sigma$
-depending on the foreground removal scheme used. The lower bound is for the
-delay spectrum technique used in this paper, where modes within the horizon are
-irrevocably corrupted, whereas the higher bound equates to when we can perfectly
-work within the wedge. That is, it is possible to perfectly subtract sources
-within the horizon.
-
-PAPER itself is looking forward to 2 seasons of 128 antenna maximally redundant
-configuration data set. This data set has to potential to increase  sensitivity
-by a factor of $3.5$ as compared to the data set used in this paper. However,
-due to constraints on the PAPER site in South Africa, the shortest baselines for
-this array are $8\lambda$ (16m), instead of the $16\lambda$ (32m) baselines used
-in this analysis, which may be riddled with systematics due to cross coupling
-and reflections within the array. Therefore, only considering the 16 m
-East-West baselines, there will be a total sensitivity benefit of $3$. However,
-there is the potential to use the $48m$ nd $64m$ baselines in this analysis as
-well, boosting the sensitivity to by another factor of 2. 
-
-PAPER is continuing to integrate down toward the 21 cm signal and gaining ground
-on overcoming challenges in systematics in the instrument as well being able to
-look past foregrounds. Future work will again characterize the reionization power
-spectrum over a range of redshifts and to measure directly the polarized power
-spectrum. We also look forward to two seasons of 128 dual polarization PAPER
-data which will increase the sensitivity of measurements by almost an order of
-magnitude from the data used here. Also, construction of HERA is also under way,
-which will have the sensitivity to make a $30\sigma$ detection of the 21 cm power
-spectrum. We look forward to this.
+Forthcoming from PAPER will be two seasons of observation with a 128-element array.
+Following the same analysis as presented here, that data set is expected to improve 
+over the PAPER-64 sensitivity by a factor of $3.5$ (in mK$^2$), with the potential for another boost to sensitivity
+should the new 16-m baselines provided in the PAPER-128 array configuration prove to be
+usable.  There also remains the potential for further improvements to sensitivity through the
+use of longer baselines, if foregrounds can be managed effectively.
+As has been done recently for PAPER-32 \citep{jacobs_et_al2015,moore_et_al2015}, 
+future work will also extend PAPER-64 analysis
+to a range of redshifts and examine the power spectrum of polarized emission.
 
 
-%However, all major 21 cm experiments (LOFAR, MWA, and PAPER) are at the cusp of detection
-%and all have the sensitivity to rule out the optimistic reionization scenarios.
-% XXX don't put speculative stuff in intro
-[XXX Might mention impact of wedge on predicted sensitivities.]
-However, even with a detection from one of these experiments, a high signal-to-noise characterization of the 21 cm power spectrum and imaging of reionization will have to
-wait until future 21 cm experiments such as the Hydrogen Epoch of Reionization
-Array (HERA) and the Square Kilometer Array (SKA), which will have more raw
-collecting area and greater sensitivity \citep{pober_et_al2014}.
+% [ARP: this wasn't shown in the main body]
+%At the achieved levels of the power spectrum, we also put constraints on the
+%amount polarization leakage that could possibly corrupt the Stokes I power
+%spectrum. We show that polarization leakage is not shown for most $k$-modes at
+%the level of $\sim10^{3}\ \text{mK}^{2}$. 
+
+With recent breakthroughs in foreground management, the sensitivity 
+limitations of current experiments are becoming clear.  Although collecting area is vital,
+as discussed in \citet{pober_et_al2014}, the impact of collecting area
+depends critically on the interplay of array configuration with foregrounds.
+Despite a large spread in collecting areas between PAPER, the MWA, and LOFAR,
+in the limit that foreground avoidance is the only viable strategy, these
+arrays all deliver, at best, comparable low-significance detections of fiducial models
+of reionization.  To move beyond simple detection, next-generation instruments must
+deliver much more collecting area with very compact arrays.
+
+The Hydrogen Epoch of Reionization Array (HERA), whose first phase was recently granted funding
+under the National Science Foundation's {\it Mid-Scale Innovations Program}, has been
+designed to this specification. HERA uses a close packing of 14-m diameter 
+dishes designed to minimize the width of the delay-space kernel
+$\tilde{A}_\tau$ in equation \ref{eqn:delay_transform}.
+Sensitivity forecasts for a 547-element HERA array
+show that HERA can deliver detections of the 21cm reionization signal
+at a significance of $\sim32\sigma$ using the same the conservative 
+foreground avoidance strategy employed in this paper
+\citet{pober_et_al2014}.  HERA is the natural successor
+to PAPER, combining a proven experimental strategy with the 
+sensitivity to deliver results that will be truly transformative for
+understanding of our cosmic dawn.
 
 \section{Acknowledgements} 
 
