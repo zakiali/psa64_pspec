@@ -715,10 +715,8 @@ extracted from images of Pictor A, made independently for each frequency channel
 and 1:10.  Each measurement is then divided by the PAPER beam model and
 averaged to obtain the measured spectrum, which serves to characterize the flux
 scale of the PAPER-64 observations. Error bars indicate 68\% confidence
-intervals, derived from the Gaussian fits in the source extractor used in
-measure the flux in PyBDSM.
-[XXX How are these errors averaged? Did you use the same beam weighting?
-tweak the text here.]
+intervals, derived from the Gaussian fits in the source extractor used to
+measure the flux in PyBDSM, combined from all snapshots.
 }\label{fig:pic_spec}
 \end{figure}
 
@@ -1029,17 +1027,23 @@ bias that is crosstalk. With foregrounds removed, we do not have this
 complication since bright foregrounds are not dominating the average and are
 able to remove the offset by subtracting shorter sums.
 
-The final step is to average the entire season into local sidereal
-time (LST) with bins of width 43 seconds, a bin size that matches the fringe-rate filter applied
-in the compression step. The full season was 135 days long; of these 124 days were included in the average. 
+The final step is to average the entire season into local sidereal time (LST)
+with bins of width 43 seconds, a bin size that matches the fringe-rate filter
+applied in the compression step. The full season was 135 days long; of these 124
+days were included in the average. 
 
-Sporadic RFI events (i.e. occurring rarely in an entire season) can skew individual LST bins away from the median value of
-the sky at a given LST, deviating from Gaussian statistics. To catch these
-events, we compute the median of a LST bin for each frequency and flag points  3
-$\sigma$ above the median, before averaging. This filter mitigates
-the effects of non Gaussianity in time, which is most likely due to spurious
-RFI events. The median statistic used here ensures that there is no signal
-loss due to this filter. [XXX why is this?]
+Sporadic RFI events (i.e. occurring rarely in an entire season) can skew
+individual LST bins away from the median value of the sky at a given LST,
+deviating from Gaussian statistics. To catch these events, we compute the median
+of a LST bin for each frequency and flag values 3 $\sigma$ above the median,
+before averaging. This filter mitigates the effects of non Gaussianity in time,
+which is most likely due to spurious RFI events. Since we are narrowing our
+distribution of visibilities around a patch of sky (LST bin), but keeping the
+same mean value, there is no associated signal loss of the 21 cm signal. The
+variance here is for a given sky position and not related to the variance, or
+power spectrum, of the cosmological signal which is across the entire sky.
+Therefore, we expect there to be no associated signal loss with the use of this
+filter.
 
 We make two separate LST-binned data sets, averaging every other julian day
 together to obtain an ``even" and ``odd" dataset. The use of these two data sets
