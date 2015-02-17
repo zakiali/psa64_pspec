@@ -1,4 +1,4 @@
-\begin{thebibliography}{101}
+\begin{thebibliography}{103}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Ali} {et~al.}(2008){Ali}, {Bharadwaj}, \&
@@ -198,6 +198,15 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   {Hernquist}}]{lidz_et_al2008}
 {Lidz}, A., {Zahn}, O., {McQuinn}, M., {Zaldarriaga}, M., \& {Hernquist}, L.
   2008, \apj, 680, 962
+
+\bibitem[{Liu {et~al.}(2014{\natexlab{a}})Liu, Parsons, \&
+  Trott}]{liu_et_al2014a}
+Liu, A., Parsons, A.~R., \& Trott, C.~M. 2014{\natexlab{a}}, Phys. Rev. D, 90,
+  023018
+
+\bibitem[{Liu {et~al.}(2014{\natexlab{b}})Liu, Parsons, \&
+  Trott}]{liu_et_al2014b}
+---. 2014{\natexlab{b}}, Phys. Rev. D, 90, 023019
 
 \bibitem[{{Liu} \& {Tegmark}(2011)}]{liu_tegmark2011}
 {Liu}, A., \& {Tegmark}, M. 2011, \prd, 83, 103006
