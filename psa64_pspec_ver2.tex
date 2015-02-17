@@ -57,7 +57,7 @@ Jonathan C. Pober\altaffilmark{10},
 Adrian Liu\altaffilmark{1}, 
 James E. Aguirre\altaffilmark{4},
 Richard F. Bradley\altaffilmark{5,6,7},
-Gianni Bernardi\altaffilmark{3}, 
+Gianni Bernardi\altaffilmark{3,13,14}, 
 Chris L. Carilli\altaffilmark{8,11},
 Carina Cheng\altaffilmark{1},
 David R. DeBoer\altaffilmark{2}, 
@@ -89,6 +89,8 @@ Andre Walker\altaffilmark{3}
 \altaffiltext{11}{Cavendish Lab., Cambridge, UK}
 \altaffiltext{12}{Dept. of Physics, Massachusetts Institute of Technology,
 Cambridge, MA}
+\altaffiltext{13}{Dept. of Physics and Electronics, Rhodes University}
+\altaffiltext{14}{Harvard-Smithsonian Center for Astrophysics}
 
 \begin{abstract}
 In this paper, we report new limits on 21cm emission from cosmic reionization
@@ -497,13 +499,13 @@ estimates taken from LOGCAL, LINCAL constructs an unbiased estimator.
 %    -Diagnostic figures : Chi-squared, complex plane, stability vs. time and
 %                          frequency.
 
-Implementation of redundant calibration was done with the 
-OMNICAL\footnote{https://github.com/jeffzhen/omnical}
-package, an open-source redundant calibration package
-\citep{zheng_et_al2014}. This
-package implements both LOGCAL and LINCAL, solving for a complex gain solution
-per antenna, frequency, and integration. The solutions are then applied to
-visibilities and the results are shown in figure \ref{fig:omniview}.
+Implementation of redundant calibration was done with the
+OMNICAL\footnote{https://github.com/jeffzhen/omnical} package, an open-source
+redundant calibration package, which can be easily adapted to other instruments
+other than PAPER.  \citep{zheng_et_al2014}. This package implements both LOGCAL
+and LINCAL, solving for a complex gain solution per antenna, frequency, and
+integration. The solutions are then applied to visibilities and the results are
+shown in figure \ref{fig:omniview}.
 
 \begin{figure*}
 \centering
@@ -540,10 +542,10 @@ where $\sigma^{2}$ is the noise in the visibilities. The $\chi^{2}$
 measures sum of the the deviation of measured visibilities to that of the best fit model
 derived from the LINCAL relative to a noise model, and gives us a tool to use in order to check the
 quality of our data. The number of degrees of freedom (DoF), as defined in \citealt{zheng_et_al2014}, is given by 
-\begin{equation}
-    \text{DoF} &= N_{\text{measurements}} - N_{\text{parameters}} \\
+\begin{align}
+    \text{DoF} &= N_{\text{measurements}} - N_{\text{parameters}} \\\notag
                &= 2N_{\text{baselines}} - 2(N_{\text{antennas}} + N_{\text{unique baselines}}),
-\end{equation} 
+\end{align} 
 and effectively comes out to the number of visibilities the
 $\chi^{2}$ is calculated over. If the data are completely noise dominated, the
 $\chi^{2}/\text{DoF}$ is drawn from a Gaussian distribution with $\mu=1$ and
@@ -2084,7 +2086,7 @@ Analysis Stage & Typical Loss & Maximum Loss \\
 \hline
 Bandpass Calibration &  $< 2 \times 10^{-9}$ & 0.03 \\
 Delay Filtering & $1.5\times10^{-5}$ & 0.048 \\
-Fringe-rate Filtering 
+Fringe-rate Filtering & & \\
 Quadratic Estimator & $<0.02$ & 0.89 \\
 Median of Modes & 1.4 & 1.4 \\
 \end{tabular}
