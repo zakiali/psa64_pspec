@@ -1480,10 +1480,12 @@ contributing appreciable noise.
 %         the covariance matrix is highly singular and therefore not invertible.
 
 In this section we first
-review the quadratic estimator formalism, with an emphasis on our power
+review the optimal quadratic estimator formalism, with an emphasis on our power
 spectrum analysis, followed by a walk through of our application of the OQE
 method to our data, and finally discuss the effects of an empirical estimate of
-covariance matrices.
+covariance matrices.  For a more detailed examination of the application
+of optimal quadratic estimators to 21cm cosmology, we refer the reader to
+\citet{liu_et_al2014a} and \citet{liu_et_al2014b}.
 
 
 
@@ -1609,23 +1611,22 @@ to unity.
 %       --This is particularly important because it doesn't insures that there
 %       is no leakage of the modes within the horizon to modes outside of it.         
 %
-The normalization matrix is the analysts choice, and is the last chance to
+The normalization matrix is the analyst's choice, and is the last chance to
 weight the measurements in the estimates of the power spectrum; it is
 essentially a re-binning of the data. One choice that can be made is to pick
-$\mathbf{M} = \mathbf{F}^{-1}$ implying that $\mathbf{W} = \mathbf{I}$. This
-window function is a delta function window such that every band power does not
+$\mathbf{M}\propto\mathbf{F}^{-1}$ implying that $\mathbf{W} = \mathbf{I}$. This
+window function is a delta function such that every band power does not
 contain leakage from other band powers, and therefore the estimates are well
-localized and contain power from only that bin. However, this has the down side
+localized and contain power from only that bin. However, this has the downside
 that the error bars are large.  On the other hand, choosing the identity
-normalization such that the window functions are given by the Fisher matrix,
-leads to the smallest possible error bars, with the consequence that every
-band power is coupled to every other band power.  
-[XXX this bit needs work.. what was I trying to say with this?]
-The choice of $\mathbf{M} =
-\mathbf{D}$, where $\mathbf{D}$ is a diagonal matrix, produces the smallest
-possible error bars [XXX cite result]. $\mathbf{D}$ is diagonal and not the
-identity because the window functions are normalized such that the rows of the
-matrix sum to unity.  
+normalization such that $\mathbf{M}\propto\mathbf{I}$ implies $\mathbf{W}=\mathbf{F}$,
+leading to the smallest possible error bars, with the consequence that every
+band power is coupled to every other band power \citep{liu_tegmark2011}.
+%The choice of $\mathbf{M} =
+%\mathbf{D}$, where $\mathbf{D}$ is a diagonal matrix, produces the smallest
+%possible error bars [XXX cite result]. $\mathbf{D}$ is diagonal and not the
+%identity because the window functions are normalized such that the rows of the
+%matrix sum to unity.  
 
 In addition to calculating the window functions, we can also calculate the error
 correlations that correspond to a given window function. In order to see the
