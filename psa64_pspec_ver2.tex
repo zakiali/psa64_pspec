@@ -119,7 +119,7 @@ unexplored phases in cosmic history.
 Studying the formation of the first galaxies and their influence on the primordial IGM during this
 period is among the highest priorities in modern astronomy.
 During our cosmic dawn, IGM characteristics depend on the matter density field, the mass and clustering of 
-the first galaxies \citep{lidz_et_al2008}, their ultraviolet luminosities [XXX need a cite],
+the first galaxies \citep{lidz_et_al2008}, their ultraviolet luminosities \citep{mcquinn_et_al2007},
 the abundance of X-ray sources and other sources of heating \citep{pritchard_loeb2008,mesinger_et_al2013},
 and higher-order cosmological effects like the relative velocities of baryons and dark matter \citep{visbal_et_al2012,mcquinn_oleary2012}.
 
@@ -441,7 +441,7 @@ baselines result from differences in the signal chain, including amplitude and
 phase effects attributable to antennas, cables, and receivers.  Redundant
 calibration only constrains the relative complex gains between antennas and is
 independent of the sky. Since redundant calibration preserves signals common to
-all redundant baselines, this type of calibration is lossless. 
+all redundant baselines, this type of calibration does not result in signal loss.
 
 %    -Summary of the procedure of redundant calibration. This should be mixed in
 %     with the equations from Zheng et. al.
@@ -499,20 +499,21 @@ estimates taken from LOGCAL, LINCAL constructs an unbiased estimator.
 %    -Diagnostic figures : Chi-squared, complex plane, stability vs. time and
 %                          frequency.
 
-Implementation of redundant calibration was done with the
-OMNICAL\footnote{https://github.com/jeffzhen/omnical} package, an open-source
-redundant calibration package, which can be easily adapted to other instruments
-other than PAPER.  \citep{zheng_et_al2014}. This package implements both LOGCAL
+Redundant calibration was performed using 
+OMNICAL\footnote{https://github.com/jeffzhen/omnical} --- an open-source
+redundant calibration package that is relatively instrument agnostic
+\citep{zheng_et_al2014}. This package implements both LOGCAL
 and LINCAL, solving for a complex gain solution per antenna, frequency, and
 integration. The solutions are then applied to visibilities and the results are
-shown in figure \ref{fig:omniview}.
+shown in Figure \ref{fig:omniview}.
 
 \begin{figure*}
 \centering
 \includegraphics[width=1.5\columnwidth]{plots/omniview_64.png}
 \caption{
-PAPER visibilities plotted in the complex plane using previous method of
-redundant calibration as described in P14 (left) and after (right) the
+%ARP: overriding this change. making this point is not worth the loss of clarity
+PAPER visibilities plotted in the complex plane before (left) and
+after (right) the 
 application of the improved redundancy-based calibration with OMNICAL
 \citep{zheng_et_al2014}.  All baselines in the array measured at 159 MHz for a
 single time integration are plotted.  Instantaneously redundant baselines are
@@ -526,7 +527,7 @@ measurements with OMNICAL indicates improved calibration.
 \centering
 \includegraphics[width=\columnwidth]{plots/chi2.png}
 \caption{
-Log of $\chi^{2}/\text{DoF}$ of all baseline residuals after the application of OMNICAL.
+Log of $\chi^{2}$ per degree of freedom of all baseline residuals after the application of OMNICAL.
 The plot comprises a observations over one day, with a frequency resolution of
 492 kHz and a time resolution of 42.9 s.
 } \label{fig:chi2}
@@ -534,7 +535,7 @@ The plot comprises a observations over one day, with a frequency resolution of
 
 In addition to solving for gain solutions, OMNICAL also characterizes the
 quality of the calibration parameters by calculating the $\chi^{2}$ for every
-integration. As defined in \cite{zheng_et_al2014}, 
+integration. As defined in \citet{zheng_et_al2014}, 
 \begin{equation}\label{eqn:chi2}
     \chi^{2} = \sum_{ij}\frac{|v_{ij} - y_{i-j}g^{\ast}_{i}g_{j}|^{2}}{\sigma^{2}_{ij}},
 \end{equation}
@@ -546,58 +547,59 @@ quality of our data. The number of degrees of freedom (DoF), as defined in \cite
     \text{DoF} &= N_{\text{measurements}} - N_{\text{parameters}} \\\notag
                &= 2N_{\text{baselines}} - 2(N_{\text{antennas}} + N_{\text{unique baselines}}),
 \end{align} 
-and effectively comes out to the number of visibilities the
-$\chi^{2}$ is calculated over. If the data are completely noise dominated, the
+and is effectively the number of visibilities for which
+$\chi^{2}$ is calculated. If the data are noise-dominated, 
 $\chi^{2}/\text{DoF}$ is drawn from a Gaussian distribution with $\mu=1$ and
 $\sigma^{2} = 2/\text{DoF}$. The calculated $\chi^{2}/\text{DoF}$ for every
 frequency and integration of a fiducial day of observation in this season and
-for the fiducial power spectrum baselines is shown in figure \ref{fig:chi2},
-demonstrating the stability of the PAPER instrument. The mean of the $\chi^{2} = 1.9$, leading us to believe we are not thermal noise dominated at this point in the analysis. However, further removal of systematics will occur along the analaysis.
-
-Large values of the $\chi^{2}$ can correspond to various systematics in the
-data. One systematic is radio frequency interference (RFI) that are
-sporadically triggered in both time and frequency due to terrestrial sources.
-In this regime, redundant baselines would agree on RFI spikes in frequency and
-time and therefore the residuals from the redundancy would be low. However,
-noise models usually only contain the noise within the system and true sky. In
-this case, the noise would underestimate the noise in the measurement and cause
-a large $\chi^{2}$. In this way, the $\chi^{2}$ can be used as a metric to
-search and flag RFI: if certain integrations and frequencies have a large
-$\chi^{2}$ for some percentage of redundant baselines, then we could with high
-confidence flag out those data points. The data set presented in this paper did
-not use this method for flagging.
+for the fiducial power spectrum baselines is shown in Figure \ref{fig:chi2},
+demonstrating the stability of the PAPER instrument.
 
 
-redundant baselines are not redundant with one another, owning to some
-systematic such as cross talk, or two, a strong signal such as radio frequency
-interference (RFI), in which case the noise is underestimated, even though all
-baselines may agree in the RFI, producing a large $\chi^{2}$. Figure
-\ref{fig:chi2} shows the logarithm of $\chi^{2}$ for all frequencies for and an entire
-night of observation. The noise model used was the variance of the visibilities for
-a given frequency and LST bin. As discussed, the $\chi^{2}$ can be a metric used
-for RFI flagging and removal because when RFI dominates, at a given frequency or
-time, the $\chi^{2}$ would be large. Therefore, if some percentage of redundant
-baselines agree on the large $\chi^{2}$, then we can flag them out of our data
-on that basis. This data set did not use the $\chi^{2}$ as a metric but
-preliminary studies have shown it's efficacy on PAPER-128 observations.
-
-In addition to RFI, crosstalk caused by cross coupling of signals from one
-antenna to another, which reveals itself as a static complex bias to a
-visibility, which may vary slowly with time. In this case, redundant baselines
-would not agree with one another and the $\chi^{2}/\text{DoF}$ would not be
-drawn from a mean 1 Gaussian distribution. In other words, the noise in the
-deviations from redundancy would not be dominated by the noise model, but would
-have an excess due to the crosstalk. This effect would not be as dramatic as
-RFI on the $\chi^{2}$, but would be skew the distribution of residuals to not be
-centered at 1. In order to account for the crosstalk term, OMNICAL convolved a
-10 minute sliding boxcar window over the deviations from redundancy and
-subtracted that average off the visibility centered in the window. This
-crosstalk removal does not remove the 21 cm signal since it is preserving the
-common mode signal from the redundant baselines. For our fiducial power spectrum
-baselines, the crosstalk, or additive offset, term is averaged over 51
-baselines before being subtracted from each redundant visibility in that
-redundant baseline group.
-
+We measure a mean $\chi^{2}/\text{DoF}$ of 1.9.  This
+indicates that the redundant calibration solutions, while a substantial improvement
+over the previous calibration, do not quite result in residuals that are thermal noise dominated.
+Possible sources of this excess include instrumental crosstalk and poorly performing signal chains.
+While the latter will be downweighted by the inverse of the estimated signal covariance described
+in Section \ref{sec:oqe}, crosstalk is a ubiquitous defect in the data that must be addressed.
+% ARP: removing this discussion because this was not used on the data, so irrelevant
+%Large values of the $\chi^{2}$ can correspond to various systematics in the
+%data. One systematic is radio frequency interference (RFI) that are
+%sporadically triggered in both time and frequency due to terrestrial sources.
+%In this regime, redundant baselines would agree on RFI spikes in frequency and
+%time and therefore the residuals from the redundancy would be low. However,
+%noise models usually only contain the noise within the system and true sky. In
+%this case, the noise would underestimate the noise in the measurement and cause
+%a large $\chi^{2}$. In this way, the $\chi^{2}$ can be used as a metric to
+%search and flag RFI: if certain integrations and frequencies have a large
+%$\chi^{2}$ for some percentage of redundant baselines, then we could with high
+%confidence flag out those data points. The data set presented in this paper did
+%not use this method for flagging.
+%redundant baselines are not redundant with one another, owing to some
+%systematic such as cross talk, or two, a strong signal such as radio frequency
+%interference (RFI), in which case the noise is underestimated, even though all
+%baselines may agree in the RFI, producing a large $\chi^{2}$. Figure
+%\ref{fig:chi2} shows the logarithm of $\chi^{2}$ for all frequencies for and an entire
+%night of observation. The noise model used was the variance of the visibilities for
+%a given frequency and LST bin. As discussed, the $\chi^{2}$ can be a metric used
+%for RFI flagging and removal because when RFI dominates, at a given frequency or
+%time, the $\chi^{2}$ would be large. Therefore, if some percentage of redundant
+%baselines agree on the large $\chi^{2}$, then we can flag them out of our data
+%on that basis. This data set did not use the $\chi^{2}$ as a metric but
+%preliminary studies have shown it's efficacy on PAPER-128 observations.
+Crosstalk caused by the cross-coupling of signals between antennas
+reveals itself as a static complex bias to a
+visibility that varies on timescales much longer than typical fringe rates.
+This effect 
+skews the distribution of the $\chi^2$ of the residuals away from 1.
+To minimize crosstalk, we first use OMNICAL to solve for antenna-dependent gains,
+and then average the residual deviations from redundancy with
+over 10-minute windows before subtracting
+the average from the original visibilities. This
+crosstalk removal preserves signals common to redundant baseline groups (such as the 21 cm signal).
+Unfortunately, it also preserves a term that is the average of the crosstalk of all baselines
+in the redundant group.  This residual crosstalk is removed by a fringe-rate filter later
+in the analysis.
 
 \subsection{Absolute Calibration} 
 %    -Selfcal to pictor, fornax, and crab (to get the north-south components).
@@ -649,7 +651,7 @@ of the field with Pictor A (5:19:49.70, -45:46:45.0)  and Fornax A
 %        --A comparison to the PSA32 Flux CAL.
 
 We then set our over all flux scale by using Pictor A as our calibrator source
-with source spectra derived in \cite{jacobs_et_al2013}, 
+with source spectra derived in \citet{jacobs_et_al2013}, 
 \begin{equation}
     S_{\nu} = S_{150}\times\left(\frac{\nu}{150MHz}\right)^{\alpha},
 \end{equation}
@@ -685,7 +687,7 @@ the primary beam model evaluated in the direction of Pictor A. To fit our
 bandpass, we divide the model spectrum by the measured one and fit a 9-th order
 polynomial over the 120-170 MHz frequency range. Figure \ref{fig:pic_spec} shows
 the calibrated Pictor A spectrum and the model spectrum from
-\cite{jacobs_et_al2013}. Also plotted are the $1\sigma$ error bars derived from the PyBDSM source extractor and averaged over the multiple snapshots used after being weighted by the beam-squared.
+\citet{jacobs_et_al2013}. Also plotted are the $1\sigma$ error bars derived from the PyBDSM source extractor and averaged over the multiple snapshots used after being weighted by the beam-squared.
 
 \begin{figure}
 \centering
@@ -726,7 +728,7 @@ would include suppressing modes that may contain the cosmological signal. In ord
 quantify the signal loss associated with fitting a ninth degree polynomial to
 the bandpass, we run a Monte Carlo simulation of the effect the bandpass has on
 a model 21-cm reionization signal. We construct a model baseline visibility as a Gaussian
-random signal with $\mu=0$ and $\sigma=1$ offset by 5 orders of magnitude and 
+random signal 
 multiplied by the derived bandpass for every independent mode measured. We
 calculate the total number of independent modes by counting the number of
 independent uv-modes sampled for the different baseline types over the two hour
@@ -735,7 +737,7 @@ fit a 9th degree polynomial. Using this as our measured bandpass for this
 simulated signal, we finally compare the power spectrum from the output of the
 simulated signal to the input power spectrum as a function fo $k$-mode.  We
 find that between $-0.06 < k < 0.06$, the signal loss is less than $3\%$ and at
-the mode right outside the horizon is $.0000002\%$. We apply the latter
+the mode right outside the horizon is $0.0000002\%$. We apply the latter
 correction factor for all modes outside of the horizon to the final power
 spectrum.
 
@@ -944,8 +946,8 @@ important caveat is that it neglects the beam asymmetry  between the two linear
 polarization states. This mismatch can cause polarization leakage from Stokes
 Q into Stokes I, thus contaminating  our measurement of the power spectrum with any polarized emission from the sky.
 This effect for PAPER, as shown in \citet{moore_et_al2013}, leaks 4\% of Q in to
-I.  We offer no correction for this effect, but in turn address some effects of 
-polarization leakage later. 
+I.  We do not correct for this effect, but discuss some effects of 
+polarization leakage in Section \ref{sec:discussion}. 
 
 Foreground removal techniques discussed in the literature include spectral
 polynomial fitting \citep{wang_et_al2006,liu_et_al2009,bowman_et_al2009},
@@ -983,7 +985,7 @@ sampling function. We note that the antenna response effectively determines a fi
 which imposes a lower bound 
 of $1/B \approx 10 ns$ on the width of any delay-domain convolving kernel.
 As per
-\cite{parsons_backer2009} and P14, we deconvolve the kernel
+\citet{parsons_backer2009} and P14, we deconvolve the kernel
 resulting from $W(\tau)$ using an iterative CLEAN procedure
 \citep{hogbom1974} restricting CLEAN components to fall within the horizon plus
 a 15-ns buffer that includes the bulk of the kernels convolving the $\delta$-function
@@ -1015,21 +1017,21 @@ Applying the delay filter to fiducial baselines used in the power spectrum analy
 foregrounds are suppressed by $\sim$4 orders of magnitude in power, or
  -40 dB of foreground suppression, as seen in Figure
 \ref{fig:waterfalls}. As discussed in P14, there is a small amount of signal loss
-associated with this foreground filter, which for the baselines and filter parameters used, the loss was found to be 4.8\% for the
+associated with this filter. For the baselines and filter parameters used, the loss was found to be 4.8\% for the
 first mode outside of the horizon, 1.3\% for the next mode out, and less than
-.0015\% for the higher modes.  
+0.0015\% for the higher modes.  
 
 After the wideband delay filter, we remove a second layer of RFI and crosstalk
  which was overshadowed by the foreground signal. RFI are excised with 
- a filter which flags values $3\sigma$ above the median using a variance calculated in a localized time and frequency window.  Cross-talk, which is an overall complex offset to the visibility, due to small couplings between independent analog signal chains, is removed by subtracting a ten minute long average from each baseline. Normally, hour long averages are needed for foreground contained data
+ a filter which flags values $3\sigma$ above the median using a variance calculated in a localized time and frequency window.  Crosstalk, which is an overall complex offset to the visibility, due to small couplings between independent analog signal chains, is removed by subtracting a ten minute long average from each baseline. Normally, hour long averages are needed for foreground contained data
 to wash out the fringes from the said foregrounds to detect the static 
 bias that is crosstalk. With foregrounds removed, we do not have this
 complication since bright foregrounds are not dominating the average and are
 able to remove the offset by subtracting shorter sums.
 
 The final step is to average the entire season into local sidereal time (LST)
-with bins of width 43 seconds, a bin size that matches the fringe-rate filter
-applied in the compression step. The full season was 135 days long; of these 124
+with 43-s bin widths matching the cadence of
+the compressed data. The full season was 135 days long; of these, 124
 days were included in the average. 
 
 Sporadic RFI events (i.e. occurring rarely in an entire season) can skew
@@ -1155,14 +1157,14 @@ jackknife tests.
 %   t_int = 42.8/n.mean(fr100)
 %   
 
-Time averaging visibilities prior to forming power spectra a necessity in order to boost sensitivity.
-The motivation for this is that we want
+In time-averaging visibilities,
+we aim
 to coherently combine  $k$-modes on the sky that are independent  before squaring in the power spectrum to get the maximum
 sensitivity. This is mathematically similar to the more traditional process of
 gridding in the $uv$ plane, but applied to a single baseline.  
 However, rather
-than applying a traditional box-car average, we can apply a kernel --a so-called
-'fringe-rate' filter-- that weights different temporal rates by the antenna
+than applying a traditional box-car average, we can apply a kernel --- a so-called
+'fringe-rate' filter --- that weights different temporal rates by the antenna
 beam corresponding to the parts of the sky moving at the same rate.
 
 Broadly, for a given baseline and frequency, different parts of the sky
@@ -1188,20 +1190,25 @@ contour of constant fringe rate to construct our time average kernel or
 %removal discussed above. In order to remove a DC offset from a time series, we
 %subtract the average.
 %
-%Now, to optimally combine the time data we can cater our fringe-rate filter to
-%upweight points of the sky that contain more signal to our instrument and down
-%weight those points that do not. That is, if we weight fringe-rate
-%bins by the beam, we can get a net increase in sensitivity. Roughly, all fringe
-%rate bins contain the same amount of noise in them, but the amount of signal
-%varies and is determined by how the primary beam illuminates the sky.
+
+As examined in \citet{parsons_et_al2015}, it is possible to tailor fringe-rate filters
+to more optimally combine time-ordered data for power-spectrum analysis.
+Fringe-rate filters can be chosen that
+up-weight points of the sky where our instrument is more sensitive and down-weight
+those points farther down in the primary beam. 
+For white noise,
+all fringe-rate bins will contain the same amount of noise in them, but the amount of signal
+varies and is determined by how the primary beam illuminates the sky.
+By weighting fringe-rate
+bins by the beam response, we can get a net increase in sensitivity.  
 %Upweighting the bins with higher signal relative to those with less signal
 %gives us a net increase in signal-to-noise, even though we are removing 
 %signal by applying signal from this filter. 
 
 Applying this filter effectively weights the data by another factor of the beam
-area, changing the effective primary beam response, $A(l,m)$ .\footnote{The
+area, changing the effective primary beam response\footnote{The
 angular area in equation \ref{eqn:delay_pspec} will reflect the new angular area
-corresponding to the change in beam area.} \citep{parsons_et_al2015}. By
+corresponding to the change in beam area.} $A(l,m)$\citep{parsons_et_al2015}. By
 utilizing prior knowledge about the beam area we are selectively down weighting
 areas on the sky contributing little signal. This results in an SNR boost of
 about 2.  The net boost in SNR depends on the shape of the beam and array
@@ -1259,7 +1266,7 @@ to integrate to unity, but has been scaled here for legibility.
 }
 \label{fig:fr_preserved_signal}
 \end{figure}
-The action of the fringe rate filter is to get an optimally weighted
+The action of the fringe-rate filter is to get an optimally weighted
 sample, averaged at the longest physically possible integration time.  For the
 fiducial baselines, the effective
 integration time is calculated by comparing the variance statistic for a
@@ -1373,7 +1380,7 @@ In addition to stability between redundant baselines, we also consider the
 stability in time for the PAPER instrument. In order to quantify the stability
 in time we extract one channel for a given baseline for every observation day
 and LST bin. We then Fourier transform along the time direction for every LST
-bin and compute the power spectrum. As shown in figure \ref{fig:stability}, the
+bin and compute the power spectrum. As shown in Figure \ref{fig:stability}, the
 DC bin is the average of all of the days and clearly there is excess power
 there. However, for time scales greater than 1 day, we see that there is little
 correlation between days, showing that there are no systematics in time. The
@@ -1382,22 +1389,23 @@ second integration timescale of a visibility with that of a sidereal day. This
 presents itself as a beat frequency on the two day timescale.
 
 \subsection{System Temperature}   
+
 During the LST binning step, the variance of the visibilities that are averaged
 together for a given frequency and LST bin are recorded. Using these variances,
 we calculate the system temperature as a function of LST, averaging over each
 LST hour. 
 \begin{equation}
-    \Tsys = T_{\rm rms}\sqrt{\Delta\nu t}, 
+    T_{\rm rms} = \Tsys\sqrt{2\Delta\nu t}, 
 \end{equation}
 where $\Delta\nu$ is the bandwidth, $t$ is the integration time, and
 $T_{\rm rms}$ is the RMS temperature, or the variance statistic described above.
 Figure \ref{fig:tsys} shows the results of this calculation. In this observing
 season, the system temperature drops just below previous estimates 
 as in P14 and \citet{jacobs_et_al2014} of $\Tsys=560K$, at $\Tsys=500K$ at 160
-MHz. However this estimate is much more consistent with the results derived in
+MHz. However, this estimate is more consistent with the results derived in
 \citep{moore_et_al2015}, where $\Tsys=505K$ at 164 MHz. The change in the
 system temperature can be attributed to the reduced range of LST used in the
-calcutation of the system temperature, where we are looking in the cold patch, away from the galaxy. We note that at 7 hours LST, there is an increase in the system temperature due to the rising of the galactic plane as seen in figure \ref{fig:coverage}
+calcutation of the system temperature, where we are looking in the cold patch, away from the galaxy. We note that at 7 hours LST, there is an increase in the system temperature due to the rising of the galactic plane as seen in Figure \ref{fig:coverage}
 
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/tsys.png}
@@ -1489,7 +1497,7 @@ covariance matrices.
 %         is because 1900 seconds ~ 30 minutes.
 \subsection{Review of Optimal Quadratic Estimators}
 We use the optimal quadratic estimator method to estimate our power spectrum as
-done in \cite{dillon_et_al2013a} and \cite{liu_tegmark2011}.  Here we briefly review the
+done in \citet{dillon_et_al2013a} and \citet{liu_tegmark2011}.  Here we briefly review the
 optimal quadratic estimator (OQE) formalism with an emphasis on our application
 to data. The end goal of this analysis technique is to estimate the 21 cm
 power spectrum, $P_{21}(\k)$, defined such that 
@@ -1730,14 +1738,14 @@ down-weighted modes correspond to the largest eigenvalues of $\C$, and hence the
 strongest modes.  Similarity, applying the inverse covariance to the baseline
 data vector, $\x$, the strongest modes get down weighted. 
 
-Looking at $\mathbf{z}$ in figure \ref{fig:inv_cov} for the visibilities that
+Looking at $\mathbf{z}$ in Figure \ref{fig:inv_cov} for the visibilities that
 still contain foreground signal (left half) shows the down weighting of
 the strongest modes which correspond to foregrounds. The strongest modes here,
 are the strongest eigenmodes of the covariance matrix. Figure
 \ref{fig:eigs} shows the eigenspectrum and the four strongest eigenmodes of a
 covariance matrix derived from a data vector with foregrounds. As seen four
 strongest eigenmodes are highly suggestive of smooth spectrum sources. In
-contrast, the right half of figure \ref{fig:inv_cov} shows the application of
+contrast, the right half of Figure \ref{fig:inv_cov} shows the application of
 inverse covariance weighting to data which has the wideband delay filter applied
 to remove smooth spectrum foregrounds. Applying the covariance, is up-weighting
 the weakest modes in the data and since the strongest, foreground, modes have
@@ -1907,7 +1915,7 @@ band powers contained correlated errors.
 
 The Fisher matrix is a key component in the above analysis and contains a
 wealth of information about the amount of information in each $k$-mode. The
-Fisher matrix is shown in figure \ref{fig:fisher}, represents the amount of
+Fisher matrix is shown in Figure \ref{fig:fisher}, represents the amount of
 information there is in every $k_{\parallel}$ mode. The Fisher matrix is derived
 using all of the baselines, not just a baseline pair and consists of all of the
 information contained in the estimate.
@@ -1987,14 +1995,14 @@ The optimal quadratic estimator has an application of the inverse covariance
 matrix to data vector $\x$. Applying an inverse covariance matrix to the data it
 is derived from has the effect of weighting the data by the covariance matrix.
 Therefore strong modes, corresponding to the eigenvectors of the covariance
-matrix, are down-weighted in this scheme as seen in figure \ref{fig:inv_cov}.
+matrix, are down-weighted in this scheme as seen in Figure \ref{fig:inv_cov}.
 For foreground contained data, the strong modes correspond to the smooth
 spectrum foregrounds, and therefore the covariance matrix is highly covariance
 since all of the frequency channels are correlated with one another. However,
 for foreground filtered data, the strongest modes correspond to modes that
 resemble residual foreground in the data. It is important to note that inverse
 covariance weighting is a powerful tool as seen by looking at the three
-baselines used in figure \ref{fig:inv_cov}. For the baseline data vector with
+baselines used in Figure \ref{fig:inv_cov}. For the baseline data vector with
 the least amount of noise in the delay filtered plot (right half, middle
 column), we can see that weighing by the inverse covariance up-weights modes in
 this baseline, as compared to the other baselines, which have a slightly higher
@@ -2011,12 +2019,12 @@ contained data.
 Another problem that occurs from empirically estimating covariances is that it
 leads to models of the covariance matrix that over-fit the noise. In this
 scenario, the covariance matrix tells us that there may be modes in the data
-that should be downweighted, for example, but if the covariances are dominated
-by noise, this may just be a random fluctualtion and that mode may not need to
-be downweighted. Said differently, the weighting of the data by the inverse
+that should be down-weighted, for example, but if the covariances are dominated
+by noise, this may just be a random fluctuation and that mode may not need to
+be down-weighted. Said differently, the weighting of the data by the inverse
 covariance is heavily influenced by the noise in the estimate of the covariance
-matrix and thus has the ability to remove or add  covariances between channels
-and baselines and a strong possibility to remove signal from the data. In order to accurately describe the covariance matrix of the instrument, we would require complete knowledge of the sky signal and the instrument and the interaction of the two due to the chromaticity of the interferomter.
+matrix and thus has the ability to down-weight valid high-variance samples.
+In order to accurately describe the covariance matrix of the instrument, we would require complete knowledge of the sky signal and the instrument and the interaction of the two due to the chromaticity of the interferometer.
 
 
 
@@ -2034,34 +2042,6 @@ and baselines and a strong possibility to remove signal from the data. In order 
 %         However, if the signal was bright enough, we would be able to see it.
 %         Since we don't see signal in the actual data, we can say that we have
 %         not detected the EOR signal yet.
-
-In theory, optimal quadratic estimators for the power spectrum described above are a
-lossless operation. However, this requires that we have all the information
-needed to accurately estimate the power spectrum. One of the biggest
-uncertainties, as noted above, is the lack of a perfect covariance matrix that
-describes all of the covariances of the sky and instrument, which can lead to
-signal loss in the final estimate of the power spectrum.  In order to quantify the amount of signal loss we can get by empirically estimating the covariances, we describe the simulations and report on the signal loss we expect with our estimates.
-
-In order to characterize the signal loss, we simulate visibilities for
-spatially Gaussian signal with a flat amplitude in $P(k)$ that rotates with the
-sky, and is optimally fringe-rate filtered in the same way as the data for our fiducial baselines. This signal is
-injected on top of the data, measuring the output signal power spectrum and
-comparing it to the input signal power spectrum for various signal amplitudes.
-We perform this injection for 40 draws at each signal level.  Figure
-\ref{fig:signal_loss} shows the resultant signal loss associated with
-estimating the covariance matrix from the data.  Error bars were obtained
-through bootstrapping.  
-
-
-As a function of the increasing input amplitude of the simulated power spectra,
-we find that there is a decrease in the output amplitude of the measured power
-spectrum of the simulated visibilites, interpreted as signal loss through the
-quadratic estimator of the power spectrum. Deviations from equality begin as
-power spectrum amplitudes of $10^{7} \text{mK}^{2} (h^{-1}\rm
-\,\text{Mpc})^{3}$. For the range of output power spectrum amplitudes in our
-final estimate of the 21 cm power spectrum (figure \ref{fig:final_pspec}), we
-show that signal loss is $<2\%$ at $95\%$ confidence. 
-[XXX need more discussion of what the plot means. Still more?]
 
 \begin{figure}
 \centering
@@ -2082,6 +2062,38 @@ dominates over the foreground modes present in estimates of the data covariance.
 }\label{fig:signal_loss}
 \end{figure}
 
+
+In theory, optimal quadratic estimators for the power spectrum described above are a
+lossless operation. However, this requires that we have all the information
+needed to accurately estimate the power spectrum. One of the biggest
+uncertainties, as noted above, is the lack of a perfect covariance matrix that
+describes all of the covariances of the sky and instrument, which can lead to
+signal loss in the final estimate of the power spectrum.  In order to quantify the amount of signal loss we can get by empirically estimating the covariances, we describe the simulations and report on the signal loss we expect with our estimates.
+
+In order to characterize the signal loss, we simulate visibilities for
+spatially Gaussian signal with a flat amplitude in $P(k)$ that rotates with the
+sky, and is optimally fringe-rate filtered in the same way as the data for our fiducial baselines. This signal is
+injected on top of the data, measuring the output signal power spectrum and
+comparing it to the input signal power spectrum for various signal amplitudes.
+We perform this injection for 40 draws at each signal level.  Figure
+\ref{fig:signal_loss} shows the resultant signal loss associated with
+estimating the covariance matrix from the data.  Error bars were obtained
+through bootstrapping.  
+
+As a function of the increasing input amplitude of the simulated power spectra,
+we find that there is a decrease in the output amplitude of the measured power
+spectrum of the simulated visibilities, interpreted as signal loss through the
+quadratic estimator of the power spectrum.  
+However, since the transfer function through this analysis is an invertible function,
+we can correct for the transfer by using the output value to infer a signal loss
+that is then divided out to obtain the original input signal level.  In Figure \ref{fig:signal_loss},
+we see that
+deviations from unity signal transfer begin at
+power spectrum amplitudes of $10^{7} \text{mK}^{2} (h^{-1}\rm
+\,\text{Mpc})^{3}$. For the range of output power spectrum amplitudes in our
+final estimate of the 21 cm power spectrum (Figure \ref{fig:final_pspec}), we
+show that signal loss is $<2\%$ at $95\%$ confidence. 
+
 \begin{table}[htdp]
 \caption{SIGNAL LOSS VERSUS ANALYSIS STAGE}
 \begin{center}
@@ -2090,7 +2102,7 @@ Analysis Stage & Typical Loss & Maximum Loss \\
 \hline
 Bandpass Calibration &  $< 2 \times 10^{-9}$ & 0.03 \\
 Delay Filtering & $1.5\times10^{-5}$ & 0.048 \\
-Fringe-rate Filtering & & \\
+Fringe-rate Filtering & XXX & XXX \\
 Quadratic Estimator & $<0.02$ & 0.89 \\
 Median of Modes & 1.4 & 1.4 \\
 \end{tabular}
@@ -2571,7 +2583,7 @@ relationship between star formation rates and X-ray luminosities
 \citep{furlanetto_et_al2006,pritchard_loeb2008,fialkov_et_al2014}.  Assuming the
 midpoint of reionization lies close to $z=8.4$ (a reasonable assumption given
 that \citealt{planck_et_al2015} suggests a midpoint of $z=8.8$), both the bounds
-found in this paper and \cite{pober_et_al2015}, show evidence for additional
+found in this paper and \citet{pober_et_al2015}, show evidence for additional
 sources of heating beyond the observed galaxy population.  We refer the reader
 to \citet{pober_et_al2015} for a detailed examination of these results.
 
@@ -2627,7 +2639,7 @@ to \citet{pober_et_al2015} for a detailed examination of these results.
 
 
 
-\section{Discussion}
+\section{Discussion}\label{sec:discussion}
 %   -We now compare and contrast our result with those without some of the key
 %   components of our analysis pipeline.
 %

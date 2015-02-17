@@ -1,4 +1,4 @@
-\begin{thebibliography}{100}
+\begin{thebibliography}{101}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Ali} {et~al.}(2008){Ali}, {Bharadwaj}, \&
@@ -103,13 +103,10 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
 \bibitem[{{Fan} {et~al.}(2006){Fan}, {Carilli}, \& {Keating}}]{fan_et_al2006}
 {Fan}, X., {Carilli}, C.~L., \& {Keating}, B. 2006, \araa, 44, 415
 
-<<<<<<< HEAD
-=======
 \bibitem[{{Fialkov} {et~al.}(2014){Fialkov}, {Barkana}, \&
   {Visbal}}]{fialkov_et_al2014}
 {Fialkov}, A., {Barkana}, R., \& {Visbal}, E. 2014, \nat, 506, 197
 
->>>>>>> 5c820d918a3b65eba19c1686e88aeb47f7df5fb1
 \bibitem[{{Field}(1958)}]{field1958}
 {Field}, G.~B. 1958, Proc. IRE, 46, 240
 
@@ -236,6 +233,11 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   {Ellis}, \& {Targett}}]{mcleod_et_al2014}
 {McLeod}, D.~J., {McLure}, R.~J., {Dunlop}, J.~S., {Robertson}, B.~E., {Ellis},
   R.~S., \& {Targett}, T.~T. 2014, ArXiv e-prints
+
+\bibitem[{{McQuinn} {et~al.}(2007){McQuinn}, {Lidz}, {Zahn}, {Dutta},
+  {Hernquist}, \& {Zaldarriaga}}]{mcquinn_et_al2007}
+{McQuinn}, M., {Lidz}, A., {Zahn}, O., {Dutta}, S., {Hernquist}, L., \&
+  {Zaldarriaga}, M. 2007, \mnras, 377, 1043
 
 \bibitem[{{McQuinn} \& {O'Leary}(2012)}]{mcquinn_oleary2012}
 {McQuinn}, M., \& {O'Leary}, R.~M. 2012, \apj, 760, 3
