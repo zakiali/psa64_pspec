@@ -26,6 +26,8 @@
 \newcommand{\kmax}{k_{\rm max}}
 \newcommand{\Tcmb}{T_\gamma}
 \newcommand\abs[1]{\left|#1\right|}
+\newcommand{\mKlimit}{(19.7 mK)$^2$}
+\newcommand{\mKsqlimit}{390 mK$^2$}
 
 \newcount\colveccount
 \newcommand*\colvec[1]{
@@ -62,11 +64,11 @@ Chris L. Carilli\altaffilmark{8,11},
 Carina Cheng\altaffilmark{1},
 David R. DeBoer\altaffilmark{2}, 
 Matthew R. Dexter\altaffilmark{2},
-Jasper Grobbelaar,
-Jasper Horrell,
+Jasper Grobbelaar\altaffilmark{3},
+Jasper Horrell\altaffilmark{3},
 Daniel C. Jacobs\altaffilmark{9}, 
 Pat Klima\altaffilmark{6},
-Matthys Maree,
+Matthys Maree\altaffilmark{3},
 David H. E. MacMahon\altaffilmark{2},
 David F. Moore\altaffilmark{3},
 Nima Razavi\altaffilmark{11},
@@ -74,7 +76,6 @@ Irina I. Stefan\altaffilmark{11},
 William P. Walbrugh\altaffilmark{3},
 Andre Walker\altaffilmark{3}
 }
-% XXX more on author list
 % XXX ordering of affil marks
 %\tableofcontents
 
@@ -102,10 +103,10 @@ in South Africa.  This work extends the work presented in
 \citet{parsons_et_al2014} with more collecting area, improved redundancy-based
 calibration, optimal fringe-rate filtering, and improved power-spectral
 analysis using optimal quadratic estimators. The result is a new $2\sigma$
-upper limit on $\Delta^2(k)$ of ($19.7~{\rm mK})^2$ in the range
+upper limit on $\Delta^2(k)$ of \mKlimit in the range
 $0.1<k<0.5\hMpci$ at $z=8.4$.  This represents a four-fold improvement over the
 previous best upper limit.  As we discuss in more depth in the companion to
-this paper \citet{pober_et_al2015}, this upper limit supports and extends
+this paper \citep{pober_et_al2015}, this upper limit supports and extends
 previous evidence for significant heating in the intergalactic medium prior to
 reionization. We conclude with a discussion of implications for future 21cm
 reionization experiments, including the newly funded Hydrogen Epoch of
@@ -219,7 +220,7 @@ for redundancy-based calibration \citep{liu_et_al2010,wieringa1992,zheng_et_al20
 now relies to solve for the majority of the internal instrumental degrees of freedom.  The efficacy of
 this approach was demonstrated with 
 data from a 32-antenna deployment of PAPER, which achieved an upper 
-limit on the 21 cm power spectrum $\Delta^2 (k) \leq (41\,\textrm{mK})^{2}$ at 
+limit on the 21 cm power spectrum $\Delta^2(k)\leq (41\,\textrm{mK})^{2}$ at 
 $k=0.27\hMpci$ (\citealt{parsons_et_al2014}, hereafter P14).  That upper limit improved
 over previous limits by orders of magnitude, showing that the early universe was heated
 from adiabatic cooling, presumably by emission from high-mass X-ray binaries or mini-quasars.
@@ -228,7 +229,7 @@ In this paper, we improve on this previous result using
 a larger 64-element deployment of PAPER, along with better redundant calibration, a new
 aggressive fringe-rate filtering technique, and an improved power-spectrum estimation pipeline.
 The result is an
-upper limit on $\Delta^2(k)$ of ($20.6~{\rm mK})^2$ in the range
+upper limit on $\Delta^2(k)$ of \mKsqlimit in the range
 $0.1<k<0.5\hMpci$ at $z=8.4$.  This result places significant constraints on the 
 spin temperature of the IGM, and as is shown in a companion to this paper,
 \citet{pober_et_al2015}, this supports and extends
@@ -311,10 +312,10 @@ $\sqrt{N}$, where $N$ is the number of baselines added.
 
 PAPER-64 conducted nighttime observations over a 135 day period 
 from 2012 November 8 (JD 2456240) to 2013 March 23 (JD 2456375). 
-Since solar time drifts with respect to sidereal time, this observing campaign
+Since solar time drifts with respect to local sidereal time (LST), this observing campaign
 yielded more samples of certain LSTs (and hence, sky positions) than others. 
 For the power spectrum analysis, we use observations between 0:00 and 8:30 hours
-local sidereal time (LST).  This range corresponds to
+LST.  This range corresponds to
 a ``cold patch" of sky away from the galactic center where galactic synchrotron power is minimal,
 but also accounts for the weighting of coverage in LST.
 Figure \ref{fig:coverage} shows our observing field with the contours labeling
@@ -391,21 +392,29 @@ spectrum foregrounds.
 
 As illustrated in Figure \ref{fig:flowchart},
 our analysis pipeline begins by running a compression
-algorithm to reduce the volume of our raw data by a factor of 70
-(see Appendix A of P14). 
-We then calibrate in two stages, which we describe in more detail below.  
-The first stage uses instantaneous redundancy to solve for the majority of the 
-per-antenna internal degrees of freedom in the array.  In the second stage, standard self-calibration is used 
+algorithm to reduce the volume of our raw data by a factor of 70.
+As described in Appendix A of P14, this is achieved by first performing statistical flagging to remove
+RFI at the 6$\sigma$ level, applying low-pass delay and fringe-rate filters that limit signal variation
+to delay scales of $|\tau|\la1 \mu$s and fringe-rate scales of $f\la23$ mHz, and then 
+decimating to critical Nyquist sampling rates of 493 kHz along the frequency axis
+and 42.9 s along the time axis.  We remind the reader that while information is lost in this compression,
+these sampling scales preserve emission between
+$-0.5\le k_\parallel\le 0.5\hMpci$ that rotates with the sky, making this an essentially lossless compression 
+for measurements of the 21 cm reionization signal in these ranges.
+
+After compression, we calibrate in two stages, as described in more detail below.  
+The first stage (Section \ref{sec:relcal}) uses instantaneous redundancy to solve for the majority of the 
+per-antenna internal degrees of freedom in the array.  In the second stage (Section \ref{sec:abscal}), standard self-calibration is used 
 to solve for a smaller number of
 absolute phase and gain parameters that cannot be solved by redundancy alone. 
-% XXX check if these statements are needed
-%After suppressing foregrounds with a
-%wide-band delay filter, we average the data in local sidereal time and apply a
-%fringe-rate filter to optimally combine the time domain data. 
-%These calibratedFinally, we use an
-%optimal quadratic estimator to make our estimate of the 21 cm power spectrum.
+After suppressing foregrounds with a
+wide-band delay filter (Section \ref{sec:wbd_filtering}), after additional RFI flagging and crosstalk removal, 
+we average the data in LST (Section \ref{sec:lstbin}) and apply a
+fringe-rate filter (Section \ref{sec:frf}) to optimally combine the time-domain data. 
+Finally, we use an
+optimal quadratic estimator (Section \ref{sec:oqe}) to make our estimate of the 21 cm power spectrum.
 
-\subsection{Relative Calibration}
+\subsection{Relative Calibration}\label{sec:relcal}
 %    -Principles of redundant calibration. Fact that there is no signal loss in
 %       this kind of measurement.
 %       --PAPER has a redundant configuration. Therefore the number of baselines
@@ -531,7 +540,7 @@ measurements with OMNICAL indicates improved calibration.
 \caption{
 Log of $\chi^{2}$ per degree of freedom of all baseline residuals after the application of OMNICAL.
 The plot comprises a observations over one day, with a frequency resolution of
-492 kHz and a time resolution of 42.9 s.
+493 kHz and a time resolution of 42.9 s.
 } \label{fig:chi2}
 \end{figure}
 
@@ -603,7 +612,7 @@ Unfortunately, it also preserves a term that is the average of the crosstalk of 
 in the redundant group.  This residual crosstalk is removed by a fringe-rate filter later
 in the analysis.
 
-\subsection{Absolute Calibration} 
+\subsection{Absolute Calibration}\label{sec:abscal}
 %    -Selfcal to pictor, fornax, and crab (to get the north-south components).
 %       --Reiterate that redundant cal does not solve for the overall flux and
 %         phase parameters. 
@@ -1009,7 +1018,7 @@ are not fringe-rate filtered, (4) are both delay and fringe-rate filtered,
 and (5) are delay and fringe-rate filtered and have been averaged over all
 redundant measurements of this visibility.  The top row shows signal amplitude
 on a logarithmic scale; the bottom row illustrates signal phase.
-Dashed lines indicate the 0:00 -- 8:30 range in local sidereal time (LST) used for power
+Dashed lines indicate the 0:00--8:30 range in LST used for power
 spectrum analysis.  Away from the edges of the observing band, over four orders 
 of magnitude of foreground suppression is evident.
 } \label{fig:waterfalls}
@@ -1023,6 +1032,8 @@ associated with this filter. For the baselines and filter parameters used, the l
 first mode outside of the horizon, 1.3\% for the next mode out, and less than
 0.0015\% for the higher modes.  
 
+\subsection{Binning in LST}\label{sec:lstbin}
+
 After the wideband delay filter, we remove a second layer of RFI and crosstalk
  which was overshadowed by the foreground signal. RFI are excised with 
  a filter which flags values $3\sigma$ above the median using a variance calculated in a localized time and frequency window.  Crosstalk, which is an overall complex offset to the visibility, due to small couplings between independent analog signal chains, is removed by subtracting a ten minute long average from each baseline. Normally, hour long averages are needed for foreground contained data
@@ -1030,8 +1041,9 @@ to wash out the fringes from the said foregrounds to detect the static
 bias that is crosstalk. With foregrounds removed, we do not have this
 complication since bright foregrounds are not dominating the average and are
 able to remove the offset by subtracting shorter sums.
+[XXX above statement is incorrect]
 
-The final step is to average the entire season into local sidereal time (LST)
+The final step is to average the entire season into LST
 with 43-s bin widths matching the cadence of
 the compressed data. The full season was 135 days long; of these, 124
 days were included in the average. 
@@ -1212,10 +1224,10 @@ area, changing the effective primary beam response\footnote{The
 angular area in equation \ref{eqn:delay_pspec} will reflect the new angular area
 corresponding to the change in beam area.} $A(l,m)$\citep{parsons_et_al2015}. By
 utilizing prior knowledge about the beam area we are selectively down weighting
-areas on the sky contributing little signal. This results in an SNR boost of
-about 2.  The net boost in SNR depends on the shape of the beam and array
+areas on the sky contributing little signal. This results in a sensitivity boost of
+about 2.  The net improvement depends on the shape of the beam and array
 declination and is functionally equivalent to the beam$^2$ weighting used in
-wide-field mosaicking. It is also worth noting that, like the delay spectrum
+wide-field mosaicking. It is also worth noting that, like delay 
 filtering, fringe-rate filtering is implemented on a per-baseline basis.
 
 %We implement the optimal fringe-rate filter by calculating the fringe rates at
@@ -1397,7 +1409,7 @@ together for a given frequency and LST bin are recorded. Using these variances,
 we calculate the system temperature as a function of LST, averaging over each
 LST hour. 
 \begin{equation}
-    T_{\rm rms} = \Tsys\sqrt{2\Delta\nu t}, 
+    T_{\rm rms} = \Tsys/\sqrt{2\Delta\nu t}, 
 \end{equation}
 where $\Delta\nu$ is the bandwidth, $t$ is the integration time, and
 $T_{\rm rms}$ is the RMS temperature, or the variance statistic described above.
@@ -1407,7 +1419,7 @@ as in P14 and \citet{jacobs_et_al2014} of $\Tsys=560K$, at $\Tsys=500K$ at 160
 MHz. However, this estimate is more consistent with the results derived in
 \citep{moore_et_al2015}, where $\Tsys=505K$ at 164 MHz. The change in the
 system temperature can be attributed to the reduced range of LST used in the
-calcutation of the system temperature, where we are looking in the cold patch, away from the galaxy. We note that at 7 hours LST, there is an increase in the system temperature due to the rising of the galactic plane as seen in Figure \ref{fig:coverage}
+calcutation of the system temperature, where we are looking in the cold patch, away from the galaxy. We note that at 7:00 LST, there is an increase in the system temperature due to the rising of the galactic plane as seen in Figure \ref{fig:coverage}
 
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/tsys.png}
@@ -1428,7 +1440,7 @@ for a given LST and frequency, we take into account the fact that we flag
 to account for the filtering, we assume the visibilities follow a Gaussian
 distribution which would require a correction factor of 1.34 for the removal of
 data points that are 3$\sigma$ above the median. In other words, we are
-accounting for the wings of the gaussian that would contribute to the variance
+accounting for the wings of the Gaussian that would contribute to the variance
 in the visibility.
 
 Previous estimates
@@ -2337,7 +2349,7 @@ each baseline group, in order to estimate the error bars on the spherically aver
 power spectrum $P(k)$, where positive and negative $k_\parallel$ measurements
 are kept separate for diagnostic purposes.  In the estimation of the 
 dimensionless power spectrum
-$\Delta^{2}\equiv{k^{3}P(k)}/{2\pi^{2}}$, the folding of $\pm k_\parallel$ is
+$\Delta^{2}(k)\equiv{k^{3}P(k)}/{2\pi^{2}}$, the folding of $\pm k_\parallel$ is
 handled along with the rest of the bootstrapping over independent modes.
 Finally, the measured values for $P(k)$ and $\Delta^2(k)$ are corrected for signal
 loss through all stages of analysis, as summarized in Table \ref{tbl:sigloss}.
@@ -2392,7 +2404,7 @@ this faint feature decorrelates without the precision of redundant calibration.
 
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/flat_k3pk_posterior.png}
-\caption{Posterior distribution of power spectrum amplitude for a flat $\Delta^{2}$
+\caption{Posterior distribution of power spectrum amplitude for a flat $\Delta^{2}(k)$
 power spectrum over $0.15<k<0.5\hMpci$ (solid black),
 assuming Gaussian error bars. The blue and orange
 vertical lines correspond to the 1$\sigma$ and 2$\sigma$ bounds, respectively.
@@ -2407,7 +2419,7 @@ in the range $0.15<k<0.5\hMpci$.  We use a uniform prior of amplitudes between
 -5000 and 5000 ${\rm mK}^2$, and assume measurement errors are Gaussian.
 Figure \ref{fig:final_posterior} shows the posterior distribution of the fit.
 From this distribution, we determine a mean of
-$(15.0~{\rm mK})^2$ and a $2\sigma$ upper limit of $(19.7~{\rm mK})^2$. 
+(15.0 mK)$^2$ and a $2\sigma$ upper limit of \mKlimit.
 The measured mean is inconsistent with zero at the 2.7$\sigma$ level.
 Even with the exclusion of the point at $k\approx0.35\hMpci$
 (Figure \ref{fig:final_posterior}, dashed) the mean is inconsistent with
@@ -2432,7 +2444,7 @@ in \citet{moore_et_al2015}.
 To summarize, we believe the excess in our measured power spectrum is likely caused
 by foregrounds.  Hence, we suggest ignoring the lower bound on the power spectrum amplitude
 as not being of relevance for the cosmological signal.  Instead, we emphasize the 
-2$\sigma$ upper limit of $(19.7~{\rm mK})^2$ at $z=8.4$, which significantly improves over the previous
+2$\sigma$ upper limit of \mKlimit at $z=8.4$, which significantly improves over the previous
 best upper limit of $(41~{\rm mK})^2$ at $z=7.7$ reported in P14.  As we show below and in
 greater detail in \citet{pober_et_al2015}, this limit begins to have significant ramifications
 for the heating of the intergalactic medium prior to the completion of reionization.
@@ -2820,9 +2832,9 @@ another order-of-magnitude improvement in sensitivity will make 21cm measurement
 
 We present new upper limits on the 21 cm reionization power spectrum at $z=8.4$,
 showing a factor of $\sim$4 improvement over the previous best result (P14).
-We find a $2\sigma$ upper limit of 390 $mK^{2}$ by fitting a
+We find a $2\sigma$ upper limit of \mKsqlimit by fitting a
 flat power spectrum in a $k$ range from $0.15<$k$<0.5\hMpci$ to the
-dimensionless power spectrum, $\Delta^{2}$, measured by the PAPER instrument. 
+dimensionless power spectrum, $\Delta^{2}(k)$, measured by the PAPER instrument. 
 We coarsely show that these upper limits imply a minimum spin
 temperature for hydrogen in the IGM.  Although these limits are dependent on
 the model chosen for the power spectrum, we use a patchy reionization model
