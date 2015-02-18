@@ -26,8 +26,8 @@
 \newcommand{\kmax}{k_{\rm max}}
 \newcommand{\Tcmb}{T_\gamma}
 \newcommand\abs[1]{\left|#1\right|}
-\newcommand{\mKlimit}{(19.7 mK)$^2$}
-\newcommand{\mKsqlimit}{390 mK$^2$}
+\newcommand{\mKlimit}{(19.7 mK)$^2$} % XXX put in final number
+\newcommand{\mKsqlimit}{390 mK$^2$} % XXX put in final number
 
 \newcount\colveccount
 \newcommand*\colvec[1]{
@@ -268,9 +268,12 @@ spectrum analysis.}
 \includegraphics[width=2\columnwidth]{plots/data_flow_chart.png}
 \caption
 {
+[XXX final figure from Dave].
 The stages of power-spectrum analysis. Black lines indicate data flow; red lines indicate
 Monte Carlo simulations used to 
 measure signal loss. Yellow boxes indicate stages without associated signal loss.
+[XXX negligible signal loss]
+[XXX link signal loss to table]
 }
 \label{fig:flowchart}
 \end{figure*}
@@ -342,7 +345,7 @@ work presented here only made use of the XX and YY polarization products.
 \caption{The Global Sky Model \citep{deoliveira2008}, illustrating foregrounds to the 21cm
 cosmological signal, with 
 contours indicating beam-weighted observing time (relative to peak) for the PAPER observations
-described in Section \ref{sec:observations}.  The map is centered at 6 hours in right ascension.
+described in Section \ref{sec:observations}.  The map is centered at 6:00 hours in right ascension.
 }\label{fig:coverage}
 \end{figure*}
 
@@ -702,6 +705,7 @@ the calibrated Pictor A spectrum and the model spectrum from
 \centering
 \includegraphics[width=\columnwidth]{plots/picimg_cs.png}
 \caption{
+[XXX change flux scale]
 PAPER-64 image of a field including Pictor A and Fornax A, with black circles
 indicating catalog positions \citep{jacobs_et_al2011}. Image was synthesized with two hours
 of visibilities while Pictor A was in transit and 53 MHz of instantaneous
@@ -1007,6 +1011,7 @@ visibility.
 \centering
 \includegraphics[width=2\columnwidth]{plots/waterfalls_labeled.png}
 \caption{
+[XXX update for new lstbin]
 Visibilities measured by a fiducial baseline in the PAPER-64 array, 
 averaged over 135 days of observation.  From left to right, columns represent
 data that: (1) contain foregrounds prior to the application of a wideband
@@ -1255,6 +1260,7 @@ in Figure \ref{fig:waterfalls}.
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/fr_preserved_signal.png}
 \caption{
+[XXX update filter shape, which data to use?]
 Fringe-rate transform of visibilities measured on the fiducial baseline at 159 MHz before (blue) and
 after (red) optimal fringe-rate filtering. The fringe-rate filter (green) is normalized
 to integrate to unity, but has been scaled here for legibility.
@@ -1344,6 +1350,7 @@ measured over 135 days with every redundant instance of the fiducial baseline at
 MHz.  Color scale indicates the number of samples falling in an
 LST/flux-density bin.  This plot serves to illustrate the stability of the
 PAPER instrument and the precision of calibration.
+[XXX link to stability plot]
 %The bulk of the samples recorded, range from an LST of 5 to
 %10 hours, whilst the EoR cold spot ranges from 0 to 4 hours as seen in figure
 %\ref{fig:coverage}. For the densest regions, the spread in visibility for a
@@ -1356,7 +1363,11 @@ PAPER instrument and the precision of calibration.
 \begin{figure}
 \centering
 \includegraphics[width=\columnwidth]{plots/stability.png}
-\caption{Power spectrum of 135 days of time-series data contributing to a single LST bin,
+\caption{
+[XXX change y label to fractional variance]
+[XXX update caption to describe how to interpret stability]
+[XXX is this figure linked to in text?]
+Power spectrum of 135 days of time-series data contributing to a single LST bin,
 illustrating the stability of measurements over the observing campaign.  The excess at
 2-day timescales is a beat frequency associated with the changing alignment of 
 integration windows in the correlator with respect to sidereal time.  
@@ -1816,8 +1827,8 @@ instantaneously redundant baselines before/after delay filtering, respectively.
 \begin{figure*}\centering
 \includegraphics[width=1.5\columnwidth]{plots/eig.png}
 \caption{
-XXX: Are the units correct here? The eigenvalues of a covariance matrix should
-have units of mK$^2$, not mK.
+[XXX: Are the units correct here? The eigenvalues of a covariance matrix should
+have units of mK$^2$, not mK.]
 Eigenspectrum of covariance matrices (left) empirically estimated 
 from visibilities before (blue) and after (green) delay filtering.
 The four strongest eigenmodes of the filtered/unfiltered data are plotted
@@ -2101,6 +2112,7 @@ In order to accurately describe the covariance matrix of the instrument, we woul
 \centering
 \includegraphics[width=\columnwidth]{plots/sigloss.png}
 \caption{
+[XXX update for new fr filtered data and update for new final pspec]
 Recovered power spectrum signal as a function of injected signal amplitude.  Shaded regions
 indicate the range in measured amplitude of power spectrum modes in Figure \ref{fig:final_pspec}.  
 Error bars indicate 95\% confidence intervals as determined from the Monte Carlo simulations
@@ -2156,7 +2168,7 @@ Analysis Stage & Typical Loss & Maximum Loss \\
 \hline
 Bandpass Calibration &  $< 2 \times 10^{-9}$ & 0.03 \\
 Delay Filtering & $1.5\times10^{-5}$ & 0.048 \\
-Fringe-rate Filtering & XXX & XXX \\
+Fringe-rate Filtering & 1.39 & 1.39 \\
 Quadratic Estimator & $<0.02$ & 0.89 \\
 Median of Modes & 1.4 & 1.4 \\
 \end{tabular}
@@ -2171,7 +2183,6 @@ We correct for the signal loss in each stage by multiplying the final power spec
 by the typical loss for each stage, except for specific modes the maximum
 signal loss applies. These modes are uniformly within the horizon limits or (in the case of
 delay filtering) immediately adjacent to the horizon limit.
-%XXX LST binning is one stage labeled as lossy in figure that isn't addressed in this table
 
 % Carina's Text of the eor model goes here.  Will put in on revision
 %The model eor signal used was a simulation of a flat power spectrum, in P($k$),
@@ -2365,6 +2376,7 @@ of using these two statistical metrics.
 \begin{figure*}\centering
 \includegraphics[width=2\columnwidth]{plots/pk_k3pk.png}
 \caption{
+[XXX change thermal noise power spectrum to 2-sigma upper limit in the absence of a celestial signal]
 Measured power spectrum (black dots with 2$\sigma$ error bars) at $z=8.4$
 resulting from a 134-day observation with PAPER-64.  The dashed vertical lines
 at $0.6\hMpci$ show the bounds of the delay filter described in Section
@@ -2394,6 +2406,7 @@ handled along with the rest of the bootstrapping over independent modes.
 Finally, the measured values for $P(k)$ and $\Delta^2(k)$ are corrected for signal
 loss through all stages of analysis, as summarized in Table \ref{tbl:sigloss}.
 
+[XXX update for new pspec]
 The final results are plotted in Figure \ref{fig:final_pspec}.
 For the first two modes outside of the horizon, we have
 clear detections. We attribute these to foreground leakage from
@@ -2409,7 +2422,9 @@ unlikely to be chance.
 
 \begin{figure*}\centering
 \includegraphics[width=2\columnwidth]{plots/pspec_comparison.png}
-\caption{Diagnostic power spectra in the style of Figure \ref{fig:final_pspec}
+\caption{
+[XXX update with non-xtalk removed data]
+Diagnostic power spectra in the style of Figure \ref{fig:final_pspec}
 illustrating the impact of various analysis stages.
 Power spectra omitting the stages of fringe-rate filtering (magenta) and 
 OMNICAL calibration (cyan) show higher residuals than the final power spectrum
@@ -2425,6 +2440,7 @@ OMNICAL calibration (cyan) show higher residuals than the final power spectrum
 \end{figure*}
 
 
+[XXX update for new pspec]
 We note that an excess centered at this wavemode was also
 measured in P14 with an amplitude an order of magnitude higher.
 In examining the effects on the power
@@ -2444,11 +2460,13 @@ this faint feature decorrelates without the precision of redundant calibration.
 
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/flat_k3pk_posterior.png}
-\caption{Posterior distribution of power spectrum amplitude for a flat $\Delta^{2}(k)$
+\caption{
+[XXX update to remove dashed curve]
+Posterior distribution of power spectrum amplitude for a flat $\Delta^{2}(k)$
 power spectrum over $0.15<k<0.5\hMpci$ (solid black),
 assuming Gaussian error bars. The blue and orange
 vertical lines correspond to the 1$\sigma$ and 2$\sigma$ bounds, respectively.
-The poseterior distribution excluding the the detection at $k=.35\rm \,hMpc^{-1}$ (dashed black) is shown for comparison.
+The posterior distribution excluding the the detection at $k=.35\rm \,hMpc^{-1}$ (dashed black) is shown for comparison.
 }
 \label{fig:final_posterior}
 \end{figure}
@@ -2461,10 +2479,12 @@ Figure \ref{fig:final_posterior} shows the posterior distribution of the fit.
 From this distribution, we determine a mean of
 (15.0 mK)$^2$ and a $2\sigma$ upper limit of \mKlimit.
 The measured mean is inconsistent with zero at the 2.7$\sigma$ level.
+[XXX update for new pspec]
 Even with the exclusion of the point at $k\approx0.35\hMpci$
 (Figure \ref{fig:final_posterior}, dashed) the mean is inconsistent with
 zero at $2.2\sigma$.
 
+[XXX update for new pspec, downweight polarization interpretation, upweight xtalk interpretation]
 We conclude that we are likely beginning to 
 detect a power spectrum excess at $k>0.15\hMpci$.  However, as illustrated
 in Figure \ref{fig:pspec_comp}, the level of this excess appears to be
@@ -2619,11 +2639,13 @@ implied by the $2\sigma$ 21 cm power
 spectrum upper limits shown in Figure \ref{fig:final_pspec}.
 Figure \ref{fig:patchy_bound} shows the results of these bounds
 for neutral fractions of $x_{\text{HI}}=$ 0.1, 0.3, 0.5, 0.7, and 0.9.
+[XXX update for new pspec]
 In all cases, we find that $\Tspin\gtrsim 3\,\text{K}$, indicating 
 that our measurements are inconsistent with the spin temperature
 being coupled to a kinetic temperature governed strictly by
 adiabatic expansion.
 
+[XXX update for new pspec]
 Our results become more interesting in the range of $\kmin\sim0.1$ and
 $\kmax\sim30$ representative of fiducial simulations
 \citep{lidz_et_al2008,zahn_et_al2007}.  For neutral fractions of 0.3, 0.5, and
@@ -2749,6 +2771,7 @@ array, flagging RFI events, and otherwise assessing data quality.
 Fringe-rate filtering, which is described in greater depth in \citep{parsons_et_al2015}, is also
 proving to be a flexible and powerful tool for controlling direction-dependent gains and
 improving sensitivity.  If indeed the low-significance excess in the measured power spectrum
+[XXX update for new pspec]
 is coming as a result of polarization leakage, independent filtering of the XX and YY polarizations
 prior to summation has the potential to better match these polarization beams and further suppress 
 the leakage signal implied by \citet{moore_et_al2015}.
@@ -2878,6 +2901,7 @@ dimensionless power spectrum, $\Delta^{2}(k)$, measured by the PAPER instrument.
 We coarsely show that these upper limits imply a minimum spin
 temperature for hydrogen in the IGM.  Although these limits are dependent on
 the model chosen for the power spectrum, we use a patchy reionization model
+[XXX update for new pspec]
 to show that limits of $T_s>5$ K are fairly generic for models with
 ionization fractions between 0.3 and 0.7.
 A more detailed analysis of the implied constraints on spin temperature using
@@ -2898,6 +2922,7 @@ demonstrated for managing bright smooth-spectrum foregrounds.  In this
 paper, we extend the analysis in P14 with aggressive fringe-rate filtering,
 improved redundant calibration with OMNICAL, and with an optimal quadratic
 estimator that, while lossy, is more adept at down-weighting non-Gaussian foregrounds.
+[XXX update for new pspec]
 The combined effect of these improvements leaves a power-spectral measurement that,
 while not consistent with zero at the 2.7$\sigma$-level, is not far from thermal
 noise limit.  With the expansion of the PAPER array to 64 antennas, the extended 135-day
