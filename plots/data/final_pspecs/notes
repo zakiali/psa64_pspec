@@ -1,0 +1,12 @@
+v032 is the final power spectrum
+v030 is final power spectrum without omnical 
+v031 is final power spectrum withouth fringe rate filtering (acually only nominal fringe rate filtering).
+
+
+
+
+v040 is final power spectrum. Updated with xtalk removal happening in the fringe rate filter. This has the subtracting the average of the kernel bug fixed.
+
+v041 is the final power spectrum without fringe rate filtering. Still need to remove cross-talk and using 
+
+v042 is final power spectrum without omnical, but has fringe rate filtering.
