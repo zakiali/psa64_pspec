@@ -24,7 +24,8 @@ opts,args = o.parse_args(sys.argv[1:])
 print args
 
 dspec='data/final_pspecs/v032/nocov_pspec.npz'
-args=['data/final_pspecs/v032/pspec.npz']
+#args=['data/final_pspecs/v032/pspec.npz']
+args=['data/final_pspecs/v040/pspec.npz']
 
 def noise_level():
     tsys = 500e3 #mK
@@ -46,7 +47,7 @@ def noise_level():
     bm = n.polyval(C.pspec.DEFAULT_BEAM_POLY, freq) * 2.35 # correction for beam^2
     scalar = X2Y * bm 
 
-    fr_correct = 1.9
+    fr_correct = 1.39
 
 
     print 'scalar:', scalar
@@ -334,7 +335,8 @@ for sep in RS_VS_KPL:
         nos_fold *= f
     if True: # For aggressive fringe-rate filtering, change beam area
         f = opts.afrf_factor
-        f = 1.90 # ratio of power**2 beams for filtered * unfiltered beams: 0.306 / 0.162
+#        f = 1.90 # ratio of power**2 beams for filtered * unfiltered beams: 0.306 / 0.162
+        f = 1.39 # ratio of power**2 beams for filtered * unfiltered beams: 0.306 / 0.162
         print 'Scaling data and noise by %f for beam constriction in aggressive fringe-rate filtering.' % f
         d *= f
         nos *= f
