@@ -1614,6 +1614,7 @@ a little algebra, one can show that
 \end{equation}
 where
 \begin{equation}
+\label{eq:FisherMatrix}
 \mathbf{F}_{\alpha\beta} =
 \frac{1}{2}\textrm{tr}(\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\mathbf{Q}_{\beta}),
 \end{equation}
@@ -1665,6 +1666,7 @@ The error bars are obtained by taking the square root of the diagonal of the cov
 \end{equation}
 Since $\phat = \mathbf{M}\qhat$, it is easily shown that 
 \begin{equation}
+\label{eq:MFM}
   \boldsymbol  \Sigma = \mathbf{M}\mathbf{F}\mathbf{M}^{\dagger}.
 \end{equation}
 The choice of $\mathbf{M} = \mathbf{F}^{-1}$ tends to give rather large error bars.
@@ -1696,124 +1698,108 @@ from low $k$ modes to high $k$ modes.
 % A walk through of the application to the data.
 
 Here we describe the specifics of our application of the optimal quadratic
-estimator formalism to measure the power spectrum. The form of our estimator is
-based on the delay spectrum technique described in P12a. The estimate of the
-power spectrum using this approach can be written as 
-\begin{equation}\label{eqn:delay_pspec}
-    \hat{P}(\mathbf{k}_{t\tau}) =
-\Big(\frac{\lambda^{2}}{2k_{B}}\Big)^{2}\frac{X^{2}Y}{\Omega
-B}\expval{\tilde{V}_{i}(t,\tau)\tilde{V}_{j}^{*}(t,\tau)},
-\end{equation}
-where $V_{i}(t,\tau)$'s are the delay spectra of baseline visibilities, $X$ and
-$Y$ are the constants that convert from angles and frequency to the co-moving
-coordinate, respectively, $\Omega$ is the power squared beam (see Appendix B of
-P14), and $B$ is the bandwidth. The expectation value represents the ensemble
-average over instantaneously redundant baselines, and hence over a single
-Fourier mode. One of the important assumptions in the estimation of the power
-spectrum in this was is that delay modes are a very good approximation to
-line-of-sight Fourier modes, which holds for the fiducial baselines used in this
-analysis (P12b). Due to the chromaticity of an interferometer, this is in
-general not valid assumption and depends on the length of the baseline.
+estimator formalism to measure the power spectrum. Doing so requires defining
+various quantities such as $\x$, $\mathbf{C}$, $\mathbf{Q}_\alpha$ for our analysis
+pipeline.
 
-First, we describe our data set used in the application. Our data set consists
+First, we consider $\x$, which represents the data in our experiment.  Our data set consists
 of visibilities as a function of frequency and time for each baseline in the
-array. In estimating the power spectrum we use specific redundant groups baselines,
-applying the analysis to different groups separately. In the
-description what follows we use the fiducial baselines,
-but we apply the same analysis to each of the redundant groups described in Section \ref{sec:observations}.
-Measurements obtained with the different redundant groups are combined in the averaging and
-bootstrapping over modes in the estimate of the final power spectrum.  Focusing on the fiducial
-baselines, our data vector becomes a list of visibilities
-such that
+array. In our analysis, we group the baselines into several groups of redundant baselines, 
+in the sense that within each group there are multiple copies of the same baseline. In the
+description that follows, we first estimate the power spectrum separately for each group described in Section \ref{sec:observations}.
+Power spectrum estimates obtained from the different redundant groups are then combined in a set of averaging and bootstrapping steps described in Section \ref{sec:bootstrap}. Note that because
+our data have been optimally fringe-rate filtered in the manner described in Section \ref{sec:frf},
+we may reap all the benefits of coherently integrating in time simply by estimating the power spectrum
+for every instant in the LST-binned data before averaging over the time-steps within the LST-binned day. XXX: cite fringe-rate paper.
+
+For the next portion of our discussion, consider only the data within a single redundant group. Within each group there is not only multiple identical copies of the same baseline, but in addition (as discussed in
+Section \ref{sec:wbd_filtering}), our pipeline also constructs two LST-binned data sets, one from binning all even-numbered days in our observations, and the other from all odd-numbered days. Thus, 
+we have not a single data vector, but a whole family of them, indexed by baseline ($i$) and odd
+versus even days ($r$). Separating the data out into independent subgroups allows one to estimate
+cross-power spectra rather than auto-power spectra in order to avoid the noise bias, as discussed in the previous section. The data vectors take the form
 \begin{equation}
 \label{eqn:xvectdef}
-\mathbf{x} = \left( \begin{array}{c}
-V (t_{1}) \\
-V (t_{2}) \\
+\mathbf{x}^{ri}(t) = \left( \begin{array}{c}
+V^{ri} (\nu_1, t) \\
+V^{ri} (\nu_2, t) \\
 \vdots \\
 \end{array}
 \right), 
 \end{equation}
-where, $V(t_{i})$ is the visibility of a baseline, indexed by LST bin,
-belonging to the redundant baselines under consideration. Each visibility
-contains 10 MHz of bandwidth centered at 151.5 MHz, amounting to 20 channels. 
-Notice that we have only included data from one baseline, which is looking ahead
-to the application of the method our data. We in effect apply the quadratic
-estimator on a per baseline basis and sum the baselines together to get our
-final estimate. The important point is that the data vector is in frequency
-space, where our final power spectrum estimate is in Fourier space. 
+where $V^{ri} (\nu, t)$ is the visibility at frequency $\nu$ at time $t$. Each data vector is essentially
+a visibility spectrum spanning $10\,\textrm{MHz}$ of bandwidth centered on $151.5\,\textrm{MHz}$,
+which amounts to 20 channels, and thus a vector consisting of $20$ elements.
+%
+%Focusing on the fiducial
+%baselines, our data vector becomes a list of visibilities
+%such that
+%\begin{equation}
+%\label{eqn:xvectdef}
+%\mathbf{x} = \left( \begin{array}{c}
+%V (t_{1}) \\
+%V (t_{2}) \\
+%\vdots \\
+%\end{array}
+%\right), 
+%\end{equation}
+%where, $V(t_{i})$ is the visibility of a baseline, indexed by LST bin,
+%belonging to the redundant baselines under consideration. Each visibility
+%contains 10 MHz of bandwidth centered at 151.5 MHz, amounting to 20 channels. 
+%Notice that we have only included data from one baseline, which is looking ahead
+%to the application of the method our data. We in effect apply the quadratic
+%estimator on a per baseline basis and sum the baselines together to get our
+%final estimate. The important point is that the data vector is in frequency
+%space, where our final power spectrum estimate is in Fourier space. 
 
-This leads to the description of the matrix that takes the data vector,
-$\mathbf{x}$, and transforms it into something that is in the power spectrum
-domain, $\mathbf{Q}_{\alpha}$. Because our data matrix is in frequency domain,
-we need a way of transforming that data into $k$-space, and specifically into
-the line of sight $k_{\parallel}$-modes. As shown in P12b,
-line of sight $k$-modes are approximated by delay modes for short baselines and
-therefore the $\mathbf{Q}_{\alpha}$ should encode the delay transform. This is,
-in fact, the form of this matrix we use; we encode the delay transform in to
-the $\mathbf{Q}_{\alpha}$ by taking the outer product of a sine wave with a
-given delay mode, $\alpha$,  with itself.  Therefore, we construct a family of
-$\mathbf{Q}$ matrices, each with a specific delay transform measuring a single
-delay mode. 
-%[ include plots of application of Q to data?] ARP: don't think so: too many plots
+Having formed the data vectors, the next step in Equation \eqref{eqn:qalpha} is to
+weight the data by their inverse covariance. To do so, we of course require the covariance
+matrix $\mathbf{C}$, which by definition, is the ensemble average of
+$\x\x^\dagger$, namely $\mathbf{C} = \expval{\x\x^{t}}$. Unfortunately, in our case the
+covariance is difficult to model from first principles, and thus we must resort to an
+empirically estimated $\mathbf{C}$. We make this estimation by taking the time average
+of the quantity $\x\x^{t}$ over 8.5 hours of LST, estimating a different covariance matrix
+for each baseline and for odd versus even days. While an empirical determination of the covariance is advantageous
+in that it captures features in the data that are difficult to model from first principles, it
+carries the risk of cosmological signal loss. We will discuss and quantify this signal loss
+in Section \ref{sec:sigloss}.
 
-According to equation \ref{eqn:qalpha}, there is one more fundamental piece of
-information we require, the covariance matrix, $\mathbf{C}$. The covariance
-matrix of the data vector $\x$, by definition, is the ensemble average of
-$\x\x^{t}$, namely $\mathbf{C} = \expval{\x\x^{t}}$. However, due to our limited
-universe, we empirically estimate the covariance matrix by taking the time average of the
-quantity $\x\x^{t}$ over a range of LSTs. We discuss the implications of
-empirically estimating the covariance matrix in a later section, due to the fact
-that the cusp of the problems with signal loss are attributed to this estimate.
-
-The covariance matrix plays an important role in the optimal quadratic estimate
-of power spectra. For ease of notation, let us define 
+To gain some intuition for the action of $\mathbf{C}^{-1}$ on our data, let us examine the
+combination
 \begin{equation}\label{eqn:z}
-    \mathbf{z} =  \mathbf{C}^{-1}\mathbf{x},
+    \mathbf{z}^{ri} =  (\mathbf{C}^{ri})^{-1}\mathbf{x}^{ri}
 \end{equation}
-which is the weighting of the data by the inverse covariance. This is a crucial
-step in the analysis since it suppresses covariant signal between $k$-modes by
-down weighting that signal. The application of the covariance matrix to data has
-the same general suppression, however, different data sets have different
-covariances. Figure  \ref{fig:inv_cov} shows what happens when one applies the
-inverse covariance to a data vector that contains foregrounds, and therefore
-highly covariant,  and one which has the foregrounds removed via that wideband
-delay filter described in Section \ref{sec:wbd_filtering}.  In the figure, the
-top row corresponds to the data vector $\mathbf{x}$, which is a waterfall of
-the visibilities with frequency on the $x$-axis and time on the $y$-axis. The
+for select baselines. This is a crucial
+step in the analysis since it suppresses coherent frequency structures (such as those
+that might arise from foregrounds). Note that the inverse covariance weighting employed
+here differs from that in P14, in that P14 modeled and included covariances between
+different baselines, whereas in our current treatment, 
+Figure \ref{fig:inv_cov} compares the effects of applying
+the inverse covariance matrix to a data vector that contains foregrounds (and thus contains
+highly correlated frequency structures) to one in which foregrounds have been suppressed
+by the wideband
+delay filter described in Section \ref{sec:wbd_filtering}. In the figure, the
+top row corresponds to the data vector $\mathbf{x}^{ri}$ for three selected baselines in the form
+of a waterfall plot of
+visibilities, with frequency on the horizontal axis and time on the vertical axis. The
 middle section shows the empirical estimate of the covariance by taking the
-outer product of $\x$ with itself and collapsing over the time axis. Finally,
-the last row is the application of inverse covariance weighting to the data,
-namely $\mathbf{z}$.
+outer product of $\x$ with itself and averaging over the time axis. Finally,
+the last row shows the results of inverse covariance weighting the data,
+namely $\mathbf{z}^{ri}$. In every row, the foreground-dominated data are shown
+in the left half of the figure, while the foreground-suppressed data are shown in the right half.
 
-Applying the inverse covariance to $\x$ down weights the
-strongest eigenmodes of the covariance matrix, $\mathbf{C}$, and up-weights the
-weakest eigenmodes. In comparison, for random white noise, the optimal
-weighting scheme is inverse variance weighting, which leads to the smallest
-error bars. For an infinite sample of random white noise, the covariance matrix
-would be diagonal and applying the inverse covariance would be identical to
-inverse variance weighting. The diagonal of this inverse covariance matrix are
-the eigenvalues and correspond to the eigenmodes. Therefore, the most
-down-weighted modes correspond to the largest eigenvalues of $\C$, and hence the
-strongest modes.  Similarity, applying the inverse covariance to the baseline
-data vector, $\x$, the strongest modes get down weighted. 
-
-Looking at $\mathbf{z}$ in Figure \ref{fig:inv_cov} for the visibilities that
-still contain foreground signal (left half) shows the down weighting of
-the strongest modes which correspond to foregrounds. The strongest modes here,
-are the strongest eigenmodes of the covariance matrix. Figure
-\ref{fig:eigs} shows the eigenspectrum and the four strongest eigenmodes of a
-covariance matrix derived from a data vector with foregrounds. As seen four
-strongest eigenmodes are highly suggestive of smooth spectrum sources. In
-contrast, the right half of Figure \ref{fig:inv_cov} shows the application of
-inverse covariance weighting to data which has the wideband delay filter applied
-to remove smooth spectrum foregrounds. Applying the covariance, is up-weighting
-the weakest modes in the data and since the strongest, foreground, modes have
-been removed we are seeing the up-weighting of the noise. This is paralleled by
-looking at the eigenspectrum and strongest eigenmodes of the foreground-less
-covariance matrix in which the strongest modes do not have any coherent
-structure to them and can be considered noise-like.
-
+Consider the foreground-dominated $\mathbf{x}^{ri}$ in Figure \ref{fig:inv_cov}, and
+their corresponding covariance matrices. The strongest modes that are present in the
+data are the eigenmodes of the covariance matrix with the largest eigenvalues. Figure
+\ref{fig:eigs} shows the full eigenvalue spectrum and the four strongest eigenmodes.
+For the foreground-dominated data, one sees that the eigenvalue spectrum is dominated
+by the first few modes, and the corresponding eigenmodes are rather smooth, highly suggestive
+of smooth spectrum foreground sources. The application of the inverse covariance weighting
+downweights these eigenmodes, revealing waterfall plots in the bottom row of Figure \ref{fig:inv_cov}
+that look more noise-dominated. With the foreground-suppressed portion (right half) of Figure \ref{fig:inv_cov},
+the initial $\mathbf{x}^{ri}$ vectors already appear noise dominated (which is corroborated by the
+relatively noisy form of the eigenspectra in Figure \ref{fig:eigs}). The final $\mathbf{z}^{ri}$ vectors
+remain noise-like, although some smooth structure (perhaps from residual foregrounds) has still been removed, and finer scale noise
+has been upweighted.
 
 \begin{figure*}\centering
 \includegraphics[width=2\columnwidth]{plots/inv_cov.png}
@@ -1822,6 +1808,7 @@ Visibilities before (top row) and after (bottom row) inverse covariance weightin
 Signal covariance (middle row) is estimated empirically, averaging over LST.
 The three left/right columns show visibilities from
 instantaneously redundant baselines before/after delay filtering, respectively.
+[XXX: need to be clearer about how there are three different baselines plotted here]
 } \label{fig:inv_cov}
 \end{figure*}
 
@@ -1847,96 +1834,75 @@ on the top/bottom panels on the right, respectively.
 } \label{fig:eigs}
 \end{figure*}
 
-As noted in the previous section, we use cross correlations between baselines
-and times to construct an unbiased estimator of the power spectrum. This results
-in applying equation \ref{eqn:qalpha_unbiased}, without the bias term, namely, 
-\begin{equation}
-\label{eqn:qalpha_nobias}
-    q_{\alpha} =
-        \frac{1}{2}\x_{1}^{t}\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\x_{2}.
-\end{equation}
-Here, $\x_{1}$ and $\x_{2}$ are data vectors which have uncorrelated noise
-properties leading to the removal of the bias term. As mentioned in section
-\ref{sec:wbd_filtering}, we have constructed two LST binned data sets, which are identical
-in sky signal, but have varying noise properties, owning to being created with
-every other day of observation.  This allows us to construct unbiased (in
-instrumental noise) quadratic estimator of the power spectrum, but will allow
-for a foreground bias if residual foregrounds are still in the data at some
-significant level after the application of the delay filter.
 
-
-Firstly, we divide the baselines into five different groups without repeating
-baselines. For each bootstrap, as discussed below, we randomly sample with
-replacement baselines from each group. When computing the estimate of the power
-spectrum, we only cross multiply the baselines between groups and never compute
-the auto power, minimizing the bias.
-
-Secondly, we use the data from the even and odd LST binned data sets which were created
-by binning alternate days onto the same LST grid. 
-When constructing our estimate of the power
-spectrum, we use baselines from these two data sets on either side of the
-$\mathbf{Q}$ matrix, being careful not to include the same baseline from the
-same data set on both sides. This is another axis on which we are trying the
-remove the noise bias.
-
-
-Taking the above two caveats in to consideration, we then construct our optimal
-estimator by applying equation \ref{eqn:qalpha_nobias} to the baseline data. In
-order to obtain the final estimate of the power spectrum, we average all of the
-baselines together as a function of time, measuring one power spectrum per LST
-bin. Therefore, because we are using only the auto covariances to weight the
-data vector, that is we are not taking into account the baseline-baseline
-covariances when weighting the data, only the frequency-frequency covariances
-between channels. This is a major difference between the analysis described in
-P14, where baseline-baseline covariances were being taken into account. To
-understand the application of this quadratic estimator formalism to the data,
-let us begin by defining 
+With intuition established for the behavior of $\mathbf{C}^{-1}$, we may compress our
+data slightly by averaging baselines together the $\mathbf{z}^{ri}$ into five different sets. That is,
+we form
 \begin{equation}\label{eqn:presum_oqe}
-    \mathbf{z}^{r}_{A} = \sum_{i\in{A}} \mathbf{C}_{i}^{-1}\mathbf{x}_{i},
+    \mathbf{z}^{r}_{A} = \sum_{i\in{A}} (\mathbf{C}^{ri})^{-1}\mathbf{x}^{ri},
 \end{equation}
-where $r$ denotes either \emph{even} or \emph{odd} depending on the LST data set
-used and $A$ denotes the group of baselines under consideration. Notice that the
-sum occurs over the baselines within a group for a given LST dataset. Using this
-definition, our final estimate of the intermediate quantity, $\mathbf{q}$, is
-given by 
+where $A$ ranges from $1$ to $5$ and indexes the baseline set. At this point,
+we have 10 weighted data vectors $\mathbf{z}$ ($5$ baseline sets, each of which has
+an even day and odd day version) for every LST-binned time-step. As discussed in the
+previous section, instrumental noise bias may be avoided by forming cross-power spectra
+rather than auto-power spectra. Generalizing Equation \eqref{eqn:qalpha_unbiased} to our
+present case where we have $10$ different data vectors, we have
 \begin{equation}\label{eqn:presum_qalpha}
     \qhat_{\alpha} = \sum_{\substack{A,B,r,s\\r\ne{s},A\ne{B}}}\mathbf{z}^{r\dagger}_{A}\mathbf{Q}_{\alpha}\mathbf{z}^{s}_{B},
 \end{equation}
-where the sum occurs over $A,B,r,s$ where $r\ne{s}$ and $A\ne{B}$. Furthermore,
-since our $\mathbf{Q}_{\alpha}$ simply encodes a delay transform, it becomes
-separable such that, $\Q_{\alpha} =
-\mathbf{m}_{\alpha}^{\dagger}\mathbf{m}_{\alpha}$, where $\mathbf{m}_{\alpha}$ a
-complex sine wave of a specific frequency corresponding to delay mode $\alpha$.
-This is a consequence of approximating delay modes as Fourier line of sight
-modes, which is a valid approximation for the short baselines under
-consideration. If this were not the case, $\Q$, would not be as simple as this
-and would be required to take in to account the coupling between delay modes. 
-Under this approximation, equation \ref{eqn:presum_qalpha} becomes
+so that auto-power contributions from identical baseline groups or identical even/odd indices
+never appear.
+
+In order to implement Equation $\label{eqn:presum_qalpha}$, it is necessary to derive a form for
+$\mathbf{Q}_\alpha \equiv \partial \mathbf{C} / \partial p_\alpha$. To do so, we follow the delay
+spectrum technique of P12a, where it was shown that
+\begin{equation}\label{eqn:delay_pspec}
+    P(\mathbf{k}_{t\tau}) \approx
+\Big(\frac{\lambda^{2}}{2k_{B}}\Big)^{2}\frac{X^{2}Y}{\Omega
+B}\expval{\tilde{V}_{i}(t,\tau)\tilde{V}_{j}^{*}(t,\tau)},
+\end{equation}
+where $V_{i}(t,\tau)$ is the delay spectrum of baseline visibilities [XXX: is this the first time
+we use the term ``delay spectrum"? If so, we need to , $X$ and
+$Y$ are the constants that convert from angles and frequency to the co-moving
+coordinate, respectively, $\Omega$ is the power squared beam (see Appendix B of
+P14), and $B$ is the bandwidth. [XXX: didn't define wavelength or Boltzmann's constant]
+This suggests that in order to estimate the power spectrum from visibilities, one only needs
+to Fourier transform along the frequency axis (converting the spectrum into a delay spectrum)
+before squaring and multiplying by a scalar. Thus, $\mathbf{Q}_\alpha$ role in Equation \eqref{eqn:presum_qalpha} is to perform a frequency Fourier transform on each copy of
+$\mathbf{z}$. The result is a separable matrix of the form $\Q_{\alpha} =
+\mathbf{m}_{\alpha}\mathbf{m}_{\alpha}^{\dagger}$, where $\mathbf{m}_{\alpha}$ a
+complex sine wave of a specific frequency corresponding to delay mode $\alpha$
+[XXX: I can make this more rigorous, but it'll require a few more lines of math. Zaki, your call.]. This
+separable form holds only for short baselines, where the chromaticity of an interferometer
+can be neglected over narrow bandwidths [XXX: cite wedge paper 1]. Fortunately, as discussed
+above [XXX: right?], only short baselines are used in our analysis here, and we may thus
+write
 \begin{equation}
     \qhat_{\alpha} =
-\sum_{\substack{A,B,r,s\\r\ne{s},A\ne{B}}}\mathbf{z}^{r\dagger}_{A}\mathbf{m}_{\alpha}^{\dagger}\mathbf{m}_{\alpha}\mathbf{z}^{r}_{A}.
+\sum_{\substack{A,B,r,s\\r\ne{s},A\ne{B}}}\mathbf{z}^{r\dagger}_{A}\mathbf{m}_{\alpha}\mathbf{m}_{\alpha}^{\dagger} \mathbf{z}^{s}_{B}.
 \end{equation}
+With an explicit form for $\mathbf{Q}_\alpha$, one now also has the necessary ingredients
+to compute the Fisher matrix using Equation \eqref{eq:FisherMatrix}.
 
-After forming intermediate quantities, we must normalize our power spectrum
-estimate to obtain sensible estimates on the power spectrum. As noted above, the
-normalization occurs by the $\mathbf{M}$ matrix in equation
-\ref{eqn:pspec_norm}, and can be any matrix of our desire. 
-Even though the choices of the normalization matrices described above have some
-good properties, e.g. small error bars and no leakage, we opt for a different
-choice of window function as follows. We first take the Cholesky decomposition of
-the Fisher matrix such that $\mathbf{F} = \mathbf{L}\mathbf{L}^{\dagger}$, where
-$\mathbf{L}$ is a lower triangular matrix\footnote{This is possible for any
-positive definite matrix}. Then, we choose ${\mathbf{M}} = \mathbf{L}^{-1}$ to
-be our normalization matrix. In this case, the window function matrix becomes,
-$\mathbf{W}=\mathbf{L}^{\dagger}$. Note that we first reorder the rows of the
-Fisher matrix before decomposing into a product of upper and lower triangular
-matrices. The reordering scheme puts higher $k$-modes first and lower ones last
-in the list. After decomposing, this choice of $\mathbf{M}$ matrix has the
-effect of only coupling modes exterior the $\alpha$'th mode only to the band
-power in $\alpha$  for the final estimate of the power spectrum.  With the
-ordering described above, this has the consequence of not coupling the modes
-inside the horizon in to measurements of band powers outside the horizon. Figure
-\ref{fig:window_func} shows these window functions. 
+Having computed the $\qhat_{\alpha}$s, we group our results into a vector $\mathbf{\hat{q}}$.
+This vector of unnormalized bandpowers is then normalized to form our final estimates of the
+power spectrum $\mathbf{p}$. As noted above, the
+normalization occurs by the $\mathbf{M}$ matrix in Equation
+\eqref{eqn:pspec_norm}, and can be any matrix of our desire. 
+Even though the choices of the normalization matrices described above have certain
+good properties, e.g. small error bars or no leakage, we opt for a different
+choice of window function, as follows. We first reorder the elements in $\mathbf{\hat{q}}$ (and
+therefore in $\mathbf{F}$, $\mathbf{M}$, and $\mathbf{\hat{p}}$ for consistency) so that
+the $k$-modes are listed in ascending order, from low $k$ to high $k$, with the exception that we place the highest $k$ bin third after the lowest two $k$ bins. (The reason for this exception will be made apparent shortly). We then take the Cholesky decomposition of
+the Fisher matrix ,such that $\mathbf{F} \equiv \mathbf{L}\mathbf{L}^{\dagger}$, where
+$\mathbf{L}$ is a lower triangular matrix. Following that, we pick ${\mathbf{M}} = \mathbf{D} \mathbf{L}^{-1}$, where $\mathbf{D}$ is a diagonal matrix chosen to adhere to the normalization constraint
+that $\mathbf{W} = \mathbf{M} \mathbf{F}$ has rows that sum to unity. In this case, the window function matrix becomes,
+$\mathbf{W}=\mathbf{D} \mathbf{L}^{\dagger}$. This means that $\mathbf{W}$ is upper triangular,
+and with our ordering scheme, has the consequence of allowing power to leak from high to low $k$,
+but not vice versa. Since foregrounds preferentially appear at low $k$, this mitigates leakage
+of foregrounds into the EoR window. [XXX: have we used this terminology elsewhere in the paper?] Additionally, our placement of the highest $k$ bin as the third element in our reordering of 
+$\mathbf{\hat{p}}$ prevents leakage from this edge bin that will contain aliased power. Figure
+\ref{fig:window_func} shows the resulting window functions. 
 
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/window.png}
@@ -1952,65 +1918,19 @@ at lower $k$-modes that are likely to be biased by foregrounds.
 }\label{fig:window_func}
 \end{figure}
 
-
-
-In addition to the nice properties in the estimates of the power spectrum given
-by the above normalization and window function matrix, there is another nice
-property about the choice of normalization which corresponds to the error
-correlation. Using the choice of normalization matrix described above, we have
+Our choice of normalization matrix also has the attractive property of eliminating error correlations
+between bandpower estimates. Using Equation \eqref{eq:MFM}, we have
 that \begin{equation} 
-    \Sigma = \mathbf{L}^{-1}\mathbf{L}\mathbf{L}^{\dagger}\mathbf{L}^{-\dagger}
-           = \mathbf{I}.
+ \boldsymbol   \Sigma = \mathbf{D} \mathbf{L}^{-1}\mathbf{L}\mathbf{L}^{\dagger}\mathbf{L}^{-\dagger} \mathbf{D}
+           = \mathbf{D}^2.
 \end{equation}
-Therefore, for $\mathbf{M}=\mathbf{L}^{-1}$, the error correlations are
-proportional to the identity matrix. Proportional to the identity matrix because
-our choice of $\mathbf{M} \propto \mathbf{L}^{-1}$ due to the normalization
-criteria. Each row of $\mathbf{M}$ are normalized to sum to 1 and therefore,
-the error correlation, or covariance of the estimate of our band powers, is only
-proportional to the identity matrix, and hence diagonal. This is a very well
-behaved property that implies that the error bars between band powers are not
-correlated and hence the error bar on every measurement is independent from on
-one another.  This contrasts with the power-spectrum estimator in P14, which
-used a Blackmann-Harris taper function that reduced leakage between band powers,
-but resulted in overlapping window functions that meant neighboring 
-band powers contained correlated errors.
-
-The Fisher matrix quantifies
-the amount of information about each $k$-mode. The
-Fisher matrix is shown in Figure \ref{fig:fisher}; the diagonal quantifies how constraining measurements
-are on the amplitude of 
-every $k_{\parallel}$ mode individually, and off-diagonal how well modes are differentiated from
-one another. The Fisher matrix is derived
-using all of the baselines, contains of all of the
-information associated with the estimate of $P(k)$.  However, modes can be re-weighted using
-$\mathbf{M}$ to trade between vertical and horizontal errors.
 [XXX define F somewhere]
 [XXX put F figure before W figure]
 [XXX explain one last time the choice of M=Linv]
+The error covariance matrix on the bandpowers is thus diagonal, which implies
+that our final data points are uncorrelated with one another. This stands in contrasts to the power-spectrum estimator used in P14, where the Blackmann-Harris taper function induced correlated errors
+between neighboring data points..
 
-\begin{figure}\centering
-\includegraphics[width=\columnwidth]{plots/fisher.png}
-\caption{
-Fisher information matrix, $\mathbf{F}=\langle\qhat\qhat^\dagger\rangle$, for the quadratic estimator described in
-equation \ref{eqn:presum_qalpha}, applied to delay-filtered data. 
-Color scale indicates $\log_{10}\mathbf{F}$.
-$\mathbf{F}$ is artificially high for the center three $k$-modes whose amplitudes have been heavily
-suppressed by the delay filter.
-}
-
-
-%Fisher matrix captures the covariance of the intermediate $\qhat$'s with one
-%another. The diagonal of the Fisher matrix, gives the auto-covariance of the
-%$\qhat$ with itself. The first mode in the horizon has a bulk of the signal
-%removed via the dleay filter and since the Fisher matrix takes into account
-%inverse covariance weigthing of the data, it upweights those modes.
-%Contrastingly, the second mode in the horizon and the first mode outside the
-%horizon is suppressed because of some possibly residual signal left by the delay
-%filter and kicking up of signal to outside of the horizon. The excess covariance
-%cross in the Fisher matrix comes from the inverse covariance weighting applied
-%to the data in the calculation of $\qhat$, which downweights the signal.}
-\label{fig:fisher}
-\end{figure}
 
 
 \subsection{Covariance Matrix and Signal Loss}
