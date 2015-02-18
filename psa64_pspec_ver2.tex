@@ -1282,11 +1282,11 @@ The action of the fringe-rate filter is to get an optimally weighted
 sample, averaged at the longest physically possible integration time.  For the
 fiducial baselines, the effective
 integration time is calculated by comparing the variance statistic for a
-fringe-rate filter that is a flat weighting vs that with an optimal filter
+fringe-rate filter $f$ that is a flat weighting versus that with an optimal filter
 weighting as described. We apply these filters to random noise with variance 1,
 without loss of generality. We can conclude that 
 \begin{equation}
-    t_{int} = \frac{\int{\sigma^{2}dt}}{\int{\sigma^{2}fr^{2}dt}},
+    t_{int} = \frac{\int{\sigma^{2}dt}}{\int{\sigma^{2}f^{2}dt}},
 \end{equation}
 which evaluates to 1886 s for an optimal fringe-rate filter on the fiducial 
 baseline at 150 MHz.  Over the range of frequencies used in our power spectrum
@@ -1926,12 +1926,18 @@ used a Blackmann-Harris taper function that reduced leakage between band powers,
 but resulted in overlapping window functions that meant neighboring 
 band powers contained correlated errors.
 
-The Fisher matrix is a key component in the above analysis and contains a
-wealth of information about the amount of information in each $k$-mode. The
-Fisher matrix is shown in Figure \ref{fig:fisher}, represents the amount of
-information there is in every $k_{\parallel}$ mode. The Fisher matrix is derived
-using all of the baselines, not just a baseline pair and consists of all of the
-information contained in the estimate.
+The Fisher matrix quantifies
+the amount of information about each $k$-mode. The
+Fisher matrix is shown in Figure \ref{fig:fisher}; the diagonal quantifies how constraining measurements
+are on the amplitude of 
+every $k_{\parallel}$ mode individually, and off-diagonal how well modes are differentiated from
+one another. The Fisher matrix is derived
+using all of the baselines, contains of all of the
+information associated with the estimate of $P(k)$.  However, modes can be re-weighted using
+$\mathbf{M}$ to trade between vertical and horizontal errors.
+[XXX define F somewhere]
+[XXX put F figure before W figure]
+[XXX explain one last time the choice of M=Linv]
 
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/fisher.png}
@@ -1943,8 +1949,6 @@ $\mathbf{F}$ is artificially high for the center three $k$-modes whose amplitude
 suppressed by the delay filter.
 }
 
-%XXX This part needs work. My understanding of the Fisher Matrix is still
-%undeveloped. Noisier modes are upweighted in k-space? 
 
 %Fisher matrix captures the covariance of the intermediate $\qhat$'s with one
 %another. The diagonal of the Fisher matrix, gives the auto-covariance of the
