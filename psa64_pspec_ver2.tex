@@ -1604,7 +1604,7 @@ space over different $k$-bins, which is separate from the ``input" vector space 
 To select an $\mathbf{M}$ matrix that properly normalizes the power spectrum, we must compute
 the window function matrix $\mathbf{W}$ for our estimator. The window matrix is defined such that
 the true bandpowers $\mathbf{p}$ and our estimates $\hat{\mathbf{p}}$ of them are related by
-\begin{equation}
+\begin{equation}\label{eqn:true_pspec_2_est_pspec}
 \hat{\mathbf{p}} = \mathbf{W} \mathbf{p},
 \end{equation}
 so that each row gives the linear combination of the true power that is probed by our estimate. With
@@ -1853,7 +1853,7 @@ present case where we have $10$ different data vectors, we have
 so that auto-power contributions from identical baseline groups or identical even/odd indices
 never appear.
 
-In order to implement Equation $\label{eqn:presum_qalpha}$, it is necessary to derive a form for
+In order to implement Equation $\ref{eqn:presum_qalpha}$, it is necessary to derive a form for
 $\mathbf{Q}_\alpha \equiv \partial \mathbf{C} / \partial p_\alpha$. To do so, we follow the delay
 spectrum technique of P12a, where it was shown that
 \begin{equation}\label{eqn:delay_pspec}
