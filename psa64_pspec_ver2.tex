@@ -1480,12 +1480,10 @@ contributing appreciable noise.
 %         the covariance matrix is highly singular and therefore not invertible.
 
 In this section we first
-review the optimal quadratic estimator formalism, with an emphasis on our power
-spectrum analysis, followed by a walk through of our application of the OQE
-method to our data, and finally discuss the effects of an empirical estimate of
-covariance matrices.  For a more detailed examination of the application
-of optimal quadratic estimators to 21cm cosmology, we refer the reader to
-\citet{liu_et_al2014a} and \citet{liu_et_al2014b}.
+review the optimal quadratic estimator (OQE) formalism, followed by a walk-through of our 
+particular applications of the OQE
+method to our data, and close by discussing the effects of using an empirically estimated 
+covariance matrix in our analysis.
 
 
 
@@ -1513,87 +1511,118 @@ of optimal quadratic estimators to 21cm cosmology, we refer the reader to
 We use the optimal quadratic estimator method to estimate our power spectrum as
 done in \citet{dillon_et_al2013a} and \citet{liu_tegmark2011}.  Here we briefly review the
 optimal quadratic estimator (OQE) formalism with an emphasis on our application
-to data. The end goal of this analysis technique is to estimate the 21 cm
+to data, which draws strongly from the aforementioned works, but also relies on empirical
+techniques similar to those used in P14. The end goal of this analysis is to estimate the 21 cm
 power spectrum, $P_{21}(\k)$, defined such that 
 \begin{equation}
 \label{eqn:pspec_def}
-    \expval{\tilde{T}_{b}(\k)\tilde{T}^{*}_{b}(\k^{\prime})} =
+    \expval{\widetilde{T}_{b}(\k)\widetilde{T}^{*}_{b}(\k^{\prime})} =
             (2\pi)^{3}\delta^{D}(\k - \k^{\prime})P_{21}(\k),
 \end{equation}
-where $\tilde{T}_{b}(\k)$ is the fourier transform of the brightness temperature
-distribution on the sky, $\expval{}$ denote the ensemble average, and
-$\delta^{D}$ is the Dirac-Delta function. 
+where $\widetilde{T}_{b}(\k)$ is the spatial Fourier transform of the brightness temperature
+distribution on the sky, $\expval{}$ denotes the ensemble average, and
+$\delta^{D}$ is the Dirac delta function. 
 
-
-In order to make an estimate of the power spectrum, we first begin with a data
-vector $\x$ which includes all of the measured  visibilities (both in time and
-frequency), $V(\nu,t)$, one wishes to use in the estimate of $P_{21}$. We form
+XXX: need to check all transposes and convert them to daggers.
+In order to make an estimate of the power spectrum in the OQE formalism, one begins with a data
+vector $\x$, which includes all of the measured visibilities (both in time and
+frequency) $V(\nu,t)$. We form
 the intermediate quantity,
 \begin{equation}
 \label{eqn:qalpha}
-    q_{\alpha} = \frac{1}{2}\x^{t}\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\x - b_{\alpha},
+   \hat{q}_{\alpha} = \frac{1}{2}\x^\dagger\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\x - b_{\alpha},
 \end{equation}
 which will be needed to form the optimal quadratic estimator of our power spectrum.
-Here, $\mathbf{C}$ is the true covariance matrix of the data vector $\x$, 
+Here, $\mathbf{C} \equiv \langle \x \x^\dagger \rangle$ is the true covariance matrix of the data vector $\x$, 
 $\mathbf{Q}_{\alpha}$ is the operator that takes visibilities into power spectrum
-$k$-space and bins into the ${\alpha}^{th}$ bin, and $b_{\alpha}$ is the bias to
-the estimate that needs to be subtracted off. This bias is the instrumental
-noise bias due to the instrument itself. There is infact another source of bias
-due to the foregrounds. In general, $\mathbf{Q}_{\alpha}$
-is a family of matrices, one for each $\alpha^{th}$ bin (equivalent to $k$-bin
-for a power spectrum analysis). It is important to note that
-$\mathbf{Q}_{\alpha}$ can take on any form and be completely arbitrary. It is
-the data analysts choice. However, if one is looking for the best possible
-estimate of the power spectrum,  $\mathbf{Q_{\alpha}}$ generally
-takes a form that is proportional to  $\mathbf{C}_{,\alpha} \equiv
-\frac{\partial{\mathbf{C}}}{\partial p_{\alpha}}$, which is the derivative of
-the covariance matrix with respect to the band power $p_{\alpha}$, defined
-below.  Therefore, $\mathbf{Q}_{\alpha}$ encodes the response of the data
-covariance matrix to the $\alpha^{th}$ bandpower. We describe our choice of this
-matrix in the next section, where we describe the application of the quadratic
-estimator. 
+$k$-space and bins into the ${\alpha}$th bin, and $b_{\alpha}$ is the bias to
+the estimate that needs to be subtracted off. In general, $\mathbf{Q}_{\alpha}$
+represents a family of matrices, one for each $k$ bin indexed by $\alpha$. Each matrix
+is defined as
+$\mathbf{Q}_{\alpha} \equiv
+\frac{\partial{\mathbf{C}}}{\partial p_{\alpha}}$, i.e., the derivative of the covariance
+matrix with respect to the band power $p_\alpha$. 
+%It is important to note that
+%$\mathbf{Q}_{\alpha}$ can take on any form and be completely arbitrary. It is
+%the data analyst's choice, provided all the relevant
+%statistical information (such as the error bars) are self-consistently computed. However, if one is looking for the best possible
+%estimate of the power spectrum,  $\mathbf{Q_{\alpha}}$ will typically be
+% proportional to  $\mathbf{C}_{,\alpha} \equiv
+%\frac{\partial{\mathbf{C}}}{\partial p_{\alpha}}$, defined as the derivative of
+%the covariance matrix with respect to the band power $p_{\alpha}$.
+The bandpower $p_\alpha$
+can be intuitively thought of as the value of the power spectrum in the $\alpha$th
+$k$ bin.  Therefore, $\mathbf{Q}_{\alpha}$ encodes the response of the data
+covariance matrix to the $\alpha$th bin of the power spectrum. 
+%We describe our choice of this
+%matrix in the next section, where we describe the application of the quadratic
+%estimator. 
+XXX: eqref vs. ref throughout
 
-Normalizing the $\q_{\alpha}'s$ with a matrix $\mathbf{M}$, we form
-the final estimate of our power spectrum,
-\begin{equation}\label{eqn:pspec_norm}
-    \mathbf{\hat{p}} = \mathbf{M}\mathbf{q},
-\end{equation}
-where $\mathbf{\hat{p}}$ is the optimal quadratic estimate of the power spectrum
-for every band power $p_{\alpha}$ in $k$-space, and $\mathbf{q}$ is a vector of the
-quantities in equation \ref{eqn:qalpha} for every $\alpha'th$ bin.
-
-The bias term $b_{\alpha}$ in equation \ref{eqn:qalpha} is the instrumental
-noise bias that needs to be subtracted off. However, in our analysis we are
-constructing an unbiased estimator by using cross correlations between different
-redundant baselines. This eliminates the need to subtract the noise bias in
-equation \ref{eqn:qalpha}. However, we do not try to remove the 
-foreground bias.  Due to the fact that we are using cross correlations in our
-quadratic estimator of the power spectrum, equation \ref{eqn:qalpha} becomes, 
+The bias term $b_{\alpha}$ in Equation \eqref{eqn:qalpha} will include contributions
+from both instrumental noise and residual foregrounds. Their presence in the data
+is simply due to the fact that both contributions have positive \emph{power}. In our analysis, we do not attempt any bias subtraction
+of residual foregrounds. This is a conservative choice motivated by concerns about
+possible signal loss from an overly aggressive bias removal scheme. In any case,
+any residual foreground bias will only serve to raise our upper limit. To deal with the
+instrumental noise bias, we do not apply Equation \eqref{eqn:qalpha} as written. Doing
+so would constitute the computation of an auto-power spectrum, where data---and thus
+instrumental noise contributions---are squared, causing a positive bias. Instead, we
+split the data $\x$ into two groups $\x_1$ and $\x_2$, which are comprised of visibilities
+from different copies of a redundant baseline in the array. If one then computes
 \begin{equation}\label{eqn:qalpha_unbiased}
-    q_{\alpha} =
-\frac{1}{2}\x_{1}^{t}\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\x_{2} - b_{\alpha},
+    \hat{q}_{\alpha} =
+\frac{1}{2}\x_{1}^\dagger\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\x_{2},
 \end{equation}
-where $x_{1}$ and $x_{2}$ are visibility vectors that correspond to two
-different redundant baselines. This cross correlation is the key to obtaining a
-zero bias estimate of the power spectrum. 
+one arrives at a cross-power spectrum that by construction has no noise bias. There is
+thus no need to explicitly model and subtract any noise bias, and with our decision to leave
+the residual foreground bias in the data, the $b_\alpha$ term no longer appears in our estimator.
 
-The normalization matrix above is defined such that
+The set of $\hat{q}_{\alpha}$s do not yet constitute a properly normalized estimate of
+the power spectrum (as evidenced, for example, by the extra factors of $\mathbf{C}^{-1}$). 
+To normalize our results, we group the unnormalized bandpowers into a vector $\mathbf{\hat{q}}$
+and apply a matrix $\mathbf{M}$ (whose exact form we specify later), so that
+\begin{equation}\label{eqn:pspec_norm}
+    \mathbf{\hat{p}} = \mathbf{M}\hat{\mathbf{q}},
+\end{equation}
+is a normalized estimate $\mathbf{\hat{p}}$ of the true power spectrum $\mathbf{p}$. We emphasize
+that the vector space that contains $\hat{\mathbf{q}}$ and $\hat{\mathbf{p}}$ is an ``output" vector
+space over different $k$-bins, which is separate from the ``input" vector space of the measurements, in which $\x$ and $\mathbf{C}$ reside.
+
+To select an $\mathbf{M}$ matrix that properly normalizes the power spectrum, we must compute
+the window function matrix $\mathbf{W}$ for our estimator. The window matrix is defined such that
+the true bandpowers $\mathbf{p}$ and our estimates $\hat{\mathbf{p}}$ of them are related by
+\begin{equation}
+\hat{\mathbf{p}} = \mathbf{W} \mathbf{p},
+\end{equation}
+so that each row gives the linear combination of the true power that is probed by our estimate. With
+a little algebra, one can show that 
 \begin{equation}\label{eqn:window_def}
     \mathbf{W} = \mathbf{M}\mathbf{F}, 
 \end{equation}
-where $\mathbf{F}$ is the Fisher information matrix, given by
-$\mathbf{F}_{\alpha\beta} =
-\frac{1}{2}tr(\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\mathbf{Q}_{\beta})$
-and $\mathbf{W}$ is the window function matrix. The window functions measure the
-degree to which power from $k$ bins couple into the measurement of the power
-measured in the $\alpha$'th $k$ bin. Specifically, 
-\begin{equation}\label{eqn:true_pspec_2_est_pspec}
-    \hat{\mathbf{p}} = \mathbf{W}\mathbf{p}, 
+where
+\begin{equation}
+\mathbf{F}_{\alpha\beta} =
+\frac{1}{2}\textrm{tr}(\mathbf{C}^{-1}\mathbf{Q}_{\alpha}\mathbf{C}^{-1}\mathbf{Q}_{\beta}),
 \end{equation}
-where $\mathbf{p}$ and $\hat{\mathbf{p}}$ are vectors of the true power spectrum and our
-estimate of the power spectrum for every $\alpha$'th bin, respectively. Note
-that the window functions are normalized such that the rows of $\mathbf{W}$ sum
-to unity.
+which we have suggestively denoted with the symbol $\mathbf{F}$ to highlight the fact that this turns out to be the Fisher
+information matrix of the bandpowers. In order to interpret each bandpower as the weighted
+average of the true bandpowers, we require each row of the window function matrix to sum to
+unity. As long as $\mathbf{M}$ is chosen to satisfy this criterion, the resulting bandpower estimates
+$\hat{\mathbf{p}}$ will be properly normalized.
+
+%$\mathbf{F}$ is the Fisher information matrix, given by
+%
+%and $\mathbf{W}$ is the window function matrix. The window functions measure the
+%degree to which power from $k$ bins couple into the measurement of the power
+%measured in the $\alpha$'th $k$ bin. Specifically, 
+%\begin{equation}\label{eqn:true_pspec_2_est_pspec}
+%    \hat{\mathbf{p}} = \mathbf{W}\mathbf{p}, 
+%\end{equation}
+%where $\mathbf{p}$ and $\hat{\mathbf{p}}$ are vectors of the true power spectrum and our
+%estimate of the power spectrum for every $\alpha$'th bin, respectively. Note
+%that the window functions are normalized such that the rows of $\mathbf{W}$ sum
+%to unity.
 
 %   -Cholesky Decomposition and window functions.
 %       --The optimal window functions (that minimize the vertical error bars of
@@ -1611,37 +1640,43 @@ to unity.
 %       --This is particularly important because it doesn't insures that there
 %       is no leakage of the modes within the horizon to modes outside of it.         
 %
-The normalization matrix is the analyst's choice, and is the last chance to
-weight the measurements in the estimates of the power spectrum; it is
-essentially a re-binning of the data. One choice that can be made is to pick
-$\mathbf{M}\propto\mathbf{F}^{-1}$ implying that $\mathbf{W} = \mathbf{I}$. This
-window function is a delta function such that every band power does not
-contain leakage from other band powers, and therefore the estimates are well
-localized and contain power from only that bin. However, this has the downside
-that the error bars are large.  On the other hand, choosing the identity
-normalization such that $\mathbf{M}\propto\mathbf{I}$ implies $\mathbf{W}=\mathbf{F}$,
-leading to the smallest possible error bars, with the consequence that every
-band power is coupled to every other band power \citep{liu_tegmark2011}.
-%The choice of $\mathbf{M} =
-%\mathbf{D}$, where $\mathbf{D}$ is a diagonal matrix, produces the smallest
-%possible error bars [XXX cite result]. $\mathbf{D}$ is diagonal and not the
-%identity because the window functions are normalized such that the rows of the
-%matrix sum to unity.  
-
-In addition to calculating the window functions, we can also calculate the error
-correlations that correspond to a given window function. In order to see the
-effect of the normalization matrix on the error correlations we start by looking
-at the covariance of the band power estimates, namely, 
+Beyond the normalization criterion, a data analyst has some freedom over the
+precise form of $\mathbf{M}$, which effectively also re-bins the bandpower estimates. One 
+popular choice is $\mathbf{M} = \mathbf{F}^{-1}$, which implies that $\mathbf{W} = \mathbf{I}$. Each
+window function is then a delta function, such that bandpowers do not
+contain leakage from other bins, and contain power from only that bin. However, the disadvantage
+of this becomes apparent if one also computes the error bars on the bandpower estimates.
+The error bars are obtained by taking the square root of the diagonal of the covariance matrix, which is defined as
 \begin{equation}\label{eqn:err_cov}
-    \boldsymbol \Sigma = \text{Cov}(\hat{\mathbf{p}}) = \expval{\hat{\mathbf{p}}\hat{\mathbf{p}^{\dagger}}} -
+    \boldsymbol \Sigma = \text{Cov}(\hat{\mathbf{p}}) = \expval{\hat{\mathbf{p}}\hat{\mathbf{p}}^{\dagger}} -
              \expval{\hat{\mathbf{p}}}\expval{\hat{\mathbf{p}}}^{\dagger}.
 \end{equation}
 Since $\phat = \mathbf{M}\qhat$, it is easily shown that 
 \begin{equation}
-    \Sigma = \mathbf{M}\mathbf{F}\mathbf{M}^{\dagger},
+  \boldsymbol  \Sigma = \mathbf{M}\mathbf{F}\mathbf{M}^{\dagger}.
 \end{equation}
-where $\mathbf{F}$ is the Fisher matrix. The error correlation matrix describes
-how correlated the errors between modes are in the final power spectrum result.
+The choice of $\mathbf{M} = \mathbf{F}^{-1}$ tends to give rather large error bars.
+At the other extreme, picking $\mathbf{M}_{\alpha \beta} \propto \delta_{\alpha \beta} / \mathbf{F}_{\alpha \alpha}$ (with the proportionality constant fixed by our normalization criterion) 
+leads to the smallest possible error bars, [XXX: cite Max's paper ] at the expense of broader
+window functions. In our application of OQEs in the following sections, we will pick an intermediate
+choice for $\mathbf{M}$, one that is carefully tailored to avoid the leakage of foreground power
+from low $k$ modes to high $k$ modes.
+
+%
+%In addition to calculating the window functions, we can also calculate the error
+%correlations that correspond to a given window function. In order to see the
+%effect of the normalization matrix on the error correlations we start by looking
+%at the covariance of the band power estimates, namely, 
+%\begin{equation}\label{eqn:err_cov}
+%    \boldsymbol \Sigma = \text{Cov}(\hat{\mathbf{p}}) = \expval{\hat{\mathbf{p}}\hat{\mathbf{p}^{\dagger}}} -
+%             \expval{\hat{\mathbf{p}}}\expval{\hat{\mathbf{p}}}^{\dagger}.
+%\end{equation}
+%Since $\phat = \mathbf{M}\qhat$, it is easily shown that 
+%\begin{equation}
+%    \Sigma = \mathbf{M}\mathbf{F}\mathbf{M}^{\dagger},
+%\end{equation}
+%where $\mathbf{F}$ is the Fisher matrix. The error correlation matrix describes
+%how correlated the errors between modes are in the final power spectrum result.
 
 
 \subsection{Application of Optimal Quadratic Estimators}
@@ -1781,6 +1816,8 @@ instantaneously redundant baselines before/after delay filtering, respectively.
 \begin{figure*}\centering
 \includegraphics[width=1.5\columnwidth]{plots/eig.png}
 \caption{
+XXX: Are the units correct here? The eigenvalues of a covariance matrix should
+have units of mK$^2$, not mK.
 Eigenspectrum of covariance matrices (left) empirically estimated 
 from visibilities before (blue) and after (green) delay filtering.
 The four strongest eigenmodes of the filtered/unfiltered data are plotted
