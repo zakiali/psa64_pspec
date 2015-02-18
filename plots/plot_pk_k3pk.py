@@ -572,7 +572,7 @@ def posterior(kpl, pk, err, pkfold=None, errfold=None, f0=.151, umag=16.):
 
     p.xlabel(r'$k^3/2\pi^2\ P(k)\ [{\rm mK}^2]$', fontsize='large')
     p.ylabel('Posterior Distribution', fontsize='large')
-    p.xlim(0,550)
+    p.xlim(0,600)
     p.grid(1)
     p.subplots_adjust(left=.15, top=.95, bottom=.15, right=.95)
     p.show()
