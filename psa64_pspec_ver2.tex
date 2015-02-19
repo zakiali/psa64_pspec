@@ -1059,7 +1059,7 @@ days were included in the average.
 Sporadic RFI events (i.e. occurring rarely in an entire season) can skew
 individual LST bins away from the median value of the sky at a given LST,
 deviating from Gaussian statistics. To catch these events, we compute the median
-of a LST bin for each frequency and flag values 3 $\sigma$ above the median,
+of a LST bin for each frequency and flag values 3$\sigma$ above the median,
 before averaging. This filter mitigates the effects of non Gaussianity in time,
 which is most likely due to spurious RFI events. Since we are narrowing our
 distribution of visibilities around a patch of sky (LST bin), but keeping the
@@ -1822,8 +1822,8 @@ three different baselines in a redundant group before/after delay filtering, res
 } \label{fig:inv_cov}
 \end{figure*}
 
-\begin{figure*}\centering
-\includegraphics[width=1.5\columnwidth]{plots/eig.png}
+\begin{figure}\centering
+\includegraphics[width=\columnwidth]{plots/eig.png}
 \caption{
 [XXX: Are the units correct here? The eigenvalues of a covariance matrix should
 have units of mK$^2$, not mK.]
@@ -1842,7 +1842,7 @@ on the top/bottom panels on the right, respectively.
 %paralleled in the strongest eigenmodes for this filtered data (bottom right
 %panel) and there is no coherent structure to any of these modes. 
 } \label{fig:eigs}
-\end{figure*}
+\end{figure}
 
 
 With intuition established for the behavior of $\mathbf{C}^{-1}$, we may compress our
@@ -2098,7 +2098,7 @@ Bandpass Calibration &  $< 2 \times 10^{-9}$ & 0.03 \\
 Delay Filtering & $1.5\times10^{-5}$ & 0.048 \\
 Fringe-rate Filtering & 1.39 & 1.39 \\
 Quadratic Estimator & $<0.02$ & 0.89 \\
-Median of Modes & 1.4 & 1.4 \\
+Median of Modes & 1.44 & 1.44 \\
 \end{tabular}
 \end{center}
 \label{tbl:sigloss}
@@ -2186,29 +2186,31 @@ With the bootstrapping technique, we do not directly perform these averages. Ins
 one draws random samples within the three-dimensional parameter space specified above,
 with replacement, until one has as many random samples as there are total number of parameter
 space points. These random samples are then propagated through the power spectrum pipeline
-and averaged together as though they were the original data. This forms a single estimate (a ``bootstrap") of $P(\mathbf{k})$. Repeating this exercise over and over again with different
+and averaged together as though they were the original data. This forms a single estimate (a ``bootstrap") of $P(\mathbf{k})$. Repeating 
 random draws allows one to quantify the inherent scatter---and hence the error bars---in our
 estimate of $P(\mathbf{k})$. When plotting $\Delta^2 (k) \equiv k^3 P(k) / 2 \pi^2$ instead of
-$P(\mathbf{k})$, we add a binary parameter to our random draws that specifies whether we
-draw from $+k$ or $-k$.
+$P(\mathbf{k})$, we additionally randomize the inclusion of 
+$+k_\parallel$ or $-k_\parallel$ samples.
 
-In our analysis, we compute a total of 400 bootstraps. In extracting our final power spectrum
-estimates, we elect to compute the median, rather than the mean. One can see the behavior 
+We compute a total of 400 bootstraps. In combining independent samples for our final power spectrum
+estimate, we elect to use the median, rather than the mean, of the samples. One can see the behavior 
 of both statistics in Figure \ref{fig:pspec_variance}, where we
-show the absolute value of the mean and median $\Delta^2 (k)$ integrate down as more and more samples in time and
-more and more baselines (more ``modes") are included. Some $k$ bins integrate down in the steady fashion
-consistent with a noise-dominated power spectrum. Others bottom out on some signal (presumably
-some systematic such as foregrounds), while a small handful have the peculiar property of
-suddenly decreasing as more modes are included. In any case, one sees that the mean and the median
-are quite similar, but we expect the median to provide a
-better rejection of outliers, such as those that might arise from residual foreground power. In doing
-so, however, we must take into account the fact that our power spectrum estimates may be
-drawn from a distribution where the mean and median do not coincide. For example, if our power spectrum estimate were
-dominated by the true cosmological power spectrum, the scatter in the measured values would
-be Rayleigh distributed due to cosmic variance. For a Rayleigh distribution, the median is $\ln2 \sim 0.69$
-times the mean. On the other hand, if our power spectrum estimation is dominated by instrumental
-noise, data points will be peaked and symmetric about zero (thanks to our use of cross- rather than auto-power spectra), and thus the mean will coincide with the median. To be conservative, we apply
-the $\ln2$ correction factor to all our power spectrum estimates.
+show how the absolute value of $\Delta^2(k)$ integrates down as more independent samples are included in the mean and median.
+In this plot, one can see modes integrating down 
+consistent with a noise-dominated power spectrum until they bottom out on a signal.
+In the noise-dominated regime, the mean and the median
+behave similarly.  However, we see that the median routinely continues to integrate down as noise for longer.
+This is a strong indication that the distribution of modes is not Gaussian, as one would expect
+if we were thermal-noise limited.  The magnitude of the difference
+is also not consistent with the Rayleigh distribution expected of a cosmological power spectrum limited by cosmic
+variance.  
+For a Rayleigh distribution, the median is $\ln2 \sim 0.69$ times the mean. 
+Instead, we interpret the discrepancy as a sign of contributions from foregrounds, which are neither isotropic 
+nor Gaussian distributed.  Since median provides 
+better rejection of outliers in the distribution that might arise from residual foreground power, we choose to use
+the median statistic to combine measurements across multiple modes.
+As listed in Table \ref{tbl:sigloss}, we apply a $1/\ln2$ correction factor to our power spectrum estimates to 
+infer the mean from the median of a Rayleigh distribution.
 
 
 %When applying this method of estimating the
@@ -2332,6 +2334,20 @@ the $\ln2$ correction factor to all our power spectrum estimates.
 
 \subsection{Power Spectrum Constraints}
 
+Following the power spectrum analysis procedure outlined in Section \ref{sec:oqe_app},
+we incoherently combine independent power spectrum measurements made at different
+times and with different baseline groups using the median statistic.  As described
+in Section \ref{sec:bootstrap}, we bootstrap over all of these independent measurements,
+as well as over the selection of baselines included in the power spectrum analysis for
+each baseline group, in order to estimate the error bars on the spherically averaged
+power spectrum $P(k)$, where positive and negative $k_\parallel$ measurements
+are kept separate for diagnostic purposes.  In the estimation of the 
+dimensionless power spectrum
+$\Delta^{2}(k)\equiv{k^{3}P(k)}/{2\pi^{2}}$, the folding of $\pm k_\parallel$ is
+handled along with the rest of the bootstrapping over independent modes.
+Finally, the measured values for $P(k)$ and $\Delta^2(k)$ are corrected for signal
+loss through all stages of analysis, as summarized in Table \ref{tbl:sigloss}.
+
 \begin{figure*}\centering
 \includegraphics[width=2\columnwidth]{plots/pk_k3pk.png}
 \caption{
@@ -2348,20 +2364,6 @@ spectrum at 50\% ionization \citep{lidz_et_al2008}.
 %filter signal loss, bandpass signal loss.
 } \label{fig:final_pspec}
 \end{figure*}
-
-Following the power spectrum analysis procedure outlined in Section \ref{sec:oqe_app},
-we incoherently combine independent power spectrum measurements made at different
-times and with different baseline groups using the median statistic.  As described
-in Section \ref{sec:bootstrap}, we bootstrap over all of these independent measurements,
-as well as over the selection of baselines included in the power spectrum analysis for
-each baseline group, in order to estimate the error bars on the spherically averaged
-power spectrum $P(k)$, where positive and negative $k_\parallel$ measurements
-are kept separate for diagnostic purposes.  In the estimation of the 
-dimensionless power spectrum
-$\Delta^{2}(k)\equiv{k^{3}P(k)}/{2\pi^{2}}$, the folding of $\pm k_\parallel$ is
-handled along with the rest of the bootstrapping over independent modes.
-Finally, the measured values for $P(k)$ and $\Delta^2(k)$ are corrected for signal
-loss through all stages of analysis, as summarized in Table \ref{tbl:sigloss}.
 
 [XXX update for new pspec]
 The final results are plotted in Figure \ref{fig:final_pspec}.
@@ -2436,9 +2438,6 @@ From this distribution, we determine a mean of
 (15.0 mK)$^2$ and a $2\sigma$ upper limit of \mKlimit.
 The measured mean is inconsistent with zero at the 2.7$\sigma$ level.
 [XXX update for new pspec]
-Even with the exclusion of the point at $k\approx0.35\hMpci$
-(Figure \ref{fig:final_posterior}, dashed) the mean is inconsistent with
-zero at $2.2\sigma$.
 
 [XXX update for new pspec, downweight polarization interpretation, upweight xtalk interpretation]
 We conclude that we are likely beginning to 
