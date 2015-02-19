@@ -2,11 +2,18 @@ v032 is the final power spectrum
 v030 is final power spectrum without omnical 
 v031 is final power spectrum withouth fringe rate filtering (acually only nominal fringe rate filtering).
 
+XXX The above 3 (30-32) are old. Have the 10 minute xtalk removal with too much signal loss.
+
 
 
 
 v040 is final power spectrum. Updated with xtalk removal happening in the fringe rate filter. This has the subtracting the average of the kernel bug fixed.
 
-v041 is the final power spectrum without fringe rate filtering. Still need to remove cross-talk and using 
+v050 is the final power spectrum with full fringe rate filter (optimal + crosstalk). 
 
-v042 is final power spectrum without omnical, but has fringe rate filtering.
+v051 is power spectrum withouth optimal fringe rate filter, but with nominal fringe rate filter and cross talk removal as zeroing fringe rates below .4 milli Hz.
+
+v052 no omnical applied to it. has final pspec filter (optimal + crosstalk). Had to exclude baseline 50_54.
+
+v053 final pspec without the xtalk part of the fringe rate filter.
+

@@ -1,0 +1,1 @@
+with new fringe rate filter that doesnt have the error of subtracting the average of the ekernel. As with previous fix. 
