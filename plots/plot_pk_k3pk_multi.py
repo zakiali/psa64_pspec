@@ -21,7 +21,8 @@ o.add_option('--show', action='store_true',
 opts,args = o.parse_args(sys.argv[1:])
 print args
 
-args = glob.glob('data/final_pspecs/v03*/pspec.npz')
+#args = glob.glob('data/final_pspecs/v03*/pspec.npz')
+args = glob.glob('data/final_pspecs/v05*/pspec.npz')
 
 ERRORS = {}
 
@@ -41,7 +42,7 @@ def dual_plot(kpl, pk, err, pkfold=None, errfold=None, umag=16, f0=.164, color='
     pk = pk.real #power spectrum is real, so discard the imaginary part.
     p.subplot(121)
     #plot pk with the error bars!
-    ebp = p.errorbar(kpl+offset, pk, yerr=err, fmt=color+'.', capsize=0)#, alpha=.5)
+    ebp = p.errorbar(kpl+offset, pk, yerr=err, fmt='.', color=color,capsize=0)#, alpha=.5)
     ebp[-1][0].set_linestyle(ls)
 
     #for folded power spectrum
@@ -60,7 +61,7 @@ def dual_plot(kpl, pk, err, pkfold=None, errfold=None, umag=16, f0=.164, color='
         pkfold = pkfold.real
         
     #plot folded power spectra
-    ebd = p.errorbar(k[k0:]+offset, k3[k0:]*pkfold, yerr=k3[k0:]*errfold, fmt=color+'.', capsize=0)
+    ebd = p.errorbar(k[k0:]+offset, k3[k0:]*pkfold, yerr=k3[k0:]*errfold, fmt='.', color=color, capsize=0)
     ebd[-1][0].set_linestyle(ls)
     if not bins is None:
         _kpls, _k3pks, _k3errs = [], [], []
@@ -126,9 +127,10 @@ RS_VS_KPL_FOLD = {} #K^2
 powerspec, powerspecwgt = {}, {}
 powerspec_fold, powerspecwgt_fold = {}, {}
 
-colors = 'cmk'
+#black, blue, orange, green, dark grey
+colors = [(0.,0.,0.),  (0, 107/255., 164/255.), (1,128/255.,14/255.), (44/255.,160/255.,44/255.), (89/255.,89/255.,89/255.)]
 #lss = ['-','--','-.',':']
-lss = ['-','-','-',':']
+lss = ['-','-','-','-']
 for filename in args:
     print 'Reading', filename
     f = n.load(filename)
@@ -206,9 +208,9 @@ for cnt,filename in enumerate(args):
         nos_fold *= f
     #if True: # For aggressive fringe-rate filtering, change beam area
     if True: # For aggressive fringe-rate filtering, change beam area
-        if 'v031' in filename: pass
+        if 'v051' in filename: pass
         #f = opts.afrf_factor
-        f = 1.90 # ratio of power**2 beams for filtered * unfiltered beams: 0.306 / 0.162
+        f = 1.39 # ratio of power**2 beams for filtered * unfiltered beams: 0.306 / 0.162
         print 'Scaling data and noise by %f for beam constriction in aggressive fringe-rate filtering' % f
         d *= f
         nos *= f
@@ -256,7 +258,8 @@ for cnt,filename in enumerate(args):
     
     if d_fold.size==0: d_fold,nos_fold=None,None
     dual_plot(kpl, d, 2*nos, d_fold, 2*nos_fold, color=colors[0], ls=lss[0], bins=None, f0=freq, offset=.005*cnt)
-    colors = colors[1:] + colors[0]
+    colors = colors[1:]+colors[:1]
+    print colors
     lss = lss[1:] + lss[:1]
 
 
@@ -274,7 +277,7 @@ p.vlines(-k_h, -1e7, 1e10, linestyles='--', linewidth=1.5)
 #p.gca().set_yscale('log', nonposy='clip')
 p.xlabel(r'$k_\parallel\ [h\ {\rm Mpc}^{-1}]$', fontsize='large')
 p.ylabel(r'$P(k)\ [{\rm mK}^2\ (h^{-1}\ {\rm Mpc})^3]$', fontsize='large')
-p.ylim(-.6e7,2e7)
+p.ylim(-.6e7,3e7)
 p.grid()
 
 
