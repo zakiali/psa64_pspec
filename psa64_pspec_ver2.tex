@@ -26,8 +26,8 @@
 \newcommand{\kmax}{k_{\rm max}}
 \newcommand{\Tcmb}{T_\gamma}
 \newcommand\abs[1]{\left|#1\right|}
-\newcommand{\mKlimit}{(22.4 mK)$^2$} % XXX put in final number
-\newcommand{\mKsqlimit}{503 mK$^2$} % XXX put in final number
+\newcommand{\mKlimit}{(22.4 mK)$^2$}
+\newcommand{\mKsqlimit}{503 mK$^2$}
 
 \newcount\colveccount
 \newcommand*\colvec[1]{
@@ -106,8 +106,8 @@ calibration, optimal fringe-rate filtering, and improved power-spectral
 analysis using optimal quadratic estimators. The result is a new $2\sigma$
 upper limit on $\Delta^2(k)$ of \mKlimit in the range
 $0.1<k<0.5\hMpci$ at $z=8.4$.  This represents a four-fold improvement over the
-previous best upper limit.  As we discuss in more depth in the companion to
-this paper \citep{pober_et_al2015}, this upper limit supports and extends
+previous best upper limit.  As we discuss in more depth in a forthcoming
+paper \citep{pober_et_al2015}, this upper limit supports and extends
 previous evidence for significant heating in the intergalactic medium prior to
 reionization. We conclude with a discussion of implications for future 21cm
 reionization experiments, including the newly funded Hydrogen Epoch of
@@ -235,7 +235,7 @@ aggressive fringe-rate filtering technique, and an improved power-spectrum estim
 The result is an
 upper limit on $\Delta^2(k)$ of \mKsqlimit in the range
 $0.1<k<0.5\hMpci$ at $z=8.4$.  This result places significant constraints on the 
-spin temperature of the IGM, and as is shown in a companion to this paper,
+spin temperature of the IGM, and as is shown in a forthcoming paper,
 \citet{pober_et_al2015}, this supports and extends
 previous evidence for significant heating prior to
 reionization.
@@ -280,9 +280,8 @@ XXXremove 100 bootstraps
 [XXX final figure from Dave].
 The stages of power-spectrum analysis. Black lines indicate data flow; red lines indicate
 Monte Carlo simulations used to 
-measure signal loss. Yellow boxes indicate stages without associated signal loss.
-[XXX negligible signal loss]
-[XXX link signal loss to table]
+measure signal loss. Yellow boxes indicate stages that by construction have negligible signal loss.
+Signal loss in other stages is tabluted in Table \ref{tbl:sigloss}.
 }
 \label{fig:flowchart}
 \end{figure*}
@@ -987,10 +986,10 @@ non-parametric subtractions
 \citep{harker_et_al2009,chapman_et_al2013}, and inverse
 covariance weighting
 \citep{dillon_et_al2013b,liu_tegmark2011,dillon_et_al2013a}, and per-baseline delay filtering described in
-P12b and \citet{petrovic_oh2011}. The delay spectrum filtering technique is
+P12b and \citet{petrovic_oh2011}. This delay-spectrum filtering technique is
 well suited to the maximum redundancy PAPER configuration which is not
 optimized for the other approaches where high fidelity imaging is a
-pre-requisite.   The delay spectrum foreground clean method is described in
+pre-requisite.   The delay-spectrum foreground filtering method is described in
 detail by P14; its application is unchanged here.  In summary; we Fourier
 transform each baseline spectrum into the delay domain  
 
@@ -1067,7 +1066,7 @@ localized time and frequency window.
 %removed, we do not have this complication since bright foregrounds are not
 %dominating the average and are able to remove the offset by subtracting shorter
 %sums.
-%[XXX above statement is incorrect]
+%[above statement is incorrect]
 
 The final step is to average the entire season into LST
 with 43-s bin widths matching the cadence of
@@ -1077,7 +1076,7 @@ days were included in the average.
 Sporadic RFI events (i.e. occurring rarely in an entire season) can skew
 individual LST bins away from the median value of the sky at a given LST,
 deviating from Gaussian statistics. To catch these events, we compute the median
-of a LST bin for each frequency and flag values 3 $\sigma$ above the median,
+of a LST bin for each frequency and flag values 3$\sigma$ above the median,
 before averaging. This filter mitigates the effects of non Gaussianity in time,
 which is most likely due to spurious RFI events. Since we are narrowing our
 distribution of visibilities around a patch of sky (LST bin), but keeping the
@@ -1826,7 +1825,7 @@ of smooth spectrum foreground sources. The application of the inverse covariance
 downweights these eigenmodes, revealing waterfall plots in the bottom row of Figure \ref{fig:inv_cov}
 that look more noise-dominated. With the foreground-suppressed portion (right half) of Figure \ref{fig:inv_cov},
 the initial $\mathbf{x}^{ri}$ vectors already appear noise dominated (which is corroborated by the
-relatively noisy form of the eigenspectra in Figure \ref{fig:eigs}). The final $\mathbf{z}^{ri}$ vectors
+relatively noisy form of the eigenvalue spectra in Figure \ref{fig:eigs}). The final $\mathbf{z}^{ri}$ vectors
 remain noise-like, although some smooth structure (perhaps from residual foregrounds) has still been removed, and finer scale noise
 has been upweighted.
 
@@ -1836,17 +1835,16 @@ has been upweighted.
 Visibilities before (top row) and after (bottom row) inverse covariance weighting.
 Signal covariance (middle row) is estimated empirically, averaging over LST.
 The three left/right columns show visibilities from
-instantaneously redundant baselines before/after delay filtering, respectively.
-[XXX: need to be clearer about how there are three different baselines plotted here]
+three different baselines in a redundant group before/after delay filtering, respectively.
 } \label{fig:inv_cov}
 \end{figure*}
 
-\begin{figure*}\centering
-\includegraphics[width=1.5\columnwidth]{plots/eig.png}
+\begin{figure}\centering
+\includegraphics[width=\columnwidth]{plots/eig.png}
 \caption{
 [XXX: Are the units correct here? The eigenvalues of a covariance matrix should
 have units of mK$^2$, not mK.]
-Eigenspectrum of covariance matrices (left) empirically estimated 
+Eigenvalue spectrum of covariance matrices (left) empirically estimated 
 from visibilities before (blue) and after (green) delay filtering.
 The four strongest eigenmodes of the filtered/unfiltered data are plotted
 on the top/bottom panels on the right, respectively.
@@ -1861,7 +1859,7 @@ on the top/bottom panels on the right, respectively.
 %paralleled in the strongest eigenmodes for this filtered data (bottom right
 %panel) and there is no coherent structure to any of these modes. 
 } \label{fig:eigs}
-\end{figure*}
+\end{figure}
 
 
 With intuition established for the behavior of $\mathbf{C}^{-1}$, we may group our identical
@@ -1893,21 +1891,23 @@ spectrum technique of P12a, where it was shown that
 \Big(\frac{\lambda^{2}}{2k_{B}}\Big)^{2}\frac{X^{2}Y}{\Omega
 B}\expval{\tilde{V}_{i}(t,\tau)\tilde{V}_{j}^{*}(t,\tau)},
 \end{equation}
-where $V_{i}(t,\tau)$ is the delay spectrum of baseline visibilities given by Equation \eqref{eqn:delay_transform}, $X$ and
+where $V_{i}(t,\tau)$ is the delay transform of baseline visibilities given by Equation \eqref{eqn:delay_transform}, $X$ and
 $Y$ are the constants that convert from angles and frequency to the co-moving
 coordinate, respectively, $\Omega$ is the power squared beam (see Appendix B of
-P14), and $B$ is the bandwidth. [XXX: didn't define wavelength or Boltzmann's constant]
+P14), $B$ is the bandwidth, $\lambda$ is the spectral wavelength, and $k_{B}$ is Boltzmann's constant.
 This suggests that in order to estimate the power spectrum from visibilities, one only needs
 to Fourier transform along the frequency axis (converting the spectrum into a delay spectrum)
 before squaring and multiplying by a scalar. Thus, the role of $\mathbf{Q}_\alpha$ in Equation \eqref{eqn:presum_qalpha} is to perform a frequency Fourier transform on each copy of
 $\mathbf{z}$. It is therefore a separable matrix of the form $\Q_{\alpha} =
 \mathbf{m}_{\alpha}\mathbf{m}_{\alpha}^{\dagger}$, where $\mathbf{m}_{\alpha}$ a
 complex sinusoid of a specific frequency corresponding to delay mode $\alpha$
-[XXX: I can make this more rigorous, but it'll require a few more lines of math. Zaki, your call.]. This
-separable form holds only for short baselines, where the chromaticity of an interferometer
-can be neglected over narrow bandwidths [XXX: cite wedge paper 1]. Fortunately, as discussed
-in Section \ref{sec:observations}, only short baselines are used in our power spectrum analysis. 
-The approximate separability of $\Q_\alpha$ therefore applies, and we may write
+%[I can make this more rigorous, but it'll require a few more lines of math. Zaki, your call. ARP: not worth the trouble]
+%This
+%separable form holds only for short baselines, where the chromaticity of an interferometer
+%can be neglected over narrow bandwidths [cite wedge paper 1]. Fortunately, as discussed
+%above [right?], only short baselines are used in our analysis here, and we may thus
+% ARP: the above caveat relates to the interpretation of delay modes as k modes, but doesn't apply to constructing a delay-mode estimator
+We may thus write
 \begin{equation}
     \qhat_{\alpha} =
 \sum_{\substack{A,B,r,s\\r\ne{s},A\ne{B}}}\mathbf{z}^{r\dagger}_{A}\mathbf{m}_{\alpha}\mathbf{m}_{\alpha}^{\dagger} \mathbf{z}^{s}_{B}.
@@ -1925,7 +1925,7 @@ good properties, e.g. small error bars or no leakage, we opt for a different
 choice of window function, as follows. We first reorder the elements in $\mathbf{\hat{q}}$ (and
 therefore in $\mathbf{F}$, $\mathbf{M}$, and $\mathbf{\hat{p}}$ for consistency) so that
 the $k$-modes are listed in ascending order, from low $k$ to high $k$, with the exception that we place the highest $k$ bin third after the lowest two $k$ bins. (The reason for this exception will be made apparent shortly). We then take the Cholesky decomposition of
-the Fisher matrix ,such that $\mathbf{F} \equiv \mathbf{L}\mathbf{L}^{\dagger}$, where
+the Fisher matrix, such that $\mathbf{F}=\mathbf{L}\mathbf{L}^{\dagger}$, where
 $\mathbf{L}$ is a lower triangular matrix. Following that, we pick ${\mathbf{M}} = \mathbf{D} \mathbf{L}^{-1}$, where $\mathbf{D}$ is a diagonal matrix chosen to adhere to the normalization constraint
 that $\mathbf{W} = \mathbf{M} \mathbf{F}$ has rows that sum to unity. In this case, the window function matrix becomes,
 $\mathbf{W}=\mathbf{D} \mathbf{L}^{\dagger}$. This means that $\mathbf{W}$ is upper triangular,
@@ -1957,7 +1957,7 @@ that \begin{equation}
            = \mathbf{D}^2.
 \end{equation}
 The error covariance matrix on the bandpowers is thus diagonal, which implies
-that our final data points are uncorrelated with one another. This stands in contrasts to the power-spectrum estimator used in P14, where the Blackmann-Harris taper function induced correlated errors
+that our final data points are uncorrelated with one another. This stands in contrast to the power-spectrum estimator used in P14, where the Blackmann-Harris taper function induced correlated errors
 between neighboring data points.
 
 
@@ -2032,7 +2032,7 @@ matrix and thus has the ability to down-weight valid high-variance samples.
 %In order to accurately describe the covariance matrix of our measurements, we would require complete knowledge of the sky signal and the instrument and the interaction of the two due to the chromaticity of the interferometer.
 Overfitting the noise in this manner carries with it the possibility of cosmological signal loss.
 This seems to contradict the conventionally recognized feature of OQEs as
-lossless estimators of the power spectrum [XXX: cite Tegmark 97]. However,
+lossless estimators of the power spectrum \citep{tegmark1997}. However,
 the standard proofs of this property assume that statistics such as $\mathbf{C}$
 are known \emph{a priori}, which is an assumption that we are violating with our
 empirical estimates.
@@ -2116,7 +2116,7 @@ Bandpass Calibration &  $< 2 \times 10^{-9}$ & 0.03 \\
 Delay Filtering & $1.5\times10^{-5}$ & 0.048 \\
 Fringe-rate Filtering & 1.39 & 1.39 \\
 Quadratic Estimator & $<0.02$ & 0.89 \\
-Median of Modes & 1.4 & 1.4 \\
+Median of Modes & 1.44 & 1.44 \\
 \end{tabular}
 \end{center}
 \label{tbl:sigloss}
@@ -2171,8 +2171,26 @@ adjacent to the horizon limit, where we apply the maximum signal loss correction
 %         bound on the errors.
 
 \subsection{Bootstrapped Averaging and Errors}\label{sec:bootstrap}
-%XXX QUESTION FOR BOOTSTRAPPING, Use the input data to the quad est vs output
-%data? Is this why the error bars were so wacked out before?
+
+\begin{figure*}\centering
+\includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
+\caption{
+[XXX update with new bootstrap files? ]
+Absolute value of the cumulative mean (left) and median (right), as a function of number of modes 
+of the power spectrum band power for
+$k_\parallel$ modes ranging from $-0.49$ (red) to $0.44\hMpci$ (violet).
+Here, modes are defined as samples from different redundant baseline groups and LSTs.
+This Allen variance plot shows modes averaging down as the square root of
+number of modes combined until a signal floor is reached.  The difference in
+behavior between the mean and median is an indication of non-Gaussianity
+in the distribution of values, likely as a result of foreground contamination.
+We use the median in the estimation of the power spectrum in Figure \ref{fig:final_pspec},
+along with a correction factor compensating for the difference between the mean and median
+in estimating variance.
+}\label{fig:pspec_variance}
+\end{figure*}
+
+
 When estimating our power spectra via optimal quadratic estimators, we generate
 multiple samples of the power spectrum in order to apply the bootstrap method to
 calculate our error bars. In detail, the power spectrum estimation scheme proposed
@@ -2186,28 +2204,32 @@ With the bootstrapping technique, we do not directly perform these averages. Ins
 one draws random samples within the three-dimensional parameter space specified above,
 with replacement, until one has as many random samples as there are total number of parameter
 space points. These random samples are then propagated through the power spectrum pipeline
-and averaged together as though they were the original data. This forms a single estimate (a ``bootstrap") of $P(\mathbf{k})$. Repeating this exercise over and over again with different
+and averaged together as though they were the original data. This forms a single estimate (a ``bootstrap") of $P(\mathbf{k})$. Repeating 
 random draws allows one to quantify the inherent scatter---and hence the error bars---in our
 estimate of $P(\mathbf{k})$. When plotting $\Delta^2 (k) \equiv k^3 P(k) / 2 \pi^2$ instead of
-$P(\mathbf{k})$, we bin power falling in $+k$ and $-k$, and so we add a binary parameter to our random draws that specifies whether to draw from the positive $k$ bin or the negative one.
+$P(\mathbf{k})$, we bin power falling in $+k$ and $-k$, and so 
+we additionally randomize the inclusion of 
+positive and negative $k$ bins.
 
-In our analysis, we compute a total of 400 bootstraps. In extracting our final power spectrum
-estimates, we elect to compute the median, rather than the mean. One can see the behavior 
+We compute a total of 400 bootstraps. In combining independent samples for our final power spectrum
+estimate, we elect to use the median, rather than the mean, of the samples. One can see the behavior 
 of both statistics in Figure \ref{fig:pspec_variance}, where we
-show the absolute value of the mean and median $\Delta^2 (k)$ integrate down as more and more samples in time and
-more and more baselines (more ``modes") are included. Some $k$ bins integrate down in the steady fashion
-consistent with a noise-dominated power spectrum. Others bottom out on some signal (presumably
-some systematic such as foregrounds), while a small handful have the peculiar property of
-suddenly decreasing as more modes are included. In any case, one sees that the mean and the median
-are quite similar, but we expect the median to provide a
-better rejection of outliers, such as those that might arise from residual foreground power. In doing
-so, however, we must take into account the fact that our power spectrum estimates may be
-drawn from a distribution where the mean and median do not coincide. For example, if our power spectrum estimate were
-dominated by the true cosmological power spectrum, the scatter in the measured values would
-be Rayleigh distributed due to cosmic variance. For a Rayleigh distribution, the median is $\ln2 \sim 0.69$
-times the mean. On the other hand, if our power spectrum estimation is dominated by instrumental
-noise, data points will be peaked and symmetric about zero (thanks to our use of cross- rather than auto-power spectra), and thus the mean will coincide with the median. To be conservative, we apply
-the $\ln2$ correction factor to all our power spectrum estimates.
+show how the absolute value of $\Delta^2(k)$ integrates down as more independent samples are included in the mean and median.
+In this plot, one can see modes integrating down 
+consistent with a noise-dominated power spectrum until they bottom out on a signal.
+In the noise-dominated regime, the mean and the median
+behave similarly.  However, we see that the median routinely continues to integrate down as noise for longer.
+This is a strong indication that the distribution of modes is not Gaussian, as one would expect
+if we were thermal-noise limited.  The magnitude of the difference
+is also not consistent with the Rayleigh distribution expected of a cosmological power spectrum limited by cosmic
+variance.  
+For a Rayleigh distribution, the median is $\ln2 \sim 0.69$ times the mean. 
+Instead, we interpret the discrepancy as a sign of contributions from foregrounds, which are neither isotropic 
+nor Gaussian distributed.  Since median provides 
+better rejection of outliers in the distribution that might arise from residual foreground power, we choose to use
+the median statistic to combine measurements across multiple modes.
+As listed in Table \ref{tbl:sigloss}, we apply a $1/\ln2$ correction factor to our power spectrum estimates to 
+infer the mean from the median of a Rayleigh distribution.
 
 
 %When applying this method of estimating the
@@ -2238,32 +2260,6 @@ the $\ln2$ correction factor to all our power spectrum estimates.
 %the mean statistic. This is due to the fact that there are outliers that
 %drastically skew the final error bars. 
 
-\begin{figure*}\centering
-\includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
-\caption{
-[XXX state that it is the absolute value plotted.Done. Check off?]
-[XXX add in what the modes are: bls X time modes]
-[XXX update with new bootstrap files? ]
-Cumulative mean (left) and median (right), as a function of number of modes (defined
-as different baselines or different LSTs),
-of the absolute value of the power spectrum band power for
-$k_\parallel$ modes ranging from $-0.49$ (red) to $0.44\hMpci$ (violet).
-This Allen variance plot shows modes averaging down as the square root of
-number of modes combined until a signal floor is reached.  The difference in
-behavior between the mean and median for several modes indicates non-Gaussianity
-in the distribution of values, likely as a result of foreground contamination.
-%Plotted is the cumulative mean for band powers at a given $k$-mode,
-%where the colors indicate the mode being integrated, with blue being the most
-%interior modes and walking out to the exterior modes in green; red being the
-%modes in the middle. On the right is the same plot, except using a median
-%instead of the mean as the statistic. The behaviour of either of these
-%statistics is very similar with modes that bottom out on something and there
-%modes that seem to take a dive as more modes are used. Assuming Gaussian
-%statistics, there is an overall correction factor of 1.4 for using the median
-%statistic relative to the mean.}
-}\label{fig:pspec_variance}
-\end{figure*}
-
 
 %
 %Figure \ref{fig:pspec_variance} shows that the mean and variance statistic used
@@ -2285,7 +2281,7 @@ in the distribution of values, likely as a result of foreground contamination.
 
 
 %\subsubsection{Integrating $k$-modes}
-%XXX This shows the efficacy of using the median over the mean.
+% This shows the efficacy of using the median over the mean.
 %The power spectrum shown in figure \ref{fig:final_pspec} is an average of
 %multiple baselines together. To show how the modes in each power spectrum
 %integrate together and to what degree they integrate down as noise are not, an
@@ -2355,25 +2351,7 @@ in the distribution of values, likely as a result of foreground contamination.
 
 \section{Results}\label{sec:results}
 
-\subsection{Power Spectrum Contstraints}
-
-\begin{figure*}\centering
-\includegraphics[width=2\columnwidth]{plots/pk_k3pk.png}
-\caption{
-[XXX change thermal noise power spectrum to 2-sigma upper limit in the absence of a celestial signal. DONE, check off.]
-Measured power spectrum (black dots with 2$\sigma$ error bars) at $z=8.4$
-resulting from a 134-day observation with PAPER-64.  The dashed vertical lines
-at $0.6\hMpci$ show the bounds of the delay filter described in Section
-\ref{sec:wbd_filtering}. The 2 $\sigma$ upper limit in the absence of the a celestial signal is shown in dashed cyan, assuming $\Tsys=500K$. The triangles indicate 2
-$\sigma$ upper limits from GMRT \citep{paciga_et_al2011} (yellow) at $z=8.6$,
-MWA \citep{dillon_et_al2013b} at $z=9.5$ (magenta), and the previous PAPER upper
-limit (P14) at $z=7.7$. The magenta curve shows a predicted model 21 cm power
-spectrum at 50\% ionization \citep{lidz_et_al2008}.
-%Using 100 bootstraps. Correction factors are
-%fringe-rate filter (1.9), signal loss (1.02), and median statistic (1.4), delay
-%filter signal loss, bandpass signal loss.
-} \label{fig:final_pspec}
-\end{figure*}
+\subsection{Power Spectrum Constraints}
 
 Following the power spectrum analysis procedure outlined in Section \ref{sec:oqe_app},
 we incoherently combine independent power spectrum measurements made at different
@@ -2388,6 +2366,23 @@ $\Delta^{2}(k)\equiv{k^{3}P(k)}/{2\pi^{2}}$, the folding of $\pm k_\parallel$ is
 handled along with the rest of the bootstrapping over independent modes.
 Finally, the measured values for $P(k)$ and $\Delta^2(k)$ are corrected for signal
 loss through all stages of analysis, as summarized in Table \ref{tbl:sigloss}.
+
+\begin{figure*}\centering
+\includegraphics[width=2\columnwidth]{plots/pk_k3pk.png}
+\caption{
+Measured power spectrum (black dots with 2$\sigma$ error bars) at $z=8.4$
+resulting from a 134-day observation with PAPER-64.  The dashed vertical lines
+at $0.6\hMpci$ show the bounds of the delay filter described in Section
+\ref{sec:wbd_filtering}. The predicted 2$\sigma$ upper limit in the absence of the a celestial signal is shown in dashed cyan, assuming $\Tsys=500K$. The triangles indicate 2
+$\sigma$ upper limits from GMRT \citep{paciga_et_al2011} (yellow) at $z=8.6$,
+MWA \citep{dillon_et_al2013b} at $z=9.5$ (magenta), and the previous PAPER upper
+limit (P14) at $z=7.7$. The magenta curve shows a predicted model 21 cm power
+spectrum at 50\% ionization \citep{lidz_et_al2008}.
+%Using 100 bootstraps. Correction factors are
+%fringe-rate filter (1.9), signal loss (1.02), and median statistic (1.4), delay
+%filter signal loss, bandpass signal loss.
+} \label{fig:final_pspec}
+\end{figure*}
 
 [XXX update for new pspec]
 The final results are plotted in Figure \ref{fig:final_pspec}.
@@ -2462,9 +2457,6 @@ From this distribution, we determine a mean of
 (15.0 mK)$^2$ and a $2\sigma$ upper limit of \mKlimit.
 The measured mean is inconsistent with zero at the 2.7$\sigma$ level.
 [XXX update for new pspec]
-Even with the exclusion of the point at $k\approx0.35\hMpci$
-(Figure \ref{fig:final_posterior}, dashed) the mean is inconsistent with
-zero at $2.2\sigma$.
 
 [XXX update for new pspec, downweight polarization interpretation, upweight xtalk interpretation]
 We conclude that we are likely beginning to 
@@ -2507,7 +2499,7 @@ that $T_{\rm s}<T_{\rm CMB}$.
 In this section, we examine the implication of the measured upper limits
 on 21cm emission in Figure \ref{fig:final_pspec} on the spin temperature
 of the 21cm line at $z=8.4$.
-In a companion paper \citet{pober_et_al2015}, we conduct a thorough analysis of the
+In a forthcoming paper \citet{pober_et_al2015}, we conduct a thorough analysis of the
 constraints that can be put on the IGM using a simulation-based framework.
 As a complement to that more thorough
 analysis, we focus here on a simpler parameterization of the shape
@@ -2892,7 +2884,7 @@ to show that limits of $T_s>5$ K are fairly generic for models with
 ionization fractions between 0.3 and 0.7.
 A more detailed analysis of the implied constraints on spin temperature using
 a self-consistent simulation of the physics of reionization is
-presented in a companion paper \citep{pober_et_al2015}.  In that paper,
+presented in a forthcoming paper \citep{pober_et_al2015}.  In that paper,
 it is shown that the excluded combinations of spin temperature
 and neutral fraction implied by our measurements
 suggest a source of X-ray luminosity beyond what can be 
