@@ -25,8 +25,9 @@ o.add_option('-f', '--fft', dest='fft', action='store_true',
     help='Perform 2D FFT of image.')
 opts, args = o.parse_args(sys.argv[1:])
 
-opts.drng = 4
-opts.max = 2
+opts.drng = 15
+opts.max = 20
+opts.mode='lin'
 #opts.nogrid=True
 
 args = ['data/gianni/all_psa64-image.fits']
@@ -119,8 +120,8 @@ for cnt, filename in enumerate(args):
         forra = -50.6708 + 100
         picx,picy = map(picra, picdec)
         forx,fory = map(forra, fordec)
-        pic_circ = Circle((picx,picy), radius=.02, facecolor='none',edgecolor='black' )
-        for_circ = Circle((forx,fory), radius=.02, facecolor='none',edgecolor='black' )
+        pic_circ = Circle((picx,picy), radius=.02, facecolor='none',edgecolor='white' )
+        for_circ = Circle((forx,fory), radius=.02, facecolor='none',edgecolor='white' )
         p.gca().add_patch(pic_circ)
         p.gca().add_patch(for_circ)
 
