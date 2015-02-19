@@ -20,13 +20,17 @@ def get_data(filenames, antstr, polstr, verbose=False):
 
 uvA_fg = glob.glob('data/lstdata/uvA_fg/*uvAA')
 uvAL_fg = glob.glob('data/lstdata/uvA_fg/*uvALA')
-uvA = glob.glob('data/lstdata/uvA/*uvAA')
-uvAL = glob.glob('data/lstdata/uvA/*uvALA')
-uvALS = glob.glob('data/lstdata/uvA/*uvALSA')
+#uvA = glob.glob('data/lstdata/uvA/*uvAA')
+#uvAL = glob.glob('data/lstdata/uvA/*uvALA')
+#uvALS = glob.glob('data/lstdata/uvA/*uvALSA')
+uvA = glob.glob('data/lstdata/uvA_v2/*uvA')
+uvAL = glob.glob('data/lstdata/uvA_v2/*uvGLA')
+uvALS = glob.glob('data/lstdata/uvA_v2/*uvGLSA')
 
 bl = a.miriad.ij2bl(0,26)
 fig = p.figure(figsize=(10,8))
-for cnt, dset in enumerate([uvA_fg, uvAL_fg, uvA, uvAL, uvALS]):
+titles = ['LST Binned', 'Fringe Rate Filt.', 'Foreground Filt.', 'Fringe Rate Filt.', 'Baseline Avg.']
+for cnt, (dset,title) in enumerate(zip([uvA_fg, uvAL_fg, uvA, uvAL, uvALS],titles)):
     #if cnt == 0:
     #    ax2 = p.subplot(2,5,1+5)
     #    ax1 = p.subplot(2,5,1, sharex=ax2)
@@ -37,6 +41,7 @@ for cnt, dset in enumerate([uvA_fg, uvAL_fg, uvA, uvAL, uvALS]):
     #    p.setp(axa.get_yticklabels(), visible=False)
     #    p.setp(axb.get_yticklabels(), visible=False)
     lsts,d,f = get_data(dset, 'cross', 'I', verbose=True)
+    print d.keys()
     d = n.array(d[bl])
     lsts = n.where(lsts > 5, lsts-2*n.pi, lsts)
     lsts = 12 * lsts/n.pi
@@ -45,6 +50,7 @@ for cnt, dset in enumerate([uvA_fg, uvAL_fg, uvA, uvAL, uvALS]):
     d[:,76:78] = 0 # make sure orbcomm is white
     im1 = C.arp.waterfall(d, mode='log', mx=4, drng=5, extent=(100,200,lsts[-1],lsts[0]))
     p.setp(ax1.get_xticklabels(), visible=False)
+    p.title(title, size=13)
     p.plot([100,200],[0,0],'k--')
     p.plot([100,200],[9.5,9.5],'k--')
     p.ylim(17,-2)
