@@ -523,7 +523,7 @@ def posterior(kpl, pk, err, pkfold=None, errfold=None, f0=.151, umag=16.):
     data_omit /= n.max(data_omit)
     p.figure(5, figsize=(6.5,5.5))
     p.plot(s, data, 'k', linewidth=2)
-    p.plot(s, data_omit, 'k--', linewidth=1)
+#    p.plot(s, data_omit, 'k--', linewidth=1)
     #use a spline interpolator to get the 1 and 2 sigma limits.
     #spline = interp.interp1d(data,s)
     #print spline
@@ -564,6 +564,7 @@ def posterior(kpl, pk, err, pkfold=None, errfold=None, f0=.151, umag=16.):
     #p.vlines(s1hi_o,0,1,color=(0,107/255.,164/255.), linestyle='--', linewidth=2)
 
     #p.vlines(s[sig2[-1]],0,1,color=(0,107/255.,164/255.), linewidth=2)
+    # limits for data_omit
     p.vlines(s2lo,0,1,color=(1,128/255.,14/255.), linewidth=2)
     p.vlines(s2hi,0,1,color=(1,128/255.,14/255.), linewidth=2)
     #p.vlines(s2lo_o,0,1,color=(1,128/255.,14/255.), linestyle='--', linewidth=2)
