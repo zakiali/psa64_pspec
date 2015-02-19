@@ -26,8 +26,8 @@
 \newcommand{\kmax}{k_{\rm max}}
 \newcommand{\Tcmb}{T_\gamma}
 \newcommand\abs[1]{\left|#1\right|}
-\newcommand{\mKlimit}{(19.7 mK)$^2$} % XXX put in final number
-\newcommand{\mKsqlimit}{390 mK$^2$} % XXX put in final number
+\newcommand{\mKlimit}{(22.4 mK)$^2$} % XXX put in final number
+\newcommand{\mKsqlimit}{503 mK$^2$} % XXX put in final number
 
 \newcount\colveccount
 \newcommand*\colvec[1]{
@@ -395,7 +395,7 @@ As illustrated in Figure \ref{fig:flowchart},
 our analysis pipeline begins by running a compression
 algorithm to reduce the volume of our raw data by a factor of 70.
 As described in Appendix A of P14, this is achieved by first performing statistical flagging to remove
-RFI at the 6$\sigma$ level, applying low-pass delay and fringe-rate filters that limit signal variation
+radio frequency interference (RFI) at the 6$\sigma$ level, applying low-pass delay and fringe-rate filters that limit signal variation
 to delay scales of $|\tau|\la1 \mu$s and fringe-rate scales of $f\la23$ mHz, and then 
 decimating to critical Nyquist sampling rates of 493 kHz along the frequency axis
 and 42.9 s along the time axis.  We remind the reader that while information is lost in this compression,
@@ -705,8 +705,7 @@ the calibrated Pictor A spectrum and the model spectrum from
 \centering
 \includegraphics[width=\columnwidth]{plots/picimg_cs.png}
 \caption{
-[XXX change flux scale]
-PAPER-64 image of a field including Pictor A and Fornax A, with black circles
+PAPER-64 image of a field including Pictor A and Fornax A, with white circles
 indicating catalog positions \citep{jacobs_et_al2011}. Image was synthesized with two hours
 of visibilities while Pictor A was in transit and 53 MHz of instantaneous
 bandwidth from 120 to 173 MHz.  Image quality is limited by the redundant
@@ -1037,14 +1036,20 @@ first mode outside of the horizon, 1.3\% for the next mode out, and less than
 
 \subsection{Binning in LST}\label{sec:lstbin}
 
-After the wideband delay filter, we remove a second layer of RFI and crosstalk
- which was overshadowed by the foreground signal. RFI are excised with 
- a filter which flags values $3\sigma$ above the median using a variance calculated in a localized time and frequency window.  Crosstalk, which is an overall complex offset to the visibility, due to small couplings between independent analog signal chains, is removed by subtracting a ten minute long average from each baseline. Normally, hour long averages are needed for foreground contained data
-to wash out the fringes from the said foregrounds to detect the static 
-bias that is crosstalk. With foregrounds removed, we do not have this
-complication since bright foregrounds are not dominating the average and are
-able to remove the offset by subtracting shorter sums.
-[XXX above statement is incorrect]
+After the wideband delay filter, we remove a second layer of RFI 
+ which was overshadowed by the foreground signal. RFI are excised with a filter
+which flags values $3\sigma$ above the median using a variance calculated in a
+localized time and frequency window.  
+
+%Crosstalk, which is an overall complex offset to the visibility, due to small
+%couplings between independent analog signal chains, is removed by subtracting a
+%ten minute long average from each baseline. Normally, hour long averages are
+%needed for foreground contained data to wash out the fringes from the said
+%foregrounds to detect the static bias that is crosstalk. With foregrounds
+%removed, we do not have this complication since bright foregrounds are not
+%dominating the average and are able to remove the offset by subtracting shorter
+%sums.
+%[XXX above statement is incorrect]
 
 The final step is to average the entire season into LST
 with 43-s bin widths matching the cadence of
@@ -2368,12 +2373,12 @@ unlikely to be chance.
 \begin{figure*}\centering
 \includegraphics[width=2\columnwidth]{plots/pspec_comparison.png}
 \caption{
-[XXX update with non-xtalk removed data]
 Diagnostic power spectra in the style of Figure \ref{fig:final_pspec}
 illustrating the impact of various analysis stages.
-Power spectra omitting the stages of fringe-rate filtering (magenta) and 
-OMNICAL calibration (cyan) show higher residuals than the final power spectrum
-(black) that includes both stages.
+Power spectra omitting the stages of fringe-rate filtering (blue) and 
+OMNICAL calibration (orange) show higher residuals than the final power
+spectrum (black) that includes both stages. Green shows the systematic
+dominated power spectrum without using the crosstalk fringe-rate filter.
 %The blue power spectrum has the full pipeline applied to it and is identical to
 %\ref{fig:final_pspec}. The red power spectrum does not have omnical applied to
 %it, and hence the error bars are bigger. Note that it does have the otimal

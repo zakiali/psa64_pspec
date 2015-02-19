@@ -24,12 +24,11 @@ opts,args = o.parse_args(sys.argv[1:])
 print args
 
 dspec='data/final_pspecs/v032/nocov_pspec.npz'
-#args=['data/final_pspecs/v032/pspec.npz']
-args=['data/final_pspecs/v040/pspec.npz']
+args=['data/final_pspecs/v050/pspec.npz']
 
 def noise_level():
     tsys = 500e3 #mK
-    inttime = 1886. #seconds
+    inttime = 1886. #seconds. XXX fix with new integration.
     nbls=51
     ndays = 120 #effectively this many days. days of operation = 135
     nseps = 3
@@ -572,7 +571,7 @@ def posterior(kpl, pk, err, pkfold=None, errfold=None, f0=.151, umag=16.):
 
     p.xlabel(r'$k^3/2\pi^2\ P(k)\ [{\rm mK}^2]$', fontsize='large')
     p.ylabel('Posterior Distribution', fontsize='large')
-    p.xlim(0,600)
+    p.xlim(0,700)
     p.grid(1)
     p.subplots_adjust(left=.15, top=.95, bottom=.15, right=.95)
     p.show()
