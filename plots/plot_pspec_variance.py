@@ -4,7 +4,8 @@ import capo as C
 import sys, optparse, re, os, random, glob
 
 #args = sys.argv[1:]
-args = glob.glob('data/pspec_v010/sep*/*boot*npz')
+#args = glob.glob('data/pspec_v010/sep*/*boot*npz')
+args = glob.glob('data/final_pspecs/v050/sep*/*boot*npz')
 
 pk_vs_t = {}
 err_vs_t = {}
