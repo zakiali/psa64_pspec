@@ -1,4 +1,4 @@
-\begin{thebibliography}{103}
+\begin{thebibliography}{102}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Ali} {et~al.}(2008){Ali}, {Bharadwaj}, \&
@@ -199,15 +199,6 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
 {Lidz}, A., {Zahn}, O., {McQuinn}, M., {Zaldarriaga}, M., \& {Hernquist}, L.
   2008, \apj, 680, 962
 
-\bibitem[{Liu {et~al.}(2014{\natexlab{a}})Liu, Parsons, \&
-  Trott}]{liu_et_al2014a}
-Liu, A., Parsons, A.~R., \& Trott, C.~M. 2014{\natexlab{a}}, Phys. Rev. D, 90,
-  023018
-
-\bibitem[{Liu {et~al.}(2014{\natexlab{b}})Liu, Parsons, \&
-  Trott}]{liu_et_al2014b}
----. 2014{\natexlab{b}}, Phys. Rev. D, 90, 023019
-
 \bibitem[{{Liu} \& {Tegmark}(2011)}]{liu_tegmark2011}
 {Liu}, A., \& {Tegmark}, M. 2011, \prd, 83, 103006
 
@@ -259,10 +250,10 @@ Liu, A., Parsons, A.~R., \& Trott, C.~M. 2014{\natexlab{a}}, Phys. Rev. D, 90,
   {Spergel}}]{mesinger_et_al2012}
 {Mesinger}, A., {McQuinn}, M., \& {Spergel}, D.~N. 2012, \mnras, 422, 1403
 
-\bibitem[{{Moore} {et~al.}(2015){Moore}, {Aguirre}, {Parsons}, {Aguirre},
-  {Bernardi}, {Bradley}, {Carilli}, {Cheng}, {DeBoer}, {Dexter}, {Jacobs},
-  {Klima}, {Liu}, {MacMahon}, {Moore}, {Stefan}, {Walbrugh}, {Walker}, \&
-  {Zheng}}]{moore_et_al2015}
+\bibitem[{{Moore} {et~al.}(2015){Moore}, {Aguirre}, {Parsons}, {Ali},
+  {Bradley}, {Carilli}, {DeBoer}, {Dexter}, {Gugliucci}, {Jacobs}, {Klima},
+  {Liu}, {MacMahon}, {Manley}, {Pober}, {Stefan}, \&
+  {Walbrugh}}]{moore_et_al2015}
 {Moore}, D.~C., {et~al.} 2015, ArXiv e-prints
 
 \bibitem[{{Moore} {et~al.}(2013){Moore}, {Aguirre}, {Parsons}, {Jacobs}, \&
@@ -438,6 +429,9 @@ Liu, A., Parsons, A.~R., \& Trott, C.~M. 2014{\natexlab{a}}, Phys. Rev. D, 90,
   {Tingay}, {Wayth}, {Waterson}, {Webster}, {Whitney}, {Williams}, {Williams},
   \& {Wyithe}}]{sullivan_et_al2012}
 {Sullivan}, I.~S., {et~al.} 2012, \apj, 759, 17
+
+\bibitem[{{Tegmark}(1997)}]{tegmark1997}
+{Tegmark}, M. 1997, \prd, 55, 5895
 
 \bibitem[{{Tingay} {et~al.}(2013){Tingay}, {Goeke}, {Bowman}, {Emrich}, {Ord},
   {Mitchell}, {Morales}, {Booler}, {Crosse}, {Wayth}, {Lonsdale}, {Tremblay},
