@@ -1946,54 +1946,45 @@ between neighboring data points..
 %   -happy coincidence?
 %
 
-We now discuss the issues of empirically estimating the covariance matrix from
-the data. The covariance matrix is defined as the ensemble average of the outer
-product of a vector with itself. In our case, 
+We now discuss some of the subtleties associated with empirically estimating the covariance matrix from
+the data. Again, the covariance matrix is defined as the ensemble average of the outer
+product of a vector with itself, i.e., 
 \begin{equation}
     \C = \expval{\x\x^{\dagger}}, 
 \end{equation}
-where $\x$ is the data (column) vector used in the analysis. Specifically, this data
-vector consists of visibilities for a single baseline type, with 20 frequency
-channels spanning 10 MHz of bandwidth
-centered at 151.72 MHz, for all integrations.
-Since we do not have a priori knowledge of the covariance matrix, 
-we instead estimate it empirically from the data, averaging over the time
-axis to derive the estimated covariances among the 20 frequency channels. In our
-analysis the time average runs from 0 to 8:30 LST hours. Our analysis method
-for calculating the power spectrum requires the inverse of the covariance
-matrix to weight the data. Therefore, the empirically derived covariance matrix
-here, must be invertible, which occurs only if $\C$ is a rank-N matrix, where N
-is the number of rows or columns. In our particular case, N=20, for the number of frequency channels.
+where $\x$ is the data (column) vector used in the analysis. In our analysis,
+we do not have \emph{a priori} knowledge of the covariance matrix. and thus we
+must resort to empirical estimates. As we have alluded to above, we replace
+the ensemble average with a time average that runs from 0 to 8:30 LST hours.
 
-There are a few fundamental problems that occur when estimating the covariance
-matrix in this way. As noted in section \ref{sec:frf} the optimal fringe-rate
+Since the OQE method for power spectrum estimation requires the inversion
+of $\C$, it is crucial that our empirically estimated covariance be a full rank matrix.
+With our data consisting of visibilities over $20$ frequency channels, the covariance
+matrix is a $20 \times 20$ matrix. Thus, a necessary condition for our estimate to be
+full rank is for there to be at least $20$ independent time samples in our average. As noted in section \ref{sec:frf} the optimal fringe-rate
 filter corresponds to averaging time samples for 31 minutes. Over the LST range
 used in this analysis, this corresponds to an order of 20 statistically
-independent modes in our data after fringe-rate filtering. This is a fundamental
-limit of the amount of information we have in our measurements. Coincidentally,
-the covariance matrix for a given baseline is an $N_{ch} \times N_{ch}$ matrix,
-where $N_{ch}=20$.  Therefore, the covariance matrices for every baseline are,
-in fact, invertible in most cases,  because they are full rank and contain 20
-statistically independent measurements of the sky. The covariance matrix is thus
-invertible and can be used to inverse covariance weight the data.
+independent modes in our data after fringe-rate filtering. We therefore have just enough
+samples for our empirical estimate, and in practice, our covariance matrices are invertible
+and allow OQE techniques to be implemented.
 
-The optimal quadratic estimator has an application of the inverse covariance
-matrix to data vector $\x$. Applying an inverse covariance matrix to the data it
-is derived from has the effect of weighting the data by the covariance matrix.
-Therefore strong modes, corresponding to the eigenvectors of the covariance
-matrix, are down-weighted in this scheme as seen in Figure \ref{fig:inv_cov}.
-For foreground contained data, the strong modes correspond to the smooth
-spectrum foregrounds, and therefore the covariance matrix is highly covariance
-since all of the frequency channels are correlated with one another. However,
-for foreground filtered data, the strongest modes correspond to modes that
-resemble residual foreground in the data. It is important to note that inverse
-covariance weighting is a powerful tool as seen by looking at the three
-baselines used in Figure \ref{fig:inv_cov}. For the baseline data vector with
-the least amount of noise in the delay filtered plot (right half, middle
-column), we can see that weighing by the inverse covariance up-weights modes in
-this baseline, as compared to the other baselines, which have a slightly higher
-noise in the original data vector. This is even paralleled in the foreground
-contained data.
+%The optimal quadratic estimator has an application of the inverse covariance
+%matrix to data vector $\x$. Applying an inverse covariance matrix to the data it
+%is derived from has the effect of weighting the data by the covariance matrix.
+%Therefore strong modes, corresponding to the eigenvectors of the covariance
+%matrix, are down-weighted in this scheme as seen in Figure \ref{fig:inv_cov}.
+%For foreground contained data, the strong modes correspond to the smooth
+%spectrum foregrounds, and therefore the covariance matrix is highly covariance
+%since all of the frequency channels are correlated with one another. However,
+%for foreground filtered data, the strongest modes correspond to modes that
+%resemble residual foreground in the data. It is important to note that inverse
+%covariance weighting is a powerful tool as seen by looking at the three
+%baselines used in Figure \ref{fig:inv_cov}. For the baseline data vector with
+%the least amount of noise in the delay filtered plot (right half, middle
+%column), we can see that weighing by the inverse covariance up-weights modes in
+%this baseline, as compared to the other baselines, which have a slightly higher
+%noise in the original data vector. This is even paralleled in the foreground
+%contained data.
 %
 %   -Potential for signal loss.
 %       --In a traditional OQE method, the process is lossless by construction.
@@ -2002,16 +1993,28 @@ contained data.
 %         loss. 
 
 
-Another problem that occurs from empirically estimating covariances is that it
+Another potential problem that occurs from empirically estimating covariances is that it
 leads to models of the covariance matrix that over-fit the noise. In this
 scenario, the covariance matrix tells us that there may be modes in the data
-that should be down-weighted, for example, but if the covariances are dominated
-by noise, this may just be a random fluctuation and that mode may not need to
-be down-weighted. Said differently, the weighting of the data by the inverse
+that should be down-weighted, for example, but if the empirical covariance estimates are dominated
+by noise, these may just be random fluctuations that need not be down-weighted. Said differently, the weighting of the data by the inverse
 covariance is heavily influenced by the noise in the estimate of the covariance
-matrix and thus has the ability to down-weight valid high-variance samples.
-In order to accurately describe the covariance matrix of the instrument, we would require complete knowledge of the sky signal and the instrument and the interaction of the two due to the chromaticity of the interferometer.
-
+matrix and thus has the ability to down-weight valid high-variance samples. 
+%In order to accurately describe the covariance matrix of our measurements, we would require complete knowledge of the sky signal and the instrument and the interaction of the two due to the chromaticity of the interferometer.
+Overfitting the noise in this manner carries with it the possibility of cosmological signal loss.
+This seems to contradict the conventionally recognized feature of OQEs as
+lossless estimators of the power spectrum [XXX: cite Tegmark 97]. However,
+the standard proofs of this property assume that statistics such as $\mathbf{C}$
+are known \emph{a priori}, which is an assumption that we are violating with our
+empirical estimates.
+%
+%
+%In theory, optimal quadratic estimators for the power spectrum described above are a
+%lossless operation. However, this requires that we have all the information
+%needed to accurately estimate the power spectrum. One of the biggest
+%uncertainties, as noted above, is the lack of a perfect covariance matrix that
+%describes all of the covariances of the sky and instrument, which can lead to
+%signal loss in the final estimate of the power spectrum.  In order to quantify the amount of signal loss we can get by empirically estimating the covariances, we describe the simulations and report on the signal loss we expect with our estimates.
 
 
 %   -Simulations
@@ -2049,28 +2052,21 @@ dominates over the foreground modes present in estimates of the data covariance.
 }\label{fig:signal_loss}
 \end{figure}
 
+[XXX: put wedge paper citations back in]
 
-In theory, optimal quadratic estimators for the power spectrum described above are a
-lossless operation. However, this requires that we have all the information
-needed to accurately estimate the power spectrum. One of the biggest
-uncertainties, as noted above, is the lack of a perfect covariance matrix that
-describes all of the covariances of the sky and instrument, which can lead to
-signal loss in the final estimate of the power spectrum.  In order to quantify the amount of signal loss we can get by empirically estimating the covariances, we describe the simulations and report on the signal loss we expect with our estimates.
-
-In order to characterize the signal loss, we simulate visibilities for
-spatially Gaussian signal with a flat amplitude in $P(k)$ that rotates with the
-sky, and is optimally fringe-rate filtered in the same way as the data for our fiducial baselines. This signal is
-injected on top of the data, measuring the output signal power spectrum and
-comparing it to the input signal power spectrum for various signal amplitudes.
-We perform this injection for 40 draws at each signal level.  Figure
+In order to deal with possible signal loss, we perform simulations of our analysis pipeline, 
+deriving correction factors that must be applied to our final constraints . We simulate visibilities for
+Gaussian temperature field with a flat amplitude in $P(k)$ that rotates with the
+sky, which is optimally fringe-rate filtered in the same way as the data for our fiducial baselines. This signal is processed through our pipeline, and the output power spectrum compared to the input
+power spectrum, for various levels of input signal amplitude.
+We repeat this for 40 sky realizations at each signal level.  Figure
 \ref{fig:signal_loss} shows the resultant signal loss associated with
 estimating the covariance matrix from the data.  Error bars were obtained
-through bootstrapping.  
+through bootstrapping.
 
 As a function of the increasing input amplitude of the simulated power spectra,
-we find that there is a decrease in the output amplitude of the measured power
-spectrum of the simulated visibilities, interpreted as signal loss through the
-quadratic estimator of the power spectrum.  
+we find that the ratio of output power to input power decreases, which we interpret
+ as signal loss through the use of our empirical OQE of the power spectrum.  
 However, since the transfer function through this analysis is an invertible function,
 we can correct for the transfer by using the output value to infer a signal loss
 that is then divided out to obtain the original input signal level.  In Figure \ref{fig:signal_loss},
@@ -2101,9 +2097,8 @@ As shown in Table \ref{tbl:sigloss}, the signal loss we characterize for quadrat
 estimation of the power spectrum band powers is tabulated along with the signal
 loss associated with each other potentially lossy analysis stage (see Figure \ref{fig:flowchart}).
 We correct for the signal loss in each stage by multiplying the final power spectrum results
-by the typical loss for each stage, except for specific modes the maximum
-signal loss applies. These modes are uniformly within the horizon limits or (in the case of
-delay filtering) immediately adjacent to the horizon limit.
+by the typical loss for each stage, except for modes within the horizon limit and immediately
+adjacent to the horizon limit, where we apply the maximum signal loss correction to be conservative.
 
 % Carina's Text of the eor model goes here.  Will put in on revision
 %The model eor signal used was a simulation of a flat power spectrum, in P($k$),
@@ -2146,38 +2141,67 @@ delay filtering) immediately adjacent to the horizon limit.
 %       --We use 100 bootstraps to derive our error bars, setting a $2\sigma$
 %         bound on the errors.
 
-\subsection{Bootstrapped Errors}\label{sec:bootstrap}
+\subsection{Bootstrapped Averaging and Errors}\label{sec:bootstrap}
 %XXX QUESTION FOR BOOTSTRAPPING, Use the input data to the quad est vs output
 %data? Is this why the error bars were so wacked out before?
 When estimating our power spectra via optimal quadratic estimators, we generate
 multiple samples of the power spectrum in order to apply the bootstrap method to
-calculate our error bars. When applying this method of estimating the
-statistical variance in our data, we require that there needs to be a random
-component in our estimates of power spectra.
+calculate our error bars. In detail, the power spectrum estimation scheme proposed
+above requires averaging at several points in the pipeline:
+\begin{itemize}
+\item Visibilities are averaged into five baseline groups after inverse covariance weighting (see Equation \ref{eqn:presum_oqe})
+\item Power spectrum estimates from each of the three redundant baseline types (described in Section \ref{sec:observations}) are averaged together.
+\item Power spectrum estimates from each LST are averaged together.
+\end{itemize}
+With the bootstrapping technique, we do not directly perform these averages. Instead,
+one draws random samples within the three-dimensional parameter space specified above,
+with replacement, until one has as many random samples as there are total number of parameter
+space points. These random samples are then propagated through the power spectrum pipeline
+and averaged together as though they were the original data. This forms a single estimate (a ``bootstrap") of $P(\mathbf{k})$. Repeating this exercise over and over again with different
+random draws allows one to quantify the inherent scatter---and hence the error bars---in our
+estimate of $P(\mathbf{k})$. When plotting $\Delta^2 (k) \equiv k^3 P(k) / 2 \pi^2$ instead of
+$P(\mathbf{k})$, we add a binary parameter to our random draws that specifies whether we
+draw from $+k$ or $-k$.
 
-We use the baseline axis as our random draw axis. For each bootstrap we
-calculate the power spectrum of a random draw of $N_{bls}-5$, giving us more
-than $2\times10^6$ possible combinations of baselines for the fiducial
-baselines used in the analysis and over $1\times10^{6}$ combinations of the 
-redundant baseline groups used in the analysis.
-There is enough variation in
-the data to tease out the underlying statistics of the distribution. 
+In our analysis, we compute a total of 400 bootstraps. In extracting our final power spectrum
+estimates, we elect to compute the median, rather than the mean. The median provides a
+better rejection of outliers, such as those that might arise from residual foreground power. In doing
+so, however, we must take into account the fact that our power spectrum estimates may be
+drawn from a distribution where the mean and median do not coincide. For example, if our power spectrum estimate were
+dominated by the true cosmological power spectrum, the scatter in the measured values would
+be Rayleigh distributed due to cosmic variance. For a Rayleigh distribution, the median is $\ln2 \sim 0.69$
+times the mean. On the other hand, if our power spectrum estimation is dominated by instrumental
+noise, data points will be peaked and symmetric about zero (thanks to our use of cross- rather than auto-power spectra), and thus the mean will coincide with the median. To be conservative, we apply
+the $\ln2$ correction factor to all our power spectrum estimates.
 
-There are, however, a few issues that must be dealt with in order to not incur a
-noise bias that will. We want to effectively construct an unbiased estimator.
-There are two ways that our estimate of the power spectrum can incur a noise
-bias as discussed earlier. One way is to have an auto cross multiplication in
-the quadratic estimator. We avoid this by only using cross baseline products
-when estimating the power spectrum as discussed above. And furthermore, we use
-the cross products in both time and baselines, as described above.
 
-In our analysis we use 100 bootstraps, to calculate the error bars as a function
-of $k$-mode in our final power spectrum. In the calculation of the error bars,
-we randomly sample 400 samples from the 100 bootstraps to measure the $1
-\text{and} 2 \sigma$ errors. One key point here is that we use the median
-statistic in order to measure the variance in our power spectrum, rather than
-the mean statistic. This is due to the fact that there are outliers that
-drastically skew the final error bars. 
+%When applying this method of estimating the
+%statistical variance in our data, we require that there needs to be a random
+%component in our estimates of power spectra.
+%
+%We use the baseline axis as our random draw axis. For each bootstrap we
+%calculate the power spectrum of a random draw of $N_{bls}-5$, giving us more
+%than $2\times10^6$ possible combinations of baselines for the fiducial
+%baselines used in the analysis and over $1\times10^{6}$ combinations of the 
+%redundant baseline groups used in the analysis.
+%There is enough variation in
+%the data to tease out the underlying statistics of the distribution. 
+%
+%There are, however, a few issues that must be dealt with in order to not incur a
+%noise bias that will. We want to effectively construct an unbiased estimator.
+%There are two ways that our estimate of the power spectrum can incur a noise
+%bias as discussed earlier. One way is to have an auto cross multiplication in
+%the quadratic estimator. We avoid this by only using cross baseline products
+%when estimating the power spectrum as discussed above. And furthermore, we use
+%the cross products in both time and baselines, as described above.
+
+%In our analysis we use 100 bootstraps, to calculate the error bars as a function
+%of $k$-mode in our final power spectrum. In the calculation of the error bars,
+%we randomly sample 400 samples from the 100 bootstraps to measure the $1
+%\text{and} 2 \sigma$ errors. One key point here is that we use the median
+%statistic in order to measure the variance in our power spectrum, rather than
+%the mean statistic. This is due to the fact that there are outliers that
+%drastically skew the final error bars. 
 
 \begin{figure*}\centering
 \includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
@@ -2202,23 +2226,23 @@ in the distribution of values, likely as a result of foreground contamination.
 \end{figure*}
 
 
-
-Figure \ref{fig:pspec_variance} shows that the mean and variance statistic used
-in the estimate of the band powers have similar properties. Namely, some modes
-integrate down and bottom out on a signal with the addition of more samples.
-However, there are a few modes that show a bottoming out, but take a dive when
-more modes are added, owning to some peculiar noise properties in the
-measurements. Generally, the two statistics have similar properties. Assuming
-Gaussian statistics; they should be the same. However, there is a correction factor that needs to be applied to
-the measured power spectrum because we are not in the completely noise dominated
-regime, due to the fact that there are clear detections. Therefore, for these
-modes we are in a Rayleigh distributed regime, in which the mean and median are
-not equal. The correction factor is $\log{(2)}$ for using the
-median statistic over the mean, for a Rayleigh distributed signal. Noting that
-we are somewhere in-between these two distributions, as implied by the fact that 
-some of our error bars are consistent with zero and some are clear detections.
-We therefore apply this correction factor as an upper bound on the discrepancy
-of using these two statistical metrics.
+%
+%Figure \ref{fig:pspec_variance} shows that the mean and variance statistic used
+%in the estimate of the band powers have similar properties. Namely, some modes
+%integrate down and bottom out on a signal with the addition of more samples.
+%However, there are a few modes that show a bottoming out, but take a dive when
+%more modes are added, owning to some peculiar noise properties in the
+%measurements. Generally, the two statistics have similar properties. Assuming
+%Gaussian statistics; they should be the same. However, there is a correction factor that needs to be applied to
+%the measured power spectrum because we are not in the completely noise dominated
+%regime, due to the fact that there are clear detections. Therefore, for these
+%modes we are in a Rayleigh distributed regime, in which the mean and median are
+%not equal. The correction factor is $\log{(2)}$ for using the
+%median statistic over the mean, for a Rayleigh distributed signal. Noting that
+%we are somewhere in-between these two distributions, as implied by the fact that 
+%some of our error bars are consistent with zero and some are clear detections.
+%We therefore apply this correction factor as an upper bound on the discrepancy
+%of using these two statistical metrics.
 
 
 %\subsubsection{Integrating $k$-modes}
