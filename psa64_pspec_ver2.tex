@@ -953,7 +953,7 @@ Namely, Stokes I can be estimated as
 \end{equation}
 where $V_{\rm XX}$ and $V_{\rm YY}$ are the visibilities of the two linear
 polarizations measured by the interferometer. There are some important caveats
-to the estimate of Stokes I provided by equation \ref{eqn:stokesi}. One
+to the estimate of Stokes I provided by Equation \eqref{eqn:stokesi}. One
 important caveat is that it neglects the beam asymmetry  between the two linear
 polarization states. This mismatch can cause polarization leakage from Stokes
 Q into Stokes I, thus contaminating  our measurement of the power spectrum with any polarized emission from the sky.
@@ -1001,7 +1001,7 @@ As per
 resulting from $W(\tau)$ using an iterative CLEAN procedure
 \citep{hogbom1974} restricting CLEAN components to fall within the horizon plus
 a 15-ns buffer that includes the bulk of the kernels convolving the $\delta$-function
-in equation \ref{eqn:delay_transform}.
+in Equation \eqref{eqn:delay_transform}.
 To remove the smooth spectrum
 foreground emission we subtract the CLEAN components from the original
 visibility.
@@ -1229,7 +1229,7 @@ bins by the beam response, we can get a net increase in sensitivity.
 
 Applying this filter effectively weights the data by another factor of the beam
 area, changing the effective primary beam response\footnote{The
-angular area in equation \ref{eqn:delay_pspec} will reflect the new angular area
+angular area in Equation \eqref{eqn:delay_pspec} will reflect the new angular area
 corresponding to the change in beam area.} $A(l,m)$\citep{parsons_et_al2015}. By
 utilizing prior knowledge about the beam area we are selectively down weighting
 areas on the sky contributing little signal. This results in a sensitivity boost of
@@ -1265,8 +1265,8 @@ in Figure \ref{fig:waterfalls}.
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/fr_preserved_signal.png}
 \caption{
-[XXX update filter shape, which data to use?]
-Fringe-rate transform of visibilities measured on the fiducial baseline at 159 MHz before (blue) and
+[XXX Still calling it an optimal fringe rate filter?]
+Fringe-rate transform of foreground contained visibilities measured on the fiducial baseline at 159 MHz before (blue) and
 after (red) optimal fringe-rate filtering. The fringe-rate filter (green) is normalized
 to integrate to unity, but has been scaled here for legibility.
 %Fringe-rate filtering at 159MHz. Fringe-rates of is defined as the rate at which
@@ -1369,14 +1369,14 @@ PAPER instrument and the precision of calibration.
 \centering
 \includegraphics[width=\columnwidth]{plots/stability.png}
 \caption{
-[XXX change y label to fractional variance]
-[XXX update caption to describe how to interpret stability]
+[XXX update caption to describe how to interpret stability. I think I did this...]
 [XXX is this figure linked to in text?]
-[XXXVariance relative to the mean. Fractional variance.]
-Power spectrum of 135 days of time-series data contributing to a single LST bin,
-illustrating the stability of measurements over the observing campaign.  The excess at
-2-day timescales is a beat frequency associated with the changing alignment of 
-integration windows in the correlator with respect to sidereal time.  
+Power spectrum of 135 days of time-series data contributing to a single LST
+bin, illustrating the stability of measurements over the observing campaign.
+On all timescales, the instrument is stable to less than .1\% relative to the
+mean (DC). The excess at 2-day timescales is a beat frequency associated with
+the changing alignment of integration windows in the correlator with respect to
+sidereal time.  
 %Demonstration of the time stability of the instrument. For a given LST
 %bin, we take the day to day samples that go into that bin and determine the
 %power spectrum for that time seris. Shown here is the power spectrum of the time
@@ -1574,7 +1574,6 @@ covariance matrix to the $\alpha$th bin of the power spectrum.
 %We describe our choice of this
 %matrix in the next section, where we describe the application of the quadratic
 %estimator. 
-XXX: eqref vs. ref throughout
 
 The bias term $b_{\alpha}$ in Equation \eqref{eqn:qalpha} will include contributions
 from both instrumental noise and residual foregrounds. Their presence in the data
@@ -1858,7 +1857,7 @@ present case where we have $10$ different data vectors, we have
 so that auto-power contributions from identical baseline groups or identical even/odd indices
 never appear.
 
-In order to implement Equation $\ref{eqn:presum_qalpha}$, it is necessary to derive a form for
+In order to implement Equation $\eqref{eqn:presum_qalpha}$, it is necessary to derive a form for
 $\mathbf{Q}_\alpha \equiv \partial \mathbf{C} / \partial p_\alpha$. To do so, we follow the delay
 spectrum technique of P12a, where it was shown that
 \begin{equation}\label{eqn:delay_pspec}
@@ -1912,12 +1911,12 @@ $\mathbf{\hat{p}}$ prevents leakage from this edge bin that will contain aliased
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/window.png}
 \caption{
-The window function matrix $\mathbf{W}$, as defined in equation \ref{eqn:true_pspec_2_est_pspec}.
+The window function matrix $\mathbf{W}$, as defined in Equation \eqref{eqn:true_pspec_2_est_pspec}.
 The $i^{\rm th}$ row corresponds to the window function
 used in the estimate of the power spectrum for the $i^{\rm th}$ $k$-mode.
 Color scale indicates $\log_{10}\mathbf{W}$.
 The inset plot illustrates the window function along the dashed line in the upper panel.
-As described in Section \ref{sec:oqe_app}, $\mathbf{M}$ in equation \ref{eqn:window_def} has been chosen so that
+As described in Section \ref{sec:oqe_app}, $\mathbf{M}$ in Equation \eqref{eqn:window_def} has been chosen so that
 each window function peaks at the waveband while achieving a high degree of isolation from
 at lower $k$-modes that are likely to be biased by foregrounds.
 }\label{fig:window_func}
@@ -2154,7 +2153,7 @@ multiple samples of the power spectrum in order to apply the bootstrap method to
 calculate our error bars. In detail, the power spectrum estimation scheme proposed
 above requires averaging at several points in the pipeline:
 \begin{itemize}
-\item Visibilities are averaged into five baseline groups after inverse covariance weighting (see Equation \ref{eqn:presum_oqe})
+\item Visibilities are averaged into five baseline groups after inverse covariance weighting (see Equation \eqref{eqn:presum_oqe})
 \item Power spectrum estimates from each of the three redundant baseline types (described in Section \ref{sec:observations}) are averaged together.
 \item Power spectrum estimates from each LST are averaged together.
 \end{itemize}
@@ -2211,8 +2210,10 @@ the $\ln2$ correction factor to all our power spectrum estimates.
 \begin{figure*}\centering
 \includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
 \caption{
+[XXX state that it is the absolute value plotted.Done. Check off?]
+[XXX add in what the modes are: bls X time modes]
 Cumulative mean (left) and median (right), as a function of number of modes,
-of power spectrum band power for
+of absolute value of the power spectrum band power for
 $k_\parallel$ modes ranging from $-0.49$ (red) to $0.44\hMpci$ (violet).
 This Allen variance plot shows modes averaging down as the square root of
 number of modes combined until a signal floor is reached.  The difference in
@@ -2360,7 +2361,7 @@ loss through all stages of analysis, as summarized in Table \ref{tbl:sigloss}.
 The final results are plotted in Figure \ref{fig:final_pspec}.
 For the first two modes outside of the horizon, we have
 clear detections. We attribute these to foreground leakage from
-inside the horizon related to the convolution kernels in equation \ref{eqn:delay_transform} (either
+inside the horizon related to the convolution kernels in Equation \eqref{eqn:delay_transform} (either
 from the chromaticity of the antenna response, or from the inherent spectrum of the
 foregrounds themselves).  Somewhat more difficult to interpret is the 
 $3.0\sigma$ excess at $k\approx0.35\hMpci$, and to a lesser
@@ -2465,8 +2466,8 @@ for the heating of the intergalactic medium prior to the completion of reionizat
 \includegraphics[width=2\columnwidth]{plots/ts_patchy_bound.png}
 \caption{Constraints on the 21cm spin temperature at $z=8.4$, 
 assuming 
-the patchy reionization model in equations
-\ref{eqn:d2pspec_model} and \ref{eqn:patchy_bound}, which hold in the limit
+the patchy reionization model in Equations
+\eqref{eqn:d2pspec_model} and \eqref{eqn:patchy_bound}, which hold in the limit
 that $T_{\rm s}<T_{\rm CMB}$.
 } \label{fig:patchy_bound}
 \end{figure*}
@@ -2547,7 +2548,7 @@ dependence, and therefore $T_0^2\xi^2$ becomes a simple multiplicative scalar to
 where $\Delta_{i}^{2}(k)$ is the dimensionless ionization power spectrum. 
 
 As shown in P14, the maximum value of the
-prefactor in equation \ref{eqn:d2pspec_model} is given by 
+prefactor in Equation \eqref{eqn:d2pspec_model} is given by 
 a no-heating scenario where the spin temperature follows the kinetic gas temperature,
 which is held in equilibrium with the CMB via Compton scattering until $z_{\rm dec}\approx150$
 \citep{furlanetto_et_al2006} and then cools adiabatically
@@ -2559,7 +2560,7 @@ In this case, $\xi$ is given by
 At $z=8.4$, this corresponds to a minimum bound on the spin temperature of $\Tspin>1.5~{\rm K}$.
 
 We can now flip this argument around and, for a measured upper bound on $\Delta^2_{21}(k)$, we
-can use models for $\Delta_i^2(k)$ in equation \ref{eqn:d2pspec_model} to place a bound
+can use models for $\Delta_i^2(k)$ in Equation \eqref{eqn:d2pspec_model} to place a bound
 on $\Tspin$.  
 %This produces a maximum prefactor of
 %\begin{equation}
@@ -2913,7 +2914,7 @@ The Hydrogen Epoch of Reionization Array (HERA), whose first phase was recently 
 under the National Science Foundation's {\it Mid-Scale Innovations Program}, has been
 designed to this specification. HERA uses a close packing of 14-m diameter 
 dishes designed to minimize the width of the delay-space kernel
-$\tilde{A}_\tau$ in equation \ref{eqn:delay_transform}.
+$\tilde{A}_\tau$ in Equation \eqref{eqn:delay_transform}.
 Sensitivity forecasts for a 547-element HERA array
 show that HERA can deliver detections of the 21cm reionization signal
 at a significance of 32$\sigma$ using the same the conservative 

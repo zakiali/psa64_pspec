@@ -94,7 +94,7 @@ else:
     p.loglog(_days[:_days.size/2]+.005, dat)
 p.ylim(3e-5,3)
 p.xlim(3e-3,1)
-p.ylabel(r'Power [${\rm K}^2$, arbitrary scale]')
+p.ylabel(r'Fractional Variance')
 p.xlabel(r'Temporal Frequency [1/days]')
 p.grid()
 p.subplots_adjust(right=.95, top=.95, left=.17, bottom=.15)
