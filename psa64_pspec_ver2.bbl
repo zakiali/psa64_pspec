@@ -1,4 +1,4 @@
-\begin{thebibliography}{102}
+\begin{thebibliography}{106}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Ali} {et~al.}(2008){Ali}, {Bharadwaj}, \&
@@ -199,6 +199,15 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
 {Lidz}, A., {Zahn}, O., {McQuinn}, M., {Zaldarriaga}, M., \& {Hernquist}, L.
   2008, \apj, 680, 962
 
+\bibitem[{Liu {et~al.}(2014{\natexlab{a}})Liu, Parsons, \&
+  Trott}]{liu_et_al2014a}
+Liu, A., Parsons, A.~R., \& Trott, C.~M. 2014{\natexlab{a}}, Phys. Rev. D, 90,
+  023018
+
+\bibitem[{Liu {et~al.}(2014{\natexlab{b}})Liu, Parsons, \&
+  Trott}]{liu_et_al2014b}
+---. 2014{\natexlab{b}}, Phys. Rev. D, 90, 023019
+
 \bibitem[{{Liu} \& {Tegmark}(2011)}]{liu_tegmark2011}
 {Liu}, A., \& {Tegmark}, M. 2011, \prd, 83, 103006
 
@@ -223,6 +232,9 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
   {Zahn}}]{mao_et_al2008}
 {Mao}, Y., {Tegmark}, M., {McQuinn}, M., {Zaldarriaga}, M., \& {Zahn}, O. 2008,
   \prd, 78, 023529
+
+\bibitem[{{Marthi} \& {Chengalur}(2014)}]{marthi_chengalur2014}
+{Marthi}, V.~R., \& {Chengalur}, J. 2014, \mnras, 437, 524
 
 \bibitem[{{Masui} {et~al.}(2013){Masui}, {Switzer}, {Banavar}, {Bandura},
   {Blake}, {Calin}, {Chang}, {Chen}, {Li}, {Liao}, {Natarajan}, {Pen},
@@ -267,6 +279,11 @@ Clark, M., Plante, P.~L., \& Greenhill, L. 2013, International Journal of High
 
 \bibitem[{{Morales} \& {Wyithe}(2010)}]{morales_wyithe2010}
 {Morales}, M.~F., \& {Wyithe}, J.~S.~B. 2010, \araa, 48, 127
+
+\bibitem[{{Noorishad} {et~al.}(2012){Noorishad}, {Wijnholds}, {van Ardenne}, \&
+  {van der Hulst}}]{noorishad_et_al2012}
+{Noorishad}, P., {Wijnholds}, S.~J., {van Ardenne}, A., \& {van der Hulst},
+  J.~M. 2012, \aap, 545, A108
 
 \bibitem[{{Oesch} {et~al.}(2013){Oesch}, {Bouwens}, {Illingworth}, {Labb{\'e}},
   {Franx}, {van Dokkum}, {Trenti}, {Stiavelli}, {Gonzalez}, \&

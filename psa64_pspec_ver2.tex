@@ -420,7 +420,6 @@ Finally, we use an
 optimal quadratic estimator (Section \ref{sec:oqe}) to make our estimate of the 21 cm power spectrum.
 
 \subsection{Relative Calibration}\label{sec:relcal}
-[XXX cite LOFAR red cal paper noorishad, nonlinear red cal paper by marthi]
 %    -Principles of redundant calibration. Fact that there is no signal loss in
 %       this kind of measurement.
 %       --PAPER has a redundant configuration. Therefore the number of baselines
@@ -450,6 +449,10 @@ optimal quadratic estimator (Section \ref{sec:oqe}) to make our estimate of the 
 %       --Absoulte phase and gain calibration are addressed in later sections.
 %
 
+Redundant calibration has gained attention recently as a particularly powerful
+way to solve for internal degrees of freedom in radio interferometric measurements without simultaneously
+having to solve for the distribution of sky brightness 
+(\citealt{wieringa1992,liu_et_al2010,noorishad_et_al2012,marthi_chengalur2014,zheng_et_al2014}; P14).
 The grid-based configuration of PAPER antennas allows a large number of antenna
 calibration parameters to be solved for on the basis of redundancy (P14; P12a;
 \citealt{zheng_et_al2014}).  Multiple baselines of the same length and
@@ -2071,8 +2074,6 @@ occurs as the injected signal
 dominates over the foreground modes present in estimates of the data covariance.
 }\label{fig:signal_loss}
 \end{figure}
-
-[XXX: put wedge paper citations back in]
 
 In order to deal with possible signal loss, we perform simulations of our analysis pipeline, 
 deriving correction factors that must be applied to our final constraints . We simulate visibilities for
