@@ -335,11 +335,7 @@ in \citet{parsons_et_al2008}, this
 correlator is based on CASPER\footnote{\url{http://casper.berkeley.edu}} open-source
 hardware and signal processing libraries \citep{parsons_et_al2006}.  
 Sixteen ROACH boards each hosting eight 8-bit analog-to-digital
-<<<<<<< HEAD
-converters digitize and channelize antenna inputs. New to this correlator, compared to prior PAPER correlators \citep{parsons_et_al2010},
-=======
 converters digitize and channelize antenna inputs. New to this correlator relative to previous PAPER correlators,
->>>>>>> 6611c6c0cfa86da09b7437801463cc7a961ecd86
 the cross multiplication engine is implemented on eight servers each receiving
 channelized data over two 10-Gb Ethernet links.  Each server hosts
 two NVIDIA GeForce 580 GPUs running the open-source cross-correlation code developed
@@ -392,15 +388,9 @@ The analysis for this paper employs a contrasting
 approach based on the fact that the chromaticity of an interferometer
 is fundamentally related to the length of an interferometric baseline.  This relationship, known
 colloquially as ``the wedge", was 
-<<<<<<< HEAD
-derived analytically (\citealt{liu_et_al2014a}; \citealt{liu_et_al2014b}; P12b; \citealt{vedantham_et_al2012}), and has been confirmed in 
-simulations \citep{hazelton_et_al2013,datta_et_al2010} and observationally
-\citep{dillon_et_al2013b,pober_et_al2013}.  As described in P12b, the wedge is the result of the delay
-=======
 derived analytically (P12b; \citealt{vedantham_et_al2012,liu_et_al2014a,liu_et_al2014b}), and has been confirmed in 
 simulations \citep{datta_et_al2010,hazelton_et_al2013} and observationally
 \citep{pober_et_al2013,dillon_et_al2013b}.  As described in P12b, the wedge is the result of the delay
->>>>>>> 6611c6c0cfa86da09b7437801463cc7a961ecd86
 between when a wavefront originating from foreground emission
 arrives at the two antennas in a baseline.  The fact that this delay is bounded by the light-crossing
 time between two antennas (which we call the ``horizon limit'' since such a wavefront would have to 
@@ -430,15 +420,9 @@ per-antenna internal degrees of freedom in the array.  In the second stage (Sect
 to solve for a smaller number of
 absolute phase and gain parameters that cannot be solved by redundancy alone. 
 After suppressing foregrounds with a
-<<<<<<< HEAD
-wide-band delay filter (Section \ref{sec:wbd_filtering}), we apply additional RFI flagging and 
-average the data in LST (Section \ref{sec:lstbin}). We then apply a 
-fringe-rate filter (Section \ref{sec:frf}) to optimally combine the time-domain data and remove crosstalk.
-=======
 wide-band delay filter (Section \ref{sec:wbd_filtering}) and additional RFI flagging and crosstalk removal, 
 we average the data in LST (Section \ref{sec:lstbin}) and apply a
 fringe-rate filter (Section \ref{sec:frf}) to optimally combine the time-domain data. 
->>>>>>> 6611c6c0cfa86da09b7437801463cc7a961ecd86
 Finally, we use an
 optimal quadratic estimator (Section \ref{sec:oqe}) to make our estimate of the 21 cm power spectrum.
 
@@ -603,13 +587,8 @@ demonstrating the stability of the PAPER instrument.
 
 
 We measure a mean $\chi^{2}/\text{DoF}$ of 1.9.  This
-<<<<<<< HEAD
-indicates that the redundant calibration solutions, while a substantial improvement
-over the previous PAPER-32 calibration (P14), do not quite result in residuals that are thermal noise dominated.
-=======
 indicates that the OMNICAL calibration solutions, while a substantial improvement
 over the P14 implementation of redudnant calibration, do not quite result in residuals that are thermal noise dominated.
->>>>>>> 6611c6c0cfa86da09b7437801463cc7a961ecd86
 Possible sources of this excess include instrumental crosstalk and poorly performing signal chains.
 While the latter will be downweighted by the inverse of the estimated signal covariance described
 in Section \ref{sec:oqe}, crosstalk is a defect in the data that must be addressed.
