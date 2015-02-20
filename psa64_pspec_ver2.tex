@@ -955,7 +955,7 @@ spectrum.
 
 
 Before implementing our foreground removal techniques, we combine the two
-linear polarizations for an estimate of stokes I as per \citet{moore_et_al2013}.
+linear polarizations for an estimate of Stokes I as per \citet{moore_et_al2013}.
 Namely, Stokes I can be estimated as 
 \begin{equation}\label{eqn:stokesi}
     V_{\rm I} = \frac12(V_{\rm XX}+V_{\rm YY}),
@@ -978,9 +978,9 @@ non-parametric subtractions
 covariance weighting
 \citep{liu_tegmark2011,dillon_et_al2013a,dillon_et_al2013b,liu_et_al2014a,liu_et_al2014b}, Fourier-mode filtering \citet{petrovic_oh2011}, and per-baseline delay filtering described in
 P12b.  This delay-spectrum filtering technique is
-well suited to the maximum redundancy PAPER configuration which is not
+well-suited to the maximum redundancy PAPER configuration which is not
 optimized for the other approaches where high fidelity imaging is a
-pre-requisite.   The delay-spectrum foreground filtering method is described in
+prerequisite.   The delay-spectrum foreground filtering method is described in
 detail by P14; its application is unchanged here.  In summary; we Fourier
 transform each baseline spectrum into the delay domain  
 
@@ -1003,7 +1003,7 @@ delay $\tau_{g}$, convolved by the Fourier transforms of the
 source spectrum, the antenna response, and the
 sampling function. We note that the antenna response effectively determines a finite bandpass,
 which imposes a lower bound 
-of $1/B \approx 10 ns$ on the width of any delay-domain convolving kernel.
+of $1/B \approx 10\,\textrm{ns}$ on the width of any delay-domain convolving kernel.
 As per
 \citet{parsons_backer2009} and P14, we deconvolve the kernel
 resulting from $W(\tau)$ using an iterative CLEAN-like procedure
@@ -1038,7 +1038,7 @@ suppression is evident.
 
 Applying the delay filter to fiducial baselines used in the power spectrum analysis,
 foregrounds are suppressed by $\sim$4 orders of magnitude in power, or
- -40 dB of foreground suppression, as seen in Figure
+ $-40$ dB of foreground suppression, as seen in Figure
 \ref{fig:waterfalls}. As discussed in P14, there is a small amount of signal loss
 associated with this filter. For the baselines and filter parameters used, the loss was found to be 4.8\% for the
 first mode outside of the horizon, 1.3\% for the next mode out, and less than
@@ -1190,7 +1190,7 @@ sky that are independent  before squaring in the power spectrum to get the
 maximum sensitivity. This is mathematically similar to the more traditional
 process of gridding in the $uv$ plane, but applied to a single baseline.
 However, rather than applying a traditional box-car average, we can apply a
-kernel --- a so-called 'fringe-rate' filter --- that weights different temporal
+kernel --- a so-called ``fringe-rate" filter --- that weights different temporal
 rates by the antenna beam corresponding to the parts of the sky moving at the
 same rate.
 
@@ -1250,7 +1250,7 @@ fringe-rate bins on the sky by the RMS of the beam at that same location.
 In order to obtain a smooth filter in the fringe-rate domain, we fit a Gaussian
 with a hyperbolic tangent tail to this filter. In addition, we multiply this
 response with another hyperbolic tangent function that effectively zeros out
-fringe rates below 0.2 mHz. This affects a crosstalk filter by removing
+fringe rates below 0.2 mHz. This removes 
 the slowly varying signals that we model as crosstalk. We convolve the
 time-domain visibilities with the Fourier transform of the resulting fringe-rate
 filter, shown in Figure \ref{fig:fr_preserved_signal}, to produce an averaged
@@ -1319,14 +1319,13 @@ without loss of generality. We can conclude that
     t_{\text{int,after}} = t_{\text{int,before}}\frac{\int{\sigma^{2}f_{\text{flat}}^{2}dt}}{\int{\sigma^{2}f_{\text{optimal}}^{2}dt}},
 \end{equation}
 where $t_{\text{int,before}}$ is the integration time before filtering.
-Equation \eqref{eqn:frf_inttime} evaluates to 2005 s for an optimal fringe-rate
-filter on the fiducial baseline at 150 MHz.  Over the range of frequencies used
-in our power spectrum estimate, the integration times range from 1936 s to 1790
-s, corresponding to an average of 31 minutes. As a rough check, we note that
-this is roughly the time it takes a source to transit through one fringe
-period.  Because the fringe-rate filter integrates in time, the number of
-statistically independent samples of the sky drastically decreases from 83 to
-$\sim2$ independent samples per hour.
+Equation \eqref{eqn:frf_inttime} evaluates to $2005\, \textrm{s}$ for an
+optimal fringe-rate filter on the fiducial baseline at 150 MHz, equating to a
+integration time of 33 minutes. As a rough check, we note that this is roughly
+the time it takes a source to transit through one fringe period.  Because the
+fringe-rate filter integrates in time, the number of statistically independent
+samples of the sky drastically decreases from 83 to $\sim2$ independent samples
+per hour.
 
 %It is important to note that the fringe rate filter is removing some sky signa
 %as is seen in figure \ref{fig:waterfalls}, but it is removing 
@@ -1452,11 +1451,13 @@ where $\Delta\nu$ is the bandwidth, $t$ is the integration time, and
 $T_{\rm rms}$ is the RMS temperature, or the variance statistic described above.
 Figure \ref{fig:tsys} shows the results of this calculation. In this observing
 season, the system temperature drops just below previous estimates 
-as in P14 and \citet{jacobs_et_al2014} of $\Tsys=560K$, at $\Tsys=500K$ at 160
-MHz. However, this estimate is more consistent with the results derived in
-\citep{moore_et_al2015}, where $\Tsys=505K$ at 164 MHz. The change in the
-system temperature can be attributed to the reduced range of LST used in the
-calcutation. We note that at 7:00 LST, there is an increase in the system temperature due to the rising of the galactic plane as seen in Figure \ref{fig:coverage}.
+as in P14 and \citet{jacobs_et_al2014} of $\Tsys=560\,\textrm{K}$, at
+$\Tsys=500\,\textrm{K}$ at 160 MHz. However, this estimate is more consistent
+with the results derived in \citep{moore_et_al2015}, where $\Tsys=505K$ at 164
+MHz. The change in the system temperature can be attributed to the reduced
+range of LST used in the calculation. We note that at 7:00 LST, there is an
+increase in the system temperature due to the rising of the galactic plane as
+seen in Figure \ref{fig:coverage}.
 
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/tsys.png}
@@ -1993,8 +1994,8 @@ Since the OQE method for power spectrum estimation requires the inversion
 of $\C$, it is crucial that our empirically estimated covariance be a full rank matrix.
 With our data consisting of visibilities over $20$ frequency channels, the covariance
 matrix is a $20 \times 20$ matrix. Thus, a necessary condition for our estimate to be
-full rank is for there to be at least $20$ independent time samples in our average. As noted in section \ref{sec:frf} the optimal fringe-rate
-filter corresponds to averaging time samples for 31 minutes. Over the LST range
+full rank is for there to be at least $20$ independent time samples in our average. As noted in Section \ref{sec:frf} the optimal fringe-rate
+filter corresponds to averaging time samples for 33 minutes. Over the LST range
 used in this analysis, this corresponds to roughly 20 statistically
 independent modes in our data after fringe-rate filtering. We therefore have just enough
 samples for our empirical estimate, and in practice, our covariance matrices are invertible
@@ -2493,7 +2494,7 @@ that $T_{\rm s}<T_{\rm CMB}$.
 In this section, we examine the implication of the measured upper limits
 on 21cm emission in Figure \ref{fig:final_pspec} on the spin temperature
 of the 21cm line at $z=8.4$.
-In a forthcoming paper \citet{pober_et_al2015}, we conduct a thorough analysis of the
+In a forthcoming paper \citep{pober_et_al2015}, we conduct a thorough analysis of the
 constraints that can be put on the IGM using a simulation-based framework.
 As a complement to that more thorough
 analysis, we focus here on a simpler parameterization of the shape
@@ -2873,12 +2874,12 @@ another order-of-magnitude improvement in sensitivity will make 21cm measurement
 We present new upper limits on the 21 cm reionization power spectrum at $z=8.4$,
 showing a factor of $\sim$4 improvement over the previous best result (P14).
 We find a $2\sigma$ upper limit of \mKsqlimit by fitting a
-flat power spectrum in a $k$ range from $0.15<$k$<0.5\hMpci$ to the
+flat power spectrum in a $k$ range from $0.15<k<0.5\,\hMpci$ to the
 dimensionless power spectrum, $\Delta^{2}(k)$, measured by the PAPER instrument. 
 We coarsely show that these upper limits imply a minimum spin
 temperature for hydrogen in the IGM.  Although these limits are dependent on
 the model chosen for the power spectrum, we use a patchy reionization model
-to show that limits of $T_s>4$ K are fairly generic for models with
+to show that limits of $T_s>4\,\textrm{K}$ are fairly generic for models with
 ionization fractions between 0.3 and 0.7.
 A more detailed analysis of the implied constraints on spin temperature using semi-analytic reionization/heating simulations is presented in a forthcoming paper \citep{pober_et_al2015}.
 %In that paper,
