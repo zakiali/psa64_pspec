@@ -1080,13 +1080,6 @@ and not related to the variance, or power spectrum, of the cosmological signal
 across the entire sky.  Therefore, we expect there to be no associated signal
 loss with the use of this filter.
 
-[XXX move to frf section?]
-After LST binning, we apply a fringe-rate filter on a baseline-by-baseline
-basis to remove crosstalk that manifests itself as a slowly varying signal in
-time.  To remove this signal, we apply a fringe-rate filter as a tapered
-hyperbolic tangent function centered at 0.35 millihertz. This effectively
-zeros out fringe rates below 0.2 millihertz, which we attribute to crosstalk.
-
 
 %\section{LST Binning and Stability}\label{sec:lstbin}
 %   -Practicals: bin size, number of days, range of days 
@@ -1242,25 +1235,35 @@ Applying this filter effectively weights the data by another factor of the beam
 area, changing the effective primary beam response\footnote{The angular area in
 Equation \eqref{eqn:delay_pspec} will reflect the new angular area
 corresponding to the change in beam area.}, $A(l,m)$\citep{parsons_et_al2015}.
-By utilizing prior knowledge about the beam area we are selectively
+By utilizing prior knowledge about the beam area, we are selectively
 down-weighting areas on the sky contributing little signal. This will result in
 a net improvement in sensitivity depending on the shape of the beam and the
-declination of the array. For PAPER, this filter roughly douples the
-sensitivity of our measurements.  It is also worth noting that, like delay
-filtering, fringe-rate filtering is implemented on a per-baseline basis.
+declination of the array. For PAPER, this filter roughly doubles the
+sensitivity of our measurements.  
 
 %We implement the optimal fringe-rate filter by calculating the fringe rates at
 %every point on the sky, for a given frequency, and weighting each bin by the
 %beam of a given baseline. 
-We implement the optimal filter by weighting the fringe-rate bins on the sky by
-the r.m.s. of the beam at that same location.  In order to obtain a smooth
-filter in the fringe-rate domain, we fit a Gaussian with a hyperbolic tangent
-tail to this filter. We convolve the time-domain visibilities with the Fourier
-transform of this fringe-rate filter to produce an averaged visibility.  The
-effect on the data can be seen in Figure \ref{fig:waterfalls}. There is an
-associated signal loss with the this optimal-fringe filter because we are
-infact removing signal. In conjucnction with the cross-talk filter described
-above, we find that there is a 39\% signal loss.
+We implement the optimal filter on a per baseline basis by weighting the
+fringe-rate bins on the sky by the r.m.s. of the beam at that same location.
+In order to obtain a smooth filter in the fringe-rate domain, we fit a Gaussian
+with a hyperbolic tangent tail to this filter. In addition, we multiply this
+response with another hyperbolic tangent function that effectively zeros out
+fringe rates below 0.2 millihertz. This effects a crosstalk filter by removing
+the slowly varying signals that we model our crosstalk as. We convolve the
+time-domain visibilitieswith the Fourier transform of the resulting fringe-rate
+filter, shown in Figure \ref{fig:fr_preserved_signal}, to produce an averaged
+visibility.  The effect on the data can be seen in Figure \ref{fig:waterfalls}.
+There is an associated signal loss with this fringe-rate filter.  As shown in
+Table \ref{tbl:sigloss}, we find that there is a 39\% signal loss due to the
+fringe-rate filter described here.
+
+%After LST binning, we apply a fringe-rate filter on a baseline-by-baseline
+%basis to remove crosstalk that manifests itself as a slowly varying signal in
+%time.  To remove this signal, we apply a fringe-rate filter as a tapered
+%hyperbolic tangent function centered at 0.35 millihertz. This effectively
+%zeros out fringe rates below 0.2 millihertz, which we attribute to crosstalk.
+
 
 %\begin{figure}[!t]
 %\centering
@@ -1301,19 +1304,20 @@ to integrate to unity, but has been scaled here for legibility.
 }
 \label{fig:fr_preserved_signal}
 \end{figure}
+
+
 The action of the fringe-rate filter is to get an optimally weighted
 sample, averaged at the longest physically possible integration time.  For the
-fiducial baselines, the effective
-integration time is calculated by comparing the variance statistic for a
-fringe-rate filter that is a flat  weighting, $f_{\text{flat}}$, versus that
-with an optimal filter weighting, $f_{optimal}$, as described above. We apply
-these filters to random noise with variance 1, without loss of generality. We
-can conclude that 
-[XXXcheck math] 
+fiducial baselines, the effective integration time is calculated by comparing
+the variance statistic for a fringe-rate filter that is a flat  weighting,
+$f_{\text{flat}}$, versus that with an optimal filter weighting, $f_{optimal}$,
+as described above. We apply these filters to random noise with variance 1,
+without loss of generality. We can conclude that 
 \begin{equation}\label{eqn:frf_inttime}
     t_{\text{int,after}} = t_{\text{int,before}}\frac{\int{\sigma^{2}f_{\text{flat}}^{2}dt}}{\int{\sigma^{2}f_{\text{optimal}}^{2}dt}},
 \end{equation}
 where $t_{\text{int,before}}$ is the integration time before filtering.
+[XXX check integration time for new filter. getting 1586s.]
 Equation \eqref{eqn:frf_inttime} evaluates to 1886 s for an optimal fringe-rate
 filter on the fiducial baseline at 150 MHz.  Over the range of frequencies used
 in our power spectrum estimate, the integration times range from 1936 s to 1790
@@ -1449,7 +1453,7 @@ as in P14 and \citet{jacobs_et_al2014} of $\Tsys=560K$, at $\Tsys=500K$ at 160
 MHz. However, this estimate is more consistent with the results derived in
 \citep{moore_et_al2015}, where $\Tsys=505K$ at 164 MHz. The change in the
 system temperature can be attributed to the reduced range of LST used in the
-calcutation of the system temperature, where we are looking in the cold patch, away from the galaxy. We note that at 7:00 LST, there is an increase in the system temperature due to the rising of the galactic plane as seen in Figure \ref{fig:coverage}
+calcutation. We note that at 7:00 LST, there is an increase in the system temperature due to the rising of the galactic plane as seen in Figure \ref{fig:coverage}.
 
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/tsys.png}
@@ -1736,7 +1740,7 @@ description that follows, we first estimate the power spectrum separately for ea
 Power spectrum estimates obtained from the different redundant groups are then combined in a set of averaging and bootstrapping steps described in Section \ref{sec:bootstrap}. Note that because
 our data have been optimally fringe-rate filtered in the manner described in Section \ref{sec:frf},
 we may reap all the benefits of coherently integrating in time simply by estimating the power spectrum
-for every instant in the LST-binned data before averaging over the time-steps within the LST-binned day \citep{parsons_et_al2015}..
+for every instant in the LST-binned data before averaging over the time-steps within the LST-binned day \citep{parsons_et_al2015}.
 
 For the next portion of our discussion, consider only the data within a single redundant group. Within each group there are not only multiple identical copies of the same baseline, but in addition (as discussed in
 Section \ref{sec:wbd_filtering}), our pipeline also constructs two LST-binned data sets, one from binning all even-numbered days in our observations, and the other from all odd-numbered days. Thus, 
@@ -2175,7 +2179,7 @@ $k_\parallel$ modes ranging from $-0.49$ (red) to $0.44\hMpci$ (violet).
 Here, modes are defined as samples from different redundant baseline groups and LSTs.
 This Allen variance plot shows modes averaging down as the square root of
 number of modes combined until a signal floor is reached.  The difference in
-behavior between the mean and median is an indication of non-Gaussianity
+behavior between the mean and median is an indication of outliers
 in the distribution of values, likely as a result of foreground contamination.
 We use the median in the estimation of the power spectrum in Figure \ref{fig:final_pspec},
 along with a correction factor compensating for the difference between the mean and median
@@ -2212,8 +2216,7 @@ In this plot, one can see modes integrating down
 consistent with a noise-dominated power spectrum until they bottom out on a signal.
 In the noise-dominated regime, the mean and the median
 behave similarly.  However, we see that the median routinely continues to integrate down as noise for longer.
-This is a strong indication that the distribution of modes is not Gaussian, as one would expect
-if we were thermal-noise limited.  The magnitude of the difference
+This is an indication that the mean is skewed by outlier modes, suggesting variations beyond thermal noise. The magnitude of the difference
 is also not consistent with the Rayleigh distribution expected of a cosmological power spectrum limited by cosmic
 variance.  
 For a Rayleigh distribution, the median is $\ln2 \sim 0.69$ times the mean. 
@@ -2417,7 +2420,7 @@ decrease significantly using the new optimal fringe-rate filter.
 As discussed in \citet{parsons_et_al2015},
 the normalization applied to $\Omega_{\rm eff}$ for fringe-rate filtering correctly
 compensates for the effect of this filtering on power-spectral measurements
-of an isotropic Gaussian sky signal.  We can surmise from any significant change in amplitude of the excess
+of a statistically isotropic Gaussian sky signal.  We can surmise from any significant change in amplitude of the excess
 under fringe-rate filtering that it arises from emission that violates these assumptions.
 We conclude, therefore, that this excess is unlikely to be cosmic reionization, and is more
 likely the result of non-Gaussian foregrounds.
@@ -2463,10 +2466,12 @@ The measured mean is inconsistent with zero at the 4.7$\sigma$ level, indicating
 we are detecting a clear power spectrum excess at $k>0.15\hMpci$.
 
 We suspect that the excess in our measured power spectrum is likely caused
-by crosstalk and foregrounds.  We suggest ignoring the lower bound on the power spectrum amplitude
-as not being of relevance for the cosmological signal.  Instead, we emphasize the 
-2$\sigma$ upper limit of \mKlimit at $z=8.4$, which significantly improves over the previous
-best upper limit of $(41~{\rm mK})^2$ at $z=7.7$ reported in P14.  As we show below and in
+by crosstalk and foregrounds.  We therefore suggest ignoring the lower bound on the power spectrum amplitude
+as not being of relevance for the cosmological signal.  On the other hand, since foreground
+power is necessarily positive, the 
+2$\sigma$ upper limit of \mKlimit at $z=8.4$, continues to serve as a conservative upper limit. This significantly improves over the previous
+best upper limit of $(41~{\rm mK})^2$ at $z=7.7$ reported in P14.
+As we show below and in
 greater detail in \citet{pober_et_al2015}, this limit begins to have implications
 for the heating of the intergalactic medium prior to the completion of reionization.
 
@@ -2555,7 +2560,7 @@ dependence, and therefore $T_0^2\xi^2$ becomes a simple multiplicative scalar to
     \Delta^2_{21}(k) = T_0^2\xi^2(z)\Delta_{i}^{2}(k),%\equiv
 %\expval{T_{b}^{2}}\Delta_{i}^{2}(k),
 \end{equation}
-where $\Delta_{i}^{2}(k)$ is the dimensionless ionization power spectrum. 
+where $\Delta_{i}^{2}(k)$ is the dimensionless HI power spectrum. 
 
 As shown in P14, the maximum value of the
 prefactor in Equation \eqref{eqn:d2pspec_model} is given by 
@@ -2712,7 +2717,7 @@ over the previous implementation of LOGCAL used in P14,
 systematics associated with foregrounds low in the primary beam, and
 \item moving from a lossless quadratic estimator targeting difference modes
 in redundant measurements to an optimal quadratic estimator (with carefully calibrated signal
-loss) significantly reduced contamination from non-Gaussian foregrounds.
+loss) significantly reduced contamination from residual foregrounds.
 \end{itemize}
 Figure \ref{fig:pspec_comp} illustrates the effect of some of these advances on the final
 power spectrum.
@@ -2885,7 +2890,7 @@ a wide bandwidth continues to one of the most powerful techniques yet
 demonstrated for managing bright smooth-spectrum foregrounds.  In this
 paper, we extend the analysis in P14 with optimal fringe-rate filtering,
 improved redundant calibration with OMNICAL, and with an optimal quadratic
-estimator that, while lossy, is more adept at down-weighting non-Gaussian foregrounds.
+estimator that, while not perfectly lossless, is more adept at down-weighting residual foregrounds.
 The combined effect of these improvements leaves a power-spectral measurement that
 is not consistent with zero at the 4.7$\sigma$-level, which we expect is a result of
 contamination from crosstalk and foregrounds.
