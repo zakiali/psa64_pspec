@@ -2396,23 +2396,47 @@ same power spectrum shown in Figure \ref{fig:final_pspec}.
 \end{figure*}
 
 
-[XXX update for new pspec]
-We note that an excess centered at this wavemode was also
-measured in P14 with an amplitude an order of magnitude higher.
 In examining the effects on the power
 spectrum of omitting various stages of analysis (see Figure \ref{fig:pspec_comp}), we
-see that the excess is more pronounced in the magenta curve corresponding 
-to the omission of fringe-rate filtering.
-This suggests to us that the excess may be a result of foreground emission that is attenuated,
-but not eliminated, in the current analysis.  
-For example, the signal might be associated with
-polarization leakage from a high rotation measure source near the horizon that
-is attenuated by the spatial filtering achieved by the fringe-rate filter.
-The absence of the excess in data without redundant calibration
-(cyan) could be interpreted as indicating the excess is a modulation induced by frequency structure
+see a pronounced excess in the green curve corresponding 
+to the omission of crosstalk removal in fringe-rate filtering.
+While the signal is heavily attenuated in the filtering step, it remains a
+possibility that the remaining detections are associated with instrumental crosstalk.
+We do note, however, that the qualitative shape of the excess in the crosstalk-removed data
+does not appear to match that of the crosstalk-containing data.
+
+Another likely possibility is that the signal might be associated with foregrounds.
+Foregrounds, which are not generally isotropically distributed on the sky, are likely
+to be affected by the spatial filtering associated with fringe-rate filtering, whereas
+a statistically isotropic signal is not.  
+Indeed, we see that excesses in many modes
+measured with using the P14-stype time-domain filtering (blue in Figure \ref{fig:pspec_comp})
+decrease significantly using the new optimal fringe-rate filter.  
+As discussed in \citet{parsons_et_al2015},
+the normalization applied to $\Omega_{\rm eff}$ for fringe-rate filtering correctly
+compensates for the effect of this filtering on power-spectral measurements
+of an isotropic Gaussian sky signal.  We can surmise from any significant change in amplitude of the excess
+under fringe-rate filtering that it arises from emission that violates these assumptions.
+We conclude, therefore, that this excess is unlikely to be cosmic reionization, and is more
+likely the result of non-Gaussian foregrounds.
+As discussed earlier, one possible
+culprit is polarization leakage \citep{moore_et_al2013,jelic_et_al2010,jelic_et_al2014}, although further
+work will be necessary to confirm this.  The interpretation of
+the signal as polarization leakage is, however, rather high to be consistent with 
+recent measurements in Stokes Q presented in \citet{moore_et_al2015}.
+
+That the
+excesses at $k\approx0.30$ and 0.44$\hMpci$ are relatively unaffected by the filtering
+could be an indication that they are more isotropically distributed, but more likely, it
+may mean that the simply arise closer to the center of the primary beam where they are
+downweighted less.
+Both excesses appear to be significantly affected by omitting OMNICAL calibration
+(orange in Figure \ref{fig:pspec_comp}).  This could be interpreted as indicating the 
+excess is a modulation induced by frequency structure
 in the calibration solution.  However, OMNICAL is constrained
 to prohibit structure common to all baselines, so a more likely interpretation is that 
-this faint feature decorrelates without the precision of redundant calibration.
+this faint feature decorrelates without the precision of redundant calibration.  To
+determine the nature of these particular excesses, further work will be necessary.
 
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/flat_k3pk_posterior.png}
@@ -2433,33 +2457,16 @@ in the range $0.15<k<0.5\hMpci$.  We use a uniform prior of amplitudes between
 Figure \ref{fig:final_posterior} shows the posterior distribution of the fit.
 From this distribution, we determine a mean of
 (18.9 mK)$^2$ and a $2\sigma$ upper limit of \mKlimit.
-The measured mean is inconsistent with zero at the 4.7$\sigma$ level.
+The measured mean is inconsistent with zero at the 4.7$\sigma$ level, indicating that
+we are detecting a clear power spectrum excess at $k>0.15\hMpci$.
 
-[XXX update for new pspec, downweight polarization interpretation, upweight xtalk interpretation]
-We are 
-detecting a clear power spectrum excess at $k>0.15\hMpci$.  However, as illustrated
-in Figure \ref{fig:pspec_comp}, the level of this excess appears to be
-strongly dependent on fringe-rate filtering.  As discussed in \citet{parsons_et_al2015},
-the normalization applied to $\Omega_{\rm eff}$ for fringe-rate filtering correctly
-compensates for the effect of this filtering on power-spectral measurements
-of an isotropic Gaussian sky signal.  We can surmise from the significant change in amplitude of the excess
-under fringe-rate filtering that it arises from emission that violates these assumptions.
-We conclude, therefore, that this excess is unlikely to be cosmic reionization, and is more
-likely the result of non-Gaussian foregrounds.  As discussed earlier, one possible
-culprit is polarization leakage \citep{moore_et_al2013,jelic_et_al2010,jelic_et_al2014}, although further
-work will be necessary to confirm this.  It is worth noting that the interpretation of
-the signal as polarization leakage is consistent with recent measurements in Stokes Q presented
-in \citet{moore_et_al2015}.
-
-
-To summarize, we suspect that the excess in our measured power spectrum is likely caused
+We suspect that the excess in our measured power spectrum is likely caused
 by crosstalk and foregrounds.  We suggest ignoring the lower bound on the power spectrum amplitude
 as not being of relevance for the cosmological signal.  Instead, we emphasize the 
 2$\sigma$ upper limit of \mKlimit at $z=8.4$, which significantly improves over the previous
 best upper limit of $(41~{\rm mK})^2$ at $z=7.7$ reported in P14.  As we show below and in
-greater detail in \citet{pober_et_al2015}, this limit begins to have significant ramifications
+greater detail in \citet{pober_et_al2015}, this limit begins to have implications
 for the heating of the intergalactic medium prior to the completion of reionization.
-[XXX check if above sentence should be weakened].
 
 \subsection{Spin Temperature Constraints}
 
