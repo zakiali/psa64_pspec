@@ -104,12 +104,11 @@ calibration, optimal fringe-rate filtering, and improved power-spectral
 analysis using optimal quadratic estimators. The result is a new $2\sigma$
 upper limit on $\Delta^2(k)$ of \mKlimit in the range
 $0.15<k<0.5\hMpci$ at $z=8.4$.  This represents a three-fold improvement over the
-previous best upper limit.  As we discuss in more depth in a forthcoming
-paper \citep{pober_et_al2015}, this upper limit supports and extends
-previous evidence for significant heating in the intergalactic medium prior to
-reionization. We conclude with a discussion of implications for future 21cm
-reionization experiments, including the newly funded Hydrogen Epoch of
-Reionization Array (HERA).  
+previous best upper limit.  As we discuss in more depth in a forthcoming paper
+\citep{pober_et_al2015}, this upper limit supports and extends previous
+evidence against extremely cold reionization scenarios.  We conclude with a
+discussion of implications for future 21cm reionization experiments, including
+the newly funded Hydrogen Epoch of Reionization Array (HERA).  
 \end{abstract}
 
 
@@ -969,7 +968,7 @@ important caveat is that it neglects the beam asymmetry  between the two linear
 polarization states. This mismatch can cause polarization leakage from Stokes
 Q into Stokes I, thus contaminating  our measurement of the power spectrum with any polarized emission from the sky.
 This effect for PAPER, as shown in \citet{moore_et_al2013}, leaks 4\% of Q in to
-I.  We take the conservative approach and do not correct for this effect, noting that the leakage of Q in to I will result in positive power, increasing our limits.
+I  in amplitude ($2.2\times10^{-3}$ in the respective power spectra).  We take the conservative approach and do not correct for this effect, noting that the leakage of Q in to I will result in positive power, increasing our limits.
 
 Foreground removal techniques discussed in the literature include spectral
 polynomial fitting \citep{wang_et_al2006,bowman_et_al2009,liu_et_al2009},
@@ -1029,9 +1028,12 @@ are not fringe-rate filtered, (4) are both delay and fringe-rate filtered,
 and (5) are delay and fringe-rate filtered and have been averaged over all
 redundant measurements of this visibility.  The top row shows signal amplitude
 on a logarithmic scale; the bottom row illustrates signal phase.
-Dashed lines indicate the 0:00--8:30 range in LST used for power
-spectrum analysis.  Away from the edges of the observing band, over four orders 
-of magnitude of foreground suppression is evident.
+Dashed lines indicate the 0:00--8:30 range in LST used for power spectrum
+analysis. The putative crosstalk is evident in the center panel as constant
+phase features which do not fringe as the sky.  The two right panels show some
+residual signal in the phase structure which is present at low delay. Away from
+the edges of the observing band, over four orders of magnitude of foreground
+suppression is evident.
 } \label{fig:waterfalls}
 \end{figure*}
 
@@ -1432,9 +1434,11 @@ for time scales greater than one day, we see that signal variance drops by
 almost four orders of magnitude, 
 with the exception of an 
 excess on two-day timescales is caused by the changing alignment of the 42.9~s
-integration timescale relative to a sidereal day.  The implication of this measurement
-is that, after calibration, PAPER measurements are sufficiently stable to be integrated
-coherently over the entire length of a 135-day observation.
+integration timescale relative to a sidereal day.  The implication of this
+measurement is that, after calibration, PAPER measurements are sufficiently
+stable to be integrated coherently over the entire length of a 135-day
+observation. This implies day-to-day stability of better than 1\%, contributing
+negligibly to the uncertainties in the data.
 
 \subsection{System Temperature}   
 
@@ -2426,8 +2430,9 @@ likely the result of non-Gaussian foregrounds.
 As discussed earlier, one possible
 culprit is polarization leakage \citep{moore_et_al2013,jelic_et_al2010,jelic_et_al2014}, although further
 work will be necessary to confirm this.  The interpretation of
-the signal as polarization leakage is, however, rather high to be consistent with 
-recent measurements in Stokes Q presented in \citet{moore_et_al2015}.
+the signal as polarization leakage is, however, rather high to be consistent
+with recent measurements in Stokes Q presented in \citet{moore_et_al2015},
+where the leakage is constrained to be $<$ 100 mK$^{2}$ for all $k$.
 
 That the
 excesses at $k\approx0.30$ and 0.44$\hMpci$ are relatively unaffected by the filtering
@@ -2738,10 +2743,14 @@ array, flagging RFI events, and otherwise assessing data quality.
 Fringe-rate filtering, which is described in greater depth in \citep{parsons_et_al2015}, is also
 proving to be a flexible and powerful tool for controlling direction-dependent gains and
 improving sensitivity.  If indeed the low-significance excess in the measured power spectrum
-As sensitivity improves, polarization leakage will become a foreground of increasing concern.
-Independent fringe-rate filtering of the XX and YY polarizations
-prior to summation has the potential to better match these polarization beams and further suppress 
-the leakage signal implied by \citet{moore_et_al2015}.
+
+As sensitivity improves, it will possible to determine more accurately than
+\citet{moore_et_al2015} what the actual level of polarized emission, and thus
+leakage, may be.  Independent fringe-rate filtering of the XX and YY
+polarizations prior to summation has the potential to better match these
+polarization beams and further suppress the leakage signal if polarized signal
+turns out to be significant.
+
 
 The end result is a major step forward, both for PAPER and for the field of 21cm cosmology.
 While we have not yet made a detection of the 21cm cosmological signal, our limits are
