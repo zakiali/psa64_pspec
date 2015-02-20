@@ -102,7 +102,7 @@ in South Africa.  This work extends the work presented in
 calibration, optimal fringe-rate filtering, and improved power-spectral
 analysis using optimal quadratic estimators. The result is a new $2\sigma$
 upper limit on $\Delta^2(k)$ of \mKlimit in the range
-$0.1<k<0.5\hMpci$ at $z=8.4$.  This represents a four-fold improvement over the
+$0.1<k<0.5\hMpci$ at $z=8.4$.  This represents a three-fold improvement over the
 previous best upper limit.  As we discuss in more depth in a forthcoming
 paper \citep{pober_et_al2015}, this upper limit supports and extends
 previous evidence for significant heating in the intergalactic medium prior to
@@ -1010,7 +1010,6 @@ visibility.
 \centering
 \includegraphics[width=2\columnwidth]{plots/waterfalls_labeled.png}
 \caption{
-[XXX update for new lstbin]
 Visibilities measured by a fiducial baseline in the PAPER-64 array, 
 averaged over 135 days of observation.  From left to right, columns represent
 data that: (1) contain foregrounds prior to the application of a wideband
@@ -1380,8 +1379,8 @@ sidereal time.
 %Demonstration of the time stability of the instrument. For a given LST
 %bin, we take the day to day samples that go into that bin and determine the
 %power spectrum for that time seris. Shown here is the power spectrum of the time
-%series over 134 days for baseline 1\_4 at 150 MHz () averaged over 5 hours in
-%LST. Power at 1/134 days$^{-1}$ is the DC bin, accumulating the average of the
+%series over 135 days for baseline 1\_4 at 150 MHz () averaged over 5 hours in
+%LST. Power at 1/135 days$^{-1}$ is the DC bin, accumulating the average of the
 %time signal. The power spectrum folows a noise like power spectrum throughout
 %with a slight uptic at the temporal frequency corresponding to 2 days. This is
 %due to the fact that the integration time does not fully divide out a sidereal
@@ -2354,31 +2353,24 @@ loss through all stages of analysis, as summarized in Table \ref{tbl:sigloss}.
 \includegraphics[width=2\columnwidth]{plots/pk_k3pk.png}
 \caption{
 Measured power spectrum (black dots with 2$\sigma$ error bars) at $z=8.4$
-resulting from a 134-day observation with PAPER-64.  The dashed vertical lines
+resulting from a 135-day observation with PAPER-64.  The dashed vertical lines
 at $0.6\hMpci$ show the bounds of the delay filter described in Section
 \ref{sec:wbd_filtering}. The predicted 2$\sigma$ upper limit in the absence of the a celestial signal is shown in dashed cyan, assuming $\Tsys=500K$. The triangles indicate 2
 $\sigma$ upper limits from GMRT \citep{paciga_et_al2011} (yellow) at $z=8.6$,
 MWA \citep{dillon_et_al2013b} at $z=9.5$ (magenta), and the previous PAPER upper
 limit (P14) at $z=7.7$. The magenta curve shows a predicted model 21 cm power
 spectrum at 50\% ionization \citep{lidz_et_al2008}.
-%Using 100 bootstraps. Correction factors are
-%fringe-rate filter (1.9), signal loss (1.02), and median statistic (1.4), delay
-%filter signal loss, bandpass signal loss.
 } \label{fig:final_pspec}
 \end{figure*}
 
-[XXX update for new pspec]
 The final results are plotted in Figure \ref{fig:final_pspec}.
-For the first two modes outside of the horizon, we have
+For the first two modes outside of the horizon where $\Delta^2(k)$ is measured, we have
 clear detections. We attribute these to foreground leakage from
 inside the horizon related to the convolution kernels in Equation \eqref{eqn:delay_transform} (either
 from the chromaticity of the antenna response, or from the inherent spectrum of the
-foregrounds themselves).  Somewhat more difficult to interpret is the 
-$3.0\sigma$ excess at $k\approx0.35\hMpci$, and to a lesser
-degree, the $2.1\sigma$ deficit at $k\approx0.39\hMpci$.  The
-latter may simply be a statistical fluctuation; we estimate a 19\% chance of 
-a negative outlier at this significance occurring in the measurement of 11 modes, assuming
-Gaussian statistics.  However, the outlier at $k\approx0.35\hMpci$ is
+foregrounds themselves).  Somewhat more difficult to interpret are the 
+$2.4\sigma$ excess at $k\approx0.30\hMpci$ and 
+the $2.9\sigma$ excess at $k\approx0.44\hMpci$. Having two such outliers is
 unlikely to be chance.
 
 \begin{figure*}\centering
@@ -2386,17 +2378,11 @@ unlikely to be chance.
 \caption{
 Diagnostic power spectra in the style of Figure \ref{fig:final_pspec}
 illustrating the impact of various analysis stages.
-Power spectra omitting the stages of fringe-rate filtering (blue) and 
-OMNICAL calibration (orange) show higher residuals than the final power
-spectrum (black) that includes both stages. Green shows the systematic
-dominated power spectrum without using the crosstalk fringe-rate filter.
-%The blue power spectrum has the full pipeline applied to it and is identical to
-%\ref{fig:final_pspec}. The red power spectrum does not have omnical applied to
-%it, and hence the error bars are bigger. Note that it does have the otimal
-%fringe rate filter applied to it. Finally, the green power sepctrum does not
-%have the optimal fringe rate filter applied.  However, it does have a fringe
-%rate filter applied to that excludes negative fringe rates and those greater
-%than the maimum fringe rate for the given baseline (east-west 30 m baselines). }
+The blue power spectrum uses the P14 fringe-rate filter combined with crosstalk removal.
+Green illustrates the result using the optimal fringe-rate filter, but without crosstalk removal.
+A power spectrum derived without the application of OMNICAL is shown in orange.  Black
+includes optimal fringe-rate filtering, crosstalk removal, and OMNICAL calibration; it is the 
+same power spectrum shown in Figure \ref{fig:final_pspec}.
 }\label{fig:pspec_comp}
 \end{figure*}
 
@@ -2437,13 +2423,12 @@ in the range $0.15<k<0.5\hMpci$.  We use a uniform prior of amplitudes between
 -5000 and 5000 ${\rm mK}^2$, and assume measurement errors are Gaussian.
 Figure \ref{fig:final_posterior} shows the posterior distribution of the fit.
 From this distribution, we determine a mean of
-(15.0 mK)$^2$ and a $2\sigma$ upper limit of \mKlimit.
-The measured mean is inconsistent with zero at the 2.7$\sigma$ level.
-[XXX update for new pspec]
+(18.9 mK)$^2$ and a $2\sigma$ upper limit of \mKlimit.
+The measured mean is inconsistent with zero at the 4.7$\sigma$ level.
 
 [XXX update for new pspec, downweight polarization interpretation, upweight xtalk interpretation]
-We conclude that we are likely beginning to 
-detect a power spectrum excess at $k>0.15\hMpci$.  However, as illustrated
+We are 
+detecting a clear power spectrum excess at $k>0.15\hMpci$.  However, as illustrated
 in Figure \ref{fig:pspec_comp}, the level of this excess appears to be
 strongly dependent on fringe-rate filtering.  As discussed in \citet{parsons_et_al2015},
 the normalization applied to $\Omega_{\rm eff}$ for fringe-rate filtering correctly
@@ -2458,8 +2443,8 @@ the signal as polarization leakage is consistent with recent measurements in Sto
 in \citet{moore_et_al2015}.
 
 
-To summarize, we believe the excess in our measured power spectrum is likely caused
-by foregrounds.  Hence, we suggest ignoring the lower bound on the power spectrum amplitude
+To summarize, we suspect that the excess in our measured power spectrum is likely caused
+by crosstalk and foregrounds.  We suggest ignoring the lower bound on the power spectrum amplitude
 as not being of relevance for the cosmological signal.  Instead, we emphasize the 
 2$\sigma$ upper limit of \mKlimit at $z=8.4$, which significantly improves over the previous
 best upper limit of $(41~{\rm mK})^2$ at $z=7.7$ reported in P14.  As we show below and in
