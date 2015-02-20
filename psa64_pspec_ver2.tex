@@ -272,7 +272,6 @@ spectrum analysis.}
 \includegraphics[width=2\columnwidth,trim=0cm 7cm 5cm 2cm,clip]{plots/data_flow_chart.pdf}
 \caption
 {
-[XXXremove 100 bootstraps]
 The stages of power-spectrum analysis. Black lines indicate data flow; red lines indicate
 Monte Carlo simulations used to 
 measure signal loss. Yellow boxes indicate stages that by construction have negligible signal loss.
@@ -294,7 +293,6 @@ down to the horizon with a full-width half-maximum of $60^{\circ}$, is summarize
 and \citet{pober_et_al2012}.  
 For this analysis, we use only the XX and YY polarization cross-products.
 
-[XXXdid we omit north south baselines. 2016 ??]
 As shown in Figure \ref{fig:antenna_positions}, PAPER-64 employs
 a highly redundant antenna layout where multiple baselines measure
 the same Fourier mode on the sky (P12a; P14).
@@ -354,7 +352,6 @@ described in Section \ref{sec:observations}.  The map is centered at 6:00 hours 
 \end{figure*}
 
 
-[XXX check crhonological order of authors.]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Calibration}\label{sec:calib}
 
@@ -761,11 +758,10 @@ time interval used to measure the bandpass. We average each mode together and
 fit a 9th degree polynomial. Using this as our measured bandpass for this
 simulated signal, we finally compare the power spectrum from the output of the
 simulated signal to the input power spectrum as a function fo $k$-mode.  We
-find that between $-0.06 < k < 0.06$, the signal loss is less than $3\%$ and at
+find that between $-0.06 < k < 0.06$, the limit of our fiducial , the signal loss is less than $3\%$ and at
 the mode right outside the horizon is $2\times{10^{-7}}\%$. We apply the latter
 correction factor for all modes outside of the horizon to the final power
 spectrum.
-[XXX remind reader what k the horizon is at.]
 
 
 %These lists were My bullet points.
@@ -972,8 +968,7 @@ important caveat is that it neglects the beam asymmetry  between the two linear
 polarization states. This mismatch can cause polarization leakage from Stokes
 Q into Stokes I, thus contaminating  our measurement of the power spectrum with any polarized emission from the sky.
 This effect for PAPER, as shown in \citet{moore_et_al2013}, leaks 4\% of Q in to
-I.  We do not correct for this effect, but discuss some effects of 
-polarization leakage in Section \ref{sec:discussion}. [XXX sentence that it is positive power, so this is conservative limit]
+I.  We take the conservative approach and do not correct for this effect, noting that the leakage of Q in to I will result in positive power increasing our limits.
 
 Foreground removal techniques discussed in the literature include spectral
 polynomial fitting \citep{wang_et_al2006,bowman_et_al2009,liu_et_al2009},
@@ -1837,8 +1832,6 @@ three different baselines in a redundant group before/after delay filtering, res
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/eig.png}
 \caption{
-[XXX: Are the units correct here? The eigenvalues of a covariance matrix should
-have units of mK$^2$, not mK.]
 Eigenvalue spectrum of covariance matrices (left) empirically estimated 
 from visibilities before (blue) and after (green) delay filtering.
 The four strongest eigenmodes of the filtered/unfiltered data are plotted

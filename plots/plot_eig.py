@@ -78,7 +78,7 @@ fig.subplots_adjust(left=.15, top=.95, bottom=.15, wspace=.15, hspace=.1, right=
 p.subplot(121)
 p.grid(True)
 p.xlabel('Eigenmode')
-p.ylabel('Eigenvalue [mK]')
+p.ylabel(r'Eigenvalue [mK$^{2}$]')
 
 ax = p.subplot(222)
 p.setp(ax.get_xticklabels(), visible=False)
