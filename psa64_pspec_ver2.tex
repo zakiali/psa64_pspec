@@ -1080,13 +1080,6 @@ and not related to the variance, or power spectrum, of the cosmological signal
 across the entire sky.  Therefore, we expect there to be no associated signal
 loss with the use of this filter.
 
-[XXX move to frf section?]
-After LST binning, we apply a fringe-rate filter on a baseline-by-baseline
-basis to remove crosstalk that manifests itself as a slowly varying signal in
-time.  To remove this signal, we apply a fringe-rate filter as a tapered
-hyperbolic tangent function centered at 0.35 millihertz. This effectively
-zeros out fringe rates below 0.2 millihertz, which we attribute to crosstalk.
-
 
 %\section{LST Binning and Stability}\label{sec:lstbin}
 %   -Practicals: bin size, number of days, range of days 
@@ -1242,25 +1235,35 @@ Applying this filter effectively weights the data by another factor of the beam
 area, changing the effective primary beam response\footnote{The angular area in
 Equation \eqref{eqn:delay_pspec} will reflect the new angular area
 corresponding to the change in beam area.}, $A(l,m)$\citep{parsons_et_al2015}.
-By utilizing prior knowledge about the beam area we are selectively
+By utilizing prior knowledge about the beam area, we are selectively
 down-weighting areas on the sky contributing little signal. This will result in
 a net improvement in sensitivity depending on the shape of the beam and the
-declination of the array. For PAPER, this filter roughly douples the
-sensitivity of our measurements.  It is also worth noting that, like delay
-filtering, fringe-rate filtering is implemented on a per-baseline basis.
+declination of the array. For PAPER, this filter roughly doubles the
+sensitivity of our measurements.  
 
 %We implement the optimal fringe-rate filter by calculating the fringe rates at
 %every point on the sky, for a given frequency, and weighting each bin by the
 %beam of a given baseline. 
-We implement the optimal filter by weighting the fringe-rate bins on the sky by
-the r.m.s. of the beam at that same location.  In order to obtain a smooth
-filter in the fringe-rate domain, we fit a Gaussian with a hyperbolic tangent
-tail to this filter. We convolve the time-domain visibilities with the Fourier
-transform of this fringe-rate filter to produce an averaged visibility.  The
-effect on the data can be seen in Figure \ref{fig:waterfalls}. There is an
-associated signal loss with the this optimal-fringe filter because we are
-infact removing signal. In conjucnction with the cross-talk filter described
-above, we find that there is a 39\% signal loss.
+We implement the optimal filter on a per baseline basis by weighting the
+fringe-rate bins on the sky by the r.m.s. of the beam at that same location.
+In order to obtain a smooth filter in the fringe-rate domain, we fit a Gaussian
+with a hyperbolic tangent tail to this filter. In addition, we multiply this
+response with another hyperbolic tangent function that effectively zeros out
+fringe rates below 0.2 millihertz. This effects a crosstalk filter by removing
+the slowly varying signals that we model our crosstalk as. We convolve the
+time-domain visibilitieswith the Fourier transform of the resulting fringe-rate
+filter, shown in Figure \ref{fig:fr_preserved_signal}, to produce an averaged
+visibility.  The effect on the data can be seen in Figure \ref{fig:waterfalls}.
+There is an associated signal loss with this fringe-rate filter.  As shown in
+Table \ref{tbl:sigloss}, we find that there is a 39\% signal loss due to the
+fringe-rate filter described here.
+
+%After LST binning, we apply a fringe-rate filter on a baseline-by-baseline
+%basis to remove crosstalk that manifests itself as a slowly varying signal in
+%time.  To remove this signal, we apply a fringe-rate filter as a tapered
+%hyperbolic tangent function centered at 0.35 millihertz. This effectively
+%zeros out fringe rates below 0.2 millihertz, which we attribute to crosstalk.
+
 
 %\begin{figure}[!t]
 %\centering
@@ -1301,19 +1304,20 @@ to integrate to unity, but has been scaled here for legibility.
 }
 \label{fig:fr_preserved_signal}
 \end{figure}
+
+
 The action of the fringe-rate filter is to get an optimally weighted
 sample, averaged at the longest physically possible integration time.  For the
-fiducial baselines, the effective
-integration time is calculated by comparing the variance statistic for a
-fringe-rate filter that is a flat  weighting, $f_{\text{flat}}$, versus that
-with an optimal filter weighting, $f_{optimal}$, as described above. We apply
-these filters to random noise with variance 1, without loss of generality. We
-can conclude that 
-[XXXcheck math] 
+fiducial baselines, the effective integration time is calculated by comparing
+the variance statistic for a fringe-rate filter that is a flat  weighting,
+$f_{\text{flat}}$, versus that with an optimal filter weighting, $f_{optimal}$,
+as described above. We apply these filters to random noise with variance 1,
+without loss of generality. We can conclude that 
 \begin{equation}\label{eqn:frf_inttime}
     t_{\text{int,after}} = t_{\text{int,before}}\frac{\int{\sigma^{2}f_{\text{flat}}^{2}dt}}{\int{\sigma^{2}f_{\text{optimal}}^{2}dt}},
 \end{equation}
 where $t_{\text{int,before}}$ is the integration time before filtering.
+[XXX check integration time for new filter. getting 1586s.]
 Equation \eqref{eqn:frf_inttime} evaluates to 1886 s for an optimal fringe-rate
 filter on the fiducial baseline at 150 MHz.  Over the range of frequencies used
 in our power spectrum estimate, the integration times range from 1936 s to 1790
