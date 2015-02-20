@@ -1,5 +1,5 @@
 %\documentclass[preprint]{aastex}  % USE THIS TO MAKE BIB, THEN FORMAT USING EMULATEAPJ
-\documentclass[twocolumn,numberedappendix]{emulateapj} \shorttitle{PSA64}
+\documentclass[twocolumn,numberedappendix]{emulateapj} \shorttitle{New Limits on the 21 cm Power Spectrum at $z=8.4$}
 \shortauthors{Ali, et al.}
 
 \usepackage{amsmath} \usepackage{graphicx} \usepackage[figuresright]{rotating}
@@ -56,44 +56,47 @@ Zaki S. Ali\altaffilmark{1},
 Aaron R. Parsons\altaffilmark{1,2}, 
 Haoxuan Zheng\altaffilmark{3},
 Jonathan C. Pober\altaffilmark{4}, 
-Adrian Liu\altaffilmark{1}, 
-James E. Aguirre\altaffilmark{5},
-Richard F. Bradley\altaffilmark{6,7,8},
-Gianni Bernardi\altaffilmark{9,10,11}, 
-Chris L. Carilli\altaffilmark{12,13},
+Adrian Liu\altaffilmark{1,5}, 
+James E. Aguirre\altaffilmark{6},
+Richard F. Bradley\altaffilmark{7,8,9},
+Gianni Bernardi\altaffilmark{10,11,12}, 
+Chris L. Carilli\altaffilmark{13,14},
 Carina Cheng\altaffilmark{1},
 David R. DeBoer\altaffilmark{2}, 
 Matthew R. Dexter\altaffilmark{2},
-Jasper Grobbelaar\altaffilmark{9},
-Jasper Horrell\altaffilmark{9},
-Daniel C. Jacobs\altaffilmark{14}, 
-Pat Klima\altaffilmark{7},
+Jasper Grobbelaar\altaffilmark{10},
+Jasper Horrell\altaffilmark{10},
+Daniel C. Jacobs\altaffilmark{15}, 
+Pat Klima\altaffilmark{8},
 David H. E. MacMahon\altaffilmark{2},
-Matthys Maree\altaffilmark{9},
-David F. Moore\altaffilmark{5},
-Nima Razavi\altaffilmark{13},
-Irina I. Stefan\altaffilmark{13},
-William P. Walbrugh\altaffilmark{9},
-Andre Walker\altaffilmark{9}
+Matthys Maree\altaffilmark{10},
+David F. Moore\altaffilmark{6},
+Nima Razavi\altaffilmark{14},
+Irina I. Stefan\altaffilmark{14},
+William P. Walbrugh\altaffilmark{10},
+Andre Walker\altaffilmark{10}
 }
 %\tableofcontents
+%XXXadd bccp affil for adrian.
 
 \altaffiltext{1}{Astronomy Dept., U. California, Berkeley CA}
 \altaffiltext{2}{Radio Astronomy Lab., U. California, Berkeley CA}
 \altaffiltext{3}{Dept. of Physics, Massachusetts Inst. of Tech., Cambridge MA}
 \altaffiltext{4}{Physics Dept.  U. Washington, Seattle WA}
-\altaffiltext{5}{Dept. of Physics and Astronomy, U. Penn., Philadelphia PA} 
-\altaffiltext{6}{Dept. of Electrical and Computer Engineering, U. Virginia, Charlottesville VA}
-\altaffiltext{7}{National Radio Astronomy Obs., Charlottesville VA}
-\altaffiltext{8}{Dept. of Astronomy, U. Virginia, Charlottesville VA}
-\altaffiltext{9}{Square Kilometer Array, S. Africa, Cape Town South Africa}
-\altaffiltext{10}{Dept. of Physics and Electronics, Rhodes University}
-\altaffiltext{11}{Harvard-Smithsonian Cen. for Astrophysics, Cambridge MA}
-\altaffiltext{12}{National Radio Astronomy Obs., Socorro NM}
-\altaffiltext{13}{Cavendish Lab., Cambridge UK}
-\altaffiltext{14}{School of Earth and Space Exploration, Arizona State U., Tempe AZ}
+\altaffiltext{5}{Berkeley Center for Cosmological Physics, Berkeley, CA} 
+\altaffiltext{6}{Dept. of Physics and Astronomy, U. Penn., Philadelphia PA} 
+\altaffiltext{7}{Dept. of Electrical and Computer Engineering, U. Virginia, Charlottesville VA}
+\altaffiltext{8}{National Radio Astronomy Obs., Charlottesville VA}
+\altaffiltext{9}{Dept. of Astronomy, U. Virginia, Charlottesville VA}
+\altaffiltext{10}{Square Kilometer Array, S. Africa, Cape Town South Africa}
+\altaffiltext{11}{Dept. of Physics and Electronics, Rhodes University}
+\altaffiltext{12}{Harvard-Smithsonian Cen. for Astrophysics, Cambridge MA}
+\altaffiltext{13}{National Radio Astronomy Obs., Socorro NM}
+\altaffiltext{14}{Cavendish Lab., Cambridge UK}
+\altaffiltext{15}{School of Earth and Space Exploration, Arizona State U., Tempe AZ}
 
 \begin{abstract}
+[XXX mention our longer integration time from P14.]
 In this paper, we report new limits on 21cm emission from cosmic reionization
 based on a 135-day observing campaign with a 64-element deployment of the
 Donald C. Backer Precision Array for Probing the Epoch of Reionization (PAPER)
@@ -110,6 +113,7 @@ reionization. We conclude with a discussion of implications for future 21cm
 reionization experiments, including the newly funded Hydrogen Epoch of
 Reionization Array (HERA).  
 \end{abstract}
+
 
 \section{Introduction}
 
@@ -155,6 +159,7 @@ Cosmological redshifting maps
 each observed frequency with a particular emission time (or distance), enabling 21~cm experiments 
 to eventually reconstruct 
 three-dimensional pictures of the time-evolution of large scale structure in the universe. 
+[XXXcut out global measure of the signal.]
 While such maps can potentially probe nearly the entire observable universe \citep{mao_et_al2008},
 in the near term, 21~cm cosmology experiments are focusing on statistical or global measures
 of the signal.
@@ -214,7 +219,7 @@ been able to adopt new antenna configurations that are densely packed and highly
 These configurations are poorly suited for synthesis imaging but
 deliver a substantial sensitivity boost for power-spectral measurements that are not yet limited by
 cosmic variance (\citealt{parsons_et_al2012a}, hereafter P12a).  Moreover, they are particularly suited
-for redundancy-based calibration \citep{liu_et_al2010,wieringa1992,zheng_et_al2014}, on which PAPER
+for redundancy-based calibration [XXX chronology]\citep{liu_et_al2010,wieringa1992,zheng_et_al2014}, on which PAPER
 now relies to solve for the majority of the internal instrumental degrees of freedom.  The efficacy of
 this approach was demonstrated with 
 data from a 32-antenna deployment of PAPER, which achieved an upper 
@@ -223,6 +228,7 @@ $k=0.27\hMpci$ (\citealt{parsons_et_al2014}, hereafter P14).  That upper limit i
 over previous limits by orders of magnitude, showing that the early universe was heated
 from adiabatic cooling, presumably by emission from high-mass X-ray binaries or mini-quasars.
 
+[XXX aggressive to optimal. talk about longer integration time.]
 In this paper, we improve on this previous result using
 a larger 64-element deployment of PAPER, along with better redundant calibration, a new
 aggressive fringe-rate filtering technique, and an improved power-spectrum estimation pipeline.
@@ -243,6 +249,7 @@ We then move on to a discussion of our power-spectrum analysis pipeline in Secti
 We present our results in Section
 \ref{sec:results} along with new constraints on the 21cm power spectrum.
 We conclude in Section \ref{sec:conclusion}.
+XXXforogot section 7 (discussion).
 
 
 
@@ -264,6 +271,7 @@ spectrum analysis.}
 \label{fig:antenna_positions}
 \end{figure}
 
+XXXremove 100 bootstraps
 \begin{figure*}
 %\includegraphics[width=2\columnwidth]{plots/data_flow_chart.png}
 \includegraphics[width=2\columnwidth,trim=0cm 7cm 5cm 2cm,clip]{plots/data_flow_chart.pdf}
@@ -291,6 +299,7 @@ down to the horizon with a full-width half-maximum of $60^{\circ}$, is summarize
 and \citet{pober_et_al2012}.  
 For this analysis, we use only the XX and YY polarization cross-products.
 
+[XXXdid we omit north south baselines. 2016 ??]
 As shown in Figure \ref{fig:antenna_positions}, PAPER-64 employs
 a highly redundant antenna layout where multiple baselines measure
 the same Fourier mode on the sky (P12a; P14).
@@ -332,6 +341,7 @@ correlator is based on CASPER\footnote{\url{http://casper.berkeley.edu}} open-so
 hardware and signal processing libraries \citep{parsons_et_al2006}.  
 Sixteen ROACH boards each hosting eight 8-bit analog-to-digital
 converters digitize and channelize antenna inputs. New to this correlator,
+[XXX new compared to what?]
 the cross multiplication engine is implemented on eight servers each receiving
 channelized data over two 10-Gb Ethernet links.  Each server hosts
 two NVIDIA GeForce 580 GPUs running the open-source cross-correlation code developed
@@ -350,6 +360,7 @@ described in Section \ref{sec:observations}.  The map is centered at 6:00 hours 
 \end{figure*}
 
 
+[XXX check crhonological order of authors.]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Calibration}\label{sec:calib}
 
@@ -377,7 +388,7 @@ The analysis for this paper employs a contrasting
 approach based on the fact that the chromaticity of an interferometer
 is fundamentally related to the length of an interferometric baseline.  This relationship, known
 colloquially as ``the wedge", was 
-derived analytically (P12b; \citealt{vedantham_et_al2012}), and has been confirmed in 
+derived analytically (P12b; \citealt{vedantham_et_al2012}XXX[adrians wedge papers cite]), and has been confirmed in 
 simulations \citep{datta_et_al2010,hazelton_et_al2013} and observationally
 \citep{pober_et_al2013,dillon_et_al2013b}.  As described in P12b, the wedge is the result of the delay
 between when a wavefront originating from foreground emission
@@ -408,6 +419,7 @@ The first stage (Section \ref{sec:relcal}) uses instantaneous redundancy to solv
 per-antenna internal degrees of freedom in the array.  In the second stage (Section \ref{sec:abscal}), standard self-calibration is used 
 to solve for a smaller number of
 absolute phase and gain parameters that cannot be solved by redundancy alone. 
+[XXX fix the two afters in following sentence]
 After suppressing foregrounds with a
 wide-band delay filter (Section \ref{sec:wbd_filtering}), after additional RFI flagging and crosstalk removal, 
 we average the data in LST (Section \ref{sec:lstbin}) and apply a
@@ -416,6 +428,7 @@ Finally, we use an
 optimal quadratic estimator (Section \ref{sec:oqe}) to make our estimate of the 21 cm power spectrum.
 
 \subsection{Relative Calibration}\label{sec:relcal}
+[XXX cite LOFAR red cal paper noorishad, nonlinear red cal paper by marthi]
 %    -Principles of redundant calibration. Fact that there is no signal loss in
 %       this kind of measurement.
 %       --PAPER has a redundant configuration. Therefore the number of baselines
@@ -472,6 +485,7 @@ all redundant baselines, this type of calibration does not result in signal loss
 
 In practice, redundant calibration often takes on two flavors: log calibration (LOGCAL) and
 linear calibration (LINCAL) \citep{liu_et_al2010,zheng_et_al2014}. LOGCAL uses 
+[XXX put in the original equation]
 logarithms applied to visibilities (equation 4 of
 \citealt{zheng_et_al2014}) to give a linearized system of equations
 \begin{equation}\label{eqn:logcal}
@@ -494,6 +508,7 @@ estimates of the gains and visibilities,
 v_{ij} = g_{i}^{0*}g_{j}^{0}y_{i-j}^{0} + g_{i}^{1*}g_{j}^{0}y_{i-j}^{0} +
          g_{i}^{0*}g_{j}^{1}y_{i-j}^{0}+g_{i}^{0*}g_{j}^{0}y_{i-j}^{1},
 \end{equation}
+[XXX make clear that 1 is the perturbation to the origianl estimate]
 where $0$ denotes initial estimates and $1$ denotes 
 solutions we fit for.  Using initial
 estimates taken from LOGCAL, LINCAL constructs an unbiased estimator.
@@ -561,6 +576,7 @@ quality of our data. The number of degrees of freedom (DoF), as defined in \cite
 \end{align} 
 and is effectively the number of visibilities for which
 $\chi^{2}$ is calculated. If the data are noise-dominated, 
+[XXX not gaussian!]
 $\chi^{2}/\text{DoF}$ is drawn from a Gaussian distribution with $\mu=1$ and
 $\sigma^{2} = 2/\text{DoF}$. The calculated $\chi^{2}/\text{DoF}$ for every
 frequency and integration of a fiducial day of observation in this season and
@@ -570,6 +586,7 @@ demonstrating the stability of the PAPER instrument.
 
 We measure a mean $\chi^{2}/\text{DoF}$ of 1.9.  This
 indicates that the redundant calibration solutions, while a substantial improvement
+[XXX be specific here for previous]
 over the previous calibration, do not quite result in residuals that are thermal noise dominated.
 Possible sources of this excess include instrumental crosstalk and poorly performing signal chains.
 While the latter will be downweighted by the inverse of the estimated signal covariance described
