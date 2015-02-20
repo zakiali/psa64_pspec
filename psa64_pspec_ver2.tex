@@ -677,7 +677,7 @@ with source spectra derived in \citet{jacobs_et_al2013},
 \begin{equation}
     S_{\nu} = S_{150}\times\left(\frac{\nu}{150MHz}\right)^{\alpha},
 \end{equation}
-where $S_{150} = 382~\text{Jy} \pm 5.4$ and $\alpha = -.76 \pm .01$, with
+where $S_{150} = 382~\text{Jy} \pm 5.4$ and $\alpha = -0.76 \pm 0.01$, with
 1$\sigma$ error bars.
 
 
@@ -1084,8 +1084,8 @@ loss with the use of this filter.
 After LST binning, we apply a fringe-rate filter on a baseline-by-baseline
 basis to remove crosstalk that manifests itself as a slowly varying signal in
 time.  To remove this signal, we apply a fringe-rate filter as a tapered
-hyperbolic tangent function centered at .35 millihertz. This effectively
-zeros out fringe rates below .2 millihertz, which we attribute to crosstalk.
+hyperbolic tangent function centered at 0.35 millihertz. This effectively
+zeros out fringe rates below 0.2 millihertz, which we attribute to crosstalk.
 
 
 %\section{LST Binning and Stability}\label{sec:lstbin}
@@ -1413,7 +1413,7 @@ baselines and nights as a function of LST. Specifically, we histogram the real p
 the visibilities for all redundant fiducial baselines 
 in a given LST bin for foreground contained data. We see that for a
 given LST bin the, spread in the value for all the baselines is $\sim$50 Jy which corresponds with our observed
-$T_{sys}$ of $\sim$500K .  We get
+$T_{sys}\sim$500K.  We get
 more samples per LST bin in the range of 2--10 hours due to our observing
 season, therefore the density of points in this LST region is greater, as shown by
 the color scale. This density plot shows that redundant baselines agree very well
@@ -2078,7 +2078,7 @@ dominates over the foreground modes present in estimates of the data covariance.
 \end{figure}
 
 In order to deal with possible signal loss, we perform simulations of our analysis pipeline, 
-deriving correction factors that must be applied to our final constraints . We simulate visibilities for
+deriving correction factors that must be applied to our final constraints. We simulate visibilities for
 Gaussian temperature field with a flat amplitude in $P(k)$ that rotates with the
 sky, which is optimally fringe-rate filtered in the same way as the data for our fiducial baselines. This signal is processed through our pipeline, and the output power spectrum compared to the input
 power spectrum, for various levels of input signal amplitude.
@@ -2600,31 +2600,31 @@ implied by the $2\sigma$ 21 cm power
 spectrum upper limits shown in Figure \ref{fig:final_pspec}.
 Figure \ref{fig:patchy_bound} shows the results of these bounds
 for neutral fractions of $x_{\text{HI}}=$ 0.1, 0.3, 0.5, 0.7, and 0.9.
-[XXX update for new pspec]
-In all cases, we find that $\Tspin\gtrsim 3\,\text{K}$, indicating 
+In almost all cases (excepting $x_{\text{HI}}=0.1,0.9$ for $\kmin<0.1\hMpci$), 
+we find that $\Tspin\gtrsim 3\,\text{K}$, indicating 
 that our measurements are inconsistent with the spin temperature
 being coupled to a kinetic temperature governed strictly by
 adiabatic expansion.
 
-[XXX update for new pspec]
-[XXX weaken all pober statements in paragraph]
 Our results become more interesting in the range of $\kmin\sim0.1$ and
 $\kmax\sim30$ representative of fiducial simulations
 \citep{zahn_et_al2007,lidz_et_al2008}.  For neutral fractions of 0.3, 0.5, and
-0.7, we find that $\Tspin\gtrsim 5\,\text{K}$. \citet{pober_et_al2015} improves
+0.7, we find that $\Tspin\gtrsim 4\,\text{K}$. \citet{pober_et_al2015} improves
 on these results by using a simulation-based framework, rather than relying on
-the approximations used here.
-They show that the improved limits they find push
-the bounds of the amount of heating possible given the currently observed star
+coarse parametrizations of the power spectrum shape.
+They compare the limits they find 
+to the amount of heating possible given the currently observed star
 formation rates in high-redshift galaxy populations
 \citep{bouwens_et_al2014,mcleod_et_al2014} and assumptions about the
 relationship between star formation rates and X-ray luminosities
-\citep{furlanetto_et_al2006,pritchard_loeb2008,fialkov_et_al2014}.  Assuming the
+\citep{furlanetto_et_al2006,pritchard_loeb2008,fialkov_et_al2014}.
+Assuming the
 midpoint of reionization lies close to $z=8.4$ (a reasonable assumption given
 that \citealt{planck_et_al2015} suggests a midpoint of $z=8.8$), both the bounds
-found in this paper and \citet{pober_et_al2015}, show evidence for additional
-sources of heating beyond the observed galaxy population.  We refer the reader
+found in this paper and \citet{pober_et_al2015} show evidence for 
+heating beyond what some fiducial models predict.  We refer the reader
 to \citet{pober_et_al2015} for a detailed examination of these results.
+[XXX check with jonnie if this is weak enough]
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2734,8 +2734,8 @@ array, flagging RFI events, and otherwise assessing data quality.
 Fringe-rate filtering, which is described in greater depth in \citep{parsons_et_al2015}, is also
 proving to be a flexible and powerful tool for controlling direction-dependent gains and
 improving sensitivity.  If indeed the low-significance excess in the measured power spectrum
-[XXX update for new pspec]
-is coming as a result of polarization leakage, independent filtering of the XX and YY polarizations
+As sensitivity improves, polarization leakage will become a foreground of increasing concern.
+Independent fringe-rate filtering of the XX and YY polarizations
 prior to summation has the potential to better match these polarization beams and further suppress 
 the leakage signal implied by \citet{moore_et_al2015}.
 
@@ -2743,7 +2743,6 @@ The end result is a major step forward, both for PAPER and for the field of 21cm
 While we have not yet made a detection of the 21cm cosmological signal, our limits are
 now within the range of some of the brighter models.  As discussed in \citet{pober_et_al2015},
 another order-of-magnitude improvement in sensitivity will make 21cm measurements highly constraining.
-[XXX check if this last statement is still valid]
 
 
 
@@ -2865,19 +2864,19 @@ dimensionless power spectrum, $\Delta^{2}(k)$, measured by the PAPER instrument.
 We coarsely show that these upper limits imply a minimum spin
 temperature for hydrogen in the IGM.  Although these limits are dependent on
 the model chosen for the power spectrum, we use a patchy reionization model
-[XXX update for new pspec]
-to show that limits of $T_s>5$ K are fairly generic for models with
+to show that limits of $T_s>4$ K are fairly generic for models with
 ionization fractions between 0.3 and 0.7.
 A more detailed analysis of the implied constraints on spin temperature using
 a self-consistent simulation of the physics of reionization is
-presented in a forthcoming paper \citep{pober_et_al2015}.  In that paper,
-it is shown that the excluded combinations of spin temperature
-and neutral fraction implied by our measurements
-suggest a source of X-ray luminosity beyond what can be 
-accounted for given currently observed galaxies.  The most likely interpretation
-of these results is a significant contribution to X-ray heating from lower-mass
-galaxies that are currently below the detection threshold of optical surveys.
-[XXX weaken pober statements in above paragaraph]
+presented in a forthcoming paper \citep{pober_et_al2015}.
+%In that paper,
+%it is shown that the excluded combinations of spin temperature
+%and neutral fraction implied by our measurements
+%suggest a source of X-ray luminosity beyond what can be 
+%accounted for given currently observed galaxies.  The most likely interpretation
+%of these results is a significant contribution to X-ray heating from lower-mass
+%galaxies that are currently below the detection threshold of optical surveys.
+%[weaken pober statements in above paragaraph]
 
 The power spectrum results that we present continue to be based on
 the delay-spectrum approach to foreground avoidance presented in 
@@ -2887,10 +2886,10 @@ demonstrated for managing bright smooth-spectrum foregrounds.  In this
 paper, we extend the analysis in P14 with optimal fringe-rate filtering,
 improved redundant calibration with OMNICAL, and with an optimal quadratic
 estimator that, while lossy, is more adept at down-weighting non-Gaussian foregrounds.
-[XXX update for new pspec]
-The combined effect of these improvements leaves a power-spectral measurement that,
-while not consistent with zero at the 2.7$\sigma$-level, is not far from thermal
-noise limit.  With the expansion of the PAPER array to 64 antennas, the extended 135-day
+The combined effect of these improvements leaves a power-spectral measurement that
+is not consistent with zero at the 4.7$\sigma$-level, which we expect is a result of
+contamination from crosstalk and foregrounds.
+With the expansion of the PAPER array to 64 antennas, the extended 135-day
 observing campaign,
 and the added sensitivity benefits of optimal fringe-rate filtering, combined with
 the optimization of antenna position in the PAPER array for highly redundant

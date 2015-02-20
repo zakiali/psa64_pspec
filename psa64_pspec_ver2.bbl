@@ -1,4 +1,4 @@
-\begin{thebibliography}{106}
+\begin{thebibliography}{107}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Ali} {et~al.}(2008){Ali}, {Bharadwaj}, \&
@@ -466,6 +466,10 @@ Liu, A., Parsons, A.~R., \& Trott, C.~M. 2014{\natexlab{a}}, Phys. Rev. D, 90,
   {Stiavelli}}]{treu_et_al2013}
 {Treu}, T., {Schmidt}, K.~B., {Trenti}, M., {Bradley}, L.~D., \& {Stiavelli},
   M. 2013, \apjl, 775, L29
+
+\bibitem[{{Trott} {et~al.}(2012){Trott}, {Wayth}, \&
+  {Tingay}}]{trott_et_al2012}
+{Trott}, C.~M., {Wayth}, R.~B., \& {Tingay}, S.~J. 2012, \apj, 757, 101
 
 \bibitem[{{van Haarlem} {et~al.}(2013){van Haarlem}, {Wise}, {Gunst}, {Heald},
   {McKean}, {Hessels}, {de Bruyn}, {Nijboer}, {Swinbank}, {Fallows},
