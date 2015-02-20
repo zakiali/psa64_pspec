@@ -51,7 +51,7 @@ p.xlabel(r'$P_{\rm in}(k)\ [{\rm mK}^2\ (h^{-1}\ {\rm Mpc})^3]$', fontsize=14)
 p.ylabel(r'$P_{\rm out}(k)\ [{\rm mK}^2\ (h^{-1}\ {\rm Mpc})^3]$', fontsize=14)
 p.grid()
 
-npz = n.load('data/final_pspecs/v032/pspec.npz')
+npz = n.load('data/final_pspecs/v050/pspec.npz')
 print npz.files
 kpls,pks,errs = npz['kpl'], npz['pk'], npz['err']
 for kpl,pk,err in zip(kpls,pks,errs):
