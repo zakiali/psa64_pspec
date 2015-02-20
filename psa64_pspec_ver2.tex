@@ -1080,6 +1080,7 @@ and not related to the variance, or power spectrum, of the cosmological signal
 across the entire sky.  Therefore, we expect there to be no associated signal
 loss with the use of this filter.
 
+[XXX move to frf section?]
 After LST binning, we apply a fringe-rate filter on a baseline-by-baseline
 basis to remove crosstalk that manifests itself as a slowly varying signal in
 time.  To remove this signal, we apply a fringe-rate filter as a tapered
@@ -1190,15 +1191,14 @@ zeros out fringe rates below .2 millihertz, which we attribute to crosstalk.
 %   t_int = 42.8/n.mean(fr100)
 %   
 
-In time-averaging visibilities,
-we aim
-to coherently combine  $k$-modes on the sky that are independent  before squaring in the power spectrum to get the maximum
-sensitivity. This is mathematically similar to the more traditional process of
-gridding in the $uv$ plane, but applied to a single baseline.  
-However, rather
-than applying a traditional box-car average, we can apply a kernel --- a so-called
-'fringe-rate' filter --- that weights different temporal rates by the antenna
-beam corresponding to the parts of the sky moving at the same rate.
+In time-averaging visibilities, we aim to coherently combine  $k$-modes on the
+sky that are independent  before squaring in the power spectrum to get the
+maximum sensitivity. This is mathematically similar to the more traditional
+process of gridding in the $uv$ plane, but applied to a single baseline.
+However, rather than applying a traditional box-car average, we can apply a
+kernel --- a so-called 'fringe-rate' filter --- that weights different temporal
+rates by the antenna beam corresponding to the parts of the sky moving at the
+same rate.
 
 Broadly, for a given baseline and frequency, different parts of the sky
 correspond to different fringe-rates.  Maximum fringe rates are found along the
@@ -1206,10 +1206,10 @@ equatorial plane, where the rotation rate of the sky is highest, and zero
 fringe rates are found at the poles, where the sky does not rotate and hence
 sources do not move and have static fringe rates \citep{parsons_backer2009}.
 However, fringe rates are not constant as a function of latitude. Bins of
-constant fringe rate correspond to rings in RA and DEC, where
-the east-west projection of a baseline projected toward a patch of the sky is
-constant.  We use this fact in conjunction with the root-mean-squared beam response for each
-contour of constant fringe rate to construct our time average kernel or
+constant fringe rate correspond to rings in RA and DEC, where the east-west
+projection of a baseline projected toward a patch of the sky is constant.  We
+use this fact in conjunction with the root-mean-squared beam response for each
+contour of constant fringe rate to construct a time average kernel or
 ``fringe-rate filter".
 
 
@@ -1225,39 +1225,42 @@ contour of constant fringe rate to construct our time average kernel or
 %
 
 As examined in \citet{parsons_et_al2015}, it is possible to tailor fringe-rate filters
-to more optimally combine time-ordered data for power-spectrum analysis.
+to optimally combine time-ordered data for power-spectrum analysis.
 Fringe-rate filters can be chosen that
 up-weight points of the sky where our instrument is more sensitive and down-weight
-those points farther down in the primary beam. 
+those points farther down in the primary beam, which are less sensitive.
 For white noise,
-all fringe-rate bins will contain the same amount of noise in them, but the amount of signal
+all fringe-rate bins will contain the same amount of noise, but the amount of signal
 varies and is determined by how the primary beam illuminates the sky.
 By weighting fringe-rate
-bins by the beam response, we can get a net increase in sensitivity.  
+bins by the r.m.s. of the beam response, we can get a net increase in sensitivity.  
 %Upweighting the bins with higher signal relative to those with less signal
 %gives us a net increase in signal-to-noise, even though we are removing 
 %signal by applying signal from this filter. 
 
 Applying this filter effectively weights the data by another factor of the beam
-area, changing the effective primary beam response\footnote{The
-angular area in Equation \eqref{eqn:delay_pspec} will reflect the new angular area
-corresponding to the change in beam area.} $A(l,m)$\citep{parsons_et_al2015}. By
-utilizing prior knowledge about the beam area we are selectively down-weighting
-areas on the sky contributing little signal. This results in a sensitivity boost of
-about 2.  The net improvement depends on the shape of the beam and array
-declination and is functionally equivalent to the beam-squared weighting used in
-wide-field mosaicking. It is also worth noting that, like delay 
+area, changing the effective primary beam response\footnote{The angular area in
+Equation \eqref{eqn:delay_pspec} will reflect the new angular area
+corresponding to the change in beam area.}, $A(l,m)$\citep{parsons_et_al2015}.
+By utilizing prior knowledge about the beam area we are selectively
+down-weighting areas on the sky contributing little signal. This will result in
+a net improvement in sensitivity depending on the shape of the beam and the
+declination of the array. For PAPER, this filter roughly douples the
+sensitivity of our measurements.  It is also worth noting that, like delay
 filtering, fringe-rate filtering is implemented on a per-baseline basis.
 
 %We implement the optimal fringe-rate filter by calculating the fringe rates at
 %every point on the sky, for a given frequency, and weighting each bin by the
 %beam of a given baseline. 
- We weight
-the fringe-rate bins on the sky by the r.m.s. of the beam at that location.
-In order to obtain a smooth filter in the fringe-rate domain, we fit a
-Gaussian with a hyperbolic tangent tail to this filter. We convolve the time-domain visibilities with the Fourier transform of this fringe-rate filter to
-produce an averaged visibility.  The effect on the data can be seen
-in Figure \ref{fig:waterfalls}.
+We implement the optimal filter by weighting the fringe-rate bins on the sky by
+the r.m.s. of the beam at that same location.  In order to obtain a smooth
+filter in the fringe-rate domain, we fit a Gaussian with a hyperbolic tangent
+tail to this filter. We convolve the time-domain visibilities with the Fourier
+transform of this fringe-rate filter to produce an averaged visibility.  The
+effect on the data can be seen in Figure \ref{fig:waterfalls}. There is an
+associated signal loss with the this optimal-fringe filter because we are
+infact removing signal. In conjucnction with the cross-talk filter described
+above, we find that there is a 39\% signal loss.
 
 %\begin{figure}[!t]
 %\centering
