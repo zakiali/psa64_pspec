@@ -1,4 +1,4 @@
-\begin{thebibliography}{108}
+\begin{thebibliography}{106}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Ali} {et~al.}(2008){Ali}, {Bharadwaj}, \&
@@ -316,10 +316,6 @@ Liu, A., Parsons, A.~R., \& Trott, C.~M. 2014{\natexlab{a}}, Phys. Rev. D, 90,
   {Verde}, {Weiland}, {Wollack}, \& {Wright}}]{page_et_al2007}
 {Page}, L., {et~al.} 2007, \apjs, 170, 335
 
-\bibitem[{{Parsons} {et~al.}(2015){Parsons}, {Ali}, \&
-  {Liu}}]{parsons_et_al2015}
-{Parsons}, A., {Ali}, Z., \& {Liu}, A. 2015, ArXiv e-prints
-
 \bibitem[{{Parsons} {et~al.}(2012{\natexlab{a}}){Parsons}, {Pober}, {McQuinn},
   {Jacobs}, \& {Aguirre}}]{parsons_et_al2012a}
 {Parsons}, A., {Pober}, J., {McQuinn}, M., {Jacobs}, D., \& {Aguirre}, J.
@@ -392,12 +388,6 @@ Liu, A., Parsons, A.~R., \& Trott, C.~M. 2014{\natexlab{a}}, Phys. Rev. D, 90,
   {Bradley}, {Carilli}, {DeBoer}, {Hewitt}, {Jacobs}, {McQuinn}, {Morales},
   {Parsons}, {Tegmark}, \& {Werthimer}}]{pober_et_al2014}
 ---. 2014, \apj, 782, 66
-
-\bibitem[{{Pober} {et~al.}(2015){Pober}, {Ali}, {Parsons}, {Aguirre},
-  {Bernardi}, {Bradley}, {Carilli}, {Cheng}, {DeBoer}, {Dexter}, {Jacobs},
-  {Klima}, {Liu}, {MacMahon}, {Moore}, {Stefan}, {Walbrugh}, {Walker}, \&
-  {Zheng}}]{pober_et_al2015}
----. 2015, ArXiv e-prints
 
 \bibitem[{{Presley} {et~al.}(2015){Presley}, {Liu}, \&
   {Parsons}}]{presley_et_al2015}
