@@ -77,7 +77,6 @@ William P. Walbrugh\altaffilmark{10},
 Andre Walker\altaffilmark{10}
 }
 %\tableofcontents
-%XXXadd bccp affil for adrian.
 
 \altaffiltext{1}{Astronomy Dept., U. California, Berkeley CA}
 \altaffiltext{2}{Radio Astronomy Lab., U. California, Berkeley CA}
@@ -96,12 +95,11 @@ Andre Walker\altaffilmark{10}
 \altaffiltext{15}{School of Earth and Space Exploration, Arizona State U., Tempe AZ}
 
 \begin{abstract}
-[XXX mention our longer integration time from P14.]
 In this paper, we report new limits on 21cm emission from cosmic reionization
 based on a 135-day observing campaign with a 64-element deployment of the
 Donald C. Backer Precision Array for Probing the Epoch of Reionization (PAPER)
 in South Africa.  This work extends the work presented in
-\citet{parsons_et_al2014} with more collecting area, improved redundancy-based
+\citet{parsons_et_al2014} with more collecting area, a longer observing period, improved redundancy-based
 calibration, optimal fringe-rate filtering, and improved power-spectral
 analysis using optimal quadratic estimators. The result is a new $2\sigma$
 upper limit on $\Delta^2(k)$ of \mKlimit in the range
@@ -159,9 +157,8 @@ Cosmological redshifting maps
 each observed frequency with a particular emission time (or distance), enabling 21~cm experiments 
 to eventually reconstruct 
 three-dimensional pictures of the time-evolution of large scale structure in the universe. 
-[XXXcut out global measure of the signal.]
 While such maps can potentially probe nearly the entire observable universe \citep{mao_et_al2008},
-in the near term, 21~cm cosmology experiments are focusing on statistical or global measures
+in the near term, 21~cm cosmology experiments are focusing on statistical measures
 of the signal.
 
 %The hyperfine transition in the ground state of hydrogen
@@ -219,7 +216,7 @@ been able to adopt new antenna configurations that are densely packed and highly
 These configurations are poorly suited for synthesis imaging but
 deliver a substantial sensitivity boost for power-spectral measurements that are not yet limited by
 cosmic variance (\citealt{parsons_et_al2012a}, hereafter P12a).  Moreover, they are particularly suited
-for redundancy-based calibration [XXX chronology]\citep{liu_et_al2010,wieringa1992,zheng_et_al2014}, on which PAPER
+for redundancy-based calibration \citep{wieringa1992,liu_et_al2010,zheng_et_al2014}, on which PAPER
 now relies to solve for the majority of the internal instrumental degrees of freedom.  The efficacy of
 this approach was demonstrated with 
 data from a 32-antenna deployment of PAPER, which achieved an upper 
@@ -228,10 +225,9 @@ $k=0.27\hMpci$ (\citealt{parsons_et_al2014}, hereafter P14).  That upper limit i
 over previous limits by orders of magnitude, showing that the early universe was heated
 from adiabatic cooling, presumably by emission from high-mass X-ray binaries or mini-quasars.
 
-[XXX aggressive to optimal. talk about longer integration time.]
 In this paper, we improve on this previous result using
-a larger 64-element deployment of PAPER, along with better redundant calibration, a new
-aggressive fringe-rate filtering technique, and an improved power-spectrum estimation pipeline.
+a larger 64-element deployment of PAPER and a longer observing period, along with better redundant calibration, a new
+optimal fringe-rate filtering technique, and an improved power-spectrum estimation pipeline.
 The result is an
 upper limit on $\Delta^2(k)$ of \mKsqlimit in the range
 $0.1<k<0.5\hMpci$ at $z=8.4$.  This result places significant constraints on the 
@@ -248,8 +244,7 @@ We then move on to a discussion of our power-spectrum analysis pipeline in Secti
 \ref{sec:oqe}. 
 We present our results in Section
 \ref{sec:results} along with new constraints on the 21cm power spectrum.
-We conclude in Section \ref{sec:conclusion}.
-XXXforogot section 7 (discussion).
+We discuss these results in Section \ref{sec:discussion} and conclude in Section \ref{sec:conclusion}.
 
 
 
@@ -271,13 +266,12 @@ spectrum analysis.}
 \label{fig:antenna_positions}
 \end{figure}
 
-XXXremove 100 bootstraps
 \begin{figure*}
 %\includegraphics[width=2\columnwidth]{plots/data_flow_chart.png}
 \includegraphics[width=2\columnwidth,trim=0cm 7cm 5cm 2cm,clip]{plots/data_flow_chart.pdf}
 \caption
 {
-[XXX final figure from Dave].
+[XXXremove 100 bootstraps]
 The stages of power-spectrum analysis. Black lines indicate data flow; red lines indicate
 Monte Carlo simulations used to 
 measure signal loss. Yellow boxes indicate stages that by construction have negligible signal loss.
@@ -2174,7 +2168,6 @@ adjacent to the horizon limit, where we apply the maximum signal loss correction
 \begin{figure*}\centering
 \includegraphics[width=1.8\columnwidth]{plots/pspec_variance.png}
 \caption{
-[XXX update with new bootstrap files? ]
 Absolute value of the cumulative mean (left) and median (right), as a function of number of modes 
 of the power spectrum band power for
 $k_\parallel$ modes ranging from $-0.49$ (red) to $0.44\hMpci$ (violet).
@@ -2883,7 +2876,7 @@ the delay-spectrum approach to foreground avoidance presented in
 P12b and first applied in P14.  The application of a delay filter over
 a wide bandwidth continues to one of the most powerful techniques yet
 demonstrated for managing bright smooth-spectrum foregrounds.  In this
-paper, we extend the analysis in P14 with aggressive fringe-rate filtering,
+paper, we extend the analysis in P14 with optimal fringe-rate filtering,
 improved redundant calibration with OMNICAL, and with an optimal quadratic
 estimator that, while lossy, is more adept at down-weighting non-Gaussian foregrounds.
 [XXX update for new pspec]
@@ -2891,7 +2884,7 @@ The combined effect of these improvements leaves a power-spectral measurement th
 while not consistent with zero at the 2.7$\sigma$-level, is not far from thermal
 noise limit.  With the expansion of the PAPER array to 64 antennas, the extended 135-day
 observing campaign,
-and the added sensitivity benefits of aggressive fringe-rate filtering, combined with
+and the added sensitivity benefits of optimal fringe-rate filtering, combined with
 the optimization of antenna position in the PAPER array for highly redundant
 measurements, this thermal
 noise limit is beginning to enter the realm of constraining realistic models of reionization.
