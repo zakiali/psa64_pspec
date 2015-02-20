@@ -28,6 +28,10 @@
 \newcommand\abs[1]{\left|#1\right|}
 \newcommand{\mKlimit}{(22.4 mK)$^2$}
 \newcommand{\mKsqlimit}{503 mK$^2$}
+\newcommand{\pobercitep}{(Pober et al. 2015, in prep)}
+\newcommand{\pobercitet}{Pober et al. (2015, in prep)}
+\newcommand{\parsonscitep}{(Parsons et al. 2015, in prep)}
+\newcommand{\parsonscitet}{Parsons et al. (2015, in prep)}
 
 \newcount\colveccount
 \newcommand*\colvec[1]{
@@ -105,7 +109,7 @@ analysis using optimal quadratic estimators. The result is a new $2\sigma$
 upper limit on $\Delta^2(k)$ of \mKlimit in the range
 $0.15<k<0.5\hMpci$ at $z=8.4$.  This represents a three-fold improvement over the
 previous best upper limit.  As we discuss in more depth in a forthcoming paper
-\citep{pober_et_al2015}, this upper limit supports and extends previous
+\pobercitep, this upper limit supports and extends previous
 evidence against extremely cold reionization scenarios.  We conclude with a
 discussion of implications for future 21cm reionization experiments, including
 the newly funded Hydrogen Epoch of Reionization Array (HERA).  
@@ -232,7 +236,7 @@ The result is an
 upper limit on $\Delta^2(k)$ of \mKsqlimit in the range
 $0.15<k<0.5\hMpci$ at $z=8.4$.  This result places constraints on the 
 spin temperature of the IGM, and as is shown in a forthcoming paper,
-\citet{pober_et_al2015}, this supports and extends
+\pobercitet, this supports and extends
 previous evidence against extremely cold reionization scenarios.
 In Section
 \ref{sec:observations} we describe the observations used in this analysis. In
@@ -1235,7 +1239,7 @@ bins by the root mean square (RMS) of the beam response, we can get a net increa
 Applying this filter effectively weights the data by another factor of the beam
 area, changing the effective primary beam response\footnote{The angular area in
 Equation \eqref{eqn:delay_pspec} will reflect the new angular area
-corresponding to the change in beam area.}, $A(l,m)$\citep{parsons_et_al2015}.
+corresponding to the change in beam area.}, $A(l,m)$\parsonscitep.
 By utilizing prior knowledge about the beam area, we are selectively
 down-weighting areas on the sky contributing little signal. This will result in
 a net improvement in sensitivity depending on the shape of the beam and the
@@ -1744,7 +1748,7 @@ description that follows, we first estimate the power spectrum separately for ea
 Power spectrum estimates obtained from the different redundant groups are then combined in a set of averaging and bootstrapping steps described in Section \ref{sec:bootstrap}. Note that because
 our data have been optimally fringe-rate filtered in the manner described in Section \ref{sec:frf},
 we may reap all the benefits of coherently integrating in time simply by estimating the power spectrum
-for every instant in the LST-binned data before averaging over the time-steps within the LST-binned day \citep{parsons_et_al2015}.
+for every instant in the LST-binned data before averaging over the time-steps within the LST-binned day \parsonscitep.
 
 For the next portion of our discussion, consider only the data within a single redundant group. Within each group there are not only multiple identical copies of the same baseline, but in addition (as discussed in
 Section \ref{sec:wbd_filtering}), our pipeline also constructs two LST-binned data sets, one from binning all even-numbered days in our observations, and the other from all odd-numbered days. Thus, 
@@ -2476,7 +2480,7 @@ power is necessarily positive, the
 2$\sigma$ upper limit of \mKlimit at $z=8.4$, continues to serve as a conservative upper limit. This significantly improves over the previous
 best upper limit of $(41~{\rm mK})^2$ at $z=7.7$ reported in P14.
 As we show below and in
-greater detail in \citet{pober_et_al2015}, this limit begins to have implications
+greater detail in \pobercitet, this limit begins to have implications
 for the heating of the intergalactic medium prior to the completion of reionization.
 
 \subsection{Spin Temperature Constraints}
@@ -2494,7 +2498,7 @@ that $T_{\rm s}<T_{\rm CMB}$.
 In this section, we examine the implication of the measured upper limits
 on 21cm emission in Figure \ref{fig:final_pspec} on the spin temperature
 of the 21cm line at $z=8.4$.
-In a forthcoming paper \citep{pober_et_al2015}, we conduct a thorough analysis of the
+In a forthcoming paper \pobercitep, we conduct a thorough analysis of the
 constraints that can be put on the IGM using a simulation-based framework.
 As a complement to that more thorough
 analysis, we focus here on a simpler parameterization of the shape
@@ -2618,7 +2622,7 @@ adiabatic expansion.
 Our results become more interesting in the range of $\kmin\sim0.1$ and
 $\kmax\sim30$ representative of fiducial simulations
 \citep{zahn_et_al2007,lidz_et_al2008}.  For neutral fractions of 0.3, 0.5, and
-0.7, we find that $\Tspin\gtrsim 4\,\text{K}$. \citet{pober_et_al2015} improves
+0.7, we find that $\Tspin\gtrsim 4\,\text{K}$. \pobercitet improves
 on these results by using a simulation-based framework, rather than relying on
 coarse parametrizations of the power spectrum shape.
 They compare the limits they find 
@@ -2630,11 +2634,11 @@ relationship between star formation rates and X-ray luminosities
 Assuming the
 midpoint of reionization lies close to $z=8.4$ (a reasonable assumption given
 that \citealt{planck_et_al2015} suggests a midpoint of $z=8.8$), both the bounds
-found in this paper and \citet{pober_et_al2015} show evidence for 
+found in this paper and \pobercitet show evidence for 
 heating that places constraints on the possible values for the star formation
 rate/X-ray luminosity correlation given certain models of the star formation
 rate density redshift evolution. We refer the reader
-to \citet{pober_et_al2015} for a detailed examination of these results.
+to \pobercitet for a detailed examination of these results.
 %[XXX check with jonnie if this is weak enough]
 
 
@@ -2742,7 +2746,7 @@ this calibration brings redundant baselines into impressive agreement with one a
 and provides important diagnostic information for
 monitoring the health of the
 array, flagging RFI events, and otherwise assessing data quality.
-Fringe-rate filtering, which is described in greater depth in \citep{parsons_et_al2015}, is also
+Fringe-rate filtering, which is described in greater depth in \parsonscitep, is also
 proving to be a flexible and powerful tool for controlling direction-dependent gains and
 improving sensitivity.  If indeed the low-significance excess in the measured power spectrum
 
@@ -2756,7 +2760,7 @@ turns out to be significant.
 
 The end result is a major step forward, both for PAPER and for the field of 21cm cosmology.
 While we have not yet made a detection of the 21cm cosmological signal, our limits are
-now within the range of some of the brighter models.  As discussed in \citet{pober_et_al2015},
+now within the range of some of the brighter models.  As discussed in \pobercitet,
 another order-of-magnitude improvement in sensitivity will make 21cm measurements highly constraining.
 
 
@@ -2881,7 +2885,7 @@ temperature for hydrogen in the IGM.  Although these limits are dependent on
 the model chosen for the power spectrum, we use a patchy reionization model
 to show that limits of $T_s>4\,\textrm{K}$ are fairly generic for models with
 ionization fractions between 0.3 and 0.7.
-A more detailed analysis of the implied constraints on spin temperature using semi-analytic reionization/heating simulations is presented in a forthcoming paper \citep{pober_et_al2015}.
+A more detailed analysis of the implied constraints on spin temperature using semi-analytic reionization/heating simulations is presented in a forthcoming paper \pobercitep.
 %In that paper,
 %it is shown that the excluded combinations of spin temperature
 %and neutral fraction implied by our measurements
