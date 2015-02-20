@@ -581,12 +581,11 @@ demonstrating the stability of the PAPER instrument.
 
 
 We measure a mean $\chi^{2}/\text{DoF}$ of 1.9.  This
-indicates that the redundant calibration solutions, while a substantial improvement
-[XXX be specific here for previous]
-over the previous calibration, do not quite result in residuals that are thermal noise dominated.
+indicates that the OMNICAL calibration solutions, while a substantial improvement
+over the P14 implementation of redudnant calibration, do not quite result in residuals that are thermal noise dominated.
 Possible sources of this excess include instrumental crosstalk and poorly performing signal chains.
 While the latter will be downweighted by the inverse of the estimated signal covariance described
-in Section \ref{sec:oqe}, crosstalk is a ubiquitous defect in the data that must be addressed.
+in Section \ref{sec:oqe}, crosstalk is a defect in the data that must be addressed.
 % ARP: removing this discussion because this was not used on the data, so irrelevant
 %Large values of the $\chi^{2}$ can correspond to various systematics in the
 %data. One systematic is radio frequency interference (RFI) that are
@@ -1277,9 +1276,8 @@ in Figure \ref{fig:waterfalls}.
 \begin{figure}\centering
 \includegraphics[width=\columnwidth]{plots/fr_preserved_signal.png}
 \caption{
-[XXX Still calling it an optimal fringe rate filter?]
 Fringe-rate transform of foreground contained visibilities measured on the fiducial baseline at 159 MHz before (blue) and
-after (red) optimal fringe-rate filtering. The fringe-rate filter (green) is normalized
+after (red) fringe-rate filtering. The fringe-rate filter (green) is normalized
 to integrate to unity, but has been scaled here for legibility.
 %Fringe-rate filtering at 159MHz. Fringe-rates of is defined as the rate at which
 %the sky moves through the fringe pattern of a baselines fringe pattern. This is
@@ -1366,8 +1364,8 @@ independent samples per hour.
 measured over 135 days with every redundant instance of the fiducial baseline at 150
 MHz.  Color scale indicates the number of samples falling in an
 LST/flux-density bin.  This plot serves to illustrate the stability of the
-PAPER instrument and the precision of calibration.
-[XXX link to stability plot]
+PAPER instrument and the precision of calibration.  The temporal stability of
+a single LST bin over multiple days is shown in Figure \ref{fig:stability}.
 %The bulk of the samples recorded, range from an LST of 5 to
 %10 hours, whilst the EoR cold spot ranges from 0 to 4 hours as seen in figure
 %\ref{fig:coverage}. For the densest regions, the spread in visibility for a
@@ -1381,14 +1379,13 @@ PAPER instrument and the precision of calibration.
 \centering
 \includegraphics[width=\columnwidth]{plots/stability.png}
 \caption{
-[XXX update caption to describe how to interpret stability. I think I did this...]
-[XXX is this figure linked to in text?]
 Power spectrum of 135 days of time-series data contributing to a single LST
 bin, illustrating the stability of measurements over the observing campaign.
-On all timescales, the instrument is stable to less than .1\% relative to the
-mean (DC). The excess at 2-day timescales is a beat frequency associated with
+Relative to the average value, variation in the measured value across days (quantified by
+variance as a function of time period) is orders of magnitude lower.
+The excess at two-day timescales is a beat frequency associated with
 the changing alignment of integration windows in the correlator with respect to
-sidereal time.  
+sidereal time. 
 %Demonstration of the time stability of the instrument. For a given LST
 %bin, we take the day to day samples that go into that bin and determine the
 %power spectrum for that time seris. Shown here is the power spectrum of the time
@@ -1405,8 +1402,9 @@ sidereal time.
 \end{figure}
 
 
-One PAPER design goal is the stability of the instrument between
-baselines and in time. Figure \ref{fig:density} shows the visibility repeatability between 
+In order to build sensitivity to the 21~cm reionization signal, it is critical
+that PAPER be able to integrate coherently measurements made with different baselines on different days.
+Figure \ref{fig:density} shows the visibility repeatability between 
 baselines and nights as a function of LST. Specifically, we histogram the real part of
 the visibilities for all redundant fiducial baselines 
 in a given LST bin for foreground contained data. We see that for a
@@ -1417,17 +1415,18 @@ season, therefore the density of points in this LST region is greater, as shown 
 the color scale. This density plot shows that redundant baselines agree very well
 with one another, OMNICAL has leveled the antenna gains to within the noise.
 
-In addition to stability between redundant baselines, we also consider the
-stability in time for the PAPER instrument. In order to quantify the stability
+Delving in a little deeper, we also examine the
+stability in time for measurements in a particular LST bin. In order to quantify the stability
 in time we extract one channel for a given baseline for every observation day
 and LST bin. We then Fourier transform along the time direction for every LST
-bin and compute the power spectrum. As shown in Figure \ref{fig:stability}, the
-DC bin is the average of all of the days and clearly there is excess power
-there. However, for time scales greater than 1 day, we see that there is little
-correlation between days, showing that there are no systematics in time. The
-excess on the two day timescale is caused by the changing alignment of the 42.9
-second integration timescale of a visibility with that of a sidereal day. This
-presents itself as a beat frequency on the two day timescale.
+bin and compute the power spectrum. As shown in Figure \ref{fig:stability},
+for time scales greater than one day, we see that signal variance drops by
+almost four orders of magnitude, 
+with the exception of an 
+excess on two-day timescales is caused by the changing alignment of the 42.9~s
+integration timescale relative to a sidereal day.  The implication of this measurement
+is that, after calibration, PAPER measurements are sufficiently stable to be integrated
+coherently over the entire length of a 135-day observation.
 
 \subsection{System Temperature}   
 
