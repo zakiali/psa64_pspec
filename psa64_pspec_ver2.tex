@@ -505,7 +505,7 @@ v_{ij} = g_{i}^{0*}g_{j}^{0}y_{i-j}^{0} + g_{i}^{1*}g_{j}^{0}y_{i-j}^{0} +
          g_{i}^{0*}g_{j}^{1}y_{i-j}^{0}+g_{i}^{0*}g_{j}^{0}y_{i-j}^{1},
 \end{equation}
 where $0$ denotes initial estimates and $1$ represents the perturbation to the
-orignal estimate and is the solutions we fit for.  Using initial estimates
+original estimate and is the solutions we fit for.  Using initial estimates
 taken from LOGCAL, LINCAL constructs an unbiased estimator.
 
 %    -How was this calibration applied to the data. 
@@ -562,7 +562,7 @@ integration. As defined in \citet{zheng_et_al2014},
     \chi^{2} = \sum_{ij}\frac{|v_{ij} - y_{i-j}g^{\ast}_{i}g_{j}|^{2}}{\sigma^{2}_{ij}},
 \end{equation}
 where $\sigma^{2}$ is the noise in the visibilities. The $\chi^{2}$
-measures sum of the the deviation of measured visibilities to that of the best fit model
+measures sum of the deviation of measured visibilities to that of the best fit model
 derived from the LINCAL relative to a noise model, and gives us a tool to use in order to check the
 quality of our data. The number of degrees of freedom (DoF), as defined in \citealt{zheng_et_al2014}, is given by 
 \begin{align}
@@ -582,7 +582,7 @@ We measure a mean $\chi^{2}/\text{DoF}$ of 1.9.  This
 indicates that the redundant calibration solutions, while a substantial improvement
 over the previous PAPER-32 calibration (P14), do not quite result in residuals that are thermal noise dominated.
 Possible sources of this excess include instrumental crosstalk and poorly performing signal chains.
-While the latter will be downweighted by the inverse of the estimated signal covariance described
+While the latter will be down-weighted by the inverse of the estimated signal covariance described
 in Section \ref{sec:oqe}, crosstalk is a defect in the data that must be addressed.
 % ARP: removing this discussion because this was not used on the data, so irrelevant
 %Large values of the $\chi^{2}$ can correspond to various systematics in the
@@ -1053,7 +1053,7 @@ localized time and frequency window.
 We then average the entire season in LST with 43-s bin widths, matching the
 cadence of the compressed data. The full season was 135 days long; of these,
 124 days were included in the average. We make two separate LST-binned data
-sets, averaging every other julian day together to obtain an ``even" and ``odd"
+sets, averaging every other Julian day together to obtain an ``even" and ``odd"
 dataset. The use of these two data sets allows us to construct an unbiased
 power spectrum estimate.
 
@@ -1071,7 +1071,7 @@ Sporadic RFI events (i.e. occurring rarely in an entire season) can skew
 individual LST bins away from the median value of the sky at a given LST,
 deviating from Gaussian statistics. To catch these events, we compute the median
 of a LST bin for each frequency and flag values 3$\sigma$ above the median,
-before averaging. This filter mitigates the effects of non Gaussianity in time,
+before averaging. This filter mitigates the effects of non-Gaussianity in time,
 which is most likely due to spurious RFI events. Since we are narrowing our
 distribution of visibilities around a patch of sky, equivalent to LST bin for a
 drift scan telescope, but keeping the same mean value, there is no associated
@@ -1226,7 +1226,7 @@ For white noise,
 all fringe-rate bins will contain the same amount of noise, but the amount of signal
 varies and is determined by how the primary beam illuminates the sky.
 By weighting fringe-rate
-bins by the r.m.s. of the beam response, we can get a net increase in sensitivity.  
+bins by the root mean square (RMS) of the beam response, we can get a net increase in sensitivity.  
 %Upweighting the bins with higher signal relative to those with less signal
 %gives us a net increase in signal-to-noise, even though we are removing 
 %signal by applying signal from this filter. 
@@ -1245,18 +1245,19 @@ sensitivity of our measurements.
 %every point on the sky, for a given frequency, and weighting each bin by the
 %beam of a given baseline. 
 We implement the optimal filter on a per baseline basis by weighting the
-fringe-rate bins on the sky by the r.m.s. of the beam at that same location.
+fringe-rate bins on the sky by the RMS of the beam at that same location.
 In order to obtain a smooth filter in the fringe-rate domain, we fit a Gaussian
 with a hyperbolic tangent tail to this filter. In addition, we multiply this
 response with another hyperbolic tangent function that effectively zeros out
-fringe rates below 0.2 millihertz. This effects a crosstalk filter by removing
-the slowly varying signals that we model our crosstalk as. We convolve the
-time-domain visibilitieswith the Fourier transform of the resulting fringe-rate
+fringe rates below 0.2 mHz. This affects a crosstalk filter by removing
+the slowly varying signals that we model as crosstalk. We convolve the
+time-domain visibilities with the Fourier transform of the resulting fringe-rate
 filter, shown in Figure \ref{fig:fr_preserved_signal}, to produce an averaged
 visibility.  The effect on the data can be seen in Figure \ref{fig:waterfalls}.
-There is an associated signal loss with this fringe-rate filter.  As shown in
-Table \ref{tbl:sigloss}, we find that there is a 39\% signal loss due to the
-fringe-rate filter described here.
+As discussed in \citet{parsons_et_al2015}, the
+signal loss associated with this fringe-rate filter can be modeled as a modification
+of the area of the primary beam.  As documented in
+Table \ref{tbl:sigloss}, the correction factor for the filter we have chosen is 1.44.
 
 %After LST binning, we apply a fringe-rate filter on a baseline-by-baseline
 %basis to remove crosstalk that manifests itself as a slowly varying signal in
@@ -1420,7 +1421,7 @@ $T_{sys}\sim$500K.  We get
 more samples per LST bin in the range of 2--10 hours due to our observing
 season, therefore the density of points in this LST region is greater, as shown by
 the color scale. This density plot shows that redundant baselines agree very well
-with one another;OMNICAL has leveled the antenna gains to within the noise.
+with one another; OMNICAL has leveled the antenna gains to within the noise.
 
 Delving in a little deeper, we also examine the
 stability in time for measurements in a particular LST bin. In order to quantify the stability
@@ -1823,12 +1824,12 @@ data are the eigenmodes of the covariance matrix with the largest eigenvalues. F
 For the foreground-dominated data, one sees that the eigenvalue spectrum is dominated
 by the first few modes, and the corresponding eigenmodes are rather smooth, highly suggestive
 of smooth spectrum foreground sources. The application of the inverse covariance weighting
-downweights these eigenmodes, revealing waterfall plots in the bottom row of Figure \ref{fig:inv_cov}
+down-weights these eigenmodes, revealing waterfall plots in the bottom row of Figure \ref{fig:inv_cov}
 that look more noise-dominated. With the foreground-suppressed portion (right half) of Figure \ref{fig:inv_cov},
 the initial $\mathbf{x}^{ri}$ vectors already appear noise dominated (which is corroborated by the
 relatively noisy form of the eigenvalue spectra in Figure \ref{fig:eigs}). The final $\mathbf{z}^{ri}$ vectors
 remain noise-like, although some smooth structure (perhaps from residual foregrounds) has still been removed, and finer scale noise
-has been upweighted.
+has been up-weighted.
 
 \begin{figure*}\centering
 \includegraphics[width=2\columnwidth]{plots/inv_cov.png}
@@ -2029,7 +2030,7 @@ by noise, these may just be random fluctuations that need not be down-weighted. 
 covariance is heavily influenced by the noise in the estimate of the covariance
 matrix and thus has the ability to down-weight valid high-variance samples. 
 %In order to accurately describe the covariance matrix of our measurements, we would require complete knowledge of the sky signal and the instrument and the interaction of the two due to the chromaticity of the interferometer.
-Overfitting the noise in this manner carries with it the possibility of cosmological signal loss.
+Over-fitting the noise in this manner carries with it the possibility of cosmological signal loss.
 This seems to contradict the conventionally recognized feature of OQEs as
 lossless estimators of the power spectrum \citep{tegmark1997}. However,
 the standard proofs of this property assume that statistics such as $\mathbf{C}$
@@ -2432,7 +2433,7 @@ That the
 excesses at $k\approx0.30$ and 0.44$\hMpci$ are relatively unaffected by the filtering
 could be an indication that they are more isotropically distributed, but more likely, it
 may mean that the simply arise closer to the center of the primary beam where they are
-downweighted less.
+down-weighted less.
 Both excesses appear to be significantly affected by omitting OMNICAL calibration
 (orange in Figure \ref{fig:pspec_comp}).  This could be interpreted as indicating the 
 excess is a modulation induced by frequency structure
