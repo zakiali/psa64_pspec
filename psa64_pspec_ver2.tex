@@ -334,8 +334,7 @@ in \citet{parsons_et_al2008}, this
 correlator is based on CASPER\footnote{\url{http://casper.berkeley.edu}} open-source
 hardware and signal processing libraries \citep{parsons_et_al2006}.  
 Sixteen ROACH boards each hosting eight 8-bit analog-to-digital
-converters digitize and channelize antenna inputs. New to this correlator,
-[XXX new compared to what?]
+converters digitize and channelize antenna inputs. New to this correlator relative to previous PAPER correlators,
 the cross multiplication engine is implemented on eight servers each receiving
 channelized data over two 10-Gb Ethernet links.  Each server hosts
 two NVIDIA GeForce 580 GPUs running the open-source cross-correlation code developed
@@ -382,7 +381,7 @@ The analysis for this paper employs a contrasting
 approach based on the fact that the chromaticity of an interferometer
 is fundamentally related to the length of an interferometric baseline.  This relationship, known
 colloquially as ``the wedge", was 
-derived analytically (P12b; \citealt{vedantham_et_al2012}XXX[adrians wedge papers cite]), and has been confirmed in 
+derived analytically (P12b; \citealt{vedantham_et_al2012,liu_et_al2014a,liu_et_al2014b}), and has been confirmed in 
 simulations \citep{datta_et_al2010,hazelton_et_al2013} and observationally
 \citep{pober_et_al2013,dillon_et_al2013b}.  As described in P12b, the wedge is the result of the delay
 between when a wavefront originating from foreground emission
@@ -413,9 +412,8 @@ The first stage (Section \ref{sec:relcal}) uses instantaneous redundancy to solv
 per-antenna internal degrees of freedom in the array.  In the second stage (Section \ref{sec:abscal}), standard self-calibration is used 
 to solve for a smaller number of
 absolute phase and gain parameters that cannot be solved by redundancy alone. 
-[XXX fix the two afters in following sentence]
 After suppressing foregrounds with a
-wide-band delay filter (Section \ref{sec:wbd_filtering}), after additional RFI flagging and crosstalk removal, 
+wide-band delay filter (Section \ref{sec:wbd_filtering}) and additional RFI flagging and crosstalk removal, 
 we average the data in LST (Section \ref{sec:lstbin}) and apply a
 fringe-rate filter (Section \ref{sec:frf}) to optimally combine the time-domain data. 
 Finally, we use an
