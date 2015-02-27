@@ -1,0 +1,164 @@
+All data for the psa64 data set is located in 
+    /data4/paper/2012EoR/psa_live 
+
+Data used for lst binning after omnical was applied (in august) in 
+    /data4/paper/2012EoR/psa_live/forlstbinning_omnical_2/
+
+    Within this directory have multiple file types: 
+        *.uvcRREcACO      - omnical solution applied to the data.
+        *.uvcRREcACOc     - corrected to remove bad antennas flagged by omnical. Are 
+                            set to zeros in the O files.
+        *.uvcRREcACOcP    - make stokes I from the two linear polarizations.
+        *.uvcRREcACOcPB   - delay filtered baselines.
+        *.uvcRREcACOcPBx  - cross talk removed using averages. Is the simple but horrible                            method that removes signal. Specifically has 10 minute 
+                            averages subtracted off.
+        *.uvcRREcACOcPBxR - RFI flagged.
+
+        *.uvcRREcACOcPBR  - RFI flagged. Note these files have no cross talk.
+        *.uvcRREcACOcPBRA - pull off the power spectrum baselines. That is the separation
+                            0,1;1,1;-1,1 baselines. This made lst binning super fast.
+
+LST binned data is also in
+    /data4/paper/2012EoR/psa_live/forlstbinning_omnical_2/
+
+    lstbin_{even,odd} : lstbinned data sets from the *.uvcRREcACOcPBxR files binning 
+                        every even and odd julian data separately. This has the lossy 
+                        cross talk removal in it.
+    
+    lstbin_{even,odd}_noxtalk : lstbinned data sets of the *.uvcRREcACOcPBRA files. 
+                                same even and odd set up.
+
+    lstbin_fg_{even,odd} : lstbinned data sets of the foreground contained data. That is
+                           *.uvcRREcACOcP files. Same even and odd.
+
+    lstbinX[0-9] : these are 10 lstbinned data sets of every tenth julian day being 
+                   binned together. This is binning of the *.uvcRREcACOcPBxR data set 
+                   and therefore has the bad cross talk removal in it.
+    
+    lstbin_half{1,2} : LST binned dat from either half of the observing season. Not used
+                       in any analysis.
+
+
+Final power spectrum estimate in Ali et.al 2015 is made with lstbin_{even,odd}_xtalk.
+
+What's inside the lstbin* directories you ask?
+    lstbin_{even,odd}
+        - Has frffix_sep{-1,0,1},1 : has fringe rate filtered data which has a revised 
+          version of the fringe rate filter applied. Has the rms beam weighting and not 
+          just the singal beam weighting. L suffix.
+
+        - Also has sep{-1,0,1},1 directories which have the same files as the above 
+          directories but has the previous optimal fringe rate filter that has just 
+          the single beam weighting.
+   
+        - The files also have a bandpass applied to them derived from Gianni for the mis
+          calculated bandpass from before.
+
+    lstbin_{even,odd}_xtalk : 
+        - This is LST binned data that was used in the final analysis. has a
+          few different directories in it. All files have the bandpass
+          correction applied to it. Also, the optimally weighted fringe rate
+          filter has the rms beam weighting rather than single beam weigthing
+
+
+            -sep{i},1 : has data that is used in the final power spectrum. Has a special
+                        fringe rate filter applied to it that has a crosstalk removal 
+                        (low fringe rates) and an optimal fringe rate filter.  Also has
+                        bandpass correction applied.
+
+
+            -sep{i},1_nofrf : Has no optimal fringe rate filter applied to it. Only has 
+                              the old P14 frigne rate filter applied to it with the
+                              an xtalk filter removing fringe rates below 1e-4Hz.
+
+            -sep{i},1_only_optimal : Only has the optimal fringe rate  applied to
+                                     it (no cross-talk removal).
+
+            -wrong filt has only the wrong filter applied to it (only beamweighting)
+
+
+
+Also in /data4/paper/2012EoR/psa_live/forlstbinning/ there is data that does not
+have omnical applied to it. This is our old calibration technique. There are
+similar directories here that have the lstbinned data in it. 
+
+    - lstbin_{even,odd}_noxtalk is lst binning of data that does not have the
+cross talk removed after the delay filter. This is what was used in Ali
+et.al2015 for the comparison. This data does have the bandpass applied to them
+from Gianni. Also has the two fringe rate filters applied (crosstalk and
+optimal). data used was *.uvcRREcACPBRA
+
+    - lstbin_{even,odd} : old data which had lossy cross talk removal applied to
+      it (10 min averages subtracted). DOes have the fringe rate filter applied,
+      but may not be the rms beam weighted. May just be the single beam weighted.
+
+
+
+copy all of the data from these directories to your computer. 
+For me I copied all the data to ~/projects/paper/analysis/psa64/
+Below is the data used in the Ali et.al 2015 paper.
+    -lstbin_{odd,even}_nomni_xtalk : good data that has no omnical applied to it.
+                            same data as lstbin_*_noxtalk in forlstbinning abv.
+    -lstbin_even_xtalk_removed : has the final spec data. That is it has the
+                    data that was optimally fringe rate filtered and has xtalk 
+                    removal (applied in fringe rate space).
+    -lstbin_even_xtalk_optimal : same as above data except only has the optimal
+                    fringe rate filtered applied to it. There is no cross talk 
+                    removal here.
+    
+    -lstbin_even_fg : has foreground contained data.
+    
+    - lstbin_even_nomni : has the bad cross talk removal. Shouldnt use this data
+      for anyhtin..
+    
+    -lstbin_even_nomni : has bad cross talk removal. Shouldnt use this data for
+     anything.
+        
+
+data products are located in lstdiff:
+    has the script pspec_run_3_spes.sh that runs all three spearation types.
+    runs pspec_cov_v002.py and pspec_cov_boot.py
+    uses these scripts from capo #0b9b4d3f0b3334404953a014ed654244fa8f66d6.
+    Note that it uses pspec_cov_v002.py from zsa/scripts but 
+    pspec_cov_boot.py from arp/scripts.
+    
+    Also note that this version of capo has the frf_conv package as a submodule. 
+    This package implements the optimal fringe rate filter and the cross talk. 
+    Look at the src (capo/src/frf_conv.py) to switch on and off the cross talk
+    kernel and then reinstall. Pretty messy and disorganized module. This needs
+    to be upgraded. XXX to do for ZSA.
+
+
+    aipy version on sherlock : 38f022c7addc7cc5a3502b874c2f2689bade70e4
+    
+    ON SHREDDER : capo #11219af5dbd2dc257ae04031dfb36055dea4f4ea 
+            capo was needed to implement the fringe rate filter on shredder.
+            this capo is the global capo (set as capo in zaki's home directory)
+            make sure to check the .bashrc file for proper sourcing and putting 
+            into paths. in order to run some scripts like pull_antpols.py from
+            aipy, they should just run. However, for other scripts like
+            xrfi_simply.py etc, run canopy-PAPER. Also, when installing capo be
+            in the canopy-PAPER envirnoment. I need to get this fixed up to use
+            my own canopy. This is a work around for now. Basically using
+            whatever aipy is shipped with canopy-PAPER environment (which should
+            be global, so anybody can use it) and when using the pull_antpols.py
+            script it uses aipy version
+            #38f022c7addc7cc5a3502b874c2f2689bade70e4.
+
+
+
+in order to run power spectrum pipeline. Get all of the uv files together for a
+single separation : 
+    for sep0,1  we run:
+    python /Users/sherlock/src/capo/zsa/scripts/pspec_cov_v002.py -C
+psa6240_v003 --window=none -c 95_115 --sep=sep0,1 -b 100
+    spits out 100 bootstrap files.
+    do this for every separation and bootstrap over all files (all 3 types) and
+times with 
+
+~/src/capo/arp/scripts/pspec_cov_boot.py ../sep{-1,0,1},1/v0${VERSION}/pspec_boot00*.npz
+
+plotting script to plot the power spectrum is best used from the paper64
+directory : psa64_pspec/plots/plot_pk_k3pk.py
+
+
