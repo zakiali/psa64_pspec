@@ -1,0 +1,6 @@
+Things to change in version 1 of the apj submission. 
+
+1. Change citations for Pober2015 and Parsons2015 from in prep to submitted ones.
+
+2. Get the flow chart figure fixed. The pdf doesn't show up and the eps is grainy.
+
