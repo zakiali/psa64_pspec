@@ -305,8 +305,8 @@ strictly east-west baselines between adjacent columns (e.g. 41-47
 in Figure \ref{fig:antenna_positions}; hereafter referred to 
 as {\it fiducial baselines}), 30-m east-west baselines
 whose eastern element is staggered one row up (e.g. 10-41), and
-those whose eastern element is one row down (e.g. 10-58) \textbf{with each having 
-56, 49, and 49 baselines, respectively}.
+those whose eastern element is one row down (e.g. 10-58). \textbf{These baseline
+groups consist of 56, 49, and 49 baselines, respectively}.
 We define a redundant group of
 baselines as being the set of baselines that have the same grid spacing;
 baselines in each
@@ -628,7 +628,7 @@ in the analysis.
 
 \subsection{Absolute Calibration}\label{sec:abscal}
 %    -Selfcal to pictor, fornax, and crab (to get the north-south components).
-%       --Reiterate that redundant cal does not solve for the overall  and
+%       --Reiterate that redundant cal does not solve for the overall flux and
 %         phase parameters. 
 %       --There are two final phase parameters we must solve
 %         for in order to correctly phase to a source on the sky. Redundancy
@@ -1073,18 +1073,21 @@ power spectrum estimate.
 %sums.
 %[above statement is incorrect]
 
-Sporadic RFI events (i.e. occurring rarely in an entire season) can skew
-individual LST bins away from the median value of the sky at a given LST,
-deviating from Gaussian statistics. To catch these events, we compute the median
+Sporadic RFI events (XXX i.e. occurring rarely in an entire season) result
+in measurements that, in any individual LST bin, deviate from the Gaussian
+distribution characteristic of thermal noise.
+To catch these events, we compute the median
 of a LST bin for each frequency and flag values 3$\sigma$ above the median,
-before averaging. This filter mitigates the effects of non-Gaussianity in time,
-which is most likely due to spurious RFI events. Since we are narrowing our
-distribution of visibilities around a patch of sky, a LST bin for a
-drift scan telescope, but keeping the same mean value, there is no associated
-signal loss of the 21 cm signal. The variance here is for a given sky position
-and not related to the variance, or power spectrum, of the cosmological signal
-across the entire sky.  Therefore, we expect there to be no associated signal
-loss with the use of this filter.
+before averaging. 
+Since we are narrowing the
+distribution of visibilities about the median, the measured thermal noise
+variance is not preserved under this filter.  However, since the central
+value is preserved, the expectation value of the measured visibility in each
+LST bin is unchanged, and there is no associated signal loss for power spectrum
+measurements.  Moreover, because errors are estimated empirically
+through bootstrapping (see Section XXX), the slight increase in measurement 
+error associated with truncating the tails of the
+Gaussian distribution are naturally accounted for.
 
 
 %\section{LST Binning and Stability}\label{sec:lstbin}
@@ -1190,21 +1193,24 @@ loss with the use of this filter.
 %   t_int = 42.8/n.mean(fr100)
 %   
 
-In time-averaging visibilities, we aim to coherently combine  $k$-modes on the
-sky that are independent  before squaring in the power spectrum to get the
-maximum sensitivity. This is mathematically similar to the more traditional
+By averaging visibilities in time, we aim to maximize sensitivity
+by coherently combining repeated measurements
+of $k$-modes 
+before squaring these measurements and averaging over independent $k$-modes
+to estimate the power spectrum amplitude.
+This is mathematically similar to the more traditional
 process of gridding in the $uv$ plane, but applied to a single baseline.
 However, rather than applying a traditional box-car average, we can apply a
 kernel --- a so-called ``fringe-rate" filter --- that weights different temporal
 rates by the antenna beam corresponding to the parts of the sky moving at the
 same rate.
 
-Broadly, for a given baseline and frequency, different parts of the sky
-correspond to different fringe-rates.  Maximum fringe rates are found along the
+For a given baseline and frequency, different parts of the sky
+exhibit different fringe-rates.  Maximum fringe rates are found along the
 equatorial plane, where the rotation rate of the sky is highest, and zero
 fringe rates are found at the poles, where the sky does not rotate and hence
 sources do not move through the fringes of a baseline \citep{parsons_backer2009}.
-However, fringe rates are not constant as a function of latitude. Bins of
+Fringe rates are not constant as a function of latitude. Bins of
 constant fringe rate correspond to rings in RA and DEC, where the east-west
 projection of a baseline projected toward a patch of the sky is constant.  We
 use this fact in conjunction with the root-mean-squared beam response for each
@@ -1230,7 +1236,7 @@ up-weight points of the sky where our instrument is more sensitive and down-weig
 those points farther down in the primary beam, which are less sensitive.
 For white noise,
 all fringe-rate bins will contain the same amount of noise, but the amount of signal
-varies and is determined by how the primary beam responds to the sky.
+in each bin is determined by the primary beam response on the sky.
 By weighting fringe-rate
 bins by the root mean square (RMS) of the beam response, we can get a net increase in sensitivity.  
 %Upweighting the bins with higher signal relative to those with less signal
@@ -1421,7 +1427,7 @@ Figure \ref{fig:density} shows the visibility repeatability between
 baselines and nights as a function of LST. Specifically, we histogram the real part of
 the visibilities for all redundant fiducial baselines 
 in a given LST bin for foreground contained data. We see that for a
-given LST bin the spread in the value for all the baselines is $\sim$50 Jy which corresponds with our observed
+given LST bin, the spread in values over all the baselines is $\sim$50 Jy which corresponds with our observed
 $T_{sys}\sim$500K.  We get
 more samples per LST bin in the range of 2--10 hours due to our observing
 season, therefore the density of points in this LST region is greater, as shown by
@@ -2941,8 +2947,8 @@ arrays all deliver, at best, comparable low-significance detections of fiducial 
 of reionization.  To move beyond simple detection, next-generation instruments must
 deliver much more collecting area with very compact arrays.
 
-\textbf{The Hydrogen Epoch of Reionization Array (HERA) and the low frequency Square Kilometre Array (SKA-Low) are next generation experiments that aim to make a significant detection of the 21 cm power spectrum and even begin characterizing it. SKA-Low has secured pre-construction funding for a build out in western Australia. HERA, on the other hand, was recently granted funding for its first phase under the National Science Foundation's {\it Mid-Scale Innovations Program}. It has been
-designed to have the maximum sensitivity possible for an epoch of reionization array consisting of a large collecting area and short baselines. HERA uses a close packing of 14-m diameter} 
+\textbf{The Hydrogen Epoch of Reionization Array (HERA) and the low frequency Square Kilometre Array (SKA-Low) are next generation experiments that aim to make significant detections of the 21 cm power spectrum and begin characterizing it. SKA-Low has secured pre-construction funding for a facility in western Australia. HERA was recently granted funding for its first phase under the National Science Foundation's {\it Mid-Scale Innovations Program}}. 
+HERA uses a close packing of 14-m diameter
 dishes designed to minimize the width of the delay-space kernel
 $\tilde{A}_\tau$ in Equation \eqref{eqn:delay_transform}.
 Sensitivity forecasts for a 547-element HERA array
