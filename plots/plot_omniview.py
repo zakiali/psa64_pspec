@@ -16,10 +16,10 @@ plt.axis(8*np.array([-1, 1, -1, 1]))
 #plt.ylabel('Imaginary [Jy]', size='Large')
 axes[0].set_ylabel('Imaginary [kJy]', size='large')
 axes[0].set_xlabel('Real [kJy]', size='large')
-axes[0].set_title('Rough Calibration',size='large')
+axes[0].set_title('Before OMNICAL',size='large')
 #axes[1].set_ylabel('Imaginary [Jy]', size='large')
 axes[1].set_xlabel('Real [kJy]', size='large')
-axes[1].set_title('Omnical',size='large')
+axes[1].set_title('After OMNICAL',size='large')
 
 plt.show()
 

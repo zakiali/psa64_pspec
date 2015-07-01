@@ -104,7 +104,7 @@ based on a 135-day observing campaign with a 64-element deployment of the
 Donald C. Backer Precision Array for Probing the Epoch of Reionization (PAPER)
 in South Africa.  This work extends the work presented in
 \citet{parsons_et_al2014} with more collecting area, a longer observing period, improved redundancy-based
-calibration, optimal fringe-rate filtering, and improved power-spectral
+calibration, improved fringe-rate filtering, and updated power-spectral
 analysis using optimal quadratic estimators. The result is a new $2\sigma$
 upper limit on $\Delta^2(k)$ of \mKlimit in the range
 $0.15<k<0.5\hMpci$ at $z=8.4$.  This represents a three-fold improvement over the
@@ -144,8 +144,8 @@ observations of resonant scattering of Ly$\alpha$ by the neutral IGM toward
 distant quasars (the `Gunn-Peterson' effect) \citep{fan_et_al2006},
 the demographics of Ly$\alpha$ emitting galaxies \citep{schenker_et_al2013,treu_et_al2013,Faisst_et_al2014},
 and the
-Ly$\alpha$ absorption profile toward very distant quasars \citep{bolton_et_al2011}.
-As stands, the known population of galaxies falls well short 
+Ly$\alpha$ absorption profile toward very distant quasars \citep{bolton_et_al2011,bosman_becker2015}.
+As it stands, the known population of galaxies falls well short 
 of the requirements for reionizing the universe at redshifts compatible
 with CMB optical depth measurements \citep{robertson_et_al2013,robertson_et_al2015}, 
 driving us to deeper observations with, e.g., JWST and ALMA, to reveal the fainter end of the luminosity function.
@@ -230,8 +230,7 @@ over previous limits by orders of magnitude, showing that the early universe was
 from adiabatic cooling, presumably by emission from high-mass X-ray binaries or mini-quasars.
 
 In this paper, we improve on this previous result using
-a larger 64-element deployment of PAPER and a longer observing period, along with better redundant calibration, a new
-optimal fringe-rate filtering technique, and an improved power-spectrum estimation pipeline.
+a larger 64-element deployment of PAPER and a longer observing period, along with better redundant calibration, an improved fringe-rate filtering technique, and an updated power-spectrum estimation pipeline.
 The result is an
 upper limit on $\Delta^2(k)$ of \mKlimit~in the range
 $0.15<k<0.5\hMpci$ at $z=8.4$.  This result places constraints on the 
@@ -260,9 +259,9 @@ We discuss these results in Section \ref{sec:discussion} and conclude in Section
 Antenna position within the PAPER-64 array.
 This analysis only makes use of
 east-west baselines between adjacent columns that have row
-separations of zero (e.g. 49-41, 41-47, 10-3, \dots)
-one in the northward direction (e.g. 10-41, 3-47, 9-3, \dots) or
-one in the southward direction (e.g. 49-3, 41-25, 10-58, \dots).
+separations of zero (black; e.g. 49-41, 41-47, 10-3, \dots)
+one in the northward direction (orange; e.g. 10-41, 3-47, 9-3, \dots) or
+one in the southward direction (blue; e.g. 49-3, 41-25, 10-58, \dots).
 Because of their high levels of redundancy, 
 these baselines constitute the bulk of the array's sensitivity for power
 spectrum analysis.}
@@ -301,12 +300,12 @@ the same Fourier mode on the sky (P12a; P14).
 We rely on all 2016 baselines for calibration,
 but only use a subset of the baselines for the power spectrum
 analysis. This subset consists of three types of baselines: the 30-m
-strictly east-west baselines between adjacent columns (e.g. 41-47
+strictly east-west baselines between adjacent columns (e.g. 41-47, black 
 in Figure \ref{fig:antenna_positions}; hereafter referred to 
 as {\it fiducial baselines}), 30-m east-west baselines
-whose eastern element is staggered one row up (e.g. 10-41), and
-those whose eastern element is one row down (e.g. 10-58) \textbf{with each having 
-56, 49, and 49 baselines, respectively}.
+whose eastern element is staggered one row up (e.g. 10-41, orange in Figure \ref{fig:antenna_positions}), and
+those whose eastern element is one row down (e.g. 10-58, orange in Figure \ref{fig:antenna_positions}) 
+\textbf{with each having 56, 49, and 49 baselines, respectively}.
 We define a redundant group of
 baselines as being the set of baselines that have the same grid spacing;
 baselines in each
@@ -417,7 +416,7 @@ absolute phase and gain parameters that cannot be solved by redundancy alone.
 After suppressing foregrounds with a
 wide-band delay filter (Section \ref{sec:wbd_filtering}) and additional RFI flagging and crosstalk removal, 
 we average the data in LST (Section \ref{sec:lstbin}) and apply a
-fringe-rate filter (Section \ref{sec:frf}) to optimally combine the time-domain data. 
+fringe-rate filter (Section \ref{sec:frf}) to combine time-domain data. 
 Finally, we use an
 optimal quadratic estimator (Section \ref{sec:oqe}) to make our estimate of the 21 cm power spectrum.
 
@@ -736,7 +735,7 @@ over a wide field of view.
 \includegraphics[width=\columnwidth]{plots/picspec.png}
 \caption{
 Measured spectrum of Pictor A in Stokes I (blue) relative to its catalog
-value (black; \citealt{jacobs_et_al2013}).  Flux measurements are
+value (black; \citealt{jacobs_et_al2013}).  Flux density measurements are
 extracted from images of Pictor A, made independently for each frequency channel in
 10 minutes snapshots as Pictor transits between hour angles of -1:49
 and 1:10.  Each measurement is then divided by the PAPER beam model and
@@ -1026,7 +1025,7 @@ visibility.
 Visibilities measured by a fiducial baseline in the PAPER-64 array, 
 averaged over 135 days of observation.  From left to right, columns represent
 data that: (1) contain foregrounds prior to the application of a wideband
-delay filter or optimal fringe-rate filtering, (2) are fringe-rate filtered but
+delay filter or fringe-rate filtering, (2) are fringe-rate filtered but
 not delay filtered, (3) are delay filtered at 15 ns beyond the horizon limit but
 are not fringe-rate filtered, (4) are both delay and fringe-rate filtered,
 and (5) are delay and fringe-rate filtered and have been averaged over all
@@ -1143,7 +1142,7 @@ loss with the use of this filter.
 %\ref{fig:tsys_lst_fq}
 %\end{figure}
 
-\subsection{Optimal Fringe-Rate Filter}\label{sec:frf}
+\subsection{Fringe-Rate Filtering}\label{sec:frf}
 %   -What is fringe rate filtering. Cite Parsons And Liu 2014.
 %       --Fringe Rate filtering is nothing more then a time domain weighted
 %         average per frequency of of visibilities. The filter can be applied 
@@ -1247,11 +1246,31 @@ a net improvement in sensitivity depending on the shape of the beam and the
 declination of the array. For PAPER, this filter roughly doubles the
 sensitivity of our measurements.  
 
+\textbf{Generally, a fringe-rate filter has the property of integrating visibilities. For a 
+fringe-rate filter, $f_\text{fr}$, the effective integration time can be calculated by comparing the variance statistic before 
+and after filtering. Therefore, the integration time can be calculated as 
+\begin{equation}\label{eqn:frf_inttime}
+    t_{\text{int,after}} = t_{\text{int,before}}\frac{\int{\sigma^{2}f_{\text{flat}}^{2}df}}{\int{\sigma^{2}f_{\text{fr}}^{2}df}},
+\end{equation}
+where $t_{\text{int,before}}$ is the integration time before filtering, $\sigma$ is that variance of the signal before filtering, $f_{flat}$ is a flat fringe rate filter and the integral is taken over all possible fringe rates for a given baseline and frequency. As discussed in \citet{parsons_et_al2015}, the
+signal loss associated with this fringe-rate filter can be modeled as a modification
+of the area of the primary beam.}
+
+\textbf{For the fiducial baseline at a 151 MHz, the integration time, as given in equation \eqref{eqn:frf_inttime}, associated with an optimal fringe rate filter is $3430\, \textrm{s}$. The number of statistically independent samples on the sky decreases from 83 to 1 sample per hour. As discussed in section \ref{sec:sigloss}, empirically estimating a covariance matrix with a small 
+number of independent modes can lead to signal loss. In order to counteract the signal loss, we degrade the optimal fringe-rate filter, as seen in figure \ref{fig:fr_preserved_signal}, to have an effective integration time of 1886 seconds, thus increasing the number of independent modes to 2 per hour. Even though the fringe rate filter is now sub-optimal, it holds a big improvement over the boxcar fringe rate weighting as used in P14. As documented in Table \ref{tbl:sigloss}, the correction factor for the associated signal loss of the filter we have chosen is \textbf{1.39}.}
+
+%As a rough check, we note that this is roughly
+%the time it takes a source to transit through one fringe period.  Because the
+%fringe-rate filter integrates in time, the number of statistically independent
+%samples of the sky drastically decreases from 83 to $\sim2$ independent samples
+%per hour.
+
 %We implement the optimal fringe-rate filter by calculating the fringe rates at
 %every point on the sky, for a given frequency, and weighting each bin by the
 %beam of a given baseline. 
-We implement the optimal filter on a per baseline basis by weighting the
-fringe-rate bins on the sky by the RMS of the beam at that same location.
+%XXX need help describing the actual filter used.
+We implement the modified filter on a per baseline basis by weighting the
+fringe-rate bins on the sky by the RMS of the beam at that same location.e
 In order to obtain a smooth filter in the fringe-rate domain, we fit a Gaussian
 with a hyperbolic tangent tail to this filter. In addition, we multiply this
 response with another hyperbolic tangent function that effectively zeros out
@@ -1259,11 +1278,7 @@ fringe rates below 0.2 mHz. This removes
 the slowly varying signals that we model as crosstalk. We convolve the
 time-domain visibilities with the Fourier transform of the resulting fringe-rate
 filter, shown in Figure \ref{fig:fr_preserved_signal}, to produce an averaged
-visibility.  The effect on the data can be seen in Figure \ref{fig:waterfalls}.
-As discussed in \citet{parsons_et_al2015}, the
-signal loss associated with this fringe-rate filter can be modeled as a modification
-of the area of the primary beam.  As documented in
-Table \ref{tbl:sigloss}, the correction factor for the filter we have chosen is 1.44.
+visibility. The effect on the data can be seen in Figure \ref{fig:waterfalls}.
 
 %After LST binning, we apply a fringe-rate filter on a baseline-by-baseline
 %basis to remove crosstalk that manifests itself as a slowly varying signal in
@@ -1285,12 +1300,35 @@ Table \ref{tbl:sigloss}, the correction factor for the filter we have chosen is 
 %\label{fig:fringe_rate_cut}
 %\end{figure}
 
+%\begin{figure}\centering
+%\includegraphics[width=\columnwidth]{plots/fr_preserved_signal.png}
+%\caption{
+%The magnitude of the fringe-rate transform of foreground contained visibilities measured on the fiducial baseline at 159 MHz before (blue) and after (red) fringe-rate filtering. The fringe-rate filter (green) is normalized to integrate to unity, but has been scaled here for legibility.
+%Fringe-rate filtering at 159MHz. Fringe-rates of is defined as the rate at which
+%the sky moves through the fringe pattern of a baselines fringe pattern. This is
+%dependent on the frequency under consideration as well as position on the sky.
+%Shown here is the fringe-rate transform (fourier transform along the time axis
+%of a visibility) of unfiltered foreground contained data for a 30 m east-west
+%baseline (blue). The fringe-rate filter in fringe-rate space (green) is scaled
+%to highlight the shape of the filter. In practice, this filter is normalized so
+%that its integral is unity.  This filter is multiplicative in this domain and
+%its fourier transform convolves the time domain visibilities from which the
+%unfiltered data in this plot is dervied from.  The filtered data (red) is the
+%product of the unfiltered with the weights of the fringe-rate filter (green).
+%Foreground signal is still retained in the final output, but signal low in the
+%beam has been downweighted. For the PAPER array in South Africa, these fringe
+%rates correspond to small/negative fringe rates and nearly the maximum fringe
+%rates of a 30m east-west baseline. Note the maximum and minimum fringerates
+%correspond to the theoretical minimum and maximum for a 30 m baseline at 159
+%MHz.
+%}
+%\label{fig:fr_preserved_signal}
+%\end{figure}
+
 \begin{figure}\centering
-\includegraphics[width=\columnwidth]{plots/fr_preserved_signal.png}
+\includegraphics[width=\columnwidth]{plots/fringe_rate_filter.png}
 \caption{
-The magnitude of the fringe-rate transform of foreground contained visibilities measured on the fiducial baseline at 159 MHz before (blue) and
-after (red) fringe-rate filtering. The fringe-rate filter (green) is normalized
-to integrate to unity, but has been scaled here for legibility.
+The optimal fringe-rate filter (orange) that and the degraded fringe-rate filter (blue) actually used in the analysis  at 151 MHz, normalized to peak at unity. 
 %Fringe-rate filtering at 159MHz. Fringe-rates of is defined as the rate at which
 %the sky moves through the fringe pattern of a baselines fringe pattern. This is
 %dependent on the frequency under consideration as well as position on the sky.
@@ -1311,26 +1349,6 @@ to integrate to unity, but has been scaled here for legibility.
 }
 \label{fig:fr_preserved_signal}
 \end{figure}
-
-
-The action of the fringe-rate filter is to get an optimally weighted
-sample, averaged at the longest physically possible integration time.  For the
-fiducial baselines, the effective integration time is calculated by comparing
-the variance statistic for a fringe-rate filter that is a flat  weighting,
-$f_{\text{flat}}$, versus that with an optimal filter weighting, $f_{optimal}$,
-as described above. We apply these filters to random noise with variance 1,
-without loss of generality. We can conclude that 
-\begin{equation}\label{eqn:frf_inttime}
-    t_{\text{int,after}} = t_{\text{int,before}}\frac{\int{\sigma^{2}f_{\text{flat}}^{2}dt}}{\int{\sigma^{2}f_{\text{optimal}}^{2}dt}},
-\end{equation}
-where $t_{\text{int,before}}$ is the integration time before filtering.
-Equation \eqref{eqn:frf_inttime} evaluates to $2005\, \textrm{s}$ for an
-optimal fringe-rate filter on the fiducial baseline at 150 MHz, equating to a
-integration time of 33 minutes. As a rough check, we note that this is roughly
-the time it takes a source to transit through one fringe period.  Because the
-fringe-rate filter integrates in time, the number of statistically independent
-samples of the sky drastically decreases from 83 to $\sim2$ independent samples
-per hour.
 
 %It is important to note that the fringe rate filter is removing some sky signa
 %as is seen in figure \ref{fig:waterfalls}, but it is removing 
@@ -1747,7 +1765,7 @@ Section \ref{sec:observations}),
 in the sense that within each group there are multiple copies of the same baseline. In the
 description that follows, we first estimate the power spectrum separately for each group.
 Power spectrum estimates obtained from the different redundant groups are then combined in a set of averaging and bootstrapping steps described in Section \ref{sec:bootstrap}. Note that because
-our data have been optimally fringe-rate filtered in the manner described in Section \ref{sec:frf},
+our data have been fringe-rate filtered in the manner described in Section \ref{sec:frf},
 we may reap all the benefits of coherently integrating in time simply by estimating the power spectrum
 for every instant in the LST-binned data before averaging over the time-steps within the LST-binned day \citep{parsons_et_al2015}.
 
@@ -1992,15 +2010,14 @@ product of a vector with itself, i.e.,
 \end{equation}
 where $\x$ is the data (column) vector used in the analysis. In our analysis,
 we do not have \emph{a priori} knowledge of the covariance matrix. and thus we
-must resort to empirical estimates. As we have alluded to above, we replace
+must resort to empirical estimates \citep{dillon_et_al2015}. As we have alluded to above, we replace
 the ensemble average with a time average that runs from 0 to 8:30 LST hours.
 
 Since the OQE method for power spectrum estimation requires the inversion
 of $\C$, it is crucial that our empirically estimated covariance be a full rank matrix.
 With our data consisting of visibilities over $20$ frequency channels, the covariance
 matrix is a $20 \times 20$ matrix. Thus, a necessary condition for our estimate to be
-full rank is for there to be at least $20$ independent time samples in our average. As noted in Section \ref{sec:frf} the optimal fringe-rate
-filter corresponds to averaging time samples for 33 minutes. Over the LST range
+full rank is for there to be at least $20$ independent time samples in our average. As noted in Section \ref{sec:frf} the fringe-rate filter used corresponds to averaging time samples for 31 minutes. Over the LST range
 used in this analysis, this corresponds to roughly 20 statistically
 independent modes in our data after fringe-rate filtering. We therefore have just enough
 samples for our empirical estimate, and in practice, our covariance matrices are invertible
@@ -2092,7 +2109,7 @@ dominates over the foreground modes present in estimates of the data covariance.
 In order to deal with possible signal loss, we perform simulations of our analysis pipeline, 
 deriving correction factors that must be applied to our final constraints. We simulate visibilities for
 Gaussian temperature field with a flat amplitude in $P(k)$ that rotates with the
-sky, which is optimally fringe-rate filtered in the same way as the data for our fiducial baselines. This signal is processed through our pipeline, and the output power spectrum compared to the input
+sky, which is fringe-rate filtered in the same way as the data for our fiducial baselines. This signal is processed through our pipeline, and the output power spectrum compared to the input
 power spectrum, for various levels of input signal amplitude.
 We repeat this for 40 sky realizations at each signal level.  Figure
 \ref{fig:signal_loss} shows the resultant signal loss associated with
@@ -2401,9 +2418,9 @@ unlikely to be chance.
 Diagnostic power spectra in the style of Figure \ref{fig:final_pspec}
 illustrating the impact of various analysis stages.
 The blue power spectrum uses the P14 fringe-rate filter combined with crosstalk removal.
-Green illustrates the result using the optimal fringe-rate filter, but without crosstalk removal.
+Green illustrates the result using the improved fringe-rate filter, but without crosstalk removal.
 A power spectrum derived without the application of OMNICAL is shown in orange.  Black
-includes optimal fringe-rate filtering, crosstalk removal, and OMNICAL calibration; it is the 
+includes improved fringe-rate filtering, crosstalk removal, and OMNICAL calibration; it is the 
 same power spectrum shown in Figure \ref{fig:final_pspec}.
 }\label{fig:pspec_comp}
 \end{figure*}
@@ -2424,7 +2441,7 @@ to be affected by the spatial filtering associated with fringe-rate filtering, w
 a statistically isotropic signal is not.  
 Indeed, we see that excesses in many modes
 measured with using the P14-stype time-domain filtering (blue in Figure \ref{fig:pspec_comp})
-decrease significantly using the new optimal fringe-rate filter.  
+decrease significantly using the improved fringe-rate filter.  
 As discussed in \citet{parsons_et_al2015},
 the normalization applied to $\Omega_{\rm eff}$ for fringe-rate filtering correctly
 compensates for the effect of this filtering on power-spectral measurements
@@ -2721,7 +2738,7 @@ to \citet{pober_et_al2015} for a detailed examination of these results.
 The improvement in our results over those in P14 are the result of four
 major advances:
 \begin{itemize}
-\item the expansion of the PAPER array to 64 antennas doubled our instrument's power spectrum sensitivity,
+\item the expansion of PAPER to 64 antennas doubled our instrument's power spectrum sensitivity,
 \item using OMNICAL for redundant calibration significantly improved the clustering of measurements
 over the previous implementation of LOGCAL used in P14,
 \item fringe-rate filtering further improved power spectrum sensitivity by $\sim$50\% and suppressed
@@ -2901,15 +2918,15 @@ the delay-spectrum approach to foreground avoidance presented in
 P12b and first applied in P14.  The application of a delay filter over
 a wide bandwidth continues to be one of the most powerful techniques yet
 demonstrated for managing bright smooth-spectrum foregrounds.  In this
-paper, we extend the analysis in P14 with optimal fringe-rate filtering,
+paper, we extend the analysis in P14 with improved fringe-rate filtering,
 improved redundant calibration with OMNICAL, and with an optimal quadratic
 estimator that, while not perfectly lossless, is more adept at down-weighting residual foregrounds.
 The combined effect of these improvements leaves a power-spectral measurement that
 is not consistent with zero at the 4.7$\sigma$-level, which we expect is a result of
 contamination from crosstalk and foregrounds.
-With the expansion of the PAPER array to 64 antennas, the extended 135-day
+With the expansion of PAPER to 64 antennas, the extended 135-day
 observing campaign,
-and the added sensitivity benefits of optimal fringe-rate filtering, combined with
+and the added sensitivity benefits of fringe-rate filtering, combined with
 the optimization of antenna positions in PAPER for highly redundant
 measurements, this thermal
 noise limit is beginning to enter the realm of constraining realistic models of reionization.
@@ -2941,18 +2958,18 @@ arrays all deliver, at best, comparable low-significance detections of fiducial 
 of reionization.  To move beyond simple detection, next-generation instruments must
 deliver much more collecting area with very compact arrays.
 
-\textbf{The Hydrogen Epoch of Reionization Array (HERA) and the low frequency Square Kilometre Array (SKA-Low) are next generation experiments that aim to make a significant detection of the 21 cm power spectrum and even begin characterizing it. SKA-Low has secured pre-construction funding for a build out in western Australia. HERA, on the other hand, was recently granted funding for its first phase under the National Science Foundation's {\it Mid-Scale Innovations Program}. It has been
-designed to have the maximum sensitivity possible for an epoch of reionization array consisting of a large collecting area and short baselines. HERA uses a close packing of 14-m diameter} 
+\textbf{The Hydrogen Epoch of Reionization Array (HERA) and the low frequency Square Kilometre Array (SKA-Low) are next generation experiments that aim to make a significant detection of the 21 cm power spectrum and even begin characterizing it. SKA-Low, the successor to LOFAR and MWA,  has secured pre-construction funding for a build out in western Australia. HERA, on the other hand, was recently granted funding for its first phase under the National Science Foundation's {\it Mid-Scale Innovations Program}. It has been
+designed to have the maximum sensitivity possible for an epoch of reionization array consisting of a large collecting area and short baselines. HERA uses a close packing of 14-m diameter 
 dishes designed to minimize the width of the delay-space kernel
 $\tilde{A}_\tau$ in Equation \eqref{eqn:delay_transform}.
-Sensitivity forecasts for a 547-element HERA array
-show that HERA can deliver detections of the 21cm reionization signal
-at a significance of 39$\sigma$ using the same the conservative 
+Sensitivity forecasts for a 331-element HERA array and SKA-Low
+show that they can deliver detections of the 21cm reionization signal
+at a significance of 39$\sigma$ and 21$\sigma$, respectively, using the same the conservative 
 foreground avoidance strategy employed in this paper
 \citep{pober_et_al2014}.  HERA is the natural successor
 to PAPER, combining a proven experimental strategy with the 
 sensitivity to deliver results that will be truly transformative for
-understanding of our cosmic dawn.
+understanding of our cosmic dawn.}
 
 %The Hydrogen Epoch of Reionization Array (HERA), whose first phase was recently granted funding
 %under the National Science Foundation's {\it Mid-Scale Innovations Program}, has been
