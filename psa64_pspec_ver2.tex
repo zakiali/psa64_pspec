@@ -1072,7 +1072,7 @@ power spectrum estimate.
 %sums.
 %[above statement is incorrect]
 
-Sporadic RFI events (XXX i.e. occurring rarely in an entire season) result
+Sporadic RFI events result
 in measurements that, in any individual LST bin, deviate from the Gaussian
 distribution characteristic of thermal noise.
 To catch these events, we compute the median
@@ -1084,7 +1084,7 @@ variance is not preserved under this filter.  However, since the central
 value is preserved, the expectation value of the measured visibility in each
 LST bin is unchanged, and there is no associated signal loss for power spectrum
 measurements.  Moreover, because errors are estimated empirically
-through bootstrapping (see Section XXX), the slight increase in measurement 
+through bootstrapping (see Section \ref{sec:bootstrap}), the slight increase in measurement 
 error associated with truncating the tails of the
 Gaussian distribution are naturally accounted for.
 
