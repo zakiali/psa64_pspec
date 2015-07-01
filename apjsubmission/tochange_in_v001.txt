@@ -1,6 +1,11 @@
 Things to change in version 1 of the apj submission. 
 
-1. Change citations for Pober2015 and Parsons2015 from in prep to submitted ones.
+1. Change citations for Pober2015 and Parsons2015 from in prep to submitted ones. CHECK
 
-2. Get the flow chart figure fixed. The pdf doesn't show up and the eps is grainy.
+2. Get the flow chart figure fixed. The pdf doesn't show up and the eps is grainy. CHECK
 
+3. cite Nithya and Park papers. CHECK
+
+4. Change Jonnie's initial back and his citations. CHECK
+
+5. Fix fringe rate filter. ... not doing this and leaving as is.

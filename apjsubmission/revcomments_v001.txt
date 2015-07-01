@@ -1,0 +1,86 @@
+KEY:
+    $$$ = not a necessry change.
+    CHECK = did this change.
+
+Referee Report
+Reviewer's Comments:
+This is an excellent paper, from a team that is clearly leading the way in pushing toward a detection of redshifted HI from the Epoch of Reionisation. The paper builds upon an already impressive literature from the three main groups pursuing interferomeric detections of the EoR, specifically in this case on the history of publications from the PAPER team regarding their instrument, observational strategies, data analysis techniques, and initial derived limits. Not all researchers working in EoR observations may agree with the PAPER approach, but this paper is impressive in explaining clearly the approaches taken, the methods used (and the motivations behind them), and in providing a balanced description of the consequences of the approach. This is, therefore, a very useful and positive paper for the field, showing that useful constraints may not be far away. Current and next generation experiments will take heart.
+
+I only have minor comments, below:
+
+1) Recent results (from Planck that first stars formed ~100 million years later than previously thought and the discovery of a redshift 6+ quasar with >10 billion solar mass black hole by Wu et al. Nature - Feb 26) should be mentioned in the introduction, I think. It is not so obvious that the EoR starts with the birth of the first stars;
+
+2) Introduction, second paragraph: "As it stands, the known...";
+CHECK
+
+3) In Figure 1, I suggest drawing lines between antenna pairs (10,41), (10,58), and (41,47), to explicitly draw attention to the baselines mentioned in the text. Makes it easier for the reader;
+CHECK. Maybe do other baselines so not cluttered.
+
+4) Throughout the paper you switch between (22.4 mJy)^2 and 503 mJy^2. Small point, but please choose one form;
+CHECK  switched all to the former.
+
+5) Section 2. Square Kilometre Array is the official (non-US English) spelling;
+CHECK
+
+6) Section 2. Would be useful to list how many baselines exist in each redundant group pointed out in Fig 1;
+CHECK. Listed them in the text.
+
+7) Near end of Section 3.1: "...from redundancy with over 10-minute..." does not make sense;
+CHECK. removed "with". Was not gramatically correct.
+
+8) A couple of places in the text "flux" is used where you mean "flux density";
+XXX
+
+9) After equation 6, the number of significant figures for S_{150} and its error are incompatible;
+CHECK. Went back and got the more accurate value.
+
+10) In Figure 4, the label "omnical" above the right hand panel should presumably be capitalised, to match the text. I'm not sure "rough calibration" is a very scientific label for the left hand panel;
+XXX fixed "Omnical" to "OMNICAL". Still have rough calibration in there. changed to Before and After OMNICAL
+
+11) Section 3.3, second paragraph: "...In the delay domain, a point...";
+CHECK
+
+12) Section 3.4, third paragraph: "...equivalent to an LST bin...", or "..a LST bin...", depending on your preference;
+CHECK, used the second one.
+
+13) Section 3.5, second paragraph: probably "zero fringe rate" is a better description than "static fringe rates" for objects at the poles;
+CHECK. Changed sentence a little bit.
+
+14) Section 3.5, second paragraph: Probably better to use "responds to the sky" rather than "illuminates the sky". Stick with the receive case rather than switch to the transmit case;
+CHECK.
+
+15) Section 4.1, first paragraph: "...given LST the spread in...";
+CHECK.
+
+16) Section 4.1, second paragraph: "...two-day timescales caused by the...";
+CHECK
+
+17) Before equation 25, "...where m_{\alpha} is a complex..." and "...delay mode \alphs. We...";
+CHECK.
+
+18) The upper limit triangles in Figure 18 are a bit hard to see. Could you make them a bit bigger please? Also, you need to list the triangle colour for the previous PAPER limit in the caption;
+CHECK. 
+
+19) Section 6.2, second paragraph: Please give the full arXiv reference for the "Planck Collaboration et al. (2015)" reference. It is unclear what this refers to;
+CHECK. Put in the arxiv number to the bib file.
+
+20) Section 6.2, several places, missing white space after citations of Pober et al. 2015, in prep);
+Added citations to biblio.bib. just need to recompile.
+
+21) Discussion, second paragraph: last sentence is truncated and incomplete;
+CHECK removed it.
+
+22) Discussion, third paragraph: "...improves, it will be possible...";
+CHECK
+
+23) Discussion, third paragraph: "...signal if the polarized signal...";
+CHECK
+
+24) Conclusions, second paragraph: "...continues to be one of the...";
+CHECK
+
+25) Conclusions, second paragraph (and here and there throughout). Surely "PAPER array" is redundant? So, should be "...antenna positions in PAPER for highly..." and similar elsewhere?
+CHECK for conclusions but not rest.
+
+26) At the end of the Conclusions, if the interesting criteria for future experiments are that they have large collecting area and have garnered significant funding, then I think you had better mention the SKA when you discuss HERA. SKA-low has secured large amounts of pre-construction funding and has survived SKA rebaselining, so is on at least as good a path as HERA. While PAPER is the precursor for HERA, LOFAR and the MWA are pathfinders and precursors for SKA-low. While I don't expect this authorship to be selling SKA-low, I think it is appropriate to acknowledge the SKA-low effort in the same vein as the HERA effort.
+CHECK : mentioned it.

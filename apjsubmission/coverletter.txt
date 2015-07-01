@@ -1,0 +1,47 @@
+We thank the reviewer for the helpful suggestions and comments. Most of the
+suggestions improved the quality of this paper and we were happy to use them.
+Below is an itemized list of the reviewers comments. Note that we left out
+replies to the comments concerning grammatical mistakes or minor changes. 
+
+In addition to the reviewers comments, we made a number of other changes to
+reflect an accurate description of the analysis taken. This includes the fact
+that the fringe rate filter used was not optimal in the sense of Parsons et al.
+(2015), but a modified version. As reflected in the paper, the use of this
+degraded optimal fringe rate filter was necessary in order to empirically
+estimate the covariance matrix used in the optimal quadratic estimator and to
+curtail signal loss. Even though we use a degraded optimal fringe rate filter,
+this filter is a substantial improvement on the boxcar fringe rate filter used
+in Parsons et al. (2014). The change in the description of the filter used is
+discussed (in bold) in section 3.5 and the comparison of filter weightings is
+shown in Figure 9. 
+
+Sincerely Zaki Ali, on behalf of the authors.
+
+
+(1) We have updated the citations in the introduction to reflect recent
+literature. 
+
+(3) In Figure 1, we highlighted the baselines of interest by drawing lines in
+between the antenna pairs and updated the text in section 2 to reflect these
+changes.
+
+(4) We have changed all the upper limit numbers to be of the form (22.4mJy)^2. 
+
+(6) We have listed the number of baselines for each redundant group in section
+2.
+
+(8) We changed flux to flux density where we saw appropriate. 
+
+(10) The titles in Figure 4 have been changed to be more precise. The left
+subplot being "Before OMNICAL" and the right subplot being "After OMNICAL".
+
+(18) We made the triangles for the other upper limits bigger as well as fixing
+the caption. 
+
+(26) We have acknowledged the SKA-low effort, and have drawn a parallel with
+HERA. 
+
+
+As for the rest of the comments, we have made the necessary changes to spelling,
+grammar, and typos. In addition, we have updated references throughout the
+manuscript.

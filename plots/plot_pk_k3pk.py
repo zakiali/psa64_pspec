@@ -23,12 +23,15 @@ o.add_option('--show', action='store_true',
 opts,args = o.parse_args(sys.argv[1:])
 print args
 
-dspec='data/final_pspecs/v032/nocov_pspec.npz'
+#dspec='data/final_pspecs/v032/nocov_pspec.npz'
 args=['data/final_pspecs/v050/pspec.npz']
+#args=['data/final_pspecs/v0200/pspec.npz']
+#args=['data/final_pspecs/v060/pspec.npz']
 
 def noise_level():
     tsys = 500e3 #mK
     inttime = 1886. #seconds. XXX fix with new integration.
+    #inttime = 2930. #seconds. XXX fix with new integration.
     nbls=51
     ndays = 120 #effectively this many days. days of operation = 135
     nseps = 3
@@ -47,8 +50,9 @@ def noise_level():
     scalar = X2Y * bm 
 
     fr_correct = 1.39
+    #fr_correct = 1.90
 
-
+    print 'X2Y', X2Y
     print 'scalar:', scalar
     print 'BM:', bm
     print 'Tsys:', tsys
@@ -334,7 +338,7 @@ for sep in RS_VS_KPL:
         nos_fold *= f
     if True: # For aggressive fringe-rate filtering, change beam area
         f = opts.afrf_factor
-#        f = 1.90 # ratio of power**2 beams for filtered * unfiltered beams: 0.306 / 0.162
+#       f = 1.90 # ratio of power**2 beams for filtered * unfiltered beams: 0.306 / 0.162
         f = 1.39 # ratio of power**2 beams for filtered * unfiltered beams: 0.306 / 0.162
         print 'Scaling data and noise by %f for beam constriction in aggressive fringe-rate filtering.' % f
         d *= f
@@ -416,6 +420,8 @@ k_h = C.pspec.dk_deta(C.pspec.f2z(.151)) * tau_h
 p.subplot(121)
 p.vlines(k_h, -1e7, 1e8, linestyles='--', linewidth=1.5)
 p.vlines(-k_h, -1e7, 1e8, linestyles='--', linewidth=1.5)
+#p.vlines(k_h, 1, 1e18, linestyles='--', linewidth=1.5)
+#p.vlines(-k_h, 1, 1e18, linestyles='--', linewidth=1.5)
 #p.gca().set_yscale('log', nonposy='clip')
 p.xlabel(r'$k_\parallel\ [h\ {\rm Mpc}^{-1}]$', fontsize='large')
 p.ylabel(r'$P(k)[\ {\rm mK}^2\ (h^{-1}\ {\rm Mpc})^3]$',fontsize='large')
@@ -427,18 +433,18 @@ p.grid()
 p.subplot(122)
 #if ONLY_POS_K: p.plot([.5], [248**2], 'mv', label='GMRT2013')
 #else: p.plot([-.5, .5], [248**2, 248**2], 'mv', label='GMRT2013')
-p.vlines(k_h, -1e7, 1e7, linestyles='--', linewidth=1.5)
+p.vlines(k_h, 1, 1e17, linestyles='--', linewidth=1.5)
 #theoretical_ks = n.linspace(.058,.5, 100)
 #theor_errs = 1441090 * n.array(theoretical_ks)**3  / (2*n.pi**2)
 #p.plot(theoretical_ks, theor_errs, 'c--')
 
 #GMRT RESULTS
 #p.plot([.1,.13,.17,.19,.27,.31,.4,.5,.6][:-1], [2e5,4e5,1e5,2e5,2e5,4e5,5e5,248**2,3e5][:-1], 'yv', label='GMRT2013')
-p.plot([.5], 248**2, 'yv', label='GMRT2013')
+p.plot([.5], 248**2, 'yv', label='GMRT2013', markersize=9)
 #Dillon upper limit 9.82e7 mK^2 at k=0.2
-p.plot([.2], 9.82e7 * .2**3/(2*n.pi**2), 'mv', label='Dillon2013')
+p.plot([.2], 9.82e7 * .2**3/(2*n.pi**2), 'mv', label='Dillon2013', markersize=9)
 #Parsons2014 upper lmit 41mk at .27
-p.plot([.27], 41**2, 'gv', label='Parsons2014')
+p.plot([.27], 41**2, 'gv', label='Parsons2014', markersize=9)
 
 theo_noise = noise_level()
 #print k0
@@ -451,7 +457,7 @@ p.ylabel(r'$k^3/2\pi^2\ P(k)\ [{\rm mK}^2]$', fontsize='large')
 p.ylim(1e0,1e5)
 p.xlim(0, 0.6)
 p.grid()
-p.savefig('pspec.png')
+#p.savefig('pspec_greece.png')
 
 #p.figure(2)
 #dual_plot(kpl, d, 2*nos, d_fold, 2*nos_fold, color=colors[0], bins=BINS,f0=freq) # 2-sigma error bars
