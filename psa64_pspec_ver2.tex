@@ -1246,18 +1246,18 @@ a net improvement in sensitivity depending on the shape of the beam and the
 declination of the array. For PAPER, this filter roughly doubles the
 sensitivity of our measurements.  
 
-\textbf{Generally, a fringe-rate filter has the property of integrating visibilities. For a 
+\textbf{Generally, a fringe-rate filter integrates visibilities in time. For a 
 fringe-rate filter, $f_\text{fr}$, the effective integration time can be calculated by comparing the variance statistic before 
-and after filtering. Therefore, the integration time can be calculated as 
+and after filtering: 
 \begin{equation}\label{eqn:frf_inttime}
-    t_{\text{int,after}} = t_{\text{int,before}}\frac{\int{\sigma^{2}f_{\text{flat}}^{2}df}}{\int{\sigma^{2}f_{\text{fr}}^{2}df}},
+    t_{\text{int,after}} = t_{\text{int,before}}\frac{\int{\sigma_{f}^{2}df}}{\int{\sigma_{f}^{2}f_{\text{fr}}^{2}df}},
 \end{equation}
-where $t_{\text{int,before}}$ is the integration time before filtering, $\sigma$ is that variance of the signal before filtering, $f_{flat}$ is a flat fringe rate filter and the integral is taken over all possible fringe rates for a given baseline and frequency. As discussed in \citet{parsons_et_al2015}, the
-signal loss associated with this fringe-rate filter can be modeled as a modification
-of the area of the primary beam.}
+where $t_{\text{int,before}}$ is the integration time before filtering, $\sigma_{f}$ denotes the noise variance in fringe rate space and the integral is taken over all possible fringe rates for a given baseline and frequency. As discussed in \citet{parsons_et_al2015}, the
+signal re-weighting  associated with this fringe-rate filter can be interpreted as a modification
+to the shape of the primary beam.}
 
-\textbf{For the fiducial baseline at a 151 MHz, the integration time, as given in equation \eqref{eqn:frf_inttime}, associated with an optimal fringe rate filter is $3430\, \textrm{s}$. The number of statistically independent samples on the sky decreases from 83 to 1 sample per hour. As discussed in section \ref{sec:sigloss}, empirically estimating a covariance matrix with a small 
-number of independent modes can lead to signal loss. In order to counteract the signal loss, we degrade the optimal fringe-rate filter, as seen in figure \ref{fig:fr_preserved_signal}, to have an effective integration time of 1886 seconds, thus increasing the number of independent modes to 2 per hour. Even though the fringe rate filter is now sub-optimal, it holds a big improvement over the boxcar fringe rate weighting as used in P14. As documented in Table \ref{tbl:sigloss}, the correction factor for the associated signal loss of the filter we have chosen is \textbf{1.39}.}
+\textbf{For the fiducial baseline at 151 MHz, the integration time, as given in equation \eqref{eqn:frf_inttime}, associated with an optimal fringe rate filter is $3430\, \textrm{s}$. The number of statistically independent samples on the sky decreases from 83 to 1 sample per hour. As discussed in section \ref{sec:sigloss}, empirically estimating a covariance matrix with a small 
+number of independent samples can lead to signal loss in the optimal quadratic estimator. In order to counteract the signal loss, we degrade the optimal fringe-rate filter, as shown in Figure \ref{fig:fr_preserved_signal}, to have an effective integration time of 1886 seconds, thus increasing the number of independent modes to 2 per hour. Even though the fringe rate filter is now sub-optimal, it holds a big improvement over the boxcar fringe rate weighting as used in P14. As documented in Table \ref{tbl:sigloss}, the correction factor for the associated signal loss of the filter we have chosen is \textbf{1.39}.}
 
 %As a rough check, we note that this is roughly
 %the time it takes a source to transit through one fringe period.  Because the
