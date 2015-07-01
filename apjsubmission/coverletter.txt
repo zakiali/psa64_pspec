@@ -1,4 +1,4 @@
-We thank the reviewer for the helpful suggestions and comments. Most of the
+We thank the reviewer for the helpful suggestions and comments. The
 suggestions improved the quality of this paper and we were happy to use them.
 Below is an itemized list of the reviewers comments. Note that we left out
 replies to the comments concerning grammatical mistakes or minor changes. 
@@ -17,6 +17,8 @@ shown in Figure 9.
 
 Sincerely Zaki Ali, on behalf of the authors.
 
+
+Response to numbered comments from the reviewer: 
 
 (1) We have updated the citations in the introduction to reflect recent
 literature. 

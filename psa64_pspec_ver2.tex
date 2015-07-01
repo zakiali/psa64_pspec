@@ -300,11 +300,11 @@ the same Fourier mode on the sky (P12a; P14).
 We rely on all 2016 baselines for calibration,
 but only use a subset of the baselines for the power spectrum
 analysis. This subset consists of three types of baselines: the 30-m
-strictly east-west baselines between adjacent columns (e.g. 41-47, black 
+strictly east-west baselines between adjacent columns (e.g. 49-41, black 
 in Figure \ref{fig:antenna_positions}; hereafter referred to 
 as {\it fiducial baselines}), 30-m east-west baselines
 whose eastern element is staggered one row up (e.g. 10-41, orange in Figure \ref{fig:antenna_positions}), and
-those whose eastern element is one row down (e.g. 10-58, orange in Figure \ref{fig:antenna_positions}) 
+those whose eastern element is one row down (e.g. 49-3, blue in Figure \ref{fig:antenna_positions}) 
 \textbf{These baseline groups consist of 56, 49, and 49 baselines, respectively}.
 We define a redundant group of
 baselines as being the set of baselines that have the same grid spacing;
@@ -1263,7 +1263,7 @@ signal re-weighting  associated with this fringe-rate filter can be interpreted 
 to the shape of the primary beam.}
 
 \textbf{For the fiducial baseline at 151 MHz, the integration time, as given in equation \eqref{eqn:frf_inttime}, associated with an optimal fringe rate filter is $3430\, \textrm{s}$. The number of statistically independent samples on the sky decreases from 83 to 1 sample per hour. As discussed in section \ref{sec:sigloss}, empirically estimating a covariance matrix with a small 
-number of independent samples can lead to signal loss in the optimal quadratic estimator. In order to counteract the signal loss, we degrade the optimal fringe-rate filter, as shown in Figure \ref{fig:fr_preserved_signal}, to have an effective integration time of 1886 seconds, thus increasing the number of independent modes to 2 per hour. Even though the fringe rate filter is now sub-optimal, it holds a big improvement over the boxcar fringe rate weighting as used in P14. As documented in Table \ref{tbl:sigloss}, the correction factor for the associated signal loss of the filter we have chosen is \textbf{1.39}.}
+number of independent samples can lead to signal loss in the optimal quadratic estimator. In order to counteract the signal loss, we degrade the optimal fringe-rate filter, as shown in Figure \ref{fig:fr_preserved_signal}, to have an effective integration time of 1886 seconds, increasing the number of independent modes to 2 per hour. The fringe rate filter is now sub-optimal, but is still an improvement on the boxcar weighting as used in P14. As documented in Table \ref{tbl:sigloss}, the correction factor for the associated signal loss of the filter we have chosen is \textbf{1.39}.}
 
 %As a rough check, we note that this is roughly
 %the time it takes a source to transit through one fringe period.  Because the
@@ -2964,7 +2964,7 @@ arrays all deliver, at best, comparable low-significance detections of fiducial 
 of reionization.  To move beyond simple detection, next-generation instruments must
 deliver much more collecting area with very compact arrays.
 
-\textbf{The Hydrogen Epoch of Reionization Array (HERA) and the low frequency Square Kilometre Array (SKA-Low) are next generation experiments that aim to make significant detections of the 21 cm power spectrum and begin characterizing it. SKA-Low has secured pre-construction funding for a facility in western Australia. HERA was recently granted funding for its first phase under the National Science Foundation's {\it Mid-Scale Innovations Program}}. 
+\textbf{The Hydrogen Epoch of Reionization Array (HERA) and the low frequency Square Kilometre Array (SKA-Low) are next generation experiments that aim to make significant detections of the 21 cm power spectrum and begin characterizing it. SKA-Low has secured pre-construction funding for a facility in western Australia. HERA was recently granted funding for its first phase under the National Science Foundation's {\it Mid-Scale Innovations Program}. 
 HERA uses a close packing of 14-m diameter
 dishes designed to minimize the width of the delay-space kernel
 $\tilde{A}_\tau$ in Equation \eqref{eqn:delay_transform}.
