@@ -268,18 +268,27 @@ spectrum analysis.}
 \label{fig:antenna_positions}
 \end{figure}
 
-\begin{figure*}
+%\begin{figure*}
 %\includegraphics[width=2\columnwidth]{plots/data_flow_chart.png}
-\includegraphics[width=2\columnwidth,trim=0cm 7cm 5cm 2cm,clip]{plots/data_flow_chart.pdf}
-\caption
-{
-The stages of power-spectrum analysis. Black lines indicate data flow; red lines indicate
-Monte Carlo simulations used to 
-measure signal loss. Yellow boxes indicate stages that by construction have negligible signal loss.
-Signal loss in other stages is tabluted in Table \ref{tbl:sigloss}.
-}
-\label{fig:flowchart}
+%\includegraphics[width=2\columnwidth,trim=0cm 7cm 5cm 2cm,clip]{plots/data_flow_chart.pdf}
+%\caption
+%{
+%The stages of power-spectrum analysis. Black lines indicate data flow; red lines indicate
+%Monte Carlo simulations used to 
+%measure signal loss. Yellow boxes indicate stages that by construction have negligible signal loss.
+%Signal loss in other stages is tabluted in Table \ref{tbl:sigloss}.
+%}
+%\label{fig:flowchart}
+%\end{figure*}
+\begin{figure*}\centering
+\includegraphics[width=2\columnwidth]{plots/coverage.png}
+\caption{The Global Sky Model \citep{deoliveira2008}, illustrating foregrounds to the 21cm
+cosmological signal, with 
+contours indicating beam-weighted observing time (relative to peak) for the PAPER observations
+described in Section \ref{sec:observations}.  The map is centered at 6:00 hours in right ascension.
+}\label{fig:coverage}
 \end{figure*}
+
 
 We base our analysis on drift-scan observations 
 with 64 dual-polarization PAPER antennas (hereafter, ``PAPER-64") deployed 
@@ -344,14 +353,28 @@ Visibilities are integrated for 10.7 s on the GPUs before
 being written to disk.  All polarization cross-products are saved, although the
 work presented here only made use of the XX and YY polarization products.
 
-\begin{figure*}\centering
-\includegraphics[width=2\columnwidth]{plots/coverage.png}
-\caption{The Global Sky Model \citep{deoliveira2008}, illustrating foregrounds to the 21cm
-cosmological signal, with 
-contours indicating beam-weighted observing time (relative to peak) for the PAPER observations
-described in Section \ref{sec:observations}.  The map is centered at 6:00 hours in right ascension.
-}\label{fig:coverage}
+
+\begin{figure*}
+%\includegraphics[width=2\columnwidth]{plots/data_flow_chart.png}
+\includegraphics[width=2\columnwidth,trim=0cm 7cm 5cm 2cm,clip]{plots/data_flow_chart.pdf}
+\caption
+{
+The stages of power-spectrum analysis. Black lines indicate data flow; red lines indicate
+Monte Carlo simulations used to 
+measure signal loss. Yellow boxes indicate stages that by construction have negligible signal loss.
+Signal loss in other stages is tabluted in Table \ref{tbl:sigloss}.
+}
+\label{fig:flowchart}
 \end{figure*}
+
+%\begin{figure*}\centering
+%\includegraphics[width=2\columnwidth]{plots/coverage.png}
+%\caption{The Global Sky Model \citep{deoliveira2008}, illustrating foregrounds to the 21cm
+%cosmological signal, with 
+%contours indicating beam-weighted observing time (relative to peak) for the PAPER observations
+%described in Section \ref{sec:observations}.  The map is centered at 6:00 hours in right ascension.
+%}\label{fig:coverage}
+%\end{figure*}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
