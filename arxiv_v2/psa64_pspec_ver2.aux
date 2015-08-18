@@ -1,0 +1,225 @@
+\relax 
+\newlabel{FirstPage}{{}{1}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces  Antenna position within the PAPER-64 array. This analysis only makes use of east-west baselines between adjacent columns that have row separations of zero (black; e.g. 49-41, 41-47, 10-3, \ldots  ) one in the northward direction (orange; e.g. 10-41, 3-47, 9-3, \ldots  ) or one in the southward direction (blue; e.g. 49-3, 41-25, 10-58, \ldots  ). Because of their high levels of redundancy, these baselines constitute the bulk of the array's sensitivity for power spectrum analysis.}}{2}{}}
+\newlabel{fig:antenna_positions}{{1}{2}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Observations}{2}{}}
+\newlabel{sec:observations}{{2}{2}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The Global Sky Model \citep  {deoliveira2008}, illustrating foregrounds to the 21cm cosmological signal, with contours indicating beam-weighted observing time (relative to peak) for the PAPER observations described in Section 2{}{}{}\hbox {}. The map is centered at 6:00 hours in RA. }}{3}{}}
+\newlabel{fig:coverage}{{2}{3}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Calibration}{3}{}}
+\newlabel{sec:calib}{{3}{3}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  The stages of power-spectrum analysis. Black lines indicate data flow; red lines indicate Monte Carlo simulations used to measure signal loss. Yellow boxes indicate stages that by construction have negligible signal loss. Signal loss in other stages is tabluted in Table 1{}{}{}\hbox {}. }}{4}{}}
+\newlabel{fig:flowchart}{{3}{4}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Relative Calibration}{4}{}}
+\newlabel{sec:relcal}{{3.1}{4}{}{}{}}
+\newlabel{eqn:logcal}{{2}{5}{}{}{}}
+\newlabel{eqn:lincal}{{3}{5}{}{}{}}
+\newlabel{eqn:chi2}{{4}{5}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Absolute Calibration}{5}{}}
+\newlabel{sec:abscal}{{3.2}{5}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces  PAPER visibilities plotted in the complex plane before (left) and after (right) the application of the improved redundancy-based calibration with OMNICAL \citep  {zheng_et_al2014}. All baselines in the array measured at 159 MHz for a single time integration are plotted. Instantaneously redundant baselines are assigned the same symbol/color. The tighter clustering of redundant measurements with OMNICAL indicates improved calibration. }}{6}{}}
+\newlabel{fig:omniview}{{4}{6}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  Log of $\chi ^{2}$ per degree of freedom of all baseline residuals after the application of OMNICAL. The plot comprises a observations over one day, with a frequency resolution of 493 kHz and a time resolution of 42.9 s. }}{6}{}}
+\newlabel{fig:chi2}{{5}{6}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  PAPER-64 image of a field including Pictor A and Fornax A, with white circles indicating catalog positions \citep  {jacobs_et_al2011}. Image was synthesized with two hours of visibilities while Pictor A was in transit and 53 MHz of instantaneous bandwidth from 120 to 173 MHz. Image quality is limited by the redundant configuration of the array (e.g. grating lobes as a result of periodic antenna spacing, elongated lobes arising from poor uv-coverage in the north-south direction). Nonetheless, this image demonstrates accurate phase calibration over a wide field of view. }}{6}{}}
+\newlabel{fig:field_image}{{6}{6}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  Measured spectrum of Pictor A in Stokes I (blue) relative to its catalog value (black; \citealt  {jacobs_et_al2013}). Flux density measurements are extracted from images of Pictor A, made independently for each frequency channel in 10 minutes snapshots as Pictor transits between hour angles of -1:49 and 1:10. Each measurement is then divided by the PAPER beam model and averaged to obtain the measured spectrum, which serves to characterize the flux scale of the PAPER-64 observations. Error bars indicate 68\% confidence intervals, derived from the Gaussian fits in the source extractor used to measure the flux density in PyBDSM, combined from all snapshots. }}{7}{}}
+\newlabel{fig:pic_spec}{{7}{7}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Wideband Delay Filtering}{7}{}}
+\newlabel{sec:wbd_filtering}{{3.3}{7}{}{}{}}
+\newlabel{eqn:stokesi}{{7}{7}{}{}{}}
+\newlabel{eqn:delay_transform}{{8}{7}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Binning in LST}{7}{}}
+\newlabel{sec:lstbin}{{3.4}{7}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces  Visibilities measured by a fiducial baseline in the PAPER-64 array, averaged over 135 days of observation. From left to right, columns represent data that: (1) contain foregrounds prior to the application of a wideband delay filter or fringe-rate filtering, (2) are fringe-rate filtered but not delay filtered, (3) are delay filtered at 15 ns beyond the horizon limit but are not fringe-rate filtered, (4) are both delay and fringe-rate filtered, and (5) are delay and fringe-rate filtered and have been averaged over all redundant measurements of this visibility. The top row shows signal amplitude on a logarithmic scale; the bottom row illustrates signal phase. Dashed lines indicate the 0:00--8:30 range in LST used for power spectrum analysis. The putative crosstalk is evident in the center panel as constant phase features which do not fringe as the sky. The two right panels show some residual signal in the phase structure which is present at low delay. Away from the edges of the observing band, over four orders of magnitude of foreground suppression is evident. }}{8}{}}
+\newlabel{fig:waterfalls}{{8}{8}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Fringe-rate Filtering}{8}{}}
+\newlabel{sec:frf}{{3.5}{8}{}{}{}}
+\newlabel{eqn:frf_inttime}{{9}{9}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Instrumental Performance}{9}{}}
+\newlabel{sec:instrument}{{4}{9}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Instrument Stability}{9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces  The optimal fringe-rate filter (orange) that and the degraded fringe-rate filter (blue) actually used in the analysis at 151 MHz, normalized to peak at unity. }}{9}{}}
+\newlabel{fig:fr_preserved_signal}{{9}{9}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}System Temperature}{9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Histogram of the real component of all calibrated visibilities measured over 135 days with every redundant instance of the fiducial baseline at 150 MHz. Color scale indicates the number of samples falling in an LST/flux-density bin. This plot serves to illustrate the stability of the PAPER instrument and the precision of calibration. The temporal stability of a single LST bin over multiple days is shown in Figure 11{}{}{}\hbox {}. }}{10}{}}
+\newlabel{fig:density}{{10}{10}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces  Power spectrum of 135 days of time-series data contributing to a single LST bin, illustrating the stability of measurements over the observing campaign. Relative to the average value, variation in the measured value across days (quantified by variance as a function of time period) is orders of magnitude lower. The excess at two-day timescales is a beat frequency associated with the changing alignment of integration windows in the correlator with respect to sidereal time. }}{10}{}}
+\newlabel{fig:stability}{{11}{10}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces System temperature, inferred from the variance of samples falling in an LST bin, averaged over one-hour intervals in LST. The measured value in the 150--160 MHz range is consistent with previous determinations of system temperature (\citealt  {jacobs_et_al2014}; P14). }}{10}{}}
+\newlabel{fig:tsys}{{12}{10}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Power Spectrum Analysis}{10}{}}
+\newlabel{sec:oqe}{{5}{10}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Review of OQEs}{10}{}}
+\newlabel{eqn:pspec_def}{{11}{11}{}{}{}}
+\newlabel{eqn:qalpha}{{12}{11}{}{}{}}
+\newlabel{eqn:qalpha_unbiased}{{13}{11}{}{}{}}
+\newlabel{eqn:pspec_norm}{{14}{11}{}{}{}}
+\newlabel{eqn:true_pspec_2_est_pspec}{{15}{11}{}{}{}}
+\newlabel{eqn:window_def}{{16}{11}{}{}{}}
+\newlabel{eq:FisherMatrix}{{17}{11}{}{}{}}
+\newlabel{eqn:err_cov}{{18}{11}{}{}{}}
+\newlabel{eq:MFM}{{19}{11}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Application of OQE}{11}{}}
+\newlabel{sec:oqe_app}{{5.2}{11}{}{}{}}
+\newlabel{eqn:xvectdef}{{20}{12}{}{}{}}
+\newlabel{eqn:z}{{21}{12}{}{}{}}
+\newlabel{eqn:presum_oqe}{{22}{12}{}{}{}}
+\newlabel{eqn:presum_qalpha}{{23}{12}{}{}{}}
+\newlabel{eqn:delay_pspec}{{24}{12}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces  Visibilities before (top row) and after (bottom row) inverse covariance weighting. Signal covariance (middle row) is estimated empirically, averaging over LST. The three left/right columns show visibilities from three different baselines in a redundant group before/after delay filtering, respectively. }}{13}{}}
+\newlabel{fig:inv_cov}{{13}{13}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces  Eigenvalue spectrum of covariance matrices (left) empirically estimated from visibilities before (blue) and after (green) delay filtering. The four strongest eigenmodes of the filtered/unfiltered data are plotted on the top/bottom panels on the right, respectively. }}{14}{}}
+\newlabel{fig:eigs}{{14}{14}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Covariance Matrix and Signal Loss}{14}{}}
+\newlabel{sec:sigloss}{{5.3}{14}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces  The window function matrix $\mathbf  {W}$, as defined in Equation \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 15{}{}{}\hbox {}\unskip \@@italiccorr )}}. The $i^{\rm  th}$ row corresponds to the window function used in the estimate of the power spectrum for the $i^{\rm  th}$ $k$-mode. Color scale indicates $\qopname  \relax o{log}_{10}\mathbf  {W}$. The inset plot illustrates the window function along the dashed line in the upper panel. As described in Section 5.2{}{}{}\hbox {}, $\mathbf  {M}$ in Equation \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 16{}{}{}\hbox {}\unskip \@@italiccorr )}} has been chosen so that each window function peaks at the waveband while achieving a high degree of isolation from at lower $k$-modes that are likely to be biased by foregrounds. }}{14}{}}
+\newlabel{fig:window_func}{{15}{14}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces  Recovered power spectrum signal as a function of injected signal amplitude. Shaded regions indicate the range in measured amplitude of power spectrum modes in Figure 18{}{}{}\hbox {}. Error bars indicate 95\% confidence intervals as determined from the Monte Carlo simulations described in Section 5.3{}{}{}\hbox {}. Because the recovered signal amplitude is a monotonic function of the injected signal amplitude, it is possible to invert the effects of signal loss in the measured power spectrum values to infer the true signal amplitude on the sky. Over the range of powers measured, the maximum correction factor $P_{\rm  in}/P_{\rm  out}$ is less than 1.02 at 97.5\% confidence. The transition to significantly higher correction factors at larger signal amplitudes occurs as the injected signal dominates over the foreground modes present in estimates of the data covariance. }}{15}{}}
+\newlabel{fig:signal_loss}{{16}{15}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces SIGNAL LOSS VERSUS ANALYSIS STAGE}}{15}{}}
+\newlabel{tbl:sigloss}{{1}{15}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Bootstrapped Averaging and Errors}{15}{}}
+\newlabel{sec:bootstrap}{{5.4}{15}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces  Absolute value of the cumulative mean (left) and median (right), as a function of number of modes of the power spectrum band power for $k_\parallel $ modes ranging from $-0.49$ (red) to $0.44h\ {\rm  Mpc}^{-1}$ (violet). Here, modes are defined as samples from different redundant baseline groups and LSTs. This Allen variance plot shows modes averaging down as the square root of number of modes combined until a signal floor is reached. The difference in behavior between the mean and median is an indication of outliers in the distribution of values, likely as a result of foreground contamination. We use the median in the estimation of the power spectrum in Figure 18{}{}{}\hbox {}, along with a correction factor compensating for the difference between the mean and median in estimating variance. }}{16}{}}
+\newlabel{fig:pspec_variance}{{17}{16}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{16}{}}
+\newlabel{sec:results}{{6}{16}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Power Spectrum Constraints}{16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces  Measured power spectrum (black dots with 2$\sigma $ error bars) at $z=8.4$ resulting from a 135 day observation with PAPER-64. The dashed vertical lines at $0.6h\ {\rm  Mpc}^{-1}$ show the bounds of the delay filter described in Section 3.3{}{}{}\hbox {}. The predicted 2$\sigma $ upper limit in the absence of the a celestial signal is shown in dashed cyan, assuming $T_{\rm  sys}=500K$. The triangles indicate 2 $\sigma $ upper limits from GMRT \citep  {paciga_et_al2011} (yellow) at $z=8.6$, MWA \citep  {dillon_et_al2013b} at $z=9.5$ (magenta), and the previous PAPER upper limit (P14) at $z=7.7$ (green). The magenta curve shows a predicted model $21\tmspace  +\thinmuskip {.1667em}\textrm  {cm}$ power spectrum at 50\% ionization \citep  {lidz_et_al2008}. }}{17}{}}
+\newlabel{fig:final_pspec}{{18}{17}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces  Diagnostic power spectra in the style of Figure 18{}{}{}\hbox {} illustrating the impact of various analysis stages. The blue power spectrum uses the P14 fringe-rate filter combined with crosstalk removal. Green illustrates the result using the improved fringe-rate filter, but without crosstalk removal. A power spectrum derived without the application of OMNICAL is shown in orange. Black includes improved fringe-rate filtering, crosstalk removal, and OMNICAL calibration; it is the same power spectrum shown in Figure 18{}{}{}\hbox {}. }}{17}{}}
+\newlabel{fig:pspec_comp}{{19}{17}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces  Posterior distribution of power spectrum amplitude for a flat $\Delta ^{2}(k)$ power spectrum over $0.15<k<0.5h\ {\rm  Mpc}^{-1}$ (solid black), assuming Gaussian error bars. The blue and orange vertical lines correspond to the 1$\sigma $ and 2$\sigma $ bounds, respectively. }}{18}{}}
+\newlabel{fig:final_posterior}{{20}{18}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Spin Temperature Constraints}{18}{}}
+\newlabel{eqn:tb}{{28}{18}{}{}{}}
+\newlabel{eqn:tau}{{29}{18}{}{}{}}
+\newlabel{eqn:final_tb}{{30}{18}{}{}{}}
+\newlabel{eqn:d2pspec_model}{{31}{18}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Constraints on the 21cm spin temperature at $z=8.4$, assuming the patchy reionization model in Equations \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 31{}{}{}\hbox {}\unskip \@@italiccorr )}} and \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 33{}{}{}\hbox {}\unskip \@@italiccorr )}}, which hold in the limit that $T_{\rm  s}<T_{\rm  CMB}$. }}{19}{}}
+\newlabel{fig:patchy_bound}{{21}{19}{}{}{}}
+\newlabel{eqn:maxxi}{{32}{19}{}{}{}}
+\newlabel{eqn:patchy_bound}{{33}{19}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Discussion}{19}{}}
+\newlabel{sec:discussion}{{7}{19}{}{}{}}
+\bibdata{biblio}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusions}{20}{}}
+\newlabel{sec:conclusion}{{8}{20}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Acknowledgements}{20}{}}
+\bibcite{ali_et_al2008}{{1}{2008}{{{Ali} {et~al.}}}{{{Ali}, {Bharadwaj}, \& {Chengalur}}}}
+\bibcite{battaglia_et_al2013}{{2}{2013}{{{Battaglia} {et~al.}}}{{{Battaglia}, {Natarajan}, {Trac}, {Cen}, \& {Loeb}}}}
+\bibcite{bernardi_et_al2015}{{3}{2015}{{{Bernardi} {et~al.}}}{{{Bernardi}, {McQuinn}, \& {Greenhill}}}}
+\bibcite{bernardi_et_al2009}{{4}{2009}{{{Bernardi} {et~al.}}}{{{Bernardi}, {de Bruyn}, {Brentjens}, {Ciardi}, {Harker}, {Jeli{\'c}}, {Koopmans}, {Labropoulos}, {Offringa}, {Pandey}, {Schaye}, {Thomas}, {Yatawatta}, \& {Zaroubi}}}}
+\bibcite{bernardi_et_al2010}{{5}{2010}{{{Bernardi} {et~al.}}}{{{Bernardi}, {de Bruyn}, {Harker}, {Brentjens}, {Ciardi}, {Jeli{\'c}}, {Koopmans}, {Labropoulos}, {Offringa}, {Pandey}, {Schaye}, {Thomas}, {Yatawatta}, \& {Zaroubi}}}}
+\bibcite{bolton_et_al2011}{{6}{2011}{{{Bolton} {et~al.}}}{{{Bolton}, {Haehnelt}, {Warren}, {Hewett}, {Mortlock}, {Venemans}, {McMahon}, \& {Simpson}}}}
+\bibcite{bosman_becker2015}{{7}{2015}{{{Bosman} \& {Becker}}}{{}}}
+\bibcite{bouwens_et_al2010}{{8}{2010}{{{Bouwens} {et~al.}}}{{{Bouwens}, {Illingworth}, {Oesch}, {Stiavelli}, {van Dokkum}, {Trenti}, {Magee}, {Labb{\'e}}, {Franx}, {Carollo}, \& {Gonzalez}}}}
+\bibcite{bouwens_et_al2014}{{9}{2014}{{{Bouwens} {et~al.}}}{{{Bouwens}, {Bradley}, {Zitrin}, {Coe}, {Franx}, {Zheng}, {Smit}, {Host}, {Postman}, {Moustakas}, {Labb{\'e}}, {Carrasco}, {Molino}, {Donahue}, {Kelson}, {Meneghetti}, {Ben{\'{\i }}tez}, {Lemze}, {Umetsu}, {Broadhurst}, {Moustakas}, {Rosati}, {Jouvel}, {Bartelmann}, {Ford}, {Graves}, {Grillo}, {Infante}, {Jimenez-Teja}, {Lahav}, {Maoz}, {Medezinski}, {Melchior}, {Merten}, {Nonino}, {Ogaz}, \& {Seitz}}}}
+\bibcite{bowman_et_al2009}{{10}{2009{a}}{{{Bowman} {et~al.}}}{{{Bowman}, {Morales}, \& {Hewitt}}}}
+\bibcite{bowman_et_al2008}{{11}{2009{b}}{{{Bowman} {et~al.}}}{{{Bowman}, {Morales}, \& {Hewitt}}}}
+\bibcite{bowman_et_al2010}{{12}{2010}{{{Bowman} \& {Rogers}}}{{}}}
+\bibcite{burns_et_al2012}{{13}{2012}{{{Burns} {et~al.}}}{{{Burns}, {Lazio}, {Bale}, {Bowman}, {Bradley}, {Carilli}, {Furlanetto}, {Harker}, {Loeb}, \& {Pritchard}}}}
+\bibcite{chapman_et_al2013}{{14}{2013}{{{Chapman} {et~al.}}}{{{Chapman}, {Abdalla}, {Bobin}, {Starck}, {Harker}, {Jeli{\'c}}, {Labropoulos}, {Zaroubi}, {Brentjens}, {de Bruyn}, \& {Koopmans}}}}
+\bibcite{clark_et_al2013}{{15}{2013}{{Clark {et~al.}}}{{Clark, Plante, \& Greenhill}}}
+\bibcite{datta_et_al2010}{{16}{2010}{{{Datta} {et~al.}}}{{{Datta}, {Bowman}, \& {Carilli}}}}
+\bibcite{deoliveira2008}{{17}{2008}{{{de Oliveira-Costa} {et~al.}}}{{{de Oliveira-Costa}, {Tegmark}, {Gaensler}, {Jonas}, {Landecker}, \& {Reich}}}}
+\bibcite{dillon_et_al2013a}{{18}{2013}{{{Dillon} {et~al.}}}{{{Dillon}, {Liu}, \& {Tegmark}}}}
+\bibcite{dillon_et_al2013b}{{19}{2014}{{{Dillon} {et~al.}}}{{{Dillon}, {Liu}, {Williams}, {Hewitt}, {Tegmark}, {Morgan}, {Levine}, {Morales}, {Tingay}, {Bernardi}, {Bowman}, {Briggs}, {Cappallo}, {Emrich}, {Mitchell}, {Oberoi}, {Prabu}, {Wayth}, \& {Webster}}}}
+\bibcite{dillon_et_al2015}{{20}{2015}{{{Dillon} {et~al.}}}{{{Dillon}, {Neben}, {Hewitt}, {Tegmark}, {Barry}, {Beardsley}, {Bowman}, {Briggs}, {Carroll}, {de Oliveira-Costa}, {Ewall-Wice}, {Feng}, {Greenhill}, {Hazelton}, {Hernquist}, {Hurley-Walker}, {Jacobs}, {Kim}, {Kittiwisit}, {Lenc}, {Line}, {Loeb}, {McKinley}, {Mitchell}, {Morales}, {Offringa}, {Paul}, {Pindor}, {Pober}, {Procopio}, {Riding}, {Sethi}, {Udaya Shankar}, {Subrahmanyan}, {Sullivan}, {Thyagarajan}, {Tingay}, {Trott}, {Wayth}, {Webster}, {Wyithe}, {Bernardi}, {Cappallo}, {Deshpande}, {Johnston-Hollitt}, {Kaplan}, {Lonsdale}, {McWhirter}, {Morgan}, {Oberoi}, {Ord}, {Prabu}, {Srivani}, {Williams}, \& {Williams}}}}
+\bibcite{ellingson_et_al2013}{{21}{2013}{{{Ellingson} {et~al.}}}{{{Ellingson}, {Taylor}, {Craig}, {Hartman}, {Dowell}, {Wolfe}, {Clarke}, {Hicks}, {Kassim}, {Ray}, {Rickard}, {Schinzel}, \& {Weiler}}}}
+\bibcite{ellis_et_al2013}{{22}{2013}{{{Ellis} {et~al.}}}{{{Ellis}, {McLure}, {Dunlop}, {Robertson}, {Ono}, {Schenker}, {Koekemoer}, {Bowler}, {Ouchi}, {Rogers}, {Curtis-Lake}, {Schneider}, {Charlot}, {Stark}, {Furlanetto}, \& {Cirasuolo}}}}
+\bibcite{Faisst_et_al2014}{{23}{2014}{{{Faisst} {et~al.}}}{{{Faisst}, {Capak}, {Carollo}, {Scarlata}, \& {Scoville}}}}
+\bibcite{fan_et_al2006}{{24}{2006}{{{Fan} {et~al.}}}{{{Fan}, {Carilli}, \& {Keating}}}}
+\bibcite{fialkov_et_al2014}{{25}{2014}{{{Fialkov} {et~al.}}}{{{Fialkov}, {Barkana}, \& {Visbal}}}}
+\bibcite{field1958}{{26}{1958}{{Field}}{{}}}
+\bibcite{furlanetto_et_al2006}{{27}{2006}{{{Furlanetto} {et~al.}}}{{{Furlanetto}, {Oh}, \& {Briggs}}}}
+\bibcite{george_et_al2014}{{28}{2014}{{{George} {et~al.}}}{{{George}, {Reichardt}, {Aird}, {Benson}, {Bleem}, {Carlstrom}, {Chang}, {Cho}, {Crawford}, {Crites}, {de Haan}, {Dobbs}, {Dudley}, {Halverson}, {Harrington}, {Holder}, {Holzapfel}, {Hou}, {Hrubes}, {Keisler}, {Knox}, {Lee}, {Leitch}, {Lueker}, {Luong-Van}, {McMahon}, {Mehl}, {Meyer}, {Millea}, {Mocanu}, {Mohr}, {Montroy}, {Padin}, {Plagge}, {Pryke}, {Ruhl}, {Schaffer}, {Shaw}, {Shirokoff}, {Spieler}, {Staniszewski}, {Stark}, {Story}, {van Engelen}, {Vanderlinde}, {Vieira}, {Williamson}, \& {Zahn}}}}
+\bibcite{ghosh_et_al2011}{{29}{2011}{{{Ghosh} {et~al.}}}{{{Ghosh}, {Bharadwaj}, {Ali}, \& {Chengalur}}}}
+\bibcite{greenhill_bernardi2012}{{30}{2012}{{{Greenhill} \& {Bernardi}}}{{}}}
+\bibcite{harker_et_al2009}{{31}{2009}{{{Harker} {et~al.}}}{{{Harker}, {Zaroubi}, {Bernardi}, {Brentjens}, {de Bruyn}, {Ciardi}, {Jeli{\'c}}, {Koopmans}, {Labropoulos}, {Mellema}, {Offringa}, {Pandey}, {Schaye}, {Thomas}, \& {Yatawatta}}}}
+\bibcite{hazelton_et_al2013}{{32}{2013}{{{Hazelton} {et~al.}}}{{{Hazelton}, {Morales}, \& {Sullivan}}}}
+\bibcite{hirata2006}{{33}{2006}{{Hirata}}{{}}}
+\bibcite{hogbom1974}{{34}{1974}{{H{\"o}gbom}}{{}}}
+\bibcite{jacobs_et_al2011}{{35}{2011}{{{Jacobs} {et~al.}}}{{{Jacobs}, {Aguirre}, {Parsons}, {Pober}, {Bradley}, {Carilli}, {Gugliucci}, {Manley}, {van der Merwe}, {Moore}, \& {Parashare}}}}
+\bibcite{jacobs_et_al2013}{{36}{2013}{{{Jacobs} {et~al.}}}{{{Jacobs}, {Parsons}, {Aguirre}, {Ali}, {Bowman}, {Bradley}, {Carilli}, {DeBoer}, {Dexter}, {Gugliucci}, {Klima}, {MacMahon}, {Manley}, {Moore}, {Pober}, {Stefan}, \& {Walbrugh}}}}
+\bibcite{jacobs_et_al2014}{{37}{2015}{{{Jacobs} {et~al.}}}{{{Jacobs}, {Pober}, {Parsons}, {Aguirre}, {Ali}, {Bowman}, {Bradley}, {Carilli}, {DeBoer}, {Dexter}, {Gugliucci}, {Klima}, {Liu}, {MacMahon}, {Manley}, {Moore}, {Stefan}, \& {Walbrugh}}}}
+\bibcite{jelic_et_al2010}{{38}{2010}{{{Jeli{\'c}} {et~al.}}}{{{Jeli{\'c}}, {Zaroubi}, {Labropoulos}, {Bernardi}, {de Bruyn}, \& {Koopmans}}}}
+\bibcite{jelic_et_al2008}{{39}{2008}{{{Jeli{\'c}} {et~al.}}}{{{Jeli{\'c}}, {Zaroubi}, {Labropoulos}, {Thomas}, {Bernardi}, {Brentjens}, {de Bruyn}, {Ciardi}, {Harker}, {Koopmans}, {Pandey}, {Schaye}, \& {Yatawatta}}}}
+\bibcite{jelic_et_al2014}{{40}{2014}{{{Jeli{\'c}} {et~al.}}}{{{Jeli{\'c}}, {de Bruyn}, {Mevius}, {Abdalla}, {Asad}, {Bernardi}, {Brentjens}, {Bus}, {Chapman}, {Ciardi}, {Daiboo}, {Fernandez}, {Ghosh}, {Harker}, {Jensen}, {Kazemi}, {Koopmans}, {Labropoulos}, {Martinez-Rubi}, {Mellema}, {Offringa}, {Pandey}, {Patil}, {Thomas}, {Vedantham}, {Veligatla}, {Yatawatta}, {Zaroubi}, {Alexov}, {Anderson}, {Avruch}, {Beck}, {Bell}, {Bentum}, {Best}, {Bonafede}, {Bregman}, {Breitling}, {Broderick}, {Brouw}, {Br{\"u}ggen}, {Butcher}, {Conway}, {de Gasperin}, {de Geus}, {Deller}, {Dettmar}, {Duscha}, {Eisl{\"o}ffel}, {Engels}, {Falcke}, {Fallows}, {Fender}, {Ferrari}, {Frieswijk}, {Garrett}, {Grie{\ss }meier}, {Gunst}, {Hamaker}, {Hassall}, {Haverkorn}, {Heald}, {Hessels}, {Hoeft}, {H{\"o}randel}, {Horneffer}, {van der Horst}, {Iacobelli}, {Juette}, {Karastergiou}, {Kondratiev}, {Kramer}, {Kuniyoshi}, {Kuper}, {van Leeuwen}, {Maat}, {Mann}, {McKay-Bukowski}, {McKean}, {Munk}, {Nelles}, {Norden}, {Paas}, {Pandey-Pommier}, {Pietka}, {Pizzo}, {Polatidis}, {Reich}, {R{\"o}ttgering}, {Rowlinson}, {Scaife}, {Schwarz}, {Serylak}, {Smirnov}, {Steinmetz}, {Stewart}, {Tagger}, {Tang}, {Tasse}, {ter Veen}, {Thoudam}, {Toribio}, {Vermeulen}, {Vocks}, {van Weeren}, {Wijers}, {Wijnholds}, {Wucknitz}, \& {Zarka}}}}
+\bibcite{lidz_et_al2008}{{41}{2008}{{{Lidz} {et~al.}}}{{{Lidz}, {Zahn}, {McQuinn}, {Zaldarriaga}, \& {Hernquist}}}}
+\bibcite{liu_et_al2014a}{{42}{2014{a}}{{Liu {et~al.}}}{{Liu, Parsons, \& Trott}}}
+\bibcite{liu_et_al2014b}{{43}{2014{b}}{{Liu {et~al.}}}{{Liu, Parsons, \& Trott}}}
+\bibcite{liu_tegmark2011}{{44}{2011}{{{Liu} \& {Tegmark}}}{{}}}
+\bibcite{liu_tegmark2012}{{45}{2012}{{{Liu} \& {Tegmark}}}{{}}}
+\bibcite{liu_et_al2009}{{46}{2009{a}}{{{Liu} {et~al.}}}{{{Liu}, {Tegmark}, {Bowman}, {Hewitt}, \& {Zaldarriaga}}}}
+\bibcite{liu_et_al2010}{{47}{2010}{{{Liu} {et~al.}}}{{{Liu}, {Tegmark}, {Morrison}, {Lutomirski}, \& {Zaldarriaga}}}}
+\bibcite{liu_et_al2008}{{48}{2009{b}}{{{Liu} {et~al.}}}{{{Liu}, {Tegmark}, \& {Zaldarriaga}}}}
+\bibcite{mao_et_al2008}{{49}{2008}{{{Mao} {et~al.}}}{{{Mao}, {Tegmark}, {McQuinn}, {Zaldarriaga}, \& {Zahn}}}}
+\bibcite{marthi_chengalur2014}{{50}{2014}{{{Marthi} \& {Chengalur}}}{{}}}
+\bibcite{masui_et_al2013}{{51}{2013}{{{Masui} {et~al.}}}{{{Masui}, {Switzer}, {Banavar}, {Bandura}, {Blake}, {Calin}, {Chang}, {Chen}, {Li}, {Liao}, {Natarajan}, {Pen}, {Peterson}, {Shaw}, \& {Voytek}}}}
+\bibcite{mcleod_et_al2014}{{52}{2015}{{{McLeod} {et~al.}}}{{{McLeod}, {McLure}, {Dunlop}, {Robertson}, {Ellis}, \& {Targett}}}}
+\bibcite{mcquinn_et_al2007}{{53}{2007}{{{McQuinn} {et~al.}}}{{{McQuinn}, {Lidz}, {Zahn}, {Dutta}, {Hernquist}, \& {Zaldarriaga}}}}
+\bibcite{mcquinn_oleary2012}{{54}{2012}{{{McQuinn} \& {O'Leary}}}{{}}}
+\bibcite{mesinger_et_al2013}{{55}{2013}{{{Mesinger} {et~al.}}}{{{Mesinger}, {Ferrara}, \& {Spiegel}}}}
+\bibcite{mesinger_et_al2012}{{56}{2012}{{{Mesinger} {et~al.}}}{{{Mesinger}, {McQuinn}, \& {Spergel}}}}
+\bibcite{moore_et_al2015}{{57}{2015}{{{Moore} {et~al.}}}{{{Moore}, {Aguirre}, {Parsons}, {Ali}, {Bradley}, {Carilli}, {DeBoer}, {Dexter}, {Gugliucci}, {Jacobs}, {Klima}, {Liu}, {MacMahon}, {Manley}, {Pober}, {Stefan}, \& {Walbrugh}}}}
+\bibcite{moore_et_al2013}{{58}{2013}{{{Moore} {et~al.}}}{{{Moore}, {Aguirre}, {Parsons}, {Jacobs}, \& {Pober}}}}
+\bibcite{morales_et_al2006a}{{59}{2006}{{{Morales} {et~al.}}}{{{Morales}, {Bowman}, \& {Hewitt}}}}
+\bibcite{morales_wyithe2010}{{60}{2010}{{{Morales} \& {Wyithe}}}{{}}}
+\bibcite{noorishad_et_al2012}{{61}{2012}{{{Noorishad} {et~al.}}}{{{Noorishad}, {Wijnholds}, {van Ardenne}, \& {van der Hulst}}}}
+\bibcite{oesch_et_al2013}{{62}{2013}{{{Oesch} {et~al.}}}{{{Oesch}, {Bouwens}, {Illingworth}, {Labb{\'e}}, {Franx}, {van Dokkum}, {Trenti}, {Stiavelli}, {Gonzalez}, \& {Magee}}}}
+\bibcite{offringa_et_al2014}{{63}{2014}{{{Offringa} {et~al.}}}{{{Offringa}, {McKinley}, {Hurley-Walker}, {Briggs}, {Wayth}, {Kaplan}, {Bell}, {Feng}, {Neben}, {Hughes}, {Rhee}, {Murphy}, {Bhat}, {Bernardi}, {Bowman}, {Cappallo}, {Corey}, {Deshpande}, {Emrich}, {Ewall-Wice}, {Gaensler}, {Goeke}, {Greenhill}, {Hazelton}, {Hindson}, {Johnston-Hollitt}, {Jacobs}, {Kasper}, {Kratzenberg}, {Lenc}, {Lonsdale}, {Lynch}, {McWhirter}, {Mitchell}, {Morales}, {Morgan}, {Kudryavtseva}, {Oberoi}, {Ord}, {Pindor}, {Procopio}, {Prabu}, {Riding}, {Roshi}, {Shankar}, {Srivani}, {Subrahmanyan}, {Tingay}, {Waterson}, {Webster}, {Whitney}, {Williams}, \& {Williams}}}}
+\bibcite{paciga_et_al2011}{{64}{2011}{{{Paciga} {et~al.}}}{{{Paciga}, {Chang}, {Gupta}, {Nityanada}, {Odegova}, {Pen}, {Peterson}, {Roy}, \& {Sigurdson}}}}
+\bibcite{paciga_et_al2013}{{65}{2013}{{{Paciga} {et~al.}}}{{{Paciga}, {Albert}, {Bandura}, {Chang}, {Gupta}, {Hirata}, {Odegova}, {Pen}, {Peterson}, {Roy}, {Shaw}, {Sigurdson}, \& {Voytek}}}}
+\bibcite{page_et_al2007}{{66}{2007}{{{Page} {et~al.}}}{{{Page}, {Hinshaw}, {Komatsu}, {Nolta}, {Spergel}, {Bennett}, {Barnes}, {Bean}, {Dor{\'e}}, {Dunkley}, {Halpern}, {Hill}, {Jarosik}, {Kogut}, {Limon}, {Meyer}, {Odegard}, {Peiris}, {Tucker}, {Verde}, {Weiland}, {Wollack}, \& {Wright}}}}
+\bibcite{park_et_al2013}{{67}{2013}{{{Park} {et~al.}}}{{{Park}, {Shapiro}, {Komatsu}, {Iliev}, {Ahn}, \& {Mellema}}}}
+\bibcite{parsons_et_al2012a}{{68}{2012{a}}{{{Parsons} {et~al.}}}{{{Parsons}, {Pober}, {McQuinn}, {Jacobs}, \& {Aguirre}}}}
+\bibcite{parsons_et_al2006}{{69}{2006}{{Parsons {et~al.}}}{{Parsons, Backer, Chang, Chapman, Chen, Crescini, de~Jesus, Dick, Droz, MacMahon, Meder, Mock, Nagpal, Nikolic, Parsa, Richards, Siemion, Wawrzynek, Werthimer, \& Wright}}}
+\bibcite{parsons_et_al2008}{{70}{2008}{{{Parsons} {et~al.}}}{{{Parsons}, {Backer}, {Siemion}, {Chen}, {Werthimer}, {Droz}, {Filiba}, {Manley}, {McMahon}, {Parsa}, {MacMahon}, \& {Wright}}}}
+\bibcite{parsons_backer2009}{{71}{2009}{{{Parsons} \& {Backer}}}{{}}}
+\bibcite{parsons_et_al2015}{{72}{2015}{{{Parsons} {et~al.}}}{{{Parsons}, {Liu}, {Ali}, \& {Cheng}}}}
+\bibcite{parsons_et_al2012b}{{73}{2012{b}}{{{Parsons} {et~al.}}}{{{Parsons}, {Pober}, {Aguirre}, {Carilli}, {Jacobs}, \& {Moore}}}}
+\bibcite{parsons_et_al2010}{{74}{2010}{{{Parsons} {et~al.}}}{{{Parsons}, {Backer}, {Foster}, {Wright}, {Bradley}, {Gugliucci}, {Parashare}, {Benoit}, {Aguirre}, {Jacobs}, {Carilli}, {Herne}, {Lynch}, {Manley}, \& {Werthimer}}}}
+\bibcite{parsons_et_al2014}{{75}{2014}{{{Parsons} {et~al.}}}{{{Parsons}, {Liu}, {Aguirre}, {Ali}, {Bradley}, {Carilli}, {DeBoer}, {Dexter}, {Gugliucci}, {Jacobs}, {Klima}, {MacMahon}, {Manley}, {Moore}, {Pober}, {Stefan}, \& {Walbrugh}}}}
+\bibcite{patra_et_al2015}{{76}{2015}{{{Patra} {et~al.}}}{{{Patra}, {Subrahmanyan}, {Sethi}, {Udaya Shankar}, \& {Raghunathan}}}}
+\bibcite{peterson_et_al2004}{{77}{2004}{{{Peterson} {et~al.}}}{{{Peterson}, {Pen}, \& {Wu}}}}
+\bibcite{petrovic_oh2011}{{78}{2011}{{{Petrovic} \& {Oh}}}{{}}}
+\bibcite{planck_et_al2014}{{79}{2014}{{{Planck Collaboration} {et~al.}}}{{{Planck Collaboration}, {Ade}, {Aghanim}, {Armitage-Caplan}, {Arnaud}, {Ashdown}, {Atrio-Barandela}, {Aumont}, {Baccigalupi}, {Banday}, \& et~al.}}}
+\bibcite{planck_et_al2015}{{80}{2015}{{{Planck Collaboration} {et~al.}}}{{{Planck Collaboration}, {Ade}, {Aghanim}, {Arnaud}, {Ashdown}, {Aumont}, {Baccigalupi}, {Banday}, {Barreiro}, {Bartlett}, \& et~al.}}}
+\bibcite{pober_et_al2012}{{81}{2012}{{{Pober} {et~al.}}}{{{Pober}, {Parsons}, {Jacobs}, {Aguirre}, {Bradley}, {Carilli}, {Gugliucci}, {Moore}, \& {Parashare}}}}
+\bibcite{pober_et_al2013}{{82}{2013}{{{Pober} {et~al.}}}{{{Pober}, {Parsons}, {Aguirre}, {Ali}, {Bradley}, {Carilli}, {DeBoer}, {Dexter}, {Gugliucci}, {Jacobs}, {Klima}, {MacMahon}, {Manley}, {Moore}, {Stefan}, \& {Walbrugh}}}}
+\bibcite{pober_et_al2014}{{83}{2014}{{{Pober} {et~al.}}}{{{Pober}, {Liu}, {Dillon}, {Aguirre}, {Bowman}, {Bradley}, {Carilli}, {DeBoer}, {Hewitt}, {Jacobs}, {McQuinn}, {Morales}, {Parsons}, {Tegmark}, \& {Werthimer}}}}
+\bibcite{pober_et_al2015}{{84}{2015}{{{Pober} {et~al.}}}{{{Pober}, {Ali}, {Parsons}, {McQuinn}, {Aguirre}, {Bernardi}, {Bradley}, {Carilli}, {Cheng}, {DeBoer}, {Dexter}, {Furlanetto}, {Grobbelaar}, {Horrell}, {Jacobs}, {Klima}, {Kohn}, {Liu}, {MacMahon}, {Maree}, {Mesinger}, {Moore}, {Razavi-Ghods}, {Stefan}, {Walbrugh}, {Walker}, \& {Zheng}}}}
+\bibcite{presley_et_al2015}{{85}{2015}{{{Presley} {et~al.}}}{{{Presley}, {Liu}, \& {Parsons}}}}
+\bibcite{pritchard_loeb2008}{{86}{2008}{{{Pritchard} \& {Loeb}}}{{}}}
+\bibcite{pritchard_loeb2012}{{87}{2012}{{{Pritchard} \& {Loeb}}}{{}}}
+\bibcite{robertson_et_al2015}{{88}{2015}{{{Robertson} {et~al.}}}{{{Robertson}, {Ellis}, {Furlanetto}, \& {Dunlop}}}}
+\bibcite{robertson_et_al2013}{{89}{2013}{{{Robertson} {et~al.}}}{{{Robertson}, {Furlanetto}, {Schneider}, {Charlot}, {Ellis}, {Stark}, {McLure}, {Dunlop}, {Koekemoer}, {Schenker}, {Ouchi}, {Ono}, {Curtis-Lake}, {Rogers}, {Bowler}, \& {Cirasuolo}}}}
+\bibcite{santos_et_al2005}{{90}{2005}{{{Santos} {et~al.}}}{{{Santos}, {Cooray}, \& {Knox}}}}
+\bibcite{schenker_et_al2013}{{91}{2013}{{{Schenker} {et~al.}}}{{{Schenker}, {Robertson}, {Ellis}, {Ono}, {McLure}, {Dunlop}, {Koekemoer}, {Bowler}, {Ouchi}, {Curtis-Lake}, {Rogers}, {Schneider}, {Charlot}, {Stark}, {Furlanetto}, \& {Cirasuolo}}}}
+\bibcite{sokolowski_et_al2015}{{92}{2015}{{{Sokolowski} {et~al.}}}{{{Sokolowski}, {Tremblay}, {Wayth}, {Tingay}, {Clarke}, {Roberts}, {Waterson}, {Ekers}, {Hall}, {Lewis}, {Mossammaparast}, {Padhi}, {Schlagenhaufer}, {Sutinjo}, \& {Tickner}}}}
+\bibcite{sullivan_et_al2012}{{93}{2012}{{{Sullivan} {et~al.}}}{{{Sullivan}, {Morales}, {Hazelton}, {Arcus}, {Barnes}, {Bernardi}, {Briggs}, {Bowman}, {Bunton}, {Cappallo}, {Corey}, {Deshpande}, {deSouza}, {Emrich}, {Gaensler}, {Goeke}, {Greenhill}, {Herne}, {Hewitt}, {Johnston-Hollitt}, {Kaplan}, {Kasper}, {Kincaid}, {Koenig}, {Kratzenberg}, {Lonsdale}, {Lynch}, {McWhirter}, {Mitchell}, {Morgan}, {Oberoi}, {Ord}, {Pathikulangara}, {Prabu}, {Remillard}, {Rogers}, {Roshi}, {Salah}, {Sault}, {Udaya Shankar}, {Srivani}, {Stevens}, {Subrahmanyan}, {Tingay}, {Wayth}, {Waterson}, {Webster}, {Whitney}, {Williams}, {Williams}, \& {Wyithe}}}}
+\bibcite{switzer_liu2014}{{94}{2014}{{Switzer \& Liu}}{{}}}
+\bibcite{tegmark1997}{{95}{1997}{{Tegmark}}{{}}}
+\bibcite{nithya_et_al2013}{{96}{2013}{{{Thyagarajan} {et~al.}}}{{{Thyagarajan}, {Udaya Shankar}, {Subrahmanyan}, {Arcus}, {Bernardi}, {Bowman}, {Briggs}, {Bunton}, {Cappallo}, {Corey}, {deSouza}, {Emrich}, {Gaensler}, {Goeke}, {Greenhill}, {Hazelton}, {Herne}, {Hewitt}, {Johnston-Hollitt}, {Kaplan}, {Kasper}, {Kincaid}, {Koenig}, {Kratzenberg}, {Lonsdale}, {Lynch}, {McWhirter}, {Mitchell}, {Morales}, {Morgan}, {Oberoi}, {Ord}, {Pathikulangara}, {Remillard}, {Rogers}, {Anish Roshi}, {Salah}, {Sault}, {Srivani}, {Stevens}, {Thiagaraj}, {Tingay}, {Wayth}, {Waterson}, {Webster}, {Whitney}, {Williams}, {Williams}, \& {Wyithe}}}}
+\bibcite{tingay_et_al2013}{{97}{2013}{{{Tingay} {et~al.}}}{{{Tingay}, {Goeke}, {Bowman}, {Emrich}, {Ord}, {Mitchell}, {Morales}, {Booler}, {Crosse}, {Wayth}, {Lonsdale}, {Tremblay}, {Pallot}, {Colegate}, {Wicenec}, {Kudryavtseva}, {Arcus}, {Barnes}, {Bernardi}, {Briggs}, {Burns}, {Bunton}, {Cappallo}, {Corey}, {Deshpande}, {Desouza}, {Gaensler}, {Greenhill}, {Hall}, {Hazelton}, {Herne}, {Hewitt}, {Johnston-Hollitt}, {Kaplan}, {Kasper}, {Kincaid}, {Koenig}, {Kratzenberg}, {Lynch}, {Mckinley}, {Mcwhirter}, {Morgan}, {Oberoi}, {Pathikulangara}, {Prabu}, {Remillard}, {Rogers}, {Roshi}, {Salah}, {Sault}, {Udaya-Shankar}, {Schlagenhaufer}, {Srivani}, {Stevens}, {Subrahmanyan}, {Waterson}, {Webster}, {Whitney}, {Williams}, {Williams}, \& {Wyithe}}}}
+\bibcite{treu_et_al2013}{{98}{2013}{{{Treu} {et~al.}}}{{{Treu}, {Schmidt}, {Trenti}, {Bradley}, \& {Stiavelli}}}}
+\bibcite{trott_et_al2012}{{99}{2012}{{{Trott} {et~al.}}}{{{Trott}, {Wayth}, \& {Tingay}}}}
+\bibcite{van_haarlem_et_al2013}{{100}{2013}{{{van Haarlem} {et~al.}}}{{{van Haarlem}, {Wise}, {Gunst}, {Heald}, {McKean}, {Hessels}, {de Bruyn}, {Nijboer}, {Swinbank}, {Fallows}, {Brentjens}, {Nelles}, {Beck}, {Falcke}, {Fender}, {H{\"o}randel}, {Koopmans}, {Mann}, {Miley}, {R{\"o}ttgering}, {Stappers}, {Wijers}, {Zaroubi}, {van den Akker}, {Alexov}, {Anderson}, {Anderson}, {van Ardenne}, {Arts}, {Asgekar}, {Avruch}, {Batejat}, {B{\"a}hren}, {Bell}, {Bell}, {van Bemmel}, {Bennema}, {Bentum}, {Bernardi}, {Best}, {B{\^i}rzan}, {Bonafede}, {Boonstra}, {Braun}, {Bregman}, {Breitling}, {van de Brink}, {Broderick}, {Broekema}, {Brouw}, {Br{\"u}ggen}, {Butcher}, {van Cappellen}, {Ciardi}, {Coenen}, {Conway}, {Coolen}, {Corstanje}, {Damstra}, {Davies}, {Deller}, {Dettmar}, {van Diepen}, {Dijkstra}, {Donker}, {Doorduin}, {Dromer}, {Drost}, {van Duin}, {Eisl{\"o}ffel}, {van Enst}, {Ferrari}, {Frieswijk}, {Gankema}, {Garrett}, {de Gasperin}, {Gerbers}, {de Geus}, {Grie{\ss }meier}, {Grit}, {Gruppen}, {Hamaker}, {Hassall}, {Hoeft}, {Holties}, {Horneffer}, {van der Horst}, {van Houwelingen}, {Huijgen}, {Iacobelli}, {Intema}, {Jackson}, {Jelic}, {de Jong}, {Juette}, {Kant}, {Karastergiou}, {Koers}, {Kollen}, {Kondratiev}, {Kooistra}, {Koopman}, {Koster}, {Kuniyoshi}, {Kramer}, {Kuper}, {Lambropoulos}, {Law}, {van Leeuwen}, {Lemaitre}, {Loose}, {Maat}, {Macario}, {Markoff}, {Masters}, {McFadden}, {McKay-Bukowski}, {Meijering}, {Meulman}, {Mevius}, {Middelberg}, {Millenaar}, {Miller-Jones}, {Mohan}, {Mol}, {Morawietz}, {Morganti}, {Mulcahy}, {Mulder}, {Munk}, {Nieuwenhuis}, {van Nieuwpoort}, {Noordam}, {Norden}, {Noutsos}, {Offringa}, {Olofsson}, {Omar}, {Orr{\'u}}, {Overeem}, {Paas}, {Pandey-Pommier}, {Pandey}, {Pizzo}, {Polatidis}, {Rafferty}, {Rawlings}, {Reich}, {de Reijer}, {Reitsma}, {Renting}, {Riemers}, {Rol}, {Romein}, {Roosjen}, {Ruiter}, {Scaife}, {van der Schaaf}, {Scheers}, {Schellart}, {Schoenmakers}, {Schoonderbeek}, {Serylak}, {Shulevski}, {Sluman}, {Smirnov}, {Sobey}, {Spreeuw}, {Steinmetz}, {Sterks}, {Stiepel}, {Stuurwold}, {Tagger}, {Tang}, {Tasse}, {Thomas}, {Thoudam}, {Toribio}, {van der Tol}, {Usov}, {van Veelen}, {van der Veen}, {ter Veen}, {Verbiest}, {Vermeulen}, {Vermaas}, {Vocks}, {Vogt}, {de Vos}, {van der Wal}, {van Weeren}, {Weggemans}, {Weltevrede}, {White}, {Wijnholds}, {Wilhelmsson}, {Wucknitz}, {Yatawatta}, {Zarka}, {Zensus}, \& {van Zwieten}}}}
+\bibcite{vedantham_et_al2012}{{101}{2012}{{{Vedantham} {et~al.}}}{{{Vedantham}, {Udaya Shankar}, \& {Subrahmanyan}}}}
+\bibcite{vedantham_et_al2015}{{102}{2015}{{{Vedantham} {et~al.}}}{{{Vedantham}, {Koopmans}, {de Bruyn}, {Wijnholds}, {Brentjens}, {Abdalla}, {Asad}, {Bernardi}, {Bus}, {Chapman}, {Ciardi}, {Daiboo}, {Fernandez}, {Ghosh}, {Harker}, {Jelic}, {Jensen}, {Kazemi}, {Lambropoulos}, {Martinez-Rubi}, {Mellema}, {Mevius}, {Offringa}, {Pandey}, {Patil}, {Thomas}, {Veligatla}, {Yatawatta}, {Zaroubi}, {Anderson}, {Asgekar}, {Bell}, {Bentum}, {Best}, {Bonafede}, {Breitling}, {Broderick}, {Br{\"u}ggen}, {Butcher}, {Corstanje}, {de Gasperin}, {de Geus}, {Deller}, {Duscha}, {Eisl{\"o}ffel}, {Engels}, {Falcke}, {Fallows}, {Fender}, {Ferrari}, {Frieswijk}, {Garrett}, {Grie{\ss }meier}, {Gunst}, {Hassall}, {Heald}, {Hoeft}, {H{\"o}randel}, {Iacobelli}, {Juette}, {Kondratiev}, {Kuniyoshi}, {Kuper}, {Mann}, {Markoff}, {McFadden}, {McKay-Bukowski}, {McKean}, {Mulcahy}, {Munk}, {Nelles}, {Norden}, {Orru}, {Pandey-Pommier}, {Pizzo}, {Polatidis}, {Reich}, {Renting}, {R{\"o}ttgering}, {Schwarz}, {Shulevski}, {Smirnov}, {Stappers}, {Steinmetz}, {Swinbank}, {Tagger}, {Tang}, {Tasse}, {ter Veen}, {Thoudam}, {Toribio}, {Vocks}, {Wise}, {Wucknitz}, \& {Zarka}}}}
+\bibcite{visbal_et_al2012}{{103}{2012}{{{Visbal} {et~al.}}}{{{Visbal}, {Barkana}, {Fialkov}, {Tseliakhovich}, \& {Hirata}}}}
+\bibcite{tabitha_et_al2014}{{104}{2014}{{{Voytek} {et~al.}}}{{{Voytek}, {Natarajan}, {J{\'a}uregui Garc{\'{\i }}a}, {Peterson}, \& {L{\'o}pez-Cruz}}}}
+\bibcite{wang_et_al2006}{{105}{2006}{{{Wang} {et~al.}}}{{{Wang}, {Tegmark}, {Santos}, \& {Knox}}}}
+\bibcite{wieringa1992}{{106}{1992}{{Wieringa}}{{}}}
+\bibcite{wouthuysen1952}{{107}{1952}{{Wouthuysen}}{{}}}
+\bibcite{wu2009}{{108}{2009}{{Wu}}{{}}}
+\bibcite{yatawatta_et_al2013}{{109}{2013}{{{Yatawatta} {et~al.}}}{{{Yatawatta}, {de Bruyn}, {Brentjens}, {Labropoulos}, {Pandey}, {Kazemi}, {Zaroubi}, {Koopmans}, {Offringa}, {Jeli{\'c}}, {Martinez Rubi}, {Veligatla}, {Wijnholds}, {Brouw}, {Bernardi}, {Ciardi}, {Daiboo}, {Harker}, {Mellema}, {Schaye}, {Thomas}, {Vedantham}, {Chapman}, {Abdalla}, {Alexov}, {Anderson}, {Avruch}, {Batejat}, {Bell}, {Bell}, {Bentum}, {Best}, {Bonafede}, {Bregman}, {Breitling}, {van de Brink}, {Broderick}, {Br{\"u}ggen}, {Conway}, {de Gasperin}, {de Geus}, {Duscha}, {Falcke}, {Fallows}, {Ferrari}, {Frieswijk}, {Garrett}, {Griessmeier}, {Gunst}, {Hassall}, {Hessels}, {Hoeft}, {Iacobelli}, {Juette}, {Karastergiou}, {Kondratiev}, {Kramer}, {Kuniyoshi}, {Kuper}, {van Leeuwen}, {Maat}, {Mann}, {McKean}, {Mevius}, {Mol}, {Munk}, {Nijboer}, {Noordam}, {Norden}, {Orru}, {Paas}, {Pandey-Pommier}, {Pizzo}, {Polatidis}, {Reich}, {R{\"o}ttgering}, {Sluman}, {Smirnov}, {Stappers}, {Steinmetz}, {Tagger}, {Tang}, {Tasse}, {ter Veen}, {Vermeulen}, {van Weeren}, {Wise}, {Wucknitz}, \& {Zarka}}}}
+\bibcite{zahn_et_al2007}{{110}{2007}{{{Zahn} {et~al.}}}{{{Zahn}, {Lidz}, {McQuinn}, {Dutta}, {Hernquist}, {Zaldarriaga}, \& {Furlanetto}}}}
+\bibcite{zahn_et_al2012}{{111}{2012}{{{Zahn} {et~al.}}}{{{Zahn}, {Reichardt}, {Shaw}, {Lidz}, {Aird}, {Benson}, {Bleem}, {Carlstrom}, {Chang}, {Cho}, {Crawford}, {Crites}, {de Haan}, {Dobbs}, {Dor{\'e}}, {Dudley}, {George}, {Halverson}, {Holder}, {Holzapfel}, {Hoover}, {Hou}, {Hrubes}, {Joy}, {Keisler}, {Knox}, {Lee}, {Leitch}, {Lueker}, {Luong-Van}, {McMahon}, {Mehl}, {Meyer}, {Millea}, {Mohr}, {Montroy}, {Natoli}, {Padin}, {Plagge}, {Pryke}, {Ruhl}, {Schaffer}, {Shirokoff}, {Spieler}, {Staniszewski}, {Stark}, {Story}, {van Engelen}, {Vanderlinde}, {Vieira}, \& {Williamson}}}}
+\bibcite{zaldarriaga_et_al2004}{{112}{2004}{{{Zaldarriaga} {et~al.}}}{{{Zaldarriaga}, {Furlanetto}, \& {Hernquist}}}}
+\bibcite{zheng_et_al2014}{{113}{2014}{{{Zheng} {et~al.}}}{{{Zheng}, {Tegmark}, {Buza}, {Dillon}, {Gharibyan}, {Hickish}, {Kunz}, {Liu}, {Losh}, {Lutomirski}, {Morrison}, {Narayanan}, {Perko}, {Rosner}, {Sanchez}, {Schutz}, {Tribiano}, {Valdez}, {Yang}, {Adami}, {Zelko}, {Zheng}, {Armstrong}, {Bradley}, {Dexter}, {Ewall-Wice}, {Magro}, {Matejek}, {Morgan}, {Neben}, {Pan}, {Penna}, {Peterson}, {Su}, {Villasenor}, {Williams}, \& {Zhu}}}}
+\bibstyle{apj}
+\newlabel{LastPage}{{}{21}}
