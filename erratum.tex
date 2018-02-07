@@ -1,0 +1,120 @@
+%\documentclass[preprint]{aastex}  % USE THIS TO MAKE BIB, THEN FORMAT USING EMULATEAPJ
+\documentclass[onecolumn]{emulateapj} \shorttitle{}
+\shortauthors{Ali, et al.}
+
+\usepackage{amsmath} \usepackage{graphicx} \usepackage[figuresright]{rotating}
+%\usepackage{rotating}
+\usepackage{natbib}
+%\usepackage{pdflscape} \usepackage{lscape}
+\citestyle{aa}
+
+\def\b{\mathbf{b}} \def\k{\mathbf{k}} \def\r{\mathbf{r}} \def\q{\mathbf{q}}
+\def\b{\mathbf{b}} \def\kp{\mathbf{k}^\prime}
+\def\kpp{\mathbf{k}^{\prime\prime}} \def\V{\mathbb{V}} \def\expval#1{\langle #1
+\rangle} \def\At{\tilde{A}} \def\Vt{\tilde{V}} \def\Tt{\tilde{T}}
+\def\tb{\langle T_b\rangle} \newcommand{\vis}{\mathbf{v}}
+\newcommand{\x}{\mathbf{x}} \newcommand{\xhat}{\hat{\mathbf{x}}}
+\newcommand{\A}{\mathbf{A}} \newcommand{\N}{\mathbf{N}}
+\newcommand{\C}{\mathbf{C}} \newcommand{\Q}{\mathbf{Q}}
+\newcommand{\rhat}{\hat{\mathbf{r}}}
+\newcommand{\phat}{\hat{\mathbf{p}}}
+\newcommand{\qhat}{\hat{\mathbf{q}}}
+\newcommand{\hMpci}{h\ {\rm Mpc}^{-1}}
+\newcommand{\Tsys}{T_{\rm sys}}
+\newcommand{\Tspin}{T_{\rm s}}
+\newcommand{\kmin}{k_{\rm min}}
+\newcommand{\kmax}{k_{\rm max}}
+\newcommand{\Tcmb}{T_\gamma}
+\newcommand\abs[1]{\left|#1\right|}
+\newcommand{\mKlimit}{(22.4\,\textrm{mK})$^2$ }
+\newcommand{\mKsqlimit}{503 mK$^2$}
+\newcommand{\pobercitep}{(Pober et al. 2015, in prep)}
+\newcommand{\pobercitet}{Pober et al. (2015, in prep)}
+\newcommand{\parsonscitep}{(Parsons et al. 2015, in prep)}
+\newcommand{\parsonscitet}{Parsons et al. (2015, in prep)}
+
+\newcount\colveccount
+\newcommand*\colvec[1]{
+        \global\colveccount#1
+        \begin{pmatrix}
+        \colvecnext
+}
+\def\colvecnext#1{
+        #1
+        \global\advance\colveccount-1
+        \ifnum\colveccount>0
+                \\
+                \expandafter\colvecnext
+        \else
+                \end{pmatrix}
+        \fi
+}
+
+
+\begin{document}
+
+\title{ERRATUM: "PAPER-64 Constraints on Reionization: the  $21\,\textrm{cm}$ Power Spectrum at $z=8.4$" (2015, Apj, 809, 61)}
+
+\author{
+Zaki S. Ali\altaffilmark{1}, 
+Aaron R. Parsons\altaffilmark{1,2}, 
+Haoxuan Zheng\altaffilmark{3},
+Jonathan C. Pober\altaffilmark{4}, 
+Adrian Liu\altaffilmark{1,5}, 
+James E. Aguirre\altaffilmark{6},
+Richard F. Bradley\altaffilmark{7,8,9},
+Gianni Bernardi\altaffilmark{10,11,12}, 
+Chris L. Carilli\altaffilmark{13,14},
+Carina Cheng\altaffilmark{1},
+David R. DeBoer\altaffilmark{2}, 
+Matthew R. Dexter\altaffilmark{2},
+Jasper Grobbelaar\altaffilmark{10},
+Jasper Horrell\altaffilmark{10},
+Daniel C. Jacobs\altaffilmark{15}, 
+Pat Klima\altaffilmark{8},
+David H. E. MacMahon\altaffilmark{2},
+Matthys Maree\altaffilmark{10},
+David F. Moore\altaffilmark{6},
+Nima Razavi\altaffilmark{14},
+Irina I. Stefan\altaffilmark{14},
+William P. Walbrugh\altaffilmark{10},
+Andre Walker\altaffilmark{10}
+}
+%\tableofcontents
+
+\altaffiltext{1}{Astronomy Dept., U. California, Berkeley CA}
+\altaffiltext{2}{Radio Astronomy Lab., U. California, Berkeley CA}
+\altaffiltext{3}{Dept. of Physics, Massachusetts Inst. of Tech., Cambridge MA}
+\altaffiltext{4}{Physics Dept.  U. Washington, Seattle WA}
+\altaffiltext{5}{Berkeley Center for Cosmological Physics, Berkeley, CA} 
+\altaffiltext{6}{Dept. of Physics and Astronomy, U. Penn., Philadelphia PA} 
+\altaffiltext{7}{Dept. of Electrical and Computer Engineering, U. Virginia, Charlottesville VA}
+\altaffiltext{8}{National Radio Astronomy Obs., Charlottesville VA}
+\altaffiltext{9}{Dept. of Astronomy, U. Virginia, Charlottesville VA}
+\altaffiltext{10}{Square Kilometer Array, S. Africa, Cape Town South Africa}
+\altaffiltext{11}{Dept. of Physics and Electronics, Rhodes University}
+\altaffiltext{12}{Harvard-Smithsonian Cen. for Astrophysics, Cambridge MA}
+\altaffiltext{13}{National Radio Astronomy Obs., Socorro NM}
+\altaffiltext{14}{Cavendish Lab., Cambridge UK}
+\altaffiltext{15}{School of Earth and Space Exploration, Arizona State U., Tempe AZ}
+
+% http://journals.aas.org/authors/manuscript.html says not to include an abstract, but Iv'e 
+% included one here to keep our message straight. 
+\begin{abstract}
+In this erratum we update the reported upper limits on the 21cm power spectrum. 
+The original results reported a $2\sigma$
+upper limit on $\Delta^2(k)$ of \mKlimit in the range
+$0.15<k<0.5\hMpci$ at $z=8.4$ The new result reports XXX.
+\end{abstract}
+
+\maketitle
+
+This is where we discuss the errors.
+
+%\clearpage
+%\nocite{*}
+\bibliographystyle{apj}
+\bibliography{biblio}
+
+\end{document}
+
