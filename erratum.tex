@@ -28,10 +28,13 @@
 \newcommand\abs[1]{\left|#1\right|}
 \newcommand{\mKlimit}{(22.4\,\textrm{mK})$^2$ }
 \newcommand{\mKsqlimit}{503 mK$^2$}
+\newcommand{\revisedmklimit}{(212.2\,\textrm{mK})$^2$}
 \newcommand{\pobercitep}{(Pober et al. 2015, in prep)}
 \newcommand{\pobercitet}{Pober et al. (2015, in prep)}
 \newcommand{\parsonscitep}{(Parsons et al. 2015, in prep)}
 \newcommand{\parsonscitet}{Parsons et al. (2015, in prep)}
+\newcommand{\kolopaniscitet}{Kolopanis et al. (2018, submitted)}
+\newcommand{\chengcitet}{Cheng et al. (2018, submitted)}
 
 \newcount\colveccount
 \newcommand*\colvec[1]{
@@ -101,15 +104,28 @@ Andre Walker\altaffilmark{10}
 % http://journals.aas.org/authors/manuscript.html says not to include an abstract, but Iv'e 
 % included one here to keep our message straight. 
 \begin{abstract}
-In this erratum we update the reported upper limits on the 21cm power spectrum. 
-The original results reported a $2\sigma$
-upper limit on $\Delta^2(k)$ of \mKlimit in the range
-$0.15<k<0.5\hMpci$ at $z=8.4$ The new result reports XXX.
+In this erratum we update the reported upper limits on the 21cm power spectrum.
+The original results reported a $2\sigma$ upper limit on $\Delta^2(k)$ of
+\mKlimit in the range $0.15<k<0.5\hMpci$ at $z=8.4$ The revised result, found in
+\kolopaniscitet,  puts an upper limit of \revisedmklimit at$k = .3\hMpci$.
 \end{abstract}
 
 \maketitle
 
-This is where we discuss the errors.
+In this erratum we revise the upper limits on the 21 cm power spectrum presented
+in the original manuscript.  The upper limit on the power spectrum in the
+original manuscript was \mKlimit.  The revised limit is \revisedmklimit. As
+discussed in \chengcitet, a number of errors in the calculation of signal loss
+through the power spectrum pipeline caused an under estimate of the amount of
+signal loss. We briefly discuss the errors below and point the reader to
+\chengcitet for an in depth analysis of signal loss using empirical covariances
+in power spectrum analysis. 
+
+List and explain errors here: 
+1. Cross terms in the signal loss calculation are relevant.
+2. Bootstrapping correlated samples under estimates the error bars.
+3. Theoretical noise prediction was incorrect by a factor of 2
+
 
 %\clearpage
 %\nocite{*}
