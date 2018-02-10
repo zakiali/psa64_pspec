@@ -103,29 +103,85 @@ Andre Walker\altaffilmark{10}
 
 % http://journals.aas.org/authors/manuscript.html says not to include an abstract, but Iv'e 
 % included one here to keep our message straight. 
-\begin{abstract}
-In this erratum we update the reported upper limits on the 21cm power spectrum.
-The original results reported a $2\sigma$ upper limit on $\Delta^2(k)$ of
-\mKlimit in the range $0.15<k<0.5\hMpci$ at $z=8.4$ The revised result, found in
-\kolopaniscitet,  puts an upper limit of \revisedmklimit at$k = .3\hMpci$.
-\end{abstract}
+%\begin{abstract}
+%In this erratum we update the reported upper limits on the 21cm power spectrum.
+%The original results reported a $2\sigma$ upper limit on $\Delta^2(k)$ of
+%\mKlimit in the range $0.15<k<0.5\hMpci$ at $z=8.4$ The revised result, found in
+%\kolopaniscitet,  puts an upper limit of \revisedmklimit at$k = .3\hMpci$.
+%\end{abstract}
 
 \maketitle
 
-In this erratum we revise the upper limits on the 21 cm power spectrum presented
-in the original manuscript.  The upper limit on the power spectrum in the
-original manuscript was \mKlimit.  The revised limit is \revisedmklimit. As
-discussed in \chengcitet, a number of errors in the calculation of signal loss
-through the power spectrum pipeline caused an under estimate of the amount of
-signal loss. We briefly discuss the errors below and point the reader to
-\chengcitet for an in depth analysis of signal loss using empirical covariances
-in power spectrum analysis. 
+In this erratum, we revise the upper limits on the 21 cm power spectrum presented
+in the original manuscript.  In the original manuscript, an upper limit on 
+$\Delta_{21}^2(k)$ of \mKlimit was reported at $z=8.4$ in the range $0.15<k<0.5\hMpci$.
+This analysis underestimated 
+the level loss associated with the chosen power spectrum estimator and also underestimated 
+the statistical error in those estimates.  The revised result shown in Figure \ref{fig:XXX}, 
+which is included in
+the multi-redshift limits of \kolopaniscitet, places a best upper limit of \revisedmklimit 
+at $z=8.4$ and $k=0.3\hMpci$.
+Below, we briefly summarize the errors in the original analysis and how they are corrected.
+For an in-depth analysis of the errors, we refer the reader to \chengcitet.
 
-List and explain errors here: 
-1. Cross terms in the signal loss calculation are relevant.
-2. Bootstrapping correlated samples under estimates the error bars.
-3. Theoretical noise prediction was incorrect by a factor of 2
+The first and most impactful error relates to the method by which signal loss was estimated.
+Signal loss was expected in the original analysis because the covariance matrices, $C$,
+used to weight the un-normalized bandpower estimates, ${\mathbf q}_\alpha$, in
+\begin{equation}
+{\mathbf q}_\alpha = {\mathbf x}C^{-1}Q_\alpha C^{-1}{\mathbf x}
+\end{equation} 
+were estimated from a finite ensemble of the data, $\mathbf x$, as $C=\langle {\mathbf x} {\mathbf x}^\dagger\rangle$.
+To assess signal loss, mock cosmological signals $\mathbf e$ of known amplitudes were 
+drawn with random seeds and added to the original data to form a new data vector, ${\mathbf r}\equiv{\mathbf x} + {\mathbf e}$.
+New covariance matrices, $C_r=\langle{\mathbf r}\mathbf{r}^\dagger\rangle$, were used to estimate un-normalized bandpowers, 
+${\mathbf q}_{\alpha,r}$. Since these bandpower estimates inlude contributions from both $\mathbf x$ and $\mathbf e$,
+an incremental bandpower associated with $\mathbf e$ was computed as
+\begin{eqalign}
+{\mathbf q}_{\alpha,e}\equiv{\mathbf q}_{\alpha,r}-{\mathbf q}_\alpha \\
+&=
+{\mathbf x}C_r^{-1}Q_\alpha C_r^{-1}{\mathbf x}+
+{\mathbf x}C_r^{-1}Q_\alpha C_r^{-1}{\mathbf e}
+{\mathbf e}C_r^{-1}Q_\alpha C_r^{-1}{\mathbf x}
+{\mathbf e}C_r^{-1}Q_\alpha C_r^{-1}{\mathbf e}
+- {\mathbf x}C^{-1}Q_\alpha C^{-1}{\mathbf x} \\
+&\approx
+{\mathbf x}C_r^{-1}Q_\alpha C_r^{-1}{\mathbf e}
+{\mathbf e}C_r^{-1}Q_\alpha C_r^{-1}{\mathbf x}
+{\mathbf e}C_r^{-1}Q_\alpha C_r^{-1}{\mathbf e},
+\label{eq:crossterms}
+\end{eqalign}
+where the last cancellation assumes that the change in weighting between $C$ and $C_r$ does not substantially change
+the normalized power spectrum estimate, ${\mathbf p}=M{\mathbf q}$, for appropriate choices of the normalization matrix, $M$.
+The normalized incremental power was then compared to the known injected power in $\mathbf e$ to estimate signal loss.
 
+The key error in the previous analysis was to assume that, since $\mathbf e$ was statistically independent of $\mathbf x$, that
+the $\mathbf x$-$\mathbf e$ cross-terms in Eq. (\ref{eq:crossterms}) would average to zero in an ensemble.  In fact, as shown
+in \chengcitet, these terms can contain significant negative power, since $C_r$ contains information that correlate the
+two vectors.  As a result, the amount of signal loss present was misestimated to be negligible, when in fact approximately
+XXX\% of the signal had been lost.  Correcting for the actual signal loss was the biggest factor revising the upper limit
+on $\Delta^2_{21}$.
+
+The second mistake made in the original analysis was to underestimate the statistical errors in the reported power spectrum
+estimates.  The original analysis used a bootstrapping technique to resample power spectral measurements made as a function
+of time and baseline before averaging them.  However, fringe-rate filtering introduces significant correlations in the data
+along the time axis.  As is discussed in \chengcitet, bootstrapping across correlated samples results in a significant underestimate
+of the variation in the data.  In this case, the error bars were underestimated by approximately a factor of 2 (XXX check this).
+The revised analysis only applies bootstrap resampling across the baseline axis to avoid this problem.
+
+The mistake in estimating the statistical errors should have become apparent when comparing results to our theoretical
+thermal noise sensitivity.  Unfortunately, a third miscalculation was made in estimating the thermal noise sensitivity.
+As detailed in \chengcitet, this miscalculation stemmed from numerous small mismatches between the idealized analysis
+pipeline used to estimate sensitivity and the actual analysis applied to the data.  As a result, our estimated thermal
+noise sensitivity was a factor of approximately 2 (XXX check this) low, leading the the mistaken impression that our
+errorbars were consistent with the level of thermal noise.
+
+In summary, Figure \ref{fig:XXX} of this erratum includes corrections to the original analysis relating to
+an incorrect estimate of signal loss and a mis-estimation the the statistical error in those measurements.
+These results replace the results in Figures XXX and YYY in the original manuscript.  Results that relied on
+the original limits, including those presented in Figures ZZZ and AAA, are retracted.
+% XXX i don't think we can point to errors in other papers in this erratum, but should we mention Pober et al?
+Our revised results are put into context with measurements at other redshifts in \kolopaniscitet.  
+% XXX anything else?
 
 %\clearpage
 %\nocite{*}
