@@ -37,27 +37,10 @@
 \newcommand{\kolopaniscitet}{Kolopanis et al. (2018, submitted)}
 \newcommand{\chengcitet}{Cheng et al. (2018, submitted)}
 
-\newcount\colveccount
-\newcommand*\colvec[1]{
-        \global\colveccount#1
-        \begin{pmatrix}
-        \colvecnext
-}
-\def\colvecnext#1{
-        #1
-        \global\advance\colveccount-1
-        \ifnum\colveccount>0
-                \\
-                \expandafter\colvecnext
-        \else
-                \end{pmatrix}
-        \fi
-}
-
 
 \begin{document}
 
-\title{ERRATUM: "PAPER-64 Constraints on Reionization: the  $21\,\textrm{cm}$ Power Spectrum at $z=8.4$" (2015, Apj, 809, 61)}
+\title{ERRATUM: ``PAPER-64 Constraints on Reionization: the  $21\,\textrm{cm}$ Power Spectrum at $z=8.4$" (2015, Apj, 809, 61)}
 
 \author{
 Zaki S. Ali\altaffilmark{1}, 
@@ -120,55 +103,54 @@ This analysis underestimated
 the level of loss associated with the chosen power spectrum estimator and also underestimated 
 the statistical error in those estimates.  The revised result, shown in Figure \ref{fig:updated_pspec}, 
 which is included in
-the multi-redshift limits of \kolopaniscitet, places a best upper limit of \revisedmklimit 
-at $z=8.4$ and $k=0.3\hMpci$.
+the multi-redshift limits of \kolopaniscitet, places a best upper limit of (212.2\,\textrm{mK})$^2$ at $z=8.4$ and $k=0.3\hMpci$.
 Below, we briefly summarize the errors in the original analysis and how they are corrected.
 For an in-depth analysis of the errors, we refer the reader to \chengcitet.
 
 The first and most impactful error relates to the method by which signal loss was estimated.
 Signal loss was expected in the original analysis because the covariance matrices, $C$,
-used to weight the un-normalized bandpower estimates, ${\mathbf q}_\alpha$, in
+used to weight the un-normalized bandpower estimates, ${\widehat{\textbf{q}}}_\alpha$, in
 \begin{equation}
-{\mathbf q}_\alpha = {\mathbf x}C_{x}^{-1}Q_\alpha C_{x}^{-1}{\mathbf x}
+{\widehat{\textbf{q}}}_{\alpha} = {\mathbf x}\widehat{\textbf{C}}_{x}^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_{x}^{-1}{\mathbf x}
 \end{equation} 
-were empirically estimated from a finite ensemble of the data, $\mathbf x$, as $C_{x}=\langle {\mathbf x} {\mathbf x}^\dagger\rangle$.
+were empirically estimated from a time-averaged finite ensemble of the data, $\mathbf x$, as $\widehat{\textbf{C}}_{x}=\langle {\mathbf x} {\mathbf x}^\dagger\rangle$.
 To assess signal loss, mock cosmological signals $\mathbf e$ of known amplitudes were 
 drawn with random seeds and added to the original data to form a new data vector, ${\mathbf r}\equiv{\mathbf x} + {\mathbf e}$.
-New covariance matrices, $C_r=\langle{\mathbf r}\mathbf{r}^\dagger\rangle$, were used to estimate un-normalized bandpowers, 
-${\mathbf q}_{\alpha,r}$. Since these bandpower estimates include contributions from both $\mathbf x$ and $\mathbf e$,
-an incremental bandpower associated with $\mathbf e$ was computed as
+New covariance matrices, $\widehat{\textbf{C}}_r=\langle{\mathbf r}\mathbf{r}^\dagger\rangle$, were used to estimate un-normalized bandpowers, 
+${\widehat{\textbf{q}}}_{\alpha,r}$. Since these bandpower estimates include contributions from both $\mathbf x$ and $\mathbf e$,
+an incremental bandpower associated with $\mathbf e$ can be written as
 \begin{align}
-{\mathbf q}_{\alpha,e}&\equiv{\mathbf q}_{\alpha,r}-{\mathbf q}_\alpha \\
+{\widehat{\textbf{q}}}_{\alpha,e}&\equiv{\widehat{\textbf{q}}}_{\alpha,r}-{\widehat{\textbf{q}}}_{\alpha} \\
 &=
-{\mathbf x}C_r^{-1}Q_\alpha C_r^{-1}{\mathbf x}+
-{\mathbf x}C_r^{-1}Q_\alpha C_r^{-1}{\mathbf e}+
-{\mathbf e}C_r^{-1}Q_\alpha C_r^{-1}{\mathbf x}+
-{\mathbf e}C_r^{-1}Q_\alpha C_r^{-1}{\mathbf e}
-- {\mathbf x}C_x^{-1}Q_\alpha C_x^{-1}{\mathbf x} \\
+{\mathbf x}\widehat{\textbf{C}}_r^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_r^{-1}{\mathbf x}+
+{\mathbf x}\widehat{\textbf{C}}_r^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_r^{-1}{\mathbf e}+
+{\mathbf e}\widehat{\textbf{C}}_r^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_r^{-1}{\mathbf x}+
+{\mathbf e}\widehat{\textbf{C}}_r^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_r^{-1}{\mathbf e}
+- {\mathbf x}\widehat{\textbf{C}}_x^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_x^{-1}{\mathbf x} \\
 &\approx
-{\mathbf x}C_r^{-1}Q_\alpha C_r^{-1}{\mathbf e}+
-{\mathbf e}C_r^{-1}Q_\alpha C_r^{-1}{\mathbf x}+
-{\mathbf e}C_r^{-1}Q_\alpha C_r^{-1}{\mathbf e},
+{\mathbf x}\widehat{\textbf{C}}_r^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_r^{-1}{\mathbf e}+
+{\mathbf e}\widehat{\textbf{C}}_r^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_r^{-1}{\mathbf x}+
+{\mathbf e}\widehat{\textbf{C}}_r^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_r^{-1}{\mathbf e},
 \label{eq:crossterms}
 \end{align}
 
-%ZA: I think we should add in the equation we acutally used in the signal loss, e.g. {\mathbf e}C_r^{-1}Q_\alpha C_r^{-1}{\mathbf e}
-% as the last line in equation \ref{eq:crossterms} for completeness. I know it's discussed in the text, but having the equation 
-% we actually used in the original signal would be good to show how far off we were.
-where the last cancellation assumes that the change in weighting between $C_{x}$ and $C_r$ does not substantially change
-the normalized power spectrum estimate, ${\mathbf p}=M{\mathbf q}$, for appropriate choices of the normalization matrix, $M$.
+where the last cancellation assumes that the change in weighting between $\widehat{\textbf{C}}_{x}$ and $\widehat{\textbf{C}}_r$ does not substantially change
+the normalized power spectrum estimate, $\widehat{\textbf{p}}=\textbf{M}\widehat{\textbf{q}}$, for appropriate choices of the normalization matrix, $\textbf{M}$.
 The normalized incremental power was then compared to the known injected power in $\mathbf e$ to estimate signal loss.
 
 The key error in the previous analysis was to assume that, since $\mathbf e$ was statistically independent of $\mathbf x$, that
-the $\mathbf x$-$\mathbf e$ cross-terms in Eq. (\ref{eq:crossterms}) would average to zero in an ensemble.  In fact, as shown
-in \chengcitet, these terms can contain significant negative power, since $C_r$ contains information that correlate the
+the $\mathbf x$-$\mathbf e$ cross-terms in Eq. (\ref{eq:crossterms}) would
+average to zero in an ensemble. In other words, only the last term in
+Eq. \ref{eq:crossterms} was used to calculate signal loss. However, as shown in \chengcitet, these cross-terms can contain
+significant negative power, since $\widehat{\textbf{C}}_r$ contains information
+that correlate the
 two vectors.  As a result, the amount of signal loss present was mis-estimated to be negligible, when in fact approximately
-XXX\% of the signal had been lost. Correcting for the actual signal loss was the biggest factor revising the upper limit
+99.9\% of the signal had been lost. Correcting for the actual signal loss was the biggest factor revising the upper limit
 on $\Delta^2_{21}$.
 
 The second mistake made in the original analysis was to underestimate the statistical errors in the reported power spectrum
-estimates.  The original analysis used a bootstrapping technique to resample power spectral measurements made as a function
-of time and baseline before averaging them.  However, fringe-rate filtering introduces significant correlations in the data
+estimates.  The original analysis used a bootstrap resampling technique on power spectral measurements over the baseline and time axes.
+However, fringe-rate filtering introduces significant correlations in the data
 along the time axis.  As is discussed in \chengcitet, bootstrapping across correlated samples results in a significant underestimate
 of the variation in the data.  In this case, the error bars were underestimated by approximately a factor of 2 (XXX check this).
 The revised analysis only applies bootstrap resampling across the baseline axis to avoid this problem.
@@ -177,7 +159,7 @@ The mistake in estimating the statistical errors should have become apparent whe
 thermal noise sensitivity.  Unfortunately, a third miscalculation was made in estimating the thermal noise sensitivity.
 As detailed in \chengcitet, this miscalculation stemmed from numerous small mismatches between the idealized analysis
 pipeline used to estimate sensitivity and the actual analysis applied to the data.  As a result, our estimated thermal
-noise sensitivity was a factor of approximately 2 low, leading the the mistaken impression that our
+noise sensitivity was approximately a factor of 2 low, leading to the mistaken impression that our
 errorbars were consistent with the level of thermal noise.
 
 In summary, Figure \ref{fig:updated_pspec} of this erratum includes corrections to the original analysis relating to
@@ -192,12 +174,12 @@ Our revised results are put into context with measurements at other redshifts in
 
 \begin{figure}%
     \centering
-    \subfloat[a]{{\includegraphics[width=6cm]{plots/pspec_95_pk.png} }}%
+    \subfloat[]{{\includegraphics[width=7.5cm]{plots/pspec_95_pk.png} }}%
     \qquad
-    \subfloat[b]{{\includegraphics[width=6cm]{plots/pspec_95.png} }}%
-    \caption{Measured power spectrum (black dots with 2 $\sigma$ error bars) at $z=8.37$ shown in (a) $P(k)$ and (b) $\Delta^{2}$
-             Using 135 days of PAPER 64 data. The dotted vertical lines at $k=0.6\hMpci$ show the bounds of the delay filter (or the horizon limit).
-             Both the analytical(cyan) and 21 cmsense (green) 2$\sigma$ noise power spectrum are also shown assuming a $T_{sys}=300K (XXX)$}%
+    \subfloat[]{{\includegraphics[width=7.5cm]{plots/pspec_95.png} }}%
+    \caption{Measured power spectrum (black dots with 2$\sigma$ error bars) at $z=8.37$ shown in (a) $P(k)$ and (b) $\Delta^{2}$
+             using 135 days of PAPER 64 data. The dotted vertical lines at $k=0.6\hMpci$ show the bounds of the delay filter (or the horizon limit).
+             Both the analytical (green) and 21cmSense (cyan) 2$\sigma$ noise power spectra are also shown assuming $T_{sys}=144K$}%
     \label{fig:updated_pspec}%
 \end{figure}
 
