@@ -111,9 +111,9 @@ The first and most impactful error relates to the method by which signal loss wa
 Signal loss was expected in the original analysis because the covariance matrices, $\textbf{C}$,
 used to weight the un-normalized bandpower estimates, ${\widehat{\textbf{q}}}_\alpha$, in
 \begin{equation}
-{\widehat{\textbf{q}}}_{\alpha} = {\mathbf x}\widehat{\textbf{C}}_{x}^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_{x}^{-1}{\mathbf x}
+{\widehat{\textbf{q}}}_{\alpha} = {\mathbf x}\textbf{C}^{-1}\textbf{Q}_\alpha \textbf{C}^{-1}{\mathbf x}
 \end{equation} 
-were empirically estimated from a time-averaged finite ensemble of the data, $\mathbf x$, as $\widehat{\textbf{C}}_{x}=\langle {\mathbf x} {\mathbf x}^\dagger\rangle$.
+were empirically estimated from a time-averaged finite ensemble of the data, $\mathbf x$, such that $\mathbf{C}\rightarrow \widehat{\textbf{C}}_{x}=\langle {\mathbf x} {\mathbf x}^\dagger\rangle$.
 To assess signal loss, mock cosmological signals $\mathbf e$ of known amplitudes were 
 drawn with random seeds and added to the original data to form a new data vector, ${\mathbf r}\equiv{\mathbf x} + {\mathbf e}$.
 New covariance matrices, $\widehat{\textbf{C}}_r=\langle{\mathbf r}\mathbf{r}^\dagger\rangle$, were used to estimate un-normalized bandpowers, 
@@ -179,7 +179,7 @@ Our revised results are put into context with measurements at other redshifts in
     \subfloat[]{{\includegraphics[width=7.5cm]{plots/pspec_95.png} }}%
     \caption{Measured power spectrum (black dots with 2$\sigma$ error bars) at $z=8.37$ shown in (a) $P(k)$ and (b) $\Delta^{2}$
              using 135 days of PAPER 64 data. The dotted vertical lines at $k=0.6\hMpci$ show the bounds of the delay filter (or the horizon limit).
-             Both the analytical (green) and 21cmSense (cyan) 2$\sigma$ noise power spectra are also shown assuming $T_{sys}=144K$}%
+             Both the analytical (green) and 21cmSense (cyan) 2$\sigma$ noise power spectra are also shown assuming $T_{sys}=144K$.}%
     \label{fig:updated_pspec}%
 \end{figure}
 
