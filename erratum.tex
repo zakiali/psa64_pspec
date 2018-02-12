@@ -108,7 +108,7 @@ Below, we briefly summarize the errors in the original analysis and how they are
 For an in-depth analysis of the errors, we refer the reader to \chengcitet.
 
 The first and most impactful error relates to the method by which signal loss was estimated.
-Signal loss was expected in the original analysis because the covariance matrices, $C$,
+Signal loss was expected in the original analysis because the covariance matrices, $\textbf{C}$,
 used to weight the un-normalized bandpower estimates, ${\widehat{\textbf{q}}}_\alpha$, in
 \begin{equation}
 {\widehat{\textbf{q}}}_{\alpha} = {\mathbf x}\widehat{\textbf{C}}_{x}^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_{x}^{-1}{\mathbf x}
@@ -152,7 +152,7 @@ The second mistake made in the original analysis was to underestimate the statis
 estimates.  The original analysis used a bootstrap resampling technique on power spectral measurements over the baseline and time axes.
 However, fringe-rate filtering introduces significant correlations in the data
 along the time axis.  As is discussed in \chengcitet, bootstrapping across correlated samples results in a significant underestimate
-of the variation in the data.  In this case, the error bars were underestimated by approximately a factor of 2 (XXX check this).
+of the variation in the data.  In this case, the error bars were underestimated by approximately a factor of 2.
 The revised analysis only applies bootstrap resampling across the baseline axis to avoid this problem.
 
 The mistake in estimating the statistical errors should have become apparent when comparing results to our theoretical
