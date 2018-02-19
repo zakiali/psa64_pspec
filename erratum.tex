@@ -72,7 +72,7 @@ Andre Walker\altaffilmark{10}
 \altaffiltext{1}{Astronomy Dept., U. California, Berkeley CA}
 \altaffiltext{2}{Radio Astronomy Lab., U. California, Berkeley CA}
 \altaffiltext{3}{Dept. of Physics, Massachusetts Inst. of Tech., Cambridge MA}
-\altaffiltext{4}{Physics Dept.  U. Washington, Seattle WA}
+\altaffiltext{4}{Department of Physics, Brown University, Providence, RI}
 \altaffiltext{5}{Berkeley Center for Cosmological Physics, Berkeley, CA} 
 \altaffiltext{6}{Dept. of Physics and Astronomy, U. Penn., Philadelphia PA} 
 \altaffiltext{7}{Dept. of Electrical and Computer Engineering, U. Virginia, Charlottesville VA}
@@ -96,16 +96,17 @@ Andre Walker\altaffilmark{10}
 
 \maketitle
 
-In this erratum, we revise the upper limits on the 21 cm power spectrum presented
-in the original manuscript.  In the original manuscript, an upper limit on 
-$\Delta_{21}^2(k)$ of \mKlimit was reported at $z=8.4$ in the range $0.15<k<0.5\hMpci$.
-This analysis underestimated 
-the level of loss associated with the chosen power spectrum estimator and also underestimated 
-the statistical error in those estimates.  The revised result, shown in Figure \ref{fig:updated_pspec}, 
-which is included in
-the multi-redshift limits of \kolopaniscitet, places a best upper limit of (212.2\,\textrm{mK})$^2$ at $z=8.4$ and $k=0.3\hMpci$.
-Below, we briefly summarize the errors in the original analysis and how they are corrected.
-For an in-depth analysis of the errors, we refer the reader to \chengcitet.
+In this erratum, we revise the upper limits on the 21 cm power spectrum
+presented in the original manuscript.  In the original manuscript, an upper
+limit on $\Delta_{21}^2(k)$ of \mKlimit was reported at $z=8.4$ in the range
+$0.15<k<0.5\hMpci$.  This analysis underestimated the level of signal loss of
+the cosmological 21 cm signal associated with the chosen power spectrum
+estimator and also underestimated the statistical error on those estimates.
+The revised result, shown in Figure \ref{fig:updated_pspec}, which is included
+in the multi-redshift limits of \kolopaniscitet, places a best upper limit of
+(212.2\,\textrm{mK})$^2$ at $z=8.4$ and $k=0.3\hMpci$.  Below, we briefly
+summarize the errors in the original analysis and how they are corrected.  For
+an in-depth analysis of the errors, we refer the reader to \chengcitet.
 
 The first and most impactful error relates to the method by which signal loss was estimated.
 Signal loss was expected in the original analysis because the covariance matrices, $\textbf{C}$,
@@ -134,7 +135,7 @@ an incremental bandpower associated with $\mathbf e$ can be written as
 \label{eq:crossterms}
 \end{align}
 
-where the last cancellation assumes that the change in weighting between $\widehat{\textbf{C}}_{x}$ and $\widehat{\textbf{C}}_r$ does not substantially change
+\noindent where the last cancellation assumes that the change in weighting between $\widehat{\textbf{C}}_{x}$ and $\widehat{\textbf{C}}_r$ does not substantially change
 the normalized power spectrum estimate, $\widehat{\textbf{p}}=\textbf{M}\widehat{\textbf{q}}$, for appropriate choices of the normalization matrix, $\textbf{M}$.
 The normalized incremental power was then compared to the known injected power in $\mathbf e$ to estimate signal loss.
 
@@ -151,8 +152,9 @@ on $\Delta^2_{21}$.
 The second mistake made in the original analysis was to underestimate the statistical errors in the reported power spectrum
 estimates.  The original analysis used a bootstrap resampling technique on power spectral measurements over the baseline and time axes.
 However, fringe-rate filtering introduces significant correlations in the data
-along the time axis.  As is discussed in \chengcitet, bootstrapping across correlated samples results in a significant underestimate
-of the variation in the data.  In this case, the error bars were underestimated by approximately a factor of 2.
+along the time axis.  As is discussed in \chengcitet, bootstrapping across correlated samples can result in a significant underestimate
+of the variation in the data if the number of resamplings is not equal to the number of independent samples in the data, as in the case 
+of the original analysis. The error bars associated with this oversampling were underestimated by approximately a factor of 2.
 The revised analysis only applies bootstrap resampling across the baseline axis to avoid this problem.
 
 The mistake in estimating the statistical errors should have become apparent when comparing results to our theoretical
@@ -162,10 +164,19 @@ pipeline used to estimate sensitivity and the actual analysis applied to the dat
 noise sensitivity was approximately a factor of 2 low, leading to the mistaken impression that our
 errorbars were consistent with the level of thermal noise.
 
-In summary, Figure \ref{fig:updated_pspec} of this erratum includes corrections to the original analysis relating to
-an incorrect estimate of signal loss and a mis-estimation the the statistical error in those measurements.
-These results replace the results in Figures 18 and 20 in the original manuscript.  Results that relied on
-the original limits, including those presented in Figures 21, are retracted.
+In summary, Figure \ref{fig:updated_pspec} of this erratum includes corrections
+to the original analysis relating to an incorrect estimate of signal loss and a
+mis-estimation the the statistical error in those measurements.  These results
+replace the results in Figures 18 and 20 in the original manuscript.  Results
+that relied on the original limits, including those presented in Figures 21,
+are retracted.  Additionally, the companion paper to the original manuscript,
+Pober et al. 2015, used the original limits to place constraints on the spin
+temperature of the intergalactic medium (IGM) at z = 8.4.  Our revised limits
+do not place significant constraints on the IGM temperature and the results of
+Figure 4 from Pober et al. 2015 should be disregarded.  However, we note that
+their analysis would still be relevant should a future experiment place
+constraints on the 21 cm signal similar to those claimed in our original
+manuscript.
 % XXX i don't think we can point to errors in other papers in this erratum, but should we mention Pober et al?
 %ZA: I agree to the first part. I think we should probably ask Jonnie if he wants to write his own quick erratum 
 % or if we should mention it here.
@@ -179,7 +190,8 @@ Our revised results are put into context with measurements at other redshifts in
     \subfloat[]{{\includegraphics[width=7.5cm]{plots/pspec_95.png} }}%
     \caption{Measured power spectrum (black dots with 2$\sigma$ error bars) at $z=8.37$ shown in (a) $P(k)$ and (b) $\Delta^{2}$
              using 135 days of PAPER 64 data. The dotted vertical lines at $k=0.6\hMpci$ show the bounds of the delay filter (or the horizon limit).
-             Both the analytical (green) and 21cmSense (cyan) 2$\sigma$ noise power spectra are also shown assuming $T_{sys}=144K$.}%
+             Both the analytical (green) and 21cmSense (cyan) 2$\sigma$ noise power spectra are also shown assuming $T_{rx}=144K$. A fiducial model
+             of the 21 cm power spectrum from 21cmFast is shown as the solid black line.}%
     \label{fig:updated_pspec}%
 \end{figure}
 
