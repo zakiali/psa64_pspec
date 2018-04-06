@@ -29,7 +29,7 @@
 \newcommand\abs[1]{\left|#1\right|}
 \newcommand{\mKlimit}{(22.4\,\textrm{mK})$^2$ }
 \newcommand{\mKsqlimit}{503 mK$^2$}
-\newcommand{\revisedmklimit}{(212.2\,\textrm{mK})$^2$}
+\newcommand{\revisedmklimit}{(250\,\textrm{mK})^2}
 \newcommand{\pobercitep}{(Pober et al. 2015, in prep)}
 \newcommand{\pobercitet}{Pober et al. (2015, in prep)}
 \newcommand{\parsonscitep}{(Parsons et al. 2015, in prep)}
@@ -104,8 +104,8 @@ the cosmological 21 cm signal associated with the chosen power spectrum
 estimator and also underestimated the statistical error on those estimates.
 The revised result, shown in Figure \ref{fig:updated_pspec}, which is included
 in the multi-redshift limits of \kolopaniscitet, places a best upper limit of
-(212.2\,\textrm{mK})$^2$ at $z=8.4$ and $k=0.3\hMpci$.  Below, we briefly
-summarize the errors in the original analysis and how they are corrected.  For
+$\revisedmklimit$ at $z=8.4$ and $k=0.3\hMpci$.  Below, we briefly
+summarize the errors in the original analysis and how they are corrected. For
 an in-depth analysis of the errors, we refer the reader to \chengcitet.
 
 The first and most impactful error relates to the method by which signal loss was estimated.
@@ -127,7 +127,7 @@ an incremental bandpower associated with $\mathbf e$ can be written as
 {\mathbf x}\widehat{\textbf{C}}_r^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_r^{-1}{\mathbf e}+
 {\mathbf e}\widehat{\textbf{C}}_r^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_r^{-1}{\mathbf x}+
 {\mathbf e}\widehat{\textbf{C}}_r^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_r^{-1}{\mathbf e}
-- {\mathbf x}\widehat{\textbf{C}}_x^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_x^{-1}{\mathbf x}. \\
+- {\mathbf x}\widehat{\textbf{C}}_x^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_x^{-1}{\mathbf x}.
 \label{eq:crossterms}
 \end{align}
 
@@ -135,8 +135,9 @@ an incremental bandpower associated with $\mathbf e$ can be written as
 
 The key error in the previous analysis was to assume that, since $\mathbf e$ was statistically independent of $\mathbf x$, that
 the $\mathbf x$-$\mathbf e$ cross-terms in Eq. (\ref{eq:crossterms}) would
-average to zero in an ensemble. In other words, only the last term in
-Eq. \ref{eq:crossterms} was used to calculate signal loss. However, as shown in $\chengcitet$ and \citet{switzer_et_al2015}, these cross-terms can contain
+average to zero in an ensemble. 
+%In other words, only the last term in Eq. \ref{eq:crossterms} was used to calculate signal loss. 
+However, as shown in $\chengcitet$ and \citet{switzer_et_al2015}, these cross-terms can contain
 significant negative power, since $\widehat{\textbf{C}}_r$ contains information
 that correlate the
 two vectors.  As a result, the amount of signal loss present was mis-estimated to be negligible, when in fact approximately
@@ -182,10 +183,15 @@ Our revised results are put into context with measurements at other redshifts in
     \subfloat[]{{\includegraphics[width=7.5cm]{plots/pspec_95_pk.png} }}%
     \qquad
     \subfloat[]{{\includegraphics[width=7.5cm]{plots/pspec_95.png} }}%
-    \caption{Measured power spectrum (black dots with 2$\sigma$ error bars) at $z=8.37$ shown in (a) $P(k)$ and (b) $\Delta^{2}$
-             using 135 days of PAPER 64 data. The dotted vertical lines at $k=0.6\hMpci$ show the bounds of the delay filter (or the horizon limit).
-             Both the analytical (green) and 21cmSense (cyan) 2$\sigma$ noise power spectra are also shown assuming $T_{rx}=144K$. A fiducial model
-             of the 21 cm power spectrum from 21cmFast is shown as the solid black line.}%
+    \caption{Power spectrum results at $z=8.37$ shown in (a) $P(k)$ and (b) $\Delta^{2}$
+             using 135 days of PAPER 64 data. For both plots, the pre-signal
+             loss power spectrum estimate is shown with the black points and $2\sigma$
+             error bars. The post-signal loss power spectrum (black dashed curve) shows the 2$\sigma$ upper limit.
+             The uniformly weighted power spectrum (using $\widehat{\textbf{C}}_{x}=\textbf{I}$), is shown as the blue
+             dashed line and does not incur any signal loss by construction.
+             The dotted vertical lines at $k=0.06\hMpci$ show the bounds of the delay filter (or the horizon limit).
+             The analytical (green) 2$\sigma$ noise power spectra are also shown assuming $T_{rx}=144K$. A fiducial
+             model of the 21cm power spectrum from 21cmFast is shown as the solid black line.}
     \label{fig:updated_pspec}%
 \end{figure}
 
