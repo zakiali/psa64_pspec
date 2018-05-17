@@ -96,30 +96,48 @@ Andre Walker\altaffilmark{10}
 
 \maketitle
 
-In this erratum, we revise the upper limits on the 21 cm power spectrum
-presented in the original manuscript.  In the original manuscript, an upper
-limit on $\Delta_{21}^2(k)$ of \mKlimit was reported at $z=8.4$ in the range
+In this erratum, we retract the upper limits on the 21 cm power spectrum
+presented in the original manuscript.  The original manuscript reported an upper
+limit on $\Delta_{21}^2(k)$ of \mKlimit at $z=8.4$ in the range
 $0.15<k<0.5\hMpci$.  This analysis underestimated the level of signal loss, or attenuation of
 the target cosmological 21 cm signal associated with the chosen power spectrum
 estimator, and also underestimated the statistical error on those estimates.
-The revised result, shown in Figure \ref{fig:updated_pspec}, which is included
-in the multi-redshift limits of \kolopaniscitet, places a best upper limit of
-$\revisedmklimit$ at $z=8.4$ and $k=0.3\hMpci$.  Below, we briefly
-summarize the errors in the original analysis and how they are corrected. For
-an in-depth analysis of the errors, we refer the reader to \chengcitet.
+A revised result, with a new analysis, is presented in \kolopaniscitet.  Below,
+we briefly summarize the errors in the original analysis and how they are
+corrected. For an in-depth analysis and discussion of the errors, we refer the reader to
+\chengcitet.
 
-The first and most impactful error relates to the method by which signal loss was estimated.
-Signal loss was expected in the original analysis because the covariance matrices, $\textbf{C}$,
-used to weight the un-normalized bandpower estimates, ${\widehat{\textbf{q}}}_\alpha$, in
+The first and most impactful error relates to the method by which signal loss
+was estimated. Signal loss was expected in the original analysis because the
+covariance matrices, $\textbf{C}$, used to weight the un-normalized bandpower
+estimates, ${\widehat{\textbf{q}}}_\alpha$, in
+
 \begin{equation}
 {\widehat{\textbf{q}}}_{\alpha} = {\mathbf x}\textbf{C}^{-1}\textbf{Q}_\alpha \textbf{C}^{-1}{\mathbf x}
 \end{equation} 
-were empirically estimated from a time-averaged finite ensemble of the data, $\mathbf x$, such that $\mathbf{C}\rightarrow \widehat{\textbf{C}}_{x}=\langle {\mathbf x} {\mathbf x}^\dagger\rangle_{t}$. As discussed in detail in \chengcitet, an empirical estimate is computed from a finite number of independent observations. Because $\widehat{\textbf{C}}$ therefore differs from the true covariance $\textbf{C}$, it carries the risk of over-fitting and down-weighting fluctuations in the particular data realization used in its computation, including the EoR signal.
-To assess signal loss, mock cosmological signals $\mathbf e$ of known amplitudes were 
-drawn with random seeds and added to the original data to form a new data vector, ${\mathbf r}\equiv{\mathbf x} + {\mathbf e}$.
-New covariance matrices, $\widehat{\textbf{C}}_r=\langle{\mathbf r}\mathbf{r}^\dagger\rangle_{t}$, were used to estimate un-normalized bandpowers, 
-${\widehat{\textbf{q}}}_{\alpha,r}$. Since these bandpower estimates include contributions from both $\mathbf x$ and $\mathbf e$,
-an incremental bandpower associated with $\mathbf e$ can be written as
+
+were empirically estimated from a time-averaged finite ensemble of the data,
+$\mathbf x$, such that $\mathbf{C}\rightarrow \widehat{\textbf{C}}_{x}=\langle {\mathbf x} {\mathbf x}^\dagger\rangle_{t}$.
+Since the empirical estimate is computed from a finite number of independent observations, correlations
+between data and the 21 cm signal exist.  Therefore, $\widehat{\textbf{C}}$ carries the risk 
+of down-weighting and over-fitting the fluctuations that look like the data, which includes the EoR signal. 
+%As discussed in detail in \chengcitet, an empirical estimate is computed from a
+%finite number of independent observations. Because $\widehat{\textbf{C}}$
+%therefore differs from the true covariance $\textbf{C}$, it carries the risk of
+%over-fitting and down-weighting fluctuations in the particular data realization
+%used in its computation, including the EoR signal.  
+To assess signal loss from the empirically estimated covariance matrix, mock
+cosmological signals $\mathbf e$ of known amplitudes were drawn with random
+seeds and added to the original data to form a new data vector, 
+${\mathbf r}\equiv{\mathbf x} + {\mathbf e}$.
+New covariance matrices, 
+$\widehat{\textbf{C}}_r=\langle{\mathbf r}\mathbf{r}^\dagger\rangle_{t}$, 
+were used to estimate un-normalized bandpowers, 
+${\widehat{\textbf{q}}}_{\alpha,r}$. 
+Since these bandpower estimates include contributions from both $\mathbf x$ and
+$\mathbf e$, an incremental bandpower associated with $\mathbf e$ can be
+written as
+
 \begin{align}
 {\widehat{\textbf{q}}}_{\alpha,e}&\equiv{\widehat{\textbf{q}}}_{\alpha,r}-{\widehat{\textbf{q}}}_{\alpha} \\
 &=
@@ -131,7 +149,7 @@ an incremental bandpower associated with $\mathbf e$ can be written as
 \label{eq:crossterms}
 \end{align}
 
-\noindent The normalized incremental power was then compared to the known injected power in $\mathbf e$ to estimate signal loss.
+\noindent The normalized incremental power was then compared to the known injected power in $\mathbf{e}$ to estimate signal loss.
 
 The key error in the previous analysis was to assume that, since $\mathbf e$ was statistically independent of $\mathbf x$, that
 the $\mathbf x$-$\mathbf e$ cross-terms in Eq. (\ref{eq:crossterms}) would
@@ -139,9 +157,10 @@ average to zero in an ensemble.
 %In other words, only the last term in Eq. \ref{eq:crossterms} was used to calculate signal loss. 
 However, as shown in $\chengcitet$ and \citet{switzer_et_al2015}, these cross-terms can contain
 significant negative power, since $\widehat{\textbf{C}}_r$ contains information
-that correlate the
-two vectors.  As a result, the amount of signal loss present was mis-estimated to be negligible, when in fact approximately
-99.9\% of the signal had been lost. Correcting for the actual signal loss was the biggest factor revising the upper limit
+that correlate the two vectors. This is the crux of the signal loss estimation in the power spectrum estimator.
+
+As a result, the amount of signal loss present was mis-estimated to be negligible, when in fact approximately
+most of the signal had been lost. Correcting for the actual signal loss was the biggest factor revising the upper limit
 on $\Delta^2_{21}$.
 
 The second mistake made in the original analysis was to underestimate the statistical errors in the reported power spectrum
@@ -150,7 +169,7 @@ However, fringe-rate filtering introduces significant correlations in the data
 along the time axis.  As is discussed in \chengcitet, bootstrapping across correlated samples can result in a significant underestimate
 of the variation in the data if the number of resamplings is not equal to the number of independent samples in the data, as in the case 
 of the original analysis. The error bars associated with this oversampling were underestimated by approximately a factor of 2 (in $\textrm{mK}$ units).
-The revised analysis only applies bootstrap resampling across the baseline axis to avoid this problem.
+The revised analysis in \kolopaniscitet only applies bootstrap resampling across the baseline axis to avoid this problem.
 
 The mistake in estimating the statistical errors should have become apparent when comparing results to our theoretical
 thermal noise sensitivity.  Unfortunately, a third miscalculation was made in estimating the thermal noise sensitivity.
@@ -159,11 +178,8 @@ pipeline used to estimate sensitivity and the actual analysis applied to the dat
 noise sensitivity was approximately a factor of 2 low (in $\textrm{mK}$ units), leading to the mistaken impression that our
 errorbars were consistent with the level of thermal noise.
 
-In summary, Figure \ref{fig:updated_pspec} of this erratum includes corrections
-to the original analysis relating to an incorrect estimate of signal loss and a
-mis-estimation of the statistical error in those measurements.  These results
-replace the results in Figures 18 and 20 in the original manuscript.  Results
-that relied on the original limits, including those presented in Figures 21,
+In summary, we retract the power spectrum results shown in figure 18 and 20 in the original manuscript.
+Results that relied on the original limits, including those presented in Figures 21,
 are retracted.  Additionally, the companion paper to the original manuscript,
 Pober et al. 2015, used the original limits to place constraints on the spin
 temperature of the intergalactic medium (IGM) at z = 8.4.  Our revised limits
@@ -175,25 +191,26 @@ manuscript.
 % XXX i don't think we can point to errors in other papers in this erratum, but should we mention Pober et al?
 %ZA: I agree to the first part. I think we should probably ask Jonnie if he wants to write his own quick erratum 
 % or if we should mention it here.
-Our revised results are put into context with measurements at other redshifts in \kolopaniscitet.  
+An updated analysis of this data set is presented in \kolopaniscitet and are put into context with measurments at other 
+redshifts.
 % XXX anything else?
 
-\begin{figure}%
-    \centering
-    \subfloat[]{{\includegraphics[width=7.5cm]{plots/pspec_95_pk.png} }}%
-    \qquad
-    \subfloat[]{{\includegraphics[width=7.5cm]{plots/pspec_95.png} }}%
-    \caption{Power spectrum results at $z=8.37$ shown in (a) $P(k)$ and (b) $\Delta^{2}$
-             using 135 days of PAPER 64 data. For both plots, the pre-signal
-             loss power spectrum estimate is shown with the black points and $2\sigma$
-             error bars. The post-signal loss power spectrum (black dashed curve) shows the 2$\sigma$ upper limit.
-             The uniformly weighted power spectrum (using $\widehat{\textbf{C}}_{x}=\textbf{I}$), is shown as the blue
-             dashed line and does not incur any signal loss by construction.
-             The dotted vertical lines at $k=0.06\hMpci$ show the bounds of the delay filter (or the horizon limit).
-             The analytical (green) 2$\sigma$ noise power spectra assume $T_{rx}=144K$. A fiducial
-             model of the 21cm power spectrum from 21cmFast is shown as the solid black line.}
-    \label{fig:updated_pspec}%
-\end{figure}
+%\begin{figure}%
+%    \centering
+%    \subfloat[]{{\includegraphics[width=7.5cm]{plots/pspec_95_pk.png} }}%
+%    \qquad
+%    \subfloat[]{{\includegraphics[width=7.5cm]{plots/pspec_95.png} }}%
+%    \caption{Power spectrum results at $z=8.37$ shown in (a) $P(k)$ and (b) $\Delta^{2}$
+%             using 135 days of PAPER 64 data. For both plots, the pre-signal
+%             loss power spectrum estimate is shown with the black points and $2\sigma$
+%             error bars. The post-signal loss power spectrum (black dashed curve) shows the 2$\sigma$ upper limit.
+%             The uniformly weighted power spectrum (using $\widehat{\textbf{C}}_{x}=\textbf{I}$), is shown as the blue
+%             dashed line and does not incur any signal loss by construction.
+%             The dotted vertical lines at $k=0.06\hMpci$ show the bounds of the delay filter (or the horizon limit).
+%             The analytical (green) 2$\sigma$ noise power spectra assume $T_{rx}=144K$. A fiducial
+%             model of the 21cm power spectrum from 21cmFast is shown as the solid black line.}
+%    \label{fig:updated_pspec}%
+%\end{figure}
 
 %\begin{figure}\centering
 %\includegraphics[width=\columnwidth, height=4in]{plots/pspec_95.png}
