@@ -34,7 +34,7 @@
 \newcommand{\pobercitet}{Pober et al. (2015, in prep)}
 \newcommand{\parsonscitep}{(Parsons et al. 2015, in prep)}
 \newcommand{\parsonscitet}{Parsons et al. (2015, in prep)}
-\newcommand{\kolopaniscitet}{Kolopanis et al. (2018, submitted)}
+\newcommand{\kolopaniscitet}{\textrm{Kolopanis et al. (2018, submitted)}}
 \newcommand{\chengcitet}{\textrm{Cheng et al. (2018, submitted)}}
 
 
@@ -99,9 +99,9 @@ Andre Walker\altaffilmark{10}
 In this erratum, we retract the upper limits on the 21 cm power spectrum
 presented in the original manuscript.  The original manuscript reported an upper
 limit on $\Delta_{21}^2(k)$ of \mKlimit at $z=8.4$ in the range
-$0.15<k<0.5\hMpci$.  This analysis underestimated the level of signal loss, or attenuation of
+$0.15<k<0.5\hMpci$.  This analysis under-estimated the level of signal loss, or attenuation of
 the target cosmological 21 cm signal associated with the chosen power spectrum
-estimator, and also underestimated the statistical error on those estimates.
+estimator, and also under-estimated the statistical error on those estimates.
 A revised result, with a new analysis, is presented in \kolopaniscitet.  Below,
 we briefly summarize the errors in the original analysis and how they are
 corrected. For an in-depth analysis and discussion of the errors, we refer the reader to
@@ -118,70 +118,61 @@ estimates, ${\widehat{\textbf{q}}}_\alpha$, in
 
 were empirically estimated from a time-averaged finite ensemble of the data,
 $\mathbf x$, such that $\mathbf{C}\rightarrow \widehat{\textbf{C}}_{x}=\langle {\mathbf x} {\mathbf x}^\dagger\rangle_{t}$.
-Since the empirical estimate is computed from a finite number of independent observations, correlations
-between data and the 21 cm signal are present.  Therefore, $\widehat{\textbf{C}}$ carries the risk 
-of down-weighting and over-fitting the fluctuations that look like the data,
-which includes the EoR signal.  The data-signal correlations are the reason
-signal loss occurs in this type of analysis.
-%As discussed in detail in \chengcitet, an empirical estimate is computed from a
-%finite number of independent observations. Because $\widehat{\textbf{C}}$
-%therefore differs from the true covariance $\textbf{C}$, it carries the risk of
-%over-fitting and down-weighting fluctuations in the particular data realization
-%used in its computation, including the EoR signal.  
-To assess signal loss from the empirically estimated covariance matrix, mock
-cosmological signals $\mathbf e$ of known amplitudes were drawn with random
-seeds and added to the original data to form a new data vector, 
+While the true covariance $\textbf{C}$ is inherently an unbiased estimator of the power spectrum (not lossy), using an empirically-estimated $\widehat{\textbf{C}}$ can lead to signal loss. Specifically, weighting data by an empirically estimated covariance carries the risk of over-fitting and down-weighting EoR fluctuations that are coupled to the data. In $\chengcitet$, it is shown that these couplings are especially strong in the fringe-rate filtered PAPER-64 dataset.
+
+To assess signal loss from the empirically estimated covariance matrix, different realizations of mock
+cosmological signals $\mathbf e$ of known amplitudes are added to the original data to form a new data vector, 
 ${\mathbf r}\equiv{\mathbf x} + {\mathbf e}$.
 New covariance matrices, 
 $\widehat{\textbf{C}}_r=\langle{\mathbf r}\mathbf{r}^\dagger\rangle_{t}$, 
-were used to estimate un-normalized bandpowers, 
+are used to estimate un-normalized bandpowers, 
 ${\widehat{\textbf{q}}}_{\alpha,r}$. 
 Since these bandpower estimates include contributions from both $\mathbf x$ and
 $\mathbf e$, an incremental bandpower associated with $\mathbf e$ can be
 written as
 
 \begin{align}
-{\widehat{\textbf{q}}}_{\alpha,e}&\equiv{\widehat{\textbf{q}}}_{\alpha,r}-{\widehat{\textbf{q}}}_{\alpha} \\
-&=
-{\mathbf x}\widehat{\textbf{C}}_r^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_r^{-1}{\mathbf x}+
+%{\widehat{\textbf{q}}}_{\alpha,e}&\equiv{\widehat{\textbf{q}}}_{\alpha,r}-{\widehat{\textbf{q}}}_{\alpha} \\
+%&=
+\widehat{\textbf{q}}_{\alpha,r} ={\mathbf x}\widehat{\textbf{C}}_r^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_r^{-1}{\mathbf x}+
 {\mathbf x}\widehat{\textbf{C}}_r^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_r^{-1}{\mathbf e}+
 {\mathbf e}\widehat{\textbf{C}}_r^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_r^{-1}{\mathbf x}+
-{\mathbf e}\widehat{\textbf{C}}_r^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_r^{-1}{\mathbf e}
-- {\mathbf x}\widehat{\textbf{C}}_x^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_x^{-1}{\mathbf x}.
+{\mathbf e}\widehat{\textbf{C}}_r^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_r^{-1}{\mathbf e}.
+%- {\mathbf x}\widehat{\textbf{C}}_x^{-1}\textbf{Q}_\alpha \widehat{\textbf{C}}_x^{-1}{\mathbf x}.
 \label{eq:crossterms}
 \end{align}
 
-\noindent The normalized incremental power was then compared to the known injected power in $\mathbf{e}$ to estimate signal loss.
+\noindent The normalized incremental power can then be compared to the known injected power in $\mathbf{e}$ to estimate signal loss.
 
 The key error in the previous analysis was to assume that, since $\mathbf e$ was statistically independent of $\mathbf x$, that
-the $\mathbf x$-$\mathbf e$ cross-terms in Eq. (\ref{eq:crossterms}) would
+the two middle cross-terms in Eq. (\ref{eq:crossterms}) would
 average to zero in an ensemble. 
 %In other words, only the last term in Eq. \ref{eq:crossterms} was used to calculate signal loss. 
 However, as shown in $\chengcitet$ and \citet{switzer_et_al2015}, these cross-terms can contain
-significant negative power, since $\widehat{\textbf{C}}_r$ contains information
-that correlate the two vectors. This is the crux of the signal loss estimation in the power spectrum estimator.
+significant negative power because $\widehat{\textbf{C}}_r$ contains information
+that correlates the two vectors. Ignoring these cross-terms when estimating signal loss significantly under-estimates the power spectrum estimator.
 
-As a result, the amount of signal loss present was mis-estimated to be negligible, when in fact approximately
-most of the signal had been lost. Correcting for the actual signal loss was the biggest factor revising the upper limit
+As a result, we presented negligible signal loss in our original analysis, when in fact approximately
+most of the signal had been lost. Correcting for the actual signal loss is the biggest factor revising the upper limit
 on $\Delta^2_{21}$.
 
-The second mistake made in the original analysis was to underestimate the statistical errors in the reported power spectrum
+The second mistake made in the original analysis was to under-estimate the statistical errors in the reported power spectrum
 estimates.  The original analysis used a bootstrap resampling technique on power spectral measurements over the baseline and time axes.
 However, fringe-rate filtering introduces significant correlations in the data
-along the time axis.  As is discussed in \chengcitet, bootstrapping across correlated samples can result in a significant underestimate
+along the time axis.  As is discussed in \chengcitet, bootstrapping across correlated samples can result in a significant under-estimate
 of the variation in the data if the number of resamplings is not equal to the number of independent samples in the data, as in the case 
-of the original analysis. The error bars associated with this oversampling were underestimated by approximately a factor of 2 (in $\textrm{mK}$ units).
-The revised analysis in \kolopaniscitet only applies bootstrap resampling across the baseline axis to avoid this problem.
+of the original analysis. The error bars associated with this oversampling were under-estimated by approximately a factor of 2 (in $\textrm{mK}$).
+The revised analysis in $\kolopaniscitet$ only applies bootstrap resampling across the baseline axis to avoid this problem.
 
 The mistake in estimating the statistical errors should have become apparent when comparing results to our theoretical
 thermal noise sensitivity.  Unfortunately, a third miscalculation was made in estimating the thermal noise sensitivity.
 As detailed in \chengcitet, this miscalculation stemmed from numerous small mismatches between the idealized analysis
 pipeline used to estimate sensitivity and the actual analysis applied to the data.  As a result, our estimated thermal
-noise sensitivity was approximately a factor of 2 low (in $\textrm{mK}$ units), leading to the mistaken impression that our
+noise sensitivity was approximately a factor of 3 low (in $\textrm{mK}$), leading to the mistaken impression that our
 errorbars were consistent with the level of thermal noise.
 
-In summary, we retract the power spectrum results shown in figure 18 and 20 in the original manuscript.
-Results that relied on the original limits, including those presented in Figures 21,
+In summary, we retract the power spectrum results shown in Figures 18 and 20 in the original manuscript.
+Results that relied on the original limits, including those presented in Figure 21,
 are retracted.  Additionally, the companion paper to the original manuscript,
 Pober et al. 2015, used the original limits to place constraints on the spin
 temperature of the intergalactic medium (IGM) at z = 8.4.  Our revised limits
@@ -193,7 +184,7 @@ manuscript.
 % XXX i don't think we can point to errors in other papers in this erratum, but should we mention Pober et al?
 %ZA: I agree to the first part. I think we should probably ask Jonnie if he wants to write his own quick erratum 
 % or if we should mention it here.
-An updated analysis of this data set is presented in \kolopaniscitet and are put into context with measurments at other 
+An updated analysis of this same dataset is presented in $\kolopaniscitet$, where these revised results are put into context with measurements at other 
 redshifts.
 % XXX anything else?
 
