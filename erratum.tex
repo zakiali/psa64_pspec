@@ -116,9 +116,9 @@ estimates, ${\widehat{\textbf{q}}}_\alpha$, in
 {\widehat{\textbf{q}}}_{\alpha} = {\mathbf x}\textbf{C}^{-1}\textbf{Q}_\alpha \textbf{C}^{-1}{\mathbf x}
 \end{equation} 
 
-were empirically estimated from a time-averaged finite ensemble of the data,
+\noindent were empirically estimated from a time-averaged finite ensemble of the data,
 $\mathbf x$, such that $\mathbf{C}\rightarrow \widehat{\textbf{C}}_{x}=\langle {\mathbf x} {\mathbf x}^\dagger\rangle_{t}$.
-While the true covariance $\textbf{C}$ is inherently an unbiased estimator of the power spectrum (not lossy), using an empirically-estimated $\widehat{\textbf{C}}$ can lead to signal loss. Specifically, weighting data by an empirically estimated covariance carries the risk of over-fitting and down-weighting EoR fluctuations that are coupled to the data. In $\chengcitet$, it is shown that these couplings are especially strong in the fringe-rate filtered PAPER-64 dataset.
+While the true covariance $\textbf{C}$ leads to an inherently unbiased lossless estimator of the power spectrum, using an empirically-estimated $\widehat{\textbf{C}}$ can lead to signal loss. Specifically, weighting data by an empirically estimated covariance carries the risk of over-fitting and down-weighting EoR fluctuations that are coupled to the data. In $\chengcitet$, it is shown that these couplings are especially strong in the fringe-rate filtered PAPER-64 dataset.
 
 To assess signal loss from the empirically estimated covariance matrix, different realizations of mock
 cosmological signals $\mathbf e$ of known amplitudes are added to the original data to form a new data vector, 
@@ -126,10 +126,10 @@ ${\mathbf r}\equiv{\mathbf x} + {\mathbf e}$.
 New covariance matrices, 
 $\widehat{\textbf{C}}_r=\langle{\mathbf r}\mathbf{r}^\dagger\rangle_{t}$, 
 are used to estimate un-normalized bandpowers, 
-${\widehat{\textbf{q}}}_{\alpha,r}$. 
-Since these bandpower estimates include contributions from both $\mathbf x$ and
-$\mathbf e$, an incremental bandpower associated with $\mathbf e$ can be
-written as
+${\widehat{\textbf{q}}}_{\alpha,r}$, which can be written as 
+%Since these bandpower estimates include contributions from both $\mathbf x$ and
+%$\mathbf e$, an incremental bandpower associated with $\mathbf e$ can be
+%written as
 
 \begin{align}
 %{\widehat{\textbf{q}}}_{\alpha,e}&\equiv{\widehat{\textbf{q}}}_{\alpha,r}-{\widehat{\textbf{q}}}_{\alpha} \\
@@ -142,7 +142,7 @@ written as
 \label{eq:crossterms}
 \end{align}
 
-\noindent The normalized incremental power can then be compared to the known injected power in $\mathbf{e}$ to estimate signal loss.
+\noindent The normalized power estimate can then be compared to the known injected power in $\mathbf{e}$ to estimate signal loss.
 
 The key error in the previous analysis was to assume that, since $\mathbf e$ was statistically independent of $\mathbf x$, that
 the two middle cross-terms in Eq. (\ref{eq:crossterms}) would
