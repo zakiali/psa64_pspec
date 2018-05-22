@@ -121,7 +121,7 @@ $\mathbf x$, such that $\mathbf{C}\rightarrow \widehat{\textbf{C}}_{x}=\langle {
 While the true covariance $\textbf{C}$ leads to an inherently unbiased lossless estimator of the power spectrum, using an empirically-estimated $\widehat{\textbf{C}}$ can lead to signal loss. Specifically, weighting data by an empirically estimated covariance carries the risk of over-fitting and down-weighting EoR fluctuations that are coupled to the data. In $\chengcitet$, it is shown that these couplings are especially strong in the fringe-rate filtered PAPER-64 dataset.
 
 The first and most impactful error relates to the method by which signal loss
-was estimated.To assess signal loss from the empirically estimated covariance matrix, different realizations of mock
+was estimated.  To assess signal loss from the empirically estimated covariance matrix, different realizations of mock
 cosmological signals $\mathbf e$ of known amplitudes are added to the original data to form a new data vector, 
 ${\mathbf r}\equiv{\mathbf x} + {\mathbf e}$.
 New covariance matrices, 
@@ -151,7 +151,7 @@ average to zero in an ensemble.
 %In other words, only the last term in Eq. \ref{eq:crossterms} was used to calculate signal loss. 
 However, as shown in $\chengcitet$ and \citet{switzer_et_al2015}, these cross-terms can contain
 significant negative power because $\widehat{\textbf{C}}_r$ contains information
-that correlates the two vectors. Ignoring these cross-terms leads to significant underestimate of signal loss.
+that correlates the two vectors. Ignoring these cross-terms leads to a significant under-estimate of signal loss.
 
 As a result, we presented negligible signal loss in our original analysis, when in fact approximately
 $\sim{99.99}\%$ of the signal was removed $\chengcitep$. Correcting for the actual signal loss is the biggest factor revising the upper limit
