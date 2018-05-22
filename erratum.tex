@@ -108,8 +108,7 @@ we briefly summarize the errors in the original analysis and how they are
 corrected. For an in-depth analysis and discussion of the errors, we refer the reader to
 \chengcitet.
 
-The first and most impactful error relates to the method by which signal loss
-was estimated. Signal loss was expected in the original analysis because the
+Signal loss was expected in the original analysis because the
 covariance matrices, $\textbf{C}$, used to weight the un-normalized bandpower
 estimates, ${\widehat{\textbf{q}}}_\alpha$, in
 
@@ -121,7 +120,8 @@ estimates, ${\widehat{\textbf{q}}}_\alpha$, in
 $\mathbf x$, such that $\mathbf{C}\rightarrow \widehat{\textbf{C}}_{x}=\langle {\mathbf x} {\mathbf x}^\dagger\rangle_{t}$.
 While the true covariance $\textbf{C}$ leads to an inherently unbiased lossless estimator of the power spectrum, using an empirically-estimated $\widehat{\textbf{C}}$ can lead to signal loss. Specifically, weighting data by an empirically estimated covariance carries the risk of over-fitting and down-weighting EoR fluctuations that are coupled to the data. In $\chengcitet$, it is shown that these couplings are especially strong in the fringe-rate filtered PAPER-64 dataset.
 
-To assess signal loss from the empirically estimated covariance matrix, different realizations of mock
+The first and most impactful error relates to the method by which signal loss
+was estimated.To assess signal loss from the empirically estimated covariance matrix, different realizations of mock
 cosmological signals $\mathbf e$ of known amplitudes are added to the original data to form a new data vector, 
 ${\mathbf r}\equiv{\mathbf x} + {\mathbf e}$.
 New covariance matrices, 
